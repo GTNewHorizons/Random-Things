@@ -1,0 +1,11 @@
+tile.playerinterface.name=Player Interface
+tile.fluidDisplay.name=Fluid Display
+tile.fertilizedDirt.name=Fertilized Dirt
+
+item.filterBlock.name=Block Filter
+item.filterItem.name=Item Filter
+item.filterEntity.name=Entity Filter
+item.biomeSolution.name=Solution
+item.biomeCapsule.name=Biome Capsule
+
+itemGroup.Random Things=Random Things

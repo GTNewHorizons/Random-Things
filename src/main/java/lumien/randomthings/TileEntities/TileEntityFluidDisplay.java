@@ -1,0 +1,67 @@
+package lumien.randomthings.TileEntities;
+
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
+
+public class TileEntityFluidDisplay extends TileEntity
+{
+	String fluidName="";
+	
+	@Override
+	public Packet getDescriptionPacket()
+	{
+		NBTTagCompound nbtTag = new NBTTagCompound();
+		this.writeToNBT(nbtTag);
+		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+	}
+	
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+	{
+		readFromNBT(packet.func_148857_g());
+	}
+	
+	@Override
+	public boolean canUpdate()
+	{
+		return false;
+	}
+	
+    public String getFluidName()
+	{
+		return fluidName;
+	}
+
+	public void setFluidName(String fluidName)
+	{
+		this.fluidName = fluidName;
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        super.readFromNBT(par1NBTTagCompound);
+        
+        this.fluidName = par1NBTTagCompound.getString("fluidName");
+        if (this.fluidName.equals("empty"))
+        {
+        	this.fluidName = "";
+        }
+    }
+    
+    @Override
+	public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        super.writeToNBT(par1NBTTagCompound);
+        
+        if (this.fluidName.equals(""))
+        {
+        	this.fluidName = "empty";
+        }
+        
+        par1NBTTagCompound.setString("fluidName", fluidName);
+    }
+}
