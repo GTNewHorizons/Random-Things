@@ -8,15 +8,20 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.Settings;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.server.S2APacketParticles;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -26,6 +31,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockFertilizedDirt extends Block
 {
+	public static boolean growthIndicator = true;
+	public static int fertilizedDirtGrowth = 3;
+
 	boolean tilled;
 
 	protected BlockFertilizedDirt(boolean tilled)
@@ -103,17 +111,27 @@ public class BlockFertilizedDirt extends Block
 
 	@Override
 	public void updateTick(World par1World, int posX, int posY, int posZ, Random rng)
-	{
-		if (par1World != null && !par1World.isAirBlock(posX, posY + 1, posZ) && ((par1World.getBlock(posX, posY, posZ) instanceof IGrowable) || (par1World.getBlock(posX, posY, posZ) instanceof IPlantable)))
+	{	
+		if (growthIndicator)
 		{
-			for (int i = 0; i < Settings.fertilizedDirtGrowth; i++)
+			S2APacketParticles packet = new S2APacketParticles("happyVillager",posX,posY+1,posZ,1,1,1,0.02F,1);
+			MinecraftServer.getServer().getConfigurationManager().sendToAllNear(posX, posY+1, posZ, 16,par1World.provider.dimensionId, packet);
+		}
+		
+		par1World.spawnParticle("cloud", posX, posY + 1, posZ, 0, 0, 0);
+		if (!par1World.isRemote)
+		{
+			if (par1World != null && !par1World.isAirBlock(posX, posY + 1, posZ) && ((par1World.getBlock(posX, posY + 1, posZ) instanceof IGrowable) || (par1World.getBlock(posX, posY + 1, posZ) instanceof IPlantable)))
 			{
-				if (!par1World.isAirBlock(posX, posY + 1, posZ))
+				for (int i = 0; i < fertilizedDirtGrowth; i++)
 				{
-					Block toBoost = par1World.getBlock(posX, posY + 1, posZ);
-					if ((toBoost instanceof IGrowable) || (toBoost instanceof IPlantable))
+					if (!par1World.isAirBlock(posX, posY + 1, posZ))
 					{
-						toBoost.updateTick(par1World, posX, posY, posZ, rng);
+						Block toBoost = par1World.getBlock(posX, posY + 1, posZ);
+						if ((toBoost instanceof IGrowable) || (toBoost instanceof IPlantable))
+						{
+							toBoost.updateTick(par1World, posX, posY + 1, posZ, rng);
+						}
 					}
 				}
 			}

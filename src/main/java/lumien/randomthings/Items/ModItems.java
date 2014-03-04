@@ -9,6 +9,7 @@ public class ModItems
 	public static ItemFilter filter;
 	public static ItemBiomeSolution biomeSolution;
 	public static ItemBiomePainter biomePainter;
+	public static ItemRedstoneInfuser redstoneInfuser;
 
 	public static void init()
 	{
@@ -20,5 +21,7 @@ public class ModItems
 			biomeSolution = new ItemBiomeSolution();
 		if (ConfigItems.biomePainter)
 			biomePainter = new ItemBiomePainter();
+		
+		redstoneInfuser = new ItemRedstoneInfuser();
 	}
 }

@@ -204,7 +204,7 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack)
 	{
-		if (this.playerEntity == null && this.playerEntity.inventoryContainer != null)
+		if (this.playerEntity == null || this.playerEntity.inventoryContainer == null)
 		{
 			return false;
 		}

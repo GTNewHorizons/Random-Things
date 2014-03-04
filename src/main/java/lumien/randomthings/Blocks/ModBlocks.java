@@ -10,6 +10,7 @@ public class ModBlocks
 	public static BlockPlayerInterface playerInterface;
 	public static BlockFluidDisplay fluidDisplay;
 	public static BlockFertilizedDirt fertilizedDirt,fertilizedDirtTilled;
+	public static BlockItemCollector itemCollector;
 
 	public static void init()
 	{
@@ -23,5 +24,7 @@ public class ModBlocks
 			fertilizedDirt = new BlockFertilizedDirt(false);
 		if (ConfigBlocks.fertilizedDirtTilled)
 			fertilizedDirtTilled = new BlockFertilizedDirt(true);
+		if (ConfigBlocks.itemCollector)
+			itemCollector = new BlockItemCollector();
 	}
 }

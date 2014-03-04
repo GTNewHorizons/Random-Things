@@ -52,6 +52,7 @@ public class RandomThings
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		logger = event.getModLog();
+		logger.info("Test");
 
 		RTConfiguration.init(event);
 
