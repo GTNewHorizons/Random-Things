@@ -2,8 +2,7 @@ package lumien.randomthings.Network;
 
 import java.util.*;
 
-import lumien.randomthings.Network.Packets.PacketBiomeSolution;
-import lumien.randomthings.Network.Packets.PacketInfusedBlocks;
+import lumien.randomthings.Network.Packets.PacketItemCollector;
 import lumien.randomthings.Network.Packets.PacketPaintBiome;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -137,8 +136,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	private void registerPackets()
 	{
 		registerPacket(PacketPaintBiome.class);
-		registerPacket(PacketBiomeSolution.class);
-		registerPacket(PacketInfusedBlocks.class);
+		registerPacket(PacketItemCollector.class);
 	}
 
 	// Method to call from FMLPostInitializationEvent

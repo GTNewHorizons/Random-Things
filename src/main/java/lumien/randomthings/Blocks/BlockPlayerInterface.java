@@ -109,25 +109,6 @@ public class BlockPlayerInterface extends BlockContainer
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public int getRenderBlockPass()
-	{
-		return 1;
-	}
-
-	@Override
-	public boolean isOpaqueCube()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock()
-	{
-		return false;
-	}
-
-	@Override
 	public TileEntity createNewTileEntity(World world, int par2)
 	{
 		return new TileEntityPlayerInterface();

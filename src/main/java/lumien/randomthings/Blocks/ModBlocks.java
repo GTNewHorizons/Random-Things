@@ -9,13 +9,14 @@ public class ModBlocks
 {
 	public static BlockPlayerInterface playerInterface;
 	public static BlockFluidDisplay fluidDisplay;
-	public static BlockFertilizedDirt fertilizedDirt,fertilizedDirtTilled;
+	public static BlockFertilizedDirt fertilizedDirt, fertilizedDirtTilled;
 	public static BlockItemCollector itemCollector;
+	public static BlockAdvancedItemCollector advancedItemCollector;
 
 	public static void init()
 	{
 		RandomThings.instance.logger.debug("Initializing Blocks");
-		
+
 		if (ConfigBlocks.playerInterface)
 			playerInterface = new BlockPlayerInterface();
 		if (ConfigBlocks.fluidDisplay)
@@ -25,6 +26,9 @@ public class ModBlocks
 		if (ConfigBlocks.fertilizedDirtTilled)
 			fertilizedDirtTilled = new BlockFertilizedDirt(true);
 		if (ConfigBlocks.itemCollector)
+		{
 			itemCollector = new BlockItemCollector();
+			advancedItemCollector = new BlockAdvancedItemCollector();
+		}
 	}
 }

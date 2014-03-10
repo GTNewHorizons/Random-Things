@@ -1,4 +1,4 @@
-package lumien.randomthings.Library.Slots;
+package lumien.randomthings.Container.Slots;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

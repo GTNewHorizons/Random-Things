@@ -13,6 +13,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.Library.GuiIds;
+import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import lumien.randomthings.TileEntities.TileEntityItemCollector;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -20,9 +22,14 @@ import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Facing;
@@ -30,26 +37,87 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockItemCollector extends BlockContainer
+public class BlockAdvancedItemCollector extends BlockContainer
 {
+	Random rng;
 
-	protected BlockItemCollector()
+	protected BlockAdvancedItemCollector()
 	{
 		super(Material.rock);
 		this.blockHardness=1.5F;
 
 		this.setCreativeTab(RandomThings.creativeTab);
-		this.setBlockName("itemCollector");
-		this.setBlockTextureName("RandomThings:itemCollector/itemCollector");
+		this.setBlockName("advancedItemCollector");
+		this.setBlockTextureName("RandomThings:itemCollector/advancedItemCollector");
 		this.setBlockBounds(0.35F, 0, 0.35F, 0.65F, 0.3F, 0.65F);
+		
+		rng = new Random();
 
-		GameRegistry.registerBlock(this, "itemCollector");
+		GameRegistry.registerBlock(this, "advancedItemCollector");
 	}
+	
+	@Override
+	public void breakBlock(World worldObj, int posX, int posY, int posZ, Block block, int metadata)
+    {
+        TileEntityAdvancedItemCollector tileEntityAdvancedItemCollector = (TileEntityAdvancedItemCollector)worldObj.getTileEntity(posX, posY, posZ);
+
+        if (tileEntityAdvancedItemCollector != null)
+        {
+        	IInventory inventory = tileEntityAdvancedItemCollector.getInventory();
+            for (int i1 = 0; i1 < inventory.getSizeInventory(); ++i1)
+            {
+                ItemStack itemstack = inventory.getStackInSlot(i1);
+
+                if (itemstack != null)
+                {
+                    float f = this.rng.nextFloat() * 0.8F + 0.1F;
+                    float f1 = this.rng.nextFloat() * 0.8F + 0.1F;
+                    EntityItem entityitem;
+
+                    for (float f2 = this.rng.nextFloat() * 0.8F + 0.1F; itemstack.stackSize > 0; worldObj.spawnEntityInWorld(entityitem))
+                    {
+                        int j1 = this.rng.nextInt(21) + 10;
+
+                        if (j1 > itemstack.stackSize)
+                        {
+                            j1 = itemstack.stackSize;
+                        }
+
+                        itemstack.stackSize -= j1;
+                        entityitem = new EntityItem(worldObj, (double)((float)posX + f), (double)((float)posY + f1), (double)((float)posZ + f2), new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
+                        float f3 = 0.05F;
+                        entityitem.motionX = (double)((float)this.rng.nextGaussian() * f3);
+                        entityitem.motionY = (double)((float)this.rng.nextGaussian() * f3 + 0.2F);
+                        entityitem.motionZ = (double)((float)this.rng.nextGaussian() * f3);
+
+                        if (itemstack.hasTagCompound())
+                        {
+                            entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
+                        }
+                    }
+                }
+            }
+
+            worldObj.func_147453_f(posX, posY, posZ, block);
+        }
+
+        super.breakBlock(worldObj, posX, posY, posZ, block, metadata);
+    }
 
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2)
 	{
-		return new TileEntityItemCollector();
+		return new TileEntityAdvancedItemCollector();
+	}
+	
+	@Override
+	public boolean onBlockActivated(World worldObj, int poxX, int poxY, int poxZ, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+	{
+		if (!worldObj.isRemote)
+		{
+			par5EntityPlayer.openGui(RandomThings.instance, GuiIds.ADVANCED_ITEMCOLLECTOR, worldObj, poxX, poxY, poxZ);
+		}
+		return true;
 	}
 
 	@Override

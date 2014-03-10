@@ -1,11 +1,18 @@
 tile.playerinterface.name=Player Interface
 tile.fluidDisplay.name=Fluid Display
 tile.fertilizedDirt.name=Fertilized Dirt
+tile.itemCollector.name=Item Collector
+tile.advancedItemCollector.name=Advanced Item Collector
 
 item.filterBlock.name=Block Filter
 item.filterItem.name=Item Filter
 item.filterEntity.name=Entity Filter
 item.biomeSolution.name=Solution
-item.biomeCapsule.name=Biome Capsule
+item.biomeCapsule.name=Biome Capsule[WIP]
+item.biomePainter.name=Biome Painter[WIP]
+
+item.playerCore.name=Player Core
+item.obsidianStick.name=Obsidian Stick
+item.error.name=Invalid Item
 
 itemGroup.Random Things=Random Things

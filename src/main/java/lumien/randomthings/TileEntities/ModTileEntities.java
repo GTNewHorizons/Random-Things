@@ -8,6 +8,8 @@ public class ModTileEntities
 	{
 		GameRegistry.registerTileEntity(TileEntityPlayerInterface.class, "playerInterface");
 		GameRegistry.registerTileEntity(TileEntityFluidDisplay.class, "fluidDisplay");
+		
 		GameRegistry.registerTileEntity(TileEntityItemCollector.class, "itemcollector");
+		GameRegistry.registerTileEntity(TileEntityAdvancedItemCollector.class, "advancedItemcollector");
 	}
 }

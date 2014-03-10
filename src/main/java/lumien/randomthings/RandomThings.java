@@ -16,6 +16,7 @@ import lumien.randomthings.Handler.RTEventHandler;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.Recipes;
 import lumien.randomthings.Network.PacketPipeline;
+import lumien.randomthings.Proxy.CommonProxy;
 import lumien.randomthings.TileEntities.ModTileEntities;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,6 +24,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
@@ -41,6 +43,9 @@ public class RandomThings
 	public static final String MOD_ID = "RandomThings";
 	public static final String MOD_NAME = "Random Things";
 	public static final String MOD_VERSION = "@VERSION@";
+	
+	@SidedProxy(clientSide="lumien.randomthings.Proxy.ClientProxy",serverSide="lumien.randomthings.Proxy.CommonProxy")
+	public static CommonProxy proxy;
 
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
@@ -76,6 +81,7 @@ public class RandomThings
 	public void init(FMLInitializationEvent event)
 	{
 		packetPipeline.initalise();
+		this.proxy.registerRenderers();
 
 		Recipes.init();
 	}

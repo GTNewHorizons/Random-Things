@@ -23,7 +23,7 @@ public class BlockFluidDisplay extends BlockContainer
 
 	public BlockFluidDisplay()
 	{
-		super(Material.glass);
+		super(Material.rock);
 		this.setBlockName("fluidDisplay");
 		this.setCreativeTab(RandomThings.creativeTab);
 		this.setHardness(0.7F);
@@ -68,12 +68,10 @@ public class BlockFluidDisplay extends BlockContainer
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
 		ItemStack currentItem = entityplayer.getCurrentEquippedItem();
-		
 
 		if (currentItem != null)
 		{
-			FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(currentItem);
-			System.out.println(liquid);
+			FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(new ItemStack(Items.water_bucket));
 			if (liquid != null)
 			{
 				TileEntityFluidDisplay te = (TileEntityFluidDisplay) world.getTileEntity(i, j, k);

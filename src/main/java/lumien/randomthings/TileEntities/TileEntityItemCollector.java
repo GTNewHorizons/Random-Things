@@ -3,6 +3,7 @@ package lumien.randomthings.TileEntities;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDispenser;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -10,33 +11,44 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Facing;
 
 public class TileEntityItemCollector extends TileEntity
 {
+	private final int range=2;
 	@Override
 	public void updateEntity()
 	{
 		if (!worldObj.isRemote)
 		{
-			Block block = worldObj.getBlock(xCoord, yCoord - 1, zCoord);
+			int targetX,targetY,targetZ;
+			
+			EnumFacing facing = BlockDispenser.func_149937_b(Facing.oppositeSide[worldObj.getBlockMetadata(xCoord, yCoord, zCoord)]);
+			
+			targetX=xCoord+facing.getFrontOffsetX();
+			targetY=yCoord+facing.getFrontOffsetY();
+			targetZ=zCoord+facing.getFrontOffsetZ();
+			
+			Block block = worldObj.getBlock(targetX, targetY, targetZ);
 
 			if (block != null)
 			{
-				TileEntity te = worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
+				TileEntity te = worldObj.getTileEntity(targetX, targetY, targetZ);
 				if (te != null && (te instanceof IInventory || te instanceof ISidedInventory))
 				{
-					AxisAlignedBB bounding = AxisAlignedBB.getBoundingBox(xCoord - 5, yCoord - 2, zCoord - 5, xCoord + 5, yCoord + 2, zCoord + 5);
+					AxisAlignedBB bounding = AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range + 1, yCoord + range + 1, zCoord + range + 1);
 
 					List<EntityItem> items = worldObj.getEntitiesWithinAABB(EntityItem.class, bounding);
 
 					for (EntityItem ei : items)
 					{
-						ItemStack rest = TileEntityHopper.func_145889_a((IInventory) te, ei.getEntityItem(), 1);
+						ItemStack rest = TileEntityHopper.func_145889_a((IInventory) te, ei.getEntityItem(), Facing.oppositeSide[facing.ordinal()]);
 						if (rest == null)
 						{
 							ei.setDead();
 						}
-						else
+						else if (!rest.equals(ei.getEntityItem()))
 						{
 							ei.setEntityItemStack(rest);
 						}

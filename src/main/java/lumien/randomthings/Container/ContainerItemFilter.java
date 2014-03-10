@@ -1,6 +1,6 @@
 package lumien.randomthings.Container;
 
-import lumien.randomthings.Library.Slots.SlotLocked;
+import lumien.randomthings.Container.Slots.SlotLocked;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

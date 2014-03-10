@@ -1,10 +1,13 @@
 package lumien.randomthings.Client;
 
 import lumien.randomthings.Items.ItemFilter;
+import lumien.randomthings.Client.GUI.GuiItemCollector;
 import lumien.randomthings.Client.GUI.GuiItemFilter;
 import lumien.randomthings.Client.GUI.GuiPlayerInterface;
+import lumien.randomthings.Container.ContainerItemCollector;
 import lumien.randomthings.Container.ContainerItemFilter;
 import lumien.randomthings.Container.ContainerPlayerInterface;
+import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerChest;
@@ -33,6 +36,8 @@ public class GuiHandler implements IGuiHandler
 					inventoryFilter = new InventoryBasic("placeholder",false,9);
 				}
 				return new ContainerItemFilter(player.inventory,inventoryFilter);
+			case ADVANCED_ITEMCOLLECTOR:
+				return new ContainerItemCollector(player.inventory,(TileEntityAdvancedItemCollector)tileEntity);
 		}
 		return null;
 	}
@@ -52,6 +57,8 @@ public class GuiHandler implements IGuiHandler
 					inventoryFilter = new InventoryBasic("placeholder",false,27);
 				}
 				return new GuiItemFilter(player.inventory,inventoryFilter);
+			case ADVANCED_ITEMCOLLECTOR:
+				return new GuiItemCollector(player.inventory,(TileEntityAdvancedItemCollector)tileEntity);
 		}
 		return null;
 	}

@@ -37,71 +37,8 @@ public class RTClassTransformer implements IClassTransformer
 		{
 			return patchLeaveClass(basicClass, false);
 		}
-		else if (name.equals("afn"))
-		{
-			return patchWorldClass(basicClass, true);
-		}
-		else if (name.equals("net.minecraft.world.World"))
-		{
-			return patchWorldClass(basicClass, false);
-		}
 
 		return basicClass;
-	}
-
-	private byte[] patchWorldClass(byte[] basicClass, boolean obfuscated)
-	{
-		ClassNode classNode = new ClassNode();
-		ClassReader classReader = new ClassReader(basicClass);
-		classReader.accept(classNode, 0);
-
-		String methodName = obfuscated ? "v" : "isBlockIndirectlyGettingPowered";
-		String worldClass = obfuscated ? "afn" : "net/minecraft/world/World";
-		
-		for (MethodNode mn:classNode.methods)
-		{
-			if (mn.name.equals(methodName))
-			{
-				classNode.methods.remove(mn);
-				break;
-			}
-		}
-		
-		ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
-		classNode.accept(cw);
-
-		MethodVisitor mv = cw.visitMethod(ACC_PUBLIC, methodName, "(III)Z", null, null);
-		mv.visitCode();
-		Label l0 = new Label();
-		mv.visitLabel(l0);
-		mv.visitLineNumber(82, l0);
-		mv.visitVarInsn(ALOAD, 0);
-		mv.visitVarInsn(ILOAD, 1);
-		mv.visitVarInsn(ILOAD, 2);
-		mv.visitVarInsn(ILOAD, 3);
-		mv.visitMethodInsn(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "isIndirectlyPowered", "(L"+worldClass+";III)Z");
-		Label l1 = new Label();
-		mv.visitJumpInsn(IFEQ, l1);
-		Label l2 = new Label();
-		mv.visitLabel(l2);
-		mv.visitLineNumber(84, l2);
-		mv.visitInsn(ICONST_1);
-		mv.visitInsn(IRETURN);
-		mv.visitLabel(l1);
-		mv.visitLineNumber(87, l1);
-		mv.visitFrame(F_SAME, 0, null, 0, null);
-		mv.visitInsn(ICONST_0);
-		mv.visitInsn(IRETURN);
-		Label l3 = new Label();
-		mv.visitLabel(l3);
-		mv.visitLocalVariable("this", "L"+worldClass+";", null, l0, l3, 0);
-		mv.visitLocalVariable("posX", "I", null, l0, l3, 1);
-		mv.visitLocalVariable("posY", "I", null, l0, l3, 2);
-		mv.visitLocalVariable("posZ", "I", null, l0, l3, 3);
-		mv.visitMaxs(4, 4);
-		mv.visitEnd();
-
-		return cw.toByteArray();
 	}
 
 	private byte[] patchLeaveClass(byte[] basicClass, boolean obfuscated)

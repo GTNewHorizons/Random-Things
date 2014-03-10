@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 
 public class ItemFilter extends Item
 {
-	enum FilterType
+	public enum FilterType
 	{
 		BLOCK, ITEM, ENTITY;
 	}
@@ -43,58 +43,76 @@ public class ItemFilter extends Item
 		GameRegistry.registerItem(this, "filter");
 	}
 
+	public static boolean matchesItem(ItemStack filter, ItemStack toCheck)
+	{
+		if (filter == null || toCheck == null)
+		{
+			return false;
+		}
+
+		if (!(filter.getItem() instanceof ItemFilter) || filter.getItemDamage() != 1)
+		{
+			return false;
+		}
+
+		IInventory filterInventory = getItemFilterInv(null, filter);
+		filterInventory.openInventory();
+		for (int slot = 0; slot < filterInventory.getSizeInventory(); slot++)
+		{
+			ItemStack is = filterInventory.getStackInSlot(slot);
+			if (is != null)
+			{
+				if (is.isItemEqual(toCheck))
+				{
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 		if (par1ItemStack.stackTagCompound != null)
 		{
-			switch (par1ItemStack.getItemDamage())
+			if (!Keyboard.isKeyDown(42))
 			{
-				case 0:
-					if (!Keyboard.isKeyDown(42))
-					{
-						par3List.add(Texts.PSHIFT);
-					}
-					else
-					{
+				par3List.add(Texts.PSHIFT);
+			}
+			else
+			{
+				switch (par1ItemStack.getItemDamage())
+				{
+					case 0:
 						String block = par1ItemStack.stackTagCompound.getString("block");
 						if (!block.equals(""))
 						{
 							par3List.add("Block: " + block);
 							par3List.add("Metadata: " + par1ItemStack.stackTagCompound.getInteger("metadata"));
 						}
-					}
-					break;
-				case 1:
-					if (!Keyboard.isKeyDown(42))
-					{
-						par3List.add(Texts.PSHIFT);
-					}
-					else if (!(ItemFilter.getItemFilterInv(par2EntityPlayer,par1ItemStack) == null))
-					{
-						IInventory inventoryFilter = new InventoryItemFilter(par2EntityPlayer, par1ItemStack);
-						inventoryFilter.openInventory();
-						if (inventoryFilter != null)
+						break;
+					case 1:
+						if (!(ItemFilter.getItemFilterInv(par2EntityPlayer, par1ItemStack) == null))
 						{
-							for (int i = 0; i < 9; i++)
+							IInventory inventoryFilter = new InventoryItemFilter(par2EntityPlayer, par1ItemStack);
+							inventoryFilter.openInventory();
+							if (inventoryFilter != null)
 							{
-								ItemStack isg = inventoryFilter.getStackInSlot(i);
-								if (isg != null)
+								for (int i = 0; i < 9; i++)
 								{
-									par3List.add("- " + isg.getDisplayName());
+									ItemStack isg = inventoryFilter.getStackInSlot(i);
+									if (isg != null)
+									{
+										par3List.add("- " + isg.getDisplayName());
+									}
 								}
 							}
 						}
-					}
-					break;
-				case 2:
-					if (!Keyboard.isKeyDown(42))
-					{
-						par3List.add(Texts.PSHIFT);
-					}
-					else
-					{
+						break;
+					case 2:
 						int entityID = par1ItemStack.stackTagCompound.getInteger("entity");
 						String entityName = par1ItemStack.stackTagCompound.getString("entityName");
 						if (!(entityID == 0))
@@ -102,8 +120,8 @@ public class ItemFilter extends Item
 							par3List.add("EntityID: " + entityID);
 							par3List.add("EntityName: " + entityName);
 						}
-					}
-					break;
+						break;
+				}
 			}
 		}
 	}
@@ -214,8 +232,8 @@ public class ItemFilter extends Item
 
 		return inventoryFilter;
 	}
-	
-	public static IInventory getItemFilterInv(EntityPlayer player,ItemStack filter)
+
+	public static IInventory getItemFilterInv(EntityPlayer player, ItemStack filter)
 	{
 		IInventory inventoryFilter = null;
 
@@ -251,14 +269,14 @@ public class ItemFilter extends Item
 	{
 		ItemStack blockFilter = new ItemStack(item, 1, 0); // Block Filter
 		blockFilter.stackTagCompound = new NBTTagCompound();
-		list.add(blockFilter); 
-		
+		list.add(blockFilter);
+
 		ItemStack itemFilter = new ItemStack(item, 1, 1);// Item Filter
 		itemFilter.stackTagCompound = new NBTTagCompound();
-		list.add(itemFilter); 
-		
-		ItemStack entityFilter = new ItemStack(item, 1, 2);
+		list.add(itemFilter);
+
+		ItemStack entityFilter = new ItemStack(item, 1, 2); // Entity Filter
 		entityFilter.stackTagCompound = new NBTTagCompound();
-		list.add(entityFilter); // Entity Filter
+		list.add(entityFilter); 
 	}
 }
