@@ -1,25 +1,13 @@
 package lumien.randomthings.Blocks;
 
-import static net.minecraftforge.common.util.ForgeDirection.UP;
-
 import java.util.Random;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Configuration.Settings;
-
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.S2APacketParticles;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.AxisAlignedBB;
@@ -61,11 +49,13 @@ public class BlockFertilizedDirt extends Block
 		GameRegistry.registerBlock(this, "fertilizedDirt" + (tilled ? "_tilled" : ""));
 	}
 
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_)
 	{
-		return AxisAlignedBB.getAABBPool().getAABB((double) (p_149668_2_ + 0), (double) (p_149668_3_ + 0), (double) (p_149668_4_ + 0), (double) (p_149668_2_ + 1), (double) (p_149668_3_ + 1), (double) (p_149668_4_ + 1));
+		return AxisAlignedBB.getAABBPool().getAABB(p_149668_2_ + 0, p_149668_3_ + 0, p_149668_4_ + 0, p_149668_2_ + 1, p_149668_3_ + 1, p_149668_4_ + 1);
 	}
 
+	@Override
 	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_)
 	{
 		return Item.getItemFromBlock(ModBlocks.fertilizedDirt);
@@ -83,6 +73,7 @@ public class BlockFertilizedDirt extends Block
 		return true;
 	}
 
+	@Override
 	public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable)
 	{
 		Block plant = plantable.getPlant(world, x, y + 1, z);

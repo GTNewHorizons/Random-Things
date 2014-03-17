@@ -1,27 +1,13 @@
 package lumien.randomthings.Transformer;
 
-import lumien.randomthings.Handler.CoreHandler;
-
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.FrameNode;
-import org.objectweb.asm.tree.InsnNode;
-import org.objectweb.asm.tree.JumpInsnNode;
-import org.objectweb.asm.tree.LabelNode;
-import org.objectweb.asm.tree.LineNumberNode;
-import org.objectweb.asm.tree.LocalVariableNode;
-import org.objectweb.asm.tree.MethodInsnNode;
-import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.VarInsnNode;
-
 import static org.objectweb.asm.Opcodes.*;
 
-import net.minecraft.block.Block;
 import net.minecraft.launchwrapper.IClassTransformer;
-import net.minecraft.world.World;
 
 public class RTClassTransformer implements IClassTransformer
 {

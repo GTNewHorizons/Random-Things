@@ -183,6 +183,7 @@ public class ItemFilter extends Item
 		return par1ItemStack;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int par1)
 	{
@@ -196,6 +197,7 @@ public class ItemFilter extends Item
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister)
 	{

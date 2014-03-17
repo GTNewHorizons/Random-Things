@@ -1,39 +1,24 @@
 package lumien.randomthings.Blocks;
 
-import static net.minecraftforge.common.util.ForgeDirection.DOWN;
-import static net.minecraftforge.common.util.ForgeDirection.EAST;
-import static net.minecraftforge.common.util.ForgeDirection.NORTH;
-import static net.minecraftforge.common.util.ForgeDirection.SOUTH;
-import static net.minecraftforge.common.util.ForgeDirection.UP;
-import static net.minecraftforge.common.util.ForgeDirection.WEST;
-
 import java.util.Random;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
-import lumien.randomthings.TileEntities.TileEntityItemCollector;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Facing;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -84,11 +69,11 @@ public class BlockAdvancedItemCollector extends BlockContainer
                         }
 
                         itemstack.stackSize -= j1;
-                        entityitem = new EntityItem(worldObj, (double)((float)posX + f), (double)((float)posY + f1), (double)((float)posZ + f2), new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
+                        entityitem = new EntityItem(worldObj, posX + f, posY + f1, posZ + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
                         float f3 = 0.05F;
-                        entityitem.motionX = (double)((float)this.rng.nextGaussian() * f3);
-                        entityitem.motionY = (double)((float)this.rng.nextGaussian() * f3 + 0.2F);
-                        entityitem.motionZ = (double)((float)this.rng.nextGaussian() * f3);
+                        entityitem.motionX = (float)this.rng.nextGaussian() * f3;
+                        entityitem.motionY = (float)this.rng.nextGaussian() * f3 + 0.2F;
+                        entityitem.motionZ = (float)this.rng.nextGaussian() * f3;
 
                         if (itemstack.hasTagCompound())
                         {
@@ -167,11 +152,13 @@ public class BlockAdvancedItemCollector extends BlockContainer
 		return false;
 	}
 
+	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_)
 	{
 		return null;
 	}
 
+	@Override
 	public boolean isOpaqueCube()
 	{
 		return false;

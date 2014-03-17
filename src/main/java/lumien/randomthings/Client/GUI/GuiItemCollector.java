@@ -6,7 +6,6 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.Container.ContainerItemCollector;
 import lumien.randomthings.Network.Packets.PacketItemCollector;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
-import lumien.randomthings.TileEntities.TileEntityItemCollector;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;

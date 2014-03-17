@@ -16,43 +16,65 @@ import net.minecraft.util.Facing;
 
 public class TileEntityItemCollector extends TileEntity
 {
-	private final int range=2;
+	private final int range = 2;
+
+	private int tickRate = 20;
+	private int tickCounter = 0;
+
 	@Override
 	public void updateEntity()
 	{
 		if (!worldObj.isRemote)
 		{
-			int targetX,targetY,targetZ;
-			
-			EnumFacing facing = BlockDispenser.func_149937_b(Facing.oppositeSide[worldObj.getBlockMetadata(xCoord, yCoord, zCoord)]);
-			
-			targetX=xCoord+facing.getFrontOffsetX();
-			targetY=yCoord+facing.getFrontOffsetY();
-			targetZ=zCoord+facing.getFrontOffsetZ();
-			
-			Block block = worldObj.getBlock(targetX, targetY, targetZ);
-
-			if (block != null)
+			tickCounter++;
+			if (tickCounter >= tickRate)
 			{
-				TileEntity te = worldObj.getTileEntity(targetX, targetY, targetZ);
-				if (te != null && (te instanceof IInventory || te instanceof ISidedInventory))
+				int targetX, targetY, targetZ;
+
+				EnumFacing facing = BlockDispenser.func_149937_b(Facing.oppositeSide[worldObj.getBlockMetadata(xCoord, yCoord, zCoord)]);
+
+				targetX = xCoord + facing.getFrontOffsetX();
+				targetY = yCoord + facing.getFrontOffsetY();
+				targetZ = zCoord + facing.getFrontOffsetZ();
+
+				Block block = worldObj.getBlock(targetX, targetY, targetZ);
+
+				if (block != null)
 				{
-					AxisAlignedBB bounding = AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range + 1, yCoord + range + 1, zCoord + range + 1);
-
-					List<EntityItem> items = worldObj.getEntitiesWithinAABB(EntityItem.class, bounding);
-
-					for (EntityItem ei : items)
+					TileEntity te = worldObj.getTileEntity(targetX, targetY, targetZ);
+					if (te != null && (te instanceof IInventory || te instanceof ISidedInventory))
 					{
-						ItemStack rest = TileEntityHopper.func_145889_a((IInventory) te, ei.getEntityItem(), Facing.oppositeSide[facing.ordinal()]);
-						if (rest == null)
+						AxisAlignedBB bounding = AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range + 1, yCoord + range + 1, zCoord + range + 1);
+
+						List<EntityItem> items = worldObj.getEntitiesWithinAABB(EntityItem.class, bounding);
+						if (items.size() == 0)
 						{
-							ei.setDead();
+							if (tickRate < 20)
+							{
+								tickRate++;
+							}
 						}
-						else if (!rest.equals(ei.getEntityItem()))
+						else
 						{
-							ei.setEntityItemStack(rest);
+							if (tickRate > 2)
+							{
+								tickRate--;
+							}
 						}
-						te.markDirty();
+
+						for (EntityItem ei : items)
+						{
+							ItemStack rest = TileEntityHopper.func_145889_a((IInventory) te, ei.getEntityItem(), Facing.oppositeSide[facing.ordinal()]);
+							if (rest == null)
+							{
+								ei.setDead();
+							}
+							else if (!rest.equals(ei.getEntityItem()))
+							{
+								ei.setEntityItemStack(rest);
+							}
+							te.markDirty();
+						}
 					}
 				}
 			}

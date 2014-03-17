@@ -1,7 +1,6 @@
 package lumien.randomthings.Client.Particle;
 
 import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
-import net.minecraft.client.particle.EntityFX;
 import net.minecraft.world.World;
 
 public class ParticleBiomeSolution extends EntityEnchantmentTableParticleFX

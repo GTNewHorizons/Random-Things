@@ -3,7 +3,6 @@ package lumien.randomthings.Blocks;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.TileEntities.TileEntityFluidDisplay;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -32,7 +31,7 @@ public class BlockFluidDisplay extends BlockContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world,int par2)
+	public TileEntity createNewTileEntity(World world, int par2)
 	{
 		return new TileEntityFluidDisplay();
 	}
@@ -41,7 +40,7 @@ public class BlockFluidDisplay extends BlockContainer
 	public IIcon getIcon(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
 	{
 		TileEntityFluidDisplay te = (TileEntityFluidDisplay) par1IBlockAccess.getTileEntity(par2, par3, par4);
-		if (te == null || te.getFluidName().equals("") || FluidRegistry.getFluid(te.getFluidName())==null)
+		if (te == null || te.getFluidName().equals("") || FluidRegistry.getFluid(te.getFluidName()) == null)
 		{
 			return blockIcon;
 		}
@@ -71,7 +70,7 @@ public class BlockFluidDisplay extends BlockContainer
 
 		if (currentItem != null)
 		{
-			FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(new ItemStack(Items.water_bucket));
+			FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(currentItem);
 			if (liquid != null)
 			{
 				TileEntityFluidDisplay te = (TileEntityFluidDisplay) world.getTileEntity(i, j, k);
@@ -93,7 +92,6 @@ public class BlockFluidDisplay extends BlockContainer
 			}
 			return true;
 		}
-
 		return false;
 	}
 

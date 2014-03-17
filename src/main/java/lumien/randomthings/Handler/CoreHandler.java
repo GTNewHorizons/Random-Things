@@ -3,8 +3,6 @@ package lumien.randomthings.Handler;
 import java.util.Random;
 
 import lumien.randomthings.Configuration.VanillaChanges;
-import lumien.randomthings.Transformer.RTClassTransformer;
-
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 

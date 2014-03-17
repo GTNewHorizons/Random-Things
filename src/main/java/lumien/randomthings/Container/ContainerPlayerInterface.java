@@ -2,7 +2,6 @@ package lumien.randomthings.Container;
 
 import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 
 public class ContainerPlayerInterface extends Container

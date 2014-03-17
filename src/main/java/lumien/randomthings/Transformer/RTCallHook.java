@@ -2,9 +2,6 @@ package lumien.randomthings.Transformer;
 
 import java.util.Map;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.launchwrapper.Launch;
-
 import cpw.mods.fml.relauncher.IFMLCallHook;
 
 public class RTCallHook implements IFMLCallHook

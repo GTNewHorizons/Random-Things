@@ -118,7 +118,7 @@ public class InventoryItemFilter extends InventoryBasic
 		NBTTagList itemList = (NBTTagList) ((NBTTagCompound) originalIS.stackTagCompound.getTag("Inventory")).getTag("Items");
 		for (int i = 0; i < itemList.tagCount(); i++)
 		{
-			NBTTagCompound slotEntry = (NBTTagCompound) itemList.getCompoundTagAt(i);
+			NBTTagCompound slotEntry = itemList.getCompoundTagAt(i);
 			int j = slotEntry.getByte("Slot") & 0xff;
 
 			if (j >= 0 && j < getSizeInventory())

@@ -24,6 +24,8 @@ import net.minecraft.util.Facing;
 public class TileEntityAdvancedItemCollector extends TileEntity
 {
 	public int rangeX, rangeY, rangeZ;
+	private int tickRate = 20;
+	private int tickCounter = 0;
 
 	InventoryBasic inventory;
 
@@ -35,6 +37,7 @@ public class TileEntityAdvancedItemCollector extends TileEntity
 
 		inventory = new InventoryBasic("AdvancedItemCollector", false, 1)
 		{
+			@Override
 			public boolean isItemValidForSlot(int slot, ItemStack par2ItemStack)
 			{
 				return par2ItemStack.getItem() instanceof ItemFilter && par2ItemStack.getItemDamage() == ItemFilter.FilterType.ITEM.ordinal();
@@ -133,39 +136,63 @@ public class TileEntityAdvancedItemCollector extends TileEntity
 	{
 		if (!worldObj.isRemote)
 		{
-			int targetX, targetY, targetZ;
-
-			EnumFacing facing = BlockDispenser.func_149937_b(Facing.oppositeSide[worldObj.getBlockMetadata(xCoord, yCoord, zCoord)]);
-
-			targetX = xCoord + facing.getFrontOffsetX();
-			targetY = yCoord + facing.getFrontOffsetY();
-			targetZ = zCoord + facing.getFrontOffsetZ();
-
-			Block block = worldObj.getBlock(targetX, targetY, targetZ);
-
-			if (block != null)
+			tickCounter++;
+			if (tickCounter >= tickRate)
 			{
-				TileEntity te = worldObj.getTileEntity(targetX, targetY, targetZ);
-				if (te != null && (te instanceof IInventory || te instanceof ISidedInventory))
+				tickCounter=0;
+				int targetX, targetY, targetZ;
+
+				EnumFacing facing = BlockDispenser.func_149937_b(Facing.oppositeSide[worldObj.getBlockMetadata(xCoord, yCoord, zCoord)]);
+
+				targetX = xCoord + facing.getFrontOffsetX();
+				targetY = yCoord + facing.getFrontOffsetY();
+				targetZ = zCoord + facing.getFrontOffsetZ();
+
+				Block block = worldObj.getBlock(targetX, targetY, targetZ);
+
+				if (block != null)
 				{
-					AxisAlignedBB bounding = AxisAlignedBB.getBoundingBox(xCoord - rangeX, yCoord - rangeY, zCoord - rangeZ, xCoord + rangeX + 1, yCoord + rangeY + 1, zCoord + rangeZ + 1);
-
-					List<EntityItem> items = worldObj.getEntitiesWithinAABB(EntityItem.class, bounding);
-
-					for (EntityItem ei : items)
+					TileEntity te = worldObj.getTileEntity(targetX, targetY, targetZ);
+					if (te != null && (te instanceof IInventory || te instanceof ISidedInventory))
 					{
-						if (inventory.getStackInSlot(0) == null || ItemFilter.matchesItem(inventory.getStackInSlot(0), ei.getEntityItem()))
+						AxisAlignedBB bounding = AxisAlignedBB.getBoundingBox(xCoord - rangeX, yCoord - rangeY, zCoord - rangeZ, xCoord + rangeX + 1, yCoord + rangeY + 1, zCoord + rangeZ + 1);
+
+						List<EntityItem> items = worldObj.getEntitiesWithinAABB(EntityItem.class, bounding);
+						
+						if (items.size()==0)
 						{
-							ItemStack rest = TileEntityHopper.func_145889_a((IInventory) te, ei.getEntityItem(), Facing.oppositeSide[facing.ordinal()]);
-							if (rest == null)
+							if (tickRate < 20)
 							{
-								te.markDirty();
-								ei.setDead();
+								tickRate++;
 							}
-							else if (!rest.equals(ei.getEntityItem()))
+						}
+
+						for (EntityItem ei : items)
+						{
+							if (inventory.getStackInSlot(0) == null || ItemFilter.matchesItem(inventory.getStackInSlot(0), ei.getEntityItem()))
 							{
-								te.markDirty();
-								ei.setEntityItemStack(rest);
+								ItemStack rest = TileEntityHopper.func_145889_a((IInventory) te, ei.getEntityItem(), Facing.oppositeSide[facing.ordinal()]);
+								if (rest == null)
+								{
+									if (tickRate > 2)
+									{
+										tickRate--;
+									}
+									te.markDirty();
+									ei.setDead();
+								}
+								else if (!rest.equals(ei.getEntityItem()))
+								{
+									te.markDirty();
+									ei.setEntityItemStack(rest);
+								}
+								else if (rest.equals(ei.getEntityItem()))
+								{
+									if (tickRate < 20)
+									{
+										tickRate++;
+									}
+								}
 							}
 						}
 					}

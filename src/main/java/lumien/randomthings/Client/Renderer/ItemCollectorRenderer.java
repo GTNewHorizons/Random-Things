@@ -2,23 +2,18 @@ package lumien.randomthings.Client.Renderer;
 
 import org.lwjgl.opengl.GL11;
 
-import lumien.randomthings.RandomThings;
-import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Client.Model.ModelItemCollector;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import lumien.randomthings.TileEntities.TileEntityItemCollector;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class ItemCollectorRenderer extends TileEntitySpecialRenderer
 {
@@ -84,7 +79,7 @@ public class ItemCollectorRenderer extends TileEntitySpecialRenderer
 		}
 
 		// A reference to your Model file. Again, very important.
-		this.model.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+		ItemCollectorRenderer.model.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 		// Tell it to stop rendering for both the PushMatrix's
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();
@@ -107,6 +102,6 @@ public class ItemCollectorRenderer extends TileEntitySpecialRenderer
 		int modulousModifier = skyLight % 65536;
 		int divModifier = skyLight / 65536;
 		tess.setColorOpaque_F(brightness, brightness, brightness);
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) modulousModifier, divModifier);
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, modulousModifier, divModifier);
 	}
 }

@@ -3,8 +3,6 @@ package lumien.randomthings.Handler;
 import java.lang.reflect.Field;
 import java.util.Random;
 
-import lumien.randomthings.RandomThings;
-import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Library.OverrideUtils;
 
 import net.minecraft.client.gui.Gui;

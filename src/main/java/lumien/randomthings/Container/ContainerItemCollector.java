@@ -2,7 +2,6 @@ package lumien.randomthings.Container;
 
 import lumien.randomthings.Slot.SlotFilter;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
-import lumien.randomthings.TileEntities.TileEntityItemCollector;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

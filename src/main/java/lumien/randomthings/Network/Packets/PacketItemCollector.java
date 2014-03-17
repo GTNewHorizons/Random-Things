@@ -7,7 +7,6 @@ import net.minecraft.world.World;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Network.AbstractPacket;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
-import lumien.randomthings.TileEntities.TileEntityItemCollector;
 
 public class PacketItemCollector extends AbstractPacket
 {
@@ -85,6 +84,7 @@ public class PacketItemCollector extends AbstractPacket
 			{
 				te.setRange(rangeX, rangeY, rangeZ);
 				te.markDirty();
+				te.getWorldObj().markBlockForUpdate(posX, posY, posZ);
 			}
 		}
 

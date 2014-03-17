@@ -14,7 +14,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemIngredient extends Item
@@ -50,7 +49,8 @@ public class ItemIngredient extends Item
 		GameRegistry.registerItem(this, "ingredient");
 	}
 	
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public void getSubItems(Item item, CreativeTabs creativeTab, List list)
     {
         for (int i=0;i<ingredients.size();i++)
@@ -59,6 +59,7 @@ public class ItemIngredient extends Item
         }
     }
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int damage)
 	{
@@ -72,7 +73,8 @@ public class ItemIngredient extends Item
 		}
 	}
 	
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister par1IconRegister)
     {
         for (Ingredient i:ingredients)

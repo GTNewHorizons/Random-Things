@@ -3,17 +3,18 @@ package lumien.randomthings.Client;
 import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Client.GUI.GuiItemCollector;
 import lumien.randomthings.Client.GUI.GuiItemFilter;
+import lumien.randomthings.Client.GUI.GuiOnlineDetector;
 import lumien.randomthings.Client.GUI.GuiPlayerInterface;
 import lumien.randomthings.Container.ContainerItemCollector;
 import lumien.randomthings.Container.ContainerItemFilter;
+import lumien.randomthings.Container.ContainerOnlineDetector;
 import lumien.randomthings.Container.ContainerPlayerInterface;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
+import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
 import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -38,6 +39,8 @@ public class GuiHandler implements IGuiHandler
 				return new ContainerItemFilter(player.inventory,inventoryFilter);
 			case ADVANCED_ITEMCOLLECTOR:
 				return new ContainerItemCollector(player.inventory,(TileEntityAdvancedItemCollector)tileEntity);
+			case ONLINE_DETECTOR:
+				return new ContainerOnlineDetector();
 		}
 		return null;
 	}
@@ -59,6 +62,8 @@ public class GuiHandler implements IGuiHandler
 				return new GuiItemFilter(player.inventory,inventoryFilter);
 			case ADVANCED_ITEMCOLLECTOR:
 				return new GuiItemCollector(player.inventory,(TileEntityAdvancedItemCollector)tileEntity);
+			case ONLINE_DETECTOR:
+				return new GuiOnlineDetector((TileEntityOnlineDetector)tileEntity);
 		}
 		return null;
 	}

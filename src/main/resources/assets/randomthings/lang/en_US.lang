@@ -3,6 +3,7 @@ tile.fluidDisplay.name=Fluid Display
 tile.fertilizedDirt.name=Fertilized Dirt
 tile.itemCollector.name=Item Collector
 tile.advancedItemCollector.name=Advanced Item Collector
+tile.onlineDetector.name=Online Detector
 
 item.filterBlock.name=Block Filter
 item.filterItem.name=Item Filter
@@ -10,6 +11,8 @@ item.filterEntity.name=Entity Filter
 item.biomeSolution.name=Solution
 item.biomeCapsule.name=Biome Capsule[WIP]
 item.biomePainter.name=Biome Painter[WIP]
+item.whitestone.name=White Stone
+item.kojaku.name=Kojaku
 
 item.playerCore.name=Player Core
 item.obsidianStick.name=Obsidian Stick

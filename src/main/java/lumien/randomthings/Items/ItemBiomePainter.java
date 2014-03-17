@@ -25,6 +25,7 @@ public class ItemBiomePainter extends Item
 		GameRegistry.registerItem(this, "biomePainter");
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister)
 	{

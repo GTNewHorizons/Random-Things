@@ -1,9 +1,8 @@
 package lumien.randomthings.Blocks;
 
+import net.minecraft.block.Block;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.ConfigBlocks;
-import lumien.randomthings.Configuration.Settings;
-import net.minecraft.block.Block;
 
 public class ModBlocks
 {
@@ -12,6 +11,7 @@ public class ModBlocks
 	public static BlockFertilizedDirt fertilizedDirt, fertilizedDirtTilled;
 	public static BlockItemCollector itemCollector;
 	public static BlockAdvancedItemCollector advancedItemCollector;
+	public static BlockOnlineDetector onlineDetector;
 
 	public static void init()
 	{
@@ -30,5 +30,7 @@ public class ModBlocks
 			itemCollector = new BlockItemCollector();
 			advancedItemCollector = new BlockAdvancedItemCollector();
 		}
+		if (ConfigBlocks.onlineDetector)
+			onlineDetector = new BlockOnlineDetector();
 	}
 }
