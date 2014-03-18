@@ -29,6 +29,7 @@ public class TileEntityItemCollector extends TileEntity
 			tickCounter++;
 			if (tickCounter >= tickRate)
 			{
+				tickCounter=0;
 				int targetX, targetY, targetZ;
 
 				EnumFacing facing = BlockDispenser.func_149937_b(Facing.oppositeSide[worldObj.getBlockMetadata(xCoord, yCoord, zCoord)]);
@@ -47,24 +48,24 @@ public class TileEntityItemCollector extends TileEntity
 						AxisAlignedBB bounding = AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range + 1, yCoord + range + 1, zCoord + range + 1);
 
 						List<EntityItem> items = worldObj.getEntitiesWithinAABB(EntityItem.class, bounding);
-						if (items.size() == 0)
+						
+						if (tickRate < 20)
 						{
-							if (tickRate < 20)
-							{
-								tickRate++;
-							}
-						}
-						else
-						{
-							if (tickRate > 2)
-							{
-								tickRate--;
-							}
+							tickRate++;
 						}
 
 						for (EntityItem ei : items)
 						{
 							ItemStack rest = TileEntityHopper.func_145889_a((IInventory) te, ei.getEntityItem(), Facing.oppositeSide[facing.ordinal()]);
+
+							if (rest == null || !rest.equals(ei.getEntityItem()))
+							{
+								if (tickRate > 2)
+								{
+									tickRate--;
+								}
+							}
+
 							if (rest == null)
 							{
 								ei.setDead();

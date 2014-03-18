@@ -4,6 +4,7 @@ import java.util.Random;
 
 import lumien.randomthings.Configuration.VanillaChanges;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
 public class CoreHandler
@@ -14,7 +15,7 @@ public class CoreHandler
 	{
 		if (VanillaChanges.FASTER_LEAVEDECAY)
 		{
-			worldObj.scheduleBlockUpdate(posX, posY, posZ, leave, 2 + rng.nextInt(5));
+			worldObj.scheduleBlockUpdate(posX, posY, posZ, Blocks.leaves, 4 + rng.nextInt(7));
 		}
 	}
 }

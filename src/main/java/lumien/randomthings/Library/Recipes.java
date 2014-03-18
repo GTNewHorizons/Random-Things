@@ -31,6 +31,9 @@ public class Recipes
 		ItemStack iGlowstone = new ItemStack(Items.glowstone_dust);
 		ItemStack iDiamond = new ItemStack(Items.diamond);
 		ItemStack iPaper = new ItemStack(Items.paper);
+		ItemStack iStone = new ItemStack(Blocks.stone);
+		ItemStack iRedstoneTorch = new ItemStack(Blocks.redstone_torch);
+		ItemStack iRedstoneRepeater = new ItemStack(Items.repeater);
 		
 		ItemStack iPlayerCore = new ItemStack(ModItems.ingredients,1,0);
 		ItemStack iObsidianStick = new ItemStack(ModItems.ingredients,1,1);
@@ -51,6 +54,8 @@ public class Recipes
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector,1),"xhx","rer","xox",'h',iHopper,'r',iRedstone,'e',iEnderPearl,'o',"stickObsidian"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedItemCollector,1),"xdx","gig",'d',iDiamond,'g',iGlowstone,'i',iItemCollector));
 		}
+		if (ConfigBlocks.onlineDetector)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.onlineDetector,1),"sts","rer","sts",'s',iStone,'t',iRedstoneTorch,'r',iRedstone,'e',iLapislazuli));
 		
 		if (ConfigItems.filter)
 		{

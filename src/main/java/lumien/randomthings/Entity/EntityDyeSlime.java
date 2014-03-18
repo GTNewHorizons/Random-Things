@@ -30,7 +30,6 @@ public class EntityDyeSlime extends EntityLiving implements IMob, IEntityAdditio
 	public float prevSquishFactor;
 
 	private int slimeJumpDelay, dye;
-	private static final String __OBFID = "CL_00001698";
 
 	public EntityDyeSlime(World par1World)
 	{
@@ -109,20 +108,9 @@ public class EntityDyeSlime extends EntityLiving implements IMob, IEntityAdditio
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		super.dropFewItems(par1, par2);
-
-		if (this.dye == 15)
+		if (rand.nextInt(10) == 0)
 		{
-			if (rand.nextInt(4) == 0)
-			{
-				this.entityDropItem(new ItemStack(Items.dye, 1, dye), 0);
-			}
-		}
-		else
-		{
-			if (rand.nextInt(4) != 0)
-			{
-				this.entityDropItem(new ItemStack(Items.dye, 1, dye), 0);
-			}
+			this.entityDropItem(new ItemStack(Items.dye, 1, dye), 0);
 		}
 	}
 
@@ -321,31 +309,7 @@ public class EntityDyeSlime extends EntityLiving implements IMob, IEntityAdditio
 	 */
 	public boolean getCanSpawnHere()
 	{
-		Chunk chunk = this.worldObj.getChunkFromBlockCoords(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posZ));
-
-		if (this.worldObj.getWorldInfo().getTerrainType().handleSlimeSpawnReduction(rand, worldObj))
-		{
-			return false;
-		}
-		else
-		{
-			if (this.getSlimeSize() == 1 || this.worldObj.difficultySetting != EnumDifficulty.PEACEFUL)
-			{
-				BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posZ));
-
-				if (biomegenbase == BiomeGenBase.swampland && this.posY > 50.0D && this.posY < 70.0D && this.rand.nextFloat() < 0.5F && this.rand.nextFloat() < this.worldObj.getCurrentMoonPhaseFactor() && this.worldObj.getBlockLightValue(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)) <= this.rand.nextInt(8))
-				{
-					return super.getCanSpawnHere();
-				}
-
-				if (this.rand.nextInt(10) == 0 && chunk.getRandomWithSeed(987234911L).nextInt(10) == 0 && this.posY < 40.0D)
-				{
-					return super.getCanSpawnHere();
-				}
-			}
-
-			return false;
-		}
+		return true;
 	}
 
 	/**

@@ -38,7 +38,7 @@ public class RTClassTransformer implements IClassTransformer
 		classNode.accept(writer);
 
 		String methodName = obfuscated ? "a" : "onNeighborBlockChange";
-		String worldClass = obfuscated ? "abw" : "net/minecraft/world/World";
+		String worldClass = obfuscated ? "afn" : "net/minecraft/world/World";
 		String leaveClass = obfuscated ? "amp" : "net/minecraft/block/BlockLeavesBase";
 		String blockClass = obfuscated ? "ahu" : "net/minecraft/block/Block";
 

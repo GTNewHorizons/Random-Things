@@ -8,6 +8,7 @@ import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.client.particle.EntityCritFX;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemDye;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import lumien.randomthings.Client.Renderer.ItemCollectorRenderer;
 import lumien.randomthings.Client.Renderer.RenderDyeSlime;
@@ -22,6 +23,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 public class ClientProxy extends CommonProxy
 {
 	ItemCollectorRenderer renderer;
+	public static IIcon slimeParticleTexture;
 
 	@Override
 	public void registerRenderers()
@@ -50,6 +52,7 @@ public class ClientProxy extends CommonProxy
 		EntityBreakingFX particle = new EntityBreakingFX(Minecraft.getMinecraft().theWorld, x,y,z, Items.slime_ball);
 		Color c = new Color(ItemDye.field_150922_c[dye]);
 		particle.setRBGColorF(1F/255F*c.getRed(), 1F/255F*c.getGreen(), 1F/255F*c.getBlue());
+		particle.setParticleIcon(slimeParticleTexture);
 		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 	}
 }

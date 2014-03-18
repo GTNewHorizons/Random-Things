@@ -7,7 +7,9 @@ import org.lwjgl.opengl.GL11;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Entity.EntityDyeSlime;
 import lumien.randomthings.Items.ItemWhiteStone;
+import lumien.randomthings.Proxy.ClientProxy;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.relauncher.Side;
@@ -17,9 +19,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent.CheckSpawn;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.ChunkWatchEvent;
 
@@ -36,34 +41,13 @@ public class RTEventHandler
 		}
 	}
 	
-	@SubscribeEvent
-	@SideOnly(Side.SERVER)
-	public void chunkWatch(ChunkWatchEvent.Watch event)
-	{
-		System.out.println(event.chunk);
-	}
-	
-	public void onEntitySpawn(LivingSpawnEvent event)
-	{
-		if (event.entity instanceof EntitySlime && !event.world.isRemote)
-		{
-			EntitySlime slime = (EntitySlime) event.entity;
-			event.setCanceled(true);
-			EntityDyeSlime dyeSlime = new EntityDyeSlime(event.world);
-			dyeSlime.setPosition(event.x,event.y,event.z);
-			event.world.spawnEntityInWorld(dyeSlime);
-		}
-	}
-
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public void entityPreRender(RenderLivingEvent.Pre event)
+	public void preTextureStitch(TextureStitchEvent.Pre event)
 	{
-		if (event.entity instanceof EntityDyeSlime)
+		if (event.map.getTextureType()==1)
 		{
-			EntityDyeSlime slime = (EntityDyeSlime) event.entity;
-			Color c = new Color(ItemDye.field_150922_c[slime.getDye()]);
-			GL11.glColor3f(1F/255F*c.getRed(), 1F/255F*c.getGreen(), 1F/255F*c.getBlue());
+			ClientProxy.slimeParticleTexture = event.map.registerIcon("RandomThings:slimeParticle");
 		}
 	}
 

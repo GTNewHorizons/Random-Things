@@ -1,5 +1,7 @@
 package lumien.randomthings.Client.Renderer;
 
+import java.awt.Color;
+
 import lumien.randomthings.Entity.EntityDyeSlime;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -7,6 +9,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemDye;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
@@ -62,6 +65,10 @@ public class RenderDyeSlime extends RenderLiving
 		float f2 = (par1EntityDyeSlime.prevSquishFactor + (par1EntityDyeSlime.squishFactor - par1EntityDyeSlime.prevSquishFactor) * par2) / (f1 * 0.5F + 1.0F);
 		float f3 = 1.0F / (f2 + 1.0F);
 		GL11.glScalef(f3 * f1, 1.0F / f3 * f1, f3 * f1);
+		
+		EntityDyeSlime slime = par1EntityDyeSlime;
+		Color c = new Color(ItemDye.field_150922_c[slime.getDye()]);
+		GL11.glColor3f(1F/255F*c.getRed(), 1F/255F*c.getGreen(), 1F/255F*c.getBlue());
 	}
 
 	/**

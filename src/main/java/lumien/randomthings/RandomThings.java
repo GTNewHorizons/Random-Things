@@ -9,6 +9,7 @@ import lumien.randomthings.Client.GuiHandler;
 import lumien.randomthings.Configuration.RTConfiguration;
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Core.RTCreativeTab;
+import lumien.randomthings.Entity.EntityDyeSlime;
 import lumien.randomthings.Entity.ModEntitys;
 import lumien.randomthings.Handler.BackgroundHandler;
 import lumien.randomthings.Handler.RTEventHandler;
@@ -18,6 +19,7 @@ import lumien.randomthings.Library.Recipes;
 import lumien.randomthings.Network.PacketPipeline;
 import lumien.randomthings.Proxy.CommonProxy;
 import lumien.randomthings.TileEntities.ModTileEntities;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
@@ -29,6 +31,7 @@ import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.Mod.EventHandler;
 
 @Mod(modid = RandomThings.MOD_ID, name = RandomThings.MOD_NAME, version = RandomThings.MOD_VERSION)
@@ -54,7 +57,6 @@ public class RandomThings
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		logger = event.getModLog();
-		logger.info("Test");
 
 		RTConfiguration.init(event);
 

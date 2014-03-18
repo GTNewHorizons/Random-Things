@@ -2,14 +2,15 @@ buildscript {
     repositories {
         mavenCentral()
         maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            name = 'ForgeFS'
+            url = 'http://files.minecraftforge.net/maven'
         }
-        maven {
+		maven {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
-    }
+
+	}
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.1-SNAPSHOT'
     }
@@ -29,6 +30,12 @@ if (ENV.DRONE_BUILD_NUMBER)
 else 
 {
 	version += ".local"
+}
+
+jar {
+    manifest {
+        attributes("FMLCorePluginContainsFMLMod": "true", "FMLCorePlugin": "lumien.randomthings.Transformer.RTLoadingPlugin")
+    }
 }
 
 minecraft {

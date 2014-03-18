@@ -1,20 +1,19 @@
 [
 {
-  "modid": "randomthings",
-  "name": "Random Things",
-  "description": "Random Things packed into one Mod :D",
-  "version": "%version%",
-  "url": "http://www.minecraftforum.net/topic/1832047-15x-random-things/",
-  "updateUrl": "",
-  "authorList": [
-    "lumien"
-  ],
-  "credits": "Created by Lumien",
-  "logoFile": "",
-  "screenshots": [
-  ],
-  "parent":"",
-  "dependencies": [
-  ]
-}
+    "modid": "randomthings",
+    "name": "Random Things",
+    "description": "Random Things packed into one Mod :D",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "http://www.minecraftforum.net/topic/1832047-15x-random-things/",
+    "updateUrl": "",
+    "authors": [
+      "lumien"
+    ],
+    "credits": "Created by Lumien",
+    "logoFile": "",
+    "screenshots": [],
+    "parent":"",
+    "dependencies": []
+  }
 ]
