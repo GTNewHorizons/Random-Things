@@ -97,6 +97,8 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	public void setPlayerName(String name)
 	{
 		this.playerName = name;
+		this.markDirty();
+		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
@@ -127,7 +129,7 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 			return null;
 		}
 		ItemStack newStack = playerEntity.inventory.decrStackSize(i, j);
-		updateSlot(i);
+		playerEntity.inventory.markDirty();
 		return newStack;
 	}
 
@@ -149,7 +151,7 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 			return;
 		}
 		playerEntity.inventory.setInventorySlotContents(i, itemstack);
-		updateSlot(i);
+		playerEntity.inventory.markDirty();
 	}
 
 	@Override
@@ -160,11 +162,6 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 			return 0;
 		}
 		return playerEntity.inventory.getInventoryStackLimit();
-	}
-
-	private void updateSlot(int slot)
-	{
-		playerEntity.sendContainerToPlayer(playerEntity.inventoryContainer);
 	}
 
 	@Override
@@ -260,13 +257,13 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j)
 	{
-		return true;
+		return isItemValidForSlot(i,itemstack);
 	}
 
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, int j)
 	{
-		return true;
+		return isItemValidForSlot(i,itemstack);
 	}
 
 	@Override

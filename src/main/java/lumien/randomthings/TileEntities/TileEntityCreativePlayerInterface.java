@@ -9,7 +9,6 @@ import cpw.mods.fml.common.Optional;
 @Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers")
 public class TileEntityCreativePlayerInterface extends TileEntityPlayerInterface implements SimpleComponent
 {
-
 	@Override
 	public String getComponentName()
 	{
