@@ -42,7 +42,7 @@ repositories {
 }
 
 dependencies {
-    compile group: 'li.cil.oc', name: 'OpenComputers', version: "MC1.7.2-1.2.4.98"
+    compile group: 'li.cil.oc', name: 'OpenComputers', version: "MC1.7.2-1.2.4.99"
 }
 
 minecraft {
