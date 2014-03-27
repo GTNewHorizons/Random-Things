@@ -103,12 +103,6 @@ public class BlockFertilizedDirt extends Block
 	@Override
 	public void updateTick(World par1World, int posX, int posY, int posZ, Random rng)
 	{	
-		if (growthIndicator)
-		{
-			S2APacketParticles packet = new S2APacketParticles("happyVillager",posX,posY+1,posZ,1,1,1,0.02F,1);
-			MinecraftServer.getServer().getConfigurationManager().sendToAllNear(posX, posY+1, posZ, 16,par1World.provider.dimensionId, packet);
-		}
-		
 		par1World.spawnParticle("cloud", posX, posY + 1, posZ, 0, 0, 0);
 		if (!par1World.isRemote)
 		{
@@ -119,7 +113,7 @@ public class BlockFertilizedDirt extends Block
 					if (!par1World.isAirBlock(posX, posY + 1, posZ))
 					{
 						Block toBoost = par1World.getBlock(posX, posY + 1, posZ);
-						if ((toBoost instanceof IGrowable) || (toBoost instanceof IPlantable))
+						if (toBoost instanceof IPlantable)
 						{
 							toBoost.updateTick(par1World, posX, posY + 1, posZ, rng);
 						}

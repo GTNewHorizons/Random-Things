@@ -9,7 +9,6 @@ buildscript {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
-
 	}
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.1-SNAPSHOT'
@@ -38,8 +37,16 @@ jar {
     }
 }
 
+repositories {
+    maven { url = "http://maven.cil.li/" }
+}
+
+dependencies {
+    compile group: 'li.cil.oc', name: 'OpenComputers', version: "MC1.7.2-1.2.4.98"
+}
+
 minecraft {
-    version = "1.7.2-10.12.0.1046"
+    version = "1.7.2-10.12.0.1047"
     assetDir = "eclipse/assets"
     
     replaceIn "RandomThings.java"

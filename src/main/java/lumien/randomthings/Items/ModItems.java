@@ -12,6 +12,9 @@ public class ModItems
 	public static ItemKojaku kojaku;
 	public static ItemWhiteStone whitestone;
 	public static ItemMagneticForce magneticForce;
+	
+	public static ItemCreativeSword creativeSword;
+	public static ItemCreativeGrower creativeGrower;
 
 	public static void init()
 	{
@@ -27,6 +30,11 @@ public class ModItems
 			whitestone = new ItemWhiteStone();
 		if (ConfigItems.magneticForce)
 			magneticForce = new ItemMagneticForce();
+		
+		if (ConfigItems.creativeSword)
+			creativeSword = new ItemCreativeSword();
+		if (ConfigItems.creativeGrower)
+			creativeGrower = new ItemCreativeGrower();
 		
 		ingredients = new ItemIngredient();
 		kojaku = new ItemKojaku();

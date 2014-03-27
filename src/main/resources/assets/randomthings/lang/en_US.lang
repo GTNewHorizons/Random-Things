@@ -11,8 +11,11 @@ item.filterEntity.name=Entity Filter
 item.biomeSolution.name=Solution
 item.biomeCapsule.name=Biome Capsule[WIP]
 item.biomePainter.name=Biome Painter[WIP]
-item.whitestone.name=White Stone
+item.whitestoneUncharged.name=White Stone [Uncharged]
+item.whitestoneCharged.name=White Stone [Charged]
 item.kojaku.name=Kojaku
+item.creativeSword.name=Creative Sword
+item.creativeGrower.name=Creative Grower
 
 item.playerCore.name=Player Core
 item.obsidianStick.name=Obsidian Stick

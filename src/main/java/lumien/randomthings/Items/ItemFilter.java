@@ -43,6 +43,21 @@ public class ItemFilter extends Item
 		GameRegistry.registerItem(this, "filter");
 	}
 
+	public static boolean matchesBlock(ItemStack filter, Block block, int metadata)
+	{
+		String blockName = Block.blockRegistry.getNameForObject(block);
+
+		if (filter.stackTagCompound == null || !filter.stackTagCompound.hasKey("block"))
+		{
+			return true;
+		}
+
+		String filterName = filter.stackTagCompound.getString("block");
+		int filterMetadata = filter.stackTagCompound.getInteger("metadata");
+
+		return filterName.equals(blockName) && filterMetadata == metadata;
+	}
+
 	public static boolean matchesItem(ItemStack filter, ItemStack toCheck)
 	{
 		if (filter == null || toCheck == null)
@@ -279,6 +294,6 @@ public class ItemFilter extends Item
 
 		ItemStack entityFilter = new ItemStack(item, 1, 2); // Entity Filter
 		entityFilter.stackTagCompound = new NBTTagCompound();
-		list.add(entityFilter); 
+		list.add(entityFilter);
 	}
 }

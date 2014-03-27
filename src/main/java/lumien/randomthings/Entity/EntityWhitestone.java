@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.vecmath.Vector3d;
 
+import lumien.randomthings.RandomThings;
 import lumien.randomthings.Items.ModItems;
 
 import net.minecraft.entity.item.EntityItem;
@@ -16,9 +17,8 @@ import net.minecraft.world.World;
 public class EntityWhitestone extends EntityItem
 {
 	int state;
-	EntityItem diamond = null;
 	EntityItem quartz = null;
-	EntityItem redstone = null;
+	int counter = 0;
 
 	public EntityWhitestone(World par1World)
 	{
@@ -37,7 +37,7 @@ public class EntityWhitestone extends EntityItem
 	public void onUpdate()
 	{
 		super.onUpdate();
-		if (worldObj.getCurrentMoonPhaseFactor() == 1 && worldObj.getWorldTime() >= 18000 && worldObj.canBlockSeeTheSky((int) Math.floor(posX), (int) Math.floor(posY), (int) Math.floor(posZ)))
+		if (this.getEntityItem().getItemDamage() == 0 && worldObj.getWorldTime() >= 18000 && worldObj.getWorldTime()<=22000 && worldObj.canBlockSeeTheSky((int) Math.floor(posX), (int) Math.floor(posY), (int) Math.floor(posZ)))
 		{
 			if (state == 0)
 			{
@@ -46,14 +46,6 @@ public class EntityWhitestone extends EntityItem
 
 				for (EntityItem ei : items)
 				{
-					if (ei.getEntityItem().getItem() == Items.diamond)
-					{
-						if (diamond == null)
-						{
-							diamond = ei;
-						}
-					}
-
 					if (ei.getEntityItem().getItem() == Items.quartz)
 					{
 						if (quartz == null)
@@ -61,24 +53,6 @@ public class EntityWhitestone extends EntityItem
 							quartz = ei;
 						}
 					}
-
-					if (ei.getEntityItem().getItem() == Items.redstone)
-					{
-						if (redstone == null)
-						{
-							redstone = ei;
-						}
-					}
-				}
-
-				if (diamond != null && diamond.isDead)
-				{
-					diamond = null;
-				}
-
-				if (redstone != null && redstone.isDead)
-				{
-					redstone = null;
 				}
 
 				if (quartz != null && quartz.isDead)
@@ -86,33 +60,32 @@ public class EntityWhitestone extends EntityItem
 					quartz = null;
 				}
 
-				if (diamond != null && quartz != null && redstone != null)
+				if (quartz != null)
 				{
 					state = 1;
 				}
 			}
 			else if (state == 1)
 			{
-				this.setEntityItemStack(new ItemStack(ModItems.whitestone, 1, 1));
-				diamond.getEntityItem().stackSize--;
-				redstone.getEntityItem().stackSize--;
-				quartz.getEntityItem().stackSize--;
-				state = 0;
-			}
-
-			if (redstone != null && worldObj.isRemote)
-			{
-				Vector3d vRedstone = new Vector3d(redstone.posX - posX, redstone.posY - posY, redstone.posZ - posZ);
-				Vector3d stutz = new Vector3d(posX, posY, posZ);
-
-				float maxK = (float) ((redstone.posX - stutz.x) / vRedstone.x);
-
-				for (float k = 0; k < maxK; k += 0.15)
+				counter++;
+				if (quartz.isDead)
 				{
-					worldObj.spawnParticle("reddust", stutz.x + k * vRedstone.x, stutz.y + k * vRedstone.y, stutz.z + k * vRedstone.z, 0, 0, 0);
+					state=0;
+					counter=0;
+				}
+				if (counter >= 100)
+				{
+					counter=0;
+					this.setEntityItemStack(new ItemStack(ModItems.whitestone, 1, 1));
+					quartz.getEntityItem().stackSize--;
+					state = 0;
+				}
+				else
+				{
+					this.motionY=0.07;
 				}
 			}
-			
+
 			if (quartz != null && worldObj.isRemote)
 			{
 				Vector3d vQuartz = new Vector3d(quartz.posX - posX, quartz.posY - posY, quartz.posZ - posZ);
@@ -120,12 +93,11 @@ public class EntityWhitestone extends EntityItem
 
 				float maxK = (float) ((quartz.posX - stutz.x) / vQuartz.x);
 
-				for (float k = 0; k < maxK; k += 0.15)
+				for (float k = 0; k < maxK; k += 0.05)
 				{
-					worldObj.spawnParticle("iconcrack_"+Item.getIdFromItem(Items.redstone), stutz.x + k * vQuartz.x, stutz.y + k * vQuartz.y, stutz.z + k * vQuartz.z, 0, 0, 0);
+					RandomThings.proxy.spawnColoredDust(stutz.x + k * vQuartz.x, stutz.y + k * vQuartz.y, stutz.z + k * vQuartz.z, 0, 0, 0, 1, 1, 1);
 				}
 			}
-
 		}
 	}
 

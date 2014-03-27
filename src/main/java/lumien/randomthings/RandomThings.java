@@ -68,6 +68,7 @@ public class RandomThings
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 		
 		MinecraftForge.EVENT_BUS.register(new RTEventHandler());
+		proxy.registerTickHandler();
 
 		if (event.getSide().isClient())
 		{

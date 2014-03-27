@@ -1,6 +1,7 @@
 package lumien.randomthings.TileEntities;
 
 import lumien.randomthings.Blocks.ModBlocks;
+import cpw.mods.fml.common.Optional;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -15,13 +16,12 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityPlayerInterface extends TileEntity implements ISidedInventory
 {
-	String playerName = "";
+	String playerName;
 	EntityPlayerMP playerEntity;
 
 	int[] armorSlots = new int[4];
 	int[] hotbarSlots = new int[9];
 	int[] mainSlots = new int[27];
-	int lockMode;
 
 	public TileEntityPlayerInterface()
 	{
@@ -46,7 +46,7 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 			i += 1;
 		}
 
-		lockMode = 0;
+		playerName = "";
 	}
 
 	@Override
@@ -216,7 +216,6 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	{
 		super.writeToNBT(par1NBTTagCompound);
 		par1NBTTagCompound.setString("playerName", this.playerName);
-		par1NBTTagCompound.setInteger("lockMode", lockMode);
 	}
 
 	@Override
@@ -224,7 +223,6 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	{
 		super.readFromNBT(par1NBTTagCompound);
 		this.playerName = par1NBTTagCompound.getString("playerName");
-		this.lockMode = par1NBTTagCompound.getInteger("lockMode");
 	}
 
 	public boolean hasPlayer()
@@ -274,7 +272,7 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	@Override
 	public String getInventoryName()
 	{
-		return "Player Interface";
+		return "Creative Player Interface";
 	}
 
 	@Override

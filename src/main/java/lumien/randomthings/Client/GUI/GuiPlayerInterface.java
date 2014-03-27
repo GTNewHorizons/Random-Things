@@ -59,6 +59,9 @@ public class GuiPlayerInterface extends GuiContainer
 	protected void drawGuiContainerForegroundLayer(int param1, int param2)
 	{
 		fontRendererObj.drawString("Player Interface", 8, 6, 4210752);
+		
+		String connectedTo = "Connected to "+te.getPlayerName();
+		fontRendererObj.drawString(connectedTo, (xSize/2-fontRendererObj.getStringWidth(connectedTo)/2), (ySize/2-fontRendererObj.FONT_HEIGHT/2), 4210752);
 	}
 
 	@Override

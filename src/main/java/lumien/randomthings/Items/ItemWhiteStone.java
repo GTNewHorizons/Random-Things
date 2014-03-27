@@ -1,10 +1,15 @@
 package lumien.randomthings.Items;
 
+import java.util.List;
+
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Entity.EntityWhitestone;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,6 +22,8 @@ public class ItemWhiteStone extends Item
 		this.setUnlocalizedName("whitestone");
 		this.setCreativeTab(RandomThings.creativeTab);
 		this.setTextureName("RandomThings:whitestone");
+		this.setHasSubtypes(true);
+		this.setMaxStackSize(1);
 		
 		GameRegistry.registerItem(this, "whitestone");
 	}
@@ -25,6 +32,14 @@ public class ItemWhiteStone extends Item
 	public boolean hasEffect(ItemStack par1ItemStack, int pass)
     {
     	return par1ItemStack.getItemDamage()==1;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void getSubItems(Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_)
+    {
+        p_150895_3_.add(new ItemStack(p_150895_1_, 1, 0));
+        p_150895_3_.add(new ItemStack(p_150895_1_, 1, 1));
     }
     
     @Override

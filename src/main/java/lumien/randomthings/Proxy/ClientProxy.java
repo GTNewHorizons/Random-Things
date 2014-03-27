@@ -2,14 +2,19 @@ package lumien.randomthings.Proxy;
 
 import java.awt.Color;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.client.particle.EntityCritFX;
+import net.minecraft.client.particle.EntityReddustFX;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemDye;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import lumien.randomthings.Client.ClientTickHandler;
 import lumien.randomthings.Client.Renderer.ItemCollectorRenderer;
 import lumien.randomthings.Client.Renderer.RenderDyeSlime;
 import lumien.randomthings.Client.Renderer.RenderPfeil;
@@ -17,13 +22,17 @@ import lumien.randomthings.Entity.EntityDyeSlime;
 import lumien.randomthings.Entity.EntityPfeil;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import lumien.randomthings.TileEntities.TileEntityItemCollector;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy
 {
 	ItemCollectorRenderer renderer;
 	public static IIcon slimeParticleTexture;
+	
+	@Override
+	public void registerTickHandler()
+	{
+		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
+	}
 
 	@Override
 	public void registerRenderers()
@@ -53,6 +62,15 @@ public class ClientProxy extends CommonProxy
 		Color c = new Color(ItemDye.field_150922_c[dye]);
 		particle.setRBGColorF(1F/255F*c.getRed(), 1F/255F*c.getGreen(), 1F/255F*c.getBlue());
 		particle.setParticleIcon(slimeParticleTexture);
+		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
+	}
+	
+	@Override
+	public void spawnColoredDust(double x,double y,double z,double motionX,double motionY,double motionZ,float red,float green,float blue)
+	{
+		EntityReddustFX particle = new EntityReddustFX(Minecraft.getMinecraft().theWorld,x,y,z,0,0,0);
+		particle.setRBGColorF(red, green, blue);
+		particle.motionY=motionY;
 		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 	}
 }
