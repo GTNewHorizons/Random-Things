@@ -1,0 +1,21 @@
+tile.playerinterface.name=Spieler-Interface
+tile.fluidDisplay.name=Flüssigkeits-Display
+tile.fertilizedDirt.name=Gedüngte Erde
+tile.itemCollector.name=Item-Sammler
+tile.advancedItemCollector.name=Fortgeschrittener Item-Sammler
+tile.onlineDetector.name=Online-Detektor
+
+item.filterBlock.name=Block-Filter
+item.filterItem.name=Item-Filter
+item.filterEntity.name=Entity-Filter
+item.biomeSolution.name=Lösung
+item.biomeCapsule.name=Biomkapsel[WIP]
+item.biomePainter.name=Biommaler[WIP]
+item.whitestone.name=Weißer Stein
+item.kojaku.name=Kojaku
+
+item.playerCore.name=Spieler-Kern
+item.obsidianStick.name=Obsidianstab
+item.error.name=Ungültiges Item
+
+itemGroup.Random Things=Random Things
