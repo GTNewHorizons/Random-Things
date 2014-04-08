@@ -5,20 +5,27 @@ import java.awt.Color;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Configuration.ConfigItems;
 import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.EntityDyeSlime;
+import lumien.randomthings.Items.ItemDropFilter;
+import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Items.ItemWhiteStone;
+import lumien.randomthings.Library.Inventorys.InventoryDropFilter;
 import lumien.randomthings.Proxy.ClientProxy;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -30,6 +37,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent.CheckSpawn;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.ChunkWatchEvent;
 
@@ -43,6 +51,54 @@ public class RTEventHandler
 			event.setResult(Result.ALLOW);
 			event.world.setBlock(event.x, event.y, event.z, ModBlocks.fertilizedDirtTilled);
 			event.world.playSoundEffect(event.x + 0.5F, event.y + 0.5F, event.z + 0.5F, ModBlocks.fertilizedDirtTilled.stepSound.getStepResourcePath(), (ModBlocks.fertilizedDirtTilled.stepSound.getVolume() + 1.0F) / 2.0F, ModBlocks.fertilizedDirtTilled.stepSound.getPitch() * 0.8F);
+		}
+	}
+
+	@SubscribeEvent
+	public void itemPickUp(EntityItemPickupEvent event)
+	{
+		if (ConfigItems.dropFilter)
+		{
+			if (event.entityPlayer != null)
+			{
+				InventoryPlayer playerInventory = event.entityPlayer.inventory;
+				if (playerInventory != null)
+				{
+					for (int slot = 0; slot < playerInventory.getSizeInventory(); slot++)
+					{
+						ItemStack is = playerInventory.getStackInSlot(slot);
+						if (is != null && is.getItem() instanceof ItemDropFilter)
+						{
+							IInventory inventory = ItemDropFilter.getDropFilterInv(event.entityPlayer, is);
+							if (inventory != null)
+							{
+								inventory.openInventory();
+								ItemStack itemFilter = inventory.getStackInSlot(0);
+								if (itemFilter != null)
+								{
+									if (ItemFilter.matchesItem(itemFilter, event.item.getEntityItem()))
+									{
+										switch (is.getItemDamage())
+										{
+											case 0:
+												event.item.delayBeforeCanPickup = 20;
+												break;
+											case 1:
+												event.item.delayBeforeCanPickup = 20;
+												event.item.age = event.item.lifespan - 10;
+												event.entityPlayer.onItemPickup(event.item, 0);
+												event.item.worldObj.playSoundAtEntity(event.entityPlayer, "random.pop", 0.2F, ((event.entityPlayer.getRNG().nextFloat() - event.entityPlayer.getRNG().nextFloat()) * 0.7F + 1.0F) * 2.0F);
+												break;
+										}
+										event.setCanceled(true);
+										return;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 

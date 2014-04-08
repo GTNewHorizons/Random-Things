@@ -24,24 +24,12 @@ import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.TileFluidHandler;
 
-public class TileEntityLiquidRouter extends TileFluidHandler
+public class TileEntityLiquidRouter extends TileEntity implements IFluidHandler
 {
-	HashSet<IFluidHandler> connectedFluidHandler;
 	InventoryBasic inventory;
-	
-	MODE mode;
-
-	public enum MODE
-	{
-		FILL,DRAIN;
-	}
 
 	public TileEntityLiquidRouter()
 	{
-		mode = MODE.FILL;
-		tank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 10);
-		connectedFluidHandler = new HashSet<IFluidHandler>();
-
 		inventory = new InventoryBasic("LiquidRouter", false, 1)
 		{
 			@Override
@@ -51,116 +39,10 @@ public class TileEntityLiquidRouter extends TileFluidHandler
 			}
 		};
 	}
-	
-	public MODE getMode()
-	{
-		return mode;
-	}
 
 	public InventoryBasic getInventory()
 	{
 		return inventory;
-	}
-
-	public void updateEntity()
-	{
-		if (mode == MODE.FILL)
-		{
-			if (tank.getFluid() == null)
-			{
-				return;
-			}
-		}
-		else if (mode == MODE.DRAIN)
-		{
-			if (tank.getCapacity() == tank.getFluidAmount())
-			{
-				return;
-			}
-		}
-
-		updateConnectedFluidHandler();
-
-		for (IFluidHandler f : connectedFluidHandler)
-		{
-			if (mode == MODE.FILL)
-			{
-				if (tank.getFluid() == null)
-				{
-					break;
-				}
-				int fluidBefore = tank.getFluidAmount();
-				int fluidRemoved = f.fill(ForgeDirection.UP, tank.getFluid(), true);
-				if (fluidRemoved != 0)
-				{
-					tank.setFluid(new FluidStack(tank.getFluid().fluidID, fluidBefore - fluidRemoved));
-				}
-			}
-			else if (mode == MODE.DRAIN)
-			{
-				if (tank.getCapacity() == tank.getFluidAmount())
-				{
-					break;
-				}
-
-				FluidStack myFluid = tank.getFluid();
-				
-				FluidTankInfo[] tankInfo = f.getTankInfo(ForgeDirection.UP);
-				if (tankInfo==null || tankInfo.length<1 || tankInfo[0]==null)
-				{
-					continue;
-				}
-				
-				FluidStack hisFluid = f.getTankInfo(ForgeDirection.UP)[0].fluid;
-				if (hisFluid==null)
-				{
-					continue;
-				}
-
-				if (myFluid == null || hisFluid.fluidID == myFluid.fluidID)
-				{
-					FluidStack drained = f.drain(ForgeDirection.UP, tank.getCapacity() - tank.getFluidAmount(), true);
-					this.fill(ForgeDirection.UP, drained, true);
-				}
-			}
-		}
-
-	}
-
-	private void updateConnectedFluidHandler()
-	{
-		connectedFluidHandler = new HashSet<IFluidHandler>();
-
-		updateConnectedFluidHandler(xCoord + 1, yCoord, zCoord);
-		updateConnectedFluidHandler(xCoord - 1, yCoord, zCoord);
-
-		updateConnectedFluidHandler(xCoord, yCoord + 1, zCoord);
-		updateConnectedFluidHandler(xCoord, yCoord - 1, zCoord);
-
-		updateConnectedFluidHandler(xCoord, yCoord, zCoord + 1);
-		updateConnectedFluidHandler(xCoord, yCoord, zCoord - 1);
-	}
-
-	private boolean isValid(int posX, int posY, int posZ)
-	{
-		TileEntity te = worldObj.getTileEntity(posX, posY, posZ);
-		if (te == null || !(te instanceof IFluidHandler))
-		{
-			return false;
-		}
-		if (te instanceof TileEntityLiquidRouter)
-		{
-			return false;
-		}
-		if (inventory.getStackInSlot(0) != null)
-		{
-			if (!ItemFilter.matchesBlock(inventory.getStackInSlot(0), worldObj.getBlock(posX, posY, posZ), worldObj.getBlockMetadata(posX, posY, posZ)))
-			{
-				return false;
-			}
-		}
-
-		return true;
 	}
 
 	@Override
@@ -177,39 +59,10 @@ public class TileEntityLiquidRouter extends TileFluidHandler
 		readFromNBT(packet.func_148857_g());
 	}
 
-	private void updateConnectedFluidHandler(int posX, int posY, int posZ)
-	{
-		if (!isValid(posX, posY, posZ))
-		{
-			return;
-		}
-		TileEntity te = worldObj.getTileEntity(posX, posY, posZ);
-
-		if (!connectedFluidHandler.contains(te))
-		{
-			connectedFluidHandler.add((IFluidHandler) te);
-
-			updateConnectedFluidHandler(posX + 1, posY, posZ);
-			updateConnectedFluidHandler(posX - 1, posY, posZ);
-
-			updateConnectedFluidHandler(posX, posY + 1, posZ);
-			updateConnectedFluidHandler(posX, posY - 1, posZ);
-
-			updateConnectedFluidHandler(posX, posY, posZ + 1);
-			updateConnectedFluidHandler(posX, posY, posZ - 1);
-		}
-		else
-		{
-			return;
-		}
-	}
-
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-
-		nbt.setInteger("mode", mode.ordinal());
 
 		NBTTagList inventoryTag = new NBTTagList();
 
@@ -232,8 +85,6 @@ public class TileEntityLiquidRouter extends TileFluidHandler
 	{
 		super.readFromNBT(nbt);
 
-		this.mode = MODE.values()[nbt.getInteger("mode")];
-
 		NBTTagList inventoryTag = (NBTTagList) nbt.getTag("inventory");
 
 		for (int slot = 0; slot < inventoryTag.tagCount(); slot++)
@@ -250,19 +101,114 @@ public class TileEntityLiquidRouter extends TileFluidHandler
 			}
 		}
 	}
-
-	public void switchMode()
+	
+	public void getTankInfos(HashSet<FluidTankInfo> tankInfos)
 	{
-		if (mode==MODE.DRAIN)
-		{
-			mode=MODE.FILL;
-		}
-		else if (mode==MODE.FILL)
-		{
-			mode=MODE.DRAIN;
-		}
+		findTankInfo(tankInfos,xCoord+1,yCoord,zCoord);
+		findTankInfo(tankInfos,xCoord-1,yCoord,zCoord);
 		
-		this.markDirty();
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		findTankInfo(tankInfos,xCoord,yCoord+1,zCoord);
+		findTankInfo(tankInfos,xCoord,yCoord-1,zCoord);
+		
+		findTankInfo(tankInfos,xCoord,yCoord,zCoord+1);
+		findTankInfo(tankInfos,xCoord,yCoord,zCoord-1);
+	}
+	
+	private boolean isValid(int posX, int posY, int posZ)
+	{
+		TileEntity te = worldObj.getTileEntity(posX, posY, posZ);
+		if (te == null || !(te instanceof IFluidHandler))
+		{
+			return false;
+		}
+		if (te instanceof TileEntityLiquidRouter)
+		{
+			return false;
+		}
+		if (inventory.getStackInSlot(0) != null)
+		{
+			if (!ItemFilter.matchesBlock(inventory.getStackInSlot(0), worldObj.getBlock(posX, posY, posZ), worldObj.getBlockMetadata(posX, posY, posZ)))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	private void findTankInfo(HashSet<FluidTankInfo> tankInfos, int posX, int posY, int posZ)
+	{
+		if (!isValid(posX, posY, posZ))
+		{
+			return;
+		}
+		FluidTankInfo[] foundTankInfos = ((IFluidHandler) worldObj.getTileEntity(posX, posY, posZ)).getTankInfo(ForgeDirection.NORTH);
+
+		boolean addedTank = false;
+		for (FluidTankInfo f : foundTankInfos)
+		{
+			if (!tankInfos.contains(f))
+			{
+				addedTank = true;
+				tankInfos.add(f);
+			}
+		}
+
+		if (addedTank)
+		{
+			findTankInfo(tankInfos, posX + 1, posY, posZ);
+			findTankInfo(tankInfos, posX - 1, posY, posZ);
+
+			findTankInfo(tankInfos, posX, posY + 1, posZ);
+			findTankInfo(tankInfos, posX, posY - 1, posZ);
+
+			findTankInfo(tankInfos, posX, posY, posZ + 1);
+			findTankInfo(tankInfos, posX, posY, posZ - 1);
+		}
+		else
+		{
+			return;
+		}
+	}
+
+	@Override
+	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean canFill(ForgeDirection from, Fluid fluid)
+	{
+		return true;
+	}
+
+	@Override
+	public boolean canDrain(ForgeDirection from, Fluid fluid)
+	{
+		return true;
+	}
+
+	@Override
+	public FluidTankInfo[] getTankInfo(ForgeDirection from)
+	{
+		HashSet<FluidTankInfo> infos = new HashSet<FluidTankInfo>();
+		getTankInfos(infos);
+		return infos.toArray(new FluidTankInfo[1]);
 	}
 }

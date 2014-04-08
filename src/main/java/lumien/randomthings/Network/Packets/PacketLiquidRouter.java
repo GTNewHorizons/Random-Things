@@ -62,7 +62,6 @@ public class PacketLiquidRouter extends AbstractPacket
 		if (te!=null && te instanceof TileEntityLiquidRouter)
 		{
 			TileEntityLiquidRouter lr = (TileEntityLiquidRouter) te;
-			lr.switchMode();
 		}
 		
 	}

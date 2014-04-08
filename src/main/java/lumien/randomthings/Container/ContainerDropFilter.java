@@ -1,40 +1,28 @@
 package lumien.randomthings.Container;
 
 import lumien.randomthings.Container.Slots.SlotFilter;
-import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
+import lumien.randomthings.Container.Slots.SlotLocked;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerItemCollector extends Container
+public class ContainerDropFilter extends Container
 {
-	TileEntityAdvancedItemCollector te;
+	IInventory dropFilterInventory;
 
-	public ContainerItemCollector(InventoryPlayer inventoryPlayer,TileEntityAdvancedItemCollector te)
+	public ContainerDropFilter(IInventory playerInventory, IInventory dropFilterInventory)
 	{
-		this.te = te;
-		this.addSlotToContainer(new SlotFilter(te.getInventory(),0,80,99,1));
-		bindPlayerInventory(inventoryPlayer);
+		this.dropFilterInventory = dropFilterInventory;
+		dropFilterInventory.openInventory();
+
+		addSlotToContainer(new SlotFilter(dropFilterInventory, 0, 80, 18, 1));
+
+		bindPlayerInventory((InventoryPlayer) playerInventory);
 	}
 
-	protected void bindPlayerInventory(InventoryPlayer inventoryPlayer)
-	{
-		for (int i = 0; i < 3; i++)
-		{
-			for (int j = 0; j < 9; j++)
-			{
-				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 126 + i * 18));
-			}
-		}
-
-		for (int i = 0; i < 9; i++)
-		{
-			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 184));
-		}
-	}
-	
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
@@ -149,13 +137,13 @@ public class ContainerItemCollector extends Container
 				if (itemstack1 == null && slot.isItemValid(par1ItemStack))
 				{
 					if (1 < par1ItemStack.stackSize)
-					{	
+					{
 						ItemStack copy = par1ItemStack.copy();
 						copy.stackSize = 1;
 						slot.putStack(copy);
-						
-						par1ItemStack.stackSize-=1;
-						flag1=true;
+
+						par1ItemStack.stackSize -= 1;
+						flag1 = true;
 						break;
 					}
 					else
@@ -180,10 +168,32 @@ public class ContainerItemCollector extends Container
 		}
 		return flag1;
 	}
-	
+
+	protected void bindPlayerInventory(InventoryPlayer inventoryPlayer)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 9; j++)
+			{
+				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 51 + i * 18));
+			}
+		}
+
+		for (int i = 0; i < 9; i++)
+		{
+			if (inventoryPlayer.getStackInSlot(i) == inventoryPlayer.player.getCurrentEquippedItem())
+			{
+				addSlotToContainer(new SlotLocked(inventoryPlayer, i, 8 + i * 18, 109));
+			}
+			else
+			{
+				addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 109));
+			}
+		}
+	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer entityplayer)
+	public boolean canInteractWith(EntityPlayer var1)
 	{
 		return true;
 	}

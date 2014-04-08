@@ -38,7 +38,6 @@ public class GuiFluidRouter extends GuiContainer
 	public void initGui()
 	{
 		super.initGui();
-		buttonMode = new GuiButton(0,(width - xSize) / 2 + 121,(height - ySize) / 2 +5,50,20 ,getFormattedMode());
 		this.buttonList.add(buttonMode);
 	}
 	
@@ -48,18 +47,6 @@ public class GuiFluidRouter extends GuiContainer
 		{
 			PacketLiquidRouter packet = new PacketLiquidRouter(te.xCoord,te.yCoord,te.zCoord);
 			RandomThings.packetPipeline.sendToServer(packet);
-		}
-	}
-	
-	private String getFormattedMode()
-	{
-		if (te.getMode() == TileEntityLiquidRouter.MODE.DRAIN)
-		{
-			return "Drain";
-		}
-		else
-		{
-			return "Fill";
 		}
 	}
 
@@ -87,8 +74,6 @@ public class GuiFluidRouter extends GuiContainer
 	public void updateScreen()
     {
         super.updateScreen();
-        
-        buttonMode.displayString = getFormattedMode();
     }
 
 }

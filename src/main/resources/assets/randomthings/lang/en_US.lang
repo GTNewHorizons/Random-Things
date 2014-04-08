@@ -19,6 +19,8 @@ item.kojaku.name=Kojaku
 item.creativeSword.name=Creative Sword
 item.creativeGrower.name=Creative Grower
 item.voidStone.name=Void Stone
+item.dropFilter.name=Drop Filter
+item.dropFilterVoiding.name=Voiding Drop Filter
 
 item.playerCore.name=Player Core
 item.obsidianStick.name=Obsidian Stick

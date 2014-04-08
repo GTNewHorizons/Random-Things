@@ -41,7 +41,7 @@ public class EntityWhitestone extends EntityItem
 		{
 			if (state == 0)
 			{
-				AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(posX - 2, posY - 1, posZ - 2, posX + 2, posY + 1, posZ + 2);
+				AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(posX - 0.5, posY - 1, posZ - 0.5, posX + 0.5, posY + 1, posZ + 0.5);
 				List<EntityItem> items = worldObj.getEntitiesWithinAABB(EntityItem.class, bb);
 
 				for (EntityItem ei : items)

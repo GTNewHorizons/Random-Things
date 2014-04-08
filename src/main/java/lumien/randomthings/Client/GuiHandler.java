@@ -1,12 +1,15 @@
 package lumien.randomthings.Client;
 
+import lumien.randomthings.Items.ItemDropFilter;
 import lumien.randomthings.Items.ItemFilter;
+import lumien.randomthings.Client.GUI.GuiDropFilter;
 import lumien.randomthings.Client.GUI.GuiItemCollector;
 import lumien.randomthings.Client.GUI.GuiItemFilter;
 import lumien.randomthings.Client.GUI.GuiFluidRouter;
 import lumien.randomthings.Client.GUI.GuiOnlineDetector;
 import lumien.randomthings.Client.GUI.GuiPlayerInterface;
 import lumien.randomthings.Client.GUI.GuiVoidStone;
+import lumien.randomthings.Container.ContainerDropFilter;
 import lumien.randomthings.Container.ContainerItemCollector;
 import lumien.randomthings.Container.ContainerItemFilter;
 import lumien.randomthings.Container.ContainerLiquidRouter;
@@ -34,22 +37,29 @@ public class GuiHandler implements IGuiHandler
 		switch (ID)
 		{
 			case PLAYER_INTERFACE:
-				return new ContainerPlayerInterface((TileEntityPlayerInterface)tileEntity);
+				return new ContainerPlayerInterface((TileEntityPlayerInterface) tileEntity);
 			case ITEM_FILTER:
 				IInventory inventoryFilter = ItemFilter.getItemFilterInv(player);
-				if (inventoryFilter==null)
+				if (inventoryFilter == null)
 				{
-					inventoryFilter = new InventoryBasic("placeholder",false,9);
+					inventoryFilter = new InventoryBasic("placeholder", false, 9);
 				}
-				return new ContainerItemFilter(player.inventory,inventoryFilter);
+				return new ContainerItemFilter(player.inventory, inventoryFilter);
 			case ADVANCED_ITEMCOLLECTOR:
-				return new ContainerItemCollector(player.inventory,(TileEntityAdvancedItemCollector)tileEntity);
+				return new ContainerItemCollector(player.inventory, (TileEntityAdvancedItemCollector) tileEntity);
 			case ONLINE_DETECTOR:
 				return new ContainerOnlineDetector();
 			case FLUID_ROUTER:
 				return new ContainerLiquidRouter(player.inventory, (TileEntityLiquidRouter) tileEntity);
 			case VOID_STONE:
 				return new ContainerVoidStone(player.inventory);
+			case DROP_FILTER:
+				IInventory inventoryDropFilter = ItemDropFilter.getDropFilterInv(player);
+				if (inventoryDropFilter == null)
+				{
+					inventoryDropFilter = new InventoryBasic("placeholder", false, 1);
+				}
+				return new ContainerDropFilter(player.inventory, inventoryDropFilter);
 		}
 		return null;
 	}
@@ -61,22 +71,29 @@ public class GuiHandler implements IGuiHandler
 		switch (ID)
 		{
 			case PLAYER_INTERFACE:
-				return new GuiPlayerInterface((TileEntityPlayerInterface)tileEntity);
+				return new GuiPlayerInterface((TileEntityPlayerInterface) tileEntity);
 			case ITEM_FILTER:
 				IInventory inventoryFilter = ItemFilter.getItemFilterInv(player);
 				if (inventoryFilter == null)
 				{
-					inventoryFilter = new InventoryBasic("placeholder",false,27);
+					inventoryFilter = new InventoryBasic("placeholder", false, 27);
 				}
-				return new GuiItemFilter(player.inventory,inventoryFilter);
+				return new GuiItemFilter(player.inventory, inventoryFilter);
 			case ADVANCED_ITEMCOLLECTOR:
-				return new GuiItemCollector(player.inventory,(TileEntityAdvancedItemCollector)tileEntity);
+				return new GuiItemCollector(player.inventory, (TileEntityAdvancedItemCollector) tileEntity);
 			case ONLINE_DETECTOR:
-				return new GuiOnlineDetector((TileEntityOnlineDetector)tileEntity);
+				return new GuiOnlineDetector((TileEntityOnlineDetector) tileEntity);
 			case FLUID_ROUTER:
 				return new GuiFluidRouter(player.inventory, (TileEntityLiquidRouter) tileEntity);
 			case VOID_STONE:
 				return new GuiVoidStone(player.inventory);
+			case DROP_FILTER:
+				IInventory inventoryDropFilter = ItemDropFilter.getDropFilterInv(player);
+				if (inventoryDropFilter == null)
+				{
+					inventoryDropFilter = new InventoryBasic("placeholder", false, 1);
+				}
+				return new GuiDropFilter(player.inventory, inventoryDropFilter);
 		}
 		return null;
 	}

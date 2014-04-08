@@ -24,6 +24,7 @@ public class RTConfiguration
 		ConfigItems.whitestone = config.get("Items", "Whitestone", true).getBoolean(true);
 		ConfigItems.magneticForce = config.get("Items","MagneticForce",true).getBoolean(true);
 		ConfigItems.voidStone = config.get("Items", "VoidStone", true).getBoolean(true);
+		ConfigItems.dropFilter = config.get("Items", "DropFilter", true).getBoolean(true);
 		
 		ConfigItems.creativeSword = config.get("Items", "CreativeSword", true).getBoolean(true);
 		ConfigItems.creativeGrower = config.get("Items", "CreativeGrower", true).getBoolean(true);

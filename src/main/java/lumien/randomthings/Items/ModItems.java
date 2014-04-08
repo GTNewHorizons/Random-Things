@@ -13,6 +13,7 @@ public class ModItems
 	public static ItemWhiteStone whitestone;
 	public static ItemMagneticForce magneticForce;
 	public static ItemVoidStone voidStone;
+	public static ItemDropFilter dropFilter;
 	
 	public static ItemCreativeSword creativeSword;
 	public static ItemCreativeGrower creativeGrower;
@@ -33,6 +34,8 @@ public class ModItems
 			magneticForce = new ItemMagneticForce();
 		if (ConfigItems.voidStone)
 			voidStone = new ItemVoidStone();
+		if (ConfigItems.dropFilter)
+			dropFilter = new ItemDropFilter();
 		
 		if (ConfigItems.creativeSword)
 			creativeSword = new ItemCreativeSword();

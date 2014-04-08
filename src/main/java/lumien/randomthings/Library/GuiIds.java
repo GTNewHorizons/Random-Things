@@ -9,4 +9,5 @@ public class GuiIds
 	public static final int FLUID_ROUTER = 4;
 	public static final int PLAYER_INTERFACE_CREATIVE = 5;
 	public static final int VOID_STONE = 6;
+	public static final int DROP_FILTER = 7;
 }

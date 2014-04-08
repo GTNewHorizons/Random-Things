@@ -10,4 +10,5 @@ public class ConfigItems
 	public static boolean creativeSword;
 	public static boolean creativeGrower;
 	public static boolean voidStone;
+	public static boolean dropFilter;
 }
