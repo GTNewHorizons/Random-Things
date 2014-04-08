@@ -1,9 +1,11 @@
 tile.playerinterface.name=Player Interface
+tile.creativePlayerInterface.name=Creative Player Interface
 tile.fluidDisplay.name=Fluid Display
 tile.fertilizedDirt.name=Fertilized Dirt
 tile.itemCollector.name=Item Collector
 tile.advancedItemCollector.name=Advanced Item Collector
 tile.onlineDetector.name=Online Detector
+tile.fluidRouter.name=Fluid Router
 
 item.filterBlock.name=Block Filter
 item.filterItem.name=Item Filter
@@ -16,6 +18,7 @@ item.whitestoneCharged.name=White Stone [Charged]
 item.kojaku.name=Kojaku
 item.creativeSword.name=Creative Sword
 item.creativeGrower.name=Creative Grower
+item.voidStone.name=Void Stone
 
 item.playerCore.name=Player Core
 item.obsidianStick.name=Obsidian Stick

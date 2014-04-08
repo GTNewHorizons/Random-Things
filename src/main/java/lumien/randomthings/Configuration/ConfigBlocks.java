@@ -8,5 +8,5 @@ public class ConfigBlocks
 	public static boolean itemCollector;
 	public static boolean onlineDetector;
 	public static boolean imbuingStation;
-	public static boolean liquidRouter;
+	public static boolean fluidRouter;
 }

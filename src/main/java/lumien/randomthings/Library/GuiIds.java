@@ -6,6 +6,7 @@ public class GuiIds
 	public static final int ITEM_FILTER = 1;
 	public static final int ADVANCED_ITEMCOLLECTOR = 2;
 	public static final int ONLINE_DETECTOR = 3;
-	public static final int LIQUID_ROUTER = 4;
+	public static final int FLUID_ROUTER = 4;
 	public static final int PLAYER_INTERFACE_CREATIVE = 5;
+	public static final int VOID_STONE = 6;
 }

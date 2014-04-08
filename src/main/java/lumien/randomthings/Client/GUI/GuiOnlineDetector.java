@@ -10,6 +10,7 @@ import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
@@ -91,7 +92,7 @@ public class GuiOnlineDetector extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2)
 	{
-		fontRendererObj.drawString("Online Detector", 8, 6, 4210752);
+		fontRendererObj.drawString(I18n.format("tile.onlineDetector.name", new Object[0]), 8, 6, 4210752);
 		String teUsername = te.getPlayerName();
 		String toDraw = "";
 		if (teUsername.equals(""))

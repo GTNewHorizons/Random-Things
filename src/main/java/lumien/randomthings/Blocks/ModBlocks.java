@@ -14,7 +14,7 @@ public class ModBlocks
 	public static BlockAdvancedItemCollector advancedItemCollector;
 	public static BlockOnlineDetector onlineDetector;
 	public static BlockImbuingStation imbuingStation;
-	public static BlockLiquidRouter liquidRouter;
+	public static BlockFluidRouter liquidRouter;
 
 	public static void init()
 	{
@@ -40,7 +40,7 @@ public class ModBlocks
 			onlineDetector = new BlockOnlineDetector();
 		if (ConfigBlocks.imbuingStation)
 			imbuingStation = new BlockImbuingStation();
-		if (ConfigBlocks.liquidRouter)
-			liquidRouter = new BlockLiquidRouter();
+		if (ConfigBlocks.fluidRouter)
+			liquidRouter = new BlockFluidRouter();
 	}
 }

@@ -5,11 +5,14 @@ import org.lwjgl.opengl.GL11;
 import lumien.randomthings.Container.ContainerPlayerInterface;
 import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.tileentity.RenderEndPortal;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiPlayerInterface extends GuiContainer
 {
 	TileEntityPlayerInterface te;
+	RenderEndPortal renderer = new RenderEndPortal();
 
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/playerInterface.png");
 	final ResourceLocation background_creative = new ResourceLocation("randomthings:textures/gui/playerInterface_creative.png");
@@ -58,8 +61,8 @@ public class GuiPlayerInterface extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2)
 	{
-		fontRendererObj.drawString("Player Interface", 8, 6, 4210752);
-		
+		fontRendererObj.drawString(I18n.format("tile.playerinterface.name", new Object[0]), 8, 6, 4210752);
+		renderer.renderTileEntityAt(null, 50, 0, 50, 0);
 		String connectedTo = "Connected to "+te.getPlayerName();
 		fontRendererObj.drawString(connectedTo, (xSize/2-fontRendererObj.getStringWidth(connectedTo)/2), (ySize/2-fontRendererObj.FONT_HEIGHT/2), 4210752);
 	}

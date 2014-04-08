@@ -8,6 +8,7 @@ import lumien.randomthings.Network.Packets.PacketItemCollector;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -128,7 +129,7 @@ public class GuiItemCollector extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2)
 	{
-		fontRendererObj.drawString("Advanced Item Collector", 8, 6, 4210752);
+		fontRendererObj.drawString(I18n.format("tile.advancedItemCollector.name", new Object[0]), 8, 6, 4210752);
 
 		String radiusX = "Radius X: " + te.rangeX;
 		String radiusY = "Radius Y: " + te.rangeY;

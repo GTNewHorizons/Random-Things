@@ -13,16 +13,16 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-public class BlockLiquidRouter extends BlockContainer
+public class BlockFluidRouter extends BlockContainer
 {
-	protected BlockLiquidRouter()
+	protected BlockFluidRouter()
 	{
 		super(Material.rock);
 		
-		this.setBlockName("liquidRouter");
+		this.setBlockName("fluidRouter");
 		this.setCreativeTab(RandomThings.creativeTab);
 		
-		GameRegistry.registerBlock(this, "liquidRouter");
+		GameRegistry.registerBlock(this, "fluidRouter");
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class BlockLiquidRouter extends BlockContainer
 	{
 		if (!worldObj.isRemote)
 		{
-			par5EntityPlayer.openGui(RandomThings.instance, GuiIds.LIQUID_ROUTER, worldObj, poxX, poxY, poxZ);
+			par5EntityPlayer.openGui(RandomThings.instance, GuiIds.FLUID_ROUTER, worldObj, poxX, poxY, poxZ);
 		}
 		return true;
 	}

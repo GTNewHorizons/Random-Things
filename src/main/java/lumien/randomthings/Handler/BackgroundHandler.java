@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 public class BackgroundHandler
 {
 	static Field f;
-	static String[] validBlocks = new String[] { "anvil_base", "bedrock", "bookshelf", "brick", "clay", "cobblestone", "cobblestone_mossy", "dirt", "end_stone", "farmland_dry", "glowstone", "gravel", "hay_block_top", "ice",  "melon_side", "mushroom_block_inside", "mycelium_top", "nether_brick", "netherrack", "obsidian", "sand", "sandstone_top", "soul_sand", "snow", "stonebrick", "stonebrick_mossy", "red_sand", "planks_big_oak", "planks_acacia", "log_acacia", "ice_packed" };
+	static String[] validBlocks = new String[] { "bedrock", "bookshelf", "brick", "clay", "cobblestone", "cobblestone_mossy", "dirt", "end_stone", "farmland_dry", "glowstone", "gravel", "hay_block_top", "ice",  "melon_side", "mushroom_block_inside", "mycelium_top", "nether_brick", "netherrack", "obsidian", "sand", "sandstone_top", "soul_sand", "snow", "stonebrick", "stonebrick_mossy", "red_sand", "planks_big_oak", "planks_acacia", "log_acacia", "ice_packed" };
 	static Random rng = new Random();
 
 	public static void setBackgroundBlock(String block)

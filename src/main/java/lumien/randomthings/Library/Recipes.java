@@ -56,7 +56,8 @@ public class Recipes
 		}
 		if (ConfigBlocks.onlineDetector)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.onlineDetector,1),"sts","rer","sts",'s',iStone,'t',iRedstoneTorch,'r',iRedstone,'e',iLapislazuli));
-		
+		if (ConfigItems.voidStone)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.voidStone,1),"xox","oeo","xox",'o',iObsidian,'e',iEnderPearl));
 		if (ConfigItems.filter)
 		{
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter,1,0),"xrx","rpr","xrx",'r',"dyeRed",'p',iPaper));

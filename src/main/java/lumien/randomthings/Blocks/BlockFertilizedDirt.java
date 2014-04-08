@@ -19,7 +19,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockFertilizedDirt extends Block
 {
-	public static boolean growthIndicator = true;
 	public static int fertilizedDirtGrowth = 3;
 
 	boolean tilled;
@@ -103,7 +102,6 @@ public class BlockFertilizedDirt extends Block
 	@Override
 	public void updateTick(World par1World, int posX, int posY, int posZ, Random rng)
 	{	
-		par1World.spawnParticle("cloud", posX, posY + 1, posZ, 0, 0, 0);
 		if (!par1World.isRemote)
 		{
 			if (par1World != null && !par1World.isAirBlock(posX, posY + 1, posZ) && ((par1World.getBlock(posX, posY + 1, posZ) instanceof IGrowable) || (par1World.getBlock(posX, posY + 1, posZ) instanceof IPlantable)))

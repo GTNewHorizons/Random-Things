@@ -1,7 +1,9 @@
 package lumien.randomthings.Client.GUI;
 
 import lumien.randomthings.Container.ContainerItemFilter;
+import lumien.randomthings.Items.ModItems;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
@@ -30,6 +32,6 @@ public class GuiItemFilter extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		fontRendererObj.drawString("Item Filter", 8, 6, 4210752);
+		fontRendererObj.drawString(I18n.format("item.filterItem.name", new Object[0]), 8, 6, 4210752);
 	}
 }

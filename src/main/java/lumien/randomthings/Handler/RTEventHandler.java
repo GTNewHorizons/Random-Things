@@ -5,6 +5,7 @@ import java.awt.Color;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.EntityDyeSlime;
 import lumien.randomthings.Items.ItemWhiteStone;
 import lumien.randomthings.Proxy.ClientProxy;
@@ -16,15 +17,19 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent.CheckSpawn;
+import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.ChunkWatchEvent;
 
@@ -40,14 +45,42 @@ public class RTEventHandler
 			event.world.playSoundEffect(event.x + 0.5F, event.y + 0.5F, event.z + 0.5F, ModBlocks.fertilizedDirtTilled.stepSound.getStepResourcePath(), (ModBlocks.fertilizedDirtTilled.stepSound.getVolume() + 1.0F) / 2.0F, ModBlocks.fertilizedDirtTilled.stepSound.getPitch() * 0.8F);
 		}
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void preTextureStitch(TextureStitchEvent.Pre event)
 	{
-		if (event.map.getTextureType()==1)
+		if (event.map.getTextureType() == 1)
 		{
 			ClientProxy.slimeParticleTexture = event.map.registerIcon("RandomThings:slimeParticle");
+		}
+	}
+
+	@SubscribeEvent
+	public void entityJoinWorld(EntityJoinWorldEvent event)
+	{
+		if (VanillaChanges.THROWABLES_MOTION)
+		{
+			if (event.entity instanceof EntityThrowable)
+			{
+				EntityThrowable throwable = (EntityThrowable) event.entity;
+				if (throwable != null && throwable.getThrower() != null)
+				{
+					throwable.motionX += throwable.getThrower().motionX;
+					throwable.motionY += throwable.getThrower().motionY;
+					throwable.motionZ += throwable.getThrower().motionZ;
+				}
+			}
+			else if (event.entity instanceof EntityArrow)
+			{
+				EntityArrow arrow = (EntityArrow) event.entity;
+				if (arrow.shootingEntity != null)
+				{
+					arrow.motionX += arrow.shootingEntity.motionX;
+					arrow.motionY += arrow.shootingEntity.motionY;
+					arrow.motionZ += arrow.shootingEntity.motionZ;
+				}
+			}
 		}
 	}
 

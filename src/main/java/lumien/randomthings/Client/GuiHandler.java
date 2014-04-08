@@ -3,14 +3,16 @@ package lumien.randomthings.Client;
 import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Client.GUI.GuiItemCollector;
 import lumien.randomthings.Client.GUI.GuiItemFilter;
-import lumien.randomthings.Client.GUI.GuiLiquidRouter;
+import lumien.randomthings.Client.GUI.GuiFluidRouter;
 import lumien.randomthings.Client.GUI.GuiOnlineDetector;
 import lumien.randomthings.Client.GUI.GuiPlayerInterface;
+import lumien.randomthings.Client.GUI.GuiVoidStone;
 import lumien.randomthings.Container.ContainerItemCollector;
 import lumien.randomthings.Container.ContainerItemFilter;
 import lumien.randomthings.Container.ContainerLiquidRouter;
 import lumien.randomthings.Container.ContainerOnlineDetector;
 import lumien.randomthings.Container.ContainerPlayerInterface;
+import lumien.randomthings.Container.ContainerVoidStone;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import lumien.randomthings.TileEntities.TileEntityLiquidRouter;
 import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
@@ -44,8 +46,10 @@ public class GuiHandler implements IGuiHandler
 				return new ContainerItemCollector(player.inventory,(TileEntityAdvancedItemCollector)tileEntity);
 			case ONLINE_DETECTOR:
 				return new ContainerOnlineDetector();
-			case LIQUID_ROUTER:
+			case FLUID_ROUTER:
 				return new ContainerLiquidRouter(player.inventory, (TileEntityLiquidRouter) tileEntity);
+			case VOID_STONE:
+				return new ContainerVoidStone(player.inventory);
 		}
 		return null;
 	}
@@ -69,8 +73,10 @@ public class GuiHandler implements IGuiHandler
 				return new GuiItemCollector(player.inventory,(TileEntityAdvancedItemCollector)tileEntity);
 			case ONLINE_DETECTOR:
 				return new GuiOnlineDetector((TileEntityOnlineDetector)tileEntity);
-			case LIQUID_ROUTER:
-				return new GuiLiquidRouter(player.inventory, (TileEntityLiquidRouter) tileEntity);
+			case FLUID_ROUTER:
+				return new GuiFluidRouter(player.inventory, (TileEntityLiquidRouter) tileEntity);
+			case VOID_STONE:
+				return new GuiVoidStone(player.inventory);
 		}
 		return null;
 	}
