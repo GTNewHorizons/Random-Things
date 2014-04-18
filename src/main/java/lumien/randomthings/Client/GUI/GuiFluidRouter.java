@@ -6,7 +6,7 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.RenderHelper;
 import lumien.randomthings.Container.ContainerLiquidRouter;
 import lumien.randomthings.Network.Packets.PacketLiquidRouter;
-import lumien.randomthings.TileEntities.TileEntityLiquidRouter;
+import lumien.randomthings.TileEntities.TileEntityFluidRouter;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
@@ -22,11 +22,11 @@ public class GuiFluidRouter extends GuiContainer
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/liquidRouter.png");
 	final ResourceLocation tankOutline = new ResourceLocation("randomthings:textures/gui/tankOutline.png");
 	
-	TileEntityLiquidRouter te;
+	TileEntityFluidRouter te;
 	
 	GuiButton buttonMode;
 
-	public GuiFluidRouter(InventoryPlayer inventoryPlayer, TileEntityLiquidRouter te)
+	public GuiFluidRouter(InventoryPlayer inventoryPlayer, TileEntityFluidRouter te)
 	{
 		super(new ContainerLiquidRouter(inventoryPlayer,te));
 		this.te = te;
@@ -66,8 +66,6 @@ public class GuiFluidRouter extends GuiContainer
 		super.drawGuiContainerForegroundLayer(param1, param2);
 		fontRendererObj.drawString(I18n.format("tile.fluidRouter.name", new Object[0]), 8, 6, 4210752);
 		fontRendererObj.drawString(I18n.format("item.filterBlock.name", new Object[0])+":",8,22,4210752);
-		
-		RenderHelper.drawFluidStack(new FluidTankInfo(new FluidStack(FluidRegistry.WATER,100),1000), 152, 50, 16, 50);
 	}
 	
 	@Override

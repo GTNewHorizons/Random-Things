@@ -24,13 +24,13 @@ import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.TileFluidHandler;
 
-public class TileEntityLiquidRouter extends TileEntity implements IFluidHandler
+public class TileEntityFluidRouter extends TileEntity implements IFluidHandler
 {
 	InventoryBasic inventory;
 
-	public TileEntityLiquidRouter()
+	public TileEntityFluidRouter()
 	{
-		inventory = new InventoryBasic("LiquidRouter", false, 1)
+		inventory = new InventoryBasic("Fluid Router", false, 1)
 		{
 			@Override
 			public boolean isItemValidForSlot(int slot, ItemStack par2ItemStack)
@@ -121,7 +121,7 @@ public class TileEntityLiquidRouter extends TileEntity implements IFluidHandler
 		{
 			return false;
 		}
-		if (te instanceof TileEntityLiquidRouter)
+		if (te instanceof TileEntityFluidRouter)
 		{
 			return false;
 		}

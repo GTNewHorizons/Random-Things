@@ -20,6 +20,11 @@ import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.ISound;
+import net.minecraft.client.audio.ISound.AttenuationType;
+import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.client.audio.SoundCategory;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -30,8 +35,11 @@ import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.client.event.sound.PlaySoundEvent17;
+import net.minecraftforge.client.event.sound.SoundEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
@@ -143,29 +151,32 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void entityDeath(LivingDeathEvent event)
 	{
-		if (FMLCommonHandler.instance().getEffectiveSide().isServer())
+		if (ConfigItems.whitestone)
 		{
-			if (event.entityLiving instanceof EntityPlayer && !event.source.canHarmInCreative())
+			if (FMLCommonHandler.instance().getEffectiveSide().isServer())
 			{
-				EntityPlayer player = (EntityPlayer) event.entityLiving;
-
-				for (int slot = 0; slot < player.inventory.getSizeInventory(); slot++)
+				if (event.entityLiving instanceof EntityPlayer && !event.source.canHarmInCreative())
 				{
-					ItemStack is = player.inventory.getStackInSlot(slot);
-					if (is != null && is.getItem() instanceof ItemWhiteStone)
+					EntityPlayer player = (EntityPlayer) event.entityLiving;
+
+					for (int slot = 0; slot < player.inventory.getSizeInventory(); slot++)
 					{
-						event.setCanceled(true);
+						ItemStack is = player.inventory.getStackInSlot(slot);
+						if (is != null && is.getItem() instanceof ItemWhiteStone)
+						{
+							event.setCanceled(true);
 
-						player.setHealth(1F);
+							player.setHealth(1F);
 
-						player.addPotionEffect(new PotionEffect(10, 200, 10, false));
-						player.addPotionEffect(new PotionEffect(11, 200, 5, false));
-						player.addPotionEffect(new PotionEffect(12, 200, 1, false));
+							player.addPotionEffect(new PotionEffect(10, 200, 10, false));
+							player.addPotionEffect(new PotionEffect(11, 200, 5, false));
+							player.addPotionEffect(new PotionEffect(12, 200, 1, false));
 
-						player.inventory.setInventorySlotContents(slot, null);
-						player.inventory.markDirty();
-						player.inventoryContainer.detectAndSendChanges();
-						return;
+							is.setItemDamage(0);
+							player.inventory.markDirty();
+							player.inventoryContainer.detectAndSendChanges();
+							return;
+						}
 					}
 				}
 			}

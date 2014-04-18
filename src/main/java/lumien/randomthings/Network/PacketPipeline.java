@@ -3,6 +3,7 @@ package lumien.randomthings.Network;
 import java.util.*;
 
 import lumien.randomthings.Network.Packets.PacketItemCollector;
+import lumien.randomthings.Network.Packets.PacketItemFilter;
 import lumien.randomthings.Network.Packets.PacketLiquidRouter;
 import lumien.randomthings.Network.Packets.PacketOnlineDetector;
 import lumien.randomthings.Network.Packets.PacketPaintBiome;
@@ -141,6 +142,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 		registerPacket(PacketItemCollector.class);
 		registerPacket(PacketOnlineDetector.class);
 		registerPacket(PacketLiquidRouter.class);
+		registerPacket(PacketItemFilter.class);
 	}
 
 	// Method to call from FMLPostInitializationEvent

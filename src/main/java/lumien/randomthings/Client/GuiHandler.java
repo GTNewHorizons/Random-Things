@@ -17,7 +17,7 @@ import lumien.randomthings.Container.ContainerOnlineDetector;
 import lumien.randomthings.Container.ContainerPlayerInterface;
 import lumien.randomthings.Container.ContainerVoidStone;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
-import lumien.randomthings.TileEntities.TileEntityLiquidRouter;
+import lumien.randomthings.TileEntities.TileEntityFluidRouter;
 import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
 import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
 import net.minecraft.entity.player.EntityPlayer;
@@ -50,7 +50,7 @@ public class GuiHandler implements IGuiHandler
 			case ONLINE_DETECTOR:
 				return new ContainerOnlineDetector();
 			case FLUID_ROUTER:
-				return new ContainerLiquidRouter(player.inventory, (TileEntityLiquidRouter) tileEntity);
+				return new ContainerLiquidRouter(player.inventory, (TileEntityFluidRouter) tileEntity);
 			case VOID_STONE:
 				return new ContainerVoidStone(player.inventory);
 			case DROP_FILTER:
@@ -78,13 +78,13 @@ public class GuiHandler implements IGuiHandler
 				{
 					inventoryFilter = new InventoryBasic("placeholder", false, 27);
 				}
-				return new GuiItemFilter(player.inventory, inventoryFilter);
+				return new GuiItemFilter(player,player.inventory, inventoryFilter);
 			case ADVANCED_ITEMCOLLECTOR:
 				return new GuiItemCollector(player.inventory, (TileEntityAdvancedItemCollector) tileEntity);
 			case ONLINE_DETECTOR:
 				return new GuiOnlineDetector((TileEntityOnlineDetector) tileEntity);
 			case FLUID_ROUTER:
-				return new GuiFluidRouter(player.inventory, (TileEntityLiquidRouter) tileEntity);
+				return new GuiFluidRouter(player.inventory, (TileEntityFluidRouter) tileEntity);
 			case VOID_STONE:
 				return new GuiVoidStone(player.inventory);
 			case DROP_FILTER:

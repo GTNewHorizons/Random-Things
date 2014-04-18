@@ -1,21 +1,57 @@
 package lumien.randomthings.Client.GUI;
 
+import lumien.randomthings.RandomThings;
+import lumien.randomthings.Client.GUI.Buttons.GuiButtonOreDictionary;
 import lumien.randomthings.Container.ContainerItemFilter;
 import lumien.randomthings.Items.ModItems;
+import lumien.randomthings.Network.Packets.PacketItemFilter;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+
 public class GuiItemFilter extends GuiContainer
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/itemFilter.png");
+	EntityPlayer player;
+	ItemStack itemFilter;
+	
+	GuiButtonOreDictionary oreDictButton;
 
-	public GuiItemFilter(IInventory inventoryPlayer, IInventory inventoryFilter)
+	public GuiItemFilter(EntityPlayer player,IInventory inventoryPlayer, IInventory inventoryFilter)
 	{
 		super(new ContainerItemFilter(inventoryPlayer, inventoryFilter));
+
+		xSize = 198;
+		ySize = 133;
+		
+		this.player = player;
+		this.itemFilter = player.getCurrentEquippedItem();
+	}
+	
+	@Override
+	public void initGui()
+    {
+        super.initGui();
+        
+        oreDictButton = new GuiButtonOreDictionary(0,guiLeft + 173,guiTop + 4,itemFilter.stackTagCompound.getBoolean("oreDict"));
+        this.buttonList.add(oreDictButton);
+    }
+	
+	protected void actionPerformed(GuiButton pressedButton)
+	{
+		if (pressedButton == oreDictButton)
+		{
+			oreDictButton.setEnabled(!oreDictButton.isEnabled());
+			RandomThings.packetPipeline.sendToServer(new PacketItemFilter(PacketItemFilter.ACTION.OREDICT));
+		}
 	}
 
 	@Override

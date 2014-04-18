@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import lumien.randomthings.Network.AbstractPacket;
-import lumien.randomthings.TileEntities.TileEntityLiquidRouter;
+import lumien.randomthings.TileEntities.TileEntityFluidRouter;
 
 public class PacketLiquidRouter extends AbstractPacket
 {
@@ -59,9 +59,9 @@ public class PacketLiquidRouter extends AbstractPacket
 	{
 		World worldObj = player.worldObj;
 		TileEntity te = worldObj.getTileEntity(posX, posY, posZ);
-		if (te!=null && te instanceof TileEntityLiquidRouter)
+		if (te!=null && te instanceof TileEntityFluidRouter)
 		{
-			TileEntityLiquidRouter lr = (TileEntityLiquidRouter) te;
+			TileEntityFluidRouter lr = (TileEntityFluidRouter) te;
 		}
 		
 	}

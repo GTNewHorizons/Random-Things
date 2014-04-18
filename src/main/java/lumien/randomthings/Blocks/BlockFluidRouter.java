@@ -3,7 +3,7 @@ package lumien.randomthings.Blocks;
 import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.GuiIds;
-import lumien.randomthings.TileEntities.TileEntityLiquidRouter;
+import lumien.randomthings.TileEntities.TileEntityFluidRouter;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +28,7 @@ public class BlockFluidRouter extends BlockContainer
 	@Override
 	public TileEntity createNewTileEntity(World worldObj, int metadata)
 	{
-		return new TileEntityLiquidRouter();
+		return new TileEntityFluidRouter();
 	}
 	
 	@Override

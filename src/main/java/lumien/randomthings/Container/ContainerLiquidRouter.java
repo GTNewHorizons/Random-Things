@@ -2,7 +2,7 @@ package lumien.randomthings.Container;
 
 import lumien.randomthings.Container.Slots.SlotFilter;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
-import lumien.randomthings.TileEntities.TileEntityLiquidRouter;
+import lumien.randomthings.TileEntities.TileEntityFluidRouter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -11,9 +11,9 @@ import net.minecraft.item.ItemStack;
 
 public class ContainerLiquidRouter extends Container
 {
-	TileEntityLiquidRouter te;
+	TileEntityFluidRouter te;
 
-	public ContainerLiquidRouter(InventoryPlayer inventoryPlayer, TileEntityLiquidRouter te)
+	public ContainerLiquidRouter(InventoryPlayer inventoryPlayer, TileEntityFluidRouter te)
 	{
 		this.te = te;
 		this.addSlotToContainer(new SlotFilter(te.getInventory(), 0, 75, 19, 0));

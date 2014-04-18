@@ -6,6 +6,7 @@ import org.lwjgl.input.Keyboard;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.GuiIds;
+import lumien.randomthings.Library.ItemUtils;
 import lumien.randomthings.Library.Texts;
 import lumien.randomthings.Library.Inventorys.InventoryItemFilter;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -60,6 +61,8 @@ public class ItemFilter extends Item
 
 	public static boolean matchesItem(ItemStack filter, ItemStack toCheck)
 	{
+		boolean oreDict = filter.stackTagCompound.getBoolean("oreDict");
+		
 		if (filter == null || toCheck == null)
 		{
 			return false;
@@ -77,6 +80,10 @@ public class ItemFilter extends Item
 			ItemStack is = filterInventory.getStackInSlot(slot);
 			if (is != null)
 			{
+				if (oreDict && ItemUtils.areOreDictionaried(is, toCheck))
+				{
+					return true;
+				}
 				if (is.isItemEqual(toCheck))
 				{
 					return true;
@@ -142,12 +149,6 @@ public class ItemFilter extends Item
 	}
 
 	@Override
-	public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-	{
-		par1ItemStack.stackTagCompound = new NBTTagCompound();
-	}
-
-	@Override
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
 	{
 		if (par1ItemStack.stackTagCompound == null)
@@ -189,6 +190,7 @@ public class ItemFilter extends Item
 		if (par1ItemStack.stackTagCompound == null)
 		{
 			par1ItemStack.stackTagCompound = new NBTTagCompound();
+			par1ItemStack.stackTagCompound.setBoolean("oreDict", false);
 		}
 
 		if (par1ItemStack.getItemDamage() == 1)
