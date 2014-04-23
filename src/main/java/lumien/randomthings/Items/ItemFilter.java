@@ -62,7 +62,7 @@ public class ItemFilter extends Item
 	public static boolean matchesItem(ItemStack filter, ItemStack toCheck)
 	{
 		boolean oreDict = filter.stackTagCompound.getBoolean("oreDict");
-		
+
 		if (filter == null || toCheck == null)
 		{
 			return false;
@@ -100,7 +100,7 @@ public class ItemFilter extends Item
 	{
 		if (par1ItemStack.stackTagCompound != null)
 		{
-			if (!Keyboard.isKeyDown(42))
+			if (!Keyboard.isKeyDown(Keyboard.KEY_LSHIFT))
 			{
 				par3List.add(Texts.PSHIFT);
 			}
@@ -119,6 +119,7 @@ public class ItemFilter extends Item
 					case 1:
 						if (!(ItemFilter.getItemFilterInv(par2EntityPlayer, par1ItemStack) == null))
 						{
+							par3List.add("Ore-Dictionary: " + (par1ItemStack.stackTagCompound.getBoolean("oreDict") ? "Yes" : "No"));
 							IInventory inventoryFilter = new InventoryItemFilter(par2EntityPlayer, par1ItemStack);
 							inventoryFilter.openInventory();
 							if (inventoryFilter != null)

@@ -23,11 +23,13 @@ public class ItemIngredient extends Item
 		IIcon icon;
 		String iconName;
 		String unlocalizedName;
+		int maxStackSize;
 
-		private Ingredient(String iconName, String unlocalizedName)
+		private Ingredient(String iconName, String unlocalizedName,int maxStackSize)
 		{
 			this.iconName = "RandomThings:crafting/" + iconName;
 			this.unlocalizedName = unlocalizedName;
+			this.maxStackSize = maxStackSize;
 		}
 	}
 
@@ -37,8 +39,9 @@ public class ItemIngredient extends Item
 	{
 		ingredients = new ArrayList<Ingredient>();
 		
-		ingredients.add(new Ingredient("playerCore", "playerCore"));
-		ingredients.add(new Ingredient("obsidianStick", "obsidianStick"));
+		ingredients.add(new Ingredient("playerCore", "playerCore",64));
+		ingredients.add(new Ingredient("obsidianStick", "obsidianStick",64));
+		ingredients.add(new Ingredient("enderFragment","enderFragment",16));
 		
 		OreDictionary.registerOre("stickObsidian", new ItemStack(this,1,1));
 		OreDictionary.registerOre("obsidianStick", new ItemStack(this,1,1));
@@ -48,6 +51,8 @@ public class ItemIngredient extends Item
 		
 		GameRegistry.registerItem(this, "ingredient");
 	}
+	
+	
 	
     @Override
 	@SideOnly(Side.CLIENT)
@@ -92,5 +97,19 @@ public class ItemIngredient extends Item
     		return "item.error";
     	}
         return "item." + ingredients.get(damage).unlocalizedName;
+    }
+    
+    @Override
+    public int getItemStackLimit(ItemStack is)
+    {
+    	int damage = is.getItemDamage();
+    	if (ingredients.size() - 1 < damage || damage < 0)
+    	{
+    		return 64;
+    	}
+    	else
+    	{
+    		return ingredients.get(damage).maxStackSize;
+    	}
     }
 }

@@ -1,5 +1,9 @@
 package lumien.randomthings;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import com.google.common.collect.ImmutableList;
@@ -12,7 +16,10 @@ import lumien.randomthings.Core.RTCreativeTab;
 import lumien.randomthings.Entity.EntityDyeSlime;
 import lumien.randomthings.Entity.ModEntitys;
 import lumien.randomthings.Handler.BackgroundHandler;
+import lumien.randomthings.Handler.LetterHandler;
 import lumien.randomthings.Handler.RTEventHandler;
+import lumien.randomthings.Handler.RTTickHandler;
+import lumien.randomthings.Handler.Notifications.NotificationHandler;
 import lumien.randomthings.Items.ItemBiomeSolution;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.Recipes;
@@ -20,8 +27,11 @@ import lumien.randomthings.Network.PacketPipeline;
 import lumien.randomthings.Proxy.CommonProxy;
 import lumien.randomthings.TileEntities.ModTileEntities;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
@@ -30,6 +40,7 @@ import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -43,8 +54,8 @@ public class RandomThings
 	public static final String MOD_ID = "RandomThings";
 	public static final String MOD_NAME = "Random Things";
 	public static final String MOD_VERSION = "@VERSION@";
-	
-	@SidedProxy(clientSide="lumien.randomthings.Proxy.ClientProxy",serverSide="lumien.randomthings.Proxy.CommonProxy")
+
+	@SidedProxy(clientSide = "lumien.randomthings.Proxy.ClientProxy", serverSide = "lumien.randomthings.Proxy.CommonProxy")
 	public static CommonProxy proxy;
 
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
@@ -53,10 +64,19 @@ public class RandomThings
 
 	public Logger logger;
 
+	File nbtFile;
+	public NBTTagCompound modNBT;
+	
+	public LetterHandler letterHandler;
+	public NotificationHandler notificationHandler;
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		logger = event.getModLog();
+		
+		letterHandler = new LetterHandler();
+		notificationHandler = new NotificationHandler();
 
 		RTConfiguration.init(event);
 
@@ -66,7 +86,8 @@ public class RandomThings
 		ModEntitys.init();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-		
+		FMLCommonHandler.instance().bus().register(new RTTickHandler());
+
 		MinecraftForge.EVENT_BUS.register(new RTEventHandler());
 		proxy.registerTickHandler();
 
@@ -75,8 +96,6 @@ public class RandomThings
 			BackgroundHandler.setRandomBackground();
 		}
 	}
-	
-
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
@@ -91,6 +110,27 @@ public class RandomThings
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		packetPipeline.postInitialise();
+	}
+	
+	public void saveNBT()
+	{
+		try
+		{
+			CompressedStreamTools.write(modNBT, nbtFile);
+		}
+		catch (IOException e)
+		{
+			logger.log(Level.WARN, "Couldn't use NBT Mod File, things like letters won't persist.");
+			e.printStackTrace();
+		}
+	}
+
+	@EventHandler
+	public void serverStarting(FMLServerStartingEvent event)
+	{
+		initializeModNBT();
+		
+		letterHandler.readFromNBT();
 	}
 
 	@EventHandler
@@ -116,6 +156,42 @@ public class RandomThings
 					}
 				}
 			}
+		}
+	}
+	
+	private void initializeModNBT()
+	{
+		nbtFile = new File(DimensionManager.getCurrentSaveRootDirectory(), "RandomThings.dat");
+		if (!nbtFile.exists())
+		{
+			logger.log(Level.INFO, "Creating NBT File");
+			
+			try
+			{
+				nbtFile.createNewFile();
+				CompressedStreamTools.write(new NBTTagCompound(), nbtFile);
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			try
+			{
+				modNBT = CompressedStreamTools.read(nbtFile);
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		if (modNBT==null)
+		{
+			logger.log(Level.WARN, "Couldn't use NBT Mod File, things like ender letters won't persist.");
+			modNBT = new NBTTagCompound();
 		}
 	}
 }

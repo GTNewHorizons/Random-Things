@@ -34,6 +34,20 @@ public class ItemDropFilter extends Item
 
 		GameRegistry.registerItem(this, "dropFilter");
 	}
+	
+	@SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+	{
+		if (!(ItemDropFilter.getDropFilterInv(par2EntityPlayer, par1ItemStack) == null))
+		{
+			IInventory inventoryFilter = new InventoryDropFilter(par2EntityPlayer, par1ItemStack);
+			inventoryFilter.openInventory();
+			if (inventoryFilter.getStackInSlot(0)!=null)
+			{
+				ModItems.filter.addInformation(inventoryFilter.getStackInSlot(0), par2EntityPlayer, par3List, par4);
+			}
+		}
+	}
 
 	public void registerIcons(IIconRegister ir)
 	{

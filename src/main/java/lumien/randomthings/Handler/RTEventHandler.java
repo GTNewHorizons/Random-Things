@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import org.lwjgl.opengl.GL11;
 
+import lumien.randomthings.RandomThings;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Configuration.ConfigItems;
 import lumien.randomthings.Configuration.VanillaChanges;
@@ -36,6 +37,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent17;
@@ -111,12 +113,22 @@ public class RTEventHandler
 	}
 
 	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
+	@SubscribeEvent()
 	public void preTextureStitch(TextureStitchEvent.Pre event)
 	{
 		if (event.map.getTextureType() == 1)
 		{
 			ClientProxy.slimeParticleTexture = event.map.registerIcon("RandomThings:slimeParticle");
+		}
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent(priority=EventPriority.LOWEST)
+	public void drawGameOverlay(RenderGameOverlayEvent.Post event)
+	{
+		if (event.type==RenderGameOverlayEvent.ElementType.HOTBAR)
+		{
+			RandomThings.instance.notificationHandler.drawNotificationOverlay();
 		}
 	}
 

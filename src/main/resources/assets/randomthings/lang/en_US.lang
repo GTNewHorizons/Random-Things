@@ -21,9 +21,14 @@ item.creativeGrower.name=Creative Grower
 item.voidStone.name=Void Stone
 item.dropFilter.name=Drop Filter
 item.dropFilterVoiding.name=Voiding Drop Filter
+item.enderLetter.name=Ender Letter
 
 item.playerCore.name=Player Core
 item.obsidianStick.name=Obsidian Stick
+item.enderFragment.name=Ender Fragment
 item.error.name=Invalid Item
 
 itemGroup.Random Things=Random Things
+
+chat.miscellaneous.pressShift=Press shift for more information
+chat.enderLetter.invalidreceiver=You didn't select a receiver

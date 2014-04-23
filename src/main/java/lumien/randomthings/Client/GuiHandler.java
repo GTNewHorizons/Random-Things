@@ -2,10 +2,12 @@ package lumien.randomthings.Client;
 
 import lumien.randomthings.Items.ItemDropFilter;
 import lumien.randomthings.Items.ItemFilter;
+import lumien.randomthings.Items.ItemEnderLetter;
 import lumien.randomthings.Client.GUI.GuiDropFilter;
 import lumien.randomthings.Client.GUI.GuiItemCollector;
 import lumien.randomthings.Client.GUI.GuiItemFilter;
 import lumien.randomthings.Client.GUI.GuiFluidRouter;
+import lumien.randomthings.Client.GUI.GuiEnderLetter;
 import lumien.randomthings.Client.GUI.GuiOnlineDetector;
 import lumien.randomthings.Client.GUI.GuiPlayerInterface;
 import lumien.randomthings.Client.GUI.GuiVoidStone;
@@ -13,6 +15,7 @@ import lumien.randomthings.Container.ContainerDropFilter;
 import lumien.randomthings.Container.ContainerItemCollector;
 import lumien.randomthings.Container.ContainerItemFilter;
 import lumien.randomthings.Container.ContainerLiquidRouter;
+import lumien.randomthings.Container.ContainerEnderLetter;
 import lumien.randomthings.Container.ContainerOnlineDetector;
 import lumien.randomthings.Container.ContainerPlayerInterface;
 import lumien.randomthings.Container.ContainerVoidStone;
@@ -60,6 +63,13 @@ public class GuiHandler implements IGuiHandler
 					inventoryDropFilter = new InventoryBasic("placeholder", false, 1);
 				}
 				return new ContainerDropFilter(player.inventory, inventoryDropFilter);
+			case ENDER_LETTER:
+				IInventory letterInventory = ItemEnderLetter.getLetterInventory(player);
+				if (letterInventory == null)
+				{
+					letterInventory = new InventoryBasic("placeholder", false, 9);
+				}
+				return new ContainerEnderLetter(player.getCurrentEquippedItem(),player.inventory, letterInventory);
 		}
 		return null;
 	}
@@ -78,7 +88,7 @@ public class GuiHandler implements IGuiHandler
 				{
 					inventoryFilter = new InventoryBasic("placeholder", false, 27);
 				}
-				return new GuiItemFilter(player,player.inventory, inventoryFilter);
+				return new GuiItemFilter(player, player.inventory, inventoryFilter);
 			case ADVANCED_ITEMCOLLECTOR:
 				return new GuiItemCollector(player.inventory, (TileEntityAdvancedItemCollector) tileEntity);
 			case ONLINE_DETECTOR:
@@ -94,6 +104,13 @@ public class GuiHandler implements IGuiHandler
 					inventoryDropFilter = new InventoryBasic("placeholder", false, 1);
 				}
 				return new GuiDropFilter(player.inventory, inventoryDropFilter);
+			case ENDER_LETTER:
+				IInventory letterInventory = ItemFilter.getItemFilterInv(player);
+				if (letterInventory == null)
+				{
+					letterInventory = new InventoryBasic("placeholder", false, 9);
+				}
+				return new GuiEnderLetter(player.inventory, letterInventory,player.getCurrentEquippedItem());
 		}
 		return null;
 	}

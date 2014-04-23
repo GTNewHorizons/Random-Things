@@ -46,4 +46,16 @@ public class InventoryUtils
 			inventory.setInventorySlotContents(slot, lIS);
 		}
 	}
+	
+	public static boolean isInventoryEmpty(IInventory inventory)
+	{
+		for (int slot=0;slot<inventory.getSizeInventory();slot++)
+		{
+			if (inventory.getStackInSlot(slot)!=null)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 }

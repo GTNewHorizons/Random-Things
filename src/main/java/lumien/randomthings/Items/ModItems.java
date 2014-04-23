@@ -14,6 +14,7 @@ public class ModItems
 	public static ItemMagneticForce magneticForce;
 	public static ItemVoidStone voidStone;
 	public static ItemDropFilter dropFilter;
+	public static ItemEnderLetter enderLetter;
 	
 	public static ItemCreativeSword creativeSword;
 	public static ItemCreativeGrower creativeGrower;
@@ -21,9 +22,7 @@ public class ModItems
 	public static void init()
 	{
 		RandomThings.instance.logger.debug("Initializing Items");
-
-		if (ConfigItems.filter)
-			filter = new ItemFilter();
+		
 		if (ConfigItems.biomeSolution)
 			biomeSolution = new ItemBiomeSolution();
 		if (ConfigItems.biomePainter)
@@ -36,6 +35,8 @@ public class ModItems
 			voidStone = new ItemVoidStone();
 		if (ConfigItems.dropFilter)
 			dropFilter = new ItemDropFilter();
+		if (ConfigItems.enderLetter)
+			enderLetter = new ItemEnderLetter();
 		
 		if (ConfigItems.creativeSword)
 			creativeSword = new ItemCreativeSword();
@@ -43,6 +44,8 @@ public class ModItems
 			creativeGrower = new ItemCreativeGrower();
 		
 		ingredients = new ItemIngredient();
+		filter = new ItemFilter();
+		
 		kojaku = new ItemKojaku();
 	}
 }

@@ -18,13 +18,13 @@ public class RTConfiguration
 		ConfigBlocks.imbuingStation = config.get("Blocks", "ImbuingStation", true).getBoolean(true);
 		ConfigBlocks.fluidRouter = config.get("Blocks", "FluidRouter", true).getBoolean(true);
 
-		ConfigItems.filter = config.get("Items", "Filter", true).getBoolean(true);
 		ConfigItems.biomeSolution = config.get("Items", "BiomeSolution", true).getBoolean(true);
 		ConfigItems.biomePainter = config.get("Items", "BiomePainter", true).getBoolean(true);
 		ConfigItems.whitestone = config.get("Items", "Whitestone", true).getBoolean(true);
 		ConfigItems.magneticForce = config.get("Items","MagneticForce",true).getBoolean(true);
 		ConfigItems.voidStone = config.get("Items", "VoidStone", true).getBoolean(true);
 		ConfigItems.dropFilter = config.get("Items", "DropFilter", true).getBoolean(true);
+		ConfigItems.enderLetter = config.get("Items", "EnderLetter", true).getBoolean(true);
 		
 		ConfigItems.creativeSword = config.get("Items", "CreativeSword", true).getBoolean(true);
 		ConfigItems.creativeGrower = config.get("Items", "CreativeGrower", true).getBoolean(true);

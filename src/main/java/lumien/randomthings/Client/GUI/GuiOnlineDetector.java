@@ -71,7 +71,7 @@ public class GuiOnlineDetector extends GuiContainer
 	@Override
 	protected void keyTyped(char par1, int pressedKey)
 	{
-		if (pressedKey == 1 || (!this.usernameInput.isFocused() && pressedKey == this.mc.gameSettings.keyBindInventory.getKeyCode()))
+		if (pressedKey == Keyboard.KEY_ESCAPE || (!this.usernameInput.isFocused() && pressedKey == this.mc.gameSettings.keyBindInventory.getKeyCode()))
 		{
 			this.mc.thePlayer.closeScreen();
 		}

@@ -10,4 +10,5 @@ public class GuiIds
 	public static final int PLAYER_INTERFACE_CREATIVE = 5;
 	public static final int VOID_STONE = 6;
 	public static final int DROP_FILTER = 7;
+	public static final int ENDER_LETTER = 8;
 }
