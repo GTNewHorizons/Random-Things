@@ -30,5 +30,14 @@ item.error.name=Invalid Item
 
 itemGroup.Random Things=Random Things
 
-chat.miscellaneous.pressShift=Press shift for more information
-chat.enderLetter.invalidreceiver=You didn't select a receiver
+text.miscellaneous.press=Press %s for more information
+text.miscellaneous.shift=shift
+text.miscellaneous.block=Block
+text.miscellaneous.metadata=Metadata
+text.miscellaneous.oreDictionary=Ore-Dictionary
+text.miscellaneous.listType=List-Type
+text.miscellaneous.entityid=Entity ID
+text.miscellaneous.entityName=Entity Name
+
+text.enderLetter.invalidreceiver=You have specified an invalid receiver
+text.enderLetter.empty=You can't send an empty letter

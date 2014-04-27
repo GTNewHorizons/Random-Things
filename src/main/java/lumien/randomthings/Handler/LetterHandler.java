@@ -3,6 +3,10 @@ package lumien.randomthings.Handler;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
+
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.WorldUtils;
@@ -28,7 +32,7 @@ public class LetterHandler
 		waitingLetters = new ArrayList<ItemStack>();
 
 		tickCounter = 0;
-		tickRate = 20;
+		tickRate = 60;
 	}
 
 	public void addLetter(ItemStack letter)
@@ -43,26 +47,29 @@ public class LetterHandler
 		tickCounter++;
 		if (tickCounter >= tickRate)
 		{
-			this.tickCounter = 0;
+			tickCounter = 0;
 			Iterator<ItemStack> iterator = waitingLetters.iterator();
 			while (iterator.hasNext())
 			{
 				ItemStack toCheck = iterator.next();
 
 				String receiver = toCheck.stackTagCompound.getString("receiver");
-				if (WorldUtils.isPlayerOnline(receiver))
+				EntityPlayer receiverEntity = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(receiver);
+				if (receiverEntity != null)
 				{
-					EntityPlayer receiverEntity = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(receiver);
+					int freeSlot = receiverEntity.inventory.getFirstEmptyStack();
+					if (freeSlot != -1)
+					{
+						receiverEntity.inventory.setInventorySlotContents(freeSlot, toCheck);
+						receiverEntity.inventory.markDirty();
+						receiverEntity.inventoryContainer.detectAndSendChanges();
 
-					EntityItem entityItem = new EntityItem(receiverEntity.worldObj, receiverEntity.posX, receiverEntity.posY, receiverEntity.posZ, toCheck);
-					entityItem.delayBeforeCanPickup = 0;
+						iterator.remove();
+						writeToNBT();
+						RandomThings.instance.saveNBT();
 
-					entityItem.worldObj.spawnEntityInWorld(entityItem);
-					iterator.remove();
-					writeToNBT();
-					RandomThings.instance.saveNBT();
-
-					RandomThings.packetPipeline.sendTo(new PacketNotification("Received Ender Letter", "Sender: " + toCheck.stackTagCompound.getString("sender"), new ItemStack(ModItems.enderLetter, 1, 1)), (EntityPlayerMP) receiverEntity);
+						RandomThings.packetPipeline.sendTo(new PacketNotification("Received Ender Letter", "Sender: " + toCheck.stackTagCompound.getString("sender"), new ItemStack(ModItems.enderLetter, 1, 1)), (EntityPlayerMP) receiverEntity);
+					}
 				}
 			}
 		}

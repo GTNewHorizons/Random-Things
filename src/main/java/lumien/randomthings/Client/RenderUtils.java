@@ -14,7 +14,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import static org.lwjgl.opengl.GL11.*;
 
-public class RenderHelper
+public class RenderUtils
 {
 	static Gui gui = new Gui();
 

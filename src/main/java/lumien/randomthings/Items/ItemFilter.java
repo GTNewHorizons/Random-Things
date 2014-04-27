@@ -14,6 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -62,6 +63,7 @@ public class ItemFilter extends Item
 	public static boolean matchesItem(ItemStack filter, ItemStack toCheck)
 	{
 		boolean oreDict = filter.stackTagCompound.getBoolean("oreDict");
+		int listType = filter.stackTagCompound.getInteger("listType");
 
 		if (filter == null || toCheck == null)
 		{
@@ -82,16 +84,16 @@ public class ItemFilter extends Item
 			{
 				if (oreDict && ItemUtils.areOreDictionaried(is, toCheck))
 				{
-					return true;
+					return listType == 0 ? true : false;
 				}
 				if (is.isItemEqual(toCheck))
 				{
-					return true;
+					return listType == 0 ? true : false;
 				}
 			}
 		}
 
-		return false;
+		return listType == 0 ? false : true;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -112,14 +114,15 @@ public class ItemFilter extends Item
 						String block = par1ItemStack.stackTagCompound.getString("block");
 						if (!block.equals(""))
 						{
-							par3List.add("Block: " + block);
-							par3List.add("Metadata: " + par1ItemStack.stackTagCompound.getInteger("metadata"));
+							par3List.add(I18n.format("text.miscellaneous.block", null) + ": " + block);
+							par3List.add(I18n.format("text.miscellaneous.metadata", null) + ": " + par1ItemStack.stackTagCompound.getInteger("metadata"));
 						}
 						break;
 					case 1:
 						if (!(ItemFilter.getItemFilterInv(par2EntityPlayer, par1ItemStack) == null))
 						{
-							par3List.add("Ore-Dictionary: " + (par1ItemStack.stackTagCompound.getBoolean("oreDict") ? "Yes" : "No"));
+							par3List.add(I18n.format("text.miscellaneous.oreDictionary", null) + ": " + (par1ItemStack.stackTagCompound.getBoolean("oreDict") ? "Yes" : "No"));
+							par3List.add(I18n.format("text.miscellaneous.listType", null) + ": " + (par1ItemStack.stackTagCompound.getInteger("listType") == 1 ? "Blacklist" : "Whitelist"));
 							IInventory inventoryFilter = new InventoryItemFilter(par2EntityPlayer, par1ItemStack);
 							inventoryFilter.openInventory();
 							if (inventoryFilter != null)
@@ -140,8 +143,8 @@ public class ItemFilter extends Item
 						String entityName = par1ItemStack.stackTagCompound.getString("entityName");
 						if (!(entityID == 0))
 						{
-							par3List.add("EntityID: " + entityID);
-							par3List.add("EntityName: " + entityName);
+							par3List.add(I18n.format("text.miscellaneous.entityid", null) + ": " + entityID);
+							par3List.add(I18n.format("text.miscellaneous.entityName", null) + ": " + entityName);
 						}
 						break;
 				}

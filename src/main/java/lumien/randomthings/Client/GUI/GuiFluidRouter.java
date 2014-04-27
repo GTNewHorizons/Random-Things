@@ -3,7 +3,7 @@ package lumien.randomthings.Client.GUI;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Client.RenderHelper;
+import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Container.ContainerLiquidRouter;
 import lumien.randomthings.Network.Packets.PacketLiquidRouter;
 import lumien.randomthings.TileEntities.TileEntityFluidRouter;
@@ -38,7 +38,6 @@ public class GuiFluidRouter extends GuiContainer
 	public void initGui()
 	{
 		super.initGui();
-		this.buttonList.add(buttonMode);
 	}
 	
 	protected void actionPerformed(GuiButton pressedButton)

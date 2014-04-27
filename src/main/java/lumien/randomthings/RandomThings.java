@@ -26,6 +26,7 @@ import lumien.randomthings.Library.Recipes;
 import lumien.randomthings.Network.PacketPipeline;
 import lumien.randomthings.Proxy.CommonProxy;
 import lumien.randomthings.TileEntities.ModTileEntities;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
@@ -66,7 +67,7 @@ public class RandomThings
 
 	File nbtFile;
 	public NBTTagCompound modNBT;
-	
+
 	public LetterHandler letterHandler;
 	public NotificationHandler notificationHandler;
 
@@ -74,9 +75,11 @@ public class RandomThings
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		logger = event.getModLog();
-		
-		letterHandler = new LetterHandler();
-		notificationHandler = new NotificationHandler();
+
+		if (event.getSide().isClient())
+		{
+			notificationHandler = new NotificationHandler();
+		}
 
 		RTConfiguration.init(event);
 
@@ -111,7 +114,7 @@ public class RandomThings
 	{
 		packetPipeline.postInitialise();
 	}
-	
+
 	public void saveNBT()
 	{
 		try
@@ -129,7 +132,8 @@ public class RandomThings
 	public void serverStarting(FMLServerStartingEvent event)
 	{
 		initializeModNBT();
-		
+
+		letterHandler = new LetterHandler();
 		letterHandler.readFromNBT();
 	}
 
@@ -158,18 +162,19 @@ public class RandomThings
 			}
 		}
 	}
-	
+
 	private void initializeModNBT()
 	{
 		nbtFile = new File(DimensionManager.getCurrentSaveRootDirectory(), "RandomThings.dat");
 		if (!nbtFile.exists())
 		{
 			logger.log(Level.INFO, "Creating NBT File");
-			
+
 			try
 			{
 				nbtFile.createNewFile();
 				CompressedStreamTools.write(new NBTTagCompound(), nbtFile);
+				modNBT = CompressedStreamTools.read(nbtFile);
 			}
 			catch (IOException e)
 			{
@@ -187,8 +192,8 @@ public class RandomThings
 				e.printStackTrace();
 			}
 		}
-		
-		if (modNBT==null)
+
+		if (modNBT == null)
 		{
 			logger.log(Level.WARN, "Couldn't use NBT Mod File, things like ender letters won't persist.");
 			modNBT = new NBTTagCompound();

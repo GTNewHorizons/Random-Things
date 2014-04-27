@@ -1,11 +1,13 @@
 package lumien.randomthings.Client.GUI;
 
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.Client.GUI.Buttons.GuiButtonListtype;
 import lumien.randomthings.Client.GUI.Buttons.GuiButtonOreDictionary;
 import lumien.randomthings.Container.ContainerItemFilter;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Network.Packets.PacketItemFilter;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiListExtended;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +26,7 @@ public class GuiItemFilter extends GuiContainer
 	ItemStack itemFilter;
 	
 	GuiButtonOreDictionary oreDictButton;
+	GuiButtonListtype listTypeButton;
 
 	public GuiItemFilter(EntityPlayer player,IInventory inventoryPlayer, IInventory inventoryFilter)
 	{
@@ -41,8 +44,11 @@ public class GuiItemFilter extends GuiContainer
     {
         super.initGui();
         
-        oreDictButton = new GuiButtonOreDictionary(0,guiLeft + 173,guiTop + 4,itemFilter.stackTagCompound.getBoolean("oreDict"));
+        oreDictButton = new GuiButtonOreDictionary(this,0,guiLeft + 173,guiTop + 4,itemFilter.stackTagCompound.getBoolean("oreDict"));
         this.buttonList.add(oreDictButton);
+        
+        listTypeButton = new GuiButtonListtype(this,1,guiLeft + 173,guiTop + 4 + 22,itemFilter.stackTagCompound.getInteger("listType"));
+        this.buttonList.add(listTypeButton);
     }
 	
 	protected void actionPerformed(GuiButton pressedButton)
@@ -51,6 +57,12 @@ public class GuiItemFilter extends GuiContainer
 		{
 			oreDictButton.setEnabled(!oreDictButton.isEnabled());
 			RandomThings.packetPipeline.sendToServer(new PacketItemFilter(PacketItemFilter.ACTION.OREDICT));
+		}
+		else if (pressedButton == listTypeButton)
+		{
+			int type = listTypeButton.getType();
+			listTypeButton.setType(type==0?1:0);
+			RandomThings.packetPipeline.sendToServer(new PacketItemFilter(PacketItemFilter.ACTION.LISTTYPE));
 		}
 	}
 

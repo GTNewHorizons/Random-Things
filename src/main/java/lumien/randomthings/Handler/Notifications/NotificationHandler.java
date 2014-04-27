@@ -19,7 +19,7 @@ import net.minecraft.util.ResourceLocation;
 public class NotificationHandler
 {
 	int tickCounter;
-	final int tickRate;
+	int tickRate;
 	int displayCounter;
 
 	Gui guiInstance = new Gui();
@@ -39,7 +39,7 @@ public class NotificationHandler
 		currentNotification = null;
 
 		tickCounter = 0;
-		tickRate = 5;
+		tickRate = 20;
 		displayCounter = 0;
 		itemRenderer = new RenderItem();
 	}
@@ -51,30 +51,30 @@ public class NotificationHandler
 			ScaledResolution scaledresolution = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
 			int i = scaledresolution.getScaleFactor();
 
-			if (displayCounter < 20)
+			if (displayCounter < 32)
 			{
-				drawY = (int) (Math.floor((-32F + 32F / 20F * displayCounter)));
+				drawY = displayCounter-32;
 			}
-			else if (displayCounter < 200)
+			else if (displayCounter < 1000)
 			{
 				drawY = 0;
 			}
-			else if (displayCounter < 220)
+			else if (displayCounter < 1032)
 			{
-				drawY = (int) Math.floor((0 - (32F / 20F * (displayCounter - 200))));
+				drawY = 0 - (displayCounter-1000);
 			}
 			else
 			{
 				currentNotification = null;
 			}
-			
+
 			if (currentNotification != null)
 			{
 				this.mc.renderEngine.bindTexture(notificationBackground);
 				GL11.glEnable(GL11.GL_BLEND);
 				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				
+
 				guiInstance.drawTexturedModalRect(scaledresolution.getScaledWidth() - 160, drawY, 0, 0, 160, 32);
 
 				FontRenderer f = Minecraft.getMinecraft().fontRenderer;
@@ -97,6 +97,14 @@ public class NotificationHandler
 	public void update()
 	{
 		tickCounter++;
+		if (currentNotification == null)
+		{
+			tickRate = 20;
+		}
+		else
+		{
+			tickRate = 1;
+		}
 		if (tickCounter >= tickRate)
 		{
 			this.tickCounter = 0;

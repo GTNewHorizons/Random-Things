@@ -6,13 +6,19 @@ import java.util.Random;
 import lumien.randomthings.Library.OverrideUtils;
 
 import net.minecraft.client.gui.Gui;
+import net.minecraft.item.ItemDye;
 import net.minecraft.util.ResourceLocation;
 
 public class BackgroundHandler
 {
 	static Field f;
-	static String[] validBlocks = new String[] { "bedrock", "bookshelf", "brick", "clay", "cobblestone", "cobblestone_mossy", "dirt", "end_stone", "farmland_dry", "glowstone", "gravel", "hay_block_top", "ice",  "melon_side", "mushroom_block_inside", "mycelium_top", "nether_brick", "netherrack", "obsidian", "sand", "sandstone_top", "soul_sand", "snow", "stonebrick", "stonebrick_mossy", "red_sand", "planks_big_oak", "planks_acacia", "log_acacia", "ice_packed" };
+	static String[] validBlocks = new String[] {"netherrack", "wool_colored", "stonebrick", "stonebrick_mossy", "sponge", "stone", "red_sand", "sand", "bedrock", "brick", "clay", "cobblestone", "cobblestone_mossy", "dirt", "end_stone", "glowstone", "gravel", "hardened_clay", "hay_block_top", "ice", "log", "melon_side", "mycelium_top", "nether_brick", "portal" };
+
 	static Random rng = new Random();
+
+	static String[] logTypes = new String[] { "acacia", "big_oak", "birch", "jungle", "oak", "spruce" };
+
+	public static String fixedBackground = "";
 
 	public static void setBackgroundBlock(String block)
 	{
@@ -39,14 +45,28 @@ public class BackgroundHandler
 
 	public static void setRandomBackground()
 	{
-		try
+		if (!fixedBackground.equals(""))
 		{
-			String newLocation = validBlocks[rng.nextInt(validBlocks.length)];
-			setBackgroundBlock(newLocation);
+			setBackgroundBlock(fixedBackground);
 		}
-		catch (Exception e)
+		else
 		{
-			System.out.println("Couldn't set Background");
+			String randomBlock = validBlocks[rng.nextInt(validBlocks.length)];
+
+			if (randomBlock.equals("hardened_clay"))
+			{
+				randomBlock = randomBlock + "_stained_" + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
+			}
+			else if (randomBlock.equals("wool_colored"))
+			{
+				randomBlock = randomBlock + "_" + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
+			}
+			else if (randomBlock.equals("log") || randomBlock.equals("planks"))
+			{
+				randomBlock = randomBlock + "_" + logTypes[rng.nextInt(logTypes.length)];
+			}
+
+			setBackgroundBlock(randomBlock);
 		}
 	}
 }

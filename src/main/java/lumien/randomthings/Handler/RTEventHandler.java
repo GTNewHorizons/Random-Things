@@ -121,12 +121,12 @@ public class RTEventHandler
 			ClientProxy.slimeParticleTexture = event.map.registerIcon("RandomThings:slimeParticle");
 		}
 	}
-	
+
 	@SideOnly(Side.CLIENT)
-	@SubscribeEvent(priority=EventPriority.LOWEST)
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void drawGameOverlay(RenderGameOverlayEvent.Post event)
 	{
-		if (event.type==RenderGameOverlayEvent.ElementType.HOTBAR)
+		if (event.type == RenderGameOverlayEvent.ElementType.HOTBAR)
 		{
 			RandomThings.instance.notificationHandler.drawNotificationOverlay();
 		}

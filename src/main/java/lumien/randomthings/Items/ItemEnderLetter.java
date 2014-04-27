@@ -23,11 +23,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 public class ItemEnderLetter extends Item
 {
-	final ChatComponentText INVALID_RECEIVER;
 
 	public ItemEnderLetter()
 	{
@@ -38,8 +39,6 @@ public class ItemEnderLetter extends Item
 		this.setHasSubtypes(true);
 
 		GameRegistry.registerItem(this, "enderLetter");
-
-		INVALID_RECEIVER = new ChatComponentText(ChatColors.RED + Texts.INVALID_RECEIVER);
 	}
 
 	@Override
@@ -88,8 +87,8 @@ public class ItemEnderLetter extends Item
 
 		return letterInventory;
 	}
-	
-	public static IInventory getLetterInventory(EntityPlayer player,ItemStack letter)
+
+	public static IInventory getLetterInventory(EntityPlayer player, ItemStack letter)
 	{
 		ItemStack enderLetter;
 		IInventory letterInventory = null;
@@ -132,13 +131,24 @@ public class ItemEnderLetter extends Item
 	private void sendLetter(ItemStack letter, EntityPlayer sender)
 	{
 		String receiver = letter.stackTagCompound.getString("receiver");
-		if (receiver.equals(""))
+		if (receiver.trim().equals(""))
 		{
-			sender.addChatMessage(INVALID_RECEIVER);
+			ChatComponentTranslation invalidReceiverMessage = new ChatComponentTranslation("text.enderLetter.invalidreceiver");
+			invalidReceiverMessage.getChatStyle().setColor(EnumChatFormatting.RED);
+			sender.addChatMessage(invalidReceiverMessage);
 			return;
 		}
 		else
 		{
+			IInventory inventory = this.getLetterInventory(sender);
+			inventory.openInventory();
+			if (InventoryUtils.isInventoryEmpty(inventory))
+			{
+				ChatComponentTranslation emptyLetterMessage = new ChatComponentTranslation("text.enderLetter.empty");
+				emptyLetterMessage.getChatStyle().setColor(EnumChatFormatting.RED);
+				sender.addChatMessage(emptyLetterMessage);
+				return;
+			}
 			letter.stackTagCompound.setString("sender", sender.getCommandSenderName());
 
 			sender.worldObj.playSoundAtEntity(sender, "mob.endermen.portal", 0.1F, 2F);
@@ -149,19 +159,7 @@ public class ItemEnderLetter extends Item
 			ItemStack receivedLetter = letter.copy();
 			receivedLetter.setItemDamage(1);
 
-			if (WorldUtils.isPlayerOnline(receiver))
-			{
-				EntityPlayer receiverEntity = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(receiver);
-				EntityItem entityItem = new EntityItem(receiverEntity.worldObj, receiverEntity.posX, receiverEntity.posY, receiverEntity.posZ, receivedLetter);
-				entityItem.delayBeforeCanPickup = 0;
-
-				entityItem.worldObj.spawnEntityInWorld(entityItem);
-				RandomThings.packetPipeline.sendTo(new PacketNotification("Received Ender Letter", "Sender: " + sender.getCommandSenderName(), new ItemStack(this, 1, 1)), (EntityPlayerMP) receiverEntity);
-			}
-			else
-			{
-				RandomThings.instance.letterHandler.addLetter(receivedLetter);
-			}
+			RandomThings.instance.letterHandler.addLetter(receivedLetter);
 		}
 	}
 }

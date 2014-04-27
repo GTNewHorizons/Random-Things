@@ -16,32 +16,31 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiButtonOreDictionary extends GuiButton
+public class GuiButtonListtype extends GuiButton
 {
-	ResourceLocation oreButtonTextures = new ResourceLocation("randomthings:textures/gui/buttonOreDict.png");
-	boolean enabled;
+	ResourceLocation listTypeTextures = new ResourceLocation("randomthings:textures/gui/buttonListType.png");
+	int listType;
 	GuiContainer gc;
-	
 
-	public GuiButtonOreDictionary(GuiContainer gc,int id,int posX,int posY,boolean enabled)
+	public GuiButtonListtype(GuiContainer gc,int id,int posX,int posY,int type)
 	{
 		super(id, posX, posY, "");
 		
-		this.enabled = enabled;
+		this.listType = type;
+		this.gc = gc;
+		
 		this.width=20;
 		this.height=20;
-
-		this.gc = gc;
 	}
 	
-	public void setEnabled(boolean state)
+	public void setType(int type)
 	{
-		this.enabled = state;
+		this.listType = type;
 	}
 	
-	public boolean isEnabled()
+	public int getType()
 	{
-		return enabled;
+		return listType;
 	}
 
 	public void drawButton(Minecraft p_146112_1_, int p_146112_2_, int p_146112_3_)
@@ -49,7 +48,7 @@ public class GuiButtonOreDictionary extends GuiButton
 		if (this.visible)
 		{
 			FontRenderer fontrenderer = p_146112_1_.fontRenderer;
-			p_146112_1_.getTextureManager().bindTexture(oreButtonTextures);
+			p_146112_1_.getTextureManager().bindTexture(listTypeTextures);
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.field_146123_n = p_146112_2_ >= this.xPosition && p_146112_3_ >= this.yPosition && p_146112_2_ < this.xPosition + this.width && p_146112_3_ < this.yPosition + this.height;
 			int k = this.getHoverState(this.field_146123_n);
@@ -57,7 +56,7 @@ public class GuiButtonOreDictionary extends GuiButton
 			OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			
-			this.drawTexturedModalRect(this.xPosition, this.yPosition, (!enabled?0:1)*20, (k-1) * 20, 20, 20);
+			this.drawTexturedModalRect(this.xPosition, this.yPosition, listType*20, (k-1) * 20, 20, 20);
 			
 			this.mouseDragged(p_146112_1_, p_146112_2_, p_146112_3_);
 			int l = 14737632;
@@ -78,19 +77,22 @@ public class GuiButtonOreDictionary extends GuiButton
 			if (k==2)
 			{
 				String toDraw="";
-				if (enabled)
+				switch (listType)
 				{
-					toDraw="Use ore dictionary";
-				}
-				else
-				{
-					toDraw="Ignore ore dictionary";
+					case 0:
+						toDraw = "Whitelist";
+						break;
+					case 1:
+						toDraw = "Blacklist";
+						break;
 				}
 				
 				ArrayList<String> strings = new ArrayList<String>();
 				strings.add(toDraw);
 				
+				GL11.glPushMatrix();
 				this.drawHoveringText(strings, xPosition + 13, yPosition + 18, Minecraft.getMinecraft().fontRenderer);
+				GL11.glPopMatrix();
 			}
 		}
 	}

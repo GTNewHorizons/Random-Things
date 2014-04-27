@@ -1,5 +1,7 @@
 package lumien.randomthings.Transformer;
 
+import lumien.randomthings.Configuration.VanillaChanges;
+
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
@@ -15,11 +17,11 @@ public class RTClassTransformer implements IClassTransformer
 	@Override
 	public byte[] transform(String name, String transformedName, byte[] basicClass)
 	{
-		if (name.equals("amp"))
+		if (name.equals("amp") && VanillaChanges.FASTER_LEAVEDECAY) // Reihenfolge wichtig da ClassCircularityError
 		{
 			return patchLeaveClass(basicClass, true);
 		}
-		else if (name.equals("net.minecraft.block.BlockLeavesBase"))
+		else if (name.equals("net.minecraft.block.BlockLeavesBase") && VanillaChanges.FASTER_LEAVEDECAY) // Reihenfolge wichtig da ClassCircularityError
 		{
 			return patchLeaveClass(basicClass, false);
 		}
