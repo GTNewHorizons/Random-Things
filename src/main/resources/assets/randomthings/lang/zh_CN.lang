@@ -1,0 +1,34 @@
+tile.playerinterface.name=玩家接口
+tile.creativePlayerInterface.name=创造玩家接口
+tile.fluidDisplay.name=液体显示器
+tile.fertilizedDirt.name=沃土
+tile.itemCollector.name=物品收集器
+tile.advancedItemCollector.name=高级物品收集器
+tile.onlineDetector.name=在线探测器
+tile.fluidRouter.name=液体路由
+
+item.filterBlock.name=方块过滤器
+item.filterItem.name=物品过滤器
+item.filterEntity.name=生物过滤器
+item.biomeSolution.name=解决方案
+item.biomeCapsule.name=生物群系胶囊[WIP]
+item.biomePainter.name=生物群系画笔[WIP]
+item.whitestoneUncharged.name=白石 [未充能]
+item.whitestoneCharged.name=白石 [已充能]
+item.kojaku.name=Kojaku
+item.creativeSword.name=创造剑
+item.creativeGrower.name=创造种植器
+item.voidStone.name=虚空石
+item.dropFilter.name=掉落过滤器
+item.dropFilterVoiding.name=虚空掉落过滤器
+item.enderLetter.name=末影信
+
+item.playerCore.name=玩家核心
+item.obsidianStick.name=黑曜石棒
+item.enderFragment.name=末影碎片
+item.error.name=无效物品
+
+itemGroup.Random Things=随意作品
+
+chat.miscellaneous.pressShift=按shift查看更多信息
+chat.enderLetter.invalidreceiver=你没有选择接收对象
