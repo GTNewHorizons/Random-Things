@@ -46,7 +46,7 @@ public class BlockFluidDisplay extends BlockContainer
 		}
 		else
 		{
-			if (par1IBlockAccess.getBlockMetadata(par2, par3, par4) == 0)
+			if (te.flowing())
 			{
 				return FluidRegistry.getFluid(te.getFluidName()).getIcon();
 			}
@@ -66,33 +66,28 @@ public class BlockFluidDisplay extends BlockContainer
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
-		ItemStack currentItem = entityplayer.getCurrentEquippedItem();
-
-		if (currentItem != null)
+		if (!world.isRemote)
 		{
-			FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(currentItem);
-			if (liquid != null)
+			TileEntityFluidDisplay te = (TileEntityFluidDisplay) world.getTileEntity(i, j, k);
+			ItemStack currentItem = entityplayer.getCurrentEquippedItem();
+
+			if (currentItem != null)
 			{
-				TileEntityFluidDisplay te = (TileEntityFluidDisplay) world.getTileEntity(i, j, k);
-				te.setFluidName(liquid.getFluid().getName());
-				world.markBlockForUpdate(i, j, k);
+				FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(currentItem);
+				if (liquid != null)
+				{
+					te.setFluidName(liquid.getFluid().getName());
+					te.markDirty();
+					world.markBlockForUpdate(i, j, k);
+					return true;
+				}
+			}
+			else
+			{
+				te.toggleFlowing();
 				return true;
 			}
 		}
-		else
-		{
-			switch (world.getBlockMetadata(i, j, k))
-			{
-				case 0:
-					world.setBlockMetadataWithNotify(i, j, k, 1, 3);
-					break;
-				case 1:
-					world.setBlockMetadataWithNotify(i, j, k, 0, 3);
-					break;
-			}
-			return true;
-		}
 		return false;
 	}
-
 }

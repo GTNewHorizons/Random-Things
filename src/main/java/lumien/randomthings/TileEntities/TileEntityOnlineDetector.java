@@ -54,14 +54,12 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
 				if (online && !playerOnline)
 				{
 					this.online = false;
-					worldObj.notifyBlockChange(xCoord, yCoord, zCoord, ModBlocks.onlineDetector);
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					this.markDirty();
 				}
 				else if (!online && playerOnline)
 				{
 					this.online = true;
-					worldObj.notifyBlockChange(xCoord, yCoord, zCoord, ModBlocks.onlineDetector);
 					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 					this.markDirty();
 				}

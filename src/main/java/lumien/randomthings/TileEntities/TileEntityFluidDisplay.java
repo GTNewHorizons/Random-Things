@@ -9,6 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityFluidDisplay extends TileEntity
 {
 	String fluidName="";
+	boolean flowing=false;
 	
 	@Override
 	public Packet getDescriptionPacket()
@@ -18,10 +19,23 @@ public class TileEntityFluidDisplay extends TileEntity
 		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
 	}
 	
+	public void toggleFlowing()
+	{
+		flowing=!flowing;
+		this.markDirty();
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+	
+	public boolean flowing()
+	{
+		return flowing;
+	}
+	
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
 	{
 		readFromNBT(packet.func_148857_g());
+		worldObj.func_147479_m(xCoord, yCoord, zCoord);
 	}
 	
 	@Override
@@ -50,6 +64,7 @@ public class TileEntityFluidDisplay extends TileEntity
         {
         	this.fluidName = "";
         }
+        this.flowing = par1NBTTagCompound.getBoolean("flowing");
     }
     
     @Override
@@ -63,5 +78,6 @@ public class TileEntityFluidDisplay extends TileEntity
         }
         
         par1NBTTagCompound.setString("fluidName", fluidName);
+        par1NBTTagCompound.setBoolean("flowing", flowing);
     }
 }
