@@ -63,6 +63,13 @@ public class RTEventHandler
 			event.world.playSoundEffect(event.x + 0.5F, event.y + 0.5F, event.z + 0.5F, ModBlocks.fertilizedDirtTilled.stepSound.getStepResourcePath(), (ModBlocks.fertilizedDirtTilled.stepSound.getVolume() + 1.0F) / 2.0F, ModBlocks.fertilizedDirtTilled.stepSound.getPitch() * 0.8F);
 		}
 	}
+	
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void soundPlayed(PlaySoundEvent17 event)
+	{
+		RandomThings.instance.soundRecorderHandler.soundPlayed(event);
+	}
 
 	@SubscribeEvent
 	public void itemPickUp(EntityItemPickupEvent event)

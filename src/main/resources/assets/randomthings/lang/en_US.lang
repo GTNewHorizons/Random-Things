@@ -38,6 +38,7 @@ text.miscellaneous.oreDictionary=Ore-Dictionary
 text.miscellaneous.listType=List-Type
 text.miscellaneous.entityid=Entity ID
 text.miscellaneous.entityName=Entity Name
+text.miscellaneous.connectedTo=Connected to
 
 text.enderLetter.invalidreceiver=You have specified an invalid receiver
 text.enderLetter.empty=You can't send an empty letter

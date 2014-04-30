@@ -270,7 +270,7 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	@Override
 	public String getInventoryName()
 	{
-		return "Creative Player Interface";
+		return "Player Interface";
 	}
 
 	@Override

@@ -1,8 +1,14 @@
 package lumien.randomthings.TileEntities;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.Optional.Interface;
+import dan200.computercraft.api.lua.ILuaContext;
+import dan200.computercraft.api.peripheral.IComputerAccess;
+import dan200.computercraft.api.peripheral.IPeripheral;
 import li.cil.oc.api.network.Arguments;
 import li.cil.oc.api.network.Callback;
 import li.cil.oc.api.network.Context;
@@ -17,8 +23,8 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 
-@Optional.Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers")
-public class TileEntityOnlineDetector extends TileEntity implements SimpleComponent
+@Optional.InterfaceList(value = { @Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers"), @Interface(iface = "IPeripheral", modid = "ComputerCraft") })
+public class TileEntityOnlineDetector extends TileEntity implements SimpleComponent, IPeripheral
 {
 	String username;
 	boolean online;
@@ -136,5 +142,83 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
 		}
 
 		return new Object[] { playerNameList };
+	}
+
+	@Override
+	@Optional.Method(modid = "ComputerCraft")
+	public String getType()
+	{
+		return "onlinedetector";
+	}
+
+	@Override
+	@Optional.Method(modid = "ComputerCraft")
+	public String[] getMethodNames()
+	{
+		return new String[] { "isPlayerOnline", "getPlayerList" };
+	}
+
+	@Override
+	@Optional.Method(modid = "ComputerCraft")
+	public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments) throws Exception
+	{
+		switch (method)
+		{
+			case 0:
+				if (arguments.length < 1)
+				{
+					return null;
+				}
+				else
+				{
+					return new Object[] { WorldUtils.isPlayerOnline(arguments[0] + "") };
+				}
+			case 1:
+				return new Object[] { generatePlayerMap() };
+		}
+		return null;
+	}
+	
+	private Map<Integer,String> generatePlayerMap()
+	{
+		List playerEntityList = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
+		String[] playerNameList = new String[playerEntityList.size()];
+		for (int i = 0; i < playerNameList.length; i++)
+		{
+			playerNameList[i] = ((EntityPlayer) playerEntityList.get(i)).getCommandSenderName();
+		}
+		
+		HashMap<Integer,String> map = new HashMap<Integer,String>();
+		
+		for (int index=0;index<playerNameList.length;index++)
+		{
+			map.put(index, playerNameList[index]);
+		}
+		
+		return map;
+	}
+
+	@Override
+	@Optional.Method(modid = "ComputerCraft")
+	public void attach(IComputerAccess computer)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	@Optional.Method(modid = "ComputerCraft")
+	public void detach(IComputerAccess computer)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	@Optional.Method(modid = "ComputerCraft")
+	public boolean equals(IPeripheral other)
+	{
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -30,7 +30,7 @@ public class BlockCreativePlayerInterface extends BlockContainer
 
 	IIcon[] icons;
 
-	protected BlockCreativePlayerInterface()
+	public BlockCreativePlayerInterface()
 	{
 		super(Material.rock);
 
@@ -84,7 +84,7 @@ public class BlockCreativePlayerInterface extends BlockContainer
 	{
 		if (!par1World.isRemote)
 		{
-			par5EntityPlayer.openGui(RandomThings.instance, GuiIds.PLAYER_INTERFACE_CREATIVE, par1World, poxX, poxY, poxZ);
+			par5EntityPlayer.openGui(RandomThings.instance, GuiIds.PLAYER_INTERFACE, par1World, poxX, poxY, poxZ);
 		}
 		return true;
 	}

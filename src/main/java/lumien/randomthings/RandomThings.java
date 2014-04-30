@@ -2,6 +2,7 @@ package lumien.randomthings;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
@@ -17,8 +18,10 @@ import lumien.randomthings.Entity.EntityDyeSlime;
 import lumien.randomthings.Entity.ModEntitys;
 import lumien.randomthings.Handler.BackgroundHandler;
 import lumien.randomthings.Handler.LetterHandler;
+import lumien.randomthings.Handler.PeripheralProvider;
 import lumien.randomthings.Handler.RTEventHandler;
 import lumien.randomthings.Handler.RTTickHandler;
+import lumien.randomthings.Handler.SoundRecorderHandler;
 import lumien.randomthings.Handler.Notifications.NotificationHandler;
 import lumien.randomthings.Items.ItemBiomeSolution;
 import lumien.randomthings.Items.ModItems;
@@ -70,16 +73,12 @@ public class RandomThings
 
 	public LetterHandler letterHandler;
 	public NotificationHandler notificationHandler;
+	public SoundRecorderHandler soundRecorderHandler;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		logger = event.getModLog();
-
-		if (event.getSide().isClient())
-		{
-			notificationHandler = new NotificationHandler();
-		}
 
 		RTConfiguration.init(event);
 
@@ -93,10 +92,12 @@ public class RandomThings
 
 		MinecraftForge.EVENT_BUS.register(new RTEventHandler());
 		proxy.registerTickHandler();
-
+		
 		if (event.getSide().isClient())
 		{
+			notificationHandler = new NotificationHandler();
 			BackgroundHandler.setRandomBackground();
+			soundRecorderHandler = new SoundRecorderHandler();
 		}
 	}
 
@@ -113,6 +114,16 @@ public class RandomThings
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		packetPipeline.postInitialise();
+		
+		try
+		{
+			PeripheralProvider.register();
+		}
+		catch (Exception e)
+		{
+			logger.log(Level.WARN, "Couldn't reflect on cc, no peripheral support for CreativePlayerInterface and OnlineDetector");
+			e.printStackTrace();
+		}
 	}
 
 	public void saveNBT()

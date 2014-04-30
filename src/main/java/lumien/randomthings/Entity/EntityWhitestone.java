@@ -1,12 +1,19 @@
 package lumien.randomthings.Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.vecmath.Vector3d;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.Client.Particle.ParticleWhitestone;
 import lumien.randomthings.Items.ModItems;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -16,86 +23,55 @@ import net.minecraft.world.World;
 
 public class EntityWhitestone extends EntityItem
 {
-	int state;
 	EntityItem quartz = null;
-	int counter = 0;
+	int chargingProgress;
+
+	@SideOnly(Side.CLIENT)
+	ArrayList<ParticleWhitestone> particles = new ArrayList<ParticleWhitestone>();
 
 	public EntityWhitestone(World par1World)
 	{
 		super(par1World);
 
-		state = 0;
+		chargingProgress = 0;
 	}
 
 	public EntityWhitestone(World world, double posX, double posY, double posZ, ItemStack itemstack)
 	{
 		super(world, posX, posY, posZ, itemstack);
 
-		state = 0;
+		chargingProgress = 0;
 	}
 
 	public void onUpdate()
 	{
 		super.onUpdate();
-		if (this.getEntityItem().getItemDamage() == 0 && worldObj.getWorldTime() >= 18000 && worldObj.getWorldTime()<=22000 && worldObj.canBlockSeeTheSky((int) Math.floor(posX), (int) Math.floor(posY), (int) Math.floor(posZ)))
+		if (this.onGround)
 		{
-			if (state == 0)
+			if (this.getEntityItem().getItemDamage() == 0 && worldObj.getWorldTime() >= 18000 && worldObj.getWorldTime() <= 22000 && worldObj.canBlockSeeTheSky((int) Math.floor(posX), (int) Math.floor(posY), (int) Math.floor(posZ)))
 			{
-				AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(posX - 0.5, posY - 1, posZ - 0.5, posX + 0.5, posY + 1, posZ + 0.5);
-				List<EntityItem> items = worldObj.getEntitiesWithinAABB(EntityItem.class, bb);
-
-				for (EntityItem ei : items)
+				if (this.worldObj.getCurrentMoonPhaseFactor() == 1.0 || Boolean.TRUE)
 				{
-					if (ei.getEntityItem().getItem() == Items.quartz)
+					this.ticksExisted = 0;
+
+					if (FMLCommonHandler.instance().getEffectiveSide().isClient())
 					{
-						if (quartz == null)
+						if (chargingProgress == 40)
 						{
-							quartz = ei;
+							for (double t = 0; t < Math.PI * 2D; t += Math.PI * 2D / 360D * 4D)
+							{
+								Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleWhitestone(worldObj, this, 0, t));
+							}
 						}
 					}
-				}
-
-				if (quartz != null && quartz.isDead)
-				{
-					quartz = null;
-				}
-
-				if (quartz != null)
-				{
-					state = 1;
-				}
-			}
-			else if (state == 1)
-			{
-				counter++;
-				if (quartz.isDead)
-				{
-					state=0;
-					counter=0;
-				}
-				if (counter >= 100)
-				{
-					counter=0;
-					this.setEntityItemStack(new ItemStack(ModItems.whitestone, 1, 1));
-					quartz.getEntityItem().stackSize--;
-					state = 0;
-				}
-				else
-				{
-					this.motionY=0.07;
-				}
-			}
-
-			if (quartz != null && worldObj.isRemote)
-			{
-				Vector3d vQuartz = new Vector3d(quartz.posX - posX, quartz.posY - posY, quartz.posZ - posZ);
-				Vector3d stutz = new Vector3d(posX, posY, posZ);
-
-				float maxK = (float) ((quartz.posX - stutz.x) / vQuartz.x);
-
-				for (float k = 0; k < maxK; k += 0.05)
-				{
-					RandomThings.proxy.spawnColoredDust(stutz.x + k * vQuartz.x, stutz.y + k * vQuartz.y, stutz.z + k * vQuartz.z, 0, 0, 0, 1, 1, 1);
+					
+					chargingProgress++;
+					if (chargingProgress >= 400)
+					{
+						worldObj.playSoundAtEntity(this, "random.orb", 1, 1);
+						this.getEntityItem().setItemDamage(1);
+						chargingProgress = 0;
+					}
 				}
 			}
 		}

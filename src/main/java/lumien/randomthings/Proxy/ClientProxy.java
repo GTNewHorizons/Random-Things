@@ -14,12 +14,14 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemDye;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
 import lumien.randomthings.Client.ClientTickHandler;
 import lumien.randomthings.Client.Renderer.ItemCollectorRenderer;
 import lumien.randomthings.Client.Renderer.RenderDyeSlime;
 import lumien.randomthings.Client.Renderer.RenderPfeil;
 import lumien.randomthings.Entity.EntityDyeSlime;
 import lumien.randomthings.Entity.EntityPfeil;
+import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import lumien.randomthings.TileEntities.TileEntityItemCollector;
 
