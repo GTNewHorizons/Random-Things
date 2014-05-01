@@ -23,7 +23,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 
-@Optional.InterfaceList(value = { @Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers"), @Interface(iface = "IPeripheral", modid = "ComputerCraft") })
+@Optional.InterfaceList(value = { @Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers"), @Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = "ComputerCraft") })
 public class TileEntityOnlineDetector extends TileEntity implements SimpleComponent, IPeripheral
 {
 	String username;
