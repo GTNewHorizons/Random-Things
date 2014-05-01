@@ -92,7 +92,7 @@ public class RandomThings
 
 		MinecraftForge.EVENT_BUS.register(new RTEventHandler());
 		proxy.registerTickHandler();
-		
+
 		if (event.getSide().isClient())
 		{
 			notificationHandler = new NotificationHandler();
@@ -114,7 +114,7 @@ public class RandomThings
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		packetPipeline.postInitialise();
-		
+
 		try
 		{
 			PeripheralProvider.register();

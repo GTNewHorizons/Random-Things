@@ -5,8 +5,9 @@ tile.fertilizedDirt.name=Fertilized Dirt
 tile.itemCollector.name=Item Collector
 tile.advancedItemCollector.name=Advanced Item Collector
 tile.onlineDetector.name=Online Detector
-tile.fluidRouter.name=Fluid Router
+tile.fluidRouter.name=Fluid Router[WIP]
 
+itemGroup.Random Things=Random Things
 item.filterBlock.name=Block Filter
 item.filterItem.name=Item Filter
 item.filterEntity.name=Entity Filter
@@ -16,19 +17,19 @@ item.biomePainter.name=Biome Painter[WIP]
 item.whitestoneUncharged.name=White Stone [Uncharged]
 item.whitestoneCharged.name=White Stone [Charged]
 item.kojaku.name=Kojaku
-item.creativeSword.name=Creative Sword
-item.creativeGrower.name=Creative Grower
 item.voidStone.name=Void Stone
 item.dropFilter.name=Drop Filter
 item.dropFilterVoiding.name=Voiding Drop Filter
 item.enderLetter.name=Ender Letter
 
+item.creativeSword.name=Creative Sword
+item.creativeGrower.name=Creative Grower
+item.creativeChestGenerator.name=Creative Chest Generator
+
 item.playerCore.name=Player Core
 item.obsidianStick.name=Obsidian Stick
 item.enderFragment.name=Ender Fragment
 item.error.name=Invalid Item
-
-itemGroup.Random Things=Random Things
 
 text.miscellaneous.press=Press %s for more information
 text.miscellaneous.shift=shift

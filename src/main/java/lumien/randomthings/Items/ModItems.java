@@ -18,6 +18,7 @@ public class ModItems
 	
 	public static ItemCreativeSword creativeSword;
 	public static ItemCreativeGrower creativeGrower;
+	public static ItemCreativeChestGenerator creativeChestGenerator;
 
 	public static void init()
 	{
@@ -42,6 +43,8 @@ public class ModItems
 			creativeSword = new ItemCreativeSword();
 		if (ConfigItems.creativeGrower)
 			creativeGrower = new ItemCreativeGrower();
+		if (ConfigItems.creativeChestGenerator)
+			creativeChestGenerator = new ItemCreativeChestGenerator();
 		
 		ingredients = new ItemIngredient();
 		filter = new ItemFilter();

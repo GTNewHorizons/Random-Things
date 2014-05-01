@@ -11,4 +11,5 @@ public class ConfigItems
 	public static boolean voidStone;
 	public static boolean dropFilter;
 	public static boolean enderLetter;
+	public static boolean creativeChestGenerator;
 }

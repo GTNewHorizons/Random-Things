@@ -46,7 +46,7 @@ public class BlockFluidDisplay extends BlockContainer
 		}
 		else
 		{
-			if (te.flowing())
+			if (!te.flowing())
 			{
 				return FluidRegistry.getFluid(te.getFluidName()).getIcon();
 			}

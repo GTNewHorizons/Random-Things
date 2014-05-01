@@ -8,14 +8,16 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Entity.EntityWhitestone;
+import lumien.randomthings.Configuration.ConfigDungeonLoot;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ChestGenHooks;
 
 public class ItemWhiteStone extends Item
 {
@@ -28,6 +30,31 @@ public class ItemWhiteStone extends Item
 		this.setMaxStackSize(1);
 
 		GameRegistry.registerItem(this, "whitestone");
+		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(this,1,0), 1, 1, ConfigDungeonLoot.WHITESTONE_CHANCE));
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+	{
+		if (stack.getItemDamage() == 0)
+		{
+			double charge;
+			if (stack.stackTagCompound == null)
+			{
+				charge = 0;
+			}
+			else
+			{
+				charge = stack.stackTagCompound.getInteger("charge") / 1200D * 100D;
+				charge = round(charge, 2);
+				par3List.add("Charge: " + charge + "%");
+			}
+		}
+	}
+
+	private double round(double wert, int stellen)
+	{
+		return Math.round(wert * Math.pow(10, stellen)) / Math.pow(10, stellen);
 	}
 
 	@Override
@@ -45,7 +72,7 @@ public class ItemWhiteStone extends Item
 	@Override
 	public void onUpdate(ItemStack stack, World worldObj, Entity entity, int par4, boolean par5)
 	{
-		if (stack.getItemDamage() == 0 && (entity instanceof EntityPlayer) && worldObj.getWorldTime() >= 18000 && worldObj.getWorldTime() <= 22000 && worldObj.canBlockSeeTheSky((int)Math.floor(entity.posX), (int)Math.floor(entity.posY), (int)Math.floor(entity.posZ)))
+		if (stack.getItemDamage() == 0 && (entity instanceof EntityPlayer) && worldObj.getWorldTime() >= 18000 && worldObj.getWorldTime() <= 22000 && worldObj.canBlockSeeTheSky((int) Math.floor(entity.posX), (int) Math.floor(entity.posY), (int) Math.floor(entity.posZ)))
 		{
 			EntityPlayer player = (EntityPlayer) entity;
 
@@ -58,7 +85,7 @@ public class ItemWhiteStone extends Item
 			int charges = stack.stackTagCompound.getInteger("charge");
 
 			stack.stackTagCompound.setInteger("charge", charges += 1);
-			if (charges == 101)
+			if (charges == 1201)
 			{
 				stack.setItemDamage(1);
 			}
@@ -80,7 +107,7 @@ public class ItemWhiteStone extends Item
 			}
 			else
 			{
-				return 1 - stack.stackTagCompound.getInteger("charge") / 100F;
+				return 1 - stack.stackTagCompound.getInteger("charge") / 1200F;
 			}
 		}
 	}
@@ -104,11 +131,5 @@ public class ItemWhiteStone extends Item
 				return "item.whitestoneCharged";
 		}
 		return "item.whitestoneUncharged";
-	}
-
-	@Override
-	public boolean hasCustomEntity(ItemStack stack)
-	{
-		return stack.getItemDamage() == 0;
 	}
 }

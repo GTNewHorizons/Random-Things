@@ -22,21 +22,26 @@ public class RTConfiguration
 		ConfigItems.biomeSolution = config.get("Items", "BiomeSolution", true).getBoolean(true);
 		ConfigItems.biomePainter = config.get("Items", "BiomePainter", true).getBoolean(true);
 		ConfigItems.whitestone = config.get("Items", "Whitestone", true).getBoolean(true);
-		ConfigItems.magneticForce = config.get("Items","MagneticForce",true).getBoolean(true);
+		ConfigItems.magneticForce = config.get("Items", "MagneticForce", true).getBoolean(true);
 		ConfigItems.voidStone = config.get("Items", "VoidStone", true).getBoolean(true);
 		ConfigItems.dropFilter = config.get("Items", "DropFilter", true).getBoolean(true);
 		ConfigItems.enderLetter = config.get("Items", "EnderLetter", true).getBoolean(true);
-		
+
 		ConfigItems.creativeSword = config.get("Items", "CreativeSword", true).getBoolean(true);
 		ConfigItems.creativeGrower = config.get("Items", "CreativeGrower", true).getBoolean(true);
+		ConfigItems.creativeChestGenerator = config.get("Items", "CreativeChestGenerator", true).getBoolean(true);
+
+		ConfigDungeonLoot.WHITESTONE_CHANCE = config.get("DungeonLoot", "WhiteStone", 3).getInt();
 
 		VanillaChanges.MODIFIED_BACKGROUND = config.get("VanillaChanges", "ModifiedBackgrounds", true, "The normal dirt background will be replaced with a different block each start").getBoolean(true);
-		BackgroundHandler.fixedBackground = config.get("VanillaChanges", "fixedBackground", "","If this is not empty the options background will not be random but the one specified here. This has to be the name of a block texture without the .png").getString();
-		
+		BackgroundHandler.fixedBackground = config.get("VanillaChanges", "fixedBackground", "", "If this is not empty the options background will not be random but the one specified here. This has to be the name of a block texture without the .png").getString();
+
 		// Moved To Class Transformer
-		//VanillaChanges.FASTER_LEAVEDECAY = config.get("VanillaChanges", "FasterLeaveDecay", true ,"Leaves will decay much faster when no longer connected to a log").getBoolean(true);
-		
-		VanillaChanges.THROWABLES_MOTION = config.get("VanillaChanges", "ThrowableMotion", true , "When you throw something or shoot an arrow the motion of the player will be added to the motion of the projectile").getBoolean(true);
+		// VanillaChanges.FASTER_LEAVEDECAY = config.get("VanillaChanges",
+		// "FasterLeaveDecay", true
+		// ,"Leaves will decay much faster when no longer connected to a log").getBoolean(true);
+
+		VanillaChanges.THROWABLES_MOTION = config.get("VanillaChanges", "ThrowableMotion", true, "When you throw something or shoot an arrow the motion of the player will be added to the motion of the projectile").getBoolean(true);
 
 		Settings.ANIMATED_TEXTURES = config.get("Settings", "AnimatedTextures", true).getBoolean(true);
 
