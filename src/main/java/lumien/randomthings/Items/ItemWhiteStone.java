@@ -4,11 +4,15 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.Client.Particle.ParticleWhitestone;
 import lumien.randomthings.Configuration.ConfigDungeonLoot;
+import lumien.randomthings.Network.Packets.PacketWhitestone;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,7 +34,7 @@ public class ItemWhiteStone extends Item
 		this.setMaxStackSize(1);
 
 		GameRegistry.registerItem(this, "whitestone");
-		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(this,1,0), 1, 1, ConfigDungeonLoot.WHITESTONE_CHANCE));
+		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(this, 1, 0), 1, 1, ConfigDungeonLoot.WHITESTONE_CHANCE));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -66,13 +70,14 @@ public class ItemWhiteStone extends Item
 	@Override
 	public boolean showDurabilityBar(ItemStack stack)
 	{
-		return stack.getItemDamage() == 0 && stack.stackTagCompound != null;
+		return false;
+		// return stack.getItemDamage() == 0 && stack.stackTagCompound != null;
 	}
 
 	@Override
 	public void onUpdate(ItemStack stack, World worldObj, Entity entity, int par4, boolean par5)
 	{
-		if (stack.getItemDamage() == 0 && (entity instanceof EntityPlayer) &&  worldObj.getCurrentMoonPhaseFactor()==1F && worldObj.getWorldTime() >= 18000 && worldObj.getWorldTime() <= 22000 && worldObj.canBlockSeeTheSky((int) Math.floor(entity.posX), (int) Math.floor(entity.posY), (int) Math.floor(entity.posZ)))
+		if (stack.getItemDamage() == 0 && (entity instanceof EntityPlayer) && worldObj.getCurrentMoonPhaseFactor() == 1F && worldObj.getWorldTime() >= 18000 && worldObj.getWorldTime() <= 22000 && worldObj.canBlockSeeTheSky((int) Math.floor(entity.posX), (int) Math.floor(entity.posY), (int) Math.floor(entity.posZ)))
 		{
 			EntityPlayer player = (EntityPlayer) entity;
 
@@ -85,8 +90,13 @@ public class ItemWhiteStone extends Item
 			int charges = stack.stackTagCompound.getInteger("charge");
 
 			stack.stackTagCompound.setInteger("charge", charges += 1);
+
+			if (charges % 5 == 0)
+				RandomThings.packetPipeline.sendToAllAround(new PacketWhitestone(entity.getEntityId()), new TargetPoint(worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 16));
+
 			if (charges == 1201)
 			{
+				stack.stackTagCompound.setInteger("charge", 0);
 				stack.setItemDamage(1);
 			}
 		}
@@ -97,13 +107,13 @@ public class ItemWhiteStone extends Item
 	{
 		if (stack.getItemDamage() == 1)
 		{
-			return 0;
+			return 1;
 		}
 		else
 		{
 			if (stack.stackTagCompound == null)
 			{
-				return 0;
+				return 1;
 			}
 			else
 			{

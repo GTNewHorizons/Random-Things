@@ -18,6 +18,8 @@ public class RTConfiguration
 		ConfigBlocks.onlineDetector = config.get("Blocks", "OnlineDetector", true).getBoolean(true);
 		ConfigBlocks.imbuingStation = config.get("Blocks", "ImbuingStation", true).getBoolean(true);
 		ConfigBlocks.fluidRouter = config.get("Blocks", "FluidRouter", true).getBoolean(true);
+		ConfigBlocks.moonSensor = config.get("Blocks", "MoonSensor", true).getBoolean(true);
+		ConfigBlocks.notificationInterface = config.get("Blocks", "NotificationInterface", true).getBoolean(true);
 
 		ConfigItems.biomeSolution = config.get("Items", "BiomeSolution", true).getBoolean(true);
 		ConfigItems.biomePainter = config.get("Items", "BiomePainter", true).getBoolean(true);
@@ -34,6 +36,8 @@ public class RTConfiguration
 		ConfigDungeonLoot.WHITESTONE_CHANCE = config.get("DungeonLoot", "WhiteStone", 3).getInt();
 
 		VanillaChanges.MODIFIED_BACKGROUND = config.get("VanillaChanges", "ModifiedBackgrounds", true, "The normal dirt background will be replaced with a different block each start").getBoolean(true);
+		VanillaChanges.LOCKED_GAMMA = config.get("VanillaChanges", "LockedGamma", false,"Locks the Gamma to 0").getBoolean(false);
+		
 		BackgroundHandler.fixedBackground = config.get("VanillaChanges", "fixedBackground", "", "If this is not empty the options background will not be random but the one specified here. This has to be the name of a block texture without the .png").getString();
 
 		// Moved To Class Transformer
@@ -41,7 +45,7 @@ public class RTConfiguration
 		// "FasterLeaveDecay", true
 		// ,"Leaves will decay much faster when no longer connected to a log").getBoolean(true);
 
-		VanillaChanges.THROWABLES_MOTION = config.get("VanillaChanges", "ThrowableMotion", true, "When you throw something or shoot an arrow the motion of the player will be added to the motion of the projectile").getBoolean(true);
+		VanillaChanges.THROWABLES_MOTION = config.get("VanillaChanges", "ThrowableMotion", false, "When you throw something or shoot an arrow the motion of the player will be added to the motion of the projectile").getBoolean(false);
 
 		Settings.ANIMATED_TEXTURES = config.get("Settings", "AnimatedTextures", true).getBoolean(true);
 

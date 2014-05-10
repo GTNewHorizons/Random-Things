@@ -12,6 +12,7 @@ public class ModTileEntities
 		GameRegistry.registerTileEntity(TileEntityOnlineDetector.class, "onlineDetector");
 		GameRegistry.registerTileEntity(TileEntityImbuingStation.class, "imbuingStation");
 		GameRegistry.registerTileEntity(TileEntityFluidRouter.class, "liquidRouter");
+		GameRegistry.registerTileEntity(TileEntityNotificationInterface.class, "notificationInterface");
 		
 		GameRegistry.registerTileEntity(TileEntityItemCollector.class, "itemcollector");
 		GameRegistry.registerTileEntity(TileEntityAdvancedItemCollector.class, "advancedItemcollector");

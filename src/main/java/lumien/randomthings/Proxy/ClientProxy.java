@@ -19,6 +19,7 @@ import lumien.randomthings.Client.ClientTickHandler;
 import lumien.randomthings.Client.Renderer.ItemCollectorRenderer;
 import lumien.randomthings.Client.Renderer.RenderDyeSlime;
 import lumien.randomthings.Client.Renderer.RenderPfeil;
+import lumien.randomthings.Client.Renderer.WhitestoneRenderer;
 import lumien.randomthings.Entity.EntityDyeSlime;
 import lumien.randomthings.Entity.EntityPfeil;
 import lumien.randomthings.Items.ModItems;
@@ -45,6 +46,8 @@ public class ClientProxy extends CommonProxy
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityPfeil.class, new RenderPfeil());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDyeSlime.class, new RenderDyeSlime(new ModelSlime(16), new ModelSlime(0), 0.25F));
+		
+		MinecraftForgeClient.registerItemRenderer(ModItems.whitestone, new WhitestoneRenderer());
 	}
 	
 	@Override

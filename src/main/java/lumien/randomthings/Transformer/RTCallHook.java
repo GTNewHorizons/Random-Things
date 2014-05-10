@@ -20,6 +20,8 @@ public class RTCallHook implements IFMLCallHook
 		config = new Configuration(f);
 		config.load();
 		VanillaChanges.FASTER_LEAVEDECAY = config.get("VanillaChanges", "FasterLeaveDecay", true ,"Leaves will decay much faster when no longer connected to a log").getBoolean(true);
+		VanillaChanges.HARDCORE_DARKNESS = config.get("VanillaChanges", "Hardcore Darkness", false ,"The minimum light will be removed so if there's no light source it's actually going to be completely black").getBoolean(false);
+
 		config.save();
 		
 		return null;

@@ -7,6 +7,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.network.play.server.S2APacketParticles;
 import net.minecraft.server.MinecraftServer;
@@ -101,21 +102,15 @@ public class BlockFertilizedDirt extends Block
 
 	@Override
 	public void updateTick(World par1World, int posX, int posY, int posZ, Random rng)
-	{	
+	{
 		if (!par1World.isRemote)
 		{
-			if (par1World != null && !par1World.isAirBlock(posX, posY + 1, posZ) && ((par1World.getBlock(posX, posY + 1, posZ) instanceof IGrowable) || (par1World.getBlock(posX, posY + 1, posZ) instanceof IPlantable)))
+			for (int i = 0; i < fertilizedDirtGrowth; i++)
 			{
-				for (int i = 0; i < fertilizedDirtGrowth; i++)
+				Block toBoost = par1World.getBlock(posX, posY + 1, posZ);
+				if (toBoost !=null && toBoost != Blocks.air && toBoost instanceof IPlantable)
 				{
-					if (!par1World.isAirBlock(posX, posY + 1, posZ))
-					{
-						Block toBoost = par1World.getBlock(posX, posY + 1, posZ);
-						if (toBoost instanceof IPlantable)
-						{
-							toBoost.updateTick(par1World, posX, posY + 1, posZ, rng);
-						}
-					}
+					toBoost.updateTick(par1World, posX, posY + 1, posZ, rng);
 				}
 			}
 		}

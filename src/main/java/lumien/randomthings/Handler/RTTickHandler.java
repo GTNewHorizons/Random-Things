@@ -1,6 +1,7 @@
 package lumien.randomthings.Handler;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
@@ -10,10 +11,11 @@ import lumien.randomthings.Client.Particle.ParticleSquare;
 import lumien.randomthings.Library.PotionEffects;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class RTTickHandler
-{
+{	
 	@SubscribeEvent
 	public void tick(TickEvent event)
 	{

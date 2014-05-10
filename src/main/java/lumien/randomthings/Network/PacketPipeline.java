@@ -9,6 +9,7 @@ import lumien.randomthings.Network.Packets.PacketEnderLetter;
 import lumien.randomthings.Network.Packets.PacketNotification;
 import lumien.randomthings.Network.Packets.PacketOnlineDetector;
 import lumien.randomthings.Network.Packets.PacketPaintBiome;
+import lumien.randomthings.Network.Packets.PacketWhitestone;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler;
@@ -147,6 +148,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 		registerPacket(PacketItemFilter.class);
 		registerPacket(PacketEnderLetter.class);
 		registerPacket(PacketNotification.class);
+		registerPacket(PacketWhitestone.class);
 	}
 
 	// Method to call from FMLPostInitializationEvent

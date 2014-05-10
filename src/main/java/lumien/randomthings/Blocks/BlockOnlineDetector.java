@@ -1,5 +1,8 @@
 package lumien.randomthings.Blocks;
 
+import static net.minecraftforge.common.util.ForgeDirection.DOWN;
+import static net.minecraftforge.common.util.ForgeDirection.UP;
+
 import java.util.Random;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -8,7 +11,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
+import net.minecraft.block.BlockCompressedPowered;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockFarmland;
+import net.minecraft.block.BlockHopper;
+import net.minecraft.block.BlockSlab;
+import net.minecraft.block.BlockSnow;
+import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityDiggingFX;
@@ -20,6 +29,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockOnlineDetector extends BlockContainer
 {
@@ -46,6 +56,12 @@ public class BlockOnlineDetector extends BlockContainer
 		icons[0] = ir.registerIcon("RandomThings:onlineDetector/offline");
 		icons[1] = ir.registerIcon("RandomThings:onlineDetector/online");
 	}
+	
+	@Override
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
+    {
+        return true;
+    }
 	
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -128,10 +144,10 @@ public class BlockOnlineDetector extends BlockContainer
 	}
 
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(IBlockAccess ba, int posX, int posY, int posZ, int p_149673_5_)
+	public IIcon getIcon(IBlockAccess ba, int posX, int posY, int posZ, int side)
 	{
-		TileEntityOnlineDetector te = (TileEntityOnlineDetector) ba.getTileEntity(posX, posY, posZ);
-		if (te.isActive())
+		int metadata=ba.getBlockMetadata(posX, posY, posZ);
+		if (metadata==1)
 		{
 			return icons[1];
 		}
@@ -170,16 +186,17 @@ public class BlockOnlineDetector extends BlockContainer
 	}
 
 	@Override
-	public int isProvidingStrongPower(IBlockAccess blockAccess, int posX, int posY, int posZ, int metadata)
+	public int isProvidingStrongPower(IBlockAccess blockAccess, int posX, int posY, int posZ, int side)
 	{
-		TileEntityOnlineDetector te = (TileEntityOnlineDetector) blockAccess.getTileEntity(posX, posY, posZ);
-		return te.isActive() ? 15 : 0;
+		int metadata=blockAccess.getBlockMetadata(posX, posY, posZ);
+		return metadata==1?15:0;
 	}
 
 	@Override
-	public int isProvidingWeakPower(IBlockAccess blockAccess, int posX, int posY, int posZ, int metadata)
+	public int isProvidingWeakPower(IBlockAccess blockAccess, int posX, int posY, int posZ, int side)
 	{
-		return isProvidingStrongPower(blockAccess, posX, posY, posZ, metadata);
+		int metadata=blockAccess.getBlockMetadata(posX, posY, posZ);
+		return metadata==1?15:0;
 	}
 
 }

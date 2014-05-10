@@ -3,6 +3,7 @@ package lumien.randomthings.Library;
 import java.util.List;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiPlayerInfo;
 import net.minecraft.client.network.NetHandlerPlayClient;
@@ -26,6 +27,16 @@ public class WorldUtils
 			entityitem.delayBeforeCanPickup = 10;
 			world.spawnEntityInWorld(entityitem);
 		}
+	}
+	
+	public static void notifyStrong(World worldObj,int posX,int posY,int posZ,Block block)
+	{
+        worldObj.notifyBlocksOfNeighborChange(posX, posY - 1, posZ, block);
+        worldObj.notifyBlocksOfNeighborChange(posX, posY + 1, posZ, block);
+        worldObj.notifyBlocksOfNeighborChange(posX - 1, posY, posZ, block);
+        worldObj.notifyBlocksOfNeighborChange(posX + 1, posY, posZ, block);
+        worldObj.notifyBlocksOfNeighborChange(posX, posY, posZ - 1, block);
+        worldObj.notifyBlocksOfNeighborChange(posX, posY, posZ + 1, block);
 	}
 	
 	public static boolean isPlayerOnline(String username)

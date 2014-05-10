@@ -2,7 +2,9 @@ package lumien.randomthings;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +15,8 @@ import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Client.GuiHandler;
 import lumien.randomthings.Configuration.RTConfiguration;
 import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Configuration.VanillaChanges;
+import lumien.randomthings.Core.RTCommand;
 import lumien.randomthings.Core.RTCreativeTab;
 import lumien.randomthings.Entity.EntityDyeSlime;
 import lumien.randomthings.Entity.ModEntitys;
@@ -25,11 +29,15 @@ import lumien.randomthings.Handler.SoundRecorderHandler;
 import lumien.randomthings.Handler.Notifications.NotificationHandler;
 import lumien.randomthings.Items.ItemBiomeSolution;
 import lumien.randomthings.Items.ModItems;
+import lumien.randomthings.Library.OverrideUtils;
 import lumien.randomthings.Library.Recipes;
 import lumien.randomthings.Network.PacketPipeline;
 import lumien.randomthings.Proxy.CommonProxy;
 import lumien.randomthings.TileEntities.ModTileEntities;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiOptions;
+import net.minecraft.client.gui.GuiVideoSettings;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
@@ -42,6 +50,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
+import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -89,8 +98,11 @@ public class RandomThings
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 		FMLCommonHandler.instance().bus().register(new RTTickHandler());
+		
+		RTEventHandler rte = new RTEventHandler();
+		MinecraftForge.EVENT_BUS.register(rte);
+		FMLCommonHandler.instance().bus().register(rte);
 
-		MinecraftForge.EVENT_BUS.register(new RTEventHandler());
 		proxy.registerTickHandler();
 
 		if (event.getSide().isClient())
@@ -146,6 +158,8 @@ public class RandomThings
 
 		letterHandler = new LetterHandler();
 		letterHandler.readFromNBT();
+
+		event.registerServerCommand(new RTCommand());
 	}
 
 	@EventHandler

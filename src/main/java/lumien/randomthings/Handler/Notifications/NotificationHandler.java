@@ -78,15 +78,15 @@ public class NotificationHandler
 				guiInstance.drawTexturedModalRect(scaledresolution.getScaledWidth() - 160, drawY, 0, 0, 160, 32);
 
 				FontRenderer f = Minecraft.getMinecraft().fontRenderer;
-				f.drawString(currentNotification.title, scaledresolution.getScaledWidth() - 160 + 35, drawY + 6, 16448250, true);
-				f.drawString(currentNotification.description, scaledresolution.getScaledWidth() - 160 + 35, drawY + 6 + f.FONT_HEIGHT + 2, 11184810, true);
+				f.drawString(currentNotification.title, scaledresolution.getScaledWidth() - 160 + 28, drawY + 5, 16448250, true);
+				f.drawString(currentNotification.description, scaledresolution.getScaledWidth() - 160 + 28, drawY + 4 + f.FONT_HEIGHT + 2, 11184810, true);
 
 				RenderHelper.enableGUIStandardItemLighting();
 				GL11.glDisable(GL11.GL_LIGHTING);
 				GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 				GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 				GL11.glEnable(GL11.GL_LIGHTING);
-				itemRenderer.renderItemAndEffectIntoGUI(f, Minecraft.getMinecraft().getTextureManager(), currentNotification.icon, scaledresolution.getScaledWidth() - 160 + 8, drawY + 7);
+				itemRenderer.renderItemAndEffectIntoGUI(f, Minecraft.getMinecraft().getTextureManager(), currentNotification.icon, scaledresolution.getScaledWidth() - 160 + 6, drawY + 6);
 				GL11.glDisable(GL11.GL_LIGHTING);
 				GL11.glDepthMask(true);
 				GL11.glEnable(GL11.GL_DEPTH_TEST);

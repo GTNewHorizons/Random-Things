@@ -19,6 +19,7 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -26,6 +27,7 @@ import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.ISound.AttenuationType;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundCategory;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -36,6 +38,7 @@ import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -50,6 +53,7 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.ChunkWatchEvent;
+import net.minecraftforge.event.world.WorldEvent;
 
 public class RTEventHandler
 {
@@ -63,12 +67,22 @@ public class RTEventHandler
 			event.world.playSoundEffect(event.x + 0.5F, event.y + 0.5F, event.z + 0.5F, ModBlocks.fertilizedDirtTilled.stepSound.getStepResourcePath(), (ModBlocks.fertilizedDirtTilled.stepSound.getVolume() + 1.0F) / 2.0F, ModBlocks.fertilizedDirtTilled.stepSound.getPitch() * 0.8F);
 		}
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void soundPlayed(PlaySoundEvent17 event)
 	{
 		RandomThings.instance.soundRecorderHandler.soundPlayed(event);
+	}
+
+	@SubscribeEvent
+	public void playerLogin(WorldEvent.Load event)
+	{
+		if (event.world.isRemote && VanillaChanges.LOCKED_GAMMA)
+		{
+			Minecraft.getMinecraft().gameSettings.setOptionFloatValue(GameSettings.Options.GAMMA, 0);
+			Minecraft.getMinecraft().gameSettings.gammaSetting = 0;
+		}
 	}
 
 	@SubscribeEvent
@@ -181,7 +195,7 @@ public class RTEventHandler
 					for (int slot = 0; slot < player.inventory.getSizeInventory(); slot++)
 					{
 						ItemStack is = player.inventory.getStackInSlot(slot);
-						if (is != null && is.getItem() instanceof ItemWhiteStone)
+						if (is != null && is.getItem() instanceof ItemWhiteStone && is.getItemDamage() == 1)
 						{
 							event.setCanceled(true);
 
@@ -194,6 +208,7 @@ public class RTEventHandler
 							is.setItemDamage(0);
 							player.inventory.markDirty();
 							player.inventoryContainer.detectAndSendChanges();
+							player.worldObj.playSoundAtEntity(player, "randomthings:whiteStoneActivate", 2, 1);
 							return;
 						}
 					}

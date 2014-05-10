@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Level;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.TileEntities.TileEntityCreativePlayerInterface;
+import lumien.randomthings.TileEntities.TileEntityNotificationInterface;
 import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -38,7 +39,7 @@ public class PeripheralProvider implements IPeripheralProvider
 	public IPeripheral getPeripheral(World world, int x, int y, int z, int side)
 	{
 		TileEntity te = world.getTileEntity(x, y, z);
-		if (te instanceof TileEntityCreativePlayerInterface || te instanceof TileEntityOnlineDetector)
+		if (te instanceof TileEntityCreativePlayerInterface || te instanceof TileEntityOnlineDetector || te instanceof TileEntityNotificationInterface)
 		{
 			return (IPeripheral)te;
 		}

@@ -37,6 +37,9 @@ public class Recipes
 		ItemStack iLeather = new ItemStack(Items.leather);
 		ItemStack iString = new ItemStack(Items.string);
 		ItemStack iFlint = new ItemStack(Items.flint);
+		ItemStack iSnowball = new ItemStack(Items.snowball);
+		ItemStack iQuartz = new ItemStack(Items.quartz);
+		ItemStack iGlass = new ItemStack(Blocks.glass);
 
 		ItemStack iPlayerCore = new ItemStack(ModItems.ingredients, 1, 0);
 		ItemStack iObsidianStick = new ItemStack(ModItems.ingredients, 1, 1);
@@ -61,6 +64,9 @@ public class Recipes
 		}
 		if (ConfigBlocks.onlineDetector)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.onlineDetector, 1), "sts", "rer", "sts", 's', iStone, 't', iRedstoneTorch, 'r', iRedstone, 'e', iLapislazuli));
+		if (ConfigBlocks.moonSensor)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.moonSensor,1),"ggg","lql","sss",'g',iGlass,'l',iLapislazuli,'s',"slabWood",'q',iQuartz));
+		
 		if (ConfigItems.voidStone)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.voidStone, 1), "xox", "oeo", "xox", 'o', iObsidian, 'e', iEnderPearl));
 		if (ConfigItems.dropFilter)

@@ -6,6 +6,8 @@ tile.itemCollector.name=Item Collector
 tile.advancedItemCollector.name=Advanced Item Collector
 tile.onlineDetector.name=Online Detector
 tile.fluidRouter.name=Fluid Router[WIP]
+tile.moonSensor.name=Moon Sensor
+tile.notificationInterface.name=Notification Interface
 
 itemGroup.Random Things=Random Things
 item.filterBlock.name=Block Filter
@@ -40,6 +42,7 @@ text.miscellaneous.listType=List-Type
 text.miscellaneous.entityid=Entity ID
 text.miscellaneous.entityName=Entity Name
 text.miscellaneous.connectedTo=Connected to
+text.miscellaneous.invalidArguments=Invalid arguments
 
 text.enderLetter.invalidreceiver=You have specified an invalid receiver
 text.enderLetter.empty=You can't send an empty letter

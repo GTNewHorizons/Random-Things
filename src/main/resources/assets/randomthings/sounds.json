@@ -1,3 +1,4 @@
 {
-    "notification": {"category": "master","sounds": [{"name": "notification","stream": false}]}
+    "notification": {"category": "master","sounds": [{"name": "notification","stream": false}]},
+    "whiteStoneActivate": {"category": "master","sounds": [{"name": "whiteStoneActivate","stream": false}]}
 }

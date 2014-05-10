@@ -27,7 +27,6 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityOnlineDetector extends TileEntity implements SimpleComponent, IPeripheral
 {
 	String username;
-	boolean online;
 
 	int tickRate = 20;
 	int tickCounter = 0;
@@ -35,8 +34,6 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
 	public TileEntityOnlineDetector()
 	{
 		username = "";
-
-		online = false;
 	}
 
 	@Override
@@ -44,32 +41,19 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
 	{
 		if (!worldObj.isRemote)
 		{
-			tickCounter++;
-			if (tickCounter >= tickRate)
+			if (worldObj.getTotalWorldTime()%20L==0L)
 			{
-				tickCounter = 0;
-
-				boolean playerOnline = WorldUtils.isPlayerOnline(username);
-
-				if (online && !playerOnline)
+				int playerOnline = WorldUtils.isPlayerOnline(username)?1:0;
+				int metadata=this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+				
+				if (playerOnline !=metadata)
 				{
-					this.online = false;
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-					this.markDirty();
-				}
-				else if (!online && playerOnline)
-				{
-					this.online = true;
-					worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-					this.markDirty();
+					this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, playerOnline, 3);
+					
+					WorldUtils.notifyStrong(worldObj, xCoord, yCoord, zCoord, this.blockType);
 				}
 			}
 		}
-	}
-
-	public boolean isActive()
-	{
-		return online;
 	}
 
 	@Override
@@ -77,7 +61,6 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
 	{
 		super.writeToNBT(nbt);
 		nbt.setString("username", username);
-		nbt.setBoolean("online", online);
 	}
 
 	@Override
@@ -85,7 +68,6 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
 	{
 		super.readFromNBT(nbt);
 		username = nbt.getString("username");
-		online = nbt.getBoolean("online");
 	}
 
 	public void setUsername(String username)
@@ -107,7 +89,6 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
 	{
 		readFromNBT(packet.func_148857_g());
-		worldObj.func_147479_m(xCoord, yCoord, zCoord);
 	}
 
 	public String getPlayerName()

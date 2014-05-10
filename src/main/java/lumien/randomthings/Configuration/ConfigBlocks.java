@@ -9,4 +9,6 @@ public class ConfigBlocks
 	public static boolean onlineDetector;
 	public static boolean imbuingStation;
 	public static boolean fluidRouter;
+	public static boolean moonSensor;
+	public static boolean notificationInterface;
 }

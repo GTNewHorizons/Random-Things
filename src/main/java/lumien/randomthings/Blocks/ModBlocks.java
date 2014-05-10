@@ -15,6 +15,8 @@ public class ModBlocks
 	public static BlockOnlineDetector onlineDetector;
 	public static BlockImbuingStation imbuingStation;
 	public static BlockFluidRouter liquidRouter;
+	public static BlockMoonSensor moonSensor;
+	public static BlockNotificationInterface notificationInterface;
 
 	public static void init()
 	{
@@ -42,5 +44,9 @@ public class ModBlocks
 			imbuingStation = new BlockImbuingStation();
 		if (ConfigBlocks.fluidRouter)
 			liquidRouter = new BlockFluidRouter();
+		if (ConfigBlocks.moonSensor)
+			moonSensor = new BlockMoonSensor();
+		if (ConfigBlocks.notificationInterface)
+			notificationInterface = new BlockNotificationInterface();
 	}
 }
