@@ -48,12 +48,17 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
 
 	@Callback
 	@Optional.Method(modid = "OpenComputers")
-	public Object[] sendNotification(Context context, Arguments args)
+	public Object[] sendNotification(Context context, Arguments args) throws Exception
 	{
 		String receiver = args.checkString(0);
 		String title = args.checkString(1);
 		String description = args.checkString(2);
 		String iconString = args.checkString(3);
+		
+		if (!WorldUtils.isPlayerOnline(receiver))
+		{
+			throw new Exception("Selected Receiver is not Online");
+		}
 
 		int metadata = 0;
 
@@ -73,6 +78,10 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
 		else if (b != null)
 		{
 			is = new ItemStack(b, 1, metadata);
+		}
+		else
+		{
+			throw new Exception("Invalid IconString");
 		}
 
 		EntityPlayerMP receiverEntity = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(receiver);
