@@ -19,8 +19,6 @@ import org.objectweb.asm.tree.LdcInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
 
-import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
-
 import static org.objectweb.asm.Opcodes.*;
 
 import net.minecraft.launchwrapper.IClassTransformer;
@@ -137,7 +135,7 @@ public class RTClassTransformer implements IClassTransformer
 				if (an instanceof VarInsnNode)
 				{
 					VarInsnNode iin = (VarInsnNode) an;
-					if (iin.getOpcode() == Opcodes.ISTORE && iin.var == 21)
+					if (iin.getOpcode() == ISTORE && iin.var == 21)
 					{
 						updateLightmap.instructions.insert(iin, new IincInsnNode(21, -14));
 						updateLightmap.instructions.insert(iin, new IincInsnNode(20, -14));
