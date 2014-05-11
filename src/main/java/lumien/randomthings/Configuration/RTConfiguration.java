@@ -36,18 +36,14 @@ public class RTConfiguration
 		ConfigDungeonLoot.WHITESTONE_CHANCE = config.get("DungeonLoot", "WhiteStone", 3).getInt();
 
 		VanillaChanges.MODIFIED_BACKGROUND = config.get("VanillaChanges", "ModifiedBackgrounds", true, "The normal dirt background will be replaced with a different block each start").getBoolean(true);
-		VanillaChanges.LOCKED_GAMMA = config.get("VanillaChanges", "LockedGamma", false,"Locks the Gamma to 0").getBoolean(false);
-		
-		BackgroundHandler.fixedBackground = config.get("VanillaChanges", "fixedBackground", "", "If this is not empty the options background will not be random but the one specified here. This has to be the name of a block texture without the .png").getString();
+		VanillaChanges.LOCKED_GAMMA = config.get("VanillaChanges", "LockedGamma", false, "Locks the Gamma to 0").getBoolean(false);
 
-		// Moved To Class Transformer
-		// VanillaChanges.FASTER_LEAVEDECAY = config.get("VanillaChanges",
-		// "FasterLeaveDecay", true
-		// ,"Leaves will decay much faster when no longer connected to a log").getBoolean(true);
+		BackgroundHandler.fixedBackground = config.get("VanillaChanges", "fixedBackground", "", "If this is not empty the options background will not be random but the one specified here. This has to be the name of a block texture without the .png").getString();
 
 		VanillaChanges.THROWABLES_MOTION = config.get("VanillaChanges", "ThrowableMotion", false, "When you throw something or shoot an arrow the motion of the player will be added to the motion of the projectile").getBoolean(false);
 
 		Settings.ANIMATED_TEXTURES = config.get("Settings", "AnimatedTextures", true).getBoolean(true);
+		Settings.FERTILIZEDDIRT_GROWTHINDICATOR = config.get("Settings", "FertilizedDirtGrowthIndicator", false, "Bonemeal particles will appear whenever fertilized dirt boosts the plant").getBoolean(false);
 
 		config.save();
 	}

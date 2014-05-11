@@ -3,6 +3,7 @@ package lumien.randomthings.Blocks;
 import java.util.Random;
 
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.Configuration.Settings;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
@@ -105,10 +106,18 @@ public class BlockFertilizedDirt extends Block
 	{
 		if (!par1World.isRemote)
 		{
+			Block toBoost = par1World.getBlock(posX, posY + 1, posZ);
+			if (toBoost != null && toBoost != Blocks.air && toBoost instanceof IPlantable)
+			{
+				if (Settings.FERTILIZEDDIRT_GROWTHINDICATOR)
+				{
+					par1World.playAuxSFX(2005, posX, posY + 1, posZ, 0);
+				}
+			}
 			for (int i = 0; i < fertilizedDirtGrowth; i++)
 			{
-				Block toBoost = par1World.getBlock(posX, posY + 1, posZ);
-				if (toBoost !=null && toBoost != Blocks.air && toBoost instanceof IPlantable)
+				toBoost = par1World.getBlock(posX, posY + 1, posZ);
+				if (toBoost != null && toBoost != Blocks.air && toBoost instanceof IPlantable)
 				{
 					toBoost.updateTick(par1World, posX, posY + 1, posZ, rng);
 				}
