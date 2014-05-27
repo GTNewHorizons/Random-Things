@@ -10,7 +10,7 @@ public class ModEntitys
 	{
 		EntityRegistry.registerModEntity(EntityPfeil.class, "Pfeil", 0, RandomThings.instance, 80, 1, true);
 		
-		EntityRegistry.registerGlobalEntityID(EntityDyeSlime.class, "dyeSlime", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
-		EntityRegistry.registerModEntity(EntityDyeSlime.class, "dyeSlime", 2, RandomThings.instance, 80, 1, true);
+		EntityRegistry.registerGlobalEntityID(EntitySpirit.class, "spirit", EntityRegistry.findGlobalUniqueEntityId(), 0, 0);
+		EntityRegistry.registerModEntity(EntitySpirit.class, "spirit", 3, RandomThings.instance, 80, 1, true);
 	}
 }

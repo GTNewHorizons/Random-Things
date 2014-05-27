@@ -17,6 +17,8 @@ public class ModBlocks
 	public static BlockFluidRouter liquidRouter;
 	public static BlockMoonSensor moonSensor;
 	public static BlockNotificationInterface notificationInterface;
+	public static BlockSpectreBlock spectreBlock;
+	public static BlockSpectreLamp spectreLamp;
 
 	public static void init()
 	{
@@ -48,5 +50,9 @@ public class ModBlocks
 			moonSensor = new BlockMoonSensor();
 		if (ConfigBlocks.notificationInterface)
 			notificationInterface = new BlockNotificationInterface();
+		if (ConfigBlocks.spectreLamp)
+			spectreLamp = new BlockSpectreLamp();
+		
+		spectreBlock = new BlockSpectreBlock();
 	}
 }

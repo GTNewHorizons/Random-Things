@@ -10,6 +10,7 @@ import lumien.randomthings.Client.GUI.GuiFluidRouter;
 import lumien.randomthings.Client.GUI.GuiEnderLetter;
 import lumien.randomthings.Client.GUI.GuiOnlineDetector;
 import lumien.randomthings.Client.GUI.GuiPlayerInterface;
+import lumien.randomthings.Client.GUI.GuiSoundRecorder;
 import lumien.randomthings.Client.GUI.GuiVoidStone;
 import lumien.randomthings.Container.ContainerDropFilter;
 import lumien.randomthings.Container.ContainerItemCollector;
@@ -18,6 +19,7 @@ import lumien.randomthings.Container.ContainerLiquidRouter;
 import lumien.randomthings.Container.ContainerEnderLetter;
 import lumien.randomthings.Container.ContainerOnlineDetector;
 import lumien.randomthings.Container.ContainerPlayerInterface;
+import lumien.randomthings.Container.ContainerSoundRecorder;
 import lumien.randomthings.Container.ContainerVoidStone;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import lumien.randomthings.TileEntities.TileEntityFluidRouter;
@@ -70,6 +72,8 @@ public class GuiHandler implements IGuiHandler
 					letterInventory = new InventoryBasic("placeholder", false, 9);
 				}
 				return new ContainerEnderLetter(player.getCurrentEquippedItem(),player.inventory, letterInventory);
+			case SOUND_RECORDER:
+				return new ContainerSoundRecorder();
 		}
 		return null;
 	}
@@ -111,6 +115,8 @@ public class GuiHandler implements IGuiHandler
 					letterInventory = new InventoryBasic("placeholder", false, 9);
 				}
 				return new GuiEnderLetter(player.inventory, letterInventory,player.getCurrentEquippedItem());
+			case SOUND_RECORDER:
+				return new GuiSoundRecorder();
 		}
 		return null;
 	}

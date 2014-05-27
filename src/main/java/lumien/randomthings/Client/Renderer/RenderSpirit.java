@@ -1,26 +1,27 @@
 package lumien.randomthings.Client.Renderer;
 
-import java.awt.Color;
-
-import lumien.randomthings.Entity.EntityDyeSlime;
+import lumien.randomthings.Entity.EntitySpirit;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemDye;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+import org.lwjgl.opengl.GL15;
 
 @SideOnly(Side.CLIENT)
-public class RenderDyeSlime extends RenderLiving
+public class RenderSpirit extends RenderLiving
 {
-	private static final ResourceLocation slimeTextures = new ResourceLocation("RandomThings:textures/entitys/dyeSlime.png");
+	private static final ResourceLocation slimeTextures = new ResourceLocation("RandomThings:textures/entitys/spirit.png");
 	private ModelBase scaleAmount;
-	private static final String __OBFID = "CL_00001024";
 
-	public RenderDyeSlime(ModelBase par1ModelBase, ModelBase par2ModelBase, float par3)
+	float t = 1F / 255F;
+
+	public RenderSpirit(ModelBase par1ModelBase, ModelBase par2ModelBase, float par3)
 	{
 		super(par1ModelBase, par3);
 		this.scaleAmount = par2ModelBase;
@@ -29,9 +30,9 @@ public class RenderDyeSlime extends RenderLiving
 	/**
 	 * Queries whether should render the specified pass or not.
 	 */
-	protected int shouldRenderPass(EntityDyeSlime par1EntityDyeSlime, int par2, float par3)
+	protected int shouldRenderPass(EntitySpirit par1EntitySpirit, int par2, float par3)
 	{
-		if (par1EntityDyeSlime.isInvisible())
+		if (par1EntitySpirit.isInvisible())
 		{
 			return 0;
 		}
@@ -59,23 +60,16 @@ public class RenderDyeSlime extends RenderLiving
 	 * Allows the render to do any OpenGL state modifications necessary before
 	 * the model is rendered. Args: entityLiving, partialTickTime
 	 */
-	protected void preRenderCallback(EntityDyeSlime par1EntityDyeSlime, float par2)
+	protected void preRenderCallback(EntitySpirit par1EntitySpirit, float par2)
 	{
-		float f1 = (float) par1EntityDyeSlime.getSlimeSize();
-		float f2 = (par1EntityDyeSlime.prevSquishFactor + (par1EntityDyeSlime.squishFactor - par1EntityDyeSlime.prevSquishFactor) * par2) / (f1 * 0.5F + 1.0F);
-		float f3 = 1.0F / (f2 + 1.0F);
-		GL11.glScalef(f3 * f1, 1.0F / f3 * f1, f3 * f1);
-		
-		EntityDyeSlime slime = par1EntityDyeSlime;
-		Color c = new Color(ItemDye.field_150922_c[slime.getDye()]);
-		GL11.glColor3f(1F/255F*c.getRed(), 1F/255F*c.getGreen(), 1F/255F*c.getBlue());
+		GL11.glScalef(1, 1, 1);
 	}
 
 	/**
 	 * Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture.
 	 */
-	protected ResourceLocation getEntityTexture(EntityDyeSlime par1EntityDyeSlime)
+	protected ResourceLocation getEntityTexture(EntitySpirit par1EntitySpirit)
 	{
 		return slimeTextures;
 	}
@@ -86,7 +80,7 @@ public class RenderDyeSlime extends RenderLiving
 	 */
 	protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2)
 	{
-		this.preRenderCallback((EntityDyeSlime) par1EntityLivingBase, par2);
+		this.preRenderCallback((EntitySpirit) par1EntityLivingBase, par2);
 	}
 
 	/**
@@ -94,7 +88,7 @@ public class RenderDyeSlime extends RenderLiving
 	 */
 	protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3)
 	{
-		return this.shouldRenderPass((EntityDyeSlime) par1EntityLivingBase, par2, par3);
+		return this.shouldRenderPass((EntitySpirit) par1EntityLivingBase, par2, par3);
 	}
 
 	/**
@@ -103,6 +97,6 @@ public class RenderDyeSlime extends RenderLiving
 	 */
 	protected ResourceLocation getEntityTexture(Entity par1Entity)
 	{
-		return this.getEntityTexture((EntityDyeSlime) par1Entity);
+		return this.getEntityTexture((EntitySpirit) par1Entity);
 	}
 }

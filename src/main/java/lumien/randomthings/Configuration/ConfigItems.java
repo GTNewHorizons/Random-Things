@@ -12,4 +12,8 @@ public class ConfigItems
 	public static boolean dropFilter;
 	public static boolean enderLetter;
 	public static boolean creativeChestGenerator;
+	public static boolean spectreKey;
+	public static boolean soundRecorder;
+	public static boolean spectreArmor;
+	public static boolean spectreSword;
 }

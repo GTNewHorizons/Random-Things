@@ -23,6 +23,8 @@ item.voidStone.name=Void Stone
 item.dropFilter.name=Drop Filter
 item.dropFilterVoiding.name=Voiding Drop Filter
 item.enderLetter.name=Ender Letter
+item.spectreKey.name=Spectre Key
+item.soundRecorder.name=Sound Recorder
 
 item.creativeSword.name=Creative Sword
 item.creativeGrower.name=Creative Grower
@@ -31,6 +33,8 @@ item.creativeChestGenerator.name=Creative Chest Generator
 item.playerCore.name=Player Core
 item.obsidianStick.name=Obsidian Stick
 item.enderFragment.name=Ender Fragment
+item.ectoplasm.name=Ectoplasm
+item.spectreIron.name=Spectre Iron
 item.error.name=Invalid Item
 
 text.miscellaneous.press=Press %s for more information

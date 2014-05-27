@@ -28,7 +28,7 @@ public class BlockFertilizedDirt extends Block
 	protected BlockFertilizedDirt(boolean tilled)
 	{
 		super(Material.ground);
-
+		
 		this.setTickRandomly(true);
 		this.setHardness(0.6F);
 		this.setStepSound(soundTypeGravel);

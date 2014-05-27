@@ -11,4 +11,5 @@ public class ConfigBlocks
 	public static boolean fluidRouter;
 	public static boolean moonSensor;
 	public static boolean notificationInterface;
+	public static boolean spectreLamp;
 }

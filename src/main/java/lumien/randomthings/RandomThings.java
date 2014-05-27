@@ -18,7 +18,6 @@ import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Core.RTCommand;
 import lumien.randomthings.Core.RTCreativeTab;
-import lumien.randomthings.Entity.EntityDyeSlime;
 import lumien.randomthings.Entity.ModEntitys;
 import lumien.randomthings.Handler.BackgroundHandler;
 import lumien.randomthings.Handler.LetterHandler;
@@ -27,6 +26,8 @@ import lumien.randomthings.Handler.RTEventHandler;
 import lumien.randomthings.Handler.RTTickHandler;
 import lumien.randomthings.Handler.SoundRecorderHandler;
 import lumien.randomthings.Handler.Notifications.NotificationHandler;
+import lumien.randomthings.Handler.Spectre.SpectreHandler;
+import lumien.randomthings.Handler.Spectre.WorldProviderSpectre;
 import lumien.randomthings.Items.ItemBiomeSolution;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.OverrideUtils;
@@ -76,6 +77,8 @@ public class RandomThings
 	public static final RTCreativeTab creativeTab = new RTCreativeTab();
 
 	public Logger logger;
+	
+	public SpectreHandler spectreHandler;
 
 	File nbtFile;
 	public NBTTagCompound modNBT;
@@ -118,6 +121,9 @@ public class RandomThings
 	{
 		packetPipeline.initalise();
 		RandomThings.proxy.registerRenderers();
+		
+		DimensionManager.registerProviderType(32, WorldProviderSpectre.class, true);
+		DimensionManager.registerDimension(32, 32);
 
 		Recipes.init();
 	}
@@ -133,7 +139,7 @@ public class RandomThings
 		}
 		catch (Exception e)
 		{
-			logger.log(Level.WARN, "Couldn't reflect on cc, no peripheral support for CreativePlayerInterface and OnlineDetector");
+			logger.log(Level.WARN, "Couldn't reflect on cc, no peripheral support for CreativePlayerInterface and OnlineDetector and Notification Interface");
 			e.printStackTrace();
 		}
 	}

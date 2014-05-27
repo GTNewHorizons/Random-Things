@@ -15,7 +15,7 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class RTTickHandler
-{	
+{
 	@SubscribeEvent
 	public void tick(TickEvent event)
 	{
@@ -50,9 +50,15 @@ public class RTTickHandler
 		{
 			case START:
 				RandomThings.instance.letterHandler.update();
+				if (RandomThings.instance.spectreHandler != null)
+				{
+					RandomThings.instance.spectreHandler.update();
+				}
+
 				break;
 			case END:
 				break;
+
 		}
 	}
 }

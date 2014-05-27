@@ -6,11 +6,13 @@ import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Client.Particles.ParticleSystem;
 import lumien.randomthings.Configuration.ConfigItems;
 import lumien.randomthings.Configuration.VanillaChanges;
-import lumien.randomthings.Entity.EntityDyeSlime;
+import lumien.randomthings.Handler.Spectre.SpectreHandler;
 import lumien.randomthings.Items.ItemDropFilter;
 import lumien.randomthings.Items.ItemFilter;
+import lumien.randomthings.Items.ItemSpectreArmor;
 import lumien.randomthings.Items.ItemWhiteStone;
 import lumien.randomthings.Library.Inventorys.InventoryDropFilter;
 import lumien.randomthings.Proxy.ClientProxy;
@@ -19,6 +21,7 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -40,8 +43,11 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent17;
 import net.minecraftforge.client.event.sound.SoundEvent;
@@ -75,6 +81,31 @@ public class RTEventHandler
 		RandomThings.instance.soundRecorderHandler.soundPlayed(event);
 	}
 
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void renderPlayerPre(RenderLivingEvent.Pre event)
+	{
+		if (event.entity instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer) event.entity;
+
+			ItemStack helmet = player.getCurrentArmor(0);
+			ItemStack chestplate = player.getCurrentArmor(1);
+			ItemStack leggings = player.getCurrentArmor(2);
+			ItemStack boots = player.getCurrentArmor(3);
+
+			if (helmet != null && chestplate != null && leggings != null && boots != null)
+			{
+				if (helmet.getItem() instanceof ItemSpectreArmor && chestplate.getItem() instanceof ItemSpectreArmor && leggings.getItem() instanceof ItemSpectreArmor && boots.getItem() instanceof ItemSpectreArmor)
+				{
+					GL11.glEnable(GL11.GL_BLEND);
+					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+					GL11.glColor4f(1, 1, 1, 0.6f);
+				}
+			}
+		}
+	}
+
 	@SubscribeEvent
 	public void playerLogin(WorldEvent.Load event)
 	{
@@ -82,6 +113,38 @@ public class RTEventHandler
 		{
 			Minecraft.getMinecraft().gameSettings.setOptionFloatValue(GameSettings.Options.GAMMA, 0);
 			Minecraft.getMinecraft().gameSettings.gammaSetting = 0;
+		}
+	}
+
+	@SubscribeEvent
+	public void changedDimension(PlayerChangedDimensionEvent event)
+	{
+		if (event.toDim == 32)
+		{
+			EntityPlayer player = event.player;
+			player.getEntityData().setInteger("oldDimension", event.fromDim);
+			player.getEntityData().setDouble("oldPosX", player.posX);
+			player.getEntityData().setDouble("oldPosY", player.posY);
+			player.getEntityData().setDouble("oldPosZ", player.posZ);
+		}
+	}
+
+	@SubscribeEvent
+	public void loadWorld(WorldEvent.Load event)
+	{
+		if (!event.world.isRemote && event.world.provider.dimensionId == 32)
+		{
+			SpectreHandler spectreHandler = (SpectreHandler) event.world.mapStorage.loadData(SpectreHandler.class, "SpectreHandler");
+			if (spectreHandler == null)
+			{
+				spectreHandler = new SpectreHandler();
+				spectreHandler.markDirty();
+			}
+
+			spectreHandler.setWorld(event.world);
+
+			event.world.mapStorage.setData("SpectreHandler", spectreHandler);
+			RandomThings.instance.spectreHandler = spectreHandler;
 		}
 	}
 

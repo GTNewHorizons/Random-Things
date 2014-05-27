@@ -20,6 +20,7 @@ public class RTConfiguration
 		ConfigBlocks.fluidRouter = config.get("Blocks", "FluidRouter", true).getBoolean(true);
 		ConfigBlocks.moonSensor = config.get("Blocks", "MoonSensor", true).getBoolean(true);
 		ConfigBlocks.notificationInterface = config.get("Blocks", "NotificationInterface", true).getBoolean(true);
+		ConfigBlocks.spectreLamp = config.get("Blocks", "SpectreLamp", true).getBoolean(true);
 
 		ConfigItems.biomeSolution = config.get("Items", "BiomeSolution", true).getBoolean(true);
 		ConfigItems.biomePainter = config.get("Items", "BiomePainter", true).getBoolean(true);
@@ -28,6 +29,10 @@ public class RTConfiguration
 		ConfigItems.voidStone = config.get("Items", "VoidStone", true).getBoolean(true);
 		ConfigItems.dropFilter = config.get("Items", "DropFilter", true).getBoolean(true);
 		ConfigItems.enderLetter = config.get("Items", "EnderLetter", true).getBoolean(true);
+		ConfigItems.spectreKey = config.get("Items", "SpectreKey", true).getBoolean(true);
+		ConfigItems.soundRecorder = config.get("Items", "SoundRecorder", true).getBoolean(true);
+		ConfigItems.spectreArmor = config.get("Items", "SpectreArmor", true).getBoolean(true);
+		ConfigItems.spectreSword = config.get("Items", "SpectreSword", true).getBoolean(true);
 
 		ConfigItems.creativeSword = config.get("Items", "CreativeSword", true).getBoolean(true);
 		ConfigItems.creativeGrower = config.get("Items", "CreativeGrower", true).getBoolean(true);

@@ -39,7 +39,7 @@ public class BlockPlayerInterface extends BlockContainer
 		this.setHardness(4.0F);
 
 		GameRegistry.registerBlock(this, "playerinterface");
-		
+
 		icons = new IIcon[3];
 	}
 
@@ -89,7 +89,7 @@ public class BlockPlayerInterface extends BlockContainer
 	@Override
 	public void onBlockPlacedBy(World par1World, int poxX, int poxY, int poxZ, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
 	{
-		if (par5EntityLivingBase instanceof EntityPlayerMP)
+		if (par5EntityLivingBase != null && par5EntityLivingBase instanceof EntityPlayerMP && par1World.getTileEntity(poxX, poxY, poxZ)!=null)
 		{
 			EntityPlayerMP player = (EntityPlayerMP) par5EntityLivingBase;
 			((TileEntityPlayerInterface) par1World.getTileEntity(poxX, poxY, poxZ)).setPlayerName(player.getCommandSenderName());

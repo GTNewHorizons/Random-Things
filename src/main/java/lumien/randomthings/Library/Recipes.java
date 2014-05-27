@@ -40,15 +40,19 @@ public class Recipes
 		ItemStack iSnowball = new ItemStack(Items.snowball);
 		ItemStack iQuartz = new ItemStack(Items.quartz);
 		ItemStack iGlass = new ItemStack(Blocks.glass);
+		ItemStack iIronIngot = new ItemStack(Items.iron_ingot);
 
 		ItemStack iPlayerCore = new ItemStack(ModItems.ingredients, 1, 0);
 		ItemStack iObsidianStick = new ItemStack(ModItems.ingredients, 1, 1);
 		ItemStack iEnderFragment = new ItemStack(ModItems.ingredients,1,2);
+		ItemStack iEctoplasm = new ItemStack(ModItems.ingredients,1,3);
+		ItemStack iSpectreIron = new ItemStack(ModItems.ingredients,1,4);
 
 		// Crafting Items
 		GameRegistry.addRecipe(new ShapedOreRecipe(iPlayerCore, "xlx", "lel", "xlx", 'l', iLapislazuli, 'e', iEmerald));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 3, 1), "o", "o", 'o', iObsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 4, 2), "fe", 'e', iEnderPearl,'f',iFlint));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients,1,4),"ei",'e',iEctoplasm,'i',iIronIngot));
 
 		if (ConfigBlocks.playerInterface)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.playerInterface), "oeo", "omo", "ono", 'o', iObsidian, 'e', iEnderChest, 'm', iPlayerCore, 'n', iNetherstar));
@@ -66,6 +70,9 @@ public class Recipes
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.onlineDetector, 1), "sts", "rer", "sts", 's', iStone, 't', iRedstoneTorch, 'r', iRedstone, 'e', iLapislazuli));
 		if (ConfigBlocks.moonSensor)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.moonSensor,1),"ggg","lql","sss",'g',iGlass,'l',iLapislazuli,'s',"slabWood",'q',iQuartz));
+		if (ConfigBlocks.spectreLamp)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.spectreLamp,4,0),"xix","iei","xix",'i',iSpectreIron,'e',iEctoplasm));
+		
 		
 		if (ConfigItems.voidStone)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.voidStone, 1), "xox", "oeo", "xox", 'o', iObsidian, 'e', iEnderPearl));
@@ -78,9 +85,21 @@ public class Recipes
 		{
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.enderLetter,1,0),"fpl",'f',iEnderFragment,'p',iPaper,'l',iLeather));
 		}
-
+		if (ConfigItems.spectreArmor)
+			addArmorRecipes(iSpectreIron,new ItemStack(ModItems.spectreHelmet),new ItemStack(ModItems.spectreChestplate),new ItemStack(ModItems.spectreLeggings),new ItemStack(ModItems.spectreBoots));
+		if (ConfigItems.spectreSword)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreSword),"xsx","xsx","xox",'s',iSpectreIron,'o',"stickObsidian"));
+		
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 0), "xrx", "rpr", "xrx", 'r', "dyeRed", 'p', iPaper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 1), "xrx", "rpr", "xrx", 'r', "dyeYellow", 'p', iPaper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 2), "xrx", "rpr", "xrx", 'r', "dyeBlue", 'p', iPaper));
+	}
+	
+	private static void addArmorRecipes(ItemStack material,ItemStack helmet,ItemStack chestPlate,ItemStack leggings,ItemStack boots)
+	{
+		GameRegistry.addRecipe(helmet,"mmm","mxm",'m',material);
+		GameRegistry.addRecipe(chestPlate,"mxm","mmm","mmm",'m',material);
+		GameRegistry.addRecipe(leggings,"mmm","mxm","mxm",'m',material);
+		GameRegistry.addRecipe(boots,"mxm","mxm",'m',material);
 	}
 }

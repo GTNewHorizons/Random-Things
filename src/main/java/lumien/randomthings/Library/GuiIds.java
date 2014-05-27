@@ -11,4 +11,5 @@ public class GuiIds
 	public static final int VOID_STONE = 6;
 	public static final int DROP_FILTER = 7;
 	public static final int ENDER_LETTER = 8;
+	public static final int SOUND_RECORDER = 9;
 }
