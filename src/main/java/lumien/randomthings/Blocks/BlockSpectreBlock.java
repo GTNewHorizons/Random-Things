@@ -26,7 +26,6 @@ public class BlockSpectreBlock extends Block
 		GameRegistry.registerBlock(this, "spectreBlock");
 	}
 	
-    @SideOnly(Side.CLIENT)
     public int colorMultiplier(IBlockAccess p_149720_1_, int p_149720_2_, int p_149720_3_, int p_149720_4_)
     {
         return 16777215;
@@ -37,7 +36,6 @@ public class BlockSpectreBlock extends Block
         return 21F;
     }
     
-    @SideOnly(Side.CLIENT)
     public int getRenderBlockPass()
     {
         return 1;

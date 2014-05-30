@@ -41,28 +41,18 @@ public class EntitySpirit extends EntityMob
 
 		this.yOffset = 0.0F;
 		this.follow = follow;
+		
+		this.width=0.6f;
+		this.height=0.6f;
 
-        this.setSize(0.6F, 0.6F);
-        
-        this.myEntitySize=EnumEntitySize.SIZE_1;
+		this.setSize(0.6F, 0.6F);
+		this.setPosition(this.posX, this.posY, this.posZ);
 	}
 
 	public EntitySpirit(World par1World)
 	{
 		super(par1World);
 	}
-	
-	@Override
-    public AxisAlignedBB getBoundingBox()
-    {
-        return AxisAlignedBB.getBoundingBox(posX-0.6f, posY-0.6f, posZ-0.6f, posX+0.6f, posY+0.6f, posZ+0.6f);
-    }
-    
-    @Override
-    public AxisAlignedBB getCollisionBox(Entity par1Entity)
-    {
-    	return AxisAlignedBB.getBoundingBox(par1Entity.posX-0.6f, par1Entity.posY-0.6f, par1Entity.posZ-0.6f, par1Entity.posX+0.6f, par1Entity.posY+0.6f, par1Entity.posZ+0.6f);
-    }
 
 	protected void collideWithEntity(Entity par1Entity)
 	{
@@ -81,6 +71,11 @@ public class EntitySpirit extends EntityMob
 	{
 		super.onUpdate();
 		this.motionY *= 0.6000000238418579D;
+
+		if (this.worldObj.isRemote)
+		{
+			this.setSize(0.6F, 0.6F);
+		}
 	}
 
 	protected void updateAITasks()
@@ -95,9 +90,9 @@ public class EntitySpirit extends EntityMob
 		double d0 = (double) this.spawnPosition.posX + 0.5D - this.posX;
 		double d1 = (double) this.spawnPosition.posY + 0.1D - this.posY;
 		double d2 = (double) this.spawnPosition.posZ + 0.5D - this.posZ;
-		this.motionX += (Math.signum(d0) * 0.5D - this.motionX) *  0.10000000149011612D;
-		this.motionY += (Math.signum(d1) * 0.699999988079071D - this.motionY)  * 0.10000000149011612D;
-		this.motionZ += (Math.signum(d2) * 0.5D - this.motionZ) *  0.10000000149011612D;
+		this.motionX += (Math.signum(d0) * 0.5D - this.motionX) * 0.10000000149011612D;
+		this.motionY += (Math.signum(d1) * 0.699999988079071D - this.motionY) * 0.10000000149011612D;
+		this.motionZ += (Math.signum(d2) * 0.5D - this.motionZ) * 0.10000000149011612D;
 		float f = (float) (Math.atan2(this.motionZ, this.motionX) * 180.0D / Math.PI) - 90.0F;
 		float f1 = MathHelper.wrapAngleTo180_float(f - this.rotationYaw);
 		this.moveForward = 0.5F;
@@ -121,7 +116,7 @@ public class EntitySpirit extends EntityMob
 
 	protected void dropFewItems(boolean par1, int par2)
 	{
-		this.entityDropItem(new ItemStack(ModItems.ingredients, this.rand.nextInt(3) + 1, 3), 0.0F);
+		this.entityDropItem(new ItemStack(ModItems.ingredients, this.rand.nextInt(2), 3), 0.0F);
 	}
 
 	/**

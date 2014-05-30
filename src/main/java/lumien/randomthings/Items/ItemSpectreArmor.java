@@ -29,7 +29,7 @@ public class ItemSpectreArmor extends ItemArmor
                 "spectre", (slot == 2 ? 2 : 1), type == null ? "" : String.format("_%s", type));
     }
     
-	@SideOnly(Side.CLIENT)
+	
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
 	{
 		GL11.glEnable(GL11.GL_BLEND);

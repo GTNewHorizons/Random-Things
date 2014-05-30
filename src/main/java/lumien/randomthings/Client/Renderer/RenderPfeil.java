@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-@SideOnly(Side.CLIENT)
+
 public class RenderPfeil extends Render
 {
 	private static final ResourceLocation pfeilTextur = new ResourceLocation("RandomThings:textures/entitys/pfeil.png");

@@ -16,10 +16,12 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import lumien.randomthings.Client.ClientTickHandler;
-import lumien.randomthings.Client.Renderer.ItemCollectorRenderer;
+import lumien.randomthings.Client.Renderer.RenderHealingOrb;
+import lumien.randomthings.Client.Renderer.RenderItemCollector;
 import lumien.randomthings.Client.Renderer.RenderPfeil;
 import lumien.randomthings.Client.Renderer.RenderSpirit;
-import lumien.randomthings.Client.Renderer.WhitestoneRenderer;
+import lumien.randomthings.Client.Renderer.RenderWhitestone;
+import lumien.randomthings.Entity.EntityHealingOrb;
 import lumien.randomthings.Entity.EntityPfeil;
 import lumien.randomthings.Entity.EntitySpirit;
 import lumien.randomthings.Items.ModItems;
@@ -28,7 +30,7 @@ import lumien.randomthings.TileEntities.TileEntityItemCollector;
 
 public class ClientProxy extends CommonProxy
 {
-	ItemCollectorRenderer renderer;
+	RenderItemCollector renderer;
 	public static IIcon slimeParticleTexture;
 
 	@Override
@@ -40,14 +42,15 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerRenderers()
 	{
-		renderer = new ItemCollectorRenderer();
+		renderer = new RenderItemCollector();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityItemCollector.class, renderer);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdvancedItemCollector.class, renderer);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityPfeil.class, new RenderPfeil());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpirit.class, new RenderSpirit(new ModelSlime(16),new ModelSlime(0), 0.25f));
+		RenderingRegistry.registerEntityRenderingHandler(EntityHealingOrb.class, new RenderHealingOrb());
 
-		MinecraftForgeClient.registerItemRenderer(ModItems.whitestone, new WhitestoneRenderer());
+		MinecraftForgeClient.registerItemRenderer(ModItems.whitestone, new RenderWhitestone());
 	}
 
 	@Override

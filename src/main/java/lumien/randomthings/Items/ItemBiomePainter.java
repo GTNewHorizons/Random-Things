@@ -1,7 +1,8 @@
 package lumien.randomthings.Items;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Network.Packets.PacketPaintBiome;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.Network.Messages.MessagePaintBiome;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -26,7 +27,7 @@ public class ItemBiomePainter extends Item
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
 		this.itemIcon = par1IconRegister.registerIcon("RandomThings:biomePainter");
@@ -60,7 +61,7 @@ public class ItemBiomePainter extends Item
 									nbt.setInteger("charges", charges-1);
 									par2EntityPlayer.inventoryContainer.detectAndSendChanges();
 								}
-								RandomThings.packetPipeline.sendToDimension(new PacketPaintBiome(par4, par5, par6, par3World.provider.dimensionId, biomeID), par3World.provider.dimensionId);
+								PacketHandler.INSTANCE.sendToDimension(new MessagePaintBiome(par4, par5, par6, par3World.provider.dimensionId, biomeID), par3World.provider.dimensionId);
 							}
 						}
 						return true;

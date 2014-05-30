@@ -1,13 +1,16 @@
-package lumien.randomthings.Network.Packets;
+package lumien.randomthings.Network.Messages;
 
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import lumien.randomthings.Items.ItemFilter;
-import lumien.randomthings.Network.AbstractPacket;
 
-public class PacketItemFilter extends AbstractPacket
+
+public class MessageItemFilter implements IMessage,IMessageHandler<MessageItemFilter,IMessage>
 {
 	public enum ACTION
 	{
@@ -16,43 +19,36 @@ public class PacketItemFilter extends AbstractPacket
 
 	ACTION action;
 
-	public PacketItemFilter(ACTION action)
+	public MessageItemFilter(ACTION action)
 	{
 		this.action = action;
 	}
 
-	public PacketItemFilter()
+	public MessageItemFilter()
 	{
 
 	}
 
 	@Override
-	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
+	public void toBytes(ByteBuf buffer)
 	{
 		buffer.writeInt(action.ordinal());
 	}
 
 	@Override
-	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
+	public void fromBytes(ByteBuf buffer)
 	{
 		action = ACTION.values()[buffer.readInt()];
 	}
 
 	@Override
-	public void handleClientSide(EntityPlayer player)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void handleServerSide(EntityPlayer player)
+	public IMessage onMessage(MessageItemFilter message, MessageContext ctx)
 	{
 		String toToggle = "";
-		ItemStack filter = player.getCurrentEquippedItem();
+		ItemStack filter =ctx.getServerHandler().playerEntity.getCurrentEquippedItem();
 		if (filter != null && filter.getItem() instanceof ItemFilter)
 		{
-			switch (action)
+			switch (message.action)
 			{
 				case OREDICT:
 					toToggle = "oreDict";
@@ -70,6 +66,7 @@ public class PacketItemFilter extends AbstractPacket
 					break;
 			}
 		}
+		return null;
 	}
 
 }

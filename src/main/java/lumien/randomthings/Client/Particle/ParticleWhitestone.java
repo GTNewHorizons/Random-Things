@@ -9,7 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityPortalFX;
 import net.minecraft.entity.player.EntityPlayer;
 
-@SideOnly(Side.CLIENT)
+
 public class ParticleWhitestone extends EntityPortalFX
 {
 	EntityPlayer followPlayer;

@@ -39,7 +39,6 @@ public class WorldProviderSpectre extends WorldProvider
         return false;
     }
     
-    @SideOnly(Side.CLIENT)
     public boolean doesXZShowFog(int par1, int par2)
     {
         return true;
@@ -70,7 +69,6 @@ public class WorldProviderSpectre extends WorldProvider
 		return new ChunkProviderSpectre(this.worldObj);
 	}
 	
-    @SideOnly(Side.CLIENT)
     public float[] calcSunriseSunsetColors(float par1, float par2)
     {
         return new float[]{0,0,0,0};
@@ -82,7 +80,6 @@ public class WorldProviderSpectre extends WorldProvider
     	return 0;
     }
     
-    @SideOnly(Side.CLIENT)
     public float getCloudHeight()
     {
         return -5;

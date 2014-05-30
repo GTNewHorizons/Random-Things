@@ -40,7 +40,7 @@ public class ItemSpectreKey extends Item
 		this.setTextureName("RandomThings:spectreKey");
 	}
 
-	@SideOnly(Side.CLIENT)
+	
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
 	{
 		GL11.glEnable(GL11.GL_BLEND);
@@ -123,7 +123,7 @@ public class ItemSpectreKey extends Item
 		return par1ItemStack;
 	}
 
-	@SideOnly(Side.CLIENT)
+	
 	public void registerIcons(IIconRegister ir)
 	{
 		super.registerIcons(ir);

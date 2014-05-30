@@ -1,6 +1,9 @@
-package lumien.randomthings.Network.Packets;
+package lumien.randomthings.Network.Messages;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
@@ -16,28 +19,27 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.Handler.Notifications.Notification;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.ClientUtil;
-import lumien.randomthings.Network.AbstractPacket;
 
-public class PacketNotification extends AbstractPacket
+public class MessageNotification implements IMessage, IMessageHandler<MessageNotification, IMessage>
 {
 	String title;
 	String description;
 	ItemStack icon;
 
-	public PacketNotification(String title,String description,ItemStack icon)
+	public MessageNotification(String title, String description, ItemStack icon)
 	{
 		this.title = title;
 		this.description = description;
 		this.icon = icon;
 	}
-	
-	public PacketNotification()
+
+	public MessageNotification()
 	{
-		
+
 	}
 
 	@Override
-	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
+	public void toBytes(ByteBuf buffer)
 	{
 		ByteBufUtils.writeUTF8String(buffer, title);
 		ByteBufUtils.writeUTF8String(buffer, description);
@@ -45,7 +47,7 @@ public class PacketNotification extends AbstractPacket
 	}
 
 	@Override
-	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
+	public void fromBytes(ByteBuf buffer)
 	{
 		this.title = ByteBufUtils.readUTF8String(buffer);
 		this.description = ByteBufUtils.readUTF8String(buffer);
@@ -53,15 +55,10 @@ public class PacketNotification extends AbstractPacket
 	}
 
 	@Override
-	public void handleClientSide(EntityPlayer player)
+	public IMessage onMessage(MessageNotification message, MessageContext ctx)
 	{
-		RandomThings.instance.notificationHandler.addNotification(new Notification(title,description,icon));
-	}
-
-	@Override
-	public void handleServerSide(EntityPlayer player)
-	{
-		
+		RandomThings.instance.notificationHandler.addNotification(new Notification(message.title, message.description, message.icon));
+		return null;
 	}
 
 }

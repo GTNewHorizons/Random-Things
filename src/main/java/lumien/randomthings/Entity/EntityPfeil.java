@@ -151,7 +151,6 @@ public class EntityPfeil extends Entity
 	 * bounding on the rotation. Args: posX, posY, posZ, yaw, pitch
 	 */
 	@Override
-	@SideOnly(Side.CLIENT)
 	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9)
 	{
 		this.setPosition(par1, par3, par5);
@@ -162,7 +161,6 @@ public class EntityPfeil extends Entity
 	 * Sets the velocity to the args. Args: x, y, z
 	 */
 	@Override
-	@SideOnly(Side.CLIENT)
 	public void setVelocity(double par1, double par3, double par5)
 	{
 		this.motionX = par1;
@@ -515,7 +513,6 @@ public class EntityPfeil extends Entity
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public float getShadowSize()
 	{
 		return 0.0F;

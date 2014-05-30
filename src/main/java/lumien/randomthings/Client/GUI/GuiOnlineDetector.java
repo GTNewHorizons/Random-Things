@@ -5,7 +5,8 @@ import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Container.ContainerOnlineDetector;
-import lumien.randomthings.Network.Packets.PacketOnlineDetector;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.Network.Messages.MessageOnlineDetector;
 import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
@@ -37,8 +38,8 @@ public class GuiOnlineDetector extends GuiContainer
 	{
 		if (buttonPressed==saveButton && !usernameInput.getText().equals(""))
 		{
-			PacketOnlineDetector packet = new PacketOnlineDetector(usernameInput.getText(),te.xCoord,te.yCoord,te.zCoord,te.getWorldObj().provider.dimensionId);
-			RandomThings.packetPipeline.sendToServer(packet);
+			MessageOnlineDetector packet = new MessageOnlineDetector(usernameInput.getText(),te.xCoord,te.yCoord,te.zCoord,te.getWorldObj().provider.dimensionId);
+			PacketHandler.INSTANCE.sendToServer(packet);
 		}
 	}
 

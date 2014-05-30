@@ -12,7 +12,8 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Client.Particle.ParticleWhitestone;
 import lumien.randomthings.Configuration.ConfigDungeonLoot;
-import lumien.randomthings.Network.Packets.PacketWhitestone;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.Network.Messages.MessageWhitestone;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -39,7 +40,7 @@ public class ItemWhiteStone extends Item
 		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(this, 1, 0), 1, 1, ConfigDungeonLoot.WHITESTONE_CHANCE));
 	}
 
-	@SideOnly(Side.CLIENT)
+	
 	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 		if (stack.getItemDamage() == 0)
@@ -94,7 +95,7 @@ public class ItemWhiteStone extends Item
 			stack.stackTagCompound.setInteger("charge", charges += 1);
 
 			if (charges % 5 == 0)
-				RandomThings.packetPipeline.sendToAllAround(new PacketWhitestone(entity.getEntityId()), new TargetPoint(worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 16));
+				PacketHandler.INSTANCE.sendToAllAround(new MessageWhitestone(entity.getEntityId()), new TargetPoint(worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 16));
 
 			if (charges == 1201)
 			{
@@ -124,7 +125,7 @@ public class ItemWhiteStone extends Item
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
+	
 	@Override
 	public void getSubItems(Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_)
 	{

@@ -10,7 +10,8 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.WorldUtils;
-import lumien.randomthings.Network.Packets.PacketNotification;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.Network.Messages.MessageNotification;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -68,7 +69,7 @@ public class LetterHandler
 						writeToNBT();
 						RandomThings.instance.saveNBT();
 
-						RandomThings.packetPipeline.sendTo(new PacketNotification("Received Ender Letter", "Sender: " + toCheck.stackTagCompound.getString("sender"), new ItemStack(ModItems.enderLetter, 1, 1)), (EntityPlayerMP) receiverEntity);
+						PacketHandler.INSTANCE.sendTo(new MessageNotification("Received Ender Letter", "Sender: " + toCheck.stackTagCompound.getString("sender"), new ItemStack(ModItems.enderLetter, 1, 1)), (EntityPlayerMP) receiverEntity);
 					}
 				}
 			}

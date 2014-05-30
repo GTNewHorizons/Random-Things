@@ -9,7 +9,8 @@ import li.cil.oc.api.network.Context;
 import li.cil.oc.api.network.SimpleComponent;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.WorldUtils;
-import lumien.randomthings.Network.Packets.PacketNotification;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.Network.Messages.MessageNotification;
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
@@ -90,9 +91,9 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
 			return new Object[] {};
 		}
 
-		PacketNotification packet = new PacketNotification(title, description, is);
+		MessageNotification packet = new MessageNotification(title, description, is);
 
-		RandomThings.packetPipeline.sendTo(packet, receiverEntity);
+		PacketHandler.INSTANCE.sendTo(packet, receiverEntity);
 
 		return new Object[] {};
 	}
@@ -152,9 +153,9 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
 							throw new Exception("Player entity not found");
 						}
 
-						PacketNotification packet = new PacketNotification(title, description, is);
+						MessageNotification packet = new MessageNotification(title, description, is);
 
-						RandomThings.packetPipeline.sendTo(packet, receiverEntity);
+						PacketHandler.INSTANCE.sendTo(packet, receiverEntity);
 						return null;
 					}
 				}

@@ -6,7 +6,9 @@ import java.util.List;
 import cpw.mods.fml.common.registry.GameData;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Network.Packets.PacketNotification;
+import lumien.randomthings.Items.ModItems;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.Network.Messages.MessageNotification;
 
 import net.minecraft.block.Block;
 import net.minecraft.command.CommandBase;
@@ -113,9 +115,9 @@ public class RTCommand extends CommandBase
 				return;
 			}
 
-			PacketNotification packet = new PacketNotification(title, description, is);
+			MessageNotification packet = new MessageNotification(title, description, is);
 
-			RandomThings.packetPipeline.sendTo(packet, (EntityPlayerMP) receiverEntity);
+			PacketHandler.INSTANCE.sendTo(packet, (EntityPlayerMP) receiverEntity);
 		}
 		else if (subCommand.equals("moon"))
 		{
@@ -144,6 +146,20 @@ public class RTCommand extends CommandBase
 			{
 				commandUser.addChatMessage(invalidArguments);
 				return;
+			}
+		}
+		else if (subCommand.equals("spectre"))
+		{
+			// Test Command
+			if (commandUser instanceof EntityPlayer)
+			{
+				EntityPlayer player = (EntityPlayer) commandUser;
+				player.inventory.addItemStackToInventory(new ItemStack(ModItems.spectreBoots));
+				player.inventory.addItemStackToInventory(new ItemStack(ModItems.spectreLeggings));
+				player.inventory.addItemStackToInventory(new ItemStack(ModItems.spectreChestplate));
+				player.inventory.addItemStackToInventory(new ItemStack(ModItems.spectreHelmet));
+				player.inventory.addItemStackToInventory(new ItemStack(ModItems.spectreKey));
+				player.inventory.addItemStackToInventory(new ItemStack(ModItems.spectreSword));
 			}
 		}
 	}

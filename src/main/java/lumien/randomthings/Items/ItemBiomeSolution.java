@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Network.Packets.PacketPaintBiome;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.Network.Messages.MessagePaintBiome;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -102,7 +103,7 @@ public class ItemBiomeSolution extends Item
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
 		this.itemIcon = par1IconRegister.registerIcon("RandomThings:biomeSolution");
@@ -185,7 +186,7 @@ public class ItemBiomeSolution extends Item
 
 						biomeArray[(itemPosZ + modZ & 15) << 4 | (itemPosX + modX & 15)] = (byte) (BiomeGenBase.plains.biomeID & 255);
 						c.setBiomeArray(biomeArray);
-						RandomThings.packetPipeline.sendToDimension(new PacketPaintBiome(itemPosX + modX, itemPosY, itemPosZ + modZ, entityItem.worldObj.provider.dimensionId, BiomeGenBase.plains.biomeID), entityItem.worldObj.provider.dimensionId);
+						PacketHandler.INSTANCE.sendToDimension(new MessagePaintBiome(itemPosX + modX, itemPosY, itemPosZ + modZ, entityItem.worldObj.provider.dimensionId, BiomeGenBase.plains.biomeID), entityItem.worldObj.provider.dimensionId);
 						charges++;
 						is.stackTagCompound.setInteger("charges", charges);
 					}
@@ -209,7 +210,7 @@ public class ItemBiomeSolution extends Item
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
 	{
 		if (par1ItemStack.getItemDamage() == 0)

@@ -16,14 +16,12 @@ public class RTCreativeTab extends CreativeTabs
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
     public ItemStack getIconItemStack()
     {
         return new ItemStack(ModItems.ingredients,0);
     }
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem()
 	{
 		return ModItems.ingredients;

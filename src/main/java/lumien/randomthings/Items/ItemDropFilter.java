@@ -35,7 +35,7 @@ public class ItemDropFilter extends Item
 		GameRegistry.registerItem(this, "dropFilter");
 	}
 	
-	@SideOnly(Side.CLIENT)
+	
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 		if (!(ItemDropFilter.getDropFilterInv(par2EntityPlayer, par1ItemStack) == null))
@@ -83,7 +83,7 @@ public class ItemDropFilter extends Item
 		return par1ItemStack;
 	}
 
-	@SideOnly(Side.CLIENT)
+	
 	public IIcon getIconFromDamage(int metadata)
 	{
 		if (metadata < 0 || metadata > 1)

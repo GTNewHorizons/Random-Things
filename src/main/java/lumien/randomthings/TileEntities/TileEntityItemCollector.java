@@ -2,7 +2,7 @@ package lumien.randomthings.TileEntities;
 
 import java.util.List;
 
-import lumien.randomthings.Client.Particles.ParticleSystem;
+import lumien.randomthings.Client.Renderer.RenderItemCollector;
 
 import org.lwjgl.util.vector.Vector3f;
 

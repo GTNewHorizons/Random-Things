@@ -32,7 +32,7 @@ import lumien.randomthings.Items.ItemBiomeSolution;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.OverrideUtils;
 import lumien.randomthings.Library.Recipes;
-import lumien.randomthings.Network.PacketPipeline;
+import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Proxy.CommonProxy;
 import lumien.randomthings.TileEntities.ModTileEntities;
 import net.minecraft.client.Minecraft;
@@ -71,8 +71,6 @@ public class RandomThings
 
 	@SidedProxy(clientSide = "lumien.randomthings.Proxy.ClientProxy", serverSide = "lumien.randomthings.Proxy.CommonProxy")
 	public static CommonProxy proxy;
-
-	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
 	public static final RTCreativeTab creativeTab = new RTCreativeTab();
 
@@ -119,7 +117,7 @@ public class RandomThings
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		packetPipeline.initalise();
+		PacketHandler.init();
 		RandomThings.proxy.registerRenderers();
 		
 		DimensionManager.registerProviderType(32, WorldProviderSpectre.class, true);
@@ -131,8 +129,6 @@ public class RandomThings
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-		packetPipeline.postInitialise();
-
 		try
 		{
 			PeripheralProvider.register();

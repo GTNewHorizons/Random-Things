@@ -96,7 +96,7 @@ public class ItemFilter extends Item
 		return listType == 0 ? false : true;
 	}
 
-	@SideOnly(Side.CLIENT)
+	
 	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
@@ -205,7 +205,7 @@ public class ItemFilter extends Item
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	
 	public IIcon getIconFromDamage(int par1)
 	{
 		if (par1 > 0 && par1 < icons.length)
@@ -219,7 +219,7 @@ public class ItemFilter extends Item
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
 		icons[0] = par1IconRegister.registerIcon("RandomThings:filter/blockFilter");

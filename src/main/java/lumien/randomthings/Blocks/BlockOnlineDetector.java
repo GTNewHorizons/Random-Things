@@ -49,7 +49,6 @@ public class BlockOnlineDetector extends BlockContainer
 		GameRegistry.registerBlock(this, "onlineDetector");
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister ir)
 	{
@@ -137,13 +136,11 @@ public class BlockOnlineDetector extends BlockContainer
 		return true;
 	}
 
-	@SideOnly(Side.CLIENT)
 	public int getMixedBrightnessForBlock(IBlockAccess p_149677_1_, int p_149677_2_, int p_149677_3_, int p_149677_4_)
 	{
 		return 15728704;
 	}
 
-	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess ba, int posX, int posY, int posZ, int side)
 	{
 		int metadata=ba.getBlockMetadata(posX, posY, posZ);
@@ -157,7 +154,6 @@ public class BlockOnlineDetector extends BlockContainer
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int p_149691_1_, int p_149691_2_)
 	{
 		return icons[0];

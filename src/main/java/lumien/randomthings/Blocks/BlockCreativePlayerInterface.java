@@ -47,7 +47,6 @@ public class BlockCreativePlayerInterface extends BlockContainer
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
 		if (Settings.ANIMATED_TEXTURES)
@@ -65,7 +64,6 @@ public class BlockCreativePlayerInterface extends BlockContainer
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int metadata)
 	{
 		switch (side)

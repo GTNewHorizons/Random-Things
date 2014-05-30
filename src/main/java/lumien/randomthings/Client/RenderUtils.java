@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
-import lumien.randomthings.Client.Renderer.ItemCollectorRenderer;
+import lumien.randomthings.Client.Renderer.RenderItemCollector;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;

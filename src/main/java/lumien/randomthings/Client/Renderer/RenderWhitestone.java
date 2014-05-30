@@ -12,7 +12,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
-public class WhitestoneRenderer implements IItemRenderer
+public class RenderWhitestone implements IItemRenderer
 {
 
 	@Override

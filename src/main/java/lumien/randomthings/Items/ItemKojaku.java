@@ -20,7 +20,7 @@ import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 public class ItemKojaku extends Item
 {
 	public static final String[] kojakuPullIconNameArray = new String[] { "pulling_0", "pulling_1", "pulling_2" };
-	@SideOnly(Side.CLIENT)
+	
 	private IIcon[] iconArray;
 
 	public ItemKojaku()
@@ -118,7 +118,7 @@ public class ItemKojaku extends Item
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
 		this.itemIcon = par1IconRegister.registerIcon("RandomThings:kojaku/kojaku" + "_standby");

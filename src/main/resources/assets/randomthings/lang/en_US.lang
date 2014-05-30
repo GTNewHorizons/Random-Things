@@ -25,6 +25,11 @@ item.dropFilterVoiding.name=Voiding Drop Filter
 item.enderLetter.name=Ender Letter
 item.spectreKey.name=Spectre Key
 item.soundRecorder.name=Sound Recorder
+item.spectreSword.name=Spectre Sword
+item.spectreHelmet.name=Spectre Helmet
+item.spectreChestplate.name=Spectre Chestplate
+item.spectreLeggings.name=Spectre Leggings
+item.spectreBoots.name=Spectre Boots
 
 item.creativeSword.name=Creative Sword
 item.creativeGrower.name=Creative Grower

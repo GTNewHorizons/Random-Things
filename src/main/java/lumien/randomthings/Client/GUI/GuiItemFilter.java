@@ -5,7 +5,8 @@ import lumien.randomthings.Client.GUI.Buttons.GuiButtonListtype;
 import lumien.randomthings.Client.GUI.Buttons.GuiButtonOreDictionary;
 import lumien.randomthings.Container.ContainerItemFilter;
 import lumien.randomthings.Items.ModItems;
-import lumien.randomthings.Network.Packets.PacketItemFilter;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.Network.Messages.MessageItemFilter;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiListExtended;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -56,13 +57,13 @@ public class GuiItemFilter extends GuiContainer
 		if (pressedButton == oreDictButton)
 		{
 			oreDictButton.setEnabled(!oreDictButton.isEnabled());
-			RandomThings.packetPipeline.sendToServer(new PacketItemFilter(PacketItemFilter.ACTION.OREDICT));
+			PacketHandler.INSTANCE.sendToServer(new MessageItemFilter(MessageItemFilter.ACTION.OREDICT));
 		}
 		else if (pressedButton == listTypeButton)
 		{
 			int type = listTypeButton.getType();
 			listTypeButton.setType(type==0?1:0);
-			RandomThings.packetPipeline.sendToServer(new PacketItemFilter(PacketItemFilter.ACTION.LISTTYPE));
+			PacketHandler.INSTANCE.sendToServer(new MessageItemFilter(MessageItemFilter.ACTION.LISTTYPE));
 		}
 	}
 

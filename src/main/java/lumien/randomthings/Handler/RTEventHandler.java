@@ -6,9 +6,9 @@ import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Blocks.ModBlocks;
-import lumien.randomthings.Client.Particles.ParticleSystem;
 import lumien.randomthings.Configuration.ConfigItems;
 import lumien.randomthings.Configuration.VanillaChanges;
+import lumien.randomthings.Entity.EntityHealingOrb;
 import lumien.randomthings.Handler.Spectre.SpectreHandler;
 import lumien.randomthings.Items.ItemDropFilter;
 import lumien.randomthings.Items.ItemFilter;
@@ -31,6 +31,7 @@ import net.minecraft.client.audio.ISound.AttenuationType;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundCategory;
 import net.minecraft.client.settings.GameSettings;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -52,7 +53,9 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent17;
 import net.minecraftforge.client.event.sound.SoundEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent.CheckSpawn;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -74,15 +77,15 @@ public class RTEventHandler
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void soundPlayed(PlaySoundEvent17 event)
 	{
 		RandomThings.instance.soundRecorderHandler.soundPlayed(event);
 	}
 
-	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void renderPlayerPre(RenderLivingEvent.Pre event)
 	{
 		if (event.entity instanceof EntityPlayer)
@@ -196,8 +199,8 @@ public class RTEventHandler
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	@SubscribeEvent()
+	@SideOnly(Side.CLIENT)
 	public void preTextureStitch(TextureStitchEvent.Pre event)
 	{
 		if (event.map.getTextureType() == 1)
@@ -206,8 +209,8 @@ public class RTEventHandler
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
 	@SubscribeEvent(priority = EventPriority.LOWEST)
+	@SideOnly(Side.CLIENT)
 	public void drawGameOverlay(RenderGameOverlayEvent.Post event)
 	{
 		if (event.type == RenderGameOverlayEvent.ElementType.HOTBAR)
@@ -239,6 +242,40 @@ public class RTEventHandler
 					arrow.motionX += arrow.shootingEntity.motionX;
 					arrow.motionY += arrow.shootingEntity.motionY;
 					arrow.motionZ += arrow.shootingEntity.motionZ;
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void livingHurt(LivingHurtEvent event)
+	{
+		if (!event.entityLiving.worldObj.isRemote && event.ammount>=7)
+		{
+			Entity attacker = event.source.getSourceOfDamage();
+			if (attacker instanceof EntityArrow)
+			{
+				EntityArrow arrow = (EntityArrow) attacker;
+				if (arrow.shootingEntity instanceof EntityPlayer)
+				{
+					attacker = arrow.shootingEntity;
+				}
+			}
+			if (attacker instanceof EntityPlayer) 
+			{
+				EntityPlayer player = (EntityPlayer) attacker;
+				
+				ItemStack helmet = player.getCurrentArmor(0);
+				ItemStack chestplate = player.getCurrentArmor(1);
+				ItemStack leggings = player.getCurrentArmor(2);
+				ItemStack boots = player.getCurrentArmor(3);
+
+				if (helmet != null && chestplate != null && leggings != null && boots != null)
+				{
+					if (helmet.getItem() instanceof ItemSpectreArmor && chestplate.getItem() instanceof ItemSpectreArmor && leggings.getItem() instanceof ItemSpectreArmor && boots.getItem() instanceof ItemSpectreArmor)
+					{
+						player.worldObj.spawnEntityInWorld(new EntityHealingOrb(player.worldObj,event.entityLiving.posX,event.entityLiving.posY+event.entityLiving.height/2,event.entityLiving.posZ,event.ammount/10));
+					}
 				}
 			}
 		}

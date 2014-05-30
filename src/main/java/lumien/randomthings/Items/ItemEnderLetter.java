@@ -11,7 +11,7 @@ import lumien.randomthings.Library.Texts;
 import lumien.randomthings.Library.WorldUtils;
 import lumien.randomthings.Library.Inventorys.InventoryDropFilter;
 import lumien.randomthings.Library.Inventorys.InventoryEnderLetter;
-import lumien.randomthings.Network.Packets.PacketNotification;
+import lumien.randomthings.Network.Messages.MessageNotification;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;

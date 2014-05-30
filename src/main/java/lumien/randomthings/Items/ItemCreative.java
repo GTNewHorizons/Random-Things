@@ -11,13 +11,13 @@ import net.minecraft.item.ItemStack;
 
 public class ItemCreative extends Item
 {
-	@SideOnly(Side.CLIENT)
+	
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 		par3List.add("\u00A7dCreative only");
 	}
 	
-	@SideOnly(Side.CLIENT)
+	
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
 	{
 		return ClientTickHandler.getCurrentCreativeColor();

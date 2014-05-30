@@ -3,6 +3,8 @@ package lumien.randomthings.Client.Renderer;
 import java.awt.Color;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
+
 import static org.lwjgl.opengl.GL11.*;
 
 import lumien.randomthings.Blocks.ModBlocks;
@@ -21,7 +23,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class ItemCollectorRenderer extends TileEntitySpecialRenderer
+public class RenderItemCollector extends TileEntitySpecialRenderer
 {
 	static final ModelItemCollector model = new ModelItemCollector();
 
@@ -75,7 +77,8 @@ public class ItemCollectorRenderer extends TileEntitySpecialRenderer
 				break;
 		}
 
-		ItemCollectorRenderer.model.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+		RenderItemCollector.model.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();
 

@@ -1,8 +1,11 @@
-package lumien.randomthings.Network.Packets;
+package lumien.randomthings.Network.Messages;
 
 import java.nio.CharBuffer;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -10,20 +13,20 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
-import lumien.randomthings.Network.AbstractPacket;
+
 import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
 
-public class PacketOnlineDetector extends AbstractPacket
+public class MessageOnlineDetector implements IMessage,IMessageHandler<MessageOnlineDetector,IMessage>
 {
 	String username;
 	int posX, posY, posZ, dimensionID;
 
-	public PacketOnlineDetector()
+	public MessageOnlineDetector()
 	{
 
 	}
 
-	public PacketOnlineDetector(String username, int posX, int posY, int posZ, int dimensionID)
+	public MessageOnlineDetector(String username, int posX, int posY, int posZ, int dimensionID)
 	{
 		this.username = username;
 		this.posX = posX;
@@ -33,7 +36,7 @@ public class PacketOnlineDetector extends AbstractPacket
 	}
 
 	@Override
-	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
+	public void toBytes(ByteBuf buffer)
 	{
 		ByteBufUtils.writeUTF8String(buffer, username);
 		
@@ -45,7 +48,7 @@ public class PacketOnlineDetector extends AbstractPacket
 	}
 
 	@Override
-	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
+	public void fromBytes(ByteBuf buffer)
 	{
 		username = ByteBufUtils.readUTF8String(buffer);
 		
@@ -57,20 +60,15 @@ public class PacketOnlineDetector extends AbstractPacket
 	}
 
 	@Override
-	public void handleClientSide(EntityPlayer player)
+	public IMessage onMessage(MessageOnlineDetector message, MessageContext ctx)
 	{
-		
-	}
-
-	@Override
-	public void handleServerSide(EntityPlayer player)
-	{
-		World worldObj = DimensionManager.getWorld(dimensionID);
-		if (worldObj.getTileEntity(posX, posY, posZ) instanceof TileEntityOnlineDetector)
+		World worldObj = DimensionManager.getWorld(message.dimensionID);
+		if (worldObj.getTileEntity(message.posX, message.posY, message.posZ) instanceof TileEntityOnlineDetector)
 		{
-			TileEntityOnlineDetector od = (TileEntityOnlineDetector) worldObj.getTileEntity(posX, posY, posZ);
-			od.setUsername(username);
+			TileEntityOnlineDetector od = (TileEntityOnlineDetector) worldObj.getTileEntity(message.posX, message.posY, message.posZ);
+			od.setUsername(message.username);
 		}
+		return null;
 	}
 
 }

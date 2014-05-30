@@ -25,7 +25,7 @@ public class ModItems
 	public static ItemCreativeGrower creativeGrower;
 	public static ItemCreativeChestGenerator creativeChestGenerator;
 	
-	public static ArmorMaterial spectreArmorMaterial = EnumHelper.addArmorMaterial("Spectre", 35, new int[]{4, 9, 7, 4}, 17);
+	public static ArmorMaterial spectreArmorMaterial = EnumHelper.addArmorMaterial("Spectre", 35, new int[]{3, 9, 7, 3}, 17);
 	public static ItemSpectreArmor spectreHelmet;
 	public static ItemSpectreArmor spectreChestplate;
 	public static ItemSpectreArmor spectreLeggings;

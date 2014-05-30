@@ -1,6 +1,9 @@
-package lumien.randomthings.Network.Packets;
+package lumien.randomthings.Network.Messages;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
@@ -8,9 +11,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import lumien.randomthings.Items.ModItems;
-import lumien.randomthings.Network.AbstractPacket;
+import lumien.randomthings.Network.PacketHandler;
 
-public class PacketEnderLetter extends AbstractPacket
+public class MessageEnderLetter implements IMessage,IMessageHandler<MessageEnderLetter,IMessage>
 {
 	public enum ACTION
 	{
@@ -20,24 +23,24 @@ public class PacketEnderLetter extends AbstractPacket
 	ACTION action;
 	String newReceiver;
 
-	public PacketEnderLetter(ACTION action)
+	public MessageEnderLetter(ACTION action)
 	{
 		this.action = action;
 	}
 	
-	public PacketEnderLetter(String newReceiver)
+	public MessageEnderLetter(String newReceiver)
 	{
 		this.action = ACTION.CHANGED_NAME;
 		this.newReceiver = newReceiver;
 	}
 	
-	public PacketEnderLetter()
+	public MessageEnderLetter()
 	{
 		
 	}
 
 	@Override
-	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
+	public void toBytes(ByteBuf buffer)
 	{
 		buffer.writeInt(action.ordinal());
 		switch (action)
@@ -49,7 +52,7 @@ public class PacketEnderLetter extends AbstractPacket
 	}
 
 	@Override
-	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer)
+	public void fromBytes(ByteBuf buffer)
 	{
 		action = ACTION.values()[buffer.readInt()];
 		
@@ -62,29 +65,23 @@ public class PacketEnderLetter extends AbstractPacket
 	}
 
 	@Override
-	public void handleClientSide(EntityPlayer player)
+	public IMessage onMessage(MessageEnderLetter message, MessageContext ctx)
 	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void handleServerSide(EntityPlayer player)
-	{
-		switch (action)
+		switch (message.action)
 		{
 			case CHANGED_NAME:
-				ItemStack enderLetter = player.getCurrentEquippedItem();
+				ItemStack enderLetter = ctx.getServerHandler().playerEntity.getCurrentEquippedItem();
 				if (enderLetter!=null && enderLetter.getItem() == ModItems.enderLetter)
 				{
 					if (enderLetter.stackTagCompound==null)
 					{
 						enderLetter.stackTagCompound = new NBTTagCompound();
 					}
-					enderLetter.stackTagCompound.setString("receiver", newReceiver);
+					enderLetter.stackTagCompound.setString("receiver", message.newReceiver);
 				}
 				break;
 		}
+		return null;
 	}
 
 }

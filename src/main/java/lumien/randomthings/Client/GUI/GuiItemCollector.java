@@ -4,7 +4,8 @@ import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Container.ContainerItemCollector;
-import lumien.randomthings.Network.Packets.PacketItemCollector;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.Network.Messages.MessageItemCollector;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -59,7 +60,7 @@ public class GuiItemCollector extends GuiContainer
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton)
 	{
-		PacketItemCollector packet = null;
+		MessageItemCollector packet = null;
 		if (par1GuiButton == minusX)
 		{
 			te.rangeX--;
@@ -111,8 +112,8 @@ public class GuiItemCollector extends GuiContainer
 		}
 		else
 		{
-			packet = new PacketItemCollector(te);
-			RandomThings.packetPipeline.sendToServer(packet);
+			packet = new MessageItemCollector(te);
+			PacketHandler.INSTANCE.sendToServer(packet);
 		}
 	}
 

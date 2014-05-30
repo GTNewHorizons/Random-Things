@@ -28,7 +28,6 @@ public class BlockSpectreLamp extends Block
 		this.setStepSound(soundTypeGlass);
 	}
 	
-    @SideOnly(Side.CLIENT)
     public int getRenderColor(int p_149741_1_)
     {
     	GL11.glEnable(GL11.GL_BLEND);
@@ -41,7 +40,6 @@ public class BlockSpectreLamp extends Block
         return false;
     }
 	
-    @SideOnly(Side.CLIENT)
     public int getRenderBlockPass()
     {
         return 1;

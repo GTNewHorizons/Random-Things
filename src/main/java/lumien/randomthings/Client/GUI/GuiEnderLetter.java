@@ -9,7 +9,8 @@ import lumien.randomthings.Container.ContainerEnderLetter;
 import lumien.randomthings.Container.ContainerVoidStone;
 import lumien.randomthings.Items.ItemEnderLetter;
 import lumien.randomthings.Library.InventoryUtils;
-import lumien.randomthings.Network.Packets.PacketEnderLetter;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.Network.Messages.MessageEnderLetter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
@@ -81,7 +82,7 @@ public class GuiEnderLetter extends GuiContainer
 	public void onGuiClosed()
 	{
 		Keyboard.enableRepeatEvents(false);
-		RandomThings.packetPipeline.sendToServer(new PacketEnderLetter(this.receiverName.getText()));
+		PacketHandler.INSTANCE.sendToServer(new MessageEnderLetter(this.receiverName.getText()));
 	}
 
 	@Override

@@ -39,7 +39,7 @@ public class SpectreHandler extends WorldSavedData
 	{
 		this("SpectreHandler");
 	}
-	
+
 	public void setWorld(World w)
 	{
 		this.worldObj = w;
@@ -109,13 +109,20 @@ public class SpectreHandler extends WorldSavedData
 
 	public void teleportPlayerOutOfSpectreWorld(EntityPlayerMP player)
 	{
-		int oldDimension = player.getEntityData().getInteger("oldDimension");
-		double oldPosX = player.getEntityData().getDouble("oldPosX");
-		double oldPosY = player.getEntityData().getDouble("oldPosY");
-		double oldPosZ = player.getEntityData().getDouble("oldPosZ");
+		if (player.getEntityData().hasKey("oldPosX"))
+		{
+			int oldDimension = player.getEntityData().getInteger("oldDimension");
+			double oldPosX = player.getEntityData().getDouble("oldPosX");
+			double oldPosY = player.getEntityData().getDouble("oldPosY");
+			double oldPosZ = player.getEntityData().getDouble("oldPosZ");
 
-		MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, oldDimension, new TeleporterSpectre((WorldServer) player.worldObj));
-		player.setPositionAndUpdate(oldPosX, oldPosY, oldPosZ);
+			MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, oldDimension, new TeleporterSpectre((WorldServer) player.worldObj));
+			player.setPositionAndUpdate(oldPosX, oldPosY, oldPosZ);
+		}
+		else
+		{
+			MinecraftServer.getServer().getConfigurationManager().respawnPlayer((EntityPlayerMP) player, 0, false);
+		}
 	}
 
 	public void update()
@@ -133,11 +140,11 @@ public class SpectreHandler extends WorldSavedData
 					{
 						int coord = playerConnection.get(username);
 						AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(coord * 32, 4, 0, coord * 32 + 15, 256, 15);
-						
-						if (!bb.isVecInside(Vec3.createVectorHelper(player.posX,player.posY,player.posZ)))
+
+						if (!bb.isVecInside(Vec3.createVectorHelper(player.posX, player.posY, player.posZ)))
 						{
 							player.setPositionAndUpdate(coord * 32 + 9 - 1, 6, 2 - 0.5);
-							player.addPotionEffect(new PotionEffect(PotionEffects.SLOWNESS,60,5,false));
+							player.addPotionEffect(new PotionEffect(PotionEffects.SLOWNESS, 200, 5, false));
 						}
 					}
 					else

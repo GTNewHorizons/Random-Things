@@ -57,7 +57,7 @@ public class ItemIngredient extends Item
 		GameRegistry.registerItem(this, "ingredient");
 	}
 	
-	@SideOnly(Side.CLIENT)
+	
     public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
     {
 		if (par1ItemStack.getItemDamage()==4)
@@ -69,7 +69,7 @@ public class ItemIngredient extends Item
     }
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	
 	public void getSubItems(Item item, CreativeTabs creativeTab, List list)
 	{
 		for (int i = 0; i < ingredients.size(); i++)
@@ -79,7 +79,7 @@ public class ItemIngredient extends Item
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	
 	public IIcon getIconFromDamage(int damage)
 	{
 		if (ingredients.size() - 1 < damage || damage < 0)
@@ -93,7 +93,7 @@ public class ItemIngredient extends Item
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
+	
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
 		for (Ingredient i : ingredients)

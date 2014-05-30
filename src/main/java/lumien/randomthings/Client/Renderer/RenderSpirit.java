@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.opengl.GL15;
 
-@SideOnly(Side.CLIENT)
+
 public class RenderSpirit extends RenderLiving
 {
 	private static final ResourceLocation slimeTextures = new ResourceLocation("RandomThings:textures/entitys/spirit.png");

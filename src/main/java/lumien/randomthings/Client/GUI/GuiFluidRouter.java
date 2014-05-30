@@ -5,7 +5,7 @@ import org.lwjgl.opengl.GL11;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Container.ContainerLiquidRouter;
-import lumien.randomthings.Network.Packets.PacketLiquidRouter;
+import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.TileEntities.TileEntityFluidRouter;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -42,11 +42,7 @@ public class GuiFluidRouter extends GuiContainer
 	
 	protected void actionPerformed(GuiButton pressedButton)
 	{
-		if (pressedButton==buttonMode)
-		{
-			PacketLiquidRouter packet = new PacketLiquidRouter(te.xCoord,te.yCoord,te.zCoord);
-			RandomThings.packetPipeline.sendToServer(packet);
-		}
+
 	}
 
 	@Override
