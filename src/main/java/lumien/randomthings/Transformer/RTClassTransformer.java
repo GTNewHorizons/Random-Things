@@ -190,7 +190,7 @@ public class RTClassTransformer implements IClassTransformer
 		mv.visitVarInsn(ILOAD, 2);
 		mv.visitVarInsn(ILOAD, 3);
 		mv.visitVarInsn(ILOAD, 4);
-		mv.visitVarInsn(ALOAD, 5);
+		mv.visitVarInsn(ALOAD, 0);
 		mv.visitMethodInsn(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "handleLeaveDecay", "(L" + worldClass + ";IIIL" + blockClass + ";)V");
 		Label l1 = new Label();
 		mv.visitLabel(l1);

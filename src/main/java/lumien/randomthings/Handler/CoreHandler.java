@@ -11,11 +11,11 @@ public class CoreHandler
 {
 	static Random rng = new Random();
 
-	public static void handleLeaveDecay(World worldObj, int posX, int posY, int posZ, Block leave)
+	public static void handleLeaveDecay(World worldObj, int posX, int posY, int posZ, Block block)
 	{
 		if (VanillaChanges.FASTER_LEAVEDECAY)
 		{
-			worldObj.scheduleBlockUpdate(posX, posY, posZ, Blocks.leaves, 4 + rng.nextInt(7));
+			worldObj.scheduleBlockUpdate(posX, posY, posZ, block, 4 + rng.nextInt(7));
 		}
 	}
 }
