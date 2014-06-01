@@ -35,6 +35,7 @@ public class ItemSpectreKey extends Item
 		this.setUnlocalizedName("spectreKey");
 		this.setCreativeTab(RandomThings.creativeTab);
 		this.setFull3D();
+		this.setMaxStackSize(1);
 
 		GameRegistry.registerItem(this, "spectreKey");
 		this.setTextureName("RandomThings:spectreKey");

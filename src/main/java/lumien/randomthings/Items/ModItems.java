@@ -31,6 +31,7 @@ public class ModItems
 	public static ItemSpectreArmor spectreLeggings;
 	public static ItemSpectreArmor spectreBoots;
 	public static ItemSpectreSword spectreSword;
+	public static ItemSpiritBinder spiritBinder;
 
 	public static void init()
 	{
@@ -65,6 +66,8 @@ public class ModItems
 		}
 		if (ConfigItems.spectreSword)
 			spectreSword = new ItemSpectreSword();
+		if (ConfigItems.spiritBinder)
+			spiritBinder = new ItemSpiritBinder();
 		
 		if (ConfigItems.creativeSword)
 			creativeSword = new ItemCreativeSword();

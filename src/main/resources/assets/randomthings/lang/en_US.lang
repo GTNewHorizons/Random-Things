@@ -30,6 +30,7 @@ item.spectreHelmet.name=Spectre Helmet
 item.spectreChestplate.name=Spectre Chestplate
 item.spectreLeggings.name=Spectre Leggings
 item.spectreBoots.name=Spectre Boots
+item.spiritBinder.name=Spirit Binder
 
 item.creativeSword.name=Creative Sword
 item.creativeGrower.name=Creative Grower
@@ -52,6 +53,14 @@ text.miscellaneous.entityid=Entity ID
 text.miscellaneous.entityName=Entity Name
 text.miscellaneous.connectedTo=Connected to
 text.miscellaneous.invalidArguments=Invalid arguments
+text.miscellaneous.setBonus=Set-Bonus:
+
+text.error.nbt=Couldn't use NBT Mod File, things like letters or magnetic force events won't survive restarts.
+
+text.magneticForce.notOnline=Not online
+text.magneticForce.invalidUsername=Invalid Username
+text.magneticForce.noRights=No right
+text.magneticForce.notYourself=Not to yourself
 
 text.enderLetter.invalidreceiver=You have specified an invalid receiver
 text.enderLetter.empty=You can't send an empty letter

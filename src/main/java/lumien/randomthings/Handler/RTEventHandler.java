@@ -7,13 +7,16 @@ import org.lwjgl.opengl.GL11;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Configuration.ConfigItems;
+import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.EntityHealingOrb;
+import lumien.randomthings.Entity.EntitySpirit;
 import lumien.randomthings.Handler.Spectre.SpectreHandler;
 import lumien.randomthings.Items.ItemDropFilter;
 import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Items.ItemSpectreArmor;
 import lumien.randomthings.Items.ItemWhiteStone;
+import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.Inventorys.InventoryDropFilter;
 import lumien.randomthings.Proxy.ClientProxy;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -33,6 +36,7 @@ import net.minecraft.client.audio.SoundCategory;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -246,11 +250,11 @@ public class RTEventHandler
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void livingHurt(LivingHurtEvent event)
 	{
-		if (!event.entityLiving.worldObj.isRemote && event.ammount>=7)
+		if (!event.entityLiving.worldObj.isRemote && event.ammount >= 7)
 		{
 			Entity attacker = event.source.getSourceOfDamage();
 			if (attacker instanceof EntityArrow)
@@ -261,10 +265,10 @@ public class RTEventHandler
 					attacker = arrow.shootingEntity;
 				}
 			}
-			if (attacker instanceof EntityPlayer) 
+			if (attacker instanceof EntityPlayer)
 			{
 				EntityPlayer player = (EntityPlayer) attacker;
-				
+
 				ItemStack helmet = player.getCurrentArmor(0);
 				ItemStack chestplate = player.getCurrentArmor(1);
 				ItemStack leggings = player.getCurrentArmor(2);
@@ -274,7 +278,7 @@ public class RTEventHandler
 				{
 					if (helmet.getItem() instanceof ItemSpectreArmor && chestplate.getItem() instanceof ItemSpectreArmor && leggings.getItem() instanceof ItemSpectreArmor && boots.getItem() instanceof ItemSpectreArmor)
 					{
-						player.worldObj.spawnEntityInWorld(new EntityHealingOrb(player.worldObj,event.entityLiving.posX,event.entityLiving.posY+event.entityLiving.height/2,event.entityLiving.posZ,event.ammount/10));
+						player.worldObj.spawnEntityInWorld(new EntityHealingOrb(player.worldObj, event.entityLiving.posX, event.entityLiving.posY + event.entityLiving.height / 2, event.entityLiving.posZ, event.ammount / 10));
 					}
 				}
 			}
@@ -284,9 +288,9 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void entityDeath(LivingDeathEvent event)
 	{
-		if (ConfigItems.whitestone)
+		if (FMLCommonHandler.instance().getEffectiveSide().isServer())
 		{
-			if (FMLCommonHandler.instance().getEffectiveSide().isServer())
+			if (ConfigItems.whitestone)
 			{
 				if (event.entityLiving instanceof EntityPlayer && !event.source.canHarmInCreative())
 				{
@@ -312,7 +316,30 @@ public class RTEventHandler
 							return;
 						}
 					}
+
 				}
+			}
+
+			if (ConfigItems.spiritBinder)
+			{
+				if (event.source.getEntity()!=null && event.source.getEntity() instanceof EntityPlayer && event.entity instanceof IMob && !(event.entity instanceof EntitySpirit))
+				{
+					EntityPlayer player = (EntityPlayer) event.source.getEntity();
+					if (player.inventory.hasItem(ModItems.spiritBinder))
+					{
+						double chance = Settings.SPIRIT_CHANCE;
+						if (ConfigItems.spectreSword && player.getCurrentEquippedItem()!=null && player.getCurrentEquippedItem().getItem()==ModItems.spectreSword)
+						{
+							chance=Settings.SPIRIT_CHANCE_SWORD;
+						}
+						double random = Math.random();
+						if (random<=chance)
+						{
+							player.worldObj.spawnEntityInWorld(new EntitySpirit(player.worldObj,event.entity.posX,event.entity.posY,event.entity.posZ));
+						}
+					}
+				}
+					
 			}
 		}
 	}

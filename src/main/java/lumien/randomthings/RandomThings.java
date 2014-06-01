@@ -21,6 +21,7 @@ import lumien.randomthings.Core.RTCreativeTab;
 import lumien.randomthings.Entity.ModEntitys;
 import lumien.randomthings.Handler.BackgroundHandler;
 import lumien.randomthings.Handler.LetterHandler;
+import lumien.randomthings.Handler.MagneticForceHandler;
 import lumien.randomthings.Handler.PeripheralProvider;
 import lumien.randomthings.Handler.RTEventHandler;
 import lumien.randomthings.Handler.RTTickHandler;
@@ -38,10 +39,12 @@ import lumien.randomthings.TileEntities.ModTileEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiVideoSettings;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -68,6 +71,8 @@ public class RandomThings
 	public static final String MOD_ID = "RandomThings";
 	public static final String MOD_NAME = "Random Things";
 	public static final String MOD_VERSION = "@VERSION@";
+	
+	public static final String AUTHOR_USERNAME="XxsumsumxX";
 
 	@SidedProxy(clientSide = "lumien.randomthings.Proxy.ClientProxy", serverSide = "lumien.randomthings.Proxy.CommonProxy")
 	public static CommonProxy proxy;
@@ -135,7 +140,7 @@ public class RandomThings
 		}
 		catch (Exception e)
 		{
-			logger.log(Level.WARN, "Couldn't reflect on cc, no peripheral support for CreativePlayerInterface and OnlineDetector and Notification Interface");
+			logger.log(Level.WARN, "Couldn't reflect on cc, no cc peripheral support for CreativePlayerInterface and OnlineDetector and Notification Interface");
 			e.printStackTrace();
 		}
 	}
@@ -148,7 +153,8 @@ public class RandomThings
 		}
 		catch (IOException e)
 		{
-			logger.log(Level.WARN, "Couldn't use NBT Mod File, things like letters won't persist.");
+			ChatComponentTranslation cct = new ChatComponentTranslation("text.error.nbt");
+			logger.log(Level.WARN, cct.getUnformattedText());
 			e.printStackTrace();
 		}
 	}
@@ -160,6 +166,8 @@ public class RandomThings
 
 		letterHandler = new LetterHandler();
 		letterHandler.readFromNBT();
+		
+		MagneticForceHandler.INSTANCE.readFromNBT(modNBT);
 
 		event.registerServerCommand(new RTCommand());
 	}
@@ -222,7 +230,8 @@ public class RandomThings
 
 		if (modNBT == null)
 		{
-			logger.log(Level.WARN, "Couldn't use NBT Mod File, things like ender letters won't persist.");
+			ChatComponentTranslation cct = new ChatComponentTranslation("text.error.nbt");
+			logger.log(Level.WARN, cct.getUnformattedText());
 			modNBT = new NBTTagCompound();
 		}
 	}

@@ -41,6 +41,7 @@ public class Recipes
 		ItemStack iQuartz = new ItemStack(Items.quartz);
 		ItemStack iGlass = new ItemStack(Blocks.glass);
 		ItemStack iIronIngot = new ItemStack(Items.iron_ingot);
+		ItemStack iSoulSand = new ItemStack(Blocks.soul_sand);
 
 		ItemStack iPlayerCore = new ItemStack(ModItems.ingredients, 1, 0);
 		ItemStack iObsidianStick = new ItemStack(ModItems.ingredients, 1, 1);
@@ -89,6 +90,12 @@ public class Recipes
 			addArmorRecipes(iSpectreIron,new ItemStack(ModItems.spectreHelmet),new ItemStack(ModItems.spectreChestplate),new ItemStack(ModItems.spectreLeggings),new ItemStack(ModItems.spectreBoots));
 		if (ConfigItems.spectreSword)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreSword),"xsx","xsx","xox",'s',iSpectreIron,'o',"stickObsidian"));
+		if (ConfigItems.spectreKey)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreKey),"xxs","sss","sxs",'s',iSpectreIron));
+		if (ConfigItems.magneticForce)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.magneticForce),"xex","xmx","xpx",'e',iEnderPearl,'m',iEmerald,'p',iPaper));
+		if (ConfigItems.spiritBinder)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spiritBinder),"ses","ene","ses",'s',iSoulSand,'e',iEnderPearl,'n',iNetherstar));
 		
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 0), "xrx", "rpr", "xrx", 'r', "dyeRed", 'p', iPaper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 1), "xrx", "rpr", "xrx", 'r', "dyeYellow", 'p', iPaper));

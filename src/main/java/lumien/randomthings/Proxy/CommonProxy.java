@@ -1,8 +1,14 @@
 package lumien.randomthings.Proxy;
 
+import java.util.ArrayList;
+
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
+
 public class CommonProxy
 {
 	public int itemCollectorRenderType;
+	private static final MinecraftServer server = MinecraftServer.getServer();
 	
 	public void registerRenderers()
 	{
@@ -28,5 +34,16 @@ public class CommonProxy
 	{
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public ArrayList<String> getUsernameList()
+	{
+		ArrayList<String> players = new ArrayList<String>();
+		for (int i = 0; i < server.getConfigurationManager().playerEntityList.size(); ++i)
+        {
+			players.add(((EntityPlayerMP)server.getConfigurationManager().playerEntityList.get(i)).getCommandSenderName());
+        }
+
+		return players;
 	}
 }

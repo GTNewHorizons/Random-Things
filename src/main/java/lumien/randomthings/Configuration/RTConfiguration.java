@@ -1,6 +1,7 @@
 package lumien.randomthings.Configuration;
 
 import lumien.randomthings.Handler.BackgroundHandler;
+import lumien.randomthings.Handler.MagneticForceHandler;
 import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
@@ -33,6 +34,7 @@ public class RTConfiguration
 		ConfigItems.soundRecorder = config.get("Items", "SoundRecorder", true).getBoolean(true);
 		ConfigItems.spectreArmor = config.get("Items", "SpectreArmor", true).getBoolean(true);
 		ConfigItems.spectreSword = config.get("Items", "SpectreSword", true).getBoolean(true);
+		ConfigItems.spiritBinder = config.get("Items", "SpiritBinder", true).getBoolean(true);
 
 		ConfigItems.creativeSword = config.get("Items", "CreativeSword", true).getBoolean(true);
 		ConfigItems.creativeGrower = config.get("Items", "CreativeGrower", true).getBoolean(true);
@@ -49,7 +51,12 @@ public class RTConfiguration
 
 		Settings.ANIMATED_TEXTURES = config.get("Settings", "AnimatedTextures", true).getBoolean(true);
 		Settings.FERTILIZEDDIRT_GROWTHINDICATOR = config.get("Settings", "FertilizedDirtGrowthIndicator", false, "Bonemeal particles will appear whenever fertilized dirt boosts the plant").getBoolean(false);
+		Settings.SPIRIT_CHANCE = config.get("Settings", "SpiritChance", 0.1,"The chance of a spirit spawning when you have a spirit binder in your inventory. (0-1)").getDouble(0.1);
+		Settings.SPIRIT_CHANCE_SWORD = config.get("Settings", "SpiritChanceSword", 0.2,"The chance of a spirit spawning when you have a spirit binder in your inventory and kill the entity with a spectre sword. (0-1)").getDouble(0.1);
 
+		MagneticForceHandler.TELEPORT_LENGTH = config.get("Settings", "MagneticForceTeleportLength", 200,"In ticks (20=1 Second)").getInt();
+		
+		
 		config.save();
 	}
 }

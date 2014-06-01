@@ -1,12 +1,16 @@
 package lumien.randomthings.Proxy;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiPlayerInfo;
 import net.minecraft.client.model.ModelSlime;
+import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.client.particle.EntityCritFX;
 import net.minecraft.client.particle.EntityReddustFX;
@@ -32,6 +36,7 @@ public class ClientProxy extends CommonProxy
 {
 	RenderItemCollector renderer;
 	public static IIcon slimeParticleTexture;
+	private static final Minecraft mc = Minecraft.getMinecraft();
 
 	@Override
 	public void registerTickHandler()
@@ -80,5 +85,19 @@ public class ClientProxy extends CommonProxy
 		particle.setRBGColorF(red, green, blue);
 		particle.motionY = motionY;
 		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
+	}
+	
+	@Override
+	public ArrayList<String> getUsernameList()
+	{
+		NetHandlerPlayClient nethandlerplayclient = this.mc.thePlayer.sendQueue;
+        List<GuiPlayerInfo> list = nethandlerplayclient.playerInfoList;
+        ArrayList<String> players=new ArrayList<String>();
+        for (GuiPlayerInfo info:list)
+        {
+        	players.add(info.name);
+        }
+        
+        return players;
 	}
 }

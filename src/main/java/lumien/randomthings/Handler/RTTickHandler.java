@@ -44,17 +44,23 @@ public class RTTickHandler
 		}
 	}
 
+	public static long lastTime = 0;
+
 	private void serverTick(TickEvent event)
 	{
 		switch (event.phase)
 		{
 			case START:
-				RandomThings.instance.letterHandler.update();
-				if (RandomThings.instance.spectreHandler != null)
+				if (event.type == TickEvent.Type.SERVER)
 				{
-					RandomThings.instance.spectreHandler.update();
-				}
+					MagneticForceHandler.INSTANCE.update();
 
+					RandomThings.instance.letterHandler.update();
+					if (RandomThings.instance.spectreHandler != null)
+					{
+						RandomThings.instance.spectreHandler.update();
+					}
+				}
 				break;
 			case END:
 				break;

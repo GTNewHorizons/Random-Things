@@ -19,5 +19,9 @@ public class PacketHandler
     	INSTANCE.registerMessage(MessageOnlineDetector.class, MessageOnlineDetector.class, 4, Side.SERVER);
     	INSTANCE.registerMessage(MessagePaintBiome.class, MessagePaintBiome.class, 5, Side.CLIENT);
     	INSTANCE.registerMessage(MessageWhitestone.class, MessageWhitestone.class, 6, Side.CLIENT);
+    	
+    	INSTANCE.registerMessage(MessageRequestTeleport.class, MessageRequestTeleport.class, 7, Side.SERVER);
+    	INSTANCE.registerMessage(MessageAnswerTeleport.class, MessageAnswerTeleport.class, 8, Side.CLIENT);
+    	INSTANCE.registerMessage(MessageMagneticForceParticle.class, MessageMagneticForceParticle.class, 9, Side.CLIENT);
     }
 }

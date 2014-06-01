@@ -16,4 +16,5 @@ public class ConfigItems
 	public static boolean soundRecorder;
 	public static boolean spectreArmor;
 	public static boolean spectreSword;
+	public static boolean spiritBinder;
 }

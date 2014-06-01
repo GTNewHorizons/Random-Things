@@ -1,8 +1,8 @@
 package lumien.randomthings.Client.GUI;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Client.GUI.Buttons.GuiButtonListtype;
-import lumien.randomthings.Client.GUI.Buttons.GuiButtonOreDictionary;
+import lumien.randomthings.Client.GUI.Elements.Buttons.GuiButtonListtype;
+import lumien.randomthings.Client.GUI.Elements.Buttons.GuiButtonOreDictionary;
 import lumien.randomthings.Container.ContainerItemFilter;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Network.PacketHandler;

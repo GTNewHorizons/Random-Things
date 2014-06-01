@@ -31,22 +31,19 @@ import net.minecraft.world.World;
 
 public class EntitySpirit extends EntityMob
 {
-	EntityPlayer follow;
-	PathNavigate path;
 	ChunkCoordinates spawnPosition;
 
-	public EntitySpirit(World par1World, EntityPlayer follow)
+	public EntitySpirit(World par1World, double posX,double posY,double posZ)
 	{
 		super(par1World);
 
 		this.yOffset = 0.0F;
-		this.follow = follow;
 		
 		this.width=0.6f;
 		this.height=0.6f;
 
 		this.setSize(0.6F, 0.6F);
-		this.setPosition(this.posX, this.posY, this.posZ);
+		this.setPosition(posX, posY, posZ);
 	}
 
 	public EntitySpirit(World par1World)
