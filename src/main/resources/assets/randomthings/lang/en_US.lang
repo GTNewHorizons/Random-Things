@@ -43,6 +43,8 @@ item.ectoplasm.name=Ectoplasm
 item.spectreIron.name=Spectre Iron
 item.error.name=Invalid Item
 
+entity.spirit.name=Spirit
+
 text.miscellaneous.press=Press %s for more information
 text.miscellaneous.shift=shift
 text.miscellaneous.block=Block
