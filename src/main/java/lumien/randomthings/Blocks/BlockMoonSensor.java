@@ -19,7 +19,7 @@ public class BlockMoonSensor extends BlockDaylightDetector
 		this.setBlockName("moonSensor");
 
 		GameRegistry.registerBlock(this, "moonSensor");
-		this.setBlockTextureName("RandomThings:moon_Sensor");
+		this.setBlockTextureName("RandomThings:moon_sensor");
 	}
 
 	@Override
