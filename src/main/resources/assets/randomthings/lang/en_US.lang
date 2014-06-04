@@ -8,6 +8,7 @@ tile.onlineDetector.name=Online Detector
 tile.fluidRouter.name=Fluid Router[WIP]
 tile.moonSensor.name=Moon Sensor
 tile.notificationInterface.name=Notification Interface
+tile.wirelessLever.name=Wireless Lever
 
 itemGroup.Random Things=Random Things
 item.filterBlock.name=Block Filter

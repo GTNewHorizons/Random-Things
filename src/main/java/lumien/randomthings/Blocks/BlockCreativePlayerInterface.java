@@ -4,6 +4,7 @@ import com.ibm.icu.util.Calendar;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Handler.CoreHandler;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.TileEntities.TileEntityCreativePlayerInterface;
 import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
@@ -78,11 +79,11 @@ public class BlockCreativePlayerInterface extends BlockContainer
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, int poxX, int poxY, int poxZ, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+	public boolean onBlockActivated(World par1World, int poxX, int posY, int poxZ, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 	{
 		if (!par1World.isRemote)
 		{
-			par5EntityPlayer.openGui(RandomThings.instance, GuiIds.PLAYER_INTERFACE, par1World, poxX, poxY, poxZ);
+			par5EntityPlayer.openGui(RandomThings.instance, GuiIds.PLAYER_INTERFACE, par1World, poxX, posY, poxZ);
 		}
 		return true;
 	}

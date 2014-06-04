@@ -39,7 +39,6 @@ public class ItemWhiteStone extends Item
 		GameRegistry.registerItem(this, "whitestone");
 		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(this, 1, 0), 1, 1, ConfigDungeonLoot.WHITESTONE_CHANCE));
 	}
-
 	
 	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{

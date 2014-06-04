@@ -12,4 +12,5 @@ public class ConfigBlocks
 	public static boolean moonSensor;
 	public static boolean notificationInterface;
 	public static boolean spectreLamp;
+	public static boolean wirelessLever;
 }

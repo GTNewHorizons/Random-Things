@@ -22,6 +22,7 @@ public class RTConfiguration
 		ConfigBlocks.moonSensor = config.get("Blocks", "MoonSensor", true).getBoolean(true);
 		ConfigBlocks.notificationInterface = config.get("Blocks", "NotificationInterface", true).getBoolean(true);
 		ConfigBlocks.spectreLamp = config.get("Blocks", "SpectreLamp", true).getBoolean(true);
+		ConfigBlocks.wirelessLever = config.get("Blocks", "WirelessLever", true).getBoolean(true);
 
 		ConfigItems.biomeSolution = config.get("Items", "BiomeSolution", true).getBoolean(true);
 		ConfigItems.biomePainter = config.get("Items", "BiomePainter", true).getBoolean(true);

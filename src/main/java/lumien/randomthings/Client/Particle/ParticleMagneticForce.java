@@ -6,10 +6,11 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntityPortalFX;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class ParticleMagneticForce extends EntityPortalFX
+public class ParticleMagneticForce extends EntityFX
 {
 	EntityPlayer followPlayer;
 
@@ -21,7 +22,7 @@ public class ParticleMagneticForce extends EntityPortalFX
 
 	public ParticleMagneticForce(EntityPlayer followPlayer, double offsetX, double offsetZ)
 	{
-		super(followPlayer.worldObj, followPlayer.posX+offsetX, followPlayer.posY, followPlayer.posZ+offsetZ, 0, 0, 0);
+		super(followPlayer.worldObj, followPlayer.posX+offsetX, followPlayer.posY-followPlayer.yOffset, followPlayer.posZ+offsetZ, 0, 0, 0);
 
 		rng = new Random();
 
@@ -37,12 +38,10 @@ public class ParticleMagneticForce extends EntityPortalFX
 		this.particleBlue = 0;
 
 		modY = -followPlayer.yOffset;
-
-		// this.setRBGColorF(0, 0, 0);
+		this.particleScale = this.rand.nextFloat() * 0.2F + 0.5F;
 
 		this.particleMaxAge = 20;
 		this.setParticleTextureIndex((int) (Math.random() * 26.0D + 1.0D + 224.0D));
-		// this.particleAlpha = 0;
 	}
 
 	@Override
@@ -57,10 +56,10 @@ public class ParticleMagneticForce extends EntityPortalFX
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
-		modY += 0.1f;
-		this.posX = followPlayer.posX + offsetX;
-		this.posY = followPlayer.posY + modY;
-		this.posZ = followPlayer.posZ + offsetZ;
+		
+		modY+=0.1;
+		
+		this.setPosition(followPlayer.posX+offsetX, followPlayer.posY+modY, followPlayer.posZ+offsetZ);
 
 		if (this.particleAge++ >= this.particleMaxAge)
 		{
@@ -69,8 +68,8 @@ public class ParticleMagneticForce extends EntityPortalFX
 
 		if (particleAge >= 10)
 		{
-			//float alpha = 1 - (particleAge - 10f) / 10f;
-			//this.setAlphaF(alpha);
+			float alpha = 1 - (particleAge - 10f) / 10f;
+			this.setAlphaF(alpha);
 		}
 	}
 

@@ -25,10 +25,12 @@ import lumien.randomthings.Client.Renderer.RenderItemCollector;
 import lumien.randomthings.Client.Renderer.RenderPfeil;
 import lumien.randomthings.Client.Renderer.RenderSpirit;
 import lumien.randomthings.Client.Renderer.RenderWhitestone;
+import lumien.randomthings.Client.Renderer.RenderWirelessLever;
 import lumien.randomthings.Entity.EntityHealingOrb;
 import lumien.randomthings.Entity.EntityPfeil;
 import lumien.randomthings.Entity.EntitySpirit;
 import lumien.randomthings.Items.ModItems;
+import lumien.randomthings.Library.RenderIds;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import lumien.randomthings.TileEntities.TileEntityItemCollector;
 
@@ -47,6 +49,8 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerRenderers()
 	{
+		RenderIds.WIRELESS_LEVER = RenderingRegistry.getNextAvailableRenderId();
+		
 		renderer = new RenderItemCollector();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityItemCollector.class, renderer);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdvancedItemCollector.class, renderer);
@@ -54,6 +58,8 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityPfeil.class, new RenderPfeil());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpirit.class, new RenderSpirit(new ModelSlime(16),new ModelSlime(0), 0.25f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHealingOrb.class, new RenderHealingOrb());
+		
+		RenderingRegistry.registerBlockHandler(new RenderWirelessLever());
 
 		MinecraftForgeClient.registerItemRenderer(ModItems.whitestone, new RenderWhitestone());
 	}

@@ -19,6 +19,7 @@ public class ModBlocks
 	public static BlockNotificationInterface notificationInterface;
 	public static BlockSpectreBlock spectreBlock;
 	public static BlockSpectreLamp spectreLamp;
+	public static BlockWirelessLever wirelessLever;
 
 	public static void init()
 	{
@@ -52,6 +53,8 @@ public class ModBlocks
 			notificationInterface = new BlockNotificationInterface();
 		if (ConfigBlocks.spectreLamp)
 			spectreLamp = new BlockSpectreLamp();
+		if (ConfigBlocks.wirelessLever)
+			wirelessLever = new BlockWirelessLever();
 		
 		spectreBlock = new BlockSpectreBlock();
 	}

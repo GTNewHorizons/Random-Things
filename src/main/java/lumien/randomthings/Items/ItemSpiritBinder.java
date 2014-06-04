@@ -65,6 +65,7 @@ public class ItemSpiritBinder extends Item
 					nbt.setBoolean("hasSpawner", true);
 					par1ItemStack.stackTagCompound = nbt;
 					par3World.setBlockToAir(posX, posY, posZ);
+					te.invalidate();
 					return true;
 				}
 			}

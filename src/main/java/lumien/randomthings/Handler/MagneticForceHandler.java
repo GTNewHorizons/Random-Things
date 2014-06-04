@@ -105,7 +105,7 @@ public class MagneticForceHandler
 			}
 			else
 			{
-				f+=0.01f;
+				f+=0.1f;
 				EntityPlayerMP userEntity = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(user);
 				EntityPlayerMP targetEntity = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(target);
 				if (userEntity!=null)

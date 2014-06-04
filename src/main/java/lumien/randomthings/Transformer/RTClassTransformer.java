@@ -13,9 +13,16 @@ import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.FrameNode;
 import org.objectweb.asm.tree.IincInsnNode;
+import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.IntInsnNode;
+import org.objectweb.asm.tree.JumpInsnNode;
+import org.objectweb.asm.tree.LabelNode;
 import org.objectweb.asm.tree.LdcInsnNode;
+import org.objectweb.asm.tree.LineNumberNode;
+import org.objectweb.asm.tree.LocalVariableNode;
+import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
 
@@ -26,6 +33,8 @@ import net.minecraft.launchwrapper.IClassTransformer;
 public class RTClassTransformer implements IClassTransformer
 {
 	Logger coreLogger = LogManager.getLogger("RandomThingsCore");
+
+	private static final String OBF_WORLD = "afn";
 
 	@Override
 	public byte[] transform(String name, String transformedName, byte[] basicClass)
@@ -46,11 +55,11 @@ public class RTClassTransformer implements IClassTransformer
 		{
 			return patchEntityRendererClass(basicClass, false);
 		}
-		else if (name.equals("afn") && VanillaChanges.HARDCORE_DARKNESS)
+		else if (name.equals(OBF_WORLD) && VanillaChanges.HARDCORE_DARKNESS)
 		{
 			return patchWorldClass(basicClass, true);
 		}
-		else if (name.equals("net.minecraft.world.World") && VanillaChanges.HARDCORE_DARKNESS)
+		else if (name.equals("net.minecraft.world.World") && (VanillaChanges.HARDCORE_DARKNESS || Boolean.TRUE))
 		{
 			return patchWorldClass(basicClass, false);
 		}
@@ -65,17 +74,23 @@ public class RTClassTransformer implements IClassTransformer
 		classReader.accept(classNode, 0);
 		coreLogger.log(Level.INFO, "Found World Class: " + classNode.name + ":" + obfuscated);
 
-		String methodName = obfuscated ? "b" : "getSunBrightness";
+		String sunBrightnessName = obfuscated ? "b" : "getSunBrightness";
+		String indirectlyPoweredName = obfuscated ? "v" : "isBlockIndirectlyGettingPowered";
 
 		int removeIndex = 0;
 
 		MethodNode getSunBrightness = null;
+		MethodNode isBlockIndirectlyGettingPowered = null;
 
 		for (MethodNode mn : classNode.methods)
 		{
-			if (mn.name.equals(methodName) && mn.desc.equals("(F)F"))
+			if (mn.name.equals(sunBrightnessName) && mn.desc.equals("(F)F"))
 			{
 				getSunBrightness = mn;
+			}
+			else if (mn.name.equals(indirectlyPoweredName) && mn.desc.equals("(III)Z"))
+			{
+				isBlockIndirectlyGettingPowered = mn;
 			}
 		}
 
@@ -101,6 +116,26 @@ public class RTClassTransformer implements IClassTransformer
 
 		}
 
+		if (isBlockIndirectlyGettingPowered != null)
+		{
+			LabelNode l0 = new LabelNode(new Label());
+			LabelNode l1 = new LabelNode(new Label());
+			LabelNode l2 = new LabelNode(new Label());
+			String world = obfuscated?OBF_WORLD:"net/minecraft/world/World";
+			
+			isBlockIndirectlyGettingPowered.instructions.insert(l2);
+			isBlockIndirectlyGettingPowered.instructions.insert(new InsnNode(IRETURN));
+			isBlockIndirectlyGettingPowered.instructions.insert(new InsnNode(ICONST_1));
+			isBlockIndirectlyGettingPowered.instructions.insert(l1);
+			isBlockIndirectlyGettingPowered.instructions.insert(new JumpInsnNode(IFEQ, l2));
+			isBlockIndirectlyGettingPowered.instructions.insert(new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "isIndirectlyGettingPowered", "(L"+world+";III)Z"));
+			isBlockIndirectlyGettingPowered.instructions.insert(new VarInsnNode(ILOAD,3));
+			isBlockIndirectlyGettingPowered.instructions.insert(new VarInsnNode(ILOAD,2));
+			isBlockIndirectlyGettingPowered.instructions.insert(new VarInsnNode(ILOAD,1));
+			isBlockIndirectlyGettingPowered.instructions.insert(new VarInsnNode(ALOAD,0));
+			isBlockIndirectlyGettingPowered.instructions.insert(l0);
+		}
+
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
@@ -112,7 +147,7 @@ public class RTClassTransformer implements IClassTransformer
 		ClassNode classNode = new ClassNode();
 		ClassReader classReader = new ClassReader(basicClass);
 		classReader.accept(classNode, 0);
-		coreLogger.log(Level.INFO,"Found EntityRenderer Class: " + classNode.name + ":" + obfuscated);
+		coreLogger.log(Level.INFO, "Found EntityRenderer Class: " + classNode.name + ":" + obfuscated);
 
 		String methodName = obfuscated ? "h" : "updateLightmap";
 
@@ -170,13 +205,13 @@ public class RTClassTransformer implements IClassTransformer
 		ClassNode classNode = new ClassNode();
 		ClassReader classReader = new ClassReader(basicClass);
 		classReader.accept(classNode, 0);
-		coreLogger.log(Level.INFO,"Found Leave Class: " + classNode.name + ":" + obfuscated);
+		coreLogger.log(Level.INFO, "Found Leave Class: " + classNode.name + ":" + obfuscated);
 
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
 		String methodName = obfuscated ? "a" : "onNeighborBlockChange";
-		String worldClass = obfuscated ? "afn" : "net/minecraft/world/World";
+		String worldClass = obfuscated ? OBF_WORLD : "net/minecraft/world/World";
 		String leaveClass = obfuscated ? "amp" : "net/minecraft/block/BlockLeavesBase";
 		String blockClass = obfuscated ? "ahu" : "net/minecraft/block/Block";
 

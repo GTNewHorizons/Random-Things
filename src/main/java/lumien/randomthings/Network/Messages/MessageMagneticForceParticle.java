@@ -41,7 +41,6 @@ public class MessageMagneticForceParticle implements IMessage, IMessageHandler<M
 			if (e != null && e instanceof EntityPlayer)
 			{
 				float f = message.f;
-				f = (float) (Math.random()*Math.PI);
 				double mX = 1 * Math.cos(f);
 				double mY = 1 * Math.sin(f);
 				Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleMagneticForce((EntityPlayer) e, mX, mY));
