@@ -1,5 +1,7 @@
 package lumien.randomthings.Blocks;
 
+import java.util.Random;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Blocks.ItemBlocks.ItemBlockWirelessLever;
@@ -9,6 +11,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLever;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -21,6 +25,10 @@ public class BlockWirelessLever extends BlockLever implements ITileEntityProvide
 		this.setBlockName("wirelessLever");
 		this.isBlockContainer = true;
 		
+		this.setHardness(0.5f);
+		this.setStepSound(soundTypeWood);
+		
+		this.setBlockTextureName("RandomThings:wirelessLever");
 		GameRegistry.registerBlock(this,ItemBlockWirelessLever.class, "wirelessLever");
 	}
 	
@@ -42,6 +50,12 @@ public class BlockWirelessLever extends BlockLever implements ITileEntityProvide
     }
 	
 	@Override
+	public int quantityDropped(Random p_149745_1_)
+    {
+        return 0;
+    }
+	
+	@Override
 	public int isProvidingWeakPower(IBlockAccess p_149709_1_, int p_149709_2_, int p_149709_3_, int p_149709_4_, int p_149709_5_)
     {
         return 0;
@@ -59,10 +73,19 @@ public class BlockWirelessLever extends BlockLever implements ITileEntityProvide
 		return new TileEntityWirelessLever();
 	}
 	
-	public void breakBlock(World p_149749_1_, int p_149749_2_, int p_149749_3_, int p_149749_4_, Block p_149749_5_, int p_149749_6_)
+	@Override
+	public void breakBlock(World worldObj, int posX, int posY, int posZ, Block block, int metadata)
     {
-        super.breakBlock(p_149749_1_, p_149749_2_, p_149749_3_, p_149749_4_, p_149749_5_, p_149749_6_);
-        p_149749_1_.removeTileEntity(p_149749_2_, p_149749_3_, p_149749_4_);
+		TileEntityWirelessLever te = (TileEntityWirelessLever) worldObj.getTileEntity(posX, posY, posZ);
+		ItemStack is = new ItemStack(this,1,0);
+		is.stackTagCompound = new NBTTagCompound();
+		is.stackTagCompound.setBoolean("hasTarget", true);
+		is.stackTagCompound.setInteger("targetX", te.getTargetX());
+		is.stackTagCompound.setInteger("targetY", te.getTargetY());
+		is.stackTagCompound.setInteger("targetZ", te.getTargetZ());
+		this.dropBlockAsItem(worldObj, posX, posY, posZ, is);
+		super.breakBlock(worldObj, posX, posY, posZ, block, metadata);
+		worldObj.removeTileEntity(posX, posY, posZ);
     }
 
     public boolean onBlockEventReceived(World p_149696_1_, int p_149696_2_, int p_149696_3_, int p_149696_4_, int p_149696_5_, int p_149696_6_)

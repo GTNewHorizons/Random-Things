@@ -3,6 +3,7 @@ package lumien.randomthings.Transformer;
 import java.io.File;
 import java.util.Map;
 
+import lumien.randomthings.Configuration.ConfigBlocks;
 import lumien.randomthings.Configuration.VanillaChanges;
 
 import net.minecraftforge.common.config.Configuration;
@@ -21,7 +22,8 @@ public class RTCallHook implements IFMLCallHook
 		config.load();
 		VanillaChanges.FASTER_LEAVEDECAY = config.get("VanillaChanges", "FasterLeaveDecay", true ,"Leaves will decay much faster when no longer connected to a log").getBoolean(true);
 		VanillaChanges.HARDCORE_DARKNESS = config.get("VanillaChanges", "Hardcore Darkness", false ,"The minimum light will be removed so if there's no light source it's actually going to be completely black").getBoolean(false);
-
+		ConfigBlocks.wirelessLever = config.get("Blocks", "WirelessLever", true).getBoolean(true);
+		
 		config.save();
 		
 		return null;

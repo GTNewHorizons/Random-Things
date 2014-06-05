@@ -1,5 +1,6 @@
 package lumien.randomthings.Client.Renderer;
 
+import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Library.RenderIds;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -32,7 +33,7 @@ public class RenderWirelessLever implements ISimpleBlockRenderingHandler
 
         if (!flag1)
         {
-        	renderer.setOverrideBlockTexture(renderer.getBlockIcon(Blocks.obsidian));
+        	renderer.setOverrideBlockTexture(renderer.getBlockIcon(Blocks.cobblestone));
         }
 
         float f = 0.25F;
@@ -81,7 +82,7 @@ public class RenderWirelessLever implements ISimpleBlockRenderingHandler
 
         tessellator.setBrightness(block.getMixedBrightnessForBlock(renderer.blockAccess, x, y, z));
         tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-        IIcon iicon = renderer.getBlockIconFromSide(Blocks.redstone_block, 0);
+        IIcon iicon = renderer.getBlockIconFromSide(ModBlocks.wirelessLever, 0);
 
         if (renderer.hasOverrideBlockTexture())
         {

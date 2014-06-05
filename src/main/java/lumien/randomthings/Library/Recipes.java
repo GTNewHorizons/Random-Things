@@ -42,6 +42,8 @@ public class Recipes
 		ItemStack iGlass = new ItemStack(Blocks.glass);
 		ItemStack iIronIngot = new ItemStack(Items.iron_ingot);
 		ItemStack iSoulSand = new ItemStack(Blocks.soul_sand);
+		ItemStack iRedstoneBlock = new ItemStack(Blocks.redstone_block);
+		ItemStack iLever = new ItemStack(Blocks.lever);
 
 		ItemStack iPlayerCore = new ItemStack(ModItems.ingredients, 1, 0);
 		ItemStack iObsidianStick = new ItemStack(ModItems.ingredients, 1, 1);
@@ -72,7 +74,9 @@ public class Recipes
 		if (ConfigBlocks.moonSensor)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.moonSensor,1),"ggg","lql","sss",'g',iGlass,'l',iLapislazuli,'s',"slabWood",'q',iQuartz));
 		if (ConfigBlocks.spectreLamp)
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.spectreLamp,4,0),"xix","iei","xix",'i',iSpectreIron,'e',iEctoplasm));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.spectreLamp,4,0),"xsx","ses","xsx",'s',iGlass,'e',iEctoplasm));
+		if (ConfigBlocks.wirelessLever)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.wirelessLever),"r","l",'r',iRedstoneBlock,'l',iLever));
 		
 		
 		if (ConfigItems.voidStone)

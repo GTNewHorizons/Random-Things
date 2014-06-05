@@ -2,6 +2,7 @@ package lumien.randomthings.Transformer;
 
 import java.util.Iterator;
 
+import lumien.randomthings.Configuration.ConfigBlocks;
 import lumien.randomthings.Configuration.VanillaChanges;
 
 import org.apache.logging.log4j.Level;
@@ -55,11 +56,11 @@ public class RTClassTransformer implements IClassTransformer
 		{
 			return patchEntityRendererClass(basicClass, false);
 		}
-		else if (name.equals(OBF_WORLD) && VanillaChanges.HARDCORE_DARKNESS)
+		else if (name.equals(OBF_WORLD))
 		{
 			return patchWorldClass(basicClass, true);
 		}
-		else if (name.equals("net.minecraft.world.World") && (VanillaChanges.HARDCORE_DARKNESS || Boolean.TRUE))
+		else if (name.equals("net.minecraft.world.World"))
 		{
 			return patchWorldClass(basicClass, false);
 		}
@@ -94,7 +95,7 @@ public class RTClassTransformer implements IClassTransformer
 			}
 		}
 
-		if (getSunBrightness != null)
+		if (getSunBrightness != null && VanillaChanges.HARDCORE_DARKNESS)
 		{
 			for (int i = 0; i < getSunBrightness.instructions.size(); i++)
 			{
@@ -116,7 +117,7 @@ public class RTClassTransformer implements IClassTransformer
 
 		}
 
-		if (isBlockIndirectlyGettingPowered != null)
+		if (isBlockIndirectlyGettingPowered != null && ConfigBlocks.wirelessLever)
 		{
 			LabelNode l0 = new LabelNode(new Label());
 			LabelNode l1 = new LabelNode(new Label());

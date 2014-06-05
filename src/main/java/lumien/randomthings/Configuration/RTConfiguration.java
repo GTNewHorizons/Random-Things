@@ -22,7 +22,6 @@ public class RTConfiguration
 		ConfigBlocks.moonSensor = config.get("Blocks", "MoonSensor", true).getBoolean(true);
 		ConfigBlocks.notificationInterface = config.get("Blocks", "NotificationInterface", true).getBoolean(true);
 		ConfigBlocks.spectreLamp = config.get("Blocks", "SpectreLamp", true).getBoolean(true);
-		ConfigBlocks.wirelessLever = config.get("Blocks", "WirelessLever", true).getBoolean(true);
 
 		ConfigItems.biomeSolution = config.get("Items", "BiomeSolution", true).getBoolean(true);
 		ConfigItems.biomePainter = config.get("Items", "BiomePainter", true).getBoolean(true);
@@ -54,7 +53,8 @@ public class RTConfiguration
 		Settings.FERTILIZEDDIRT_GROWTHINDICATOR = config.get("Settings", "FertilizedDirtGrowthIndicator", false, "Bonemeal particles will appear whenever fertilized dirt boosts the plant").getBoolean(false);
 		Settings.SPIRIT_CHANCE = config.get("Settings", "SpiritChance", 0.1,"The chance of a spirit spawning when you have a spirit binder in your inventory. (0-1)").getDouble(0.1);
 		Settings.SPIRIT_CHANCE_SWORD = config.get("Settings", "SpiritChanceSword", 0.2,"The chance of a spirit spawning when you have a spirit binder in your inventory and kill the entity with a spectre sword. (0-1)").getDouble(0.1);
-
+		Settings.WIRELESSLEVER_RANGE = config.get("Settings", "WirelessLeverRange", 10,"The range of a wireless lever in blocks").getDouble(10);
+		
 		MagneticForceHandler.TELEPORT_LENGTH = config.get("Settings", "MagneticForceTeleportLength", 200,"In ticks (20=1 Second)").getInt();
 		
 		
