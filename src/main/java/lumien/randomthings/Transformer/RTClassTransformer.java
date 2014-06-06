@@ -14,6 +14,7 @@ import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.FieldInsnNode;
 import org.objectweb.asm.tree.FrameNode;
 import org.objectweb.asm.tree.IincInsnNode;
 import org.objectweb.asm.tree.InsnNode;
@@ -64,10 +65,61 @@ public class RTClassTransformer implements IClassTransformer
 		{
 			return patchWorldClass(basicClass, false);
 		}
+		else if (name.equals("bls"))
+		{
+			return patchRenderGlobalClass(basicClass,true);
+		}
+		else if (name.equals("net.minecraft.client.renderer.RenderGlobal"))
+		{
+			return patchRenderGlobalClass(basicClass,false);
+		}
 
 		return basicClass;
 	}
 
+	private byte[] patchRenderGlobalClass(byte[] basicClass, boolean obfuscated)
+	{
+		ClassNode classNode = new ClassNode();
+		ClassReader classReader = new ClassReader(basicClass);
+		classReader.accept(classNode, 0);
+		coreLogger.log(Level.INFO, "Found RenderGlobal Class: " + classNode.name + ":" + obfuscated);
+		
+		String renderSkyName = obfuscated ? "a":"renderSky";
+		String moonPhaseName = obfuscated ? "n":"locationMoonPhasesPng";
+		
+		MethodNode renderSky = null;
+		for (MethodNode mn:classNode.methods)
+		{
+			if (mn.name.equals(renderSkyName) && mn.desc.equals("(F)V"))
+			{
+				renderSky = mn;
+			}
+		}
+		
+		if (renderSky!=null)
+		{
+			for (int i=0;i<renderSky.instructions.size();i++)
+			{
+				AbstractInsnNode node = renderSky.instructions.get(i);
+				if (node instanceof FieldInsnNode)
+				{
+					FieldInsnNode fin = (FieldInsnNode) node;
+					if (fin.name.equals(moonPhaseName))
+					{
+						renderSky.instructions.insert(renderSky.instructions.get(i+1), new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "moonColorHook", "()V"));
+						break;
+					}
+				}
+			}
+		}
+		
+		
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		classNode.accept(writer);
+
+		return writer.toByteArray();
+	}
+	
 	private byte[] patchWorldClass(byte[] basicClass, boolean obfuscated)
 	{
 		ClassNode classNode = new ClassNode();

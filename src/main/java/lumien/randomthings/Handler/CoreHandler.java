@@ -2,6 +2,8 @@ package lumien.randomthings.Handler;
 
 import java.util.Random;
 
+import org.lwjgl.opengl.GL11;
+
 import lumien.randomthings.Configuration.ConfigBlocks;
 import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.TileEntities.TileEntityWirelessLever;
@@ -33,5 +35,10 @@ public class CoreHandler
 		{
 			return false;
 		}
+	}
+	
+	public static void moonColorHook()
+	{
+		
 	}
 }
