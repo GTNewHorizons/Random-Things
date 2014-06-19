@@ -1,7 +1,6 @@
 package lumien.randomthings.Entity;
 
 import lumien.randomthings.Client.Particle.ParticleSpirit;
-import lumien.randomthings.Entity.AI.EntityAIFollow;
 import lumien.randomthings.Items.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;

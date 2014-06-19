@@ -2,6 +2,8 @@ package lumien.randomthings.Entity;
 
 import java.util.List;
 
+import lumien.randomthings.RandomThings;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -385,8 +387,16 @@ public class EntityPfeil extends Entity
 			{
 				for (i = 0; i < 4; ++i)
 				{
-					//RandomThings.proxy.spawnPfeilParticle(this.posX + this.motionX * (double) i / 4.0D, this.posY + this.motionY * (double) i / 4.0D, this.posZ + this.motionZ * (double) i / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ);
-					//this.worldObj.spawnParticle("crit", this.posX + this.motionX * (double) i / 4.0D, this.posY + this.motionY * (double) i / 4.0D, this.posZ + this.motionZ * (double) i / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ);
+					 RandomThings.proxy.spawnPfeilParticle(this.posX +
+					 this.motionX * (double) i / 4.0D, this.posY +
+					 this.motionY * (double) i / 4.0D, this.posZ +
+					 this.motionZ * (double) i / 4.0D, -this.motionX,
+					 -this.motionY + 0.2D, -this.motionZ);
+					 this.worldObj.spawnParticle("crit", this.posX +
+					 this.motionX * (double) i / 4.0D, this.posY +
+					 this.motionY * (double) i / 4.0D, this.posZ +
+					 this.motionZ * (double) i / 4.0D, -this.motionX,
+					 -this.motionY + 0.2D, -this.motionZ);
 				}
 			}
 
@@ -487,18 +497,7 @@ public class EntityPfeil extends Entity
 		if (!this.worldObj.isRemote && this.inGround && this.arrowShake <= 0)
 		{
 			boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && par1EntityPlayer.capabilities.isCreativeMode;
-
-			if (this.canBePickedUp == 1 && !par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Items.arrow, 1)))
-			{
-				flag = false;
-			}
-
-			if (flag)
-			{
-				this.playSound("random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-				par1EntityPlayer.onItemPickup(this, 1);
-				this.setDead();
-			}
+			this.setDead();
 		}
 	}
 

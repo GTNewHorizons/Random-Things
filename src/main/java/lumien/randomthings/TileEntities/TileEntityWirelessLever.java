@@ -58,6 +58,26 @@ public class TileEntityWirelessLever extends TileEntity
 			}
 		}
 	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound nbt)
+    {
+        super.readFromNBT(nbt);
+        
+        this.targetX = nbt.getInteger("targetX");
+        this.targetY = nbt.getInteger("targetY");
+        this.targetZ = nbt.getInteger("targetZ");
+    }
+    
+    @Override
+	public void writeToNBT(NBTTagCompound nbt)
+    {
+        super.writeToNBT(nbt);
+        
+        nbt.setInteger("targetX", targetX);
+        nbt.setInteger("targetY", targetY);
+        nbt.setInteger("targetZ", targetZ);
+    }
 
 	@Override
 	public Packet getDescriptionPacket()

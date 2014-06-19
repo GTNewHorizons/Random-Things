@@ -6,6 +6,8 @@ import java.util.List;
 import cpw.mods.fml.common.registry.GameData;
 
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.Configuration.ConfigItems;
+import lumien.randomthings.Handler.BloodMoonHandler;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageNotification;
@@ -49,7 +51,7 @@ public class RTCommand extends CommandBase
 	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender par1ICommandSender)
 	{
-		return par1ICommandSender.canCommandSenderUseCommand(this.getRequiredPermissionLevel(), this.getCommandName()) || par1ICommandSender.getCommandSenderName().equals("XxsumsumxX");
+		return par1ICommandSender.canCommandSenderUseCommand(this.getRequiredPermissionLevel(), this.getCommandName()) || par1ICommandSender.getCommandSenderName().equals(RandomThings.AUTHOR_USERNAME);
 	}
 
 	@Override
@@ -151,7 +153,7 @@ public class RTCommand extends CommandBase
 		else if (subCommand.equals("spectre"))
 		{
 			// Test Command
-			if (commandUser instanceof EntityPlayer)
+			if (commandUser instanceof EntityPlayer && ConfigItems.spectreArmor && ConfigItems.spectreKey)
 			{
 				EntityPlayer player = (EntityPlayer) commandUser;
 				player.inventory.addItemStackToInventory(new ItemStack(ModItems.spectreBoots));
@@ -167,7 +169,7 @@ public class RTCommand extends CommandBase
 	@Override
 	public int getRequiredPermissionLevel()
 	{
-		return 2;
+		return 3;
 	}
 
 	@Override

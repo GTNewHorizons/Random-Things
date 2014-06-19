@@ -4,7 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.potion.Potion;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Configuration.ConfigBlocks;
@@ -44,6 +48,7 @@ public class Recipes
 		ItemStack iSoulSand = new ItemStack(Blocks.soul_sand);
 		ItemStack iRedstoneBlock = new ItemStack(Blocks.redstone_block);
 		ItemStack iLever = new ItemStack(Blocks.lever);
+		ItemStack iDiamondBlock = new ItemStack(Blocks.diamond_block);
 
 		ItemStack iPlayerCore = new ItemStack(ModItems.ingredients, 1, 0);
 		ItemStack iObsidianStick = new ItemStack(ModItems.ingredients, 1, 1);
@@ -56,6 +61,7 @@ public class Recipes
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 3, 1), "o", "o", 'o', iObsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 4, 2), "fe", 'e', iEnderPearl,'f',iFlint));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients,1,4),"ei",'e',iEctoplasm,'i',iIronIngot));
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.ingredients,1,5), "dyeRed","dyeOrange","dyeYellow","dyeGreen","dyeCyan","dyePurple","dyeGray","dyeLime","dyeMagenta"));
 
 		if (ConfigBlocks.playerInterface)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.playerInterface), "oeo", "omo", "ono", 'o', iObsidian, 'e', iEnderChest, 'm', iPlayerCore, 'n', iNetherstar));
@@ -73,14 +79,14 @@ public class Recipes
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.onlineDetector, 1), "sts", "rer", "sts", 's', iStone, 't', iRedstoneTorch, 'r', iRedstone, 'e', iLapislazuli));
 		if (ConfigBlocks.moonSensor)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.moonSensor,1),"ggg","lql","sss",'g',iGlass,'l',iLapislazuli,'s',"slabWood",'q',iQuartz));
-		if (ConfigBlocks.spectreLamp)
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.spectreLamp,4,0),"xsx","ses","xsx",'s',iGlass,'e',iEctoplasm));
+		if (ConfigBlocks.lapisLamp)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.spectreLamp,4,0),"sss","sls","sss",'s',iGlass,'l',iLapislazuli));
 		if (ConfigBlocks.wirelessLever)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.wirelessLever),"r","l",'r',iRedstoneBlock,'l',iLever));
 		
 		
 		if (ConfigItems.voidStone)
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.voidStone, 1), "xox", "oeo", "xox", 'o', iObsidian, 'e', iEnderPearl));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.voidStone, 1), "xox", "oeo", "xox", 'o', iStone, 'e', iEnderPearl));
 		if (ConfigItems.dropFilter)
 		{
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.dropFilter, 1, 0), "lsl", "sfs", "lsl", 'l', iLeather, 's', iString, 'f', iFlint));
@@ -95,11 +101,17 @@ public class Recipes
 		if (ConfigItems.spectreSword)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreSword),"xsx","xsx","xox",'s',iSpectreIron,'o',"stickObsidian"));
 		if (ConfigItems.spectreKey)
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreKey),"xxs","sss","sxs",'s',iSpectreIron));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spectreKey),"xsx","xtx",'s',iSpectreIron,'t',"stickWood"));
 		if (ConfigItems.magneticForce)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.magneticForce),"xex","xmx","xpx",'e',iEnderPearl,'m',iEmerald,'p',iPaper));
 		if (ConfigItems.spiritBinder)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.spiritBinder),"ses","ene","ses",'s',iSoulSand,'e',iEnderPearl,'n',iNetherstar));
+		if (ConfigItems.soundRecorder)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.soundRecorder),"xrx","wiw","wiw",'r',iRedstoneTorch,'w',"plankWood",'i',iIronIngot));
+		if (ConfigItems.biomeCapsule)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.biomeCapsule),"dte","qgq","ooo",'d',iDiamondBlock,'e',iEmerald,'t',new ItemStack(ModItems.ingredients,1,5),'q',iQuartz,'g',iGlass,'o',iObsidian));
+		if (ConfigItems.biomePainter)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.biomePainter),"xtx","xwx","xox",'t',new ItemStack(ModItems.ingredients,1,5),'w',new ItemStack(Blocks.wool,1,OreDictionary.WILDCARD_VALUE),'o',"stickObsidian"));
 		
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 0), "xrx", "rpr", "xrx", 'r', "dyeRed", 'p', iPaper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 1), "xrx", "rpr", "xrx", 'r', "dyeYellow", 'p', iPaper));

@@ -6,6 +6,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Entity.EntitySpirit;
 import lumien.randomthings.Handler.Spectre.TeleporterSpectre;
 import lumien.randomthings.Library.WorldUtils;
@@ -23,6 +24,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 
@@ -36,7 +38,7 @@ public class ItemSpectreKey extends Item
 		this.setCreativeTab(RandomThings.creativeTab);
 		this.setFull3D();
 		this.setMaxStackSize(1);
-
+		
 		GameRegistry.registerItem(this, "spectreKey");
 		this.setTextureName("RandomThings:spectreKey");
 	}
@@ -85,7 +87,7 @@ public class ItemSpectreKey extends Item
 	{
 		if (!par2World.isRemote)
 		{
-			if (par2World.provider.dimensionId != 32)
+			if (par2World.provider.dimensionId != Settings.SPECTRE_DIMENSON_ID)
 			{
 				RandomThings.instance.spectreHandler.teleportPlayerToSpectreWorld((EntityPlayerMP) par3EntityPlayer);
 			}
@@ -95,6 +97,13 @@ public class ItemSpectreKey extends Item
 			}
 		}
 		return par1ItemStack;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean hasEffect(ItemStack par1ItemStack, int pass)
+	{
+		return Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId == Settings.SPECTRE_DIMENSON_ID;
 	}
 
 	/**

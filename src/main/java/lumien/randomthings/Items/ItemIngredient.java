@@ -17,6 +17,8 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemIngredient extends Item
@@ -47,9 +49,12 @@ public class ItemIngredient extends Item
 		ingredients.add(new Ingredient("enderFragment", "enderFragment", 16));
 		ingredients.add(new Ingredient("ectoplasm", "ectoplasm", 64));
 		ingredients.add(new Ingredient("spectreIron","spectreIron",64));
+		ingredients.add(new Ingredient("transformationCore","transformationCore",1));
 
 		OreDictionary.registerOre("stickObsidian", new ItemStack(this, 1, 1));
 		OreDictionary.registerOre("obsidianStick", new ItemStack(this, 1, 1));
+		
+		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH,new WeightedRandomChestContent(new ItemStack(this,1,4), 1, 1, 3));
 
 		this.setHasSubtypes(true);
 		this.setCreativeTab(RandomThings.creativeTab);

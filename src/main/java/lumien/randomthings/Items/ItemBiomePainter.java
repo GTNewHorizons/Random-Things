@@ -36,14 +36,14 @@ public class ItemBiomePainter extends Item
 	@Override
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
 	{
-		if (par2EntityPlayer.inventory.hasItem(ModItems.biomeSolution))
+		if (par2EntityPlayer.inventory.hasItem(ModItems.biomeCapsule))
 		{
 			if (!par3World.isRemote)
 			{
 				for (int i = 0; i < par2EntityPlayer.inventory.getSizeInventory(); i++)
 				{
 					ItemStack is = par2EntityPlayer.inventory.getStackInSlot(i);
-					if (is != null && is.getItem() instanceof ItemBiomeSolution && is.getItemDamage() != 0)
+					if (is != null && is.getItem() instanceof ItemBiomeCapsule && is.getItemDamage() != 0)
 					{
 						NBTTagCompound nbt = is.stackTagCompound;
 						int charges = nbt.getInteger("charges");

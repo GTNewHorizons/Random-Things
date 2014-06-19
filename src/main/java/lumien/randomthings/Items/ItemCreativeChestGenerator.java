@@ -57,6 +57,7 @@ public class ItemCreativeChestGenerator extends ItemCreative
 		{
 			ChestCategory selectedCategory = ChestCategory.values()[nbt.getInteger("category")];
 			par3List.add("Category: " + selectedCategory.getName());
+			par3List.add("Shift click to change category");
 		}
 	}
 

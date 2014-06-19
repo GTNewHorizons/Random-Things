@@ -1,5 +1,6 @@
 package lumien.randomthings.Client.GUI;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +20,8 @@ import net.minecraft.client.gui.GuiSlot;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.network.NetHandlerPlayClient;
+import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.scoreboard.Score;
@@ -37,7 +40,7 @@ public class GuiMagneticForce extends GuiContainer
 	boolean selected;
 
 	int counter;
-	
+
 	MessageAnswerTeleport.STATUS status;
 
 	public GuiMagneticForce()
@@ -47,7 +50,7 @@ public class GuiMagneticForce extends GuiContainer
 		this.xSize = 122;
 		this.ySize = 135;
 		counter = 0;
-		
+
 		status = null;
 
 		selected = false;
@@ -58,13 +61,13 @@ public class GuiMagneticForce extends GuiContainer
 		if (!selected)
 		{
 			selected = true;
-			
+
 			MessageRequestTeleport request = new MessageRequestTeleport();
 			request.setUsername(player);
 			PacketHandler.INSTANCE.sendToServer(request);
 		}
 	}
-	
+
 	public void setStatus(MessageAnswerTeleport.STATUS status)
 	{
 		this.status = status;
@@ -106,11 +109,11 @@ public class GuiMagneticForce extends GuiContainer
 	{
 		return guiTop;
 	}
-	
+
 	@Override
 	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_)
 	{
-		if (status!=null)
+		if (status != null)
 		{
 			String toDraw = "";
 			switch (status)
@@ -130,7 +133,7 @@ public class GuiMagneticForce extends GuiContainer
 				default:
 					break;
 			}
-			this.drawCenteredString(fontRendererObj, toDraw, xSize/2, 5, 0xFFFFFF);
+			this.drawCenteredString(fontRendererObj, toDraw, xSize / 2, 5, 0xFFFFFF);
 		}
 	}
 

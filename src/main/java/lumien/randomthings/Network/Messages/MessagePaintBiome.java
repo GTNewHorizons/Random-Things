@@ -16,7 +16,7 @@ import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
-import lumien.randomthings.Items.ItemBiomeSolution;
+import lumien.randomthings.Items.ItemBiomeCapsule;
 
 public class MessagePaintBiome implements IMessage, IMessageHandler<MessagePaintBiome, IMessage>
 {
@@ -69,7 +69,7 @@ public class MessagePaintBiome implements IMessage, IMessageHandler<MessagePaint
 			c.setBiomeArray(biomeArray);
 			Minecraft.getMinecraft().thePlayer.worldObj.markBlocksDirtyVertical(message.posX, message.posZ, 0, player.worldObj.getActualHeight());
 			BiomeGenBase biome = BiomeGenBase.getBiome(message.biomeID);
-			int colorInt = ItemBiomeSolution.getColorForBiome(biome);
+			int colorInt = ItemBiomeCapsule.getColorForBiome(biome);
 			Random rng = new Random();
 			Color color = new Color(colorInt);
 

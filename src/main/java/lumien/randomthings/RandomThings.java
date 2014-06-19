@@ -29,7 +29,7 @@ import lumien.randomthings.Handler.SoundRecorderHandler;
 import lumien.randomthings.Handler.Notifications.NotificationHandler;
 import lumien.randomthings.Handler.Spectre.SpectreHandler;
 import lumien.randomthings.Handler.Spectre.WorldProviderSpectre;
-import lumien.randomthings.Items.ItemBiomeSolution;
+import lumien.randomthings.Items.ItemBiomeCapsule;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.OverrideUtils;
 import lumien.randomthings.Library.Recipes;
@@ -48,12 +48,14 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -71,8 +73,8 @@ public class RandomThings
 	public static final String MOD_ID = "RandomThings";
 	public static final String MOD_NAME = "Random Things";
 	public static final String MOD_VERSION = "@VERSION@";
-	
-	public static final String AUTHOR_USERNAME="XxsumsumxX";
+
+	public static final String AUTHOR_USERNAME = "XxsumsumxX";
 
 	@SidedProxy(clientSide = "lumien.randomthings.Proxy.ClientProxy", serverSide = "lumien.randomthings.Proxy.CommonProxy")
 	public static CommonProxy proxy;
@@ -80,7 +82,7 @@ public class RandomThings
 	public static final RTCreativeTab creativeTab = new RTCreativeTab();
 
 	public Logger logger;
-	
+
 	public SpectreHandler spectreHandler;
 
 	File nbtFile;
@@ -104,7 +106,7 @@ public class RandomThings
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 		FMLCommonHandler.instance().bus().register(new RTTickHandler());
-		
+
 		RTEventHandler rte = new RTEventHandler();
 		MinecraftForge.EVENT_BUS.register(rte);
 		FMLCommonHandler.instance().bus().register(rte);
@@ -117,6 +119,15 @@ public class RandomThings
 			BackgroundHandler.setRandomBackground();
 			soundRecorderHandler = new SoundRecorderHandler();
 		}
+
+		// Version Checker
+		{
+			String VERSION_CHECKER_MODID = "VersionChecker";
+			if (Loader.isModLoaded(VERSION_CHECKER_MODID) && !MOD_VERSION.equals("@VERSION@"))
+			{
+				FMLInterModComms.sendRuntimeMessage(this.MOD_ID, VERSION_CHECKER_MODID, "addUpdate", "https://www.dropbox.com/s/mdy6g7mc7couc24/version.json");
+			}
+		}
 	}
 
 	@EventHandler
@@ -124,9 +135,9 @@ public class RandomThings
 	{
 		PacketHandler.init();
 		RandomThings.proxy.registerRenderers();
-		
-		DimensionManager.registerProviderType(32, WorldProviderSpectre.class, true);
-		DimensionManager.registerDimension(32, 32);
+
+		DimensionManager.registerProviderType(Settings.SPECTRE_DIMENSON_ID, WorldProviderSpectre.class, true);
+		DimensionManager.registerDimension(Settings.SPECTRE_DIMENSON_ID, Settings.SPECTRE_DIMENSON_ID);
 
 		Recipes.init();
 	}
@@ -166,7 +177,7 @@ public class RandomThings
 
 		letterHandler = new LetterHandler();
 		letterHandler.readFromNBT();
-		
+
 		MagneticForceHandler.INSTANCE.readFromNBT(modNBT);
 
 		event.registerServerCommand(new RTCommand());
@@ -188,11 +199,7 @@ public class RandomThings
 					int biomeID = nbt.getInteger("biomeID");
 					int color = nbt.getInteger("color");
 
-					ItemBiomeSolution.biomeColors.put(biomeID, color);
-					if (Settings.DEBUG)
-					{
-						logger.info(m.getSender() + " registered a custom solution color (" + color + ") for the biome " + biomeID);
-					}
+					ItemBiomeCapsule.biomeColors.put(biomeID, color);
 				}
 			}
 		}

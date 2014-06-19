@@ -2,7 +2,7 @@ package lumien.randomthings.Configuration;
 
 public class ConfigItems
 {
-	public static boolean biomeSolution;
+	public static boolean biomeCapsule;
 	public static boolean biomePainter;
 	public static boolean whitestone;
 	public static boolean magneticForce;

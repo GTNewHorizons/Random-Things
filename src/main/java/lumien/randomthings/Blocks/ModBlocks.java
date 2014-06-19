@@ -13,13 +13,12 @@ public class ModBlocks
 	public static BlockItemCollector itemCollector;
 	public static BlockAdvancedItemCollector advancedItemCollector;
 	public static BlockOnlineDetector onlineDetector;
-	public static BlockImbuingStation imbuingStation;
-	public static BlockFluidRouter liquidRouter;
 	public static BlockMoonSensor moonSensor;
 	public static BlockNotificationInterface notificationInterface;
 	public static BlockSpectreBlock spectreBlock;
-	public static BlockSpectreLamp spectreLamp;
+	public static BlockLapisLamp spectreLamp;
 	public static BlockWirelessLever wirelessLever;
+	public static BlockCarpentryBench carpentryBench;
 
 	public static void init()
 	{
@@ -43,18 +42,16 @@ public class ModBlocks
 		}
 		if (ConfigBlocks.onlineDetector)
 			onlineDetector = new BlockOnlineDetector();
-		if (ConfigBlocks.imbuingStation)
-			imbuingStation = new BlockImbuingStation();
-		if (ConfigBlocks.fluidRouter)
-			liquidRouter = new BlockFluidRouter();
 		if (ConfigBlocks.moonSensor)
 			moonSensor = new BlockMoonSensor();
 		if (ConfigBlocks.notificationInterface)
 			notificationInterface = new BlockNotificationInterface();
-		if (ConfigBlocks.spectreLamp)
-			spectreLamp = new BlockSpectreLamp();
+		if (ConfigBlocks.lapisLamp)
+			spectreLamp = new BlockLapisLamp();
 		if (ConfigBlocks.wirelessLever)
 			wirelessLever = new BlockWirelessLever();
+		if (ConfigBlocks.carpentryBench)
+			carpentryBench = new BlockCarpentryBench();
 		
 		spectreBlock = new BlockSpectreBlock();
 	}

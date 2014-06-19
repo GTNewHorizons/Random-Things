@@ -11,19 +11,19 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockSpectreLamp extends Block
+public class BlockLapisLamp extends Block
 {
 
-	public BlockSpectreLamp()
+	public BlockLapisLamp()
 	{
 		super(Material.redstoneLight);
 
 		this.setCreativeTab(RandomThings.creativeTab);
-		this.setBlockName("spectreLamp");
+		this.setBlockName("lapisLamp");
 		
-		GameRegistry.registerBlock(this, "spectreLamp");
+		GameRegistry.registerBlock(this, "lapisLamp");
 		
-		this.setBlockTextureName("RandomThings:spectreLamp");
+		this.setBlockTextureName("RandomThings:lapisLamp");
 		this.setHardness(0.3F);
 		this.setStepSound(soundTypeGlass);
 	}

@@ -73,7 +73,6 @@ public class ItemWhiteStone extends Item
 	public boolean showDurabilityBar(ItemStack stack)
 	{
 		return false;
-		// return stack.getItemDamage() == 0 && stack.stackTagCompound != null;
 	}
 
 	@Override

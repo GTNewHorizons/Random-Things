@@ -1,5 +1,6 @@
 package lumien.randomthings.Items;
 
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -22,18 +23,20 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 
-public class ItemBiomeSolution extends Item
+public class ItemBiomeCapsule extends Item
 {
 	static public HashMap<Integer, Integer> biomeColors;
 	static Random rng = new Random();
+	
+	final static float modColor = 1F/255F;
 
-	public ItemBiomeSolution()
+	public ItemBiomeCapsule()
 	{
-		this.setUnlocalizedName("biomeSolution");
+		this.setUnlocalizedName("biomeCapsule");
 		this.setCreativeTab(RandomThings.creativeTab);
 		this.setMaxStackSize(1);
 
-		GameRegistry.registerItem(this, "biomeSolution");
+		GameRegistry.registerItem(this, "biomeCapsule");
 
 		biomeColors = new HashMap<Integer, Integer>();
 		{
@@ -42,25 +45,6 @@ public class ItemBiomeSolution extends Item
 			biomeColors.put(8, 6029312); // Nether
 			biomeColors.put(9, 8223332); // The End
 		}
-	}
-
-	@Override
-	public int getMaxItemUseDuration(ItemStack par1ItemStack)
-	{
-		return 72000;
-	}
-
-	@Override
-	public EnumAction getItemUseAction(ItemStack par1ItemStack)
-	{
-		return EnumAction.block;
-	}
-
-	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-	{
-		par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
-		return par1ItemStack;
 	}
 
 	@Override
@@ -103,10 +87,9 @@ public class ItemBiomeSolution extends Item
 	}
 
 	@Override
-	
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
-		this.itemIcon = par1IconRegister.registerIcon("RandomThings:biomeSolution");
+		this.itemIcon = par1IconRegister.registerIcon("RandomThings:biomeCapsule");
 	}
 
 	@Override
@@ -114,22 +97,25 @@ public class ItemBiomeSolution extends Item
 	{
 		if (entityItem.worldObj.isRemote)
 		{
-			if (entityItem.getEntityItem().getItemDamage() != 0 && !entityItem.worldObj.isAirBlock((int) Math.floor(entityItem.posX), ((int) Math.floor(entityItem.posY)) - 1, (int) Math.floor(entityItem.posZ)))
-			{
-				ItemStack is = entityItem.getEntityItem();
-				NBTTagCompound nbt = is.stackTagCompound;
-				if (nbt == null)
-				{
-					nbt = is.stackTagCompound = new NBTTagCompound();
-					nbt.setInteger("charges", 0);
-				}
-				int charges = is.stackTagCompound.getInteger("charges");
-				int biomeID = is.getItemDamage() - 1;
+			ItemStack is = entityItem.getEntityItem();
+			BiomeGenBase biome = entityItem.worldObj.getBiomeGenForCoords((int) Math.floor(entityItem.posX), (int) Math.floor(entityItem.posZ));
 
-				if (charges < 256)
-				{
-					entityItem.motionY += 0.05;
-				}
+			NBTTagCompound nbt = is.stackTagCompound;
+			if (nbt == null)
+			{
+				nbt = is.stackTagCompound = new NBTTagCompound();
+				nbt.setInteger("charges", 0);
+			}
+			
+			System.out.println(nbt.getInteger("selectingTimer"));
+			
+			int charges = is.stackTagCompound.getInteger("charges");
+			int biomeID = is.getItemDamage()-1;
+			if (charges < 256 && biomeID!=-1 && biome.biomeID == biomeID)
+			{
+				int intColor = getColorForBiome(BiomeGenBase.getBiome(biomeID));
+				Color c = new Color(intColor);
+				RandomThings.proxy.spawnColoredDust(entityItem.posX, entityItem.posY+0.1, entityItem.posZ, 0, 0, 0,modColor*c.getRed(),modColor*c.getGreen(),modColor*c.getBlue());
 			}
 		}
 		else
@@ -175,18 +161,9 @@ public class ItemBiomeSolution extends Item
 					int itemPosY = (int) Math.floor(entityItem.posY);
 					int itemPosZ = (int) Math.floor(entityItem.posZ);
 
-					int modX = rng.nextInt(16) - 8;
-					int modZ = rng.nextInt(16) - 8;
-
-					int randomBiomeID = entityItem.worldObj.getBiomeGenForCoords(itemPosX + modX, itemPosZ + modZ).biomeID;
-					if (randomBiomeID == biomeID)
+					int foundBiomeID = entityItem.worldObj.getBiomeGenForCoords(itemPosX, itemPosZ).biomeID;
+					if (foundBiomeID == biomeID)
 					{
-						Chunk c = entityItem.worldObj.getChunkFromBlockCoords(itemPosX + modX, itemPosZ + modZ);
-						byte[] biomeArray = c.getBiomeArray();
-
-						biomeArray[(itemPosZ + modZ & 15) << 4 | (itemPosX + modX & 15)] = (byte) (BiomeGenBase.plains.biomeID & 255);
-						c.setBiomeArray(biomeArray);
-						PacketHandler.INSTANCE.sendToDimension(new MessagePaintBiome(itemPosX + modX, itemPosY, itemPosZ + modZ, entityItem.worldObj.provider.dimensionId, BiomeGenBase.plains.biomeID), entityItem.worldObj.provider.dimensionId);
 						charges++;
 						is.stackTagCompound.setInteger("charges", charges);
 					}
@@ -210,7 +187,6 @@ public class ItemBiomeSolution extends Item
 	}
 
 	@Override
-	
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
 	{
 		if (par1ItemStack.getItemDamage() == 0)

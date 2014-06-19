@@ -28,9 +28,9 @@ public class SoundRecorderHandler
 			{
 				if (playedSounds.size() >= 10)
 				{
-					playedSounds.remove(0);
+					playedSounds.remove(9);
 				}
-				playedSounds.add(event.sound.getPositionedSoundLocation().getResourceDomain()+":"+event.sound.getPositionedSoundLocation().getResourcePath());
+				playedSounds.add(0,event.sound.getPositionedSoundLocation().getResourceDomain()+":"+event.sound.getPositionedSoundLocation().getResourcePath());
 			}
 		}
 	}

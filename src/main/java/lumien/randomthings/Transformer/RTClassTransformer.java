@@ -65,6 +65,7 @@ public class RTClassTransformer implements IClassTransformer
 		{
 			return patchWorldClass(basicClass, false);
 		}
+		/* Moon and Star Stuff
 		else if (name.equals("bls"))
 		{
 			return patchRenderGlobalClass(basicClass,true);
@@ -73,6 +74,7 @@ public class RTClassTransformer implements IClassTransformer
 		{
 			return patchRenderGlobalClass(basicClass,false);
 		}
+		*/
 
 		return basicClass;
 	}
@@ -86,6 +88,7 @@ public class RTClassTransformer implements IClassTransformer
 		
 		String renderSkyName = obfuscated ? "a":"renderSky";
 		String moonPhaseName = obfuscated ? "n":"locationMoonPhasesPng";
+		String starListName = obfuscated ? "F":"starGLCallList";
 		
 		MethodNode renderSky = null;
 		for (MethodNode mn:classNode.methods)
@@ -106,8 +109,15 @@ public class RTClassTransformer implements IClassTransformer
 					FieldInsnNode fin = (FieldInsnNode) node;
 					if (fin.name.equals(moonPhaseName))
 					{
-						renderSky.instructions.insert(renderSky.instructions.get(i+1), new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "moonColorHook", "()V"));
-						break;
+						renderSky.instructions.insert(renderSky.instructions.get(i+1), new VarInsnNode(FLOAD,1));
+						renderSky.instructions.insert(renderSky.instructions.get(i+2), new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "moonColorHook", "(F)V"));
+						i+=2;
+					}
+					else if (fin.name.equals(starListName))
+					{
+						renderSky.instructions.insert(renderSky.instructions.get(i-3), new VarInsnNode(FLOAD,1));
+						renderSky.instructions.insert(renderSky.instructions.get(i-2), new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "starColorHook", "(F)V"));
+						i+=2;
 					}
 				}
 			}

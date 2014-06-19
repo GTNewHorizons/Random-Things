@@ -17,7 +17,10 @@ import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Items.ItemSpectreArmor;
 import lumien.randomthings.Items.ItemWhiteStone;
 import lumien.randomthings.Items.ModItems;
+import lumien.randomthings.Library.PotionEffects;
 import lumien.randomthings.Library.Inventorys.InventoryDropFilter;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.Network.Messages.MessageBloodMoon;
 import lumien.randomthings.Proxy.ClientProxy;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.EventPriority;
@@ -38,6 +41,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -65,6 +69,7 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent.CheckSpawn;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
+import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.event.world.ChunkWatchEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
@@ -114,7 +119,7 @@ public class RTEventHandler
 	}
 
 	@SubscribeEvent
-	public void playerLogin(WorldEvent.Load event)
+	public void worldLoad(WorldEvent.Load event)
 	{
 		if (event.world.isRemote && VanillaChanges.LOCKED_GAMMA)
 		{
@@ -126,7 +131,7 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void changedDimension(PlayerChangedDimensionEvent event)
 	{
-		if (event.toDim == 32)
+		if (event.toDim == Settings.SPECTRE_DIMENSON_ID)
 		{
 			EntityPlayer player = event.player;
 			player.getEntityData().setInteger("oldDimension", event.fromDim);
@@ -139,7 +144,7 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void loadWorld(WorldEvent.Load event)
 	{
-		if (!event.world.isRemote && event.world.provider.dimensionId == 32)
+		if (!event.world.isRemote && event.world.provider.dimensionId == Settings.SPECTRE_DIMENSON_ID)
 		{
 			SpectreHandler spectreHandler = (SpectreHandler) event.world.mapStorage.loadData(SpectreHandler.class, "SpectreHandler");
 			if (spectreHandler == null)
@@ -249,6 +254,12 @@ public class RTEventHandler
 				}
 			}
 		}
+		
+		if (Settings.BLOOD_MOON && !event.world.isRemote && event.entity instanceof EntityPlayerMP)
+		{
+			boolean hasBloodMoon = BloodMoonHandler.INSTANCE.hasBloodMoon(event.world.provider.dimensionId);
+			PacketHandler.INSTANCE.sendTo(new MessageBloodMoon().setBloodmoon(hasBloodMoon).setDimensionID(event.world.provider.dimensionId), (EntityPlayerMP) event.entity);
+		}
 	}
 
 	@SubscribeEvent
@@ -305,9 +316,9 @@ public class RTEventHandler
 
 							player.setHealth(1F);
 
-							player.addPotionEffect(new PotionEffect(10, 200, 10, false));
-							player.addPotionEffect(new PotionEffect(11, 200, 5, false));
-							player.addPotionEffect(new PotionEffect(12, 200, 1, false));
+							player.addPotionEffect(new PotionEffect(PotionEffects.REGENERATION, 200, 10, false));
+							player.addPotionEffect(new PotionEffect(PotionEffects.RESISTANCE, 200, 5, false));
+							player.addPotionEffect(new PotionEffect(PotionEffects.FIRERESISTANCE, 200, 1, false));
 
 							is.setItemDamage(0);
 							player.inventory.markDirty();

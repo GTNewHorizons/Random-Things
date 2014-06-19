@@ -9,7 +9,7 @@ import lumien.randomthings.Configuration.ConfigItems;
 public class ModItems
 {
 	public static ItemFilter filter;
-	public static ItemBiomeSolution biomeSolution;
+	public static ItemBiomeCapsule biomeCapsule;
 	public static ItemBiomePainter biomePainter;
 	public static ItemIngredient ingredients;
 	public static ItemKojaku kojaku;
@@ -37,8 +37,8 @@ public class ModItems
 	{
 		RandomThings.instance.logger.debug("Initializing Items");
 		
-		if (ConfigItems.biomeSolution)
-			biomeSolution = new ItemBiomeSolution();
+		if (ConfigItems.biomeCapsule)
+			biomeCapsule = new ItemBiomeCapsule();
 		if (ConfigItems.biomePainter)
 			biomePainter = new ItemBiomePainter();
 		if (ConfigItems.whitestone)

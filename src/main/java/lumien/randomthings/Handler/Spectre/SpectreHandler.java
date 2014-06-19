@@ -2,11 +2,14 @@ package lumien.randomthings.Handler.Spectre;
 
 import java.util.HashMap;
 
+import lumien.randomthings.RandomThings;
 import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Library.PotionEffects;
 import lumien.randomthings.Library.WorldUtils;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.logging.log4j.Level;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -49,7 +52,7 @@ public class SpectreHandler extends WorldSavedData
 	{
 		String playerName = player.getCommandSenderName();
 		int coord = 0;
-		WorldServer spectreWorld = MinecraftServer.getServer().worldServerForDimension(32);
+		WorldServer spectreWorld = MinecraftServer.getServer().worldServerForDimension(Settings.SPECTRE_DIMENSON_ID);
 		if (playerConnection.containsKey(playerName))
 		{
 			coord = playerConnection.get(playerName);
@@ -58,17 +61,17 @@ public class SpectreHandler extends WorldSavedData
 		{
 			coord = nextCoord;
 			nextCoord++;
-			WorldUtils.generateCube(spectreWorld, coord * 32, 4, 0, coord * 32 + 15, 16, 15, ModBlocks.spectreBlock);
+			WorldUtils.generateCube(spectreWorld, coord * 32, 40, 0, coord * 32 + 15, 52, 15, ModBlocks.spectreBlock);
 			playerConnection.put(playerName, coord);
 			this.markDirty();
 		}
 
-		if (player.dimension != 32)
+		if (player.dimension != Settings.SPECTRE_DIMENSON_ID)
 		{
-			MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, 32, new TeleporterSpectre(spectreWorld));
+			MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, Settings.SPECTRE_DIMENSON_ID, new TeleporterSpectre(spectreWorld));
 		}
 
-		player.setPositionAndUpdate(coord * 32 + 9 - 1, 6, 2 - 0.5);
+		player.setPositionAndUpdate(coord * 32 + 9 - 1, 42, 2 - 0.5);
 	}
 
 	@Override
@@ -88,6 +91,8 @@ public class SpectreHandler extends WorldSavedData
 		}
 
 		nbt.setTag("playerList", tagList);
+		
+		nbt.setBoolean("newVersion", true);
 	}
 
 	@Override
@@ -104,6 +109,18 @@ public class SpectreHandler extends WorldSavedData
 			String playerName = compound.getString("playerName");
 			int coord = compound.getInteger("coord");
 			playerConnection.put(playerName, coord);
+		}
+		
+		// Old Version PATCH
+		boolean newVersion = nbt.getBoolean("newVersion");
+		if (!newVersion)
+		{
+			playerConnection = new HashMap<String, Integer>();
+			nextCoord = 0;
+			RandomThings.instance.logger.log(Level.WARN, "The Spectre World got an update in the recent version so i had to \"reset\" the spectre world.");
+			RandomThings.instance.logger.log(Level.WARN, "I would recommend to also reset the spectre world itself because the \"old\" cubes are still where they were");
+			RandomThings.instance.logger.log(Level.WARN, "Also if there's still a player in the old spectre world you should either move him out or change the dimensionID to 32 in the config file");
+			RandomThings.instance.logger.log(Level.WARN, "If you don't this will crash in a second!! :(");
 		}
 	}
 
@@ -139,11 +156,11 @@ public class SpectreHandler extends WorldSavedData
 					if (playerConnection.containsKey(username))
 					{
 						int coord = playerConnection.get(username);
-						AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(coord * 32, 4, 0, coord * 32 + 15, 256, 15);
+						AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(coord * 32, 40, 0, coord * 32 + 15, 52, 15);
 
 						if (!bb.isVecInside(Vec3.createVectorHelper(player.posX, player.posY, player.posZ)))
 						{
-							player.setPositionAndUpdate(coord * 32 + 9 - 1, 6, 2 - 0.5);
+							player.setPositionAndUpdate(coord * 32 + 9 - 1, 42, 2 - 0.5);
 							player.addPotionEffect(new PotionEffect(PotionEffects.SLOWNESS, 200, 5, false));
 						}
 					}

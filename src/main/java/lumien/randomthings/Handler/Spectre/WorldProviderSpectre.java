@@ -3,6 +3,7 @@ package lumien.randomthings.Handler.Spectre;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.Configuration.Settings;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
@@ -60,7 +61,7 @@ public class WorldProviderSpectre extends WorldProvider
 	public void registerWorldChunkManager()
 	{
 		this.worldChunkMgr = new WorldChunkManagerHell(BiomeGenBase.sky, 0F);
-		this.dimensionId = 32;
+		this.dimensionId = Settings.SPECTRE_DIMENSON_ID;
 	}
 
 	@Override
@@ -92,7 +93,7 @@ public class WorldProviderSpectre extends WorldProvider
 
     public String getDepartMessage()
     {
-    	return "Entering the Spectre World";
+    	return "Leaving the Spectre World";
     }
 
 }

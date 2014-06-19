@@ -2,7 +2,7 @@ package lumien.randomthings.TileEntities;
 
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityImbuingStation extends TileEntity
+public class TileEntityCarpentryBench extends TileEntity
 {
 
 }
