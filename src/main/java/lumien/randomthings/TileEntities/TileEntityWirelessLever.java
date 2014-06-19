@@ -33,7 +33,7 @@ public class TileEntityWirelessLever extends TileEntity
 		super.validate();
 
 		loadedLevers.add(this);
-		this.worldObj.notifyBlockOfNeighborChange(targetX, targetY, targetZ, ModBlocks.wirelessLever);
+		//this.worldObj.notifyBlockOfNeighborChange(targetX, targetY, targetZ, ModBlocks.wirelessLever);
 	}
 
 	@Override
