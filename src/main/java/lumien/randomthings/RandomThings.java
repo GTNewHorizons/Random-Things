@@ -121,13 +121,8 @@ public class RandomThings
 		}
 
 		// Version Checker
-		{
-			String VERSION_CHECKER_MODID = "VersionChecker";
-			if (Loader.isModLoaded(VERSION_CHECKER_MODID) && !MOD_VERSION.equals("@VERSION@"))
-			{
-				FMLInterModComms.sendRuntimeMessage(this.MOD_ID, VERSION_CHECKER_MODID, "addUpdate", "https://www.dropbox.com/s/mdy6g7mc7couc24/version.json");
-			}
-		}
+		String VERSION_CHECKER_MODID = "VersionChecker";
+		FMLInterModComms.sendRuntimeMessage(this.MOD_ID, VERSION_CHECKER_MODID, "addVersionCheck", "https://raw.github.com/lumien231/Random-Things/master/version.json");
 	}
 
 	@EventHandler
