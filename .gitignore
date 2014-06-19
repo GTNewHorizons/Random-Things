@@ -7,6 +7,7 @@
 !/src/*
 !/*.gradle
 !/*.md
+!/version.json
 .gradle
 Thumbs.db
 Update.bat
