@@ -17,19 +17,15 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "2.0"
-group= "lumien.randomthings" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+version = "2.1"
+group= "lumien.randomthings" 
 archivesBaseName = "RandomThings"
 
 def ENV = System.getenv()
-if (ENV.DRONE_BUILD_NUMBER) 
+if (ENV.DRONE_COMMIT) 
 {
-	version += "." + ENV.DRONE_BUILD_NUMBER
+	version += "." + ENV.DRONE_COMMIT
 } 
-else 
-{
-	version += ".local"
-}
 
 jar {
     manifest {
