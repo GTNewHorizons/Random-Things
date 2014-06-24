@@ -2,23 +2,15 @@ package lumien.randomthings.Items;
 
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Client.RenderUtils;
-import lumien.randomthings.Client.Particle.ParticleWhitestone;
 import lumien.randomthings.Configuration.ConfigDungeonLoot;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageWhitestone;
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -40,6 +32,7 @@ public class ItemWhiteStone extends Item
 		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(this, 1, 0), 1, 1, ConfigDungeonLoot.WHITESTONE_CHANCE));
 	}
 	
+	@Override
 	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 		if (stack.getItemDamage() == 0)

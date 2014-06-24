@@ -1,9 +1,6 @@
 package lumien.randomthings.Client.Particle;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntityReddustFX;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.world.World;
 
 public class ParticleSquare extends EntityReddustFX
@@ -19,6 +16,7 @@ public class ParticleSquare extends EntityReddustFX
 		this.setRBGColorF(0, 0, 0);
 	}
 	
+	@Override
 	public void onUpdate()
     {
         this.prevPosX = this.posX;

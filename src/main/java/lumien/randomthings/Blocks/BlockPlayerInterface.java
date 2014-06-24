@@ -5,10 +5,6 @@ import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,7 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockPlayerInterface extends BlockContainer
+public class BlockPlayerInterface extends BlockContainerBase
 {
 	IIcon texture_bottom;
 	IIcon texture_top;
@@ -29,17 +25,10 @@ public class BlockPlayerInterface extends BlockContainer
 
 	protected BlockPlayerInterface()
 	{
-		super(Material.rock);
+		super("playerinterface",Material.rock);
 
-		this.setCreativeTab(RandomThings.creativeTab);
 		this.setStepSound(soundTypeStone);
-		this.setHardness(20.0F);
-		this.setBlockName("playerinterface");
-
 		this.setHardness(4.0F);
-
-		GameRegistry.registerBlock(this, "playerinterface");
-
 		icons = new IIcon[3];
 	}
 
@@ -103,9 +92,9 @@ public class BlockPlayerInterface extends BlockContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int par2)
+	protected <T extends TileEntity> Class getTileEntityClass()
 	{
-		return new TileEntityPlayerInterface();
+		return TileEntityPlayerInterface.class;
 	}
 
 }

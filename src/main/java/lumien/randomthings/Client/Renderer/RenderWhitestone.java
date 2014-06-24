@@ -1,14 +1,11 @@
 package lumien.randomthings.Client.Renderer;
 
-import lumien.randomthings.Client.RenderUtils;
-
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
@@ -58,10 +55,10 @@ public class RenderWhitestone implements IItemRenderer
     {
         par1Tessellator.startDrawingQuads();
         par1Tessellator.setColorOpaque_I(par6);
-        par1Tessellator.addVertex((double)(par2 + 0), (double)(par3 + 0), 0.0D);
-        par1Tessellator.addVertex((double)(par2 + 0), (double)(par3 + par5), 0.0D);
-        par1Tessellator.addVertex((double)(par2 + par4), (double)(par3 + par5), 0.0D);
-        par1Tessellator.addVertex((double)(par2 + par4), (double)(par3 + 0), 0.0D);
+        par1Tessellator.addVertex(par2 + 0, par3 + 0, 0.0D);
+        par1Tessellator.addVertex(par2 + 0, par3 + par5, 0.0D);
+        par1Tessellator.addVertex(par2 + par4, par3 + par5, 0.0D);
+        par1Tessellator.addVertex(par2 + par4, par3 + 0, 0.0D);
         par1Tessellator.draw();
     }
 

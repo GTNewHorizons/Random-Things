@@ -12,4 +12,5 @@ public class ConfigBlocks
 	public static boolean lapisLamp;
 	public static boolean wirelessLever;
 	public static boolean carpentryBench;
+	public static boolean dyeingMachine;
 }

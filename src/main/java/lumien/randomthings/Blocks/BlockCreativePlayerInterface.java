@@ -1,29 +1,17 @@
 package lumien.randomthings.Blocks;
 
-import com.ibm.icu.util.Calendar;
-
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Handler.CoreHandler;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.TileEntities.TileEntityCreativePlayerInterface;
-import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockCreativePlayerInterface extends BlockContainer
+public class BlockCreativePlayerInterface extends BlockContainerBase
 {
 	IIcon texture_bottom;
 	IIcon texture_top;
@@ -33,17 +21,12 @@ public class BlockCreativePlayerInterface extends BlockContainer
 
 	public BlockCreativePlayerInterface()
 	{
-		super(Material.rock);
+		super("creativePlayerInterface",Material.rock);
 
 		this.setCreativeTab(RandomThings.creativeTab);
 		this.setStepSound(soundTypeStone);
-		this.setHardness(20.0F);
-		this.setBlockName("creativePlayerInterface");
 
 		this.setHardness(4.0F);
-
-		GameRegistry.registerBlock(this, "creativePlayerInterface");
-		
 		icons = new IIcon[3];
 	}
 
@@ -89,8 +72,8 @@ public class BlockCreativePlayerInterface extends BlockContainer
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int par2)
+	protected <T extends TileEntity> Class getTileEntityClass()
 	{
-		return new TileEntityCreativePlayerInterface();
+		return TileEntityCreativePlayerInterface.class;
 	}
 }

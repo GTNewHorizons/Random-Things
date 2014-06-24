@@ -5,11 +5,8 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Entity.EntityHealingOrb;
-import lumien.randomthings.Library.ChatColors;
+import lumien.randomthings.Library.Colors;
 import lumien.randomthings.Library.PotionEffects;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,6 +31,7 @@ public class ItemSpectreSword extends ItemSword
 		GameRegistry.registerItem(this, "spectreSword");
 	}
 
+	@Override
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase hitEntity, EntityLivingBase hittingEntity)
 	{
 		super.hitEntity(par1ItemStack, hitEntity, hittingEntity);
@@ -42,12 +40,14 @@ public class ItemSpectreSword extends ItemSword
 	}
 
 	
+	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
-		par3List.add(ChatColors.AQUA + "Soul Solid");
+		par3List.add(Colors.AQUA + "Soul Solid");
 	}
 
 	
+	@Override
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
 	{
 		GL11.glEnable(GL11.GL_BLEND);

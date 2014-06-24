@@ -2,12 +2,10 @@ package lumien.randomthings.Blocks;
 
 import java.util.Random;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
@@ -22,23 +20,20 @@ import net.minecraft.util.Facing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockAdvancedItemCollector extends BlockContainer
+public class BlockAdvancedItemCollector extends BlockContainerBase
 {
 	Random rng;
 
 	protected BlockAdvancedItemCollector()
 	{
-		super(Material.rock);
+		super("advancedItemCollector",Material.rock);
 		this.blockHardness=1.5F;
 
-		this.setCreativeTab(RandomThings.creativeTab);
-		this.setBlockName("advancedItemCollector");
 		this.setBlockTextureName("RandomThings:itemCollector/advancedItemCollector");
 		this.setBlockBounds(0.35F, 0, 0.35F, 0.65F, 0.3F, 0.65F);
+		this.
 		
 		rng = new Random();
-
-		GameRegistry.registerBlock(this, "advancedItemCollector");
 	}
 	
 	@Override
@@ -88,12 +83,6 @@ public class BlockAdvancedItemCollector extends BlockContainer
 
         super.breakBlock(worldObj, posX, posY, posZ, block, metadata);
     }
-
-	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
-	{
-		return new TileEntityAdvancedItemCollector();
-	}
 	
 	@Override
 	public boolean onBlockActivated(World worldObj, int poxX, int poxY, int poxZ, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
@@ -198,4 +187,9 @@ public class BlockAdvancedItemCollector extends BlockContainer
 		}
 	}
 
+	@Override
+	protected <T extends TileEntity> Class getTileEntityClass()
+	{
+		return TileEntityAdvancedItemCollector.class;
+	}
 }

@@ -7,26 +7,17 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Entity.EntitySpirit;
-import lumien.randomthings.Handler.Spectre.TeleporterSpectre;
-import lumien.randomthings.Library.WorldUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.ArrowNockEvent;
 
 public class ItemSpectreKey extends Item
 {
@@ -44,6 +35,7 @@ public class ItemSpectreKey extends Item
 	}
 
 	
+	@Override
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
 	{
 		GL11.glEnable(GL11.GL_BLEND);
@@ -109,6 +101,7 @@ public class ItemSpectreKey extends Item
 	/**
 	 * How long it takes to use or consume an item
 	 */
+	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack)
 	{
 		return 100;
@@ -118,6 +111,7 @@ public class ItemSpectreKey extends Item
 	 * returns the action that specifies what animation to play when the items
 	 * is being used
 	 */
+	@Override
 	public EnumAction getItemUseAction(ItemStack par1ItemStack)
 	{
 		return EnumAction.bow;
@@ -127,6 +121,7 @@ public class ItemSpectreKey extends Item
 	 * Called whenever this item is equipped and the right mouse button is
 	 * pressed. Args: itemStack, world, entityPlayer
 	 */
+	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
 		par3EntityPlayer.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
@@ -134,6 +129,7 @@ public class ItemSpectreKey extends Item
 	}
 
 	
+	@Override
 	public void registerIcons(IIconRegister ir)
 	{
 		super.registerIcons(ir);

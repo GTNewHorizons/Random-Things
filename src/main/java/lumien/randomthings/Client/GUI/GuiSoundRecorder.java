@@ -6,7 +6,6 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.Container.ContainerSoundRecorder;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiSoundRecorder extends GuiContainer

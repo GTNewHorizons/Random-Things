@@ -1,10 +1,8 @@
 package lumien.randomthings.Blocks;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.TileEntities.TileEntityItemCollector;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
@@ -14,26 +12,17 @@ import net.minecraft.util.Facing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockItemCollector extends BlockContainer
+public class BlockItemCollector extends BlockContainerBase
 {
 
 	protected BlockItemCollector()
 	{
-		super(Material.rock);
+		super("itemCollector",Material.rock);
 		this.blockHardness=1.5F;
 
 		this.setCreativeTab(RandomThings.creativeTab);
-		this.setBlockName("itemCollector");
 		this.setBlockTextureName("RandomThings:itemCollector/itemCollector");
 		this.setBlockBounds(0.35F, 0, 0.35F, 0.65F, 0.3F, 0.65F);
-
-		GameRegistry.registerBlock(this, "itemCollector");
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
-	{
-		return new TileEntityItemCollector();
 	}
 
 	@Override
@@ -127,6 +116,12 @@ public class BlockItemCollector extends BlockContainer
 				this.setBlockBounds(0F, 0.35F, 0.35F, 0.30F, 0.65F, 0.65F);
 				break;
 		}
+	}
+
+	@Override
+	protected <T extends TileEntity> Class getTileEntityClass()
+	{
+		return TileEntityItemCollector.class;
 	}
 
 }

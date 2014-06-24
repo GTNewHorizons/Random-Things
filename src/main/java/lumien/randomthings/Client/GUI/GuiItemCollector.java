@@ -2,7 +2,6 @@ package lumien.randomthings.Client.GUI;
 
 import org.lwjgl.opengl.GL11;
 
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.Container.ContainerItemCollector;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageItemCollector;

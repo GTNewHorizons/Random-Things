@@ -24,6 +24,7 @@ public class ItemSoundRecorder extends Item
 		GameRegistry.registerItem(this, "soundRecorder");
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
@@ -32,6 +33,7 @@ public class ItemSoundRecorder extends Item
 		icons[1] = par1IconRegister.registerIcon("RandomThings:soundRecorderActive");
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIconFromDamage(int damage)
 	{
@@ -42,6 +44,7 @@ public class ItemSoundRecorder extends Item
 		return null;
 	}
 
+	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
 		if (par3EntityPlayer.isSneaking())

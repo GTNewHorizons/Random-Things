@@ -3,17 +3,11 @@ package lumien.randomthings.Handler;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Items.ModItems;
-import lumien.randomthings.Library.WorldUtils;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageNotification;
 
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;

@@ -4,25 +4,14 @@ import java.util.List;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Library.ChatColors;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.Library.InventoryUtils;
-import lumien.randomthings.Library.Texts;
-import lumien.randomthings.Library.WorldUtils;
-import lumien.randomthings.Library.Inventorys.InventoryDropFilter;
 import lumien.randomthings.Library.Inventorys.InventoryEnderLetter;
-import lumien.randomthings.Network.Messages.MessageNotification;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
@@ -140,7 +129,7 @@ public class ItemEnderLetter extends Item
 		}
 		else
 		{
-			IInventory inventory = this.getLetterInventory(sender);
+			IInventory inventory = ItemEnderLetter.getLetterInventory(sender);
 			inventory.openInventory();
 			if (InventoryUtils.isInventoryEmpty(inventory))
 			{

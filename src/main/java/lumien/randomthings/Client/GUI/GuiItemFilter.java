@@ -1,14 +1,11 @@
 package lumien.randomthings.Client.GUI;
 
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.GUI.Elements.Buttons.GuiButtonListtype;
 import lumien.randomthings.Client.GUI.Elements.Buttons.GuiButtonOreDictionary;
 import lumien.randomthings.Container.ContainerItemFilter;
-import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageItemFilter;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiListExtended;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,8 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.common.FMLCommonHandler;
 
 public class GuiItemFilter extends GuiContainer
 {
@@ -52,6 +47,7 @@ public class GuiItemFilter extends GuiContainer
         this.buttonList.add(listTypeButton);
     }
 	
+	@Override
 	protected void actionPerformed(GuiButton pressedButton)
 	{
 		if (pressedButton == oreDictButton)

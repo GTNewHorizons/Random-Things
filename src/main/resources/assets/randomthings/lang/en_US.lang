@@ -13,6 +13,7 @@ tile.soundBox.name=Sound Box
 tile.spectreBlock.name=Spectre Block
 tile.carpentryBench.name=[WIP] Carpentry Bench
 tile.lapisLamp.name=Lapis Lamp
+tile.dyeingMachine.name=Dyeing Machine
 
 itemGroup.Random Things=Random Things
 item.filterBlock.name=Block Filter

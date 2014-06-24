@@ -3,48 +3,42 @@ package lumien.randomthings.Blocks;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import lumien.randomthings.RandomThings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockLapisLamp extends Block
+public class BlockLapisLamp extends BlockBase
 {
 
 	public BlockLapisLamp()
 	{
-		super(Material.redstoneLight);
+		super("lapisLamp",Material.redstoneLight);
 
-		this.setCreativeTab(RandomThings.creativeTab);
-		this.setBlockName("lapisLamp");
-		
-		GameRegistry.registerBlock(this, "lapisLamp");
-		
-		this.setBlockTextureName("RandomThings:lapisLamp");
 		this.setHardness(0.3F);
 		this.setStepSound(soundTypeGlass);
 	}
 	
-    public int getRenderColor(int p_149741_1_)
+    @Override
+	public int getRenderColor(int p_149741_1_)
     {
     	GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         return 16777215;
     }
 	
-    public boolean isOpaqueCube()
+    @Override
+	public boolean isOpaqueCube()
     {
         return false;
     }
 	
-    public int getRenderBlockPass()
+    @Override
+	public int getRenderBlockPass()
     {
         return 1;
     }
 	
+	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z)
     {
         Block block = world.getBlock(x, y, z);

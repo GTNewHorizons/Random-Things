@@ -8,17 +8,16 @@ import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Library.PotionEffects;
 import lumien.randomthings.Library.WorldUtils;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.logging.log4j.Level;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
@@ -115,8 +114,7 @@ public class SpectreHandler extends WorldSavedData
 		boolean newVersion = nbt.getBoolean("newVersion");
 		if (!newVersion)
 		{
-			playerConnection = new HashMap<String, Integer>();
-			nextCoord = 0;
+			reset();
 			RandomThings.instance.logger.log(Level.WARN, "The Spectre World got an update in the recent version so i had to \"reset\" the spectre world.");
 			RandomThings.instance.logger.log(Level.WARN, "I would recommend to also reset the spectre world itself because the \"old\" cubes are still where they were");
 			RandomThings.instance.logger.log(Level.WARN, "Also if there's still a player in the old spectre world you should either move him out or change the dimensionID to 32 in the config file");
@@ -133,12 +131,15 @@ public class SpectreHandler extends WorldSavedData
 			double oldPosY = player.getEntityData().getDouble("oldPosY");
 			double oldPosZ = player.getEntityData().getDouble("oldPosZ");
 
-			MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, oldDimension, new TeleporterSpectre((WorldServer) player.worldObj));
+			MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, oldDimension, new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(oldDimension)));
 			player.setPositionAndUpdate(oldPosX, oldPosY, oldPosZ);
 		}
 		else
 		{
-			MinecraftServer.getServer().getConfigurationManager().respawnPlayer((EntityPlayerMP) player, 0, false);
+			ChunkCoordinates cc = MinecraftServer.getServer().worldServerForDimension(0).provider.getRandomizedSpawnPoint();
+			MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, 0, new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(0)));
+			
+			player.setPositionAndUpdate(cc.posX, cc.posY, cc.posZ);
 		}
 	}
 
@@ -166,11 +167,21 @@ public class SpectreHandler extends WorldSavedData
 					}
 					else
 					{
-						MinecraftServer.getServer().getConfigurationManager().respawnPlayer((EntityPlayerMP) player, 0, false);
+						ChunkCoordinates cc = MinecraftServer.getServer().worldServerForDimension(0).provider.getRandomizedSpawnPoint();
+						MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) player, 0, new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(0)));
+						
+						player.setPositionAndUpdate(cc.posX, cc.posY, cc.posZ);
 					}
 				}
 			}
 		}
+	}
+
+	public void reset()
+	{
+		playerConnection = new HashMap<String, Integer>();
+		nextCoord = 0;
+		this.markDirty();
 	}
 
 }

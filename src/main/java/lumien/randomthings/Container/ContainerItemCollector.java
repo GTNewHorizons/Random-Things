@@ -183,7 +183,7 @@ public class ContainerItemCollector extends Container
 	
 
 	@Override
-	public boolean canInteractWith(EntityPlayer entityplayer)
+	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
 	{
 		return true;
 	}

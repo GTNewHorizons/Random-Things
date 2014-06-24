@@ -1,6 +1,5 @@
 package lumien.randomthings.Entity;
 
-import net.minecraft.entity.EnumCreatureType;
 import lumien.randomthings.RandomThings;
 import cpw.mods.fml.common.registry.EntityRegistry;
 

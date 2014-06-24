@@ -9,7 +9,6 @@ import net.minecraft.client.gui.GuiPlayerInfo;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.INetHandler;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 

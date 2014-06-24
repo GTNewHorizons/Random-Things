@@ -13,6 +13,7 @@ public class ModTileEntities
 		GameRegistry.registerTileEntity(TileEntityNotificationInterface.class, "notificationInterface");
 		GameRegistry.registerTileEntity(TileEntityWirelessLever.class, "wirelessLever");
 		GameRegistry.registerTileEntity(TileEntityCarpentryBench.class, "carpentryBench");
+		GameRegistry.registerTileEntity(TileEntityDyeingMachine.class, "dyeingMachine");
 		
 		GameRegistry.registerTileEntity(TileEntityItemCollector.class, "itemcollector");
 		GameRegistry.registerTileEntity(TileEntityAdvancedItemCollector.class, "advancedItemcollector");

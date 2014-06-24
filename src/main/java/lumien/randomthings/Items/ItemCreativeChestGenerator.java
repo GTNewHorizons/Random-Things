@@ -1,14 +1,9 @@
 package lumien.randomthings.Items;
 
-import static net.minecraftforge.common.ChestGenHooks.DUNGEON_CHEST;
-
 import java.util.List;
 import java.util.Random;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.ChestCategory;
 
@@ -40,6 +35,7 @@ public class ItemCreativeChestGenerator extends ItemCreative
 	}
 
 	
+	@Override
 	public void getSubItems(Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_)
 	{
 		ItemStack is = new ItemStack(p_150895_1_, 1, 0);
@@ -48,6 +44,7 @@ public class ItemCreativeChestGenerator extends ItemCreative
 	}
 
 	
+	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);

@@ -1,7 +1,6 @@
 package lumien.randomthings.Library.Inventorys;
 
 import lumien.randomthings.Items.ItemDropFilter;
-import lumien.randomthings.Items.ItemFilter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;

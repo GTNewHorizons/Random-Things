@@ -1,6 +1,5 @@
 package lumien.randomthings.Handler.Notifications;
 
-import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import lumien.randomthings.Library.ClientUtil;

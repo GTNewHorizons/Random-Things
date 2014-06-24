@@ -8,12 +8,8 @@ import org.lwjgl.opengl.GL11;
 import lumien.randomthings.RandomThings;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -63,7 +59,8 @@ public class ItemIngredient extends Item
 	}
 	
 	
-    public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
+    @Override
+	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
     {
 		if (par1ItemStack.getItemDamage()==4)
 		{

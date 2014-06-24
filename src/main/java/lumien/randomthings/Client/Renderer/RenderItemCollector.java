@@ -1,14 +1,6 @@
 package lumien.randomthings.Client.Renderer;
 
-import java.awt.Color;
-
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector3f;
-
-import static org.lwjgl.opengl.GL11.*;
-
-import lumien.randomthings.Blocks.ModBlocks;
-import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Client.Model.ModelItemCollector;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import lumien.randomthings.TileEntities.TileEntityItemCollector;
@@ -18,7 +10,6 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;

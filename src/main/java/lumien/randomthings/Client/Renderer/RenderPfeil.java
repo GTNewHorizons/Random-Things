@@ -1,8 +1,6 @@
 package lumien.randomthings.Client.Renderer;
 
 import lumien.randomthings.Entity.EntityPfeil;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;

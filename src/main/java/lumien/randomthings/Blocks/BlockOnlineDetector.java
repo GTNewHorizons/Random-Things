@@ -1,29 +1,17 @@
 package lumien.randomthings.Blocks;
 
-import static net.minecraftforge.common.util.ForgeDirection.DOWN;
-import static net.minecraftforge.common.util.ForgeDirection.UP;
-
 import java.util.Random;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
-import net.minecraft.block.BlockCompressedPowered;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockFarmland;
-import net.minecraft.block.BlockHopper;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.BlockSnow;
-import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityDiggingFX;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
@@ -31,22 +19,17 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockOnlineDetector extends BlockContainer
+public class BlockOnlineDetector extends BlockContainerBase
 {
 	IIcon[] icons;
 	Random rand = new Random();
 
 	protected BlockOnlineDetector()
 	{
-		super(Material.rock);
-
-		this.setBlockName("onlineDetector");
-		this.setCreativeTab(RandomThings.creativeTab);
+		super("onlineDetector",Material.rock);
+		
 		this.blockHardness = 2.0F;
-
 		icons = new IIcon[2];
-
-		GameRegistry.registerBlock(this, "onlineDetector");
 	}
 
 	@Override
@@ -74,11 +57,11 @@ public class BlockOnlineDetector extends BlockContainer
             {
                 for (int k1 = 0; k1 < b0; ++k1)
                 {
-                    double d0 = (double)x + ((double)i1 + 0.5D) / (double)b0;
-                    double d1 = (double)y + ((double)j1 + 0.5D) / (double)b0;
-                    double d2 = (double)z + ((double)k1 + 0.5D) / (double)b0;
+                    double d0 = x + (i1 + 0.5D) / b0;
+                    double d1 = y + (j1 + 0.5D) / b0;
+                    double d2 = z + (k1 + 0.5D) / b0;
                     
-                    EntityDiggingFX particle = (new EntityDiggingFX(world, d0, d1, d2, d0 - (double)x - 0.5D, d1 - (double)y - 0.5D, d2 - (double)z - 0.5D, this, 0)).applyColourMultiplier(x, y, z);
+                    EntityDiggingFX particle = (new EntityDiggingFX(world, d0, d1, d2, d0 - x - 0.5D, d1 - y - 0.5D, d2 - z - 0.5D, this, 0)).applyColourMultiplier(x, y, z);
                     particle.setParticleIcon(getIcon(world,x,y,z,0));
                     effectRenderer.addEffect(particle);
                 }
@@ -93,38 +76,38 @@ public class BlockOnlineDetector extends BlockContainer
 	public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer)
 	{
 		float f = 0.1F;
-		double d0 = (double) target.blockX + this.rand.nextDouble() * (this.getBlockBoundsMaxX() - this.getBlockBoundsMinX() - (double) (f * 2.0F)) + (double) f + this.getBlockBoundsMinX();
-		double d1 = (double) target.blockY + this.rand.nextDouble() * (this.getBlockBoundsMaxY() - this.getBlockBoundsMinY() - (double) (f * 2.0F)) + (double) f + this.getBlockBoundsMinY();
-		double d2 = (double) target.blockZ + this.rand.nextDouble() * (this.getBlockBoundsMaxZ() - this.getBlockBoundsMinZ() - (double) (f * 2.0F)) + (double) f + this.getBlockBoundsMinZ();
+		double d0 = target.blockX + this.rand.nextDouble() * (this.getBlockBoundsMaxX() - this.getBlockBoundsMinX() - f * 2.0F) + f + this.getBlockBoundsMinX();
+		double d1 = target.blockY + this.rand.nextDouble() * (this.getBlockBoundsMaxY() - this.getBlockBoundsMinY() - f * 2.0F) + f + this.getBlockBoundsMinY();
+		double d2 = target.blockZ + this.rand.nextDouble() * (this.getBlockBoundsMaxZ() - this.getBlockBoundsMinZ() - f * 2.0F) + f + this.getBlockBoundsMinZ();
 
 		if (target.sideHit == 0)
 		{
-			d1 = (double) target.blockY + this.getBlockBoundsMinY() - (double) f;
+			d1 = target.blockY + this.getBlockBoundsMinY() - f;
 		}
 
 		if (target.sideHit == 1)
 		{
-			d1 = (double) target.blockY + this.getBlockBoundsMaxY() + (double) f;
+			d1 = target.blockY + this.getBlockBoundsMaxY() + f;
 		}
 
 		if (target.sideHit == 2)
 		{
-			d2 = (double) target.blockZ + this.getBlockBoundsMinZ() - (double) f;
+			d2 = target.blockZ + this.getBlockBoundsMinZ() - f;
 		}
 
 		if (target.sideHit == 3)
 		{
-			d2 = (double) target.blockZ + this.getBlockBoundsMaxZ() + (double) f;
+			d2 = target.blockZ + this.getBlockBoundsMaxZ() + f;
 		}
 
 		if (target.sideHit == 4)
 		{
-			d0 = (double) target.blockX + this.getBlockBoundsMinX() - (double) f;
+			d0 = target.blockX + this.getBlockBoundsMinX() - f;
 		}
 
 		if (target.sideHit == 5)
 		{
-			d0 = (double) target.blockX + this.getBlockBoundsMaxX() + (double) f;
+			d0 = target.blockX + this.getBlockBoundsMaxX() + f;
 		}
 
 		EntityDiggingFX particle = (EntityDiggingFX) new EntityDiggingFX(worldObj, d0, d1, d2, 0.0D, 0.0D, 0.0D, this, worldObj.getBlockMetadata(target.blockX, target.blockY, target.blockZ)).applyColourMultiplier(target.blockX, target.blockY, target.blockZ).multiplyVelocity(0.2F).multipleParticleScaleBy(0.6F);
@@ -136,11 +119,13 @@ public class BlockOnlineDetector extends BlockContainer
 		return true;
 	}
 
+	@Override
 	public int getMixedBrightnessForBlock(IBlockAccess p_149677_1_, int p_149677_2_, int p_149677_3_, int p_149677_4_)
 	{
 		return 15728704;
 	}
 
+	@Override
 	public IIcon getIcon(IBlockAccess ba, int posX, int posY, int posZ, int side)
 	{
 		int metadata=ba.getBlockMetadata(posX, posY, posZ);
@@ -154,15 +139,10 @@ public class BlockOnlineDetector extends BlockContainer
 		}
 	}
 
+	@Override
 	public IIcon getIcon(int p_149691_1_, int p_149691_2_)
 	{
 		return icons[0];
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
-	{
-		return new TileEntityOnlineDetector();
 	}
 
 	@Override
@@ -193,6 +173,12 @@ public class BlockOnlineDetector extends BlockContainer
 	{
 		int metadata=blockAccess.getBlockMetadata(posX, posY, posZ);
 		return metadata==1?15:0;
+	}
+
+	@Override
+	protected <T extends TileEntity> Class getTileEntityClass()
+	{
+		return TileEntityOnlineDetector.class;
 	}
 
 }

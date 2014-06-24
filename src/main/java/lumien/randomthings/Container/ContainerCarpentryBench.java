@@ -4,7 +4,6 @@ import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Handler.CarpentryBench.CarpentryManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
@@ -12,7 +11,6 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
 
 public class ContainerCarpentryBench extends Container
@@ -47,11 +45,13 @@ public class ContainerCarpentryBench extends Container
 		bindPlayerInventory(playerInventory);
 	}
 	
+	@Override
 	public void onCraftMatrixChanged(IInventory par1IInventory)
     {
         this.craftResult.setInventorySlotContents(0, CarpentryManager.instance().findMatchingRecipe(this.craftMatrix, this.worldObj));
     }
 	
+	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
     {
         ItemStack itemstack = null;
@@ -110,6 +110,7 @@ public class ContainerCarpentryBench extends Container
         return itemstack;
     }
 	
+	@Override
 	public void onContainerClosed(EntityPlayer par1EntityPlayer)
     {
         super.onContainerClosed(par1EntityPlayer);
@@ -148,7 +149,7 @@ public class ContainerCarpentryBench extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
 	{
-		return this.worldObj.getBlock(this.posX, this.posY, this.posZ) != ModBlocks.carpentryBench ? false : par1EntityPlayer.getDistanceSq((double) this.posX + 0.5D, (double) this.posY + 0.5D, (double) this.posZ + 0.5D) <= 64.0D;
+		return this.worldObj.getBlock(this.posX, this.posY, this.posZ) != ModBlocks.carpentryBench ? false : par1EntityPlayer.getDistanceSq(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D) <= 64.0D;
 	}
 
 }

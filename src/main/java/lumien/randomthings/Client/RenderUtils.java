@@ -1,27 +1,17 @@
 package lumien.randomthings.Client;
 
 import java.awt.Color;
-import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
-import lumien.randomthings.Client.Renderer.RenderItemCollector;
-
 import org.lwjgl.BufferUtils;
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-import org.lwjgl.opengl.GL41;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import static org.lwjgl.opengl.GL11.*;
@@ -65,8 +55,8 @@ public class RenderUtils
 		int textureWidth = (int) GL11.glGetTexLevelParameterf(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH);
 		int textureHeight = (int) GL11.glGetTexLevelParameterf(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT);
 
-		IntBuffer ib = BufferUtils.createIntBuffer((int) (textureWidth * textureHeight * 4));
-		GL11.glGetTexImage(GL_TEXTURE_2D, 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_INT, (IntBuffer) ib);
+		IntBuffer ib = BufferUtils.createIntBuffer(textureWidth * textureHeight * 4);
+		GL11.glGetTexImage(GL_TEXTURE_2D, 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_INT, ib);
 		GL11.glBindTexture(GL_TEXTURE_2D, 0);
 
 		int startPos = y * width + x;

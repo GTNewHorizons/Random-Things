@@ -4,9 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Client.Particle.ParticleMagneticForce;
 import lumien.randomthings.Library.GuiIds;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -25,6 +23,7 @@ public class ItemMagneticForce extends Item
 		GameRegistry.registerItem(this, "magneticForce");
 	}
 
+	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
 		if (!par2World.isRemote)
@@ -34,6 +33,7 @@ public class ItemMagneticForce extends Item
 		return par1ItemStack;
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5)
 	{

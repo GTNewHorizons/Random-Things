@@ -10,8 +10,6 @@ import lumien.randomthings.Library.ItemUtils;
 import lumien.randomthings.Library.Texts;
 import lumien.randomthings.Library.Inventorys.InventoryItemFilter;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.resources.I18n;

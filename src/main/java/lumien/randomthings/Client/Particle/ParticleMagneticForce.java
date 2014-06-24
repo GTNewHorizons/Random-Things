@@ -2,12 +2,7 @@ package lumien.randomthings.Client.Particle;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.particle.EntityPortalFX;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class ParticleMagneticForce extends EntityFX

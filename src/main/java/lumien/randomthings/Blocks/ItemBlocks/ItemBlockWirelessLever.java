@@ -4,11 +4,8 @@ import java.util.List;
 
 import javax.vecmath.Vector3d;
 
-import org.lwjgl.util.vector.Vector3f;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.TileEntities.TileEntityWirelessLever;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -30,6 +27,7 @@ public class ItemBlockWirelessLever extends ItemBlock
 		this.setTextureName("RandomThings:wirelessLever");
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
@@ -115,6 +113,7 @@ public class ItemBlockWirelessLever extends ItemBlock
 		}
 	}
 
+	@Override
 	public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata)
 	{
 		if (player.isSneaking())

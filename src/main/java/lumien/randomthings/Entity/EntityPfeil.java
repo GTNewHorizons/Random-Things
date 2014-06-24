@@ -4,9 +4,6 @@ import java.util.List;
 
 import lumien.randomthings.RandomThings;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -15,8 +12,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.S2BPacketChangeGameState;
 import net.minecraft.util.AxisAlignedBB;
@@ -388,14 +383,14 @@ public class EntityPfeil extends Entity
 				for (i = 0; i < 4; ++i)
 				{
 					 RandomThings.proxy.spawnPfeilParticle(this.posX +
-					 this.motionX * (double) i / 4.0D, this.posY +
-					 this.motionY * (double) i / 4.0D, this.posZ +
-					 this.motionZ * (double) i / 4.0D, -this.motionX,
+					 this.motionX * i / 4.0D, this.posY +
+					 this.motionY * i / 4.0D, this.posZ +
+					 this.motionZ * i / 4.0D, -this.motionX,
 					 -this.motionY + 0.2D, -this.motionZ);
 					 this.worldObj.spawnParticle("crit", this.posX +
-					 this.motionX * (double) i / 4.0D, this.posY +
-					 this.motionY * (double) i / 4.0D, this.posZ +
-					 this.motionZ * (double) i / 4.0D, -this.motionX,
+					 this.motionX * i / 4.0D, this.posY +
+					 this.motionY * i / 4.0D, this.posZ +
+					 this.motionZ * i / 4.0D, -this.motionX,
 					 -this.motionY + 0.2D, -this.motionZ);
 				}
 			}

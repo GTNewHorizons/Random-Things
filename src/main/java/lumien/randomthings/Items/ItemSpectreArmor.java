@@ -4,13 +4,11 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Library.ChatColors;
+import lumien.randomthings.Library.Colors;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
@@ -25,6 +23,7 @@ public class ItemSpectreArmor extends ItemArmor
 		this.setCreativeTab(RandomThings.creativeTab);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer player, List par3List, boolean par4)
 	{
@@ -41,16 +40,17 @@ public class ItemSpectreArmor extends ItemArmor
 				{
 					if (par1ItemStack == helmet || par1ItemStack == chestplate || par1ItemStack == leggings || par1ItemStack == boots)
 					{
-						par3List.add(ChatColors.DARK_AQUA + I18n.format("text.miscellaneous.setBonus", new Object[0]));
-						par3List.add(ChatColors.AQUA + "- Damage done to enemies creates orbs");
-						par3List.add(ChatColors.AQUA + "that heal the player with the lowest health nearby.");
-						par3List.add(ChatColors.AQUA + "- Semi Transparent Character Model");
+						par3List.add(Colors.DARK_AQUA + I18n.format("text.miscellaneous.setBonus", new Object[0]));
+						par3List.add(Colors.AQUA + "- Damage done to enemies creates orbs");
+						par3List.add(Colors.AQUA + "that heal the player with the lowest health nearby.");
+						par3List.add(Colors.AQUA + "- Semi Transparent Character Model");
 					}
 				}
 			}
 		}
 	}
 
+	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
 		GL11.glEnable(GL11.GL_BLEND);
@@ -58,6 +58,7 @@ public class ItemSpectreArmor extends ItemArmor
 		return String.format("RandomThings:textures/models/armor/%s_layer_%d%s.png", "spectre", (slot == 2 ? 2 : 1), type == null ? "" : String.format("_%s", type));
 	}
 
+	@Override
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
 	{
 		GL11.glEnable(GL11.GL_BLEND);

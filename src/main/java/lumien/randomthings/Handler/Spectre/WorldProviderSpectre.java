@@ -1,14 +1,7 @@
 package lumien.randomthings.Handler.Spectre;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.Settings;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.WorldProviderEnd;
-import net.minecraft.world.WorldProviderHell;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -22,6 +15,7 @@ public class WorldProviderSpectre extends WorldProvider
 		this.hasNoSky = true;
 	}
 
+	@Override
 	protected void generateLightBrightnessTable()
 	{
 		for (int i = 0; i < this.lightBrightnessTable.length; i++)
@@ -30,17 +24,20 @@ public class WorldProviderSpectre extends WorldProvider
 		}
 	}
 	
-    public boolean isSurfaceWorld()
+    @Override
+	public boolean isSurfaceWorld()
     {
         return false;
     }
     
-    public boolean canRespawnHere()
+    @Override
+	public boolean canRespawnHere()
     {
         return false;
     }
     
-    public boolean doesXZShowFog(int par1, int par2)
+    @Override
+	public boolean doesXZShowFog(int par1, int par2)
     {
         return true;
     }
@@ -70,7 +67,8 @@ public class WorldProviderSpectre extends WorldProvider
 		return new ChunkProviderSpectre(this.worldObj);
 	}
 	
-    public float[] calcSunriseSunsetColors(float par1, float par2)
+    @Override
+	public float[] calcSunriseSunsetColors(float par1, float par2)
     {
         return new float[]{0,0,0,0};
     }
@@ -81,17 +79,20 @@ public class WorldProviderSpectre extends WorldProvider
     	return 0;
     }
     
-    public float getCloudHeight()
+    @Override
+	public float getCloudHeight()
     {
         return -5;
     }
     
-    public String getWelcomeMessage()
+    @Override
+	public String getWelcomeMessage()
     {
         return "Entering the Spectre World";
     }
 
-    public String getDepartMessage()
+    @Override
+	public String getDepartMessage()
     {
     	return "Leaving the Spectre World";
     }

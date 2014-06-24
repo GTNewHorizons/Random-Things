@@ -28,6 +28,7 @@ public class TileEntityWirelessLever extends TileEntity
 
 	int targetX, targetY, targetZ;
 
+	@Override
 	public void validate()
 	{
 		super.validate();
@@ -93,6 +94,7 @@ public class TileEntityWirelessLever extends TileEntity
 		readFromNBT(packet.func_148857_g());
 	}
 
+	@Override
 	public void invalidate()
 	{
 		super.invalidate();
@@ -101,6 +103,7 @@ public class TileEntityWirelessLever extends TileEntity
 		this.worldObj.notifyBlockOfNeighborChange(targetX, targetY, targetZ, ModBlocks.wirelessLever);
 	}
 
+	@Override
 	public boolean shouldRefresh(Block oldBlock, Block newBlock, int oldMeta, int newMeta, World world, int x, int y, int z)
 	{
 		return (oldBlock != newBlock);

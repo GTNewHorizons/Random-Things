@@ -24,6 +24,7 @@ public class RTConfiguration
 		ConfigBlocks.notificationInterface = isBlockEnabled("NotificationInterface");
 		ConfigBlocks.lapisLamp = isBlockEnabled("LapisLamp");
 		ConfigBlocks.carpentryBench = isBlockEnabled("CarpentryBench");
+		ConfigBlocks.dyeingMachine = isBlockEnabled("DyeingMachine");
 
 		ConfigItems.biomeCapsule = isItemEnabled("BiomeSolution");
 		ConfigItems.biomePainter = isItemEnabled("BiomePainter");

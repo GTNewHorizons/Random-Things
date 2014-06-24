@@ -6,13 +6,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Library.ChatColors;
+import lumien.randomthings.Library.Colors;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMobSpawner;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -31,6 +29,7 @@ public class ItemSpiritBinder extends Item
 		GameRegistry.registerItem(this, "spiritBinder");
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
@@ -38,10 +37,11 @@ public class ItemSpiritBinder extends Item
 		{
 			String entityName = par1ItemStack.stackTagCompound.getString("EntityId");
 	        
-			par3List.add(ChatColors.DARK_GREEN+"Holding "+entityName+" Spawner");
+			par3List.add(Colors.DARK_GREEN+"Holding "+entityName+" Spawner");
 		}
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack par1ItemStack, int pass)
     {

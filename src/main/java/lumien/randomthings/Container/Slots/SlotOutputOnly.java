@@ -13,7 +13,8 @@ public class SlotOutputOnly extends Slot
 		// TODO Auto-generated constructor stub
 	}
 
-    public boolean isItemValid(ItemStack par1ItemStack)
+    @Override
+	public boolean isItemValid(ItemStack par1ItemStack)
     {
         return false;
     }

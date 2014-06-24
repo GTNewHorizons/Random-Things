@@ -2,10 +2,6 @@ package lumien.randomthings;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
-
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
@@ -15,7 +11,6 @@ import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Client.GuiHandler;
 import lumien.randomthings.Configuration.RTConfiguration;
 import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Core.RTCommand;
 import lumien.randomthings.Core.RTCreativeTab;
 import lumien.randomthings.Entity.ModEntitys;
@@ -31,24 +26,16 @@ import lumien.randomthings.Handler.Spectre.SpectreHandler;
 import lumien.randomthings.Handler.Spectre.WorldProviderSpectre;
 import lumien.randomthings.Items.ItemBiomeCapsule;
 import lumien.randomthings.Items.ModItems;
-import lumien.randomthings.Library.OverrideUtils;
 import lumien.randomthings.Library.Recipes;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Proxy.CommonProxy;
 import lumien.randomthings.TileEntities.ModTileEntities;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiOptions;
-import net.minecraft.client.gui.GuiVideoSettings;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.settings.GameSettings;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
@@ -56,12 +43,10 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.Mod.EventHandler;
 
 @Mod(modid = RandomThings.MOD_ID, name = RandomThings.MOD_NAME, version = RandomThings.MOD_VERSION)
@@ -122,7 +107,7 @@ public class RandomThings
 
 		// Version Checker
 		String VERSION_CHECKER_MODID = "VersionChecker";
-		FMLInterModComms.sendRuntimeMessage(this.MOD_ID, VERSION_CHECKER_MODID, "addVersionCheck", "https://raw.github.com/lumien231/Random-Things/master/version.json");
+		FMLInterModComms.sendRuntimeMessage(RandomThings.MOD_ID, VERSION_CHECKER_MODID, "addVersionCheck", "https://raw.github.com/lumien231/Random-Things/master/version.json");
 	}
 
 	@EventHandler
@@ -140,6 +125,7 @@ public class RandomThings
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
+		proxy.postInit();
 		try
 		{
 			PeripheralProvider.register();

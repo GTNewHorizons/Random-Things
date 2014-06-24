@@ -3,9 +3,6 @@ package lumien.randomthings.Handler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.apache.logging.log4j.Level;
-
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.TileEntities.TileEntityCreativePlayerInterface;
 import lumien.randomthings.TileEntities.TileEntityNotificationInterface;
 import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
@@ -13,7 +10,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.Optional.Interface;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheralProvider;
 

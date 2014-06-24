@@ -4,8 +4,6 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessagePaintBiome;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

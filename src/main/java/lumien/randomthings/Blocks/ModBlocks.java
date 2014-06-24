@@ -1,6 +1,5 @@
 package lumien.randomthings.Blocks;
 
-import net.minecraft.block.Block;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.ConfigBlocks;
 
@@ -19,6 +18,7 @@ public class ModBlocks
 	public static BlockLapisLamp spectreLamp;
 	public static BlockWirelessLever wirelessLever;
 	public static BlockCarpentryBench carpentryBench;
+	public static BlockDyeingMachine dyeingMachine;
 
 	public static void init()
 	{
@@ -52,6 +52,8 @@ public class ModBlocks
 			wirelessLever = new BlockWirelessLever();
 		if (ConfigBlocks.carpentryBench)
 			carpentryBench = new BlockCarpentryBench();
+		if (ConfigBlocks.dyeingMachine)
+			dyeingMachine = new BlockDyeingMachine();
 		
 		spectreBlock = new BlockSpectreBlock();
 	}

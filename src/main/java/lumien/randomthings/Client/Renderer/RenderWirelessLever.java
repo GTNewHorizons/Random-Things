@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
@@ -42,35 +41,35 @@ public class RenderWirelessLever implements ISimpleBlockRenderingHandler
 
         if (i1 == 5)
         {
-        	renderer.setRenderBounds((double)(0.5F - f1), 0.0D, (double)(0.5F - f), (double)(0.5F + f1), (double)f2, (double)(0.5F + f));
+        	renderer.setRenderBounds(0.5F - f1, 0.0D, 0.5F - f, 0.5F + f1, f2, 0.5F + f);
         }
         else if (i1 == 6)
         {
-        	renderer.setRenderBounds((double)(0.5F - f), 0.0D, (double)(0.5F - f1), (double)(0.5F + f), (double)f2, (double)(0.5F + f1));
+        	renderer.setRenderBounds(0.5F - f, 0.0D, 0.5F - f1, 0.5F + f, f2, 0.5F + f1);
         }
         else if (i1 == 4)
         {
-        	renderer.setRenderBounds((double)(0.5F - f1), (double)(0.5F - f), (double)(1.0F - f2), (double)(0.5F + f1), (double)(0.5F + f), 1.0D);
+        	renderer.setRenderBounds(0.5F - f1, 0.5F - f, 1.0F - f2, 0.5F + f1, 0.5F + f, 1.0D);
         }
         else if (i1 == 3)
         {
-        	renderer.setRenderBounds((double)(0.5F - f1), (double)(0.5F - f), 0.0D, (double)(0.5F + f1), (double)(0.5F + f), (double)f2);
+        	renderer.setRenderBounds(0.5F - f1, 0.5F - f, 0.0D, 0.5F + f1, 0.5F + f, f2);
         }
         else if (i1 == 2)
         {
-        	renderer.setRenderBounds((double)(1.0F - f2), (double)(0.5F - f), (double)(0.5F - f1), 1.0D, (double)(0.5F + f), (double)(0.5F + f1));
+        	renderer.setRenderBounds(1.0F - f2, 0.5F - f, 0.5F - f1, 1.0D, 0.5F + f, 0.5F + f1);
         }
         else if (i1 == 1)
         {
-        	renderer.setRenderBounds(0.0D, (double)(0.5F - f), (double)(0.5F - f1), (double)f2, (double)(0.5F + f), (double)(0.5F + f1));
+        	renderer.setRenderBounds(0.0D, 0.5F - f, 0.5F - f1, f2, 0.5F + f, 0.5F + f1);
         }
         else if (i1 == 0)
         {
-        	renderer.setRenderBounds((double)(0.5F - f), (double)(1.0F - f2), (double)(0.5F - f1), (double)(0.5F + f), 1.0D, (double)(0.5F + f1));
+        	renderer.setRenderBounds(0.5F - f, 1.0F - f2, 0.5F - f1, 0.5F + f, 1.0D, 0.5F + f1);
         }
         else if (i1 == 7)
         {
-        	renderer.setRenderBounds((double)(0.5F - f1), (double)(1.0F - f2), (double)(0.5F - f), (double)(0.5F + f1), 1.0D, (double)(0.5F + f));
+        	renderer.setRenderBounds(0.5F - f1, 1.0F - f2, 0.5F - f, 0.5F + f1, 1.0D, 0.5F + f);
         }
 
         renderer.renderStandardBlock(block, x, y, z);
@@ -89,22 +88,22 @@ public class RenderWirelessLever implements ISimpleBlockRenderingHandler
             iicon = renderer.overrideBlockTexture;
         }
 
-        double d0 = (double)iicon.getMinU();
-        double d1 = (double)iicon.getMinV();
-        double d2 = (double)iicon.getMaxU();
-        double d3 = (double)iicon.getMaxV();
+        double d0 = iicon.getMinU();
+        double d1 = iicon.getMinV();
+        double d2 = iicon.getMaxU();
+        double d3 = iicon.getMaxV();
         Vec3[] avec3 = new Vec3[8];
         float f3 = 0.0625F;
         float f4 = 0.0625F;
         float f5 = 0.625F;
-        avec3[0] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool((double)(-f3), 0.0D, (double)(-f4));
-        avec3[1] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool((double)f3, 0.0D, (double)(-f4));
-        avec3[2] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool((double)f3, 0.0D, (double)f4);
-        avec3[3] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool((double)(-f3), 0.0D, (double)f4);
-        avec3[4] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool((double)(-f3), (double)f5, (double)(-f4));
-        avec3[5] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool((double)f3, (double)f5, (double)(-f4));
-        avec3[6] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool((double)f3, (double)f5, (double)f4);
-        avec3[7] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool((double)(-f3), (double)f5, (double)f4);
+        avec3[0] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool((-f3), 0.0D, (-f4));
+        avec3[1] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool(f3, 0.0D, (-f4));
+        avec3[2] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool(f3, 0.0D, f4);
+        avec3[3] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool((-f3), 0.0D, f4);
+        avec3[4] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool((-f3), f5, (-f4));
+        avec3[5] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool(f3, f5, (-f4));
+        avec3[6] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool(f3, f5, f4);
+        avec3[7] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool((-f3), f5, f4);
 
         for (int j1 = 0; j1 < 8; ++j1)
         {
@@ -154,21 +153,21 @@ public class RenderWirelessLever implements ISimpleBlockRenderingHandler
                     avec3[j1].rotateAroundY(-((float)Math.PI / 2F));
                 }
 
-                avec3[j1].xCoord += (double)x + 0.5D;
-                avec3[j1].yCoord += (double)((float)y + 0.5F);
-                avec3[j1].zCoord += (double)z + 0.5D;
+                avec3[j1].xCoord += x + 0.5D;
+                avec3[j1].yCoord += y + 0.5F;
+                avec3[j1].zCoord += z + 0.5D;
             }
             else if (i1 != 0 && i1 != 7)
             {
-                avec3[j1].xCoord += (double)x + 0.5D;
-                avec3[j1].yCoord += (double)((float)y + 0.125F);
-                avec3[j1].zCoord += (double)z + 0.5D;
+                avec3[j1].xCoord += x + 0.5D;
+                avec3[j1].yCoord += y + 0.125F;
+                avec3[j1].zCoord += z + 0.5D;
             }
             else
             {
-                avec3[j1].xCoord += (double)x + 0.5D;
-                avec3[j1].yCoord += (double)((float)y + 0.875F);
-                avec3[j1].zCoord += (double)z + 0.5D;
+                avec3[j1].xCoord += x + 0.5D;
+                avec3[j1].yCoord += y + 0.875F;
+                avec3[j1].zCoord += z + 0.5D;
             }
         }
 
@@ -181,17 +180,17 @@ public class RenderWirelessLever implements ISimpleBlockRenderingHandler
         {
             if (k1 == 0)
             {
-                d0 = (double)iicon.getInterpolatedU(7.0D);
-                d1 = (double)iicon.getInterpolatedV(6.0D);
-                d2 = (double)iicon.getInterpolatedU(9.0D);
-                d3 = (double)iicon.getInterpolatedV(8.0D);
+                d0 = iicon.getInterpolatedU(7.0D);
+                d1 = iicon.getInterpolatedV(6.0D);
+                d2 = iicon.getInterpolatedU(9.0D);
+                d3 = iicon.getInterpolatedV(8.0D);
             }
             else if (k1 == 2)
             {
-                d0 = (double)iicon.getInterpolatedU(7.0D);
-                d1 = (double)iicon.getInterpolatedV(6.0D);
-                d2 = (double)iicon.getInterpolatedU(9.0D);
-                d3 = (double)iicon.getMaxV();
+                d0 = iicon.getInterpolatedU(7.0D);
+                d1 = iicon.getInterpolatedV(6.0D);
+                d2 = iicon.getInterpolatedU(9.0D);
+                d3 = iicon.getMaxV();
             }
 
             if (k1 == 0)

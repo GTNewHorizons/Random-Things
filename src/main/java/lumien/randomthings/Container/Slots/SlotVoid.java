@@ -1,6 +1,5 @@
 package lumien.randomthings.Container.Slots;
 
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
@@ -12,22 +11,26 @@ public class SlotVoid extends Slot
 		super(null, 0, x, y);
 	}
 	
-    public void putStack(ItemStack par1ItemStack)
+    @Override
+	public void putStack(ItemStack par1ItemStack)
     {
         this.onSlotChanged();
     }
     
-    public ItemStack getStack()
+    @Override
+	public ItemStack getStack()
     {
         return null;
     }
     
-    public void onSlotChanged()
+    @Override
+	public void onSlotChanged()
     {
         
     }
     
-    public int getSlotStackLimit()
+    @Override
+	public int getSlotStackLimit()
     {
         return 64;
     }

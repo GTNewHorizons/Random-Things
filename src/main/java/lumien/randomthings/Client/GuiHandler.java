@@ -5,6 +5,7 @@ import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Items.ItemEnderLetter;
 import lumien.randomthings.Client.GUI.GuiCarpentryBench;
 import lumien.randomthings.Client.GUI.GuiDropFilter;
+import lumien.randomthings.Client.GUI.GuiDyeingMachine;
 import lumien.randomthings.Client.GUI.GuiItemCollector;
 import lumien.randomthings.Client.GUI.GuiItemFilter;
 import lumien.randomthings.Client.GUI.GuiEnderLetter;
@@ -15,6 +16,7 @@ import lumien.randomthings.Client.GUI.GuiSoundRecorder;
 import lumien.randomthings.Client.GUI.GuiVoidStone;
 import lumien.randomthings.Container.ContainerCarpentryBench;
 import lumien.randomthings.Container.ContainerDropFilter;
+import lumien.randomthings.Container.ContainerDyeingMachine;
 import lumien.randomthings.Container.ContainerItemCollector;
 import lumien.randomthings.Container.ContainerItemFilter;
 import lumien.randomthings.Container.ContainerEnderLetter;
@@ -77,6 +79,8 @@ public class GuiHandler implements IGuiHandler
 				return new ContainerMagneticForce();
 			case CARPENTRY_BENCH:
 				return new ContainerCarpentryBench(player.inventory,world,x,y,z);
+			case DYEING_MACHINE:
+				return new ContainerDyeingMachine(player.inventory);
 		}
 		return null;
 	}
@@ -122,6 +126,8 @@ public class GuiHandler implements IGuiHandler
 				return new GuiMagneticForce();
 			case CARPENTRY_BENCH:
 				return new GuiCarpentryBench(player.inventory,world,x,y,z);
+			case DYEING_MACHINE:
+				return new GuiDyeingMachine(player.inventory);
 		}
 		return null;
 	}

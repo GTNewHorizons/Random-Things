@@ -13,7 +13,7 @@ public class ContainerVoidStone extends Container
 	public ContainerVoidStone(InventoryPlayer playerInventory)
 	{
 		this.addSlotToContainer(new SlotVoid(80,18));
-		bindPlayerInventory((InventoryPlayer) playerInventory);
+		bindPlayerInventory(playerInventory);
 	}
 
 	@Override

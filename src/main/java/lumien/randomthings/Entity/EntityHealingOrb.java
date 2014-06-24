@@ -1,12 +1,6 @@
 package lumien.randomthings.Entity;
 
-import java.util.Iterator;
 import java.util.List;
-
-import javax.vecmath.Vector3d;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,6 +42,7 @@ public class EntityHealingOrb extends Entity
 		this.noClip = true;
 	}
 
+	@Override
 	public void onCollideWithPlayer(EntityPlayer par1EntityPlayer)
 	{
 		if (!worldObj.isRemote)
@@ -57,6 +52,7 @@ public class EntityHealingOrb extends Entity
 		}
 	}
 
+	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
@@ -109,6 +105,7 @@ public class EntityHealingOrb extends Entity
 		}
 	}
 
+	@Override
 	public int getBrightnessForRender(float par1)
 	{
 		float f1 = 0.5F;

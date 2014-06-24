@@ -1,7 +1,5 @@
 package lumien.randomthings.Transformer;
 
-import java.util.Iterator;
-
 import lumien.randomthings.Configuration.ConfigBlocks;
 import lumien.randomthings.Configuration.VanillaChanges;
 
@@ -14,16 +12,12 @@ import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.FieldInsnNode;
-import org.objectweb.asm.tree.FrameNode;
 import org.objectweb.asm.tree.IincInsnNode;
 import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.IntInsnNode;
 import org.objectweb.asm.tree.JumpInsnNode;
 import org.objectweb.asm.tree.LabelNode;
 import org.objectweb.asm.tree.LdcInsnNode;
-import org.objectweb.asm.tree.LineNumberNode;
-import org.objectweb.asm.tree.LocalVariableNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
@@ -39,106 +33,81 @@ public class RTClassTransformer implements IClassTransformer
 	private static final String OBF_WORLD = "afn";
 
 	@Override
-	public byte[] transform(String name, String transformedName, byte[] basicClass)
+	public byte[] transform(String obfName, String transformedName, byte[] basicClass)
 	{
-		if (name.equals("amp") && VanillaChanges.FASTER_LEAVEDECAY)
+		if (transformedName.equals("net.minecraft.block.BlockLeavesBase") && VanillaChanges.FASTER_LEAVEDECAY) // ClassCircularityError
 		{
-			return patchLeaveClass(basicClass, true);
+			return patchLeaveClass(basicClass);
 		}
-		else if (name.equals("net.minecraft.block.BlockLeavesBase") && VanillaChanges.FASTER_LEAVEDECAY) // ClassCircularityError
+		else if (transformedName.equals("net.minecraft.client.renderer.EntityRenderer") && VanillaChanges.HARDCORE_DARKNESS)
 		{
-			return patchLeaveClass(basicClass, false);
+			return patchEntityRendererClass(basicClass);
 		}
-		else if (name.equals("bll") && VanillaChanges.HARDCORE_DARKNESS)
+		else if (transformedName.equals("net.minecraft.world.World"))
 		{
-			return patchEntityRendererClass(basicClass, true);
+			return patchWorldClass(basicClass);
 		}
-		else if (name.equals("net.minecraft.client.renderer.EntityRenderer") && VanillaChanges.HARDCORE_DARKNESS)
+		else if (transformedName.equals("net.minecraft.item.Item"))
 		{
-			return patchEntityRendererClass(basicClass, false);
+			return patchItemClass(basicClass);
 		}
-		else if (name.equals(OBF_WORLD))
-		{
-			return patchWorldClass(basicClass, true);
-		}
-		else if (name.equals("net.minecraft.world.World"))
-		{
-			return patchWorldClass(basicClass, false);
-		}
-		/* Moon and Star Stuff
-		else if (name.equals("bls"))
-		{
-			return patchRenderGlobalClass(basicClass,true);
-		}
-		else if (name.equals("net.minecraft.client.renderer.RenderGlobal"))
-		{
-			return patchRenderGlobalClass(basicClass,false);
-		}
-		*/
 
 		return basicClass;
 	}
-
-	private byte[] patchRenderGlobalClass(byte[] basicClass, boolean obfuscated)
+	
+	private byte[] patchItemClass(byte[] basicClass)
 	{
 		ClassNode classNode = new ClassNode();
 		ClassReader classReader = new ClassReader(basicClass);
 		classReader.accept(classNode, 0);
-		coreLogger.log(Level.INFO, "Found RenderGlobal Class: " + classNode.name + ":" + obfuscated);
 		
-		String renderSkyName = obfuscated ? "a":"renderSky";
-		String moonPhaseName = obfuscated ? "n":"locationMoonPhasesPng";
-		String starListName = obfuscated ? "F":"starGLCallList";
+		coreLogger.log(Level.INFO, "Found Item Class: " + classNode.name);
 		
-		MethodNode renderSky = null;
-		for (MethodNode mn:classNode.methods)
+		String getColorFromItemStackName = MCPNames.method("func_82790_a");
+		MethodNode getColorFromItemStack=null;
+		
+		for (MethodNode mn : classNode.methods)
 		{
-			if (mn.name.equals(renderSkyName) && mn.desc.equals("(F)V"))
+			if (mn.name.equals(getColorFromItemStackName))
 			{
-				renderSky = mn;
+				getColorFromItemStack = mn;
 			}
 		}
 		
-		if (renderSky!=null)
+		if (getColorFromItemStack!=null)
 		{
-			for (int i=0;i<renderSky.instructions.size();i++)
-			{
-				AbstractInsnNode node = renderSky.instructions.get(i);
-				if (node instanceof FieldInsnNode)
-				{
-					FieldInsnNode fin = (FieldInsnNode) node;
-					if (fin.name.equals(moonPhaseName))
-					{
-						renderSky.instructions.insert(renderSky.instructions.get(i+1), new VarInsnNode(FLOAD,1));
-						renderSky.instructions.insert(renderSky.instructions.get(i+2), new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "moonColorHook", "(F)V"));
-						i+=2;
-					}
-					else if (fin.name.equals(starListName))
-					{
-						renderSky.instructions.insert(renderSky.instructions.get(i-3), new VarInsnNode(FLOAD,1));
-						renderSky.instructions.insert(renderSky.instructions.get(i-2), new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "starColorHook", "(F)V"));
-						i+=2;
-					}
-				}
-			}
+			LabelNode l0 = new LabelNode(new Label());
+			LabelNode l1 = new LabelNode(new Label());
+			LabelNode l2 = new LabelNode(new Label());
+			
+			getColorFromItemStack.instructions.insert(new InsnNode(POP));
+			getColorFromItemStack.instructions.insert(l2);
+			getColorFromItemStack.instructions.insert(new InsnNode(IRETURN));
+			getColorFromItemStack.instructions.insert(l1);
+			getColorFromItemStack.instructions.insert(new JumpInsnNode(IF_ICMPEQ, l2));
+			getColorFromItemStack.instructions.insert(new IntInsnNode(BIPUSH, 16777215));
+			getColorFromItemStack.instructions.insert(new InsnNode(DUP));
+			getColorFromItemStack.instructions.insert(new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "getColorFromItemStack",  "(Lnet/minecraft/item/ItemStack;I)I"));
+			getColorFromItemStack.instructions.insert(new VarInsnNode(ILOAD, 2));
+			getColorFromItemStack.instructions.insert(new VarInsnNode(ALOAD, 1));
+			getColorFromItemStack.instructions.insert(l0);
 		}
 		
-		
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
 	}
 	
-	private byte[] patchWorldClass(byte[] basicClass, boolean obfuscated)
+	private byte[] patchWorldClass(byte[] basicClass)
 	{
 		ClassNode classNode = new ClassNode();
 		ClassReader classReader = new ClassReader(basicClass);
 		classReader.accept(classNode, 0);
-		coreLogger.log(Level.INFO, "Found World Class: " + classNode.name + ":" + obfuscated);
+		coreLogger.log(Level.INFO, "Found World Class: " + classNode.name);
 
-		String sunBrightnessName = obfuscated ? "b" : "getSunBrightness";
-		String indirectlyPoweredName = obfuscated ? "v" : "isBlockIndirectlyGettingPowered";
+		String sunBrightnessName = MCPNames.method("func_72971_b");
+		String indirectlyPoweredName = MCPNames.method("func_72864_z");
 
 		int removeIndex = 0;
 
@@ -147,11 +116,11 @@ public class RTClassTransformer implements IClassTransformer
 
 		for (MethodNode mn : classNode.methods)
 		{
-			if (mn.name.equals(sunBrightnessName) && mn.desc.equals("(F)F"))
+			if (mn.name.equals(sunBrightnessName))
 			{
 				getSunBrightness = mn;
 			}
-			else if (mn.name.equals(indirectlyPoweredName) && mn.desc.equals("(III)Z"))
+			else if (mn.name.equals(indirectlyPoweredName))
 			{
 				isBlockIndirectlyGettingPowered = mn;
 			}
@@ -184,14 +153,14 @@ public class RTClassTransformer implements IClassTransformer
 			LabelNode l0 = new LabelNode(new Label());
 			LabelNode l1 = new LabelNode(new Label());
 			LabelNode l2 = new LabelNode(new Label());
-			String world = obfuscated?OBF_WORLD:"net/minecraft/world/World";
+			String world = "net/minecraft/world/World";
 			
 			isBlockIndirectlyGettingPowered.instructions.insert(l2);
 			isBlockIndirectlyGettingPowered.instructions.insert(new InsnNode(IRETURN));
 			isBlockIndirectlyGettingPowered.instructions.insert(new InsnNode(ICONST_1));
 			isBlockIndirectlyGettingPowered.instructions.insert(l1);
 			isBlockIndirectlyGettingPowered.instructions.insert(new JumpInsnNode(IFEQ, l2));
-			isBlockIndirectlyGettingPowered.instructions.insert(new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "isIndirectlyGettingPowered", "(L"+world+";III)Z"));
+			isBlockIndirectlyGettingPowered.instructions.insert(new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "isBlockIndirectlyGettingPowered", "(L"+world+";III)Z"));
 			isBlockIndirectlyGettingPowered.instructions.insert(new VarInsnNode(ILOAD,3));
 			isBlockIndirectlyGettingPowered.instructions.insert(new VarInsnNode(ILOAD,2));
 			isBlockIndirectlyGettingPowered.instructions.insert(new VarInsnNode(ILOAD,1));
@@ -205,14 +174,14 @@ public class RTClassTransformer implements IClassTransformer
 		return writer.toByteArray();
 	}
 
-	private byte[] patchEntityRendererClass(byte[] basicClass, boolean obfuscated)
+	private byte[] patchEntityRendererClass(byte[] basicClass)
 	{
 		ClassNode classNode = new ClassNode();
 		ClassReader classReader = new ClassReader(basicClass);
 		classReader.accept(classNode, 0);
-		coreLogger.log(Level.INFO, "Found EntityRenderer Class: " + classNode.name + ":" + obfuscated);
+		coreLogger.log(Level.INFO, "Found EntityRenderer Class: " + classNode.name);
 
-		String methodName = obfuscated ? "h" : "updateLightmap";
+		String methodName = MCPNames.method("func_78472_g");
 
 		int removeIndex = 0;
 
@@ -263,20 +232,20 @@ public class RTClassTransformer implements IClassTransformer
 		return writer.toByteArray();
 	}
 
-	private byte[] patchLeaveClass(byte[] basicClass, boolean obfuscated)
+	private byte[] patchLeaveClass(byte[] basicClass)
 	{
 		ClassNode classNode = new ClassNode();
 		ClassReader classReader = new ClassReader(basicClass);
 		classReader.accept(classNode, 0);
-		coreLogger.log(Level.INFO, "Found Leave Class: " + classNode.name + ":" + obfuscated);
+		coreLogger.log(Level.INFO, "Found Leave Class: " + classNode.name);
 
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
 		classNode.accept(writer);
 
-		String methodName = obfuscated ? "a" : "onNeighborBlockChange";
-		String worldClass = obfuscated ? OBF_WORLD : "net/minecraft/world/World";
-		String leaveClass = obfuscated ? "amp" : "net/minecraft/block/BlockLeavesBase";
-		String blockClass = obfuscated ? "ahu" : "net/minecraft/block/Block";
+		String methodName = MCPNames.method("func_149695_a");
+		String worldClass = "net/minecraft/world/World";
+		String leaveClass = "net/minecraft/block/BlockLeavesBase";
+		String blockClass = "net/minecraft/block/Block";
 
 		MethodVisitor mv = writer.visitMethod(ACC_PUBLIC, methodName, "(L" + worldClass + ";IIIL" + blockClass + ";)V", null, null);
 		mv.visitCode();

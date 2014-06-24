@@ -12,8 +12,6 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiButtonOreDictionary extends GuiButton
@@ -44,6 +42,7 @@ public class GuiButtonOreDictionary extends GuiButton
 		return enabled;
 	}
 
+	@Override
 	public void drawButton(Minecraft p_146112_1_, int p_146112_2_, int p_146112_3_)
 	{
 		if (this.visible)

@@ -4,8 +4,11 @@ import java.util.Map;
 
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 
+@IFMLLoadingPlugin.SortingIndex(1001)
 public class RTLoadingPlugin implements IFMLLoadingPlugin
 {
+	public static boolean IN_MCP = false;
+
 	@Override
 	public String[] getASMTransformerClass()
 	{
@@ -29,8 +32,7 @@ public class RTLoadingPlugin implements IFMLLoadingPlugin
 	@Override
 	public void injectData(Map<String, Object> data)
 	{
-		// TODO Auto-generated method stub
-
+		IN_MCP = !(Boolean)data.get("runtimeDeobfuscationEnabled");
 	}
 
 	@Override

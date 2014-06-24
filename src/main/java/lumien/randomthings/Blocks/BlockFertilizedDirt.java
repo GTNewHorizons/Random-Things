@@ -4,14 +4,10 @@ import java.util.Random;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.Settings;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.network.play.server.S2APacketParticles;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -19,7 +15,7 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockFertilizedDirt extends Block
+public class BlockFertilizedDirt extends BlockBase
 {
 	public static int fertilizedDirtGrowth = 3;
 
@@ -27,8 +23,9 @@ public class BlockFertilizedDirt extends Block
 
 	protected BlockFertilizedDirt(boolean tilled)
 	{
-		super(Material.ground);
-		
+		super("fertilizedDirt" + (tilled ? "_tilled" : ""), Material.ground);
+
+		this.tilled = tilled;
 		this.setTickRandomly(true);
 		this.setHardness(0.6F);
 		this.setStepSound(soundTypeGravel);
@@ -44,10 +41,7 @@ public class BlockFertilizedDirt extends Block
 			this.setCreativeTab(RandomThings.creativeTab);
 		}
 
-		this.tilled = tilled;
-		this.setBlockName("fertilizedDirt" + (tilled ? "_tilled" : ""));
 		this.setBlockTextureName("RandomThings:fertilizedDirt");
-		GameRegistry.registerBlock(this, "fertilizedDirt" + (tilled ? "_tilled" : ""));
 	}
 
 	@Override

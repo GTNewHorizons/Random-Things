@@ -2,12 +2,6 @@ package lumien.randomthings.Handler;
 
 import java.util.HashMap;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageBloodMoon;
 

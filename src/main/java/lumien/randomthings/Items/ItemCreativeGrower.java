@@ -3,13 +3,9 @@ package lumien.randomthings.Items;
 import java.util.Random;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Client.ClientTickHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -26,6 +22,7 @@ public class ItemCreativeGrower extends ItemCreative
 		GameRegistry.registerItem(this, "creativeGrower");
 	}
 	
+	@Override
 	public boolean isFull3D()
 	{
 		return true;

@@ -1,7 +1,6 @@
 package lumien.randomthings.TileEntities;
 
 import lumien.randomthings.Blocks.ModBlocks;
-import cpw.mods.fml.common.Optional;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;

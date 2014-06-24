@@ -1,10 +1,6 @@
 package lumien.randomthings.Client.GUI;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.GUI.Elements.GuiSlotPlayerList;
 import lumien.randomthings.Container.ContainerMagneticForce;
@@ -14,21 +10,8 @@ import lumien.randomthings.Network.Messages.MessageRequestTeleport;
 
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiPlayerInfo;
-import net.minecraft.client.gui.GuiSlot;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.network.NetHandlerPlayClient;
-import net.minecraft.client.renderer.EntityRenderer;
-import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.inventory.Container;
-import net.minecraft.scoreboard.Score;
-import net.minecraft.scoreboard.ScoreObjective;
-import net.minecraft.scoreboard.ScorePlayerTeam;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiMagneticForce extends GuiContainer
@@ -87,6 +70,7 @@ public class GuiMagneticForce extends GuiContainer
 		playerList = new GuiSlotPlayerList(this, this.mc, 100, 110, guiX + xSize / 2 - 100 / 2, guiY - 10 + ySize / 2 - 100 / 2 + 10, players);
 	}
 
+	@Override
 	public void updateScreen()
 	{
 		super.updateScreen();

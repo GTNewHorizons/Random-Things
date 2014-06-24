@@ -1,32 +1,19 @@
 package lumien.randomthings.Blocks;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.TileEntities.TileEntityCarpentryBench;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockCarpentryBench extends BlockContainer
+public class BlockCarpentryBench extends BlockContainerBase
 {
 
 	protected BlockCarpentryBench()
 	{
-		super(Material.wood);
-
-		//this.setCreativeTab(RandomThings.creativeTab); WIP
-		this.setBlockName("carpentryBench");
-
-		GameRegistry.registerBlock(this, "carpentryBench");
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World var1, int var2)
-	{
-		return new TileEntityCarpentryBench();
+		super("carpentryBench",Material.wood);
 	}
 
 	@Override
@@ -41,5 +28,11 @@ public class BlockCarpentryBench extends BlockContainer
 			player.openGui(RandomThings.instance, GuiIds.CARPENTRY_BENCH, worldObj, posX, posY, posZ);
 			return true;
 		}
+	}
+
+	@Override
+	protected <T extends TileEntity> Class getTileEntityClass()
+	{
+		return TileEntityCarpentryBench.class;
 	}
 }

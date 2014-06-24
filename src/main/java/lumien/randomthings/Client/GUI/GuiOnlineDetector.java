@@ -3,7 +3,6 @@ package lumien.randomthings.Client.GUI;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.Container.ContainerOnlineDetector;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageOnlineDetector;
@@ -12,7 +11,6 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiOnlineDetector extends GuiContainer

@@ -13,7 +13,6 @@ import li.cil.oc.api.network.Arguments;
 import li.cil.oc.api.network.Callback;
 import li.cil.oc.api.network.Context;
 import li.cil.oc.api.network.SimpleComponent;
-import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Library.WorldUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

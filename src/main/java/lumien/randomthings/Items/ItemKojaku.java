@@ -3,8 +3,6 @@ package lumien.randomthings.Items;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Entity.EntityPfeil;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;

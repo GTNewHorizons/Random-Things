@@ -3,12 +3,9 @@ package lumien.randomthings.Items;
 import java.util.List;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.Library.Inventorys.InventoryDropFilter;
-import lumien.randomthings.Library.Inventorys.InventoryItemFilter;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,7 +33,8 @@ public class ItemDropFilter extends Item
 	}
 	
 	
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+    @Override
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 		if (!(ItemDropFilter.getDropFilterInv(par2EntityPlayer, par1ItemStack) == null))
 		{
@@ -49,6 +47,7 @@ public class ItemDropFilter extends Item
 		}
 	}
 
+	@Override
 	public void registerIcons(IIconRegister ir)
 	{
 		icons[0] = ir.registerIcon("RandomThings:dropFilter");
@@ -84,6 +83,7 @@ public class ItemDropFilter extends Item
 	}
 
 	
+	@Override
 	public IIcon getIconFromDamage(int metadata)
 	{
 		if (metadata < 0 || metadata > 1)

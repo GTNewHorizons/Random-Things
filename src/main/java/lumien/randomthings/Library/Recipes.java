@@ -4,8 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.ShapelessRecipes;
-import net.minecraft.potion.Potion;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -80,7 +78,7 @@ public class Recipes
 		if (ConfigBlocks.moonSensor)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.moonSensor,1),"ggg","lql","sss",'g',iGlass,'l',iLapislazuli,'s',"slabWood",'q',iQuartz));
 		if (ConfigBlocks.lapisLamp)
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.spectreLamp,4,0),"sss","sls","sss",'s',iGlass,'l',iLapislazuli));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.spectreLamp,4,0),"isi","sls","isi",'s',iGlass,'i',iIronIngot,'l',iLapislazuli));
 		if (ConfigBlocks.wirelessLever)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.wirelessLever),"r","l",'r',iRedstoneBlock,'l',iLever));
 		

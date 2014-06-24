@@ -1,16 +1,13 @@
 package lumien.randomthings.Handler;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Client.Particle.ParticleMagneticForce;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageMagneticForceParticle;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -111,7 +108,7 @@ public class MagneticForceHandler
 				if (userEntity!=null)
 				{
 					Set<EntityPlayer> trackingUser = ((WorldServer)userEntity.worldObj).getEntityTracker().getTrackingPlayers(userEntity);
-					PacketHandler.INSTANCE.sendTo(new MessageMagneticForceParticle(userEntity.getEntityId(),userEntity.worldObj.provider.dimensionId,f), (EntityPlayerMP) userEntity);
+					PacketHandler.INSTANCE.sendTo(new MessageMagneticForceParticle(userEntity.getEntityId(),userEntity.worldObj.provider.dimensionId,f), userEntity);
 					for (EntityPlayer player:trackingUser)
 					{
 						PacketHandler.INSTANCE.sendTo(new MessageMagneticForceParticle(userEntity.getEntityId(),userEntity.worldObj.provider.dimensionId,f), (EntityPlayerMP) player);
@@ -120,7 +117,7 @@ public class MagneticForceHandler
 				if (targetEntity!=null)
 				{
 					Set<EntityPlayer> trackingTarget = ((WorldServer)userEntity.worldObj).getEntityTracker().getTrackingPlayers(targetEntity);
-					PacketHandler.INSTANCE.sendTo(new MessageMagneticForceParticle(targetEntity.getEntityId(),targetEntity.worldObj.provider.dimensionId,f), (EntityPlayerMP) targetEntity);
+					PacketHandler.INSTANCE.sendTo(new MessageMagneticForceParticle(targetEntity.getEntityId(),targetEntity.worldObj.provider.dimensionId,f), targetEntity);
 					
 					for (EntityPlayer player:trackingTarget)
 					{

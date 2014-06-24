@@ -7,20 +7,19 @@ import cpw.mods.fml.common.registry.GameData;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.ConfigItems;
-import lumien.randomthings.Handler.BloodMoonHandler;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageNotification;
 
 import net.minecraft.block.Block;
 import net.minecraft.command.CommandBase;
-import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
@@ -98,7 +97,7 @@ public class RTCommand extends CommandBase
 			int metadata = 0;
 			if (args.length > 5)
 			{
-				metadata = this.parseInt(commandUser, args[5]);
+				metadata = CommandBase.parseInt(commandUser, args[5]);
 			}
 
 			ItemStack is = null;
@@ -119,7 +118,7 @@ public class RTCommand extends CommandBase
 
 			MessageNotification packet = new MessageNotification(title, description, is);
 
-			PacketHandler.INSTANCE.sendTo(packet, (EntityPlayerMP) receiverEntity);
+			PacketHandler.INSTANCE.sendTo(packet, receiverEntity);
 		}
 		else if (subCommand.equals("moon"))
 		{
@@ -134,7 +133,7 @@ public class RTCommand extends CommandBase
 			}
 			else if (args[1].equals("set") && args.length > 2)
 			{
-				int moonPhase = this.parseInt(commandUser, args[2]);
+				int moonPhase = CommandBase.parseInt(commandUser, args[2]);
 
 				if (moonPhase < 0 || moonPhase > 7)
 				{
@@ -142,7 +141,7 @@ public class RTCommand extends CommandBase
 					return;
 				}
 
-				commandUser.getEntityWorld().setWorldTime((long) (commandUser.getEntityWorld().provider.getWorldTime() % 24000 + 24000 * moonPhase));
+				commandUser.getEntityWorld().setWorldTime(commandUser.getEntityWorld().provider.getWorldTime() % 24000 + 24000 * moonPhase);
 			}
 			else
 			{
@@ -163,6 +162,25 @@ public class RTCommand extends CommandBase
 				player.inventory.addItemStackToInventory(new ItemStack(ModItems.spectreKey));
 				player.inventory.addItemStackToInventory(new ItemStack(ModItems.spectreSword));
 			}
+		}
+		else if (subCommand.equals("setItemColor"))
+		{
+			if (commandUser instanceof EntityPlayer)
+			{
+				ItemStack is = ((EntityPlayer) commandUser).getCurrentEquippedItem();
+				if (is!=null && args.length>1)
+				{
+					if (is.stackTagCompound==null)
+					{
+						is.stackTagCompound = new NBTTagCompound();
+					}
+					is.stackTagCompound.setInteger("customRTColor", Integer.parseInt(args[1]));
+				}
+			}
+		}
+		else if (subCommand.equals("resetSpectre"))
+		{
+			RandomThings.instance.spectreHandler.reset();
 		}
 	}
 

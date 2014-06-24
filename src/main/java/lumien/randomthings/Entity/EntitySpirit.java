@@ -1,29 +1,10 @@
 package lumien.randomthings.Entity;
 
-import lumien.randomthings.Client.Particle.ParticleSpirit;
 import lumien.randomthings.Items.ModItems;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityFlying;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIOpenDoor;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.pathfinding.PathNavigate;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -50,19 +31,23 @@ public class EntitySpirit extends EntityMob
 		super(par1World);
 	}
 
+	@Override
 	protected void collideWithEntity(Entity par1Entity)
 	{
 	}
 
+	@Override
 	protected void collideWithNearbyEntities()
 	{
 	}
 
+	@Override
 	protected boolean isAIEnabled()
 	{
 		return true;
 	}
 
+	@Override
 	public void onUpdate()
 	{
 		super.onUpdate();
@@ -74,6 +59,7 @@ public class EntitySpirit extends EntityMob
 		}
 	}
 
+	@Override
 	protected void updateAITasks()
 	{
 		super.updateAITasks();
@@ -83,9 +69,9 @@ public class EntitySpirit extends EntityMob
 			this.spawnPosition = new ChunkCoordinates((int) this.posX + this.rand.nextInt(7) - this.rand.nextInt(7), (int) this.posY + this.rand.nextInt(6) - 2, (int) this.posZ + this.rand.nextInt(7) - this.rand.nextInt(7));
 		}
 
-		double d0 = (double) this.spawnPosition.posX + 0.5D - this.posX;
-		double d1 = (double) this.spawnPosition.posY + 0.1D - this.posY;
-		double d2 = (double) this.spawnPosition.posZ + 0.5D - this.posZ;
+		double d0 = this.spawnPosition.posX + 0.5D - this.posX;
+		double d1 = this.spawnPosition.posY + 0.1D - this.posY;
+		double d2 = this.spawnPosition.posZ + 0.5D - this.posZ;
 		this.motionX += (Math.signum(d0) * 0.5D - this.motionX) * 0.10000000149011612D;
 		this.motionY += (Math.signum(d1) * 0.699999988079071D - this.motionY) * 0.10000000149011612D;
 		this.motionZ += (Math.signum(d2) * 0.5D - this.motionZ) * 0.10000000149011612D;
@@ -95,21 +81,25 @@ public class EntitySpirit extends EntityMob
 		this.rotationYaw += f1;
 	}
 
+	@Override
 	protected boolean canTriggerWalking()
 	{
 		return false;
 	}
 
+	@Override
 	public void onEntityUpdate()
 	{
 		super.onEntityUpdate();
 	}
 
+	@Override
 	protected Item getDropItem()
 	{
 		return ModItems.ingredients;
 	}
 
+	@Override
 	protected void dropFewItems(boolean par1, int par2)
 	{
 		this.entityDropItem(new ItemStack(ModItems.ingredients, this.rand.nextInt(2), 3), 0.0F);
@@ -118,6 +108,7 @@ public class EntitySpirit extends EntityMob
 	/**
 	 * Called when the mob is falling. Calculates and applies fall damage.
 	 */
+	@Override
 	protected void fall(float par1)
 	{
 	}
@@ -127,6 +118,7 @@ public class EntitySpirit extends EntityMob
 	 * the ground to update the fall distance and deal fall damage if landing on
 	 * the ground. Args: distanceFallenThisTick, onGround
 	 */
+	@Override
 	protected void updateFallState(double par1, boolean par3)
 	{
 	}
@@ -134,6 +126,7 @@ public class EntitySpirit extends EntityMob
 	/**
 	 * Moves the entity based on the specified heading. Args: strafe, forward
 	 */
+	@Override
 	public void moveEntityWithHeading(float par1, float par2)
 	{
 		if (this.isInWater())
@@ -171,9 +164,9 @@ public class EntitySpirit extends EntityMob
 			}
 
 			this.moveEntity(this.motionX, this.motionY, this.motionZ);
-			this.motionX *= (double) f2;
-			this.motionY *= (double) f2;
-			this.motionZ *= (double) f2;
+			this.motionX *= f2;
+			this.motionY *= f2;
+			this.motionZ *= f2;
 		}
 
 		this.prevLimbSwingAmount = this.limbSwingAmount;
@@ -193,6 +186,7 @@ public class EntitySpirit extends EntityMob
 	/**
 	 * returns true if this entity is by a ladder, false otherwise
 	 */
+	@Override
 	public boolean isOnLadder()
 	{
 		return false;

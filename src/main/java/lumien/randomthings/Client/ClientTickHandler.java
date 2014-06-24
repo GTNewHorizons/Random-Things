@@ -3,14 +3,9 @@ package lumien.randomthings.Client;
 import java.awt.Color;
 
 import net.minecraft.client.Minecraft;
-import lumien.randomthings.RandomThings;
-import lumien.randomthings.Configuration.ConfigItems;
-import lumien.randomthings.Items.ModItems;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ClientTickHandler
 {

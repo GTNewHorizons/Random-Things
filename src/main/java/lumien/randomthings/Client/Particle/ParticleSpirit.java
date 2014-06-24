@@ -1,8 +1,6 @@
 package lumien.randomthings.Client.Particle;
 
-import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntityPortalFX;
-import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.world.World;
 
 public class ParticleSpirit extends EntityPortalFX
@@ -16,7 +14,8 @@ public class ParticleSpirit extends EntityPortalFX
 		this.setRBGColorF(t*152F, t*245F, t*255F);
     }
 	
-    public void onUpdate()
+    @Override
+	public void onUpdate()
     {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
