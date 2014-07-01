@@ -60,18 +60,18 @@ public class ItemFilter extends Item
 
 	public static boolean matchesItem(ItemStack filter, ItemStack toCheck)
 	{
-		boolean oreDict = filter.stackTagCompound.getBoolean("oreDict");
-		int listType = filter.stackTagCompound.getInteger("listType");
-
-		if (filter == null || toCheck == null)
+		if (filter == null || toCheck == null || filter.stackTagCompound==null)
 		{
 			return false;
 		}
-
+		
 		if (!(filter.getItem() instanceof ItemFilter) || filter.getItemDamage() != 1)
 		{
 			return false;
 		}
+		
+		boolean oreDict = filter.stackTagCompound.getBoolean("oreDict");
+		int listType = filter.stackTagCompound.getInteger("listType");
 
 		IInventory filterInventory = getItemFilterInv(null, filter);
 		filterInventory.openInventory();
