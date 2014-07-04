@@ -24,7 +24,8 @@ public class RTCallHook implements IFMLCallHook
 		VanillaChanges.HARDCORE_DARKNESS = config.get("VanillaChanges", "Hardcore Darkness", false ,"The minimum light will be removed so if there's no light source it's actually going to be completely black").getBoolean(false);
 		ConfigBlocks.wirelessLever = config.get("Blocks", "WirelessLever", true).getBoolean(true);
 		
-		config.save();
+		if (config.hasChanged())
+			config.save();
 		
 		return null;
 	}

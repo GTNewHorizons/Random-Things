@@ -12,6 +12,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class GuiDyeingMachine extends GuiContainer
@@ -24,9 +25,9 @@ public class GuiDyeingMachine extends GuiContainer
 
 	static final float colorMod = 1F / 255F;
 
-	public GuiDyeingMachine(InventoryPlayer playerInventory)
+	public GuiDyeingMachine(InventoryPlayer playerInventory, World worldObj, int posX, int posY, int posZ)
 	{
-		super(new ContainerDyeingMachine(playerInventory));
+		super(new ContainerDyeingMachine(playerInventory, worldObj, posX, posY, posZ));
 
 		this.xSize = 176;
 		this.ySize = 141;

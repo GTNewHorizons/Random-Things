@@ -14,6 +14,9 @@ public class BlockCarpentryBench extends BlockContainerBase
 	protected BlockCarpentryBench()
 	{
 		super("carpentryBench",Material.wood);
+		
+		this.setCreativeTab(null);
+		this.setHardness(3);
 	}
 
 	@Override

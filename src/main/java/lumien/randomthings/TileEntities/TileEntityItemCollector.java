@@ -2,6 +2,10 @@ package lumien.randomthings.TileEntities;
 
 import java.util.List;
 
+import javax.vecmath.Vector3d;
+
+import lumien.randomthings.Client.ParticleSystem.ParticleSystem;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.entity.item.EntityItem;
@@ -16,11 +20,13 @@ import net.minecraft.util.Facing;
 
 public class TileEntityItemCollector extends TileEntity
 {
+	public ParticleSystem ps;
+	
 	private final int range = 2;
 
 	private int tickRate = 20;
 	private int tickCounter = 0;
-
+    
 	@Override
 	public void updateEntity()
 	{

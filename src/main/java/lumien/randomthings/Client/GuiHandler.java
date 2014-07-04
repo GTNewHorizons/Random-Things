@@ -52,7 +52,7 @@ public class GuiHandler implements IGuiHandler
 				{
 					inventoryFilter = new InventoryBasic("placeholder", false, 9);
 				}
-				return new ContainerItemFilter(player.inventory, inventoryFilter);
+				return new ContainerItemFilter(player.getCurrentEquippedItem(),player.inventory, inventoryFilter);
 			case ADVANCED_ITEMCOLLECTOR:
 				return new ContainerItemCollector(player.inventory, (TileEntityAdvancedItemCollector) tileEntity);
 			case ONLINE_DETECTOR:
@@ -80,7 +80,7 @@ public class GuiHandler implements IGuiHandler
 			case CARPENTRY_BENCH:
 				return new ContainerCarpentryBench(player.inventory,world,x,y,z);
 			case DYEING_MACHINE:
-				return new ContainerDyeingMachine(player.inventory);
+				return new ContainerDyeingMachine(player.inventory,world,x,y,z);
 		}
 		return null;
 	}
@@ -99,7 +99,7 @@ public class GuiHandler implements IGuiHandler
 				{
 					inventoryFilter = new InventoryBasic("placeholder", false, 27);
 				}
-				return new GuiItemFilter(player, player.inventory, inventoryFilter);
+				return new GuiItemFilter(player.getCurrentEquippedItem(),player, player.inventory, inventoryFilter);
 			case ADVANCED_ITEMCOLLECTOR:
 				return new GuiItemCollector(player.inventory, (TileEntityAdvancedItemCollector) tileEntity);
 			case ONLINE_DETECTOR:
@@ -127,7 +127,7 @@ public class GuiHandler implements IGuiHandler
 			case CARPENTRY_BENCH:
 				return new GuiCarpentryBench(player.inventory,world,x,y,z);
 			case DYEING_MACHINE:
-				return new GuiDyeingMachine(player.inventory);
+				return new GuiDyeingMachine(player.inventory,world,x,y,z);
 		}
 		return null;
 	}

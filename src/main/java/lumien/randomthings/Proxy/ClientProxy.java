@@ -34,6 +34,7 @@ import lumien.randomthings.Client.Renderer.RenderPfeil;
 import lumien.randomthings.Client.Renderer.RenderSpirit;
 import lumien.randomthings.Client.Renderer.RenderWhitestone;
 import lumien.randomthings.Client.Renderer.RenderWirelessLever;
+import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.EntityHealingOrb;
 import lumien.randomthings.Entity.EntityPfeil;
 import lumien.randomthings.Entity.EntitySpirit;
@@ -60,15 +61,15 @@ public class ClientProxy extends CommonProxy
 	public void registerRenderers()
 	{
 		RenderIds.WIRELESS_LEVER = RenderingRegistry.getNextAvailableRenderId();
-		
+
 		renderer = new RenderItemCollector();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityItemCollector.class, renderer);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdvancedItemCollector.class, renderer);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityPfeil.class, new RenderPfeil());
-		RenderingRegistry.registerEntityRenderingHandler(EntitySpirit.class, new RenderSpirit(new ModelSlime(16),new ModelSlime(0), 0.25f));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySpirit.class, new RenderSpirit(new ModelSlime(16), new ModelSlime(0), 0.25f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHealingOrb.class, new RenderHealingOrb());
-		
+
 		RenderingRegistry.registerBlockHandler(new RenderWirelessLever());
 
 		MinecraftForgeClient.registerItemRenderer(ModItems.whitestone, new RenderWhitestone());
@@ -102,53 +103,56 @@ public class ClientProxy extends CommonProxy
 		particle.motionY = motionY;
 		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 	}
-	
+
 	@Override
 	public ArrayList<String> getUsernameList()
 	{
 		NetHandlerPlayClient nethandlerplayclient = ClientProxy.mc.thePlayer.sendQueue;
-        List<GuiPlayerInfo> list = nethandlerplayclient.playerInfoList;
-        ArrayList<String> players=new ArrayList<String>();
-        for (GuiPlayerInfo info:list)
-        {
-        	players.add(info.name);
-        }
-        
-        return players;
+		List<GuiPlayerInfo> list = nethandlerplayclient.playerInfoList;
+		ArrayList<String> players = new ArrayList<String>();
+		for (GuiPlayerInfo info : list)
+		{
+			players.add(info.name);
+		}
+
+		return players;
 	}
-	
+
 	@Override
 	public void postInit()
 	{
-		GameSettings.Options[] videoOptions = ReflectionHelper.getPrivateValue(GuiVideoSettings.class, null, MCPNames.field("field_146502_i"));
-		ArrayList<GameSettings.Options> options = new ArrayList<GameSettings.Options>(Arrays.asList(videoOptions));
-		
-		Iterator<GameSettings.Options> iterator = options.iterator();
-		while (iterator.hasNext())
+		if (VanillaChanges.LOCKED_GAMMA)
 		{
-			GameSettings.Options option = iterator.next();
-			if (option==GameSettings.Options.GAMMA)
+			GameSettings.Options[] videoOptions = ReflectionHelper.getPrivateValue(GuiVideoSettings.class, null, MCPNames.field("field_146502_i"));
+			ArrayList<GameSettings.Options> options = new ArrayList<GameSettings.Options>(Arrays.asList(videoOptions));
+
+			Iterator<GameSettings.Options> iterator = options.iterator();
+			while (iterator.hasNext())
 			{
-				iterator.remove();
+				GameSettings.Options option = iterator.next();
+				if (option == GameSettings.Options.GAMMA)
+				{
+					iterator.remove();
+				}
 			}
-		}
-		
-		RandomThings.instance.logger.log(Level.INFO, "Removing Gamma from settings... (GammaLock is on)");
-		try
-		{
-			OverrideUtils.setFinalStatic(GuiVideoSettings.class.getDeclaredField(MCPNames.field("field_146502_i")), options.toArray(videoOptions));
-		}
-		catch (NoSuchFieldException e)
-		{
-			e.printStackTrace();
-		}
-		catch (SecurityException e)
-		{
-			e.printStackTrace();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
+
+			RandomThings.instance.logger.log(Level.INFO, "Removing Gamma from settings... (GammaLock is on)");
+			try
+			{
+				OverrideUtils.setFinalStatic(GuiVideoSettings.class.getDeclaredField(MCPNames.field("field_146502_i")), options.toArray(videoOptions));
+			}
+			catch (NoSuchFieldException e)
+			{
+				e.printStackTrace();
+			}
+			catch (SecurityException e)
+			{
+				e.printStackTrace();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 }

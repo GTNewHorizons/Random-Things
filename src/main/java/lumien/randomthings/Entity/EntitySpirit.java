@@ -13,14 +13,14 @@ public class EntitySpirit extends EntityMob
 {
 	ChunkCoordinates spawnPosition;
 
-	public EntitySpirit(World par1World, double posX,double posY,double posZ)
+	public EntitySpirit(World par1World, double posX, double posY, double posZ)
 	{
 		super(par1World);
 
 		this.yOffset = 0.0F;
-		
-		this.width=0.6f;
-		this.height=0.6f;
+
+		this.width = 0.6f;
+		this.height = 0.6f;
 
 		this.setSize(0.6F, 0.6F);
 		this.setPosition(posX, posY, posZ);
@@ -29,6 +29,8 @@ public class EntitySpirit extends EntityMob
 	public EntitySpirit(World par1World)
 	{
 		super(par1World);
+		
+		this.setSize(0.6F, 0.6F);
 	}
 
 	@Override
@@ -52,11 +54,6 @@ public class EntitySpirit extends EntityMob
 	{
 		super.onUpdate();
 		this.motionY *= 0.6000000238418579D;
-
-		if (this.worldObj.isRemote)
-		{
-			this.setSize(0.6F, 0.6F);
-		}
 	}
 
 	@Override

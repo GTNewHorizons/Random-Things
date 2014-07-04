@@ -83,7 +83,7 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
 			throw new Exception("Invalid IconString");
 		}
 
-		EntityPlayerMP receiverEntity = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(receiver);
+		EntityPlayerMP receiverEntity = MinecraftServer.getServer().getConfigurationManager().func_152612_a(receiver);
 		if (receiverEntity == null)
 		{
 			return new Object[] {};
@@ -145,7 +145,7 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
 							throw new Exception("Invalid IconString");
 						}
 
-						EntityPlayerMP receiverEntity = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(receiver);
+						EntityPlayerMP receiverEntity = MinecraftServer.getServer().getConfigurationManager().func_152612_a(receiver);
 						if (receiverEntity == null)
 						{
 							throw new Exception("Player entity not found");

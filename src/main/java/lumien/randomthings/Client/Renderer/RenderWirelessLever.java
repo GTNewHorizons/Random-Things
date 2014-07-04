@@ -96,14 +96,14 @@ public class RenderWirelessLever implements ISimpleBlockRenderingHandler
         float f3 = 0.0625F;
         float f4 = 0.0625F;
         float f5 = 0.625F;
-        avec3[0] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool((-f3), 0.0D, (-f4));
-        avec3[1] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool(f3, 0.0D, (-f4));
-        avec3[2] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool(f3, 0.0D, f4);
-        avec3[3] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool((-f3), 0.0D, f4);
-        avec3[4] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool((-f3), f5, (-f4));
-        avec3[5] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool(f3, f5, (-f4));
-        avec3[6] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool(f3, f5, f4);
-        avec3[7] = renderer.blockAccess.getWorldVec3Pool().getVecFromPool((-f3), f5, f4);
+        avec3[0] = Vec3.createVectorHelper((-f3), 0.0D, (-f4));
+        avec3[1] = Vec3.createVectorHelper(f3, 0.0D, (-f4));
+        avec3[2] = Vec3.createVectorHelper(f3, 0.0D, f4);
+        avec3[3] = Vec3.createVectorHelper((-f3), 0.0D, f4);
+        avec3[4] = Vec3.createVectorHelper((-f3), f5, (-f4));
+        avec3[5] = Vec3.createVectorHelper(f3, f5, (-f4));
+        avec3[6] = Vec3.createVectorHelper(f3, f5, f4);
+        avec3[7] = Vec3.createVectorHelper((-f3), f5, f4);
 
         for (int j1 = 0; j1 < 8; ++j1)
         {

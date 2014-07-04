@@ -2,6 +2,8 @@ package lumien.randomthings;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
@@ -30,11 +32,16 @@ import lumien.randomthings.Library.Recipes;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Proxy.CommonProxy;
 import lumien.randomthings.TileEntities.ModTileEntities;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
+import cpw.mods.fml.client.IModGuiFactory;
+import cpw.mods.fml.client.config.GuiConfig;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
@@ -49,12 +56,12 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.Mod.EventHandler;
 
-@Mod(modid = RandomThings.MOD_ID, name = RandomThings.MOD_NAME, version = RandomThings.MOD_VERSION)
+@Mod(modid = RandomThings.MOD_ID, name = RandomThings.MOD_NAME, version = RandomThings.MOD_VERSION, guiFactory = "lumien.randomthings.Client.Config.RandomThingsGuiFactory")
 public class RandomThings
 {
 	@Instance(RandomThings.MOD_ID)
 	public static RandomThings instance;
-
+	
 	public static final String MOD_ID = "RandomThings";
 	public static final String MOD_NAME = "Random Things";
 	public static final String MOD_VERSION = "@VERSION@";
@@ -83,6 +90,7 @@ public class RandomThings
 		logger = event.getModLog();
 
 		RTConfiguration.init(event);
+		RTConfiguration.syncConfig();
 
 		ModItems.init();
 		ModBlocks.init();
@@ -116,6 +124,10 @@ public class RandomThings
 		PacketHandler.init();
 		RandomThings.proxy.registerRenderers();
 
+		if (Settings.SPECTRE_DIMENSON_ID==-1)
+		{
+			Settings.SPECTRE_DIMENSON_ID = DimensionManager.getNextFreeDimId();
+		}
 		DimensionManager.registerProviderType(Settings.SPECTRE_DIMENSON_ID, WorldProviderSpectre.class, true);
 		DimensionManager.registerDimension(Settings.SPECTRE_DIMENSON_ID, Settings.SPECTRE_DIMENSON_ID);
 
@@ -135,6 +147,11 @@ public class RandomThings
 			logger.log(Level.WARN, "Couldn't reflect on cc, no cc peripheral support for CreativePlayerInterface and OnlineDetector and Notification Interface");
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean canBeDeactivated()
+	{
+		return false;
 	}
 
 	public void saveNBT()

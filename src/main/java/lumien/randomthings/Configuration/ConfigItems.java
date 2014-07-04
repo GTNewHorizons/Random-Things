@@ -17,4 +17,5 @@ public class ConfigItems
 	public static boolean spectreArmor;
 	public static boolean spectreSword;
 	public static boolean spiritBinder;
+	public static boolean ginto;
 }

@@ -1,10 +1,13 @@
 package lumien.randomthings.Container;
 
+import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Container.Slots.SlotDye;
+import lumien.randomthings.Container.Slots.SlotDyeCrafting;
 import lumien.randomthings.Container.Slots.SlotDyeable;
 import lumien.randomthings.Library.Colors;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
@@ -13,45 +16,95 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class ContainerDyeingMachine extends Container
 {
-	IInventory ingredients = new InventoryCrafting(this,2,1);
+	IInventory ingredients = new InventoryCrafting(this, 2, 1);
 	IInventory result = new InventoryCraftResult();
-	
-	public ContainerDyeingMachine(InventoryPlayer playerInventory)
+
+	private int posX;
+	private int posY;
+	private int posZ;
+	private World worldObj;
+
+	public ContainerDyeingMachine(InventoryPlayer playerInventory, World worldObj, int posX, int posY, int posZ)
 	{
-		this.addSlotToContainer(new SlotDyeable(ingredients,0,27,22));
-		this.addSlotToContainer(new SlotDye(ingredients,1,76,22));
-		this.addSlotToContainer(new SlotCrafting(playerInventory.player,ingredients,result,2,134,22));
-		
+		this.posX = posX;
+		this.posY = posY;
+		this.posZ = posZ;
+		this.worldObj = worldObj;
+
+		this.addSlotToContainer(new SlotDyeable(ingredients, 0, 27, 22));
+		this.addSlotToContainer(new SlotDye(ingredients, 1, 76, 22));
+		this.addSlotToContainer(new SlotDyeCrafting(playerInventory.player, ingredients, result, 2, 134, 22));
 		bindPlayerInventory(playerInventory);
 	}
-	
+
 	@Override
 	public void onCraftMatrixChanged(IInventory par1IInventory)
-    {
-        ItemStack toDye = par1IInventory.getStackInSlot(0);
-        ItemStack dye = par1IInventory.getStackInSlot(1);
-        
-        if (toDye!=null && dye!=null)
-        {
-        	int dyeColor = Colors.getDyeColor(dye);
-        	ItemStack copy = toDye.copy();
-        	
-        	if (copy.stackTagCompound==null)
-        	{
-        		copy.stackTagCompound = new NBTTagCompound();
-        	}
-        	copy.stackSize=1;
-        	copy.stackTagCompound.setInteger("customRTColor", dyeColor);
-        	this.result.setInventorySlotContents(0, copy);
-        }
-        else
-        {
-        	this.result.setInventorySlotContents(0, null);
-        }
-    }
+	{
+		ItemStack toDye = par1IInventory.getStackInSlot(0);
+		ItemStack dye = par1IInventory.getStackInSlot(1);
+
+		if (toDye != null && dye != null)
+		{
+			int dyeColor = Colors.getDyeColor(dye);
+			ItemStack copy = toDye.copy();
+
+			if (copy.stackTagCompound == null)
+			{
+				copy.stackTagCompound = new NBTTagCompound();
+			}
+			copy.stackSize = 1;
+			copy.stackTagCompound.setInteger("customRTColor", dyeColor);
+			this.result.setInventorySlotContents(0, copy);
+		}
+		else if (toDye != null && dye == null)
+		{
+			ItemStack copy = toDye.copy();
+			copy.stackSize = 1;
+			if (copy.stackTagCompound != null)
+			{
+				if (copy.stackTagCompound.hasKey("customRTColor"))
+				{
+					copy.stackTagCompound.removeTag("customRTColor");
+				}
+
+				if (copy.stackTagCompound.hasNoTags())
+				{
+					copy.stackTagCompound = null;
+				}
+				this.result.setInventorySlotContents(0, copy);
+			}
+			else if (copy.stackTagCompound == null)
+			{
+				this.result.setInventorySlotContents(0, null);
+			}
+		}
+		else
+		{
+			this.result.setInventorySlotContents(0, null);
+		}
+	}
+
+	public void onContainerClosed(EntityPlayer par1EntityPlayer)
+	{
+		super.onContainerClosed(par1EntityPlayer);
+
+		if (!this.worldObj.isRemote)
+		{
+			for (int i = 0; i < 2; ++i)
+			{
+				ItemStack itemstack = this.ingredients.getStackInSlotOnClosing(i);
+
+				if (itemstack != null)
+				{
+					par1EntityPlayer.dropPlayerItemWithRandomChoice(itemstack, false);
+				}
+			}
+		}
+	}
 
 	protected void bindPlayerInventory(InventoryPlayer inventoryPlayer)
 	{
@@ -70,11 +123,11 @@ public class ContainerDyeingMachine extends Container
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer var1)
+	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
 	{
-		return true;
+		return this.worldObj.getBlock(this.posX, this.posY, this.posZ) != ModBlocks.dyeingMachine ? false : par1EntityPlayer.getDistanceSq((double) this.posX + 0.5D, (double) this.posY + 0.5D, (double) this.posZ + 0.5D) <= 64.0D;
 	}
-	
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{

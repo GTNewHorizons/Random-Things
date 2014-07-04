@@ -2,7 +2,7 @@ buildscript {
     repositories {
         mavenCentral()
         maven {
-            name = 'ForgeFS'
+            name = 'forge'
             url = 'http://files.minecraftforge.net/maven'
         }
 		maven {
@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    compile group: 'li.cil.oc', name: 'OpenComputers', version: "MC1.7.2-1.2.8.135"
+    compile group: 'li.cil.oc', name: 'OpenComputers', version: 'MC1.7.2-1.2.13.150', classifier: 'api'
 }
 
 
@@ -44,7 +44,7 @@ jar {
 }
 
 minecraft {
-    version = "1.7.2-10.12.1.1101"
+    version = "1.7.10_pre4-10.12.2.1149-prerelease"
     assetDir = "eclipse/assets"
     
     replaceIn "RandomThings.java"

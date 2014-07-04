@@ -24,9 +24,9 @@ public class GuiItemFilter extends GuiContainer
 	GuiButtonOreDictionary oreDictButton;
 	GuiButtonListtype listTypeButton;
 
-	public GuiItemFilter(EntityPlayer player,IInventory inventoryPlayer, IInventory inventoryFilter)
+	public GuiItemFilter(ItemStack filter,EntityPlayer player,IInventory inventoryPlayer, IInventory inventoryFilter)
 	{
-		super(new ContainerItemFilter(inventoryPlayer, inventoryFilter));
+		super(new ContainerItemFilter(filter,inventoryPlayer, inventoryFilter));
 
 		xSize = 198;
 		ySize = 133;

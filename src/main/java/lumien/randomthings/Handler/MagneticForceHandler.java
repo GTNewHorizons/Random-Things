@@ -103,8 +103,8 @@ public class MagneticForceHandler
 			else
 			{
 				f+=0.1f;
-				EntityPlayerMP userEntity = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(user);
-				EntityPlayerMP targetEntity = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(target);
+				EntityPlayerMP userEntity = MinecraftServer.getServer().getConfigurationManager().func_152612_a(user);
+				EntityPlayerMP targetEntity = MinecraftServer.getServer().getConfigurationManager().func_152612_a(target);
 				if (userEntity!=null)
 				{
 					Set<EntityPlayer> trackingUser = ((WorldServer)userEntity.worldObj).getEntityTracker().getTrackingPlayers(userEntity);
@@ -132,8 +132,8 @@ public class MagneticForceHandler
 
 		private void teleport()
 		{
-			EntityPlayerMP userEntity = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(user);
-			EntityPlayerMP targetEntity = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(target);
+			EntityPlayerMP userEntity = MinecraftServer.getServer().getConfigurationManager().func_152612_a(user);
+			EntityPlayerMP targetEntity = MinecraftServer.getServer().getConfigurationManager().func_152612_a(target);
 
 			if (userEntity != null && targetEntity != null)
 			{

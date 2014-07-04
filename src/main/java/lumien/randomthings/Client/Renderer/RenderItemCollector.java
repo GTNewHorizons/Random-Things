@@ -69,7 +69,7 @@ public class RenderItemCollector extends TileEntitySpecialRenderer
 		}
 
 		RenderItemCollector.model.render((Entity) null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-
+		
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();
 

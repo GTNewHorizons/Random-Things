@@ -13,4 +13,5 @@ public class ConfigBlocks
 	public static boolean wirelessLever;
 	public static boolean carpentryBench;
 	public static boolean dyeingMachine;
+	public static boolean spiritRod;
 }

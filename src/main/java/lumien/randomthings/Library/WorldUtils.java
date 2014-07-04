@@ -67,7 +67,7 @@ public class WorldUtils
 	{
 		if (FMLCommonHandler.instance().getEffectiveSide().isServer())
 		{
-			return MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(username) != null;
+			return MinecraftServer.getServer().getConfigurationManager().func_152612_a(username) != null;
 		}
 		else
 		{

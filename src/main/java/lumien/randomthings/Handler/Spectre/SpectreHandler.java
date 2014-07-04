@@ -26,6 +26,7 @@ import net.minecraft.world.WorldServer;
 public class SpectreHandler extends WorldSavedData
 {
 	int nextCoord;
+	int spectreDimensionID;
 
 	HashMap<String, Integer> playerConnection;
 	World worldObj;
@@ -35,6 +36,7 @@ public class SpectreHandler extends WorldSavedData
 		super("SpectreHandler");
 		nextCoord = 0;
 		playerConnection = new HashMap<String, Integer>();
+		spectreDimensionID=Settings.SPECTRE_DIMENSON_ID;
 	}
 
 	public SpectreHandler()
@@ -77,7 +79,7 @@ public class SpectreHandler extends WorldSavedData
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		nbt.setInteger("nextCoord", nextCoord);
-
+		nbt.setInteger("spectreDimensionID", spectreDimensionID);
 		NBTTagList tagList = new NBTTagList();
 
 		for (String playerName : playerConnection.keySet())
@@ -98,6 +100,7 @@ public class SpectreHandler extends WorldSavedData
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		nextCoord = nbt.getInteger("nextCoord");
+		spectreDimensionID = nbt.getInteger("spectreDimensionID");
 
 		NBTTagList tagList = nbt.getTagList("playerList", 10);
 
@@ -119,6 +122,12 @@ public class SpectreHandler extends WorldSavedData
 			RandomThings.instance.logger.log(Level.WARN, "I would recommend to also reset the spectre world itself because the \"old\" cubes are still where they were");
 			RandomThings.instance.logger.log(Level.WARN, "Also if there's still a player in the old spectre world you should either move him out or change the dimensionID to 32 in the config file");
 			RandomThings.instance.logger.log(Level.WARN, "If you don't this will crash in a second!! :(");
+		}
+		
+		if (spectreDimensionID!=Settings.SPECTRE_DIMENSON_ID)
+		{
+			RandomThings.instance.logger.log(Level.WARN, "Resetting Spectre World because dimensionID changed");
+			reset();
 		}
 	}
 

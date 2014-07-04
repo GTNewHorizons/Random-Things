@@ -1,10 +1,21 @@
 package lumien.randomthings.Handler;
 
+import static org.lwjgl.opengl.GL11.glPointSize;
+
+import java.util.Arrays;
+import java.util.HashSet;
+
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
+import static org.lwjgl.opengl.GL11.*;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Client.RenderUtils;
+import lumien.randomthings.Client.Renderer.RenderBlut;
 import lumien.randomthings.Configuration.ConfigItems;
+import lumien.randomthings.Configuration.RTConfiguration;
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.EntityHealingOrb;
@@ -15,10 +26,14 @@ import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Items.ItemSpectreArmor;
 import lumien.randomthings.Items.ItemWhiteStone;
 import lumien.randomthings.Items.ModItems;
+import lumien.randomthings.Library.Colors;
 import lumien.randomthings.Library.PotionEffects;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageBloodMoon;
 import lumien.randomthings.Proxy.ClientProxy;
+import lumien.randomthings.TileEntities.TileEntityFogGenerator;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -27,8 +42,16 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelBox;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -36,12 +59,18 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.MathHelper;
+import net.minecraftforge.client.event.EntityViewRenderEvent.FogDensity;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent17;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -62,18 +91,77 @@ public class RTEventHandler
 			event.world.playSoundEffect(event.x + 0.5F, event.y + 0.5F, event.z + 0.5F, ModBlocks.fertilizedDirtTilled.stepSound.getStepResourcePath(), (ModBlocks.fertilizedDirtTilled.stepSound.getVolume() + 1.0F) / 2.0F, ModBlocks.fertilizedDirtTilled.stepSound.getPitch() * 0.8F);
 		}
 	}
+
+	@SubscribeEvent
+	public void onConfigChange(OnConfigChangedEvent event)
+	{
+		RTConfiguration.onConfigChange(event);
+	}
+
 	
+	// Body Width: 0.25
+	// Body Height: 0.375
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void renderPlayerPost(RenderPlayerEvent.Post event)
+	{
+		RenderBlut.renderBlut(event);
+	}
+
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void fogDensity(FogDensity event)
+	{
+		if (event.entity.worldObj.isRemote)
+		{
+			if (Minecraft.getMinecraft().thePlayer.getHealth() < 20f)
+			{
+				event.density = 10f;
+				event.setCanceled(true);
+			}
+		}
+	}
+
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void renderPre(RenderLivingEvent.Pre event)
+	{
+		// GL11.glColor3f(0, 0, 1);
+	}
+
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void toolTip(ItemTooltipEvent event)
 	{
-		if (event.itemStack.stackTagCompound!=null)
+		if (event.itemStack.stackTagCompound != null)
 		{
 			if (event.itemStack.stackTagCompound.hasKey("customRTColor"))
 			{
-				event.toolTip.add("Color: "+event.itemStack.stackTagCompound.getInteger("customRTColor"));
+				int dyeColor = event.itemStack.stackTagCompound.getInteger("customRTColor");
+				String dye = dyeColor + "";
+
+				int indexDye;
+				if ((indexDye = getDyeFromColor(dyeColor)) != -1)
+				{
+					dye = I18n.format("text.color." + ItemDye.field_150923_a[indexDye], new Object[] {});
+				}
+
+				event.toolTip.add(I18n.format("text.dyed", new Object[] { dye }));
 			}
 		}
+	}
+
+	private int getDyeFromColor(int color)
+	{
+		for (int i = 0; i < ItemDye.field_150922_c.length; i++)
+		{
+			if (ItemDye.field_150922_c[i] == color)
+			{
+				return i;
+			}
+		}
+
+		return -1;
 	}
 
 	@SubscribeEvent
@@ -100,9 +188,9 @@ public class RTEventHandler
 			{
 				if (helmet.getItem() instanceof ItemSpectreArmor && chestplate.getItem() instanceof ItemSpectreArmor && leggings.getItem() instanceof ItemSpectreArmor && boots.getItem() instanceof ItemSpectreArmor)
 				{
-					GL11.glEnable(GL11.GL_BLEND);
-					GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-					GL11.glColor4f(1, 1, 1, 0.6f);
+					glEnable(GL_BLEND);
+					glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+					glColor4f(1, 1, 1, 0.6f);
 				}
 			}
 		}
@@ -244,7 +332,7 @@ public class RTEventHandler
 				}
 			}
 		}
-		
+
 		if (Settings.BLOOD_MOON && !event.world.isRemote && event.entity instanceof EntityPlayerMP)
 		{
 			boolean hasBloodMoon = BloodMoonHandler.INSTANCE.hasBloodMoon(event.world.provider.dimensionId);
@@ -289,7 +377,7 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void entityDeath(LivingDeathEvent event)
 	{
-		if (FMLCommonHandler.instance().getEffectiveSide().isServer())
+		if (!event.entity.worldObj.isRemote)
 		{
 			if (ConfigItems.whitestone)
 			{
@@ -321,26 +409,23 @@ public class RTEventHandler
 				}
 			}
 
-			if (ConfigItems.spiritBinder)
+			if (ConfigItems.spectreArmor || ConfigItems.spectreKey || ConfigItems.spectreSword)
 			{
-				if (event.source.getEntity()!=null && event.source.getEntity() instanceof EntityPlayer && event.entity instanceof IMob && !(event.entity instanceof EntitySpirit))
+				if (event.source.getEntity() != null && !(event.source.getEntity() instanceof FakePlayer) && event.source.getEntity() instanceof EntityPlayer && !(event.entity instanceof EntitySpirit))
 				{
 					EntityPlayer player = (EntityPlayer) event.source.getEntity();
-					if (player.inventory.hasItem(ModItems.spiritBinder))
+					double chance = Settings.SPIRIT_CHANCE;
+					if (ConfigItems.spectreSword && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ModItems.spectreSword)
 					{
-						double chance = Settings.SPIRIT_CHANCE;
-						if (ConfigItems.spectreSword && player.getCurrentEquippedItem()!=null && player.getCurrentEquippedItem().getItem()==ModItems.spectreSword)
-						{
-							chance=Settings.SPIRIT_CHANCE_SWORD;
-						}
-						double random = Math.random();
-						if (random<=chance)
-						{
-							player.worldObj.spawnEntityInWorld(new EntitySpirit(player.worldObj,event.entity.posX,event.entity.posY,event.entity.posZ));
-						}
+						chance = Settings.SPIRIT_CHANCE_SWORD;
+					}
+					double random = Math.random();
+					if (random <= chance)
+					{
+						player.worldObj.spawnEntityInWorld(new EntitySpirit(player.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ));
 					}
 				}
-					
+
 			}
 		}
 	}

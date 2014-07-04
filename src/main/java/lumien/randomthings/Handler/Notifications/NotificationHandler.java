@@ -47,7 +47,7 @@ public class NotificationHandler
 	{
 		if (currentNotification != null)
 		{
-			ScaledResolution scaledresolution = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
+			ScaledResolution scaledresolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
 			int i = scaledresolution.getScaleFactor();
 
 			if (displayCounter < 32)

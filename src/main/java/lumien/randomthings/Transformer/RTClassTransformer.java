@@ -34,7 +34,7 @@ public class RTClassTransformer implements IClassTransformer
 
 	@Override
 	public byte[] transform(String obfName, String transformedName, byte[] basicClass)
-	{
+	{	
 		if (transformedName.equals("net.minecraft.block.BlockLeavesBase") && VanillaChanges.FASTER_LEAVEDECAY) // ClassCircularityError
 		{
 			return patchLeaveClass(basicClass);

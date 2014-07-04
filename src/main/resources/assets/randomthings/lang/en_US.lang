@@ -14,6 +14,7 @@ tile.spectreBlock.name=Spectre Block
 tile.carpentryBench.name=[WIP] Carpentry Bench
 tile.lapisLamp.name=Lapis Lamp
 tile.dyeingMachine.name=Dyeing Machine
+tile.spiritRod.name=Spirit Rod
 
 itemGroup.Random Things=Random Things
 item.filterBlock.name=Block Filter
@@ -37,6 +38,8 @@ item.spectreChestplate.name=Spectre Chestplate
 item.spectreLeggings.name=Spectre Leggings
 item.spectreBoots.name=Spectre Boots
 item.spiritBinder.name=Spirit Binder
+item.magneticForce.name=Magnetic Force
+item.ginto.name=Ginto
 
 item.creativeSword.name=Creative Sword
 item.creativeGrower.name=Creative Grower
@@ -63,6 +66,24 @@ text.miscellaneous.entityName=Entity Name
 text.miscellaneous.connectedTo=Connected to
 text.miscellaneous.invalidArguments=Invalid arguments
 text.miscellaneous.setBonus=Set-Bonus:
+
+text.dyed=Dyed %s
+text.color.black=Black
+text.color.red=Red
+text.color.green=Green
+text.color.brown=Brown
+text.color.blue=Blue
+text.color.purple=Purple
+text.color.cyan=Cyan
+text.color.silver=Light Gray
+text.color.gray=Gray
+text.color.pink=Pink
+text.color.lime=Lime
+text.color.yellow=Yellow
+text.color.lightBlue=Light Blue
+text.color.magenta=Magenta
+text.color.orange=Orange
+text.color.white=White
 
 text.error.nbt=Couldn't use NBT Mod File, things like letters or magnetic force events won't survive restarts.
 

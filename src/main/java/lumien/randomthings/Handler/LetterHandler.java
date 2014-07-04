@@ -49,7 +49,7 @@ public class LetterHandler
 				ItemStack toCheck = iterator.next();
 
 				String receiver = toCheck.stackTagCompound.getString("receiver");
-				EntityPlayer receiverEntity = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(receiver);
+				EntityPlayer receiverEntity = MinecraftServer.getServer().getConfigurationManager().func_152612_a(receiver);
 				if (receiverEntity != null)
 				{
 					int freeSlot = receiverEntity.inventory.getFirstEmptyStack();

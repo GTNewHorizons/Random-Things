@@ -74,16 +74,16 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 		{
 			if (this.playerEntity == null && this.playerName != "")
 			{
-				EntityPlayerMP tempPlayer = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(this.playerName);
+				EntityPlayerMP tempPlayer = MinecraftServer.getServer().getConfigurationManager().func_152612_a(this.playerName);
 				if (tempPlayer != null)
 				{
-					playerEntity = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(this.playerName);
+					playerEntity = MinecraftServer.getServer().getConfigurationManager().func_152612_a(this.playerName);
 					this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, ModBlocks.playerInterface);
 				}
 			}
 			else
 			{
-				EntityPlayerMP tempPlayer = MinecraftServer.getServer().getConfigurationManager().getPlayerForUsername(this.playerName);
+				EntityPlayerMP tempPlayer = MinecraftServer.getServer().getConfigurationManager().func_152612_a(this.playerName);
 				if (tempPlayer != playerEntity)
 				{
 					this.playerEntity = null;

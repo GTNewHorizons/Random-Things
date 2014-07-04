@@ -54,7 +54,7 @@ public class GuiSlotPlayerList extends GuiScrollingList
 	protected void drawSlot(int var1, int var2, int var3, int var4, Tessellator var5)
 	{
 		FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
-		ScaledResolution scaledResolution = new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+		ScaledResolution scaledResolution = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
 		int factor = scaledResolution.getScaleFactor();
 
 		GL11.glEnable(GL11.GL_SCISSOR_TEST);
