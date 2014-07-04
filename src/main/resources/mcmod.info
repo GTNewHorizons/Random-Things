@@ -9,7 +9,7 @@
   "updateUrl": "",
   "authorList": ["Lumien"],
   "credits": "",
-  "logoFile": "",
+  "logoFile": "logo.png",
   "screenshots": [],
   "dependencies": []
 }
