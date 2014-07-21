@@ -50,7 +50,8 @@ public class ItemImbue extends ItemBase
 		
 		if (par1ItemStack.getItemDamage()==1)
 		{
-			par3List.add("I will work with ANY entity as soon as there are Forge Hooks for me");
+			par3List.add("I will work with ANY entity as");
+			par3List.add("soon as there are Forge Hooks for me");
 		}
 	}
 

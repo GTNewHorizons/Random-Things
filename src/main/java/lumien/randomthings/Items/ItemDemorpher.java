@@ -31,7 +31,8 @@ public class ItemDemorpher extends ItemBase
 	{
 		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
 
-		par3List.add("I will become functional when Morph updates to 1.7.10");
+		par3List.add("I will become functional");
+		par3List.add("when Morph updates to 1.7.10");
 	}
 
 	@Override
