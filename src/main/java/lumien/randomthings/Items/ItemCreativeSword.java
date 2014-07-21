@@ -14,12 +14,8 @@ public class ItemCreativeSword extends ItemCreative
 
 	public ItemCreativeSword()
 	{
-		this.setUnlocalizedName("creativeSword");
-		this.setCreativeTab(RandomThings.creativeTab);
+		super("creativeSword");
 		this.setMaxStackSize(1);
-		this.setTextureName("RandomThings:creativeSword");
-
-		GameRegistry.registerItem(this, "creativeSword");
 	}
 
 	@Override

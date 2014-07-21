@@ -126,8 +126,10 @@ public class SpectreHandler extends WorldSavedData
 		
 		if (spectreDimensionID!=Settings.SPECTRE_DIMENSON_ID)
 		{
-			RandomThings.instance.logger.log(Level.WARN, "Resetting Spectre World because dimensionID changed");
+			RandomThings.instance.logger.log(Level.WARN, "Resetting Spectre World because dimensionID changed ("+spectreDimensionID+"->"+Settings.SPECTRE_DIMENSON_ID+")");
+			spectreDimensionID = Settings.SPECTRE_DIMENSON_ID;
 			reset();
+			this.markDirty();
 		}
 	}
 

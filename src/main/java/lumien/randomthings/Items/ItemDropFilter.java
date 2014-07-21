@@ -16,20 +16,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class ItemDropFilter extends Item
+public class ItemDropFilter extends ItemBase
 {
 	IIcon[] icons;
 
 	public ItemDropFilter()
 	{
-		icons = new IIcon[2];
-
-		this.setUnlocalizedName("dropFilter");
-		this.setCreativeTab(RandomThings.creativeTab);
+		super("dropFilter");
 		this.setMaxStackSize(1);
 		this.setHasSubtypes(true);
-
-		GameRegistry.registerItem(this, "dropFilter");
 	}
 	
 	
@@ -50,6 +45,7 @@ public class ItemDropFilter extends Item
 	@Override
 	public void registerIcons(IIconRegister ir)
 	{
+		icons = new IIcon[2];
 		icons[0] = ir.registerIcon("RandomThings:dropFilter");
 		icons[1] = ir.registerIcon("RandomThings:dropFilterVoiding");
 	}

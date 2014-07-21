@@ -7,6 +7,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.IIcon;
@@ -40,22 +41,46 @@ public class RenderUtils
 		glDisable(GL_SCISSOR_TEST);
 	}
 	
-	public static float interpolateRotation(float p_77034_1_, float p_77034_2_, float p_77034_3_)
+	public static void drawTexturedModalRect(int p_73729_1_, int p_73729_2_, int p_73729_3_, int p_73729_4_, int p_73729_5_, int p_73729_6_,int zLevel)
     {
-        float f3;
-
-        for (f3 = p_77034_2_ - p_77034_1_; f3 < -180.0F; f3 += 360.0F)
-        {
-            ;
-        }
-
-        while (f3 >= 180.0F)
-        {
-            f3 -= 360.0F;
-        }
-
-        return p_77034_1_ + p_77034_3_ * f3;
+        float f = 0.00390625F;
+        float f1 = 0.00390625F;
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV((double)(p_73729_1_ + 0), (double)(p_73729_2_ + p_73729_6_), (double)zLevel, (double)((float)(p_73729_3_ + 0) * f), (double)((float)(p_73729_4_ + p_73729_6_) * f1));
+        tessellator.addVertexWithUV((double)(p_73729_1_ + p_73729_5_), (double)(p_73729_2_ + p_73729_6_), (double)zLevel, (double)((float)(p_73729_3_ + p_73729_5_) * f), (double)((float)(p_73729_4_ + p_73729_6_) * f1));
+        tessellator.addVertexWithUV((double)(p_73729_1_ + p_73729_5_), (double)(p_73729_2_ + 0), (double)zLevel, (double)((float)(p_73729_3_ + p_73729_5_) * f), (double)((float)(p_73729_4_ + 0) * f1));
+        tessellator.addVertexWithUV((double)(p_73729_1_ + 0), (double)(p_73729_2_ + 0), (double)zLevel, (double)((float)(p_73729_3_ + 0) * f), (double)((float)(p_73729_4_ + 0) * f1));
+        tessellator.draw();
     }
+
+	public static void drawTexturedQuad(int x, int y, int width, int height, double zLevel)
+	{
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV((double) (x + 0), (double) (y + height), zLevel, 0, 1);
+		tessellator.addVertexWithUV((double) (x + width), (double) (y + height), zLevel, 1, 1);
+		tessellator.addVertexWithUV((double) (x + width), (double) (y + 0), zLevel, 1, 0);
+		tessellator.addVertexWithUV((double) (x + 0), (double) (y + 0), zLevel, 0, 0);
+		tessellator.draw();
+	}
+
+	public static float interpolateRotation(float p_77034_1_, float p_77034_2_, float p_77034_3_)
+	{
+		float f3;
+
+		for (f3 = p_77034_2_ - p_77034_1_; f3 < -180.0F; f3 += 360.0F)
+		{
+			;
+		}
+
+		while (f3 >= 180.0F)
+		{
+			f3 -= 360.0F;
+		}
+
+		return p_77034_1_ + p_77034_3_ * f3;
+	}
 
 	public static Color getAverageIconColor(IIcon icon)
 	{
@@ -175,5 +200,11 @@ public class RenderUtils
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 
 		Minecraft.getMinecraft().entityRenderer.enableLightmap(0);
+	}
+
+	public static void enableDefaultBlending()
+	{
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 	}
 }

@@ -24,7 +24,7 @@ public class MCPNames
 		{
 			String mappingDir;
 
-			mappingDir = "./../build/unpacked/mappings/";
+			mappingDir = "./../build/unpacked/conf/";
 
 			fields = readMappings(new File(mappingDir + "fields.csv"));
 			methods = readMappings(new File(mappingDir + "methods.csv"));

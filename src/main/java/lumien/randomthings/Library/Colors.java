@@ -1,5 +1,7 @@
 package lumien.randomthings.Library;
 
+import java.awt.Color;
+
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -23,7 +25,12 @@ public class Colors
 	public final static String LIGHT_PURPLE = "\247" + "d";
 	public final static String YELLOW = "\247" + "e";
 	public final static String WHITE = "\247" + "f";
-
+	
+	public static final Color[] dyeColors = new Color[ItemDye.field_150922_c.length];
+	{
+		
+	}
+	
 	public static final String[] oreDictDyes = new String[] { "dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow", "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite" };
 
 

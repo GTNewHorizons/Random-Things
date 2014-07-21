@@ -8,13 +8,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-
 public class RenderSpirit extends RenderLiving
 {
 	private static final ResourceLocation slimeTextures = new ResourceLocation("RandomThings:textures/entitys/spirit.png");
 	private ModelBase scaleAmount;
 
 	float t = 1F / 255F;
+
+	float a = 1F / 200F;
 
 	public RenderSpirit(ModelBase par1ModelBase, ModelBase par2ModelBase, float par3)
 	{
@@ -55,9 +56,16 @@ public class RenderSpirit extends RenderLiving
 	 * Allows the render to do any OpenGL state modifications necessary before
 	 * the model is rendered. Args: entityLiving, partialTickTime
 	 */
-	protected void preRenderCallback(EntitySpirit par1EntitySpirit, float par2)
+	protected void preRenderCallback(EntitySpirit spirit, float par2)
 	{
 		GL11.glScalef(1, 1, 1);
+
+		int lifetime = spirit.getLifeTime();
+		if (lifetime < 200)
+		{
+			GL11.glColor4f(1, 1, 1, a*lifetime);
+			System.out.println(a*lifetime);
+		}
 	}
 
 	/**

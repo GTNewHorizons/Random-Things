@@ -1,8 +1,11 @@
 package lumien.randomthings.Handler;
 
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.Client.Renderer.RenderBlut;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class RTTickHandler
 {
@@ -22,12 +25,14 @@ public class RTTickHandler
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	private void clientTick(TickEvent event)
 	{
 		switch (event.phase)
 		{
 			case START:
 				RandomThings.instance.notificationHandler.update();
+				RenderBlut.counter+=0.01;
 				break;
 			case END:
 				break;

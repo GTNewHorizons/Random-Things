@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.Configuration.Settings;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
@@ -16,20 +17,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.biome.BiomeGenBase;
 
-public class ItemBiomeCapsule extends Item
+public class ItemBiomeCapsule extends ItemBase
 {
 	static public HashMap<Integer, Integer> biomeColors;
 	static Random rng = new Random();
-	
-	final static float modColor = 1F/255F;
+
+	final static float modColor = 1F / 255F;
 
 	public ItemBiomeCapsule()
 	{
-		this.setUnlocalizedName("biomeCapsule");
-		this.setCreativeTab(RandomThings.creativeTab);
+		super("biomeCapsule");
 		this.setMaxStackSize(1);
-
-		GameRegistry.registerItem(this, "biomeCapsule");
 
 		biomeColors = new HashMap<Integer, Integer>();
 		{
@@ -99,16 +97,14 @@ public class ItemBiomeCapsule extends Item
 				nbt = is.stackTagCompound = new NBTTagCompound();
 				nbt.setInteger("charges", 0);
 			}
-			
-			System.out.println(nbt.getInteger("selectingTimer"));
-			
+
 			int charges = is.stackTagCompound.getInteger("charges");
-			int biomeID = is.getItemDamage()-1;
-			if (charges < 256 && biomeID!=-1 && biome.biomeID == biomeID)
+			int biomeID = is.getItemDamage() - 1;
+			if (charges < 256 && biomeID != -1 && biome.biomeID == biomeID)
 			{
 				int intColor = getColorForBiome(BiomeGenBase.getBiome(biomeID));
 				Color c = new Color(intColor);
-				RandomThings.proxy.spawnColoredDust(entityItem.posX, entityItem.posY+0.1, entityItem.posZ, 0, 0, 0,modColor*c.getRed(),modColor*c.getGreen(),modColor*c.getBlue());
+				RandomThings.proxy.spawnColoredDust(entityItem.posX, entityItem.posY + 0.1, entityItem.posZ, 0, 0, 0, modColor * c.getRed(), modColor * c.getGreen(), modColor * c.getBlue());
 			}
 		}
 		else
@@ -139,6 +135,7 @@ public class ItemBiomeCapsule extends Item
 			}
 			else
 			{
+				entityItem.age = 0;
 				ItemStack is = entityItem.getEntityItem();
 				NBTTagCompound nbt = is.stackTagCompound;
 				if (nbt == null)
@@ -148,7 +145,7 @@ public class ItemBiomeCapsule extends Item
 				}
 				int charges = is.stackTagCompound.getInteger("charges");
 				int biomeID = is.getItemDamage() - 1;
-				if (charges < 256)
+				if (charges < 256 && entityItem.worldObj.getTotalWorldTime() % Settings.BIOME_CHARGE_TIME == 0)
 				{
 					int itemPosX = (int) Math.floor(entityItem.posX);
 					int itemPosY = (int) Math.floor(entityItem.posY);

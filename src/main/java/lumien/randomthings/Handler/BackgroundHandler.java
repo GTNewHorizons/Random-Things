@@ -3,6 +3,7 @@ package lumien.randomthings.Handler;
 import java.lang.reflect.Field;
 import java.util.Random;
 
+import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Library.OverrideUtils;
 
 import net.minecraft.client.gui.Gui;
@@ -17,8 +18,6 @@ public class BackgroundHandler
 	static Random rng = new Random();
 
 	static String[] logTypes = new String[] { "acacia", "big_oak", "birch", "jungle", "oak", "spruce" };
-
-	public static String fixedBackground = "";
 
 	public static void setBackgroundBlock(String block)
 	{
@@ -45,9 +44,9 @@ public class BackgroundHandler
 
 	public static void setRandomBackground()
 	{
-		if (!fixedBackground.equals(""))
+		if (!Settings.FIXED_BACKGROUND.equals(""))
 		{
-			setBackgroundBlock(fixedBackground);
+			setBackgroundBlock(Settings.FIXED_BACKGROUND);
 		}
 		else
 		{

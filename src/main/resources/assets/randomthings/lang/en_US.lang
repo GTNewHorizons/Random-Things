@@ -15,6 +15,7 @@ tile.carpentryBench.name=[WIP] Carpentry Bench
 tile.lapisLamp.name=Lapis Lamp
 tile.dyeingMachine.name=Dyeing Machine
 tile.spiritRod.name=Spirit Rod
+tile.imbuingStation.name=Imbuing Station
 
 itemGroup.Random Things=Random Things
 item.filterBlock.name=Block Filter
@@ -40,18 +41,31 @@ item.spectreBoots.name=Spectre Boots
 item.spiritBinder.name=Spirit Binder
 item.magneticForce.name=Magnetic Force
 item.ginto.name=Ginto
-
 item.creativeSword.name=Creative Sword
 item.creativeGrower.name=Creative Grower
 item.creativeChestGenerator.name=Creative Chest Generator
-
 item.playerCore.name=Player Core
 item.obsidianStick.name=Obsidian Stick
 item.enderFragment.name=Ender Fragment
 item.ectoplasm.name=Ectoplasm
 item.spectreIron.name=Spectre Iron
 item.transformationCore.name=Transformation Core
+item.demorpher.name=Demorpher
 item.error.name=Invalid Item
+
+item.imbue.poison.name=Flask of Poison
+item.imbue.experience.name=Flask of Experience
+item.imbue.fire.name=Flask of Fire
+item.imbue.wither.name=Flask of Withering
+item.imbue.weakness.name=Flask of Weakness
+item.imbue.spectre.name=Flask of Spectre
+
+imbue.poison=Poison Imbue
+imbue.experience=Experience Imbue
+imbue.fire=Fire Imbue
+imbue.wither=Wither Imbue
+imbue.weakness=Weakness Imbue
+imbue.spectre=Spectre Imbue
 
 entity.spirit.name=Spirit
 

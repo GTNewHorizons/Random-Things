@@ -13,6 +13,6 @@ public class GuiIds
 	public static final int ENDER_LETTER = 8;
 	public static final int SOUND_RECORDER = 9;
 	public static final int MAGNETIC_FORCE = 10;
-
+	public static final int IMBUING_STATION = 11;
 	public static final int CARPENTRY_BENCH = 12;
 }

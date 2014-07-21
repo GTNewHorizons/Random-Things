@@ -19,7 +19,7 @@ public class ModBlocks
 	public static BlockWirelessLever wirelessLever;
 	public static BlockCarpentryBench carpentryBench;
 	public static BlockDyeingMachine dyeingMachine;
-	public static BlockSpiritRod spiritRod;
+	public static BlockImbuingStation imbuingStation;
 
 	public static void init()
 	{
@@ -55,8 +55,8 @@ public class ModBlocks
 			carpentryBench = new BlockCarpentryBench();
 		if (ConfigBlocks.dyeingMachine)
 			dyeingMachine = new BlockDyeingMachine();
-		if (ConfigBlocks.spiritRod)
-			spiritRod = new BlockSpiritRod();
+		if (ConfigBlocks.imbuingStation)
+			imbuingStation = new BlockImbuingStation();
 		
 		spectreBlock = new BlockSpectreBlock();
 	}

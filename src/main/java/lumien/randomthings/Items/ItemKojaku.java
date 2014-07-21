@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 
-public class ItemKojaku extends Item
+public class ItemKojaku extends ItemBase
 {
 	public static final String[] kojakuPullIconNameArray = new String[] { "pulling_0", "pulling_1", "pulling_2" };
 	
@@ -23,10 +23,7 @@ public class ItemKojaku extends Item
 
 	public ItemKojaku()
 	{
-		this.setUnlocalizedName("kojaku");
-		this.setCreativeTab(RandomThings.creativeTab);
-
-		GameRegistry.registerItem(this, "kojaku");
+		super("kojaku");
 	}
 
 	@Override

@@ -12,16 +12,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class ItemSoundRecorder extends Item
+public class ItemSoundRecorder extends ItemBase
 {
 	IIcon[] icons;
 
 	public ItemSoundRecorder()
 	{
-		this.setCreativeTab(RandomThings.creativeTab);
-		this.setUnlocalizedName("soundRecorder");
-
-		GameRegistry.registerItem(this, "soundRecorder");
+		super("soundRecorder");
 	}
 
 	@Override

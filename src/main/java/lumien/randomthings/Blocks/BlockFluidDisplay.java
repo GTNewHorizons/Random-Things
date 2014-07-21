@@ -18,10 +18,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class BlockFluidDisplay extends BlockContainer
 {
-
 	public BlockFluidDisplay()
 	{
-		super(Material.rock);
+		super(Material.glass);
 		this.setBlockName("fluidDisplay");
 		this.setCreativeTab(RandomThings.creativeTab);
 		this.setHardness(0.7F);
@@ -65,27 +64,30 @@ public class BlockFluidDisplay extends BlockContainer
 	@Override
 	public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
 	{
-		if (!world.isRemote)
-		{
-			TileEntityFluidDisplay te = (TileEntityFluidDisplay) world.getTileEntity(i, j, k);
-			ItemStack currentItem = entityplayer.getCurrentEquippedItem();
+		TileEntityFluidDisplay te = (TileEntityFluidDisplay) world.getTileEntity(i, j, k);
+		ItemStack currentItem = entityplayer.getCurrentEquippedItem();
 
-			if (currentItem != null)
+		if (currentItem != null)
+		{
+			FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(currentItem);
+			if (liquid != null)
 			{
-				FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(currentItem);
-				if (liquid != null)
+				if (!world.isRemote)
 				{
 					te.setFluidName(liquid.getFluid().getName());
 					te.markDirty();
 					world.markBlockForUpdate(i, j, k);
-					return true;
 				}
-			}
-			else
-			{
-				te.toggleFlowing();
 				return true;
 			}
+		}
+		else
+		{
+			if (!world.isRemote)
+			{
+				te.toggleFlowing();
+			}
+			return true;
 		}
 		return false;
 	}

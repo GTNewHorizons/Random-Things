@@ -23,7 +23,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class ItemFilter extends Item
+public class ItemFilter extends ItemBase
 {
 	public enum FilterType
 	{
@@ -34,13 +34,10 @@ public class ItemFilter extends Item
 
 	public ItemFilter()
 	{
-		this.setUnlocalizedName("filter");
-		this.setCreativeTab(RandomThings.creativeTab);
+		super("filter");
 		this.setHasSubtypes(true);
 
 		icons = new IIcon[3];
-
-		GameRegistry.registerItem(this, "filter");
 	}
 
 	public static boolean matchesBlock(ItemStack filter, Block block, int metadata)
@@ -60,16 +57,16 @@ public class ItemFilter extends Item
 
 	public static boolean matchesItem(ItemStack filter, ItemStack toCheck)
 	{
-		if (filter == null || toCheck == null || filter.stackTagCompound==null)
+		if (filter == null || toCheck == null || filter.stackTagCompound == null)
 		{
 			return false;
 		}
-		
-		if (!(filter.getItem() instanceof ItemFilter) || filter.getItemDamage() != 1)
+
+		if (filter.getItem() == null && !(filter.getItem() instanceof ItemFilter) || filter.getItemDamage() != 1)
 		{
 			return false;
 		}
-		
+
 		boolean oreDict = filter.stackTagCompound.getBoolean("oreDict");
 		int listType = filter.stackTagCompound.getInteger("listType");
 
@@ -94,7 +91,6 @@ public class ItemFilter extends Item
 		return listType == 0 ? false : true;
 	}
 
-	
 	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
@@ -112,15 +108,15 @@ public class ItemFilter extends Item
 						String block = par1ItemStack.stackTagCompound.getString("block");
 						if (!block.equals(""))
 						{
-							par3List.add(I18n.format("text.miscellaneous.block", null) + ": " + block);
-							par3List.add(I18n.format("text.miscellaneous.metadata", null) + ": " + par1ItemStack.stackTagCompound.getInteger("metadata"));
+							par3List.add(I18n.format("text.miscellaneous.block", (Object[]) null) + ": " + block);
+							par3List.add(I18n.format("text.miscellaneous.metadata", (Object[]) null) + ": " + par1ItemStack.stackTagCompound.getInteger("metadata"));
 						}
 						break;
 					case 1:
 						if (!(ItemFilter.getItemFilterInv(par2EntityPlayer, par1ItemStack) == null))
 						{
-							par3List.add(I18n.format("text.miscellaneous.oreDictionary", null) + ": " + (par1ItemStack.stackTagCompound.getBoolean("oreDict") ? "Yes" : "No"));
-							par3List.add(I18n.format("text.miscellaneous.listType", null) + ": " + (par1ItemStack.stackTagCompound.getInteger("listType") == 1 ? "Blacklist" : "Whitelist"));
+							par3List.add(I18n.format("text.miscellaneous.oreDictionary", (Object[]) null) + ": " + (par1ItemStack.stackTagCompound.getBoolean("oreDict") ? "Yes" : "No"));
+							par3List.add(I18n.format("text.miscellaneous.listType", (Object[]) null) + ": " + (par1ItemStack.stackTagCompound.getInteger("listType") == 1 ? "Blacklist" : "Whitelist"));
 							IInventory inventoryFilter = new InventoryItemFilter(par2EntityPlayer, par1ItemStack);
 							inventoryFilter.openInventory();
 							if (inventoryFilter != null)
@@ -141,8 +137,8 @@ public class ItemFilter extends Item
 						String entityName = par1ItemStack.stackTagCompound.getString("entityName");
 						if (!(entityID == 0))
 						{
-							par3List.add(I18n.format("text.miscellaneous.entityid", null) + ": " + entityID);
-							par3List.add(I18n.format("text.miscellaneous.entityName", null) + ": " + entityName);
+							par3List.add(I18n.format("text.miscellaneous.entityid", (Object[]) null) + ": " + entityID);
+							par3List.add(I18n.format("text.miscellaneous.entityName", (Object[]) null) + ": " + entityName);
 						}
 						break;
 				}
@@ -203,7 +199,6 @@ public class ItemFilter extends Item
 	}
 
 	@Override
-	
 	public IIcon getIconFromDamage(int par1)
 	{
 		if (par1 > 0 && par1 < icons.length)
@@ -217,7 +212,6 @@ public class ItemFilter extends Item
 	}
 
 	@Override
-	
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
 		icons[0] = par1IconRegister.registerIcon("RandomThings:filter/blockFilter");

@@ -19,10 +19,12 @@ apply plugin: 'forge'
 
 repositories {
     maven { url = "http://maven.cil.li/" }
+    maven { url = "http://chickenbones.net/maven/" }
 }
 
 dependencies {
     compile group: 'li.cil.oc', name: 'OpenComputers', version: 'MC1.7.2-1.2.13.150', classifier: 'api'
+    compile "codechicken:NotEnoughItems:1.7.10-1.0.2.30:dev"
 }
 
 
@@ -44,10 +46,10 @@ jar {
 }
 
 minecraft {
-    version = "1.7.10_pre4-10.12.2.1149-prerelease"
-    assetDir = "eclipse/assets"
+    version = "1.7.10-10.13.0.1177"
+    runDir = "eclipse/assets"
     
-    replaceIn "RandomThings.java"
+    replaceIn "Library/Reference.java"
     replace "@VERSION@",project.version
 }
 

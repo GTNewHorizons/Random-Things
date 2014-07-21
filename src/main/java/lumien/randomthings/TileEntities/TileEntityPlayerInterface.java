@@ -72,22 +72,25 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	{
 		if (!this.worldObj.isRemote)
 		{
-			if (this.playerEntity == null && this.playerName != "")
+			if (this.worldObj.getTotalWorldTime() % 20 == 0)
 			{
-				EntityPlayerMP tempPlayer = MinecraftServer.getServer().getConfigurationManager().func_152612_a(this.playerName);
-				if (tempPlayer != null)
+				if (this.playerEntity == null && this.playerName.equals(""))
 				{
-					playerEntity = MinecraftServer.getServer().getConfigurationManager().func_152612_a(this.playerName);
-					this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, ModBlocks.playerInterface);
+					EntityPlayerMP tempPlayer = MinecraftServer.getServer().getConfigurationManager().func_152612_a(this.playerName);
+					if (tempPlayer != null)
+					{
+						playerEntity = MinecraftServer.getServer().getConfigurationManager().func_152612_a(this.playerName);
+						this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, ModBlocks.playerInterface);
+					}
 				}
-			}
-			else
-			{
-				EntityPlayerMP tempPlayer = MinecraftServer.getServer().getConfigurationManager().func_152612_a(this.playerName);
-				if (tempPlayer != playerEntity)
+				else
 				{
-					this.playerEntity = null;
-					this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, ModBlocks.playerInterface);
+					EntityPlayerMP tempPlayer = MinecraftServer.getServer().getConfigurationManager().func_152612_a(this.playerName);
+					if (tempPlayer != playerEntity)
+					{
+						this.playerEntity = null;
+						this.worldObj.notifyBlocksOfNeighborChange(this.xCoord, this.yCoord, this.zCoord, ModBlocks.playerInterface);
+					}
 				}
 			}
 		}
@@ -100,9 +103,22 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
+	private void checkPlayerEntity()
+	{
+		if (this.playerEntity == null)
+		{
+			return;
+		}
+		else if (this.playerEntity.isDead)
+		{
+			this.playerEntity = null;
+		}
+	}
+
 	@Override
 	public int getSizeInventory()
 	{
+		checkPlayerEntity();
 		if (this.playerEntity == null)
 		{
 			return 0;
@@ -113,6 +129,7 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	@Override
 	public ItemStack getStackInSlot(int i)
 	{
+		checkPlayerEntity();
 		if (this.playerEntity == null)
 		{
 			return null;
@@ -123,6 +140,7 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	@Override
 	public ItemStack decrStackSize(int i, int j)
 	{
+		checkPlayerEntity();
 		if (this.playerEntity == null)
 		{
 			return null;
@@ -135,6 +153,7 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	@Override
 	public ItemStack getStackInSlotOnClosing(int i)
 	{
+		checkPlayerEntity();
 		if (this.playerEntity == null)
 		{
 			return null;
@@ -145,6 +164,7 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	@Override
 	public void setInventorySlotContents(int i, ItemStack itemstack)
 	{
+		checkPlayerEntity();
 		if (this.playerEntity == null)
 		{
 			return;
@@ -156,6 +176,7 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	@Override
 	public int getInventoryStackLimit()
 	{
+		checkPlayerEntity();
 		if (this.playerEntity == null)
 		{
 			return 0;
@@ -172,6 +193,7 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	@Override
 	public void openInventory()
 	{
+		checkPlayerEntity();
 		if (this.playerEntity != null)
 		{
 			this.playerEntity.inventory.openInventory();
@@ -182,6 +204,7 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	public void markDirty()
 	{
 		super.markDirty();
+		checkPlayerEntity();
 		if (this.playerEntity != null && this.playerEntity.inventoryContainer != null)
 		{
 			this.playerEntity.inventoryContainer.detectAndSendChanges();
@@ -192,6 +215,7 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	@Override
 	public void closeInventory()
 	{
+		checkPlayerEntity();
 		if (this.playerEntity != null)
 		{
 			this.playerEntity.inventory.closeInventory();
@@ -201,7 +225,8 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack)
 	{
-		if (this.playerEntity == null || this.playerEntity.inventoryContainer == null || this.playerEntity.inventory==null || this.playerEntity.inventoryContainer.getSlotFromInventory(this.playerEntity.inventory, i)==null)
+		checkPlayerEntity();
+		if (this.playerEntity == null || this.playerEntity.inventoryContainer == null || this.playerEntity.inventory == null || this.playerEntity.inventoryContainer.getSlotFromInventory(this.playerEntity.inventory, i) == null)
 		{
 			return false;
 		}
@@ -240,6 +265,11 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side)
 	{
+		checkPlayerEntity();
+		if (this.playerEntity == null)
+		{
+			return new int[] {};
+		}
 		if (side == 0)
 		{
 			return hotbarSlots;
@@ -257,13 +287,13 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j)
 	{
-		return isItemValidForSlot(i,itemstack);
+		return isItemValidForSlot(i, itemstack);
 	}
 
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, int j)
 	{
-		return isItemValidForSlot(i,itemstack);
+		return isItemValidForSlot(i, itemstack);
 	}
 
 	@Override
@@ -275,6 +305,6 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 	@Override
 	public boolean hasCustomInventoryName()
 	{
-		return true;
+		return false;
 	}
 }

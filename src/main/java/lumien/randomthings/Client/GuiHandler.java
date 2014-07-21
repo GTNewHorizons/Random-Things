@@ -6,6 +6,7 @@ import lumien.randomthings.Items.ItemEnderLetter;
 import lumien.randomthings.Client.GUI.GuiCarpentryBench;
 import lumien.randomthings.Client.GUI.GuiDropFilter;
 import lumien.randomthings.Client.GUI.GuiDyeingMachine;
+import lumien.randomthings.Client.GUI.GuiImbuingStation;
 import lumien.randomthings.Client.GUI.GuiItemCollector;
 import lumien.randomthings.Client.GUI.GuiItemFilter;
 import lumien.randomthings.Client.GUI.GuiEnderLetter;
@@ -17,6 +18,7 @@ import lumien.randomthings.Client.GUI.GuiVoidStone;
 import lumien.randomthings.Container.ContainerCarpentryBench;
 import lumien.randomthings.Container.ContainerDropFilter;
 import lumien.randomthings.Container.ContainerDyeingMachine;
+import lumien.randomthings.Container.ContainerImbuingStation;
 import lumien.randomthings.Container.ContainerItemCollector;
 import lumien.randomthings.Container.ContainerItemFilter;
 import lumien.randomthings.Container.ContainerEnderLetter;
@@ -26,6 +28,7 @@ import lumien.randomthings.Container.ContainerPlayerInterface;
 import lumien.randomthings.Container.ContainerSoundRecorder;
 import lumien.randomthings.Container.ContainerVoidStone;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
+import lumien.randomthings.TileEntities.TileEntityImbuingStation;
 import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
 import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
 import net.minecraft.entity.player.EntityPlayer;
@@ -81,6 +84,8 @@ public class GuiHandler implements IGuiHandler
 				return new ContainerCarpentryBench(player.inventory,world,x,y,z);
 			case DYEING_MACHINE:
 				return new ContainerDyeingMachine(player.inventory,world,x,y,z);
+			case IMBUING_STATION:
+				return new ContainerImbuingStation(player.inventory, (TileEntityImbuingStation) tileEntity);
 		}
 		return null;
 	}
@@ -128,6 +133,8 @@ public class GuiHandler implements IGuiHandler
 				return new GuiCarpentryBench(player.inventory,world,x,y,z);
 			case DYEING_MACHINE:
 				return new GuiDyeingMachine(player.inventory,world,x,y,z);
+			case IMBUING_STATION:
+				return new GuiImbuingStation(player.inventory, (TileEntityImbuingStation) tileEntity);
 		}
 		return null;
 	}

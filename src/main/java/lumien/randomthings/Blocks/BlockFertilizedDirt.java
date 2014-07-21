@@ -6,6 +6,7 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.Settings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
@@ -17,8 +18,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockFertilizedDirt extends BlockBase
 {
-	public static int fertilizedDirtGrowth = 3;
-
 	boolean tilled;
 
 	protected BlockFertilizedDirt(boolean tilled)
@@ -46,6 +45,14 @@ public class BlockFertilizedDirt extends BlockBase
 		}
 
 		this.setBlockTextureName("RandomThings:fertilizedDirt");
+	}
+
+	public void onEntityWalking(World worldObj, int p_149724_2_, int p_149724_3_, int p_149724_4_, Entity entity)
+	{
+		if (!worldObj.isRemote)
+		{
+			entity.setVelocity(0, 20, 0);
+		}
 	}
 
 	@Override
@@ -112,7 +119,7 @@ public class BlockFertilizedDirt extends BlockBase
 					par1World.playAuxSFX(2005, posX, posY + 1, posZ, 0);
 				}
 			}
-			for (int i = 0; i < fertilizedDirtGrowth; i++)
+			for (int i = 0; i < Settings.FERTILIZED_DIRT_GROWTH; i++)
 			{
 				toBoost = par1World.getBlock(posX, posY + 1, posZ);
 				if (toBoost != null && toBoost != Blocks.air && toBoost instanceof IPlantable)

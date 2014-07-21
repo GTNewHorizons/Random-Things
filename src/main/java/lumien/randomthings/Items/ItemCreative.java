@@ -7,10 +7,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemCreative extends Item
+public abstract class ItemCreative extends ItemBase
 {
 	
-    @Override
+    public ItemCreative(String name)
+	{
+		super(name);
+	}
+
+
+	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 		par3List.add("\u00A7dCreative only");

@@ -32,7 +32,6 @@ public class CommonProxy
 
 	public void registerTickHandler()
 	{
-		// TODO Auto-generated method stub
 		
 	}
 	

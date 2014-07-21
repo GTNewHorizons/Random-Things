@@ -6,10 +6,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Configuration.Settings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntitySmokeFX;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -19,27 +21,22 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class ItemSpectreKey extends Item
+public class ItemSpectreKey extends ItemBase
 {
 	IIcon empty;
 
 	public ItemSpectreKey()
 	{
-		this.setUnlocalizedName("spectreKey");
-		this.setCreativeTab(RandomThings.creativeTab);
+		super("spectreKey");
 		this.setFull3D();
 		this.setMaxStackSize(1);
-		
-		GameRegistry.registerItem(this, "spectreKey");
-		this.setTextureName("RandomThings:spectreKey");
 	}
 
 	
 	@Override
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
 	{
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		RenderUtils.enableDefaultBlending();
 
 		return 16777215;
 	}

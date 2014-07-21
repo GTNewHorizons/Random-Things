@@ -1,5 +1,7 @@
 package lumien.randomthings.Entity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.Items.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityMob;
@@ -12,6 +14,7 @@ import net.minecraft.world.World;
 public class EntitySpirit extends EntityMob
 {
 	ChunkCoordinates spawnPosition;
+	int lifetime;
 
 	public EntitySpirit(World par1World, double posX, double posY, double posZ)
 	{
@@ -24,13 +27,23 @@ public class EntitySpirit extends EntityMob
 
 		this.setSize(0.6F, 0.6F);
 		this.setPosition(posX, posY, posZ);
+
+		this.lifetime = 20 * 20;
 	}
 
 	public EntitySpirit(World par1World)
 	{
 		super(par1World);
-		
+
 		this.setSize(0.6F, 0.6F);
+
+		this.lifetime = 20 * 20;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public float getShadowSize()
+	{
+		return 0;
 	}
 
 	@Override
@@ -78,6 +91,11 @@ public class EntitySpirit extends EntityMob
 		this.rotationYaw += f1;
 	}
 
+	public int getLifeTime()
+	{
+		return lifetime;
+	}
+
 	@Override
 	protected boolean canTriggerWalking()
 	{
@@ -88,6 +106,12 @@ public class EntitySpirit extends EntityMob
 	public void onEntityUpdate()
 	{
 		super.onEntityUpdate();
+
+		lifetime--;
+		if (lifetime == 0 && !worldObj.isRemote)
+		{
+			this.setDead();
+		}
 	}
 
 	@Override

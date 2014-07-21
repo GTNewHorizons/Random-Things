@@ -25,13 +25,9 @@ public class ItemCreativeChestGenerator extends ItemCreative
 
 	public ItemCreativeChestGenerator()
 	{
-		this.setUnlocalizedName("creativeChestGenerator");
-		this.setCreativeTab(RandomThings.creativeTab);
-		this.setTextureName("RandomThings:creativeChestGenerator");
+		super("creativeChestGenerator");
 		
 		this.setFull3D();
-
-		GameRegistry.registerItem(this, "creativeChestGenerator");
 	}
 
 	

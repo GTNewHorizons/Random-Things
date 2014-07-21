@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Library.Colors;
 import lumien.randomthings.Library.PotionEffects;
 import net.minecraft.entity.EntityLivingBase;
@@ -50,9 +51,7 @@ public class ItemSpectreSword extends ItemSword
 	@Override
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
 	{
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-
+		RenderUtils.enableDefaultBlending();
 		return 16777215;
 	}
 }

@@ -17,16 +17,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.world.World;
 
-public class ItemSpiritBinder extends Item
+public class ItemSpiritBinder extends ItemBase
 {
 	public ItemSpiritBinder()
 	{
-		this.setUnlocalizedName("spiritBinder");
-		this.setCreativeTab(RandomThings.creativeTab);
-		this.setTextureName("RandomThings:spiritBinder");
+		super("spiritBinder");
 		this.setMaxStackSize(1);
-
-		GameRegistry.registerItem(this, "spiritBinder");
 	}
 	
 	@Override

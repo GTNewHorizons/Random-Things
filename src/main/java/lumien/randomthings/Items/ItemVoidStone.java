@@ -8,16 +8,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemVoidStone extends Item
+public class ItemVoidStone extends ItemBase
 {
 	public ItemVoidStone()
 	{
-		this.setUnlocalizedName("voidStone");
-		this.setCreativeTab(RandomThings.creativeTab);
+		super("voidStone");
 		this.setMaxStackSize(1);
-		this.setTextureName("RandomThings:voidstone");
-
-		GameRegistry.registerItem(this, "voidStone");
 	}
 
 	@Override

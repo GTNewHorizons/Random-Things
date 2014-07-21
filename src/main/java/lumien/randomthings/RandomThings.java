@@ -2,6 +2,7 @@ package lumien.randomthings;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 import java.util.Set;
 
 import org.apache.logging.log4j.Level;
@@ -13,8 +14,9 @@ import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Client.GuiHandler;
 import lumien.randomthings.Configuration.RTConfiguration;
 import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Core.RTCommand;
 import lumien.randomthings.Core.RTCreativeTab;
+import lumien.randomthings.Core.Commands.ExitSpectreCommand;
+import lumien.randomthings.Core.Commands.RTCommand;
 import lumien.randomthings.Entity.ModEntitys;
 import lumien.randomthings.Handler.BackgroundHandler;
 import lumien.randomthings.Handler.LetterHandler;
@@ -29,7 +31,9 @@ import lumien.randomthings.Handler.Spectre.WorldProviderSpectre;
 import lumien.randomthings.Items.ItemBiomeCapsule;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.Recipes;
+import lumien.randomthings.Library.Reference;
 import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.Potions.ModPotions;
 import lumien.randomthings.Proxy.CommonProxy;
 import lumien.randomthings.TileEntities.ModTileEntities;
 import net.minecraft.client.Minecraft;
@@ -56,16 +60,12 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.Mod.EventHandler;
 
-@Mod(modid = RandomThings.MOD_ID, name = RandomThings.MOD_NAME, version = RandomThings.MOD_VERSION, guiFactory = "lumien.randomthings.Client.Config.RandomThingsGuiFactory")
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, guiFactory = "lumien.randomthings.Client.Config.RandomThingsGuiFactory")
 public class RandomThings
 {
-	@Instance(RandomThings.MOD_ID)
+	@Instance(Reference.MOD_ID)
 	public static RandomThings instance;
 	
-	public static final String MOD_ID = "RandomThings";
-	public static final String MOD_NAME = "Random Things";
-	public static final String MOD_VERSION = "@VERSION@";
-
 	public static final String AUTHOR_USERNAME = "XxsumsumxX";
 
 	@SidedProxy(clientSide = "lumien.randomthings.Proxy.ClientProxy", serverSide = "lumien.randomthings.Proxy.CommonProxy")
@@ -95,6 +95,7 @@ public class RandomThings
 		ModItems.init();
 		ModBlocks.init();
 		ModTileEntities.init();
+
 		ModEntitys.init();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
@@ -115,7 +116,7 @@ public class RandomThings
 
 		// Version Checker
 		String VERSION_CHECKER_MODID = "VersionChecker";
-		FMLInterModComms.sendRuntimeMessage(RandomThings.MOD_ID, VERSION_CHECKER_MODID, "addVersionCheck", "https://raw.github.com/lumien231/Random-Things/master/version.json");
+		FMLInterModComms.sendRuntimeMessage(Reference.MOD_ID, VERSION_CHECKER_MODID, "addVersionCheck", "https://raw.github.com/lumien231/Random-Things/master/version.json");
 	}
 
 	@EventHandler
@@ -126,7 +127,11 @@ public class RandomThings
 
 		if (Settings.SPECTRE_DIMENSON_ID==-1)
 		{
-			Settings.SPECTRE_DIMENSON_ID = DimensionManager.getNextFreeDimId();
+			int dimensionID = DimensionManager.getNextFreeDimId();
+			logger.log(Level.INFO, "Auto Resolved Spectre Dimension ID to "+dimensionID);
+			RTConfiguration.spectreDimensionID.set(dimensionID);
+			
+			RTConfiguration.syncConfig();
 		}
 		DimensionManager.registerProviderType(Settings.SPECTRE_DIMENSON_ID, WorldProviderSpectre.class, true);
 		DimensionManager.registerDimension(Settings.SPECTRE_DIMENSON_ID, Settings.SPECTRE_DIMENSON_ID);
@@ -147,6 +152,8 @@ public class RandomThings
 			logger.log(Level.WARN, "Couldn't reflect on cc, no cc peripheral support for CreativePlayerInterface and OnlineDetector and Notification Interface");
 			e.printStackTrace();
 		}
+		
+		ModPotions.init();
 	}
 	
 	public boolean canBeDeactivated()
@@ -179,6 +186,7 @@ public class RandomThings
 		MagneticForceHandler.INSTANCE.readFromNBT(modNBT);
 
 		event.registerServerCommand(new RTCommand());
+		event.registerServerCommand(new ExitSpectreCommand());
 	}
 
 	@EventHandler

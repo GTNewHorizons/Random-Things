@@ -25,7 +25,7 @@ public class BlockPlayerInterface extends BlockContainerBase
 
 	protected BlockPlayerInterface()
 	{
-		super("playerinterface",Material.rock);
+		super("playerinterface", Material.rock);
 
 		this.setStepSound(soundTypeStone);
 		this.setHardness(4.0F);
@@ -35,18 +35,9 @@ public class BlockPlayerInterface extends BlockContainerBase
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		if (Settings.ANIMATED_TEXTURES)
-		{
-			icons[0] = par1IconRegister.registerIcon("RandomThings:playerinterface/playerinterface_bottom");
-			icons[1] = par1IconRegister.registerIcon("RandomThings:playerinterface/playerinterface_top");
-			icons[2] = par1IconRegister.registerIcon("RandomThings:playerinterface/playerinterface_side");
-		}
-		else
-		{
-			icons[0] = par1IconRegister.registerIcon("RandomThings:playerinterface/playerinterface_bottom_static");
-			icons[1] = par1IconRegister.registerIcon("RandomThings:playerinterface/playerinterface_top_static");
-			icons[2] = par1IconRegister.registerIcon("RandomThings:playerinterface/playerinterface_side_static");
-		}
+		icons[0] = par1IconRegister.registerIcon("RandomThings:playerinterface/playerinterface_bottom");
+		icons[1] = par1IconRegister.registerIcon("RandomThings:playerinterface/playerinterface_top");
+		icons[2] = par1IconRegister.registerIcon("RandomThings:playerinterface/playerinterface_side");
 	}
 
 	@Override
@@ -76,7 +67,7 @@ public class BlockPlayerInterface extends BlockContainerBase
 	@Override
 	public void onBlockPlacedBy(World par1World, int poxX, int poxY, int poxZ, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
 	{
-		if (par5EntityLivingBase != null && par5EntityLivingBase instanceof EntityPlayerMP && par1World.getTileEntity(poxX, poxY, poxZ)!=null)
+		if (par5EntityLivingBase != null && par5EntityLivingBase instanceof EntityPlayerMP && par1World.getTileEntity(poxX, poxY, poxZ) != null)
 		{
 			EntityPlayerMP player = (EntityPlayerMP) par5EntityLivingBase;
 			((TileEntityPlayerInterface) par1World.getTileEntity(poxX, poxY, poxZ)).setPlayerName(player.getCommandSenderName());

@@ -11,16 +11,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemMagneticForce extends Item
+public class ItemMagneticForce extends ItemBase
 {
 	double r=0;
 	public ItemMagneticForce()
 	{
-		this.setUnlocalizedName("magneticForce");
-		this.setCreativeTab(RandomThings.creativeTab);
-		this.setTextureName("RandomThings:magneticForce");
-
-		GameRegistry.registerItem(this, "magneticForce");
+		super("magneticForce");
 	}
 
 	@Override

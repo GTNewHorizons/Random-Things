@@ -21,7 +21,7 @@ public class BlockCreativePlayerInterface extends BlockContainerBase
 
 	public BlockCreativePlayerInterface()
 	{
-		super("creativePlayerInterface",Material.rock);
+		super("creativePlayerInterface", Material.rock);
 
 		this.setCreativeTab(RandomThings.creativeTab);
 		this.setStepSound(soundTypeStone);
@@ -33,18 +33,9 @@ public class BlockCreativePlayerInterface extends BlockContainerBase
 	@Override
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		if (Settings.ANIMATED_TEXTURES)
-		{
-			icons[0] = par1IconRegister.registerIcon("RandomThings:playerinterface/creative/playerinterface_bottom");
-			icons[1] = par1IconRegister.registerIcon("RandomThings:playerinterface/creative/playerinterface_top");
-			icons[2] = par1IconRegister.registerIcon("RandomThings:playerinterface/creative/playerinterface_side");
-		}
-		else
-		{
-			icons[0] = par1IconRegister.registerIcon("RandomThings:playerinterface/creative/playerinterface_bottom_static");
-			icons[1] = par1IconRegister.registerIcon("RandomThings:playerinterface/creative/playerinterface_top_static");
-			icons[2] = par1IconRegister.registerIcon("RandomThings:playerinterface/creative/playerinterface_side_static");
-		}
+		icons[0] = par1IconRegister.registerIcon("RandomThings:playerinterface/creative/playerinterface_bottom");
+		icons[1] = par1IconRegister.registerIcon("RandomThings:playerinterface/creative/playerinterface_top");
+		icons[2] = par1IconRegister.registerIcon("RandomThings:playerinterface/creative/playerinterface_side");
 	}
 
 	@Override

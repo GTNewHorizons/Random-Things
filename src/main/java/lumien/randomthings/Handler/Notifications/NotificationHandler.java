@@ -2,6 +2,7 @@ package lumien.randomthings.Handler.Notifications;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Library.ClientUtil;
 
 import org.lwjgl.opengl.GL11;
@@ -70,8 +71,7 @@ public class NotificationHandler
 			if (currentNotification != null)
 			{
 				this.mc.renderEngine.bindTexture(notificationBackground);
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+				RenderUtils.enableDefaultBlending();
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 				guiInstance.drawTexturedModalRect(scaledresolution.getScaledWidth() - 160, drawY, 0, 0, 160, 32);
@@ -89,6 +89,7 @@ public class NotificationHandler
 				GL11.glDisable(GL11.GL_LIGHTING);
 				GL11.glDepthMask(true);
 				GL11.glEnable(GL11.GL_DEPTH_TEST);
+				GL11.glDisable(GL11.GL_BLEND);
 			}
 		}
 	}

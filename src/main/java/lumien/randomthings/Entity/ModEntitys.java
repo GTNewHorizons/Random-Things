@@ -9,8 +9,7 @@ public class ModEntitys
 	{
 		EntityRegistry.registerModEntity(EntityPfeil.class, "Pfeil", 0, RandomThings.instance, 80, 1, true);
 		EntityRegistry.registerModEntity(EntityHealingOrb.class, "HealingOrb", 1, RandomThings.instance, 80, 1, true);
-		
-		EntityRegistry.registerGlobalEntityID(EntitySpirit.class, "spirit", EntityRegistry.findGlobalUniqueEntityId(), 2631720, 10024447);
+		EntityRegistry.registerModEntity(EntityMagicCircle.class, "magicCircle", 2, RandomThings.instance, 80, 1, true);
 		EntityRegistry.registerModEntity(EntitySpirit.class, "spirit", 3, RandomThings.instance, 80, 1, true);
 	}
 }

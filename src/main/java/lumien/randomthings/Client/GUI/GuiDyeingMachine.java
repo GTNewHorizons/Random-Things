@@ -29,7 +29,7 @@ public class GuiDyeingMachine extends GuiContainer
 	{
 		super(new ContainerDyeingMachine(playerInventory, worldObj, posX, posY, posZ));
 
-		this.xSize = 176;
+		this.xSize = 176; // 176
 		this.ySize = 141;
 
 		this.p = 1;

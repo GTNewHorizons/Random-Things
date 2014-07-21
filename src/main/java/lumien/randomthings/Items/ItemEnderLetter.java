@@ -16,18 +16,14 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
-public class ItemEnderLetter extends Item
+public class ItemEnderLetter extends ItemBase
 {
 
 	public ItemEnderLetter()
 	{
-		this.setCreativeTab(RandomThings.creativeTab);
-		this.setUnlocalizedName("enderLetter");
-		this.setTextureName("RandomThings:enderLetter");
+		super("enderLetter");
 		this.setMaxStackSize(1);
 		this.setHasSubtypes(true);
-
-		GameRegistry.registerItem(this, "enderLetter");
 	}
 
 	@Override

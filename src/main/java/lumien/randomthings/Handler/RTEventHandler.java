@@ -2,9 +2,11 @@ package lumien.randomthings.Handler;
 
 import static org.lwjgl.opengl.GL11.glPointSize;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashSet;
 
+import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -28,10 +30,13 @@ import lumien.randomthings.Items.ItemWhiteStone;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.Colors;
 import lumien.randomthings.Library.PotionEffects;
+import lumien.randomthings.Library.Reference;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageBloodMoon;
+import lumien.randomthings.Potions.ModPotions;
 import lumien.randomthings.Proxy.ClientProxy;
 import lumien.randomthings.TileEntities.TileEntityFogGenerator;
+import lumien.randomthings.Transformer.MCPNames;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -43,6 +48,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.gui.GuiIngameMenu;
+import net.minecraft.client.gui.inventory.GuiChest;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelBox;
@@ -51,6 +58,7 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -65,22 +73,43 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.event.EntityViewRenderEvent.FogDensity;
+import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent17;
 import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
 public class RTEventHandler
 {
+	Field experienceValue;
+
+	public RTEventHandler()
+	{
+		try
+		{
+			experienceValue = EntityLiving.class.getDeclaredField(MCPNames.field("field_70728_aV"));
+			experienceValue.setAccessible(true);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			RandomThings.instance.logger.log(Level.ERROR, "Couldn't find experienceValue in EntityLiving, experience imbue will not work :(");
+			experienceValue = null;
+		}
+	}
+
 	@SubscribeEvent
 	public void useHoe(UseHoeEvent event)
 	{
@@ -96,37 +125,6 @@ public class RTEventHandler
 	public void onConfigChange(OnConfigChangedEvent event)
 	{
 		RTConfiguration.onConfigChange(event);
-	}
-
-	
-	// Body Width: 0.25
-	// Body Height: 0.375
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public void renderPlayerPost(RenderPlayerEvent.Post event)
-	{
-		RenderBlut.renderBlut(event);
-	}
-
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public void fogDensity(FogDensity event)
-	{
-		if (event.entity.worldObj.isRemote)
-		{
-			if (Minecraft.getMinecraft().thePlayer.getHealth() < 20f)
-			{
-				event.density = 10f;
-				event.setCanceled(true);
-			}
-		}
-	}
-
-	@SubscribeEvent
-	@SideOnly(Side.CLIENT)
-	public void renderPre(RenderLivingEvent.Pre event)
-	{
-		// GL11.glColor3f(0, 0, 1);
 	}
 
 	@SubscribeEvent
@@ -189,8 +187,9 @@ public class RTEventHandler
 				if (helmet.getItem() instanceof ItemSpectreArmor && chestplate.getItem() instanceof ItemSpectreArmor && leggings.getItem() instanceof ItemSpectreArmor && boots.getItem() instanceof ItemSpectreArmor)
 				{
 					glEnable(GL_BLEND);
+					glAlphaFunc(GL11.GL_GREATER, 0F);
 					glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-					glColor4f(1, 1, 1, 0.6f);
+					glColor4f(1, 1, 1, 0.5f);
 				}
 			}
 		}
@@ -332,42 +331,79 @@ public class RTEventHandler
 				}
 			}
 		}
+	}
 
-		if (Settings.BLOOD_MOON && !event.world.isRemote && event.entity instanceof EntityPlayerMP)
+	@SubscribeEvent
+	public void attackEntity(AttackEntityEvent event)
+	{
+		if (!event.entityPlayer.worldObj.isRemote && event.target instanceof EntityLivingBase)
 		{
-			boolean hasBloodMoon = BloodMoonHandler.INSTANCE.hasBloodMoon(event.world.provider.dimensionId);
-			PacketHandler.INSTANCE.sendTo(new MessageBloodMoon().setBloodmoon(hasBloodMoon).setDimensionID(event.world.provider.dimensionId), (EntityPlayerMP) event.entity);
+			EntityPlayer player = event.entityPlayer;
+			EntityLivingBase entityLiving = (EntityLivingBase) event.target;
+
+			if (player.isPotionActive(ModPotions.imbuePoison))
+			{
+				entityLiving.addPotionEffect(new PotionEffect(PotionEffects.POISON, 200, 1, false));
+			}
+			else if (player.isPotionActive(ModPotions.imbueFire))
+			{
+				entityLiving.setFire(200);
+			}
+			else if (player.isPotionActive(ModPotions.imbueWeakness))
+			{
+				entityLiving.addPotionEffect(new PotionEffect(PotionEffects.WEAKNESS, 100, 1, false));
+			}
+			else if (player.isPotionActive(ModPotions.imbueWither))
+			{
+				entityLiving.addPotionEffect(new PotionEffect(PotionEffects.WITHER, 200, 1, false));
+			}
 		}
 	}
 
 	@SubscribeEvent
 	public void livingHurt(LivingHurtEvent event)
 	{
-		if (!event.entityLiving.worldObj.isRemote && event.ammount >= 7)
+		if (!event.entityLiving.worldObj.isRemote)
 		{
-			Entity attacker = event.source.getSourceOfDamage();
-			if (attacker instanceof EntityArrow)
+			if (event.entityLiving instanceof EntityPlayer)
 			{
-				EntityArrow arrow = (EntityArrow) attacker;
-				if (arrow.shootingEntity instanceof EntityPlayer)
+				EntityPlayer player = (EntityPlayer) event.entityLiving;
+				if (player.isPotionActive(ModPotions.imbueSpectre))
 				{
-					attacker = arrow.shootingEntity;
+					if (!event.source.isMagicDamage() && (event.source.getSourceOfDamage()!=null || event.source.isExplosion()) && !event.source.canHarmInCreative() && !event.source.isFireDamage() && !event.source.isUnblockable() && Math.random()<=Settings.SPECTRE_IMBUE_CHANCE)
+					{
+						event.setCanceled(true);
+						return;
+					}
 				}
 			}
-			if (attacker instanceof EntityPlayer)
+			
+			if (event.ammount >= 7)
 			{
-				EntityPlayer player = (EntityPlayer) attacker;
-
-				ItemStack helmet = player.getCurrentArmor(0);
-				ItemStack chestplate = player.getCurrentArmor(1);
-				ItemStack leggings = player.getCurrentArmor(2);
-				ItemStack boots = player.getCurrentArmor(3);
-
-				if (helmet != null && chestplate != null && leggings != null && boots != null)
+				Entity attacker = event.source.getSourceOfDamage();
+				if (attacker instanceof EntityArrow)
 				{
-					if (helmet.getItem() instanceof ItemSpectreArmor && chestplate.getItem() instanceof ItemSpectreArmor && leggings.getItem() instanceof ItemSpectreArmor && boots.getItem() instanceof ItemSpectreArmor)
+					EntityArrow arrow = (EntityArrow) attacker;
+					if (arrow.shootingEntity instanceof EntityPlayer)
 					{
-						player.worldObj.spawnEntityInWorld(new EntityHealingOrb(player.worldObj, event.entityLiving.posX, event.entityLiving.posY + event.entityLiving.height / 2, event.entityLiving.posZ, event.ammount / 10));
+						attacker = arrow.shootingEntity;
+					}
+				}
+				if (attacker != null && attacker instanceof EntityPlayer)
+				{
+					EntityPlayer player = (EntityPlayer) attacker;
+
+					ItemStack helmet = player.getCurrentArmor(0);
+					ItemStack chestplate = player.getCurrentArmor(1);
+					ItemStack leggings = player.getCurrentArmor(2);
+					ItemStack boots = player.getCurrentArmor(3);
+
+					if (helmet != null && chestplate != null && leggings != null && boots != null)
+					{
+						if (helmet.getItem() instanceof ItemSpectreArmor && chestplate.getItem() instanceof ItemSpectreArmor && leggings.getItem() instanceof ItemSpectreArmor && boots.getItem() instanceof ItemSpectreArmor)
+						{
+							player.worldObj.spawnEntityInWorld(new EntityHealingOrb(player.worldObj, event.entityLiving.posX, event.entityLiving.posY + event.entityLiving.height / 2, event.entityLiving.posZ, event.ammount / 10));
+						}
 					}
 				}
 			}
@@ -425,7 +461,24 @@ public class RTEventHandler
 						player.worldObj.spawnEntityInWorld(new EntitySpirit(player.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ));
 					}
 				}
+			}
 
+			if (experienceValue != null && event.entityLiving instanceof EntityLiving && event.source.getEntity() != null && event.source.getEntity() instanceof EntityLivingBase)
+			{
+				EntityLivingBase livingAttacker = (EntityLivingBase) event.source.getEntity();
+				EntityLiving attacked = (EntityLiving) event.entityLiving;
+				if (livingAttacker.isPotionActive(ModPotions.imbueExperience))
+				{
+					try
+					{
+						experienceValue.set(attacked, (Float) experienceValue.get(attacked)*1.5F);
+					}
+					catch (Exception e)
+					{
+						e.printStackTrace();
+						RandomThings.instance.logger.log(Level.WARN, "Couldn't reflect on experienceValue, imbue won't work");
+					}
+				}
 			}
 		}
 	}

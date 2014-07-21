@@ -58,4 +58,17 @@ public class InventoryUtils
 		}
 		return true;
 	}
+
+	public static boolean areItemStackContentEqual(ItemStack is1, ItemStack is2)
+	{
+		if ((is1 == null && is2 != null) || (is1 != null && is2 == null))
+		{
+			return false;
+		}
+		is1 = is1.copy();
+		is2 = is2.copy();
+		is1.stackSize = 1;
+		is2.stackSize = 1;
+		return ItemStack.areItemStacksEqual(is1, is2);
+	}
 }

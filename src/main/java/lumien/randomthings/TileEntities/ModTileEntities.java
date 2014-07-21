@@ -16,6 +16,7 @@ public class ModTileEntities
 		GameRegistry.registerTileEntity(TileEntityDyeingMachine.class, "dyeingMachine");
 		GameRegistry.registerTileEntity(TileEntitySpiritRod.class, "spiritRod");
 		GameRegistry.registerTileEntity(TileEntityFogGenerator.class, "fogGenerator");
+		GameRegistry.registerTileEntity(TileEntityImbuingStation.class, "imbuingStation");
 		
 		GameRegistry.registerTileEntity(TileEntityItemCollector.class, "itemcollector");
 		GameRegistry.registerTileEntity(TileEntityAdvancedItemCollector.class, "advancedItemcollector");

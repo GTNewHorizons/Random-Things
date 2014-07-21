@@ -12,23 +12,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
-public class ItemBiomePainter extends Item
+public class ItemBiomePainter extends ItemBase
 {
 	public ItemBiomePainter()
 	{
-		this.setUnlocalizedName("biomePainter");
+		super("biomePainter");
 		this.setMaxStackSize(1);
-		this.setCreativeTab(RandomThings.creativeTab);
 		this.setHasSubtypes(true);
-
-		GameRegistry.registerItem(this, "biomePainter");
-	}
-
-	@Override
-	
-	public void registerIcons(IIconRegister par1IconRegister)
-	{
-		this.itemIcon = par1IconRegister.registerIcon("RandomThings:biomePainter");
 	}
 
 	@Override

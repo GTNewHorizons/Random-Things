@@ -3,6 +3,7 @@ package lumien.randomthings.TileEntities;
 import java.util.List;
 
 import javax.vecmath.Vector3d;
+import javax.vecmath.Vector3f;
 
 import lumien.randomthings.Client.ParticleSystem.ParticleSystem;
 
@@ -20,13 +21,11 @@ import net.minecraft.util.Facing;
 
 public class TileEntityItemCollector extends TileEntity
 {
-	public ParticleSystem ps;
-	
 	private final int range = 2;
 
 	private int tickRate = 20;
 	private int tickCounter = 0;
-    
+
 	@Override
 	public void updateEntity()
 	{
@@ -35,7 +34,7 @@ public class TileEntityItemCollector extends TileEntity
 			tickCounter++;
 			if (tickCounter >= tickRate)
 			{
-				tickCounter=0;
+				tickCounter = 0;
 				int targetX, targetY, targetZ;
 
 				EnumFacing facing = BlockDispenser.func_149937_b(Facing.oppositeSide[worldObj.getBlockMetadata(xCoord, yCoord, zCoord)]);
@@ -54,7 +53,7 @@ public class TileEntityItemCollector extends TileEntity
 						AxisAlignedBB bounding = AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range + 1, yCoord + range + 1, zCoord + range + 1);
 
 						List<EntityItem> items = worldObj.getEntitiesWithinAABB(EntityItem.class, bounding);
-						
+
 						if (tickRate < 20)
 						{
 							tickRate++;

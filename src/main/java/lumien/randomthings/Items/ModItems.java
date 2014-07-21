@@ -20,6 +20,8 @@ public class ModItems
 	public static ItemEnderLetter enderLetter;
 	public static ItemSpectreKey spectreKey;
 	public static ItemSoundRecorder soundRecorder;
+	public static ItemImbue imbue;
+	public static ItemDemorpher demorpher;
 	
 	public static ItemCreativeSword creativeSword;
 	public static ItemCreativeGrower creativeGrower;
@@ -32,7 +34,6 @@ public class ModItems
 	public static ItemSpectreArmor spectreBoots;
 	public static ItemSpectreSword spectreSword;
 	public static ItemSpiritBinder spiritBinder;
-	public static ItemGinto ginto;
 
 	public static void init()
 	{
@@ -69,8 +70,10 @@ public class ModItems
 			spectreSword = new ItemSpectreSword();
 		if (ConfigItems.spiritBinder)
 			spiritBinder = new ItemSpiritBinder();
-		if (ConfigItems.ginto)
-			ginto = new ItemGinto();
+		if (ConfigItems.imbue)
+			imbue = new ItemImbue();
+		if (ConfigItems.demorpher)
+			demorpher = new ItemDemorpher();
 		
 		if (ConfigItems.creativeSword)
 			creativeSword = new ItemCreativeSword();

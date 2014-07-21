@@ -15,11 +15,7 @@ public class ItemCreativeGrower extends ItemCreative
 	
 	public ItemCreativeGrower()
 	{
-		this.setUnlocalizedName("creativeGrower");
-		this.setCreativeTab(RandomThings.creativeTab);
-		this.setTextureName("RandomThings:creativeGrower");
-		
-		GameRegistry.registerItem(this, "creativeGrower");
+		super("creativeGrower");
 	}
 	
 	@Override

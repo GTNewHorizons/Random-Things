@@ -1,4 +1,4 @@
-package lumien.randomthings.Core;
+package lumien.randomthings.Core.Commands;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import cpw.mods.fml.common.registry.GameData;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.ConfigItems;
+import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageNotification;
@@ -149,20 +150,6 @@ public class RTCommand extends CommandBase
 				return;
 			}
 		}
-		else if (subCommand.equals("spectre"))
-		{
-			// Test Command
-			if (commandUser instanceof EntityPlayer && ConfigItems.spectreArmor && ConfigItems.spectreKey)
-			{
-				EntityPlayer player = (EntityPlayer) commandUser;
-				player.inventory.addItemStackToInventory(new ItemStack(ModItems.spectreBoots));
-				player.inventory.addItemStackToInventory(new ItemStack(ModItems.spectreLeggings));
-				player.inventory.addItemStackToInventory(new ItemStack(ModItems.spectreChestplate));
-				player.inventory.addItemStackToInventory(new ItemStack(ModItems.spectreHelmet));
-				player.inventory.addItemStackToInventory(new ItemStack(ModItems.spectreKey));
-				player.inventory.addItemStackToInventory(new ItemStack(ModItems.spectreSword));
-			}
-		}
 		else if (subCommand.equals("setItemColor"))
 		{
 			if (commandUser instanceof EntityPlayer)
@@ -178,16 +165,12 @@ public class RTCommand extends CommandBase
 				}
 			}
 		}
-		else if (subCommand.equals("resetSpectre"))
-		{
-			RandomThings.instance.spectreHandler.reset();
-		}
 	}
 
 	@Override
 	public int getRequiredPermissionLevel()
 	{
-		return 3;
+		return 2;
 	}
 
 	@Override
@@ -195,7 +178,7 @@ public class RTCommand extends CommandBase
 	{
 		if (stringList[0].equals(""))
 		{
-			return getListOfStringsMatchingLastWord(stringList, "notify", "moon");
+			return getListOfStringsMatchingLastWord(stringList, "notify", "moon","setItemColor","spectre");
 		}
 		else if (stringList[0].equals("notify") && stringList.length == 2)
 		{

@@ -10,6 +10,7 @@ import lumien.randomthings.Network.Messages.MessageRequestTeleport;
 
 import org.lwjgl.opengl.GL11;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
@@ -67,6 +68,7 @@ public class GuiMagneticForce extends GuiContainer
 
 		players = RandomThings.proxy.getUsernameList();
 		players.remove(mc.thePlayer.getCommandSenderName());
+		
 		playerList = new GuiSlotPlayerList(this, this.mc, 100, 110, guiX + xSize / 2 - 100 / 2, guiY - 10 + ySize / 2 - 100 / 2 + 10, players);
 	}
 

@@ -18,17 +18,15 @@ import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
-public class ItemWhiteStone extends Item
+public class ItemWhiteStone extends ItemBase
 {
 	public ItemWhiteStone()
 	{
-		this.setUnlocalizedName("whitestone");
-		this.setCreativeTab(RandomThings.creativeTab);
+		super("whitestone");
 		this.setTextureName("RandomThings:whitestone");
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);
 
-		GameRegistry.registerItem(this, "whitestone");
 		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(this, 1, 0), 1, 1, ConfigDungeonLoot.WHITESTONE_CHANCE));
 	}
 	

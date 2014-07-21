@@ -17,7 +17,7 @@ import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ItemIngredient extends Item
+public class ItemIngredient extends ItemBase
 {
 	private class Ingredient
 	{
@@ -38,6 +38,7 @@ public class ItemIngredient extends Item
 
 	public ItemIngredient()
 	{
+		super("ingredient");
 		ingredients = new ArrayList<Ingredient>();
 
 		ingredients.add(new Ingredient("playerCore", "playerCore", 64));
@@ -53,9 +54,6 @@ public class ItemIngredient extends Item
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH,new WeightedRandomChestContent(new ItemStack(this,1,4), 1, 1, 3));
 
 		this.setHasSubtypes(true);
-		this.setCreativeTab(RandomThings.creativeTab);
-
-		GameRegistry.registerItem(this, "ingredient");
 	}
 	
 	
