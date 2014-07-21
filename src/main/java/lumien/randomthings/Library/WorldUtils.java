@@ -14,6 +14,37 @@ import net.minecraft.world.World;
 
 public class WorldUtils
 {
+	public static void setConnectedBlocksTo(World worldObj, int startX, int startY, int startZ, Block b, int metadata, Block originalBlock, int originalMetadata)
+	{
+		Block atPositionBlock = worldObj.getBlock(startX, startY, startZ);
+		int atPositionMetadata = worldObj.getBlockMetadata(startX, startY, startZ);
+		if ((atPositionBlock == b && atPositionMetadata == metadata) || atPositionBlock.isAir(worldObj, startX, startY, startZ))
+		{
+			return;
+		}
+		else if (atPositionBlock == originalBlock && atPositionMetadata == originalMetadata)
+		{
+			worldObj.setBlock(startX, startY, startZ, b, metadata, 2);
+
+			try
+			{
+				setConnectedBlocksTo(worldObj, startX, startY + 1, startZ, b, metadata, originalBlock, originalMetadata);
+				setConnectedBlocksTo(worldObj, startX, startY - 1, startZ, b, metadata, originalBlock, originalMetadata);
+
+				setConnectedBlocksTo(worldObj, startX + 1, startY, startZ, b, metadata, originalBlock, originalMetadata);
+				setConnectedBlocksTo(worldObj, startX - 1, startY, startZ, b, metadata, originalBlock, originalMetadata);
+
+				setConnectedBlocksTo(worldObj, startX, startY, startZ + 1, b, metadata, originalBlock, originalMetadata);
+				setConnectedBlocksTo(worldObj, startX, startY, startZ - 1, b, metadata, originalBlock, originalMetadata);
+			}
+			catch (StackOverflowError e)
+			{
+				return;
+			}
+		}
+		return;
+	}
+
 	public static void dropItemStack(World world, double x, double y, double z, ItemStack stack)
 	{
 		if (!world.isRemote)
@@ -38,7 +69,7 @@ public class WorldUtils
 		worldObj.notifyBlocksOfNeighborChange(posX, posY, posZ + 1, block);
 	}
 
-	public static void generateCube(World worldObj, int posX1, int posY1, int posZ1, int posX2, int posY2, int posZ2, Block b)
+	public static void generateCube(World worldObj, int posX1, int posY1, int posZ1, int posX2, int posY2, int posZ2, Block b, int metadata,int flag)
 	{
 		int minX = Math.min(posX1, posX2);
 		int minY = Math.min(posY1, posY2);
@@ -47,16 +78,16 @@ public class WorldUtils
 		int maxX = Math.max(posX1, posX2);
 		int maxY = Math.max(posY1, posY2);
 		int maxZ = Math.max(posZ1, posZ2);
-		
-		for (int x=minX;x<=maxX;x++)
+
+		for (int x = minX; x <= maxX; x++)
 		{
-			for (int y=minY;y<=maxY;y++)
+			for (int y = minY; y <= maxY; y++)
 			{
-				for (int z=minZ;z<=maxZ;z++)
+				for (int z = minZ; z <= maxZ; z++)
 				{
-					if (x==minX || y==minY || z==minZ || x==maxX || y==maxY || z==maxZ)
+					if (x == minX || y == minY || z == minZ || x == maxX || y == maxY || z == maxZ)
 					{
-						worldObj.setBlock(x, y, z, b);
+						worldObj.setBlock(x, y, z, b, metadata, flag);
 					}
 				}
 			}

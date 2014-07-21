@@ -52,4 +52,22 @@ public class Colors
 		
 		return 0;
 	}
+	
+	public static int getDye(ItemStack is)
+	{
+		int[] oreDictIds = OreDictionary.getOreIDs(is);
+		for (int i : oreDictIds)
+		{
+			for (int dyeO = 0; dyeO < Colors.oreDictDyes.length; dyeO++)
+			{
+				String s = Colors.oreDictDyes[dyeO];
+				int dyeID = OreDictionary.getOreID(s);
+				if (dyeID == i)
+				{
+					return dyeO;
+				}
+			}
+		}
+		return -1;
+	}
 }

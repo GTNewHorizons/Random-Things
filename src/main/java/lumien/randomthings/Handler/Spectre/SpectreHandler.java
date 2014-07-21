@@ -36,7 +36,7 @@ public class SpectreHandler extends WorldSavedData
 		super("SpectreHandler");
 		nextCoord = 0;
 		playerConnection = new HashMap<String, Integer>();
-		spectreDimensionID=Settings.SPECTRE_DIMENSON_ID;
+		spectreDimensionID = Settings.SPECTRE_DIMENSON_ID;
 	}
 
 	public SpectreHandler()
@@ -62,7 +62,7 @@ public class SpectreHandler extends WorldSavedData
 		{
 			coord = nextCoord;
 			nextCoord++;
-			WorldUtils.generateCube(spectreWorld, coord * 32, 40, 0, coord * 32 + 15, 52, 15, ModBlocks.spectreBlock);
+			WorldUtils.generateCube(spectreWorld, coord * 32, 40, 0, coord * 32 + 15, 52, 15, ModBlocks.spectreBlock, 12, 2);
 			playerConnection.put(playerName, coord);
 			this.markDirty();
 		}
@@ -92,7 +92,7 @@ public class SpectreHandler extends WorldSavedData
 		}
 
 		nbt.setTag("playerList", tagList);
-		
+
 		nbt.setBoolean("newVersion", true);
 	}
 
@@ -112,7 +112,7 @@ public class SpectreHandler extends WorldSavedData
 			int coord = compound.getInteger("coord");
 			playerConnection.put(playerName, coord);
 		}
-		
+
 		// Old Version PATCH
 		boolean newVersion = nbt.getBoolean("newVersion");
 		if (!newVersion)
@@ -123,10 +123,10 @@ public class SpectreHandler extends WorldSavedData
 			RandomThings.instance.logger.log(Level.WARN, "Also if there's still a player in the old spectre world you should either move him out or change the dimensionID to 32 in the config file");
 			RandomThings.instance.logger.log(Level.WARN, "If you don't this will crash in a second!! :(");
 		}
-		
-		if (spectreDimensionID!=Settings.SPECTRE_DIMENSON_ID)
+
+		if (spectreDimensionID != Settings.SPECTRE_DIMENSON_ID)
 		{
-			RandomThings.instance.logger.log(Level.WARN, "Resetting Spectre World because dimensionID changed ("+spectreDimensionID+"->"+Settings.SPECTRE_DIMENSON_ID+")");
+			RandomThings.instance.logger.log(Level.WARN, "Resetting Spectre World because dimensionID changed (" + spectreDimensionID + "->" + Settings.SPECTRE_DIMENSON_ID + ")");
 			spectreDimensionID = Settings.SPECTRE_DIMENSON_ID;
 			reset();
 			this.markDirty();
@@ -149,7 +149,7 @@ public class SpectreHandler extends WorldSavedData
 		{
 			ChunkCoordinates cc = MinecraftServer.getServer().worldServerForDimension(0).provider.getRandomizedSpawnPoint();
 			MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(player, 0, new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(0)));
-			
+
 			player.setPositionAndUpdate(cc.posX, cc.posY, cc.posZ);
 		}
 	}
@@ -180,7 +180,7 @@ public class SpectreHandler extends WorldSavedData
 					{
 						ChunkCoordinates cc = MinecraftServer.getServer().worldServerForDimension(0).provider.getRandomizedSpawnPoint();
 						MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) player, 0, new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(0)));
-						
+
 						player.setPositionAndUpdate(cc.posX, cc.posY, cc.posZ);
 					}
 				}
