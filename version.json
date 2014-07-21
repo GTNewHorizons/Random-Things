@@ -1,7 +1,7 @@
 {
 	"versionList": [
 		{
-			"mcVersion":"1.7.10",
+			"mcVersion":"Minecraft 1.7.10",
 			"modVersion":"2.1.2",
 			"changeLog": [
 				""
@@ -9,6 +9,16 @@
 			"updateURL":"http://minecraft.curseforge.com/mc-mods/59816-random-things",
 			"isDirectLink":"false",
 			"newFileName":""
-		}
+		},
+		{
+            "mcVersion":"Minecraft 1.7.2",
+            "modVersion":"2.1",
+            "changeLog": [
+                ""
+            ],
+            "updateURL":"http://minecraft.curseforge.com/mc-mods/59816-random-things",
+            "isDirectLink":"false",
+            "newFileName":""
+        }
 	]
 }
