@@ -86,8 +86,8 @@ public class SpectreHandler extends WorldSavedData
 		{
 			NBTTagCompound compound = new NBTTagCompound();
 			compound.setString("playerName", playerName);
-			int coord = playerConnection.get(playerName);
-			compound.setInteger("position", coord);
+			int position = playerConnection.get(playerName);
+			compound.setInteger("position", position);
 			tagList.appendTag(compound);
 		}
 
@@ -109,8 +109,8 @@ public class SpectreHandler extends WorldSavedData
 			NBTTagCompound compound = tagList.getCompoundTagAt(i);
 
 			String playerName = compound.getString("playerName");
-			int coord = compound.getInteger("coord");
-			playerConnection.put(playerName, coord);
+			int position = compound.getInteger("position");
+			playerConnection.put(playerName, position);
 		}
 
 		// Old Version PATCH
