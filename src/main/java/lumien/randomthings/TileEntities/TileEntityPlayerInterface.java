@@ -74,7 +74,7 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 		{
 			if (this.worldObj.getTotalWorldTime() % 20 == 0)
 			{
-				if (this.playerEntity == null && this.playerName.equals(""))
+				if (this.playerEntity == null && !this.playerName.equals(""))
 				{
 					EntityPlayerMP tempPlayer = MinecraftServer.getServer().getConfigurationManager().func_152612_a(this.playerName);
 					if (tempPlayer != null)
