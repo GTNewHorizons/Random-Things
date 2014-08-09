@@ -1,10 +1,10 @@
 package lumien.randomthings.Potions;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 
 import org.apache.logging.log4j.Level;
 
-import scala.actors.threadpool.Arrays;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.RTConfiguration;
 import lumien.randomthings.Library.OverrideUtils;
