@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.Random;
 
 import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Library.OverrideUtils;
 
 import net.minecraft.client.gui.Gui;
@@ -13,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 public class BackgroundHandler
 {
 	static Field f;
-	static String[] validBlocks = new String[] {"netherrack", "wool_colored", "stonebrick", "stonebrick_mossy", "sponge", "stone", "red_sand", "sand", "bedrock", "brick", "clay", "cobblestone", "cobblestone_mossy", "dirt", "end_stone", "glowstone", "gravel", "hardened_clay", "hay_block_top", "ice", "log", "melon_side", "mycelium_top", "nether_brick", "portal" };
+	static String[] validBlocks = new String[] { "netherrack", "wool_colored", "stonebrick", "stonebrick_mossy", "sponge", "stone", "red_sand", "sand", "bedrock", "brick", "clay", "cobblestone", "cobblestone_mossy", "dirt", "end_stone", "glowstone", "gravel", "hardened_clay", "hay_block_top", "ice", "log", "melon_side", "mycelium_top", "nether_brick", "portal" };
 
 	static Random rng = new Random();
 
@@ -44,28 +45,31 @@ public class BackgroundHandler
 
 	public static void setRandomBackground()
 	{
-		if (!Settings.FIXED_BACKGROUND.equals(""))
+		if (VanillaChanges.MODIFIED_BACKGROUND)
 		{
-			setBackgroundBlock(Settings.FIXED_BACKGROUND);
-		}
-		else
-		{
-			String randomBlock = validBlocks[rng.nextInt(validBlocks.length)];
+			if (!Settings.FIXED_BACKGROUND.equals(""))
+			{
+				setBackgroundBlock(Settings.FIXED_BACKGROUND);
+			}
+			else
+			{
+				String randomBlock = validBlocks[rng.nextInt(validBlocks.length)];
 
-			if (randomBlock.equals("hardened_clay"))
-			{
-				randomBlock = randomBlock + "_stained_" + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
-			}
-			else if (randomBlock.equals("wool_colored"))
-			{
-				randomBlock = randomBlock + "_" + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
-			}
-			else if (randomBlock.equals("log") || randomBlock.equals("planks"))
-			{
-				randomBlock = randomBlock + "_" + logTypes[rng.nextInt(logTypes.length)];
-			}
+				if (randomBlock.equals("hardened_clay"))
+				{
+					randomBlock = randomBlock + "_stained_" + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
+				}
+				else if (randomBlock.equals("wool_colored"))
+				{
+					randomBlock = randomBlock + "_" + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
+				}
+				else if (randomBlock.equals("log") || randomBlock.equals("planks"))
+				{
+					randomBlock = randomBlock + "_" + logTypes[rng.nextInt(logTypes.length)];
+				}
 
-			setBackgroundBlock(randomBlock);
+				setBackgroundBlock(randomBlock);
+			}
 		}
 	}
 }
