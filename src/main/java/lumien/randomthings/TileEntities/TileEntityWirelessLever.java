@@ -34,7 +34,6 @@ public class TileEntityWirelessLever extends TileEntity
 		super.validate();
 
 		loadedLevers.add(this);
-		//this.worldObj.notifyBlockOfNeighborChange(targetX, targetY, targetZ, ModBlocks.wirelessLever);
 	}
 
 	@Override
@@ -52,33 +51,37 @@ public class TileEntityWirelessLever extends TileEntity
 					EntityReddustFX particle = new EntityReddustFX(this.worldObj, xCoord + 0.5 + vec.x * d, yCoord + 0.5 + vec.y * d, zCoord + 0.5 + vec.z * d, 0, 0, 0);
 					if ((this.blockMetadata & 8) == 0)
 					{
-						particle.setRBGColorF(0.7f, 0.6f, 0.6f);
+						particle.setRBGColorF(0.9f, 0.9f, 0.9f);
+					}
+					if (vec.length() > Settings.WIRELESSLEVER_RANGE)
+					{
+						particle.setRBGColorF(0, 0, 0);
 					}
 					Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 				}
 			}
 		}
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
-    {
-        super.readFromNBT(nbt);
-        
-        this.targetX = nbt.getInteger("targetX");
-        this.targetY = nbt.getInteger("targetY");
-        this.targetZ = nbt.getInteger("targetZ");
-    }
-    
-    @Override
+	{
+		super.readFromNBT(nbt);
+
+		this.targetX = nbt.getInteger("targetX");
+		this.targetY = nbt.getInteger("targetY");
+		this.targetZ = nbt.getInteger("targetZ");
+	}
+
+	@Override
 	public void writeToNBT(NBTTagCompound nbt)
-    {
-        super.writeToNBT(nbt);
-        
-        nbt.setInteger("targetX", targetX);
-        nbt.setInteger("targetY", targetY);
-        nbt.setInteger("targetZ", targetZ);
-    }
+	{
+		super.writeToNBT(nbt);
+
+		nbt.setInteger("targetX", targetX);
+		nbt.setInteger("targetY", targetY);
+		nbt.setInteger("targetZ", targetZ);
+	}
 
 	@Override
 	public Packet getDescriptionPacket()
