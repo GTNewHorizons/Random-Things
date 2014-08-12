@@ -26,7 +26,7 @@ public class ItemCreativeChestGenerator extends ItemCreative
 	public ItemCreativeChestGenerator()
 	{
 		super("creativeChestGenerator");
-		
+		this.setMaxStackSize(1);
 		this.setFull3D();
 	}
 
