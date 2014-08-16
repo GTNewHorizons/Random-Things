@@ -21,4 +21,6 @@ public class Settings
 	public static int IMBUE_DURATION = 20 * 60 * 5;
 	
 	public static int BIOME_CHARGE_TIME = 20;
+	
+	public static double DEMORPHER_RANGE = 10;
 }

@@ -72,7 +72,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
+import net.minecraftforge.client.event.EntityViewRenderEvent.FogColors;
 import net.minecraftforge.client.event.EntityViewRenderEvent.FogDensity;
+import net.minecraftforge.client.event.EntityViewRenderEvent.RenderFogEvent;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -285,16 +287,6 @@ public class RTEventHandler
 		}
 	}
 
-	@SubscribeEvent()
-	@SideOnly(Side.CLIENT)
-	public void preTextureStitch(TextureStitchEvent.Pre event)
-	{
-		if (event.map.getTextureType() == 1)
-		{
-			ClientProxy.slimeParticleTexture = event.map.registerIcon("RandomThings:slimeParticle");
-		}
-	}
-
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	@SideOnly(Side.CLIENT)
 	public void drawGameOverlay(RenderGameOverlayEvent.Post event)
@@ -370,14 +362,14 @@ public class RTEventHandler
 				EntityPlayer player = (EntityPlayer) event.entityLiving;
 				if (player.isPotionActive(ModPotions.imbueSpectre))
 				{
-					if (!event.source.isMagicDamage() && (event.source.getSourceOfDamage()!=null || event.source.isExplosion()) && !event.source.canHarmInCreative() && !event.source.isFireDamage() && !event.source.isUnblockable() && Math.random()<=Settings.SPECTRE_IMBUE_CHANCE)
+					if (!event.source.isMagicDamage() && (event.source.getSourceOfDamage() != null || event.source.isExplosion()) && !event.source.canHarmInCreative() && !event.source.isFireDamage() && !event.source.isUnblockable() && Math.random() <= Settings.SPECTRE_IMBUE_CHANCE)
 					{
 						event.setCanceled(true);
 						return;
 					}
 				}
 			}
-			
+
 			if (event.ammount >= 7)
 			{
 				Entity attacker = event.source.getSourceOfDamage();
@@ -471,7 +463,7 @@ public class RTEventHandler
 				{
 					try
 					{
-						experienceValue.set(attacked, (Float) experienceValue.get(attacked)*1.5F);
+						experienceValue.set(attacked, (Float) experienceValue.get(attacked) * 1.5F);
 					}
 					catch (Exception e)
 					{

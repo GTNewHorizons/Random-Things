@@ -81,6 +81,7 @@ public class RTConfiguration
 		ConfigBlocks.carpentryBench = isBlockEnabled("CarpentryBench");
 		ConfigBlocks.dyeingMachine = isBlockEnabled("DyeingMachine");
 		ConfigBlocks.imbuingStation = isBlockEnabled("ImbuingStation");
+		ConfigBlocks.customWorkbench = isBlockEnabled("CustomWorkbench");
 
 		// Items
 		ConfigItems.biomeCapsule = isItemEnabled("BiomeSolution");

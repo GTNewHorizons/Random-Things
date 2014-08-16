@@ -4,12 +4,16 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.Container.ContainerEnderLetter;
+import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Network.PacketHandler;
-import lumien.randomthings.Network.Messages.MessageEnderLetter;
+import lumien.randomthings.Network.Messages.MessageChangeItemProperty;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -20,9 +24,13 @@ public class GuiEnderLetter extends GuiContainer
 	GuiTextField receiverName;
 	ItemStack enderLetter;
 
+	String oldReceiver = "";
+
+	EntityPlayer thePlayer = Minecraft.getMinecraft().thePlayer;
+
 	public GuiEnderLetter(IInventory inventoryPlayer, IInventory letterInventory, ItemStack enderLetter)
 	{
-		super(new ContainerEnderLetter(enderLetter,inventoryPlayer, letterInventory));
+		super(new ContainerEnderLetter(enderLetter, inventoryPlayer, letterInventory));
 		this.enderLetter = enderLetter;
 	}
 
@@ -49,6 +57,12 @@ public class GuiEnderLetter extends GuiContainer
 	public void updateScreen()
 	{
 		super.updateScreen();
+
+		if (!oldReceiver.equals(receiverName.getText()))
+		{
+			oldReceiver = receiverName.getText();
+			PacketHandler.INSTANCE.sendToServer(new MessageChangeItemProperty(Item.getIdFromItem(ModItems.enderLetter), 0, thePlayer.inventory.currentItem, "receiver", oldReceiver));
+		}
 	}
 
 	@Override
@@ -63,6 +77,7 @@ public class GuiEnderLetter extends GuiContainer
 
 		String receiver = enderLetter.stackTagCompound.getString("receiver");
 		receiverName.setText(receiver);
+		oldReceiver = receiver;
 
 		if (enderLetter.getItemDamage() == 1)
 		{
@@ -74,7 +89,7 @@ public class GuiEnderLetter extends GuiContainer
 	public void onGuiClosed()
 	{
 		Keyboard.enableRepeatEvents(false);
-		PacketHandler.INSTANCE.sendToServer(new MessageEnderLetter(this.receiverName.getText()));
+		PacketHandler.INSTANCE.sendToServer(new MessageChangeItemProperty(Item.getIdFromItem(ModItems.enderLetter), 0, thePlayer.inventory.currentItem, "receiver", receiverName.getText()));
 	}
 
 	@Override
@@ -82,7 +97,6 @@ public class GuiEnderLetter extends GuiContainer
 	{
 		super.mouseClicked(par1, par2, par3);
 		this.receiverName.mouseClicked(par1, par2, par3);
-
 	}
 
 	@Override

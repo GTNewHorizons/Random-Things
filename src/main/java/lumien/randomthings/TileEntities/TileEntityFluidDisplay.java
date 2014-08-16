@@ -19,6 +19,13 @@ public class TileEntityFluidDisplay extends TileEntity
 		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
 	}
 	
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
+	{
+		readFromNBT(packet.func_148857_g());
+		worldObj.func_147479_m(xCoord, yCoord, zCoord);
+	}
+	
 	public void toggleFlowing()
 	{
 		flowing=!flowing;
@@ -29,13 +36,6 @@ public class TileEntityFluidDisplay extends TileEntity
 	public boolean flowing()
 	{
 		return flowing;
-	}
-	
-	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet)
-	{
-		readFromNBT(packet.func_148857_g());
-		worldObj.func_147479_m(xCoord, yCoord, zCoord);
 	}
 	
 	@Override

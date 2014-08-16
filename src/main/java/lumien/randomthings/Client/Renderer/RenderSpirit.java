@@ -64,7 +64,6 @@ public class RenderSpirit extends RenderLiving
 		if (lifetime < 200)
 		{
 			GL11.glColor4f(1, 1, 1, a*lifetime);
-			System.out.println(a*lifetime);
 		}
 	}
 

@@ -3,11 +3,14 @@ package lumien.randomthings.Core.Commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Preconditions;
+
 import cpw.mods.fml.common.registry.GameData;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.ConfigItems;
 import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Items.ItemBiomeCapsule;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageNotification;
@@ -155,14 +158,28 @@ public class RTCommand extends CommandBase
 			if (commandUser instanceof EntityPlayer)
 			{
 				ItemStack is = ((EntityPlayer) commandUser).getCurrentEquippedItem();
-				if (is!=null && args.length>1)
+				if (is != null && args.length > 1)
 				{
-					if (is.stackTagCompound==null)
+					if (is.stackTagCompound == null)
 					{
 						is.stackTagCompound = new NBTTagCompound();
 					}
 					is.stackTagCompound.setInteger("customRTColor", Integer.parseInt(args[1]));
 				}
+			}
+		}
+		else if (subCommand.equals("setBiomeCapsule"))
+		{
+			if (commandUser instanceof EntityPlayer)
+			{
+				Preconditions.checkNotNull(((EntityPlayer) commandUser).getCurrentEquippedItem(), "Currently Equiped Item is not a Biome Capsule");
+				Preconditions.checkState(((EntityPlayer) commandUser).getCurrentEquippedItem().getItem() instanceof ItemBiomeCapsule, "Currently Equiped Item is not a Biome Capsule");
+				Preconditions.checkPositionIndex(1, args.length, "You have to specify the Biome ID");
+
+				int biomeID = Integer.parseInt(args[1]);
+				Preconditions.checkArgument(biomeID >= 0, "Invalid Biome ID (%s)", args[0]);
+				ItemStack is = ((EntityPlayer) commandUser).getCurrentEquippedItem();
+				is.setItemDamage(biomeID + 1);
 			}
 		}
 	}
@@ -178,7 +195,7 @@ public class RTCommand extends CommandBase
 	{
 		if (stringList[0].equals(""))
 		{
-			return getListOfStringsMatchingLastWord(stringList, "notify", "moon","setItemColor","spectre");
+			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre" , "setBiomeCapsule");
 		}
 		else if (stringList[0].equals("notify") && stringList.length == 2)
 		{
@@ -190,7 +207,7 @@ public class RTCommand extends CommandBase
 			{
 				if (stringList[1].equals("set"))
 				{
-					return getListOfStringsMatchingLastWord(stringList, "0","1","2","3","4","5","6","7");
+					return getListOfStringsMatchingLastWord(stringList, "0", "1", "2", "3", "4", "5", "6", "7");
 				}
 			}
 			else

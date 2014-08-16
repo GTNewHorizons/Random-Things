@@ -65,7 +65,7 @@ public class RandomThings
 {
 	@Instance(Reference.MOD_ID)
 	public static RandomThings instance;
-	
+
 	public static final String AUTHOR_USERNAME = "XxsumsumxX";
 
 	@SidedProxy(clientSide = "lumien.randomthings.Proxy.ClientProxy", serverSide = "lumien.randomthings.Proxy.CommonProxy")
@@ -125,12 +125,12 @@ public class RandomThings
 		PacketHandler.init();
 		RandomThings.proxy.registerRenderers();
 
-		if (Settings.SPECTRE_DIMENSON_ID==-1)
+		if (Settings.SPECTRE_DIMENSON_ID == -1)
 		{
 			int dimensionID = DimensionManager.getNextFreeDimId();
-			logger.log(Level.INFO, "Auto Resolved Spectre Dimension ID to "+dimensionID);
+			logger.log(Level.INFO, "Auto Resolved Spectre Dimension ID to " + dimensionID);
 			RTConfiguration.spectreDimensionID.set(dimensionID);
-			
+
 			RTConfiguration.syncConfig();
 		}
 		DimensionManager.registerProviderType(Settings.SPECTRE_DIMENSON_ID, WorldProviderSpectre.class, true);
@@ -152,10 +152,10 @@ public class RandomThings
 			logger.log(Level.WARN, "Couldn't reflect on cc, no cc peripheral support for CreativePlayerInterface and OnlineDetector and Notification Interface");
 			e.printStackTrace();
 		}
-		
+
 		ModPotions.init();
 	}
-	
+
 	public boolean canBeDeactivated()
 	{
 		return false;

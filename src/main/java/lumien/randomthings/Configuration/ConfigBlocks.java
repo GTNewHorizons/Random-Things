@@ -14,4 +14,5 @@ public class ConfigBlocks
 	public static boolean carpentryBench;
 	public static boolean dyeingMachine;
 	public static boolean imbuingStation;
+	public static boolean customWorkbench;
 }

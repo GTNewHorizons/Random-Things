@@ -1,11 +1,13 @@
 package lumien.randomthings.Container;
 
 import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Container.Slots.SlotCarpentryPattern;
 import lumien.randomthings.Handler.CarpentryBench.CarpentryManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
@@ -17,7 +19,8 @@ public class ContainerCarpentryBench extends Container
 {
 	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 3, 3);
 	public IInventory craftResult = new InventoryCraftResult();
-	
+	public IInventory pattern = new InventoryBasic("Pattern", false, 1);
+
 	private World worldObj;
 	private int posX;
 	private int posY;
@@ -31,103 +34,100 @@ public class ContainerCarpentryBench extends Container
 		this.posX = posX;
 		this.posY = posY;
 		this.posZ = posZ;
-		
+
+		this.addSlotToContainer(new SlotCarpentryPattern(this, pattern, 0, 16, 35));
 		this.addSlotToContainer(new SlotCrafting(playerInventory.player, this.craftMatrix, this.craftResult, 0, 142, 35));
-		
-        for (int l = 0; l < 3; ++l)
-        {
-            for (int i1 = 0; i1 < 3; ++i1)
-            {
-                this.addSlotToContainer(new Slot(this.craftMatrix, i1 + l * 3, 48 + i1 * 18, 17 + l * 18));
-            }
-        }
-		
+
+		for (int l = 0; l < 3; ++l)
+		{
+			for (int i1 = 0; i1 < 3; ++i1)
+			{
+				this.addSlotToContainer(new Slot(this.craftMatrix, i1 + l * 3, 48 + i1 * 18, 17 + l * 18));
+			}
+		}
+
 		bindPlayerInventory(playerInventory);
 	}
-	
+
 	@Override
 	public void onCraftMatrixChanged(IInventory par1IInventory)
-    {
-        this.craftResult.setInventorySlotContents(0, CarpentryManager.instance().findMatchingRecipe(this.craftMatrix, this.worldObj));
-    }
-	
+	{
+		this.craftResult.setInventorySlotContents(0, CarpentryManager.instance().findMatchingRecipe(this.pattern.getStackInSlot(0), this.craftMatrix, this.worldObj));
+	}
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
-    {
-        ItemStack itemstack = null;
-        Slot slot = (Slot)this.inventorySlots.get(par2);
+	{
+		ItemStack itemstack = null;
+		Slot slot = (Slot) this.inventorySlots.get(par2);
 
-        if (slot != null && slot.getHasStack())
-        {
-            ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
+		if (slot != null && slot.getHasStack())
+		{
+			ItemStack itemstack1 = slot.getStack();
+			itemstack = itemstack1.copy();
 
-            if (par2 == 0)
-            {
-                if (!this.mergeItemStack(itemstack1, 10, 46, true))
-                {
-                    return null;
-                }
+			if (par2 >= 11 && par2 < 37)
+			{
+				if (!this.mergeItemStack(itemstack1, 38, 46, false))
+				{
+					return null;
+				}
+			}
+			else if (par2 >= 37 && par2 < 46)
+			{
+				if (!this.mergeItemStack(itemstack1, 11, 38, false))
+				{
+					return null;
+				}
+			}
+			else if (!this.mergeItemStack(itemstack1, 11, 47, false))
+			{
+				return null;
+			}
 
-                slot.onSlotChange(itemstack1, itemstack);
-            }
-            else if (par2 >= 10 && par2 < 37)
-            {
-                if (!this.mergeItemStack(itemstack1, 37, 46, false))
-                {
-                    return null;
-                }
-            }
-            else if (par2 >= 37 && par2 < 46)
-            {
-                if (!this.mergeItemStack(itemstack1, 10, 37, false))
-                {
-                    return null;
-                }
-            }
-            else if (!this.mergeItemStack(itemstack1, 10, 46, false))
-            {
-                return null;
-            }
+			if (itemstack1.stackSize == 0)
+			{
+				slot.putStack((ItemStack) null);
+			}
+			else
+			{
+				slot.onSlotChanged();
+			}
 
-            if (itemstack1.stackSize == 0)
-            {
-                slot.putStack((ItemStack)null);
-            }
-            else
-            {
-                slot.onSlotChanged();
-            }
+			if (itemstack1.stackSize == itemstack.stackSize)
+			{
+				return null;
+			}
 
-            if (itemstack1.stackSize == itemstack.stackSize)
-            {
-                return null;
-            }
+			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
+		}
 
-            slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
-        }
+		return itemstack;
+	}
 
-        return itemstack;
-    }
-	
 	@Override
 	public void onContainerClosed(EntityPlayer par1EntityPlayer)
-    {
-        super.onContainerClosed(par1EntityPlayer);
+	{
+		super.onContainerClosed(par1EntityPlayer);
 
-        if (!this.worldObj.isRemote)
-        {
-            for (int i = 0; i < 9; ++i)
-            {
-                ItemStack itemstack = this.craftMatrix.getStackInSlotOnClosing(i);
+		if (!this.worldObj.isRemote)
+		{
+			ItemStack carpentryPattern = this.pattern.getStackInSlot(0);
+			if (carpentryPattern != null)
+			{
+				par1EntityPlayer.dropPlayerItemWithRandomChoice(carpentryPattern, false);
+			}
+			for (int i = 0; i < 9; ++i)
+			{
+				ItemStack itemstack = this.craftMatrix.getStackInSlotOnClosing(i);
 
-                if (itemstack != null)
-                {
-                    par1EntityPlayer.dropPlayerItemWithRandomChoice(itemstack, false);
-                }
-            }
-        }
-    }
+				if (itemstack != null)
+				{
+					par1EntityPlayer.dropPlayerItemWithRandomChoice(itemstack, false);
+				}
+			}
+		}
+	}
 
 	private void bindPlayerInventory(InventoryPlayer playerInventory)
 	{

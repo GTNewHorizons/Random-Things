@@ -50,7 +50,6 @@ import lumien.randomthings.Transformer.MCPNames;
 public class ClientProxy extends CommonProxy
 {
 	RenderItemCollector renderer;
-	public static IIcon slimeParticleTexture;
 	private static final Minecraft mc = Minecraft.getMinecraft();
 
 	@Override
@@ -85,16 +84,6 @@ public class ClientProxy extends CommonProxy
 
 		EntityCritFX particle = new EntityCritFX(worldObj, x, y, z, motionX, motionY, motionZ);
 		particle.setRBGColorF(1F / 255F * 198F, 1F / 255F * 246F, 1F / 255F * 252F);
-		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
-	}
-
-	@Override
-	public void spawnSlimeParticle(int dye, double x, double y, double z, double motionX, double motionY, double motionZ)
-	{
-		EntityBreakingFX particle = new EntityBreakingFX(Minecraft.getMinecraft().theWorld, x, y, z, Items.slime_ball);
-		Color c = new Color(ItemDye.field_150922_c[dye]);
-		particle.setRBGColorF(1F / 255F * c.getRed(), 1F / 255F * c.getGreen(), 1F / 255F * c.getBlue());
-		particle.setParticleIcon(slimeParticleTexture);
 		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 	}
 

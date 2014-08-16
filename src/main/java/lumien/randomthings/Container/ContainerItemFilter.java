@@ -1,6 +1,7 @@
 package lumien.randomthings.Container;
 
 import lumien.randomthings.Container.Slots.SlotLocked;
+import lumien.randomthings.Items.ItemCarpentryPattern;
 import lumien.randomthings.Items.ItemFilter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,8 +14,8 @@ public class ContainerItemFilter extends Container
 {
 	IInventory filterInventory;
 	ItemStack filter;
-	
-	public ContainerItemFilter(ItemStack filter,IInventory playerInventory, IInventory filterInventory)
+
+	public ContainerItemFilter(ItemStack filter, IInventory playerInventory, IInventory filterInventory)
 	{
 		this.filterInventory = filterInventory;
 		filterInventory.openInventory();
@@ -91,7 +92,7 @@ public class ContainerItemFilter extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer)
 	{
-		return entityplayer.getCurrentEquippedItem()!=null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemFilter && ItemFilter.getFilterType(entityplayer.getCurrentEquippedItem().getItemDamage())==ItemFilter.FilterType.ITEM;
+		return entityplayer.getCurrentEquippedItem() != null && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemFilter && ItemFilter.getFilterType(entityplayer.getCurrentEquippedItem().getItemDamage()) == ItemFilter.FilterType.ITEM;
 	}
 
 }

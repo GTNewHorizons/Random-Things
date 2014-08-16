@@ -6,6 +6,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.Library.InventoryUtils;
+import lumien.randomthings.Library.Interfaces.IItemWithProperties;
 import lumien.randomthings.Library.Inventorys.InventoryEnderLetter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -16,7 +17,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
-public class ItemEnderLetter extends ItemBase
+public class ItemEnderLetter extends ItemBase implements IItemWithProperties
 {
 
 	public ItemEnderLetter()
@@ -146,5 +147,11 @@ public class ItemEnderLetter extends ItemBase
 
 			RandomThings.instance.letterHandler.addLetter(receivedLetter);
 		}
+	}
+
+	@Override
+	public boolean isValidAttribute(String attributeName, int attributeType)
+	{
+		return attributeName.equals("receiver") && attributeType == 1;
 	}
 }

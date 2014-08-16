@@ -1,13 +1,17 @@
 package lumien.randomthings.Items;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
+import cpw.mods.fml.common.Optional;
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.Configuration.Settings;
+import morph.api.Api;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -19,29 +23,57 @@ import net.minecraft.world.World;
 
 public class ItemDemorpher extends ItemBase
 {
+	IIcon[] icons;
+
 	public ItemDemorpher()
 	{
 		super("demorpher");
 		this.setMaxStackSize(1);
+		this.setHasSubtypes(true);
+		this.setCreativeTab(null);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+	public void addInformation(ItemStack is, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
-		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
+		super.addInformation(is, par2EntityPlayer, par3List, par4);
+		if (is.stackTagCompound != null && !is.stackTagCompound.getString("boundPlayers").equals(":"))
+		{
+			String[] boundPlayers = is.stackTagCompound.getString("boundPlayers").split(":");
+			for (String player : boundPlayers)
+			{
+				if (!player.equals(""))
+				{
+					par3List.add(player);
+				}
+			}
+		}
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+    public IIcon getIconFromDamage(int damage)
+    {
+        return icons[damage];
+    }
 
-		par3List.add("I will become functional");
-		par3List.add("when Morph updates to 1.7.10");
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister ir)
+	{
+		icons = new IIcon[2];
+		icons[0] = ir.registerIcon("RandomThings:demorpher");
+		icons[1] = ir.registerIcon("RandomThings:demorpher_active");
 	}
 
 	@Override
+	@Optional.Method(modid = "Morph")
 	public ItemStack onItemRightClick(ItemStack is, World worldObj, EntityPlayer player)
 	{
 		if (Boolean.TRUE)
 		{
-			return is; // Will be functional as soon as Morph is updated to
-						// 1.7.10
+			return is;
 		}
 		if (!worldObj.isRemote)
 		{
@@ -49,21 +81,20 @@ public class ItemDemorpher extends ItemBase
 			{
 				is.stackTagCompound = new NBTTagCompound();
 			}
-			List<EntityPlayer> playersInRadius = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(player.posX - 10, player.posY - 10, player.posZ - 10, player.posX + 10, player.posY + 10, player.posZ + 10));
+			String boundPlayers = "";
+			List<EntityPlayer> playersInRadius = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(player.posX - Settings.DEMORPHER_RANGE, player.posY - Settings.DEMORPHER_RANGE, player.posZ - Settings.DEMORPHER_RANGE, player.posX + Settings.DEMORPHER_RANGE, player.posY + Settings.DEMORPHER_RANGE, player.posZ + Settings.DEMORPHER_RANGE));
 			for (EntityPlayer foundPlayer : playersInRadius)
 			{
-				if (!(foundPlayer == player))
+				if (Api.hasMorph(foundPlayer.getCommandSenderName(), false))
 				{
-					try
-					{
-						Class.forName("morph.api.Api").getMethod("forceDemorph", EntityPlayerMP.class).invoke(null, foundPlayer);
-					}
-					catch (Exception e)
-					{
-						e.printStackTrace();
-						RandomThings.instance.logger.warn("Couldn't reflect on Morph API, the demorpher will not work");
-					}
+					Api.forceDemorph((EntityPlayerMP) foundPlayer);
+					boundPlayers += foundPlayer.getCommandSenderName() + ":";
 				}
+			}
+			if (!boundPlayers.equals(""))
+			{
+				is.setItemDamage(1);
+				is.stackTagCompound.setString("boundPlayers", boundPlayers);
 			}
 		}
 		return is;

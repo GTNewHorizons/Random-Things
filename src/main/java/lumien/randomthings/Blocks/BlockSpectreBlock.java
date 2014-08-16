@@ -23,19 +23,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockSpectreBlock extends Block
+public class BlockSpectreBlock extends BlockBase
 {
 	public BlockSpectreBlock()
 	{
-		super(Material.rock);
+		super("spectreBlock",Material.rock,ItemBlockColored.class);
 
 		this.lightValue = 15;
 		this.setBlockUnbreakable().setStepSound(soundTypeGlass);
-		this.setCreativeTab(RandomThings.creativeTab);
-		this.setBlockName("spectreBlock");
-		this.setBlockTextureName("RandomThings:" + "spectreBlock");
-
-		GameRegistry.registerBlock(this, ItemBlockColored.class, "spectreBlock");
 	}
 
 	@Override

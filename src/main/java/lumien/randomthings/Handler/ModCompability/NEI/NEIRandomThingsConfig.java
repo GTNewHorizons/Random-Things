@@ -1,4 +1,4 @@
-package lumien.randomthings.Handler.NEI;
+package lumien.randomthings.Handler.ModCompability.NEI;
 
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;

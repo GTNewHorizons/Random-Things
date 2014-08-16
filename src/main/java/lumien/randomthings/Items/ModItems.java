@@ -12,7 +12,6 @@ public class ModItems
 	public static ItemBiomeCapsule biomeCapsule;
 	public static ItemBiomePainter biomePainter;
 	public static ItemIngredient ingredients;
-	public static ItemKojaku kojaku;
 	public static ItemWhiteStone whitestone;
 	public static ItemMagneticForce magneticForce;
 	public static ItemVoidStone voidStone;
@@ -22,6 +21,7 @@ public class ModItems
 	public static ItemSoundRecorder soundRecorder;
 	public static ItemImbue imbue;
 	public static ItemDemorpher demorpher;
+	public static ItemCarpentryPattern carpentryPattern;
 	
 	public static ItemCreativeSword creativeSword;
 	public static ItemCreativeGrower creativeGrower;
@@ -86,7 +86,6 @@ public class ModItems
 		
 		ingredients = new ItemIngredient();
 		filter = new ItemFilter();
-		
-		kojaku = new ItemKojaku();
+		carpentryPattern = new ItemCarpentryPattern();
 	}
 }

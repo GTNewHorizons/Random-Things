@@ -35,7 +35,7 @@ public class ItemBiomePainter extends ItemBase
 					{
 						NBTTagCompound nbt = is.stackTagCompound;
 						int charges = nbt.getInteger("charges");
-						if (charges > 0)
+						if (charges > 0 || par2EntityPlayer.capabilities.isCreativeMode)
 						{
 							Chunk c = par3World.getChunkFromBlockCoords(par4, par6);
 							int biomeID = is.getItemDamage() - 1;
