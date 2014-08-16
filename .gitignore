@@ -8,6 +8,8 @@
 !/*.gradle
 !/*.md
 !/version.json
+!/libs/*
+!/libs/
 .gradle
 Thumbs.db
 Update.bat
