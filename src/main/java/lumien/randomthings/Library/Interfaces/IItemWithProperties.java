@@ -1,6 +1,8 @@
 package lumien.randomthings.Library.Interfaces;
 
+import net.minecraft.item.ItemStack;
+
 public interface IItemWithProperties
 {
-	public boolean isValidAttribute(String attributeName,int attributeType);
+	public boolean isValidAttribute(ItemStack is,String attributeName,int attributeType);
 }

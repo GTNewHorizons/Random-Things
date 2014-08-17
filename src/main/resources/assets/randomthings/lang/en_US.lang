@@ -98,6 +98,12 @@ text.miscellaneous.connectedTo=Connected to
 text.miscellaneous.invalidArguments=Invalid arguments
 text.miscellaneous.setBonus=Set-Bonus:
 
+text.miscellaneous.ignoreOreDict=Ignore ore dictionary
+text.miscellaneous.useOreDict=Use ore dictionary
+
+text.miscellaneous.ignoreMetadata=Ignore metadata
+text.miscellaneous.useMetadata=Use metadata
+
 text.dyed=Dyed %s
 text.color.black=Black
 text.color.red=Red

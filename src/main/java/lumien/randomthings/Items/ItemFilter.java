@@ -5,9 +5,11 @@ import java.util.List;
 import org.lwjgl.input.Keyboard;
 
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.Library.ClientUtil;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.Library.ItemUtils;
 import lumien.randomthings.Library.Texts;
+import lumien.randomthings.Library.Interfaces.IItemWithProperties;
 import lumien.randomthings.Library.Inventorys.InventoryItemFilter;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -23,12 +25,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class ItemFilter extends ItemBase
+public class ItemFilter extends ItemBase implements IItemWithProperties
 {
 	public enum FilterType
 	{
 		BLOCK, ITEM, ENTITY;
 	}
+
+	public static ItemStack standardItemFilter;
 
 	IIcon[] icons;
 
@@ -38,6 +42,11 @@ public class ItemFilter extends ItemBase
 		this.setHasSubtypes(true);
 
 		icons = new IIcon[3];
+
+		standardItemFilter = new ItemStack(this, 1, 1);
+		standardItemFilter.stackTagCompound = new NBTTagCompound();
+		standardItemFilter.stackTagCompound.setBoolean("oreDict", false);
+		standardItemFilter.stackTagCompound.setBoolean("metadata", true);
 	}
 
 	public static boolean matchesBlock(ItemStack filter, Block block, int metadata)
@@ -67,6 +76,13 @@ public class ItemFilter extends ItemBase
 			return false;
 		}
 
+		// Update Check
+		if (!filter.stackTagCompound.hasKey("metadata"))
+		{
+			filter.stackTagCompound.setBoolean("metadata", true);
+		}
+
+		boolean metadata = filter.stackTagCompound.getBoolean("metadata");
 		boolean oreDict = filter.stackTagCompound.getBoolean("oreDict");
 		int listType = filter.stackTagCompound.getInteger("listType");
 
@@ -81,7 +97,7 @@ public class ItemFilter extends ItemBase
 				{
 					return listType == 0 ? true : false;
 				}
-				if (is.isItemEqual(toCheck))
+				if (metadata ? is.isItemEqual(toCheck) : isItemEqualIgnoreMetadata(is, toCheck))
 				{
 					return listType == 0 ? true : false;
 				}
@@ -89,6 +105,11 @@ public class ItemFilter extends ItemBase
 		}
 
 		return listType == 0 ? false : true;
+	}
+
+	private static boolean isItemEqualIgnoreMetadata(ItemStack is1, ItemStack is2)
+	{
+		return is1.getItem() == is2.getItem();
 	}
 
 	@Override
@@ -115,6 +136,7 @@ public class ItemFilter extends ItemBase
 					case 1:
 						if (!(ItemFilter.getItemFilterInv(par2EntityPlayer, par1ItemStack) == null))
 						{
+							par3List.add(ClientUtil.translate("text.miscellaneous.metadata") + ": " + (par1ItemStack.stackTagCompound.getBoolean("metadata") ? "Yes" : "No"));
 							par3List.add(I18n.format("text.miscellaneous.oreDictionary", (Object[]) null) + ": " + (par1ItemStack.stackTagCompound.getBoolean("oreDict") ? "Yes" : "No"));
 							par3List.add(I18n.format("text.miscellaneous.listType", (Object[]) null) + ": " + (par1ItemStack.stackTagCompound.getInteger("listType") == 1 ? "Blacklist" : "Whitelist"));
 							IInventory inventoryFilter = new InventoryItemFilter(par2EntityPlayer, par1ItemStack);
@@ -183,19 +205,29 @@ public class ItemFilter extends ItemBase
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+	public ItemStack onItemRightClick(ItemStack itemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
-		if (par1ItemStack.stackTagCompound == null)
+		if (itemStack.stackTagCompound == null || !itemStack.stackTagCompound.hasKey("oreDict"))
 		{
-			par1ItemStack.stackTagCompound = new NBTTagCompound();
-			par1ItemStack.stackTagCompound.setBoolean("oreDict", false);
+			itemStack.stackTagCompound = new NBTTagCompound();
+			if (itemStack.getItemDamage() == 1)
+			{
+				itemStack.stackTagCompound.setBoolean("oreDict", false);
+				itemStack.stackTagCompound.setBoolean("metadata", true);
+			}
 		}
-
-		if (par1ItemStack.getItemDamage() == 1)
+		if (!par2World.isRemote)
 		{
-			par3EntityPlayer.openGui(RandomThings.instance, GuiIds.ITEM_FILTER, par2World, (int) par3EntityPlayer.posX, (int) par3EntityPlayer.posY, (int) par3EntityPlayer.posZ);
+			if (itemStack.getItemDamage() == 1)
+			{
+				if (!itemStack.stackTagCompound.hasKey("metadata"))
+				{
+					itemStack.stackTagCompound.setBoolean("metadata", true);
+				}
+				par3EntityPlayer.openGui(RandomThings.instance, GuiIds.ITEM_FILTER, par2World, (int) par3EntityPlayer.posX, (int) par3EntityPlayer.posY, (int) par3EntityPlayer.posZ);
+			}
 		}
-		return par1ItemStack;
+		return itemStack;
 	}
 
 	@Override
@@ -286,12 +318,21 @@ public class ItemFilter extends ItemBase
 		blockFilter.stackTagCompound = new NBTTagCompound();
 		list.add(blockFilter);
 
-		ItemStack itemFilter = new ItemStack(item, 1, 1);// Item Filter
-		itemFilter.stackTagCompound = new NBTTagCompound();
-		list.add(itemFilter);
+		list.add(standardItemFilter);
 
 		ItemStack entityFilter = new ItemStack(item, 1, 2); // Entity Filter
 		entityFilter.stackTagCompound = new NBTTagCompound();
 		list.add(entityFilter);
+	}
+
+	@Override
+	public boolean isValidAttribute(ItemStack is, String attributeName, int attributeType)
+	{
+		switch (is.getItemDamage())
+		{
+			case 1:
+				return (attributeName.equals("oreDict") || attributeName.equals("metadata")) && attributeType == 0;
+		}
+		return false;
 	}
 }

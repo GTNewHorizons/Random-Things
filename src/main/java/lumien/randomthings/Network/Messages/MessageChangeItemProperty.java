@@ -78,7 +78,7 @@ public class MessageChangeItemProperty implements IMessage, IMessageHandler<Mess
 			if (is != null && is.getItem() instanceof IItemWithProperties && is.getItem() != null && Item.getItemById(message.itemID) == is.getItem() && message.itemDamage == is.getItemDamage())
 			{
 				IItemWithProperties properties = (IItemWithProperties) is.getItem();
-				if (properties.isValidAttribute(message.propertyName, message.propertyType))
+				if (properties.isValidAttribute(is, message.propertyName, message.propertyType))
 				{
 					if (is.stackTagCompound == null)
 					{
@@ -140,7 +140,7 @@ public class MessageChangeItemProperty implements IMessage, IMessageHandler<Mess
 		buf.writeInt(itemID);
 		buf.writeInt(itemDamage);
 		buf.writeInt(slot);
-		
+
 		ByteBufUtils.writeUTF8String(buf, propertyName);
 
 		switch (propertyType)

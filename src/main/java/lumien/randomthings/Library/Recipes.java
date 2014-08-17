@@ -12,6 +12,7 @@ import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Configuration.ConfigBlocks;
 import lumien.randomthings.Configuration.ConfigItems;
 import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipeHandler;
+import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Items.ModItems;
 
 public class Recipes
@@ -148,7 +149,7 @@ public class Recipes
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.biomePainter),"xtx","xwx","xox",'t',iTransformationCore,'w',new ItemStack(Blocks.wool,1,OreDictionary.WILDCARD_VALUE),'o',"stickObsidian"));
 		
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 0), "xrx", "rpr", "xrx", 'r', "dyeRed", 'p', iPaper));
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 1), "xrx", "rpr", "xrx", 'r', "dyeYellow", 'p', iPaper));
+		GameRegistry.addRecipe(new ShapedOreRecipe(ItemFilter.standardItemFilter, "xrx", "rpr", "xrx", 'r', "dyeYellow", 'p', iPaper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 2), "xrx", "rpr", "xrx", 'r', "dyeBlue", 'p', iPaper));
 		
 		addImbuingRecipes();

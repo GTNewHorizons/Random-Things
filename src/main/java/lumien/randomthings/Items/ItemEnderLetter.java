@@ -150,7 +150,7 @@ public class ItemEnderLetter extends ItemBase implements IItemWithProperties
 	}
 
 	@Override
-	public boolean isValidAttribute(String attributeName, int attributeType)
+	public boolean isValidAttribute(ItemStack is,String attributeName, int attributeType)
 	{
 		return attributeName.equals("receiver") && attributeType == 1;
 	}
