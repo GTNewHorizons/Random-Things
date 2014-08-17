@@ -70,8 +70,11 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.WorldProvider;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.client.event.EntityViewRenderEvent.FogColors;
 import net.minecraftforge.client.event.EntityViewRenderEvent.FogDensity;
 import net.minecraftforge.client.event.EntityViewRenderEvent.RenderFogEvent;
@@ -212,11 +215,21 @@ public class RTEventHandler
 	{
 		if (event.toDim == Settings.SPECTRE_DIMENSON_ID)
 		{
+			double movementFactor = 1;
 			EntityPlayer player = event.player;
+			WorldServer world = MinecraftServer.getServer().worldServerForDimension(event.fromDim);
+			if (world != null)
+			{
+				WorldProvider provider = world.provider;
+				if (provider != null)
+				{
+					movementFactor = provider.getMovementFactor();
+				}
+			}
 			player.getEntityData().setInteger("oldDimension", event.fromDim);
-			player.getEntityData().setDouble("oldPosX", player.posX);
+			player.getEntityData().setDouble("oldPosX", player.posX / movementFactor);
 			player.getEntityData().setDouble("oldPosY", player.posY);
-			player.getEntityData().setDouble("oldPosZ", player.posZ);
+			player.getEntityData().setDouble("oldPosZ", player.posZ / movementFactor);
 		}
 	}
 

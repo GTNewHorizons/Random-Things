@@ -10,7 +10,6 @@ public class TeleporterSpectre extends Teleporter
 	public TeleporterSpectre(WorldServer par1WorldServer)
 	{
 		super(par1WorldServer);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
