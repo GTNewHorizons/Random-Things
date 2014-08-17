@@ -1,6 +1,7 @@
 tile.playerinterface.name=Player Interface
 tile.creativePlayerInterface.name=Creative Player Interface
 tile.fluidDisplay.name=Fluid Display
+tile.advancedFluidDisplay.name=Advanced Fluid Display
 tile.fertilizedDirt.name=Fertilized Dirt
 tile.itemCollector.name=Item Collector
 tile.advancedItemCollector.name=Advanced Item Collector

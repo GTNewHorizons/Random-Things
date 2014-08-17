@@ -9,6 +9,7 @@ public class ModTileEntities
 		GameRegistry.registerTileEntity(TileEntityPlayerInterface.class, "playerInterface");
 		GameRegistry.registerTileEntity(TileEntityCreativePlayerInterface.class, "creativePlayerInterface");
 		GameRegistry.registerTileEntity(TileEntityFluidDisplay.class, "fluidDisplay");
+		GameRegistry.registerTileEntity(TileEntityAdvancedFluidDisplay.class, "advancedFluidDisplay");
 		GameRegistry.registerTileEntity(TileEntityOnlineDetector.class, "onlineDetector");
 		GameRegistry.registerTileEntity(TileEntityNotificationInterface.class, "notificationInterface");
 		GameRegistry.registerTileEntity(TileEntityWirelessLever.class, "wirelessLever");

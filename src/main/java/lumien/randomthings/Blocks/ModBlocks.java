@@ -20,6 +20,7 @@ public class ModBlocks
 	public static BlockCarpentryBench carpentryBench;
 	public static BlockDyeingMachine dyeingMachine;
 	public static BlockImbuingStation imbuingStation;
+	public static BlockAdvancedFluidDisplay advancedFluidDisplay;
 
 	public static void init()
 	{
@@ -31,7 +32,10 @@ public class ModBlocks
 			creativePlayerInterface = new BlockCreativePlayerInterface();
 		}
 		if (ConfigBlocks.fluidDisplay)
+		{
 			fluidDisplay = new BlockFluidDisplay();
+			advancedFluidDisplay = new BlockAdvancedFluidDisplay();
+		}
 		if (ConfigBlocks.fertilizedDirt)
 			fertilizedDirt = new BlockFertilizedDirt(false);
 		if (ConfigBlocks.fertilizedDirtTilled)
