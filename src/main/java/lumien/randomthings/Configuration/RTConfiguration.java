@@ -25,6 +25,8 @@ public class RTConfiguration
 	public static Property fertilizedDirtGrowthModifier;
 	public static Property imbueDuration;
 	public static Property biomeChargeTime;
+	public static Property decaySpeed;
+	public static Property decayFuzz;
 
 	// PotionIds
 	public static Property piImbuePoison;
@@ -49,7 +51,9 @@ public class RTConfiguration
 		fertilizedDirtGrowthModifier = config.get("Settings", "FertilizedDirtGrowthModifier", 3, "How often should Fertilize Dirt tick the plant above it when it's ticked itself?");
 		imbueDuration = config.get("Settings", "ImbueDuration", 20 * 60 * 5, "The duration of imbues (in ticks)");
 		biomeChargeTime = config.get("Settings", "BiomeChargeTime", 20, "The amount of ticks the biome capsule needs to collect 1 charge");
-
+		decaySpeed = config.get("Settings", "LeaveDecaySpeed", 7, "The amount of ticks every leave needs to decay (Lower is faster)");
+		decayFuzz = config.get("Settings", "LeaveDecayFuzz", 5,"A random number from 0-thisconfigoption will be added to the decay speed for every Leave. Setting this to 0 will decay leaves rather linear while higher numbers will let the whole thing look more natural");
+		
 		// PotionIds
 		ConfigCategory c = config.getCategory("potionids");
 		c.setComment("Setting these to -1 will auto resolve them. If RandomThings finds a potion at the position of the specified id it will try to find a free one. It will also dynamically increase the size of the potion array if necessary.");
@@ -123,6 +127,8 @@ public class RTConfiguration
 		Settings.FERTILIZED_DIRT_GROWTH = fertilizedDirtGrowthModifier.getInt();
 		Settings.IMBUE_DURATION = imbueDuration.getInt();
 		Settings.BIOME_CHARGE_TIME = biomeChargeTime.getInt();
+		Settings.DECAY_SPEED = decaySpeed.getInt();
+		Settings.DECAY_FUZZ = decayFuzz.getInt();
 
 		MagneticForceHandler.TELEPORT_LENGTH = RTConfiguration.config.get("Settings", "MagneticForceTeleportLength", 200, "In ticks (20=1 Second)").getInt();
 

@@ -23,4 +23,8 @@ public class Settings
 	public static int BIOME_CHARGE_TIME = 20;
 	
 	public static double DEMORPHER_RANGE = 10;
+	
+	public static int DECAY_SPEED = 7;
+	
+	public static int DECAY_FUZZ = 5;
 }
