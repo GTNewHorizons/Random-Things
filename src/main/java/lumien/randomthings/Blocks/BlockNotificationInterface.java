@@ -13,6 +13,7 @@ public class BlockNotificationInterface extends BlockContainerBase
 		super("notificationInterface",Material.rock);
 		
 		this.setCreativeTab(RandomThings.creativeTab);
+		this.setHardness(0.7f);
 	}
 
 	@Override

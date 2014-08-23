@@ -24,11 +24,11 @@ public class BlockDyeingMachine extends BlockContainerBase
 
 	public BlockDyeingMachine()
 	{
-		super("dyeingMachine", Material.rock);
+		super("dyeingMachine", Material.wood);
 		
 		this.setBlockTextureName("RandomThings:dyeingMachine/dyeingMachine");
 		this.setStepSound(soundTypeWood);
-		this.setHardness(2.6F);
+		this.setHardness(0.7F);
 	}
 
 	@Override
