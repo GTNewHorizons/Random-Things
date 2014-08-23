@@ -106,7 +106,7 @@ public class RTClassTransformer implements IClassTransformer
 		classReader.accept(classNode, 0);
 		coreLogger.log(Level.INFO, "Found World Class: " + classNode.name);
 
-		String sunBrightnessName = MCPNames.method("func_72971_b");
+		String sunBrightnessName = "getSunBrightnessBody";
 		String indirectlyPoweredName = MCPNames.method("func_72864_z");
 
 		int removeIndex = 0;
