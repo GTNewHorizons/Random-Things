@@ -16,6 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayer;
 
 public class ItemEnderLetter extends ItemBase implements IItemWithProperties
 {
@@ -96,7 +97,7 @@ public class ItemEnderLetter extends ItemBase implements IItemWithProperties
 			par1ItemStack.stackTagCompound = new NBTTagCompound();
 		}
 
-		if (playerEntity.isSneaking() && par1ItemStack.getItemDamage() == 0)
+		if (playerEntity.isSneaking() && par1ItemStack.getItemDamage() == 0 && !(playerEntity instanceof FakePlayer))
 		{
 			if (!worldObj.isRemote)
 			{
