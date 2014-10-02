@@ -1,16 +1,17 @@
 tile.playerinterface.name=玩家接口
 tile.creativePlayerInterface.name=创造模式玩家接口
 tile.fluidDisplay.name=液体伪装方块
+tile.advancedFluidDisplay.name=高级液体伪装方块
 tile.fertilizedDirt.name=沃土
 tile.itemCollector.name=物品收集器
 tile.advancedItemCollector.name=高级物品收集器
-tile.onlineDetector.name=在线探测器
-tile.fluidRouter.name=液体路由器[WIP]
-tile.moonSensor.name=月光传感器
+tile.onlineDetector.name=在线侦测器
+tile.fluidRouter.name=液体路由器[开发中]
+tile.moonSensor.name=月相传感器
 tile.notificationInterface.name=通知接口
 tile.wirelessLever.name=无线拉杆
 tile.soundBox.name=音箱
-tile.carpentryBench.name=[WIP] 木匠工作台
+tile.carpentryBench.name=木匠工作台[开发中]
 tile.lapisLamp.name=青金石灯
 tile.dyeingMachine.name=混色机器
 tile.spiritRod.name=灵魂手柄
@@ -37,12 +38,13 @@ tile.spectreBlock.white.name=白色幽灵方块
 itemGroup.Random Things=随意作品
 item.filterBlock.name=方块过滤器
 item.filterItem.name=物品过滤器
-item.filterEntity.name=生物过滤器
+item.filterEntity.name=实体过滤器
+item.filterPosition.name=方位过滤器
 item.biomeSolution.name=解决方案
 item.biomeCapsule.name=生物群系胶囊
 item.biomePainter.name=生物群系画刷
 item.whitestoneUncharged.name=白石 [未充能]
-item.whitestoneCharged.name=白石 [已充能]
+item.whitestoneCharged.name=白石 [充能]
 item.kojaku.name=Kojaku
 item.voidStone.name=虚空之石
 item.dropFilter.name=掉落物过滤器
@@ -67,7 +69,6 @@ item.enderFragment.name=末影碎片
 item.ectoplasm.name=灵气
 item.spectreIron.name=灵魂之铁
 item.transformationCore.name=转换核心
-item.demorpher.name=反变身器
 item.error.name=无效物品
 
 item.imbue.poison.name=毒性激素药水
@@ -77,12 +78,12 @@ item.imbue.wither.name=凋零激素药水
 item.imbue.weakness.name=虚弱激素药水
 item.imbue.spectre.name=灵魂激素药水
 
-imbue.poison=毒性能力感染
-imbue.experience=经验能力感染
-imbue.fire=火焰能力感染
-imbue.wither=凋零能力感染
-imbue.weakness=虚弱能力感染
-imbue.spectre=灵魂能力感染
+imbue.poison=毒性感染
+imbue.experience=经验感染
+imbue.fire=火焰感染
+imbue.wither=凋零感染
+imbue.weakness=虚弱感染
+imbue.spectre=灵魂感染
 
 entity.spirit.name=灵魂
 
@@ -97,6 +98,12 @@ text.miscellaneous.entityName=实体名称
 text.miscellaneous.connectedTo=连接到
 text.miscellaneous.invalidArguments=无效的数据
 text.miscellaneous.setBonus=设定奖励:
+
+text.miscellaneous.ignoreOreDict=无视矿物辞典
+text.miscellaneous.useOreDict=使用矿物辞典
+
+text.miscellaneous.ignoreMetadata=无视MetaData
+text.miscellaneous.useMetadata=使用MetaData
 
 text.dyed=混合成 %s
 text.color.black=黑色
