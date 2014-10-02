@@ -10,9 +10,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import lumien.randomthings.Client.Particle.ParticleWhitestone;
+import lumien.randomthings.Network.IRTMessage;
 
 
-public class MessageWhitestone implements IMessage,IMessageHandler<MessageWhitestone,IMessage>
+public class MessageWhitestone implements IRTMessage
 {
 	int playerID;
 
@@ -40,9 +41,9 @@ public class MessageWhitestone implements IMessage,IMessageHandler<MessageWhites
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IMessage onMessage(MessageWhitestone message, MessageContext ctx)
+	public void onMessage(MessageContext ctx)
 	{
-		Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(message.playerID);
+		Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(playerID);
 		if (entity != null && entity instanceof EntityPlayer)
 		{
 			for (int i = 0; i < 10; i++)
@@ -50,7 +51,6 @@ public class MessageWhitestone implements IMessage,IMessageHandler<MessageWhites
 				Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleWhitestone((EntityPlayer) entity, 0, 0, 0, Math.random() * 2 - 1, 0, Math.random() * 2 - 1));
 			}
 		}
-		return null;
 	}
 
 }

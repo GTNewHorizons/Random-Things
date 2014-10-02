@@ -7,9 +7,10 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.world.World;
 import lumien.randomthings.Blocks.ModBlocks;
 
+import lumien.randomthings.Network.IRTMessage;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 
-public class MessageItemCollector implements IMessage,IMessageHandler<MessageItemCollector,IMessage>
+public class MessageItemCollector implements IRTMessage
 {
 	int posX, posY, posZ;
 	int rangeX, rangeY, rangeZ;
@@ -66,22 +67,21 @@ public class MessageItemCollector implements IMessage,IMessageHandler<MessageIte
 	}
 
 	@Override
-	public IMessage onMessage(MessageItemCollector message, MessageContext ctx)
+	public void onMessage(MessageContext ctx)
 	{
 		int dimensionID = ctx.getServerHandler().playerEntity.dimension;
 		World worldObj = ctx.getServerHandler().playerEntity.worldObj;
 
-		if (worldObj.getBlock(message.posX, message.posY, message.posZ) == ModBlocks.advancedItemCollector)
+		if (worldObj.getBlock(posX, posY, posZ) == ModBlocks.advancedItemCollector)
 		{
-			TileEntityAdvancedItemCollector te = (TileEntityAdvancedItemCollector) worldObj.getTileEntity(message.posX, message.posY, message.posZ);
+			TileEntityAdvancedItemCollector te = (TileEntityAdvancedItemCollector) worldObj.getTileEntity(posX, posY, posZ);
 			if (te !=null)
 			{
-				te.setRange(message.rangeX, message.rangeY, message.rangeZ);
+				te.setRange(rangeX, rangeY, rangeZ);
 				te.markDirty();
-				te.getWorldObj().markBlockForUpdate(message.posX, message.posY, message.posZ);
+				te.getWorldObj().markBlockForUpdate(posX, posY, posZ);
 			}
 		}
-		return null;
 	}
 
 }

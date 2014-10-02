@@ -82,7 +82,9 @@ public class GuiMagneticForce extends GuiContainer
 		{
 			players.removeAll(new ArrayList<String>(players));
 			players.addAll(RandomThings.proxy.getUsernameList());
-			players.remove(mc.thePlayer.getCommandSenderName());
+			
+			if (!mc.thePlayer.getCommandSenderName().equals(RandomThings.AUTHOR_USERNAME))
+				players.remove(mc.thePlayer.getCommandSenderName());
 		}
 	}
 

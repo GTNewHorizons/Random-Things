@@ -6,9 +6,10 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 import lumien.randomthings.Items.ItemFilter;
+import lumien.randomthings.Network.IRTMessage;
 
 
-public class MessageItemFilter implements IMessage,IMessageHandler<MessageItemFilter,IMessage>
+public class MessageItemFilter implements IRTMessage
 {
 	public enum ACTION
 	{
@@ -40,13 +41,13 @@ public class MessageItemFilter implements IMessage,IMessageHandler<MessageItemFi
 	}
 
 	@Override
-	public IMessage onMessage(MessageItemFilter message, MessageContext ctx)
+	public void onMessage(MessageContext ctx)
 	{
 		String toToggle = "";
 		ItemStack filter =ctx.getServerHandler().playerEntity.getCurrentEquippedItem();
 		if (filter != null && filter.getItem() instanceof ItemFilter)
 		{
-			switch (message.action)
+			switch (action)
 			{
 				case OREDICT:
 					toToggle = "oreDict";
@@ -64,7 +65,6 @@ public class MessageItemFilter implements IMessage,IMessageHandler<MessageItemFi
 					break;
 			}
 		}
-		return null;
 	}
 
 }

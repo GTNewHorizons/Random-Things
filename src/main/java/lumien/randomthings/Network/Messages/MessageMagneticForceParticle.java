@@ -1,6 +1,7 @@
 package lumien.randomthings.Network.Messages;
 
 import lumien.randomthings.Client.Particle.ParticleMagneticForce;
+import lumien.randomthings.Network.IRTMessage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,7 +12,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class MessageMagneticForceParticle implements IMessage, IMessageHandler<MessageMagneticForceParticle, IMessage>
+public class MessageMagneticForceParticle implements IRTMessage
 {
 	int entityID;
 	int dimensionID;
@@ -32,15 +33,14 @@ public class MessageMagneticForceParticle implements IMessage, IMessageHandler<M
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IMessage onMessage(MessageMagneticForceParticle message, MessageContext ctx)
+	public void onMessage(MessageContext ctx)
 	{
 		EntityPlayer thePlayer = Minecraft.getMinecraft().thePlayer;
-		if (thePlayer != null && thePlayer.worldObj != null && thePlayer.worldObj.provider.dimensionId == message.dimensionID)
+		if (thePlayer != null && thePlayer.worldObj != null && thePlayer.worldObj.provider.dimensionId == dimensionID)
 		{
-			Entity e = thePlayer.worldObj.getEntityByID(message.entityID);
+			Entity e = thePlayer.worldObj.getEntityByID(entityID);
 			if (e != null && e instanceof EntityPlayer)
 			{
-				float f = message.f;
 				double mX = 1 * Math.cos(f);
 				double mY = 1 * Math.sin(f);
 				Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleMagneticForce((EntityPlayer) e, mX, mY));
@@ -58,7 +58,6 @@ public class MessageMagneticForceParticle implements IMessage, IMessageHandler<M
 				Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleMagneticForce((EntityPlayer) e, mX, mY));
 			}
 		}
-		return null;
 	}
 
 	@Override

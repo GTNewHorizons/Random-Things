@@ -9,9 +9,10 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
+import lumien.randomthings.Network.IRTMessage;
 import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
 
-public class MessageOnlineDetector implements IMessage,IMessageHandler<MessageOnlineDetector,IMessage>
+public class MessageOnlineDetector implements IRTMessage
 {
 	String username;
 	int posX, posY, posZ, dimensionID;
@@ -55,15 +56,14 @@ public class MessageOnlineDetector implements IMessage,IMessageHandler<MessageOn
 	}
 
 	@Override
-	public IMessage onMessage(MessageOnlineDetector message, MessageContext ctx)
+	public void onMessage(MessageContext ctx)
 	{
-		World worldObj = DimensionManager.getWorld(message.dimensionID);
-		if (worldObj.getTileEntity(message.posX, message.posY, message.posZ) instanceof TileEntityOnlineDetector)
+		World worldObj = DimensionManager.getWorld(dimensionID);
+		if (worldObj.getTileEntity(posX, posY, posZ) instanceof TileEntityOnlineDetector)
 		{
-			TileEntityOnlineDetector od = (TileEntityOnlineDetector) worldObj.getTileEntity(message.posX, message.posY, message.posZ);
-			od.setUsername(message.username);
+			TileEntityOnlineDetector od = (TileEntityOnlineDetector) worldObj.getTileEntity(posX, posY, posZ);
+			od.setUsername(username);
 		}
-		return null;
 	}
 
 }

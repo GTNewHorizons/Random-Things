@@ -1,6 +1,7 @@
 package lumien.randomthings.Network.Messages;
 
 import lumien.randomthings.Client.GUI.GuiMagneticForce;
+import lumien.randomthings.Network.IRTMessage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import io.netty.buffer.ByteBuf;
@@ -10,7 +11,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class MessageAnswerTeleport implements IMessage, IMessageHandler<MessageAnswerTeleport, IMessage>
+public class MessageAnswerTeleport implements IRTMessage
 {
 	public enum STATUS
 	{
@@ -21,10 +22,9 @@ public class MessageAnswerTeleport implements IMessage, IMessageHandler<MessageA
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IMessage onMessage(MessageAnswerTeleport message, MessageContext ctx)
+	public void onMessage(MessageContext ctx)
 	{
 		Minecraft mc = Minecraft.getMinecraft();
-		STATUS status = message.status;
 		GuiScreen currentScreen = Minecraft.getMinecraft().currentScreen;
 
 		if (mc.thePlayer != null && currentScreen != null && currentScreen instanceof GuiMagneticForce)
@@ -38,8 +38,6 @@ public class MessageAnswerTeleport implements IMessage, IMessageHandler<MessageA
 				((GuiMagneticForce) currentScreen).setStatus(status);
 			}
 		}
-
-		return null;
 	}
 
 	@Override

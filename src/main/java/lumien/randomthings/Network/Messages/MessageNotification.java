@@ -8,8 +8,9 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Handler.Notifications.Notification;
+import lumien.randomthings.Network.IRTMessage;
 
-public class MessageNotification implements IMessage, IMessageHandler<MessageNotification, IMessage>
+public class MessageNotification implements IRTMessage
 {
 	String title;
 	String description;
@@ -44,10 +45,9 @@ public class MessageNotification implements IMessage, IMessageHandler<MessageNot
 	}
 
 	@Override
-	public IMessage onMessage(MessageNotification message, MessageContext ctx)
+	public void onMessage(MessageContext ctx)
 	{
-		RandomThings.instance.notificationHandler.addNotification(new Notification(message.title, message.description, message.icon));
-		return null;
+		RandomThings.instance.notificationHandler.addNotification(new Notification(title, description, icon));
 	}
 
 }

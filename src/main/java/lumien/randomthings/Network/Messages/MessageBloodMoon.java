@@ -1,22 +1,21 @@
 package lumien.randomthings.Network.Messages;
 
 import lumien.randomthings.Handler.BloodMoonHandler;
+import lumien.randomthings.Network.IRTMessage;
 import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageBloodMoon implements IMessage, IMessageHandler<MessageBloodMoon, IMessage>
+public class MessageBloodMoon implements IRTMessage
 {
 	int dimensionID;
 	boolean bloodmoon;
 
 	@Override
-	public IMessage onMessage(MessageBloodMoon message, MessageContext ctx)
+	public void onMessage(MessageContext ctx)
 	{
-		BloodMoonHandler.INSTANCE.setBloodMoon(message.dimensionID,message.bloodmoon,true);
-		
-		return null;
+		BloodMoonHandler.INSTANCE.setBloodMoon(dimensionID,bloodmoon,true);
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package lumien.randomthings.Network.Messages;
 import com.google.common.base.Preconditions;
 
 import lumien.randomthings.Library.Interfaces.IItemWithProperties;
+import lumien.randomthings.Network.IRTMessage;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,7 +15,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageChangeItemProperty implements IMessage, IMessageHandler<MessageChangeItemProperty, IMessage>
+public class MessageChangeItemProperty implements IRTMessage
 {
 	String propertyName;
 
@@ -67,43 +68,41 @@ public class MessageChangeItemProperty implements IMessage, IMessageHandler<Mess
 	}
 
 	@Override
-	public IMessage onMessage(MessageChangeItemProperty message, MessageContext ctx)
+	public void onMessage(MessageContext ctx)
 	{
 		NetHandlerPlayServer netHandler = (NetHandlerPlayServer) ctx.netHandler;
 		EntityPlayerMP player = netHandler.playerEntity;
 
-		if (message.slot >= 0 && message.slot < player.inventory.getSizeInventory() && message.propertyName != null)
+		if (slot >= 0 && slot < player.inventory.getSizeInventory() && propertyName != null)
 		{
-			ItemStack is = player.inventory.getStackInSlot(message.slot);
-			if (is != null && is.getItem() instanceof IItemWithProperties && is.getItem() != null && Item.getItemById(message.itemID) == is.getItem() && message.itemDamage == is.getItemDamage())
+			ItemStack is = player.inventory.getStackInSlot(slot);
+			if (is != null && is.getItem() instanceof IItemWithProperties && is.getItem() != null && Item.getItemById(itemID) == is.getItem() && itemDamage == is.getItemDamage())
 			{
 				IItemWithProperties properties = (IItemWithProperties) is.getItem();
-				if (properties.isValidAttribute(is, message.propertyName, message.propertyType))
+				if (properties.isValidAttribute(is, propertyName, propertyType))
 				{
 					if (is.stackTagCompound == null)
 					{
 						is.stackTagCompound = new NBTTagCompound();
 					}
-					switch (message.propertyType)
+					switch (propertyType)
 					{
 						case 0: // Boolean
-							is.stackTagCompound.setBoolean(message.propertyName, message.newBoolean);
+							is.stackTagCompound.setBoolean(propertyName, newBoolean);
 							break;
 						case 1: // String
-							is.stackTagCompound.setString(message.propertyName, message.newString);
+							is.stackTagCompound.setString(propertyName, newString);
 							break;
 						case 2: // Int
-							is.stackTagCompound.setInteger(message.propertyName, message.newInt);
+							is.stackTagCompound.setInteger(propertyName, newInt);
 							break;
 						case 3: // Long
-							is.stackTagCompound.setLong(message.propertyName, message.newLong);
+							is.stackTagCompound.setLong(propertyName, newLong);
 							break;
 					}
 				}
 			}
 		}
-
-		return null;
 	}
 
 	@Override

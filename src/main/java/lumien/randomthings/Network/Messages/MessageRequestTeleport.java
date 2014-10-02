@@ -6,6 +6,7 @@ import lumien.randomthings.Configuration.ConfigItems;
 import lumien.randomthings.Handler.MagneticForceHandler;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.WorldUtils;
+import lumien.randomthings.Network.IRTMessage;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageAnswerTeleport.STATUS;
 import io.netty.buffer.ByteBuf;
@@ -14,15 +15,14 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageRequestTeleport implements IMessage, IMessageHandler<MessageRequestTeleport, IMessage>
+public class MessageRequestTeleport implements IRTMessage
 {
 	String username;
 
 	@Override
-	public IMessage onMessage(MessageRequestTeleport message, MessageContext ctx)
+	public void onMessage(MessageContext ctx)
 	{
 		MessageAnswerTeleport answer = new MessageAnswerTeleport();
-		String username = message.username;
 		EntityPlayerMP playerEntity = ctx.getServerHandler().playerEntity;
 
 		if (!ConfigItems.magneticForce)
@@ -63,7 +63,6 @@ public class MessageRequestTeleport implements IMessage, IMessageHandler<Message
 
 			MagneticForceHandler.INSTANCE.addEvent(playerEntity.getCommandSenderName(), username);
 		}
-		return null;
 	}
 
 	@Override
