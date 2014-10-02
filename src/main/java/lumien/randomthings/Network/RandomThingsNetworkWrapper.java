@@ -38,7 +38,6 @@ public class RandomThingsNetworkWrapper extends SimpleNetworkWrapper
 		channels = NetworkRegistry.INSTANCE.newChannel(Reference.MOD_ID.toLowerCase(), packetCodec);
 		mh = new RTMessageHandler();
 
-
 		FMLEmbeddedChannel channel = channels.get(Side.SERVER);
 		String type = channel.findChannelHandlerNameForType(SimpleIndexedCodec.class);
 		addServerHandlerAfter(channel, type, mh, IRTMessage.class);
