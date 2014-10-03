@@ -30,15 +30,11 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.ClientTickHandler;
 import lumien.randomthings.Client.Renderer.RenderHealingOrb;
 import lumien.randomthings.Client.Renderer.RenderItemCollector;
-import lumien.randomthings.Client.Renderer.RenderMagicCircle;
-import lumien.randomthings.Client.Renderer.RenderPfeil;
 import lumien.randomthings.Client.Renderer.RenderSpirit;
 import lumien.randomthings.Client.Renderer.RenderWhitestone;
 import lumien.randomthings.Client.Renderer.RenderWirelessLever;
 import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.EntityHealingOrb;
-import lumien.randomthings.Entity.EntityMagicCircle;
-import lumien.randomthings.Entity.EntityPfeil;
 import lumien.randomthings.Entity.EntitySpirit;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.OverrideUtils;
@@ -67,10 +63,8 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityItemCollector.class, renderer);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdvancedItemCollector.class, renderer);
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityPfeil.class, new RenderPfeil());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpirit.class, new RenderSpirit(new ModelSlime(16), new ModelSlime(0), 0.25f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHealingOrb.class, new RenderHealingOrb());
-		RenderingRegistry.registerEntityRenderingHandler(EntityMagicCircle.class, new RenderMagicCircle());
 		
 		RenderingRegistry.registerBlockHandler(new RenderWirelessLever());
 

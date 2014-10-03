@@ -9,7 +9,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Entity.EntityMagicCircle;
 import lumien.randomthings.Library.PotionEffects;
 import lumien.randomthings.Library.PotionIds;
 import lumien.randomthings.Potions.ModPotions;

@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Entity.EntityMagicCircle;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageMagneticForceParticle;
 
