@@ -34,7 +34,7 @@ public class RTClassTransformer implements IClassTransformer
 
 	@Override
 	public byte[] transform(String obfName, String transformedName, byte[] basicClass)
-	{	
+	{
 		if (transformedName.equals("net.minecraft.block.BlockLeavesBase") && VanillaChanges.FASTER_LEAVEDECAY) // ClassCircularityError
 		{
 			return patchLeaveClass(basicClass);
@@ -54,18 +54,18 @@ public class RTClassTransformer implements IClassTransformer
 
 		return basicClass;
 	}
-	
+
 	private byte[] patchItemClass(byte[] basicClass)
 	{
 		ClassNode classNode = new ClassNode();
 		ClassReader classReader = new ClassReader(basicClass);
 		classReader.accept(classNode, 0);
-		
+
 		coreLogger.log(Level.INFO, "Found Item Class: " + classNode.name);
-		
+
 		String getColorFromItemStackName = MCPNames.method("func_82790_a");
-		MethodNode getColorFromItemStack=null;
-		
+		MethodNode getColorFromItemStack = null;
+
 		for (MethodNode mn : classNode.methods)
 		{
 			if (mn.name.equals(getColorFromItemStackName))
@@ -73,13 +73,13 @@ public class RTClassTransformer implements IClassTransformer
 				getColorFromItemStack = mn;
 			}
 		}
-		
-		if (getColorFromItemStack!=null)
+
+		if (getColorFromItemStack != null)
 		{
 			LabelNode l0 = new LabelNode(new Label());
 			LabelNode l1 = new LabelNode(new Label());
 			LabelNode l2 = new LabelNode(new Label());
-			
+
 			getColorFromItemStack.instructions.insert(new InsnNode(POP));
 			getColorFromItemStack.instructions.insert(l2);
 			getColorFromItemStack.instructions.insert(new InsnNode(IRETURN));
@@ -87,18 +87,18 @@ public class RTClassTransformer implements IClassTransformer
 			getColorFromItemStack.instructions.insert(new JumpInsnNode(IF_ICMPEQ, l2));
 			getColorFromItemStack.instructions.insert(new IntInsnNode(BIPUSH, 16777215));
 			getColorFromItemStack.instructions.insert(new InsnNode(DUP));
-			getColorFromItemStack.instructions.insert(new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "getColorFromItemStack",  "(Lnet/minecraft/item/ItemStack;I)I"));
+			getColorFromItemStack.instructions.insert(new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "getColorFromItemStack", "(Lnet/minecraft/item/ItemStack;I)I", false));
 			getColorFromItemStack.instructions.insert(new VarInsnNode(ILOAD, 2));
 			getColorFromItemStack.instructions.insert(new VarInsnNode(ALOAD, 1));
 			getColorFromItemStack.instructions.insert(l0);
 		}
-		
+
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(writer);
 
 		return writer.toByteArray();
 	}
-	
+
 	private byte[] patchWorldClass(byte[] basicClass)
 	{
 		ClassNode classNode = new ClassNode();
@@ -154,17 +154,17 @@ public class RTClassTransformer implements IClassTransformer
 			LabelNode l1 = new LabelNode(new Label());
 			LabelNode l2 = new LabelNode(new Label());
 			String world = "net/minecraft/world/World";
-			
+
 			isBlockIndirectlyGettingPowered.instructions.insert(l2);
 			isBlockIndirectlyGettingPowered.instructions.insert(new InsnNode(IRETURN));
 			isBlockIndirectlyGettingPowered.instructions.insert(new InsnNode(ICONST_1));
 			isBlockIndirectlyGettingPowered.instructions.insert(l1);
 			isBlockIndirectlyGettingPowered.instructions.insert(new JumpInsnNode(IFEQ, l2));
-			isBlockIndirectlyGettingPowered.instructions.insert(new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "isBlockIndirectlyGettingPowered", "(L"+world+";III)Z"));
-			isBlockIndirectlyGettingPowered.instructions.insert(new VarInsnNode(ILOAD,3));
-			isBlockIndirectlyGettingPowered.instructions.insert(new VarInsnNode(ILOAD,2));
-			isBlockIndirectlyGettingPowered.instructions.insert(new VarInsnNode(ILOAD,1));
-			isBlockIndirectlyGettingPowered.instructions.insert(new VarInsnNode(ALOAD,0));
+			isBlockIndirectlyGettingPowered.instructions.insert(new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "isBlockIndirectlyGettingPowered", "(L" + world + ";III)Z", false));
+			isBlockIndirectlyGettingPowered.instructions.insert(new VarInsnNode(ILOAD, 3));
+			isBlockIndirectlyGettingPowered.instructions.insert(new VarInsnNode(ILOAD, 2));
+			isBlockIndirectlyGettingPowered.instructions.insert(new VarInsnNode(ILOAD, 1));
+			isBlockIndirectlyGettingPowered.instructions.insert(new VarInsnNode(ALOAD, 0));
 			isBlockIndirectlyGettingPowered.instructions.insert(l0);
 		}
 
@@ -258,7 +258,7 @@ public class RTClassTransformer implements IClassTransformer
 		mv.visitVarInsn(ILOAD, 3);
 		mv.visitVarInsn(ILOAD, 4);
 		mv.visitVarInsn(ALOAD, 0);
-		mv.visitMethodInsn(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "handleLeaveDecay", "(L" + worldClass + ";IIIL" + blockClass + ";)V");
+		mv.visitMethodInsn(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "handleLeaveDecay", "(L" + worldClass + ";IIIL" + blockClass + ";)V", false);
 		Label l1 = new Label();
 		mv.visitLabel(l1);
 		mv.visitLineNumber(82, l1);
