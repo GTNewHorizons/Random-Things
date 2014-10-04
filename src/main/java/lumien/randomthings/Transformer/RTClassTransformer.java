@@ -85,7 +85,7 @@ public class RTClassTransformer implements IClassTransformer
 			getColorFromItemStack.instructions.insert(new InsnNode(IRETURN));
 			getColorFromItemStack.instructions.insert(l1);
 			getColorFromItemStack.instructions.insert(new JumpInsnNode(IF_ICMPEQ, l2));
-			getColorFromItemStack.instructions.insert(new IntInsnNode(BIPUSH, 16777215));
+			getColorFromItemStack.instructions.insert(new LdcInsnNode(16777215));
 			getColorFromItemStack.instructions.insert(new InsnNode(DUP));
 			getColorFromItemStack.instructions.insert(new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/CoreHandler", "getColorFromItemStack", "(Lnet/minecraft/item/ItemStack;I)I", false));
 			getColorFromItemStack.instructions.insert(new VarInsnNode(ILOAD, 2));
