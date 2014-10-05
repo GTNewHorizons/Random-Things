@@ -135,6 +135,10 @@ public class ClientProxy extends CommonProxy
 			{
 				e.printStackTrace();
 			}
+			catch (IllegalAccessException e)
+			{
+				// Still works
+			}
 			catch (Exception e)
 			{
 				e.printStackTrace();
