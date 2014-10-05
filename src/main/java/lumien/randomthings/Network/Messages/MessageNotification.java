@@ -14,13 +14,15 @@ public class MessageNotification implements IRTMessage
 {
 	String title;
 	String description;
+	int duration;
 	ItemStack icon;
 
-	public MessageNotification(String title, String description, ItemStack icon)
+	public MessageNotification(String title, String description, int duration, ItemStack icon)
 	{
 		this.title = title;
 		this.description = description;
 		this.icon = icon;
+		this.duration = duration;
 	}
 
 	public MessageNotification()
@@ -34,6 +36,7 @@ public class MessageNotification implements IRTMessage
 		ByteBufUtils.writeUTF8String(buffer, title);
 		ByteBufUtils.writeUTF8String(buffer, description);
 		ByteBufUtils.writeItemStack(buffer, icon);
+		buffer.writeInt(duration);
 	}
 
 	@Override
@@ -42,12 +45,13 @@ public class MessageNotification implements IRTMessage
 		this.title = ByteBufUtils.readUTF8String(buffer);
 		this.description = ByteBufUtils.readUTF8String(buffer);
 		this.icon = ByteBufUtils.readItemStack(buffer);
+		this.duration = buffer.readInt();
 	}
 
 	@Override
 	public void onMessage(MessageContext ctx)
 	{
-		RandomThings.instance.notificationHandler.addNotification(new Notification(title, description, icon));
+		RandomThings.instance.notificationHandler.addNotification(new Notification(title, description, duration, icon));
 	}
 
 }

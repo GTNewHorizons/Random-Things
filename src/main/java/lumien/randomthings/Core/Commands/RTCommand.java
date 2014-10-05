@@ -17,8 +17,10 @@ import lumien.randomthings.Network.Messages.MessageNotification;
 
 import net.minecraft.block.Block;
 import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerNotFoundException;
+import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -66,7 +68,7 @@ public class RTCommand extends CommandBase
 	@Override
 	public void processCommand(ICommandSender commandUser, String[] args)
 	{
-		ChatComponentTranslation invalidArguments = new ChatComponentTranslation("text.miscellaneous.invalidArguments");
+		ChatComponentText invalidArguments = new ChatComponentText("/rt <notify|moon|setItemColor|setBiomeCapsule>");
 		invalidArguments.getChatStyle().setColor(EnumChatFormatting.RED);
 		if (args.length == 0)
 		{
@@ -78,17 +80,24 @@ public class RTCommand extends CommandBase
 
 		if (subCommand.equals("notify"))
 		{
-			if (args.length < 5)
+			invalidArguments = new ChatComponentText("/rt notify <username> <title> <description> <displayduration> <iconstring> [metadata]");
+			if (args.length < 6)
 			{
-				commandUser.addChatMessage(invalidArguments);
-				return;
+				throw new WrongUsageException(invalidArguments.getFormattedText());
 			}
 
 			String receiver = args[1];
 			String title = args[2];
 			String description = args[3];
-			String iconString = args[4];
+			int duration = CommandBase.parseInt(commandUser, args[4]);
+			String iconString = args[5];
 
+			
+			if (duration<=0)
+			{
+				throw new CommandException("Display Duration has to be > 0");
+			}
+			
 			EntityPlayerMP receiverEntity = getPlayer(commandUser, receiver);
 			if (receiverEntity == null)
 			{
@@ -99,9 +108,9 @@ public class RTCommand extends CommandBase
 			Block b = GameData.getBlockRegistry().getObject(iconString);
 
 			int metadata = 0;
-			if (args.length > 5)
+			if (args.length > 6)
 			{
-				metadata = CommandBase.parseInt(commandUser, args[5]);
+				metadata = CommandBase.parseInt(commandUser, args[6]);
 			}
 
 			ItemStack is = null;
@@ -116,11 +125,10 @@ public class RTCommand extends CommandBase
 			}
 			else
 			{
-				commandUser.addChatMessage(invalidArguments);
-				return;
+				throw new WrongUsageException(invalidArguments.getFormattedText());
 			}
 
-			MessageNotification packet = new MessageNotification(title, description, is);
+			MessageNotification packet = new MessageNotification(title, description, duration, is);
 
 			PacketHandler.INSTANCE.sendTo(packet, receiverEntity);
 		}
@@ -193,9 +201,9 @@ public class RTCommand extends CommandBase
 	@Override
 	public List addTabCompletionOptions(ICommandSender var1, String[] stringList)
 	{
-		if (stringList[0].equals(""))
+		if (stringList.length == 1)
 		{
-			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre" , "setBiomeCapsule");
+			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre", "setBiomeCapsule");
 		}
 		else if (stringList[0].equals("notify") && stringList.length == 2)
 		{

@@ -31,8 +31,11 @@ public class RTTickHandler
 		switch (event.phase)
 		{
 			case START:
-				RandomThings.instance.notificationHandler.update();
-				RenderBlut.counter+=0.01;
+				if (event.type == TickEvent.Type.CLIENT)
+				{
+					RandomThings.instance.notificationHandler.update();
+				}
+				RenderBlut.counter += 0.01;
 				break;
 			case END:
 				break;

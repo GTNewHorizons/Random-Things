@@ -306,7 +306,7 @@ public class RTEventHandler
 	{
 		if (event.type == RenderGameOverlayEvent.ElementType.HOTBAR)
 		{
-			RandomThings.instance.notificationHandler.drawNotificationOverlay();
+			RandomThings.instance.notificationHandler.drawNotificationOverlay(event.partialTicks);
 		}
 	}
 

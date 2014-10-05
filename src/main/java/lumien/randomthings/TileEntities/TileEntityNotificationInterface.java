@@ -52,8 +52,14 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
 		String receiver = args.checkString(0);
 		String title = args.checkString(1);
 		String description = args.checkString(2);
-		String iconString = args.checkString(3);
-		
+		int duration = args.checkInteger(3);
+		String iconString = args.checkString(4);
+
+		if (duration <= 0)
+		{
+			throw new Exception("Duration has to be > 0");
+		}
+
 		if (!WorldUtils.isPlayerOnline(receiver))
 		{
 			throw new Exception("Selected Receiver is not Online");
@@ -61,9 +67,9 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
 
 		int metadata = 0;
 
-		if (args.count() > 4)
+		if (args.count() >= 6)
 		{
-			metadata = args.checkInteger(4);
+			metadata = args.checkInteger(5);
 		}
 		Item i = GameData.getItemRegistry().getObject(iconString);
 		Block b = GameData.getBlockRegistry().getObject(iconString);
@@ -89,7 +95,7 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
 			return new Object[] {};
 		}
 
-		MessageNotification packet = new MessageNotification(title, description, is);
+		MessageNotification packet = new MessageNotification(title, description, duration, is);
 
 		PacketHandler.INSTANCE.sendTo(packet, receiverEntity);
 
@@ -103,22 +109,28 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
 		switch (method)
 		{
 			case 0:
-				if (arguments.length < 4)
+				if (arguments.length < 5)
 				{
-					throw new Exception("Usage: sendNotification(Receiver,Title,Description,IconString)");
+					throw new Exception("Usage: sendNotification(Receiver,Title,Description,DisplayDuration,IconString,(optional) metadata)");
 				}
 				else
 				{
 					String receiver = arguments[0] + "";
 					String title = arguments[1] + "";
 					String description = arguments[2] + "";
-					String iconString = arguments[3] + "";
+					int duration = (int) Math.floor(Double.parseDouble(arguments[3] + ""));
+
+					String iconString = arguments[4] + "";
 
 					int metadata = 0;
-
-					if (arguments.length > 4)
+					if (arguments.length > 5)
 					{
-						metadata = (int) Double.parseDouble(arguments[4] + "");
+						metadata = (int) Double.parseDouble(arguments[5] + "");
+					}
+
+					if (duration <= 0)
+					{
+						throw new Exception("Duration has to be > 0");
 					}
 
 					if (!WorldUtils.isPlayerOnline(receiver))
@@ -151,7 +163,7 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
 							throw new Exception("Player entity not found");
 						}
 
-						MessageNotification packet = new MessageNotification(title, description, is);
+						MessageNotification packet = new MessageNotification(title, description, duration, is);
 
 						PacketHandler.INSTANCE.sendTo(packet, receiverEntity);
 						return null;

@@ -22,6 +22,8 @@ public class NotificationHandler
 	int tickRate;
 	int displayCounter;
 
+	final float teiler = 28F / 20F;
+
 	Gui guiInstance = new Gui();
 	Minecraft mc = Minecraft.getMinecraft();
 	RenderItem itemRenderer;
@@ -44,82 +46,67 @@ public class NotificationHandler
 		itemRenderer = new RenderItem();
 	}
 
-	public void drawNotificationOverlay()
+	public void drawNotificationOverlay(float partialTickTime)
 	{
 		if (currentNotification != null)
 		{
 			ScaledResolution scaledresolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
 			int i = scaledresolution.getScaleFactor();
 
-			if (displayCounter < 32)
+			if (displayCounter < 20)
 			{
-				drawY = displayCounter-32;
+				drawY = (int) (teiler * ((float) (displayCounter + partialTickTime) - 20F));
 			}
-			else if (displayCounter < 1000)
+			else if (displayCounter > currentNotification.duration + 20)
 			{
-				drawY = 0;
-			}
-			else if (displayCounter < 1032)
-			{
-				drawY = 0 - (displayCounter-1000);
+				float dif = currentNotification.duration + 40 - displayCounter - partialTickTime;
+				drawY = (int) (0f - (teiler * (20f - dif)));
 			}
 			else
 			{
-				currentNotification = null;
+				drawY = 0;
 			}
 
-			if (currentNotification != null)
-			{
-				this.mc.renderEngine.bindTexture(notificationBackground);
-				RenderUtils.enableDefaultBlending();
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			this.mc.renderEngine.bindTexture(notificationBackground);
+			RenderUtils.enableDefaultBlending();
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-				guiInstance.drawTexturedModalRect(scaledresolution.getScaledWidth() - 160, drawY, 0, 0, 160, 32);
+			guiInstance.drawTexturedModalRect(scaledresolution.getScaledWidth() - 160, drawY, 0, 0, 160, 32);
 
-				FontRenderer f = Minecraft.getMinecraft().fontRenderer;
-				f.drawString(currentNotification.title, scaledresolution.getScaledWidth() - 160 + 28, drawY + 5, 16448250, true);
-				f.drawString(currentNotification.description, scaledresolution.getScaledWidth() - 160 + 28, drawY + 4 + f.FONT_HEIGHT + 2, 11184810, true);
+			FontRenderer f = Minecraft.getMinecraft().fontRenderer;
+			f.drawString(currentNotification.title, scaledresolution.getScaledWidth() - 160 + 28, drawY + 5, 16448250, true);
+			f.drawString(currentNotification.description, scaledresolution.getScaledWidth() - 160 + 28, drawY + 4 + f.FONT_HEIGHT + 2, 11184810, true);
 
-				RenderHelper.enableGUIStandardItemLighting();
-				GL11.glDisable(GL11.GL_LIGHTING);
-				GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-				GL11.glEnable(GL11.GL_COLOR_MATERIAL);
-				GL11.glEnable(GL11.GL_LIGHTING);
-				itemRenderer.renderItemAndEffectIntoGUI(f, Minecraft.getMinecraft().getTextureManager(), currentNotification.icon, scaledresolution.getScaledWidth() - 160 + 6, drawY + 6);
-				GL11.glDisable(GL11.GL_LIGHTING);
-				GL11.glDepthMask(true);
-				GL11.glEnable(GL11.GL_DEPTH_TEST);
-				GL11.glDisable(GL11.GL_BLEND);
-			}
+			RenderHelper.enableGUIStandardItemLighting();
+			GL11.glDisable(GL11.GL_LIGHTING);
+			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+			GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+			GL11.glEnable(GL11.GL_LIGHTING);
+			itemRenderer.renderItemAndEffectIntoGUI(f, Minecraft.getMinecraft().getTextureManager(), currentNotification.icon, scaledresolution.getScaledWidth() - 160 + 6, drawY + 6);
+			GL11.glDisable(GL11.GL_LIGHTING);
+			GL11.glDepthMask(true);
+			GL11.glEnable(GL11.GL_DEPTH_TEST);
+			GL11.glDisable(GL11.GL_BLEND);
 		}
 	}
 
 	public void update()
 	{
-		tickCounter++;
 		if (currentNotification == null)
 		{
-			tickRate = 20;
+			if (!queuedNotifications.isEmpty())
+			{
+				this.currentNotification = queuedNotifications.poll();
+				displayCounter = 0;
+				ClientUtil.broadcastEffect("notification", 2, 1);
+			}
 		}
 		else
 		{
-			tickRate = 1;
-		}
-		if (tickCounter >= tickRate)
-		{
-			this.tickCounter = 0;
-			if (currentNotification == null)
+			displayCounter++;
+			if (displayCounter == currentNotification.duration + 40)
 			{
-				if (!queuedNotifications.isEmpty())
-				{
-					this.currentNotification = queuedNotifications.poll();
-					displayCounter = 0;
-					ClientUtil.broadcastEffect("notification", 2, 1);
-				}
-			}
-			else
-			{
-				displayCounter++;
+				currentNotification = null;
 			}
 		}
 	}
