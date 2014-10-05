@@ -194,19 +194,38 @@ public class RTClassTransformer implements IClassTransformer
 				updateLightmap = mn;
 			}
 		}
+
 		if (updateLightmap != null)
 		{
+			boolean insertedSubtraction = false;
 			for (int i = 0; i < updateLightmap.instructions.size(); i++)
 			{
 				AbstractInsnNode an = updateLightmap.instructions.get(i);
-				if (an instanceof VarInsnNode)
+				if (an instanceof VarInsnNode && !insertedSubtraction)
 				{
 					VarInsnNode iin = (VarInsnNode) an;
 					if (iin.getOpcode() == ISTORE && iin.var == 21)
 					{
+						updateLightmap.instructions.insert(iin, new VarInsnNode(ISTORE, 21));
+						updateLightmap.instructions.insert(iin, new MethodInsnNode(INVOKESTATIC, "java/lang/Math", "max", "(II)I", false));
+						updateLightmap.instructions.insert(iin, new InsnNode(ICONST_0));
+						updateLightmap.instructions.insert(iin, new VarInsnNode(ILOAD, 21));
+
+						updateLightmap.instructions.insert(iin, new VarInsnNode(ISTORE, 20));
+						updateLightmap.instructions.insert(iin, new MethodInsnNode(INVOKESTATIC, "java/lang/Math", "max", "(II)I", false));
+						updateLightmap.instructions.insert(iin, new InsnNode(ICONST_0));
+						updateLightmap.instructions.insert(iin, new VarInsnNode(ILOAD, 20));
+
+						updateLightmap.instructions.insert(iin, new VarInsnNode(ISTORE, 19));
+						updateLightmap.instructions.insert(iin, new MethodInsnNode(INVOKESTATIC, "java/lang/Math", "max", "(II)I", false));
+						updateLightmap.instructions.insert(iin, new InsnNode(ICONST_0));
+						updateLightmap.instructions.insert(iin, new VarInsnNode(ILOAD, 19));
+
 						updateLightmap.instructions.insert(iin, new IincInsnNode(21, -14));
 						updateLightmap.instructions.insert(iin, new IincInsnNode(20, -14));
 						updateLightmap.instructions.insert(iin, new IincInsnNode(19, -14));
+
+						insertedSubtraction = true;
 					}
 				}
 				else if (an instanceof LdcInsnNode)
