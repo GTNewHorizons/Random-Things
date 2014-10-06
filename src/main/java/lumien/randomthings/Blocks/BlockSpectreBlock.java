@@ -31,6 +31,7 @@ public class BlockSpectreBlock extends BlockBase
 
 		this.lightValue = 15;
 		this.setBlockUnbreakable().setStepSound(soundTypeGlass);
+		this.setResistance(6000000.0F);
 	}
 
 	@Override
