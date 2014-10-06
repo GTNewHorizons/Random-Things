@@ -192,24 +192,27 @@ public class SpectreHandler extends WorldSavedData
 				{
 					EntityPlayer player = (EntityPlayer) worldObj.playerEntities.get(i);
 
-					String username = player.getCommandSenderName();
-					if (playerConnection.containsKey(username))
+					if (!MinecraftServer.getServer().getConfigurationManager().func_152596_g(player.getGameProfile()))
 					{
-						int coord = playerConnection.get(username);
-						AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(coord * 32, 40, 0, coord * 32 + 15, 52, 15);
-
-						if (!bb.isVecInside(Vec3.createVectorHelper(player.posX, player.posY, player.posZ)))
+						String username = player.getCommandSenderName();
+						if (playerConnection.containsKey(username))
 						{
-							player.setPositionAndUpdate(coord * 32 + 9 - 1, 42, 2 - 0.5);
-							player.addPotionEffect(new PotionEffect(PotionEffects.SLOWNESS, 200, 5, false));
-						}
-					}
-					else
-					{
-						ChunkCoordinates cc = MinecraftServer.getServer().worldServerForDimension(0).provider.getRandomizedSpawnPoint();
-						MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) player, 0, new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(0)));
+							int coord = playerConnection.get(username);
+							AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(coord * 32, 40, 0, coord * 32 + 15, 52, 15);
 
-						player.setPositionAndUpdate(cc.posX, cc.posY, cc.posZ);
+							if (!bb.isVecInside(Vec3.createVectorHelper(player.posX, player.posY, player.posZ)))
+							{
+								player.setPositionAndUpdate(coord * 32 + 9 - 1, 42, 2 - 0.5);
+								player.addPotionEffect(new PotionEffect(PotionEffects.SLOWNESS, 200, 5, false));
+							}
+						}
+						else
+						{
+							ChunkCoordinates cc = MinecraftServer.getServer().worldServerForDimension(0).provider.getRandomizedSpawnPoint();
+							MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) player, 0, new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(0)));
+
+							player.setPositionAndUpdate(cc.posX, cc.posY, cc.posZ);
+						}
 					}
 				}
 			}
