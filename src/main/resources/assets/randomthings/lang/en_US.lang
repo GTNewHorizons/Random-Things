@@ -51,6 +51,7 @@ item.dropFilter.name=Drop Filter
 item.dropFilterVoiding.name=Voiding Drop Filter
 item.enderLetter.name=Ender Letter
 item.spectreKey.name=Spectre Key
+item.opSpectreKey.name=Op Spectre Key
 item.soundRecorder.name=Sound Recorder
 item.spectreSword.name=Spectre Sword
 item.spectreHelmet.name=Spectre Helmet

@@ -1,66 +1,57 @@
 package lumien.randomthings.Items;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Library.GuiIds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntitySmokeFX;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemSpectreKey extends ItemBase
+public class ItemOpSpectreKey extends ItemOp
 {
 
-	public ItemSpectreKey()
+	public ItemOpSpectreKey()
 	{
-		super("spectreKey");
-		this.setFull3D();
-		this.setMaxStackSize(1);
+		super("opSpectreKey");
 	}
-
 	
 	@Override
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
 	{
 		RenderUtils.enableDefaultBlending();
 
-		return 16777215;
+		return super.getColorFromItemStack(par1ItemStack, par2);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
 	{
-		if (player.worldObj.isRemote && count < 60)
+		if (player.worldObj.isRemote && count < 20)
 		{	
 			EntityFX particle;
 			if (Minecraft.getMinecraft().thePlayer == player)
 			{
 				float t = 1F / 255F;
-				for (int i = 0; i < (60 - count); i++)
+				for (int i = 0; i < (40 - count); i++)
 				{
 					particle = new EntitySmokeFX(player.worldObj, player.posX + Math.random() * 2 - 1, player.posY - 1 + Math.random(), player.posZ + Math.random() * 2 - 1, 0, 0, 0);
 
-					particle.setRBGColorF(t * 152F, t * 245F, t * 255F);
+					particle.setRBGColorF(t * 172F, t * 7F, t * 7F);
 					Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 				}
 			}
 			else
 			{
-				for (int i = 0; i < (60 - count); i++)
+				for (int i = 0; i < (40 - count); i++)
 				{
 					particle = new EntitySmokeFX(player.worldObj, player.posX + Math.random() * 2 - 1, player.posY + 0.5 + Math.random(), player.posZ + Math.random() * 2 - 1, 0, 0, 0);
 					particle.setRBGColorF(1, 1, 1);
@@ -75,14 +66,7 @@ public class ItemSpectreKey extends ItemBase
 	{
 		if (!par2World.isRemote)
 		{
-			if (par2World.provider.dimensionId != Settings.SPECTRE_DIMENSON_ID)
-			{
-				RandomThings.instance.spectreHandler.teleportPlayerToSpectreWorld((EntityPlayerMP) par3EntityPlayer);
-			}
-			else
-			{
-				RandomThings.instance.spectreHandler.teleportPlayerOutOfSpectreWorld((EntityPlayerMP) par3EntityPlayer);
-			}
+			par3EntityPlayer.openGui(RandomThings.instance, GuiIds.OP_SPECTRE_KEY, par2World, 0, 0, 0);
 		}
 		return par1ItemStack;
 	}
@@ -100,7 +84,7 @@ public class ItemSpectreKey extends ItemBase
 	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack)
 	{
-		return 100;
+		return 40;
 	}
 
 	/**

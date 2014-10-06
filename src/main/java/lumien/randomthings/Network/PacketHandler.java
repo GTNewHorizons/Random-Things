@@ -23,5 +23,6 @@ public class PacketHandler
 		INSTANCE.registerMessage(MessageAnswerTeleport.class);
 		INSTANCE.registerMessage(MessageMagneticForceParticle.class);
 		INSTANCE.registerMessage(MessageChangeItemProperty.class);
+		INSTANCE.registerMessage(MessageSpectreData.class);
 	}
 }

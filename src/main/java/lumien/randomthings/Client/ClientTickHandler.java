@@ -12,22 +12,36 @@ public class ClientTickHandler
 	static int counter = 0;
 	static boolean raising = true;
 
-	static int[] colors;
+	static int[] creativeColors;
+	static int[] opColors;
 
 	public ClientTickHandler()
 	{
-		colors = new int[255];
-
+		creativeColors = new int[255];
+		opColors = new int[255];
+		
 		for (int i = 0; i < 255; i++)
 		{
 			float h = i / 255F;
-			colors[i] = new Color(Color.HSBtoRGB(h, 1f, 1f)).getRGB();
+			creativeColors[i] = new Color(Color.HSBtoRGB(h, 1f, 1f)).getRGB();
 		}
+		
+		for (int i = 0; i < 255; i++)
+		{
+			float h = i / 255F+0.5f;
+			h = Math.min(1, h);
+			opColors[i] = new Color(Color.HSBtoRGB(0, h, 1f)).getRGB();
+		}
+	}
+	
+	public static int getCurrentOPColor()
+	{
+		return opColors[counter];
 	}
 	
 	public static int getCurrentCreativeColor()
 	{
-		return colors[counter];
+		return creativeColors[counter];
 	}
 
 	@SubscribeEvent
@@ -35,7 +49,7 @@ public class ClientTickHandler
 	{
 		if (event.phase == Phase.END &&  Minecraft.getMinecraft().thePlayer!=null)
 		{
-			if (counter >= colors.length - 1)
+			if (counter >= creativeColors.length - 1)
 			{
 				raising = false;
 			}

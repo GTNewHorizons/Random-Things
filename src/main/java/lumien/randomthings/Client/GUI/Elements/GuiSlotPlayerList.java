@@ -3,6 +3,7 @@ package lumien.randomthings.Client.GUI.Elements;
 import java.util.ArrayList;
 
 import lumien.randomthings.Client.GUI.GuiMagneticForce;
+import lumien.randomthings.Library.Interfaces.IPlayerListGUI;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Rectangle;
@@ -16,9 +17,9 @@ import cpw.mods.fml.client.GuiScrollingList;
 public class GuiSlotPlayerList extends GuiScrollingList
 {
 	private ArrayList<String> players;
-	private GuiMagneticForce parent;
+	private IPlayerListGUI parent;
 
-	public GuiSlotPlayerList(GuiMagneticForce parent, Minecraft client, int width, int height, int posX, int posY, ArrayList<String> playerList)
+	public GuiSlotPlayerList(IPlayerListGUI parent, Minecraft client, int width, int height, int posX, int posY, ArrayList<String> playerList)
 	{
 		super(client, width, height, posY, posY + height, posX, Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT);
 

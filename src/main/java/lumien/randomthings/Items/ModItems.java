@@ -18,6 +18,7 @@ public class ModItems
 	public static ItemDropFilter dropFilter;
 	public static ItemEnderLetter enderLetter;
 	public static ItemSpectreKey spectreKey;
+	public static ItemOpSpectreKey opSpectreKey;
 	public static ItemSoundRecorder soundRecorder;
 	public static ItemImbue imbue;
 	public static ItemDemorpher demorpher;
@@ -55,6 +56,8 @@ public class ModItems
 			enderLetter = new ItemEnderLetter();
 		if (ConfigItems.spectreKey)
 			spectreKey = new ItemSpectreKey();
+		if (ConfigItems.opSpectreKey)
+			opSpectreKey = new ItemOpSpectreKey();
 		if (ConfigItems.spectreArmor)
 		{
 			spectreHelmet = (ItemSpectreArmor) new ItemSpectreArmor(0).setUnlocalizedName("spectreHelmet").setTextureName("RandomThings:armor/spectreHelmet");

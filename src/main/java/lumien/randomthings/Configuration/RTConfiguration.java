@@ -96,6 +96,7 @@ public class RTConfiguration
 		ConfigItems.dropFilter = isItemEnabled("DropFilter");
 		ConfigItems.enderLetter = isItemEnabled("EnderLetter");
 		ConfigItems.spectreKey = isItemEnabled("SpectreKey");
+		ConfigItems.opSpectreKey = isItemEnabled("OpSpectreKey");
 		ConfigItems.soundRecorder = isItemEnabled("SoundRecorder");
 		ConfigItems.spectreArmor = isItemEnabled("SpectreArmor");
 		ConfigItems.spectreSword = isItemEnabled("SpectreSword");

@@ -12,6 +12,7 @@ import lumien.randomthings.Client.GUI.GuiItemFilter;
 import lumien.randomthings.Client.GUI.GuiEnderLetter;
 import lumien.randomthings.Client.GUI.GuiMagneticForce;
 import lumien.randomthings.Client.GUI.GuiOnlineDetector;
+import lumien.randomthings.Client.GUI.GuiOpSpectreKey;
 import lumien.randomthings.Client.GUI.GuiPlayerInterface;
 import lumien.randomthings.Client.GUI.GuiSoundRecorder;
 import lumien.randomthings.Client.GUI.GuiVoidStone;
@@ -24,6 +25,7 @@ import lumien.randomthings.Container.ContainerItemFilter;
 import lumien.randomthings.Container.ContainerEnderLetter;
 import lumien.randomthings.Container.ContainerMagneticForce;
 import lumien.randomthings.Container.ContainerOnlineDetector;
+import lumien.randomthings.Container.ContainerOpSpectreKey;
 import lumien.randomthings.Container.ContainerPlayerInterface;
 import lumien.randomthings.Container.ContainerSoundRecorder;
 import lumien.randomthings.Container.ContainerVoidStone;
@@ -41,6 +43,8 @@ import static lumien.randomthings.Library.GuiIds.*;
 
 public class GuiHandler implements IGuiHandler
 {
+
+	
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
@@ -86,6 +90,8 @@ public class GuiHandler implements IGuiHandler
 				return new ContainerDyeingMachine(player.inventory,world,x,y,z);
 			case IMBUING_STATION:
 				return new ContainerImbuingStation(player.inventory, (TileEntityImbuingStation) tileEntity);
+			case OP_SPECTRE_KEY:
+				return new ContainerOpSpectreKey();
 		}
 		return null;
 	}
@@ -135,6 +141,8 @@ public class GuiHandler implements IGuiHandler
 				return new GuiDyeingMachine(player.inventory,world,x,y,z);
 			case IMBUING_STATION:
 				return new GuiImbuingStation(player.inventory, (TileEntityImbuingStation) tileEntity);
+			case OP_SPECTRE_KEY:
+				return new GuiOpSpectreKey();
 		}
 		return null;
 	}

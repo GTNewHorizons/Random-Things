@@ -28,11 +28,4 @@ public class ItemMagneticForce extends ItemBase
 		}
 		return par1ItemStack;
 	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5)
-	{
-		EntityPlayer player = (EntityPlayer) par3Entity;
-	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.GUI.Elements.GuiSlotPlayerList;
 import lumien.randomthings.Container.ContainerMagneticForce;
+import lumien.randomthings.Container.ContainerOpSpectreKey;
 import lumien.randomthings.Library.Interfaces.IPlayerListGUI;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageAnswerTeleport;
@@ -14,49 +15,33 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.network.play.client.C01PacketChatMessage;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiMagneticForce extends GuiContainer implements IPlayerListGUI
+public class GuiOpSpectreKey extends GuiContainer implements IPlayerListGUI
 {
-	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/magneticForce.png");
+	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/opSpectreKey.png");
 	GuiSlotPlayerList playerList;
-	ArrayList<String> players;
+	public ArrayList<String> players;
 
 	boolean selected;
 
-	int counter;
-
-	MessageAnswerTeleport.STATUS status;
-
-	public GuiMagneticForce()
+	public GuiOpSpectreKey()
 	{
-		super(new ContainerMagneticForce());
+		super(new ContainerOpSpectreKey());
 
 		this.xSize = 122;
 		this.ySize = 135;
-		counter = 0;
-
-		status = null;
+		
+		players = new ArrayList<String>();
 
 		selected = false;
 	}
 
 	public void pressedPlayer(String player)
 	{
-		if (!selected)
-		{
-			selected = true;
-
-			MessageRequestTeleport request = new MessageRequestTeleport();
-			request.setUsername(player);
-			PacketHandler.INSTANCE.sendToServer(request);
-		}
-	}
-
-	public void setStatus(MessageAnswerTeleport.STATUS status)
-	{
-		this.status = status;
-		selected = false;
+		Minecraft.getMinecraft().thePlayer.sendChatMessage("/rt spectre "+player);
+		Minecraft.getMinecraft().thePlayer.closeScreen();
 	}
 
 	@Override
@@ -67,9 +52,6 @@ public class GuiMagneticForce extends GuiContainer implements IPlayerListGUI
 		int guiX = (width / 2 - xSize / 2);
 		int guiY = (height / 2 - ySize / 2);
 
-		players = RandomThings.proxy.getUsernameList();
-		players.remove(mc.thePlayer.getCommandSenderName());
-		
 		playerList = new GuiSlotPlayerList(this, this.mc, 100, 110, guiX + xSize / 2 - 100 / 2, guiY - 10 + ySize / 2 - 100 / 2 + 10, players);
 	}
 
@@ -77,16 +59,6 @@ public class GuiMagneticForce extends GuiContainer implements IPlayerListGUI
 	public void updateScreen()
 	{
 		super.updateScreen();
-		counter++;
-
-		if (counter % 5 == 0)
-		{
-			players.removeAll(new ArrayList<String>(players));
-			players.addAll(RandomThings.proxy.getUsernameList());
-			
-			if (!mc.thePlayer.getCommandSenderName().equals(RandomThings.AUTHOR_USERNAME))
-				players.remove(mc.thePlayer.getCommandSenderName());
-		}
 	}
 
 	public int getGuiLeft()
@@ -97,33 +69,6 @@ public class GuiMagneticForce extends GuiContainer implements IPlayerListGUI
 	public int getGuiTop()
 	{
 		return guiTop;
-	}
-
-	@Override
-	protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_)
-	{
-		if (status != null)
-		{
-			String toDraw = "";
-			switch (status)
-			{
-				case INVALID_USERNAME:
-					toDraw = I18n.format("text.magneticForce.invalidUsername", new Object[0]);
-					break;
-				case NOT_ONLINE:
-					toDraw = I18n.format("text.magneticForce.notOnline", new Object[0]);
-					break;
-				case NO_RIGHT:
-					toDraw = I18n.format("text.magneticForce.noRights", new Object[0]);
-					break;
-				case SAME_PLAYER:
-					toDraw = I18n.format("text.magneticForce.notYourself", new Object[0]);
-					break;
-				default:
-					break;
-			}
-			this.drawCenteredString(fontRendererObj, toDraw, xSize / 2, 5, 0xFFFFFF);
-		}
 	}
 
 	@Override

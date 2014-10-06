@@ -92,12 +92,11 @@ public class RTCommand extends CommandBase
 			int duration = CommandBase.parseInt(commandUser, args[4]);
 			String iconString = args[5];
 
-			
-			if (duration<=0)
+			if (duration <= 0)
 			{
 				throw new CommandException("Display Duration has to be > 0");
 			}
-			
+
 			EntityPlayerMP receiverEntity = getPlayer(commandUser, receiver);
 			if (receiverEntity == null)
 			{
@@ -190,12 +189,21 @@ public class RTCommand extends CommandBase
 				is.setItemDamage(biomeID + 1);
 			}
 		}
+		else if (subCommand.equals("spectre"))
+		{
+			if (commandUser instanceof EntityPlayer)
+			{
+				EntityPlayer player = (EntityPlayer) commandUser;
+				
+				RandomThings.instance.spectreHandler.sendOperator(player,args[1]);
+			}
+		}
 	}
 
 	@Override
 	public int getRequiredPermissionLevel()
 	{
-		return 2;
+		return 3;
 	}
 
 	@Override
@@ -203,7 +211,7 @@ public class RTCommand extends CommandBase
 	{
 		if (stringList.length == 1)
 		{
-			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre", "setBiomeCapsule");
+			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre", "setBiomeCapsule", "spectre");
 		}
 		else if (stringList[0].equals("notify") && stringList.length == 2)
 		{

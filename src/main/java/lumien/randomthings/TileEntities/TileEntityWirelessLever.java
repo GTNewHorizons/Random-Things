@@ -125,7 +125,6 @@ public class TileEntityWirelessLever extends TileEntity
 				}
 			}
 		}
-
 		return false;
 	}
 

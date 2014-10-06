@@ -1,5 +1,6 @@
 package lumien.randomthings.Handler.Spectre;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import lumien.randomthings.RandomThings;
@@ -7,6 +8,8 @@ import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Library.PotionEffects;
 import lumien.randomthings.Library.WorldUtils;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.Network.Messages.MessageSpectreData;
 
 import org.apache.logging.log4j.Level;
 
@@ -17,6 +20,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -47,6 +51,30 @@ public class SpectreHandler extends WorldSavedData
 	public void setWorld(World w)
 	{
 		this.worldObj = w;
+	}
+
+	public void sendOperator(EntityPlayer operator, String cubeOwner)
+	{
+		if (MinecraftServer.getServer().getConfigurationManager().func_152596_g(operator.getGameProfile()))
+		{
+			if (!playerConnection.containsKey(cubeOwner))
+			{
+				operator.addChatComponentMessage(new ChatComponentText(cubeOwner + " does not have a cube in the spectre dimension"));
+				return;
+			}
+			else
+			{
+				WorldServer spectreWorld = MinecraftServer.getServer().worldServerForDimension(Settings.SPECTRE_DIMENSON_ID);
+				int coord = playerConnection.get(cubeOwner);
+				
+				if (operator.dimension != Settings.SPECTRE_DIMENSON_ID)
+				{
+					MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) operator, Settings.SPECTRE_DIMENSON_ID, new TeleporterSpectre(spectreWorld));
+				}
+
+				operator.setPositionAndUpdate(coord * 32 + 9 - 1, 42, 2 - 0.5);
+			}
+		}
 	}
 
 	public void teleportPlayerToSpectreWorld(EntityPlayerMP player)
@@ -193,6 +221,13 @@ public class SpectreHandler extends WorldSavedData
 		playerConnection = new HashMap<String, Integer>();
 		nextCoord = 0;
 		this.markDirty();
+	}
+
+	public void sendData(EntityPlayer player)
+	{
+		ArrayList<String> list = new ArrayList<String>();
+		list.addAll(playerConnection.keySet());
+		PacketHandler.INSTANCE.sendTo(new MessageSpectreData(list), (EntityPlayerMP)player);
 	}
 
 }
