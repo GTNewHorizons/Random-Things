@@ -86,6 +86,12 @@ public class BlockSpectreBlock extends BlockBase
 	{
 		return false;
 	}
+	
+	@Override
+	public int damageDropped(int p_149692_1_)
+    {
+        return p_149692_1_;
+    }
 
 	@Override
 	public boolean isOpaqueCube()
