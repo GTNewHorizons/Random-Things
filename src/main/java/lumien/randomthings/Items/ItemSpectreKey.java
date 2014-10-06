@@ -47,9 +47,9 @@ public class ItemSpectreKey extends ItemBase
 		if (player.worldObj.isRemote && count < 60)
 		{	
 			EntityFX particle;
+			float t = 1F / 255F;
 			if (Minecraft.getMinecraft().thePlayer == player)
 			{
-				float t = 1F / 255F;
 				for (int i = 0; i < (60 - count); i++)
 				{
 					particle = new EntitySmokeFX(player.worldObj, player.posX + Math.random() * 2 - 1, player.posY - 1 + Math.random(), player.posZ + Math.random() * 2 - 1, 0, 0, 0);
@@ -63,7 +63,7 @@ public class ItemSpectreKey extends ItemBase
 				for (int i = 0; i < (60 - count); i++)
 				{
 					particle = new EntitySmokeFX(player.worldObj, player.posX + Math.random() * 2 - 1, player.posY + 0.5 + Math.random(), player.posZ + Math.random() * 2 - 1, 0, 0, 0);
-					particle.setRBGColorF(1, 1, 1);
+					particle.setRBGColorF(t * 152F, t * 245F, t * 255F);
 					Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 				}
 			}
