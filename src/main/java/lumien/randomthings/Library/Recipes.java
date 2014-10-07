@@ -97,6 +97,7 @@ public class Recipes
 		{
 			ItemStack iItemCollector = new ItemStack(ModBlocks.itemCollector);
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector, 1), "xhx", "rer", "xox", 'h', iHopper, 'r', "dustRedstone", 'e', iEnderPearl, 'o', "stickObsidian"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector, 1), "xhx", "rer", "xox", 'h', iHopper, 'r', "dustRedstone", 'e', iEnderPearl, 'o', "obsidianRod"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedItemCollector, 1), "xdx", "gig", 'd', "gemDiamond", 'g', "dustGlowstone", 'i', iItemCollector));
 		}
 		if (ConfigBlocks.onlineDetector)

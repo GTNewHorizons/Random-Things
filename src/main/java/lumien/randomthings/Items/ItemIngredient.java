@@ -50,6 +50,7 @@ public class ItemIngredient extends ItemBase
 
 		OreDictionary.registerOre("stickObsidian", new ItemStack(this, 1, 1));
 		OreDictionary.registerOre("obsidianStick", new ItemStack(this, 1, 1));
+		OreDictionary.registerOre("obsidianRod", new ItemStack(this, 1, 1));
 		
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH,new WeightedRandomChestContent(new ItemStack(this,1,4), 1, 1, 3));
 
