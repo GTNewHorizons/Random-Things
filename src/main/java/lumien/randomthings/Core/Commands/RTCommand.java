@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.common.base.Preconditions;
 
 import cpw.mods.fml.common.registry.GameData;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.ConfigItems;
@@ -30,6 +31,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class RTCommand extends CommandBase
 {
@@ -68,7 +70,7 @@ public class RTCommand extends CommandBase
 	@Override
 	public void processCommand(ICommandSender commandUser, String[] args)
 	{
-		ChatComponentText invalidArguments = new ChatComponentText("/rt <notify|moon|setItemColor|setBiomeCapsule>");
+		ChatComponentText invalidArguments = new ChatComponentText("/rt <notify|moon|setItemColor|setBiomeCapsule|analyze>");
 		invalidArguments.getChatStyle().setColor(EnumChatFormatting.RED);
 		if (args.length == 0)
 		{
@@ -194,8 +196,31 @@ public class RTCommand extends CommandBase
 			if (commandUser instanceof EntityPlayer)
 			{
 				EntityPlayer player = (EntityPlayer) commandUser;
-				
-				RandomThings.instance.spectreHandler.sendOperator(player,args[1]);
+
+				RandomThings.instance.spectreHandler.sendOperator(player, args[1]);
+			}
+		}
+		else if (subCommand.equals("analyze"))
+		{
+			if (commandUser instanceof EntityPlayer)
+			{
+				EntityPlayer player = (EntityPlayer) commandUser;
+				ItemStack item = player.getCurrentEquippedItem();
+				if (item != null)
+				{
+					player.addChatMessage(new ChatComponentText("Start"));
+					player.addChatMessage(new ChatComponentText("Display-Name: " + item.getDisplayName()));
+					player.addChatMessage(new ChatComponentText("Metadata: " + item.getItemDamage()));
+					player.addChatMessage(new ChatComponentText("NBT: " + (item.stackTagCompound != null ? "Yes" : "No")));
+					player.addChatMessage(new ChatComponentText("Registered-Name: \"" + GameRegistry.findUniqueIdentifierFor(item.getItem()) + "\""));
+					player.addChatMessage(new ChatComponentText("Ore-Dictionary:"));
+					int[] ids = OreDictionary.getOreIDs(item);
+					for (int id : ids)
+					{
+						player.addChatMessage(new ChatComponentText(" -" + OreDictionary.getOreName(id)));
+					}
+					player.addChatMessage(new ChatComponentText("End"));
+				}
 			}
 		}
 	}
@@ -211,7 +236,7 @@ public class RTCommand extends CommandBase
 	{
 		if (stringList.length == 1)
 		{
-			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre", "setBiomeCapsule", "spectre");
+			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre", "setBiomeCapsule", "spectre", "analyze");
 		}
 		else if (stringList[0].equals("notify") && stringList.length == 2)
 		{
