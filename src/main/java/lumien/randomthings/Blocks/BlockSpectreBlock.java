@@ -13,6 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemCloth;
@@ -33,6 +34,12 @@ public class BlockSpectreBlock extends BlockBase
 		this.setBlockUnbreakable().setStepSound(soundTypeGlass);
 		this.setResistance(6000000.0F);
 	}
+	
+	@Override
+	public boolean canEntityDestroy(IBlockAccess world, int x, int y, int z, Entity entity)
+    {
+		return false;
+    }
 
 	@Override
 	public boolean onBlockActivated(World worldObj, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9)
