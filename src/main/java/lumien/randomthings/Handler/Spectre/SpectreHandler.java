@@ -184,7 +184,7 @@ public class SpectreHandler extends WorldSavedData
 
 	public void update()
 	{
-		if (this.worldObj.getTotalWorldTime() % 40 == 0)
+		if (this.worldObj.getTotalWorldTime() % 10 == 0)
 		{
 			for (int i = 0; i < worldObj.playerEntities.size(); i++)
 			{
