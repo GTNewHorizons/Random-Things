@@ -32,7 +32,6 @@ import lumien.randomthings.Library.Colors;
 import lumien.randomthings.Library.PotionEffects;
 import lumien.randomthings.Library.Reference;
 import lumien.randomthings.Network.PacketHandler;
-import lumien.randomthings.Network.Messages.MessageBloodMoon;
 import lumien.randomthings.Potions.ModPotions;
 import lumien.randomthings.Proxy.ClientProxy;
 import lumien.randomthings.TileEntities.TileEntityFogGenerator;
