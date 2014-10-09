@@ -69,7 +69,8 @@ public class ItemWhiteStone extends ItemBase
 	@Override
 	public void onUpdate(ItemStack stack, World worldObj, Entity entity, int par4, boolean par5)
 	{
-		if (stack.getItemDamage() == 0 && (entity instanceof EntityPlayer) && worldObj.getCurrentMoonPhaseFactor() == 1F && worldObj.getWorldTime() >= 18000 && worldObj.getWorldTime() <= 22000 && worldObj.canBlockSeeTheSky((int) Math.floor(entity.posX), (int) Math.floor(entity.posY), (int) Math.floor(entity.posZ)))
+		int time = (int) (worldObj.getWorldTime() % 24000);
+		if (stack.getItemDamage() == 0 && (entity instanceof EntityPlayer) && worldObj.getCurrentMoonPhaseFactor() == 1F && time >= 18000 && time <= 22000 && worldObj.canBlockSeeTheSky((int) Math.floor(entity.posX), (int) Math.floor(entity.posY), (int) Math.floor(entity.posZ)))
 		{
 			EntityPlayer player = (EntityPlayer) entity;
 
