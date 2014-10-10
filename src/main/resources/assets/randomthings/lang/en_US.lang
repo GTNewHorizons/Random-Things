@@ -133,3 +133,6 @@ text.magneticForce.notYourself=Not to yourself
 
 text.enderLetter.invalidreceiver=You have specified an invalid receiver
 text.enderLetter.empty=You can't send an empty letter
+
+text.bloodmoon.command=There will be a Bloodmoon next night
+text.bloodmoon.notify=The Blood Moon is rising...

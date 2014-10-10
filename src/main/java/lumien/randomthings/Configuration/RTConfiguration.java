@@ -28,6 +28,11 @@ public class RTConfiguration
 	public static Property decaySpeed;
 	public static Property decayFuzz;
 
+	public static Property bloodMoon_chance;
+	public static Property bloodMoon_spawnSpeed;
+	public static Property bloodMoon_spawnLimitMult;
+	public static Property bloodMoon_spawnRange;
+
 	// PotionIds
 	public static Property piImbuePoison;
 	public static Property piImbueExperience;
@@ -52,8 +57,12 @@ public class RTConfiguration
 		imbueDuration = config.get("Settings", "ImbueDuration", 20 * 60 * 5, "The duration of imbues (in ticks)");
 		biomeChargeTime = config.get("Settings", "BiomeChargeTime", 20, "The amount of ticks the biome capsule needs to collect 1 charge");
 		decaySpeed = config.get("Settings", "LeaveDecaySpeed", 7, "The amount of ticks every leave needs to decay (Lower is faster)");
-		decayFuzz = config.get("Settings", "LeaveDecayFuzz", 5,"A random number from 0-thisconfigoption will be added to the decay speed for every Leave. Setting this to 0 will decay leaves rather linear while higher numbers will let the whole thing look more natural");
-		
+		decayFuzz = config.get("Settings", "LeaveDecayFuzz", 5, "A random number from 0-thisconfigoption will be added to the decay speed for every Leave. Setting this to 0 will decay leaves rather linear while higher numbers will let the whole thing look more natural");
+		bloodMoon_spawnSpeed = config.get("Settings", "BloodMoonSpawnSpeed", 3, "How much faster enemys spawn on a bloodmoon (0=Vanilla)");
+		bloodMoon_spawnLimitMult = config.get("Settings", "BloodMoonSpawnLimitMult", 3, "With which number should the default entity limit be multiplicated on a blood moon");
+		bloodMoon_spawnRange = config.get("Settings", "BloodMoonSpawnRange", 3, "How close can enemys spawn next to the player on a bloodmoon in blocks? (Vanilla=24)");
+		bloodMoon_chance = config.get("Settings", "BloodMoonChance", 0.05, "The chance of a bloodmoon happening (0=Never 1=Everytime)");
+
 		// PotionIds
 		ConfigCategory c = config.getCategory("potionids");
 		c.setComment("Setting these to -1 will auto resolve them. If RandomThings finds a potion at the position of the specified id it will try to find a free one. It will also dynamically increase the size of the potion array if necessary.");
@@ -122,6 +131,7 @@ public class RTConfiguration
 		Settings.SPIRIT_CHANCE = spiritChance.getDouble(0.02);
 		Settings.SPIRIT_CHANCE_SWORD = spiritChanceSword.getDouble(0.1);
 		Settings.WIRELESSLEVER_RANGE = wirelessLeverRange.getDouble(10);
+		Settings.WIRELESSLEVER_RANGE_SQRD = Settings.WIRELESSLEVER_RANGE * Settings.WIRELESSLEVER_RANGE;
 		Settings.FIXED_BACKGROUND = fixedBackground.getString();
 		Settings.SPECTRE_DIMENSON_ID = spectreDimensionID.getInt();
 		Settings.SPECTRE_IMBUE_CHANCE = spectreImbueChance.getDouble();
@@ -130,6 +140,10 @@ public class RTConfiguration
 		Settings.BIOME_CHARGE_TIME = biomeChargeTime.getInt();
 		Settings.DECAY_SPEED = decaySpeed.getInt();
 		Settings.DECAY_FUZZ = decayFuzz.getInt();
+		Settings.BLOODMOON_CHANCE = (float) bloodMoon_chance.getDouble(0.05);
+		Settings.BLOODMOON_SPAWNLIMIT_MULTIPLIER = bloodMoon_spawnLimitMult.getInt(3);
+		Settings.BLOODMOON_SPAWNRANGE = bloodMoon_spawnRange.getInt(4);
+		Settings.BLOODMOON_SPAWNSPEED = bloodMoon_spawnSpeed.getInt(3);
 
 		MagneticForceHandler.TELEPORT_LENGTH = RTConfiguration.config.get("Settings", "MagneticForceTeleportLength", 200, "In ticks (20=1 Second)").getInt();
 

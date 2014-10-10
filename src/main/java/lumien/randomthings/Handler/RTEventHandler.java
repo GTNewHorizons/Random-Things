@@ -22,6 +22,8 @@ import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.EntityHealingOrb;
 import lumien.randomthings.Entity.EntitySpirit;
+import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
+import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Handler.Spectre.SpectreHandler;
 import lumien.randomthings.Items.ItemDropFilter;
 import lumien.randomthings.Items.ItemFilter;
@@ -98,6 +100,7 @@ import net.minecraftforge.event.world.WorldEvent;
 public class RTEventHandler
 {
 	Field experienceValue;
+	static final float sinMax = (float) (Math.PI / 12000d);
 
 	public RTEventHandler()
 	{
@@ -111,6 +114,18 @@ public class RTEventHandler
 			e.printStackTrace();
 			RandomThings.instance.logger.log(Level.ERROR, "Couldn't find experienceValue in EntityLiving, experience imbue will not work :(");
 			experienceValue = null;
+		}
+	}
+
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void fogColor(FogColors event)
+	{
+		if (ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
+		{
+			event.red = Math.max(event.red - ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
+			event.green = Math.max(event.green - ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
+			event.blue = Math.max(event.blue -ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
 		}
 	}
 
@@ -308,10 +323,25 @@ public class RTEventHandler
 			RandomThings.instance.notificationHandler.drawNotificationOverlay(event.partialTicks);
 		}
 	}
+	
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void entityJoinWorldClient(EntityJoinWorldEvent event)
+	{
+		if (event.entity == Minecraft.getMinecraft().thePlayer)
+		{
+			ClientBloodmoonHandler.INSTANCE.setBloodmoon(false);
+		}
+	}
 
 	@SubscribeEvent
 	public void entityJoinWorld(EntityJoinWorldEvent event)
 	{
+		if (!event.world.isRemote && event.entity instanceof EntityPlayer && event.world.provider.dimensionId == 0)
+		{
+			ServerBloodmoonHandler.INSTANCE.playerJoinedWorld((EntityPlayer) event.entity);
+		}
+		
 		if (VanillaChanges.THROWABLES_MOTION)
 		{
 			if (event.entity instanceof EntityThrowable)

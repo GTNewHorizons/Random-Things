@@ -10,6 +10,7 @@ public class Settings
 	public static double SPECTRE_IMBUE_CHANCE = 0.1;
 
 	public static double WIRELESSLEVER_RANGE = 10;
+	public static double WIRELESSLEVER_RANGE_SQRD = 100;
 
 	public static int SPECTRE_DIMENSON_ID;
 	public static String FIXED_BACKGROUND = "";
@@ -27,4 +28,9 @@ public class Settings
 	public static int DECAY_SPEED = 7;
 	
 	public static int DECAY_FUZZ = 5;
+	
+	public static int BLOODMOON_SPAWNSPEED = 3;
+	public static int BLOODMOON_SPAWNLIMIT_MULTIPLIER = 3;
+	public static int BLOODMOON_SPAWNRANGE = 4; // 24
+	public static float BLOODMOON_CHANCE = 0.05f;
 }

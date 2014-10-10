@@ -12,6 +12,7 @@ import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.FieldInsnNode;
 import org.objectweb.asm.tree.IincInsnNode;
 import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.IntInsnNode;
@@ -39,7 +40,8 @@ public class RTClassTransformer implements IClassTransformer
 		{
 			return patchLeaveClass(basicClass);
 		}
-		else if (transformedName.equals("net.minecraft.client.renderer.EntityRenderer") && VanillaChanges.HARDCORE_DARKNESS)
+		else if (transformedName.equals("net.minecraft.client.renderer.EntityRenderer")) // &&
+																							// VanillaChanges.HARDCORE_DARKNESS
 		{
 			return patchEntityRendererClass(basicClass);
 		}
@@ -51,8 +53,65 @@ public class RTClassTransformer implements IClassTransformer
 		{
 			return patchItemClass(basicClass);
 		}
+		else if (transformedName.equals("net.minecraft.client.renderer.RenderGlobal"))
+		{
+			return patchRenderGlobal(basicClass);
+		}
 
 		return basicClass;
+	}
+
+	private byte[] patchRenderGlobal(byte[] basicClass)
+	{
+		ClassNode classNode = new ClassNode();
+		ClassReader classReader = new ClassReader(basicClass);
+		classReader.accept(classNode, 0);
+
+		coreLogger.log(Level.INFO, "Found Render Global Class: " + classNode.name);
+
+		String renderSkyName = MCPNames.method("func_72714_a");
+		MethodNode renderSky = null;
+
+		for (MethodNode mn : classNode.methods)
+		{
+			if (mn.name.equals(renderSkyName))
+			{
+				renderSky = mn;
+				break;
+			}
+		}
+
+		if (renderSky != null)
+		{
+			for (int i = 0; i < renderSky.instructions.size(); i++)
+			{
+				AbstractInsnNode ain = renderSky.instructions.get(i);
+				if (ain instanceof FieldInsnNode)
+				{
+					FieldInsnNode fin = (FieldInsnNode) ain;
+					if (fin.name.equals(MCPNames.field("field_110927_h")))
+					{
+						renderSky.instructions.insert(renderSky.instructions.get(i + 1), new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/Bloodmoon/ClientBloodmoonHandler", "moonColorHook", "()V", false));
+						i++;
+					}
+				}
+				else if (ain instanceof MethodInsnNode)
+				{
+					MethodInsnNode min = (MethodInsnNode) ain;
+					if (min.name.equals(MCPNames.method("func_72833_a")))
+					{
+						renderSky.instructions.insert(min, new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/Bloodmoon/ClientBloodmoonHandler", "skyColorHook", "(Lnet/minecraft/util/Vec3;)V", false));
+						renderSky.instructions.insert(min, new InsnNode(DUP));
+						i += 2;
+					}
+				}
+			}
+		}
+
+		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
+		classNode.accept(writer);
+
+		return writer.toByteArray();
 	}
 
 	private byte[] patchItemClass(byte[] basicClass)
@@ -197,38 +256,31 @@ public class RTClassTransformer implements IClassTransformer
 
 		if (updateLightmap != null)
 		{
-			boolean insertedSubtraction = false;
+			boolean insertedHook = false;
 			for (int i = 0; i < updateLightmap.instructions.size(); i++)
 			{
 				AbstractInsnNode an = updateLightmap.instructions.get(i);
-				if (an instanceof VarInsnNode && !insertedSubtraction)
+				if (an instanceof VarInsnNode && !insertedHook)
 				{
 					VarInsnNode iin = (VarInsnNode) an;
 					if (iin.getOpcode() == ISTORE && iin.var == 21)
 					{
 						updateLightmap.instructions.insert(iin, new VarInsnNode(ISTORE, 21));
-						updateLightmap.instructions.insert(iin, new MethodInsnNode(INVOKESTATIC, "java/lang/Math", "max", "(II)I", false));
-						updateLightmap.instructions.insert(iin, new InsnNode(ICONST_0));
+						updateLightmap.instructions.insert(iin, new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/LightmapHandler", "manipulateBlue", "(I)I", false));
 						updateLightmap.instructions.insert(iin, new VarInsnNode(ILOAD, 21));
 
 						updateLightmap.instructions.insert(iin, new VarInsnNode(ISTORE, 20));
-						updateLightmap.instructions.insert(iin, new MethodInsnNode(INVOKESTATIC, "java/lang/Math", "max", "(II)I", false));
-						updateLightmap.instructions.insert(iin, new InsnNode(ICONST_0));
+						updateLightmap.instructions.insert(iin, new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/LightmapHandler", "manipulateGreen", "(I)I", false));
 						updateLightmap.instructions.insert(iin, new VarInsnNode(ILOAD, 20));
 
 						updateLightmap.instructions.insert(iin, new VarInsnNode(ISTORE, 19));
-						updateLightmap.instructions.insert(iin, new MethodInsnNode(INVOKESTATIC, "java/lang/Math", "max", "(II)I", false));
-						updateLightmap.instructions.insert(iin, new InsnNode(ICONST_0));
+						updateLightmap.instructions.insert(iin, new MethodInsnNode(INVOKESTATIC, "lumien/randomthings/Handler/LightmapHandler", "manipulateRed", "(I)I", false));
 						updateLightmap.instructions.insert(iin, new VarInsnNode(ILOAD, 19));
 
-						updateLightmap.instructions.insert(iin, new IincInsnNode(21, -14));
-						updateLightmap.instructions.insert(iin, new IincInsnNode(20, -14));
-						updateLightmap.instructions.insert(iin, new IincInsnNode(19, -14));
-
-						insertedSubtraction = true;
+						insertedHook = true;
 					}
 				}
-				else if (an instanceof LdcInsnNode)
+				else if (VanillaChanges.HARDCORE_DARKNESS && an instanceof LdcInsnNode)
 				{
 					LdcInsnNode lin = (LdcInsnNode) an;
 
@@ -238,11 +290,13 @@ public class RTClassTransformer implements IClassTransformer
 					}
 				}
 			}
-			for (int i = 0; i < 4; i++)
+			if (VanillaChanges.HARDCORE_DARKNESS)
 			{
-				updateLightmap.instructions.remove(updateLightmap.instructions.get(removeIndex));
+				for (int i = 0; i < 4; i++)
+				{
+					updateLightmap.instructions.remove(updateLightmap.instructions.get(removeIndex));
+				}
 			}
-
 		}
 
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);

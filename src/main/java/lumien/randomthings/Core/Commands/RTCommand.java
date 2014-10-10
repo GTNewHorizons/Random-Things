@@ -11,6 +11,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.ConfigItems;
 import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Items.ItemBiomeCapsule;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Network.PacketHandler;
@@ -70,7 +71,7 @@ public class RTCommand extends CommandBase
 	@Override
 	public void processCommand(ICommandSender commandUser, String[] args)
 	{
-		ChatComponentText invalidArguments = new ChatComponentText("/rt <notify|moon|setItemColor|setBiomeCapsule|analyze>");
+		ChatComponentText invalidArguments = new ChatComponentText("/rt <notify|moon|setItemColor|setBiomeCapsule|analyze|bloodmoon>");
 		invalidArguments.getChatStyle().setColor(EnumChatFormatting.RED);
 		if (args.length == 0)
 		{
@@ -223,6 +224,11 @@ public class RTCommand extends CommandBase
 				}
 			}
 		}
+		else if (subCommand.equals("bloodmoon"))
+		{
+			ServerBloodmoonHandler.INSTANCE.force();
+			commandUser.addChatMessage(new ChatComponentTranslation("text.bloodmoon.command", new Object[0]));
+		}
 	}
 
 	@Override
@@ -236,7 +242,7 @@ public class RTCommand extends CommandBase
 	{
 		if (stringList.length == 1)
 		{
-			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre", "setBiomeCapsule", "spectre", "analyze");
+			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre", "setBiomeCapsule", "spectre", "analyze","bloodmoon");
 		}
 		else if (stringList[0].equals("notify") && stringList.length == 2)
 		{

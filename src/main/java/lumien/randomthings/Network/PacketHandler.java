@@ -24,5 +24,6 @@ public class PacketHandler
 		INSTANCE.registerMessage(MessageMagneticForceParticle.class);
 		INSTANCE.registerMessage(MessageChangeItemProperty.class);
 		INSTANCE.registerMessage(MessageSpectreData.class);
+		INSTANCE.registerMessage(MessageBloodmoon.class);
 	}
 }
