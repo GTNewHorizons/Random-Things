@@ -51,6 +51,7 @@ item.dropFilter.name=掉落物过滤器
 item.dropFilterVoiding.name=虚空掉落物过滤器
 item.enderLetter.name=末影邮件
 item.spectreKey.name=灵魂之匙
+item.opSpectreKey.name=管理者灵魂之匙
 item.soundRecorder.name=录音机
 item.spectreSword.name=灵魂之剑
 item.spectreHelmet.name=灵魂头盔
@@ -123,7 +124,7 @@ text.color.magenta=品红色
 text.color.orange=橙色
 text.color.white=白色
 
-text.error.nbt=无法读取NBT Mod文件, 末影邮件或磁力仪等物品将在游戏重启后消失.
+text.error.nbt=无法读取NBT信息, 末影邮件或磁力仪等物品将在游戏重启后消失.
 
 text.magneticForce.notOnline=离线
 text.magneticForce.invalidUsername=无效的用户名
@@ -132,3 +133,6 @@ text.magneticForce.notYourself=不能指向你自己
 
 text.enderLetter.invalidreceiver=你填写了一个无效的收件人
 text.enderLetter.empty=你不能寄出空的邮件
+
+text.bloodmoon.command=明晚的月亮将被血色染红...
+text.bloodmoon.notify=血月升起...
