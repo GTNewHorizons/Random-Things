@@ -61,7 +61,7 @@ public class RTConfiguration
 		bloodMoon_spawnSpeed = config.get("Settings", "BloodMoonSpawnSpeed", 3, "How much faster enemys spawn on a bloodmoon (0=Vanilla)");
 		bloodMoon_spawnLimitMult = config.get("Settings", "BloodMoonSpawnLimitMult", 3, "With which number should the default entity limit be multiplicated on a blood moon");
 		bloodMoon_spawnRange = config.get("Settings", "BloodMoonSpawnRange", 3, "How close can enemys spawn next to the player on a bloodmoon in blocks? (Vanilla=24)");
-		bloodMoon_chance = config.get("Settings", "BloodMoonChance", 0.05, "The chance of a bloodmoon happening (0=Never 1=Everytime)");
+		bloodMoon_chance = config.get("Settings", "BloodMoonChance", 0.05, "The chance of a bloodmoon happening (0=Never;1=Every night;0.05=5% of all nights)");
 
 		// PotionIds
 		ConfigCategory c = config.getCategory("potionids");
