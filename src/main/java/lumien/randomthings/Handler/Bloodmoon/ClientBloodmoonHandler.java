@@ -1,5 +1,6 @@
 package lumien.randomthings.Handler.Bloodmoon;
 
+import lumien.randomthings.Configuration.Settings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -49,7 +50,7 @@ public class ClientBloodmoonHandler
 
 	public static void moonColorHook()
 	{
-		if (ClientBloodmoonHandler.INSTANCE.bloodMoon)
+		if (Settings.BLOODMOON_VISUAL_REDMOON && ClientBloodmoonHandler.INSTANCE.bloodMoon)
 		{
 			GL11.glColor3f(0.8f, 0, 0);
 		}
@@ -57,7 +58,7 @@ public class ClientBloodmoonHandler
 
 	public static void skyColorHook(Vec3 color)
 	{
-		if (ClientBloodmoonHandler.INSTANCE.bloodMoon)
+		if (Settings.BLOODMOON_VISUAL_REDSKY && ClientBloodmoonHandler.INSTANCE.bloodMoon)
 		{
 			color.xCoord += INSTANCE.skyColorAdd;
 		}

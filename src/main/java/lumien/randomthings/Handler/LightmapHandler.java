@@ -1,6 +1,7 @@
 package lumien.randomthings.Handler;
 
 import net.minecraft.client.Minecraft;
+import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
 import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
@@ -30,7 +31,7 @@ public class LightmapHandler
 				originalValue -= 14;
 			}
 
-			if (ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
+			if (Settings.BLOODMOON_VISUAL_REDLIGHT && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
 			{
 				originalValue -= ClientBloodmoonHandler.INSTANCE.lightSub;
 			}
@@ -52,7 +53,7 @@ public class LightmapHandler
 				originalValue -= 14;
 			}
 
-			if (ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
+			if (Settings.BLOODMOON_VISUAL_REDLIGHT && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
 			{
 				originalValue -= ClientBloodmoonHandler.INSTANCE.lightSub;
 			}

@@ -121,7 +121,7 @@ public class RTEventHandler
 	@SideOnly(Side.CLIENT)
 	public void fogColor(FogColors event)
 	{
-		if (ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
+		if (Settings.BLOODMOON_VISUAL_BLACKFOG && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
 		{
 			event.red = Math.max(event.red - ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
 			event.green = Math.max(event.green - ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
@@ -497,7 +497,7 @@ public class RTEventHandler
 				}
 			}
 
-			if (experienceValue != null && event.entityLiving instanceof EntityLiving && event.source.getEntity() != null && event.source.getEntity() instanceof EntityLivingBase)
+			if (ConfigItems.imbue && experienceValue != null && event.entityLiving instanceof EntityLiving && event.source.getEntity() != null && event.source.getEntity() instanceof EntityLivingBase)
 			{
 				EntityLivingBase livingAttacker = (EntityLivingBase) event.source.getEntity();
 				EntityLiving attacked = (EntityLiving) event.entityLiving;
