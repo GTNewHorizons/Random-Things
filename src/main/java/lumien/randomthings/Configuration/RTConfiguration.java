@@ -137,7 +137,6 @@ public class RTConfiguration
 		Settings.SPIRIT_CHANCE = spiritChance.getDouble(0.02);
 		Settings.SPIRIT_CHANCE_SWORD = spiritChanceSword.getDouble(0.1);
 		Settings.WIRELESSLEVER_RANGE = wirelessLeverRange.getDouble(10);
-		Settings.WIRELESSLEVER_RANGE_SQRD = Settings.WIRELESSLEVER_RANGE * Settings.WIRELESSLEVER_RANGE;
 		Settings.FIXED_BACKGROUND = fixedBackground.getString();
 		Settings.SPECTRE_DIMENSON_ID = spectreDimensionID.getInt();
 		Settings.SPECTRE_IMBUE_CHANCE = spectreImbueChance.getDouble();
