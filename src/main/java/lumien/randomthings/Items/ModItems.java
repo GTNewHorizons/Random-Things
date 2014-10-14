@@ -21,7 +21,6 @@ public class ModItems
 	public static ItemOpSpectreKey opSpectreKey;
 	public static ItemSoundRecorder soundRecorder;
 	public static ItemImbue imbue;
-	public static ItemDemorpher demorpher;
 	public static ItemCarpentryPattern carpentryPattern;
 	
 	public static ItemCreativeSword creativeSword;
@@ -75,8 +74,6 @@ public class ModItems
 			spiritBinder = new ItemSpiritBinder();
 		if (ConfigItems.imbue)
 			imbue = new ItemImbue();
-		if (ConfigItems.demorpher)
-			demorpher = new ItemDemorpher();
 		
 		if (ConfigItems.creativeSword)
 			creativeSword = new ItemCreativeSword();

@@ -122,7 +122,6 @@ public class RTConfiguration
 		ConfigItems.creativeGrower = isItemEnabled("CreativeGrower");
 		ConfigItems.creativeChestGenerator = isItemEnabled("CreativeChestGenerator");
 		ConfigItems.imbue = isItemEnabled("Imbues");
-		ConfigItems.demorpher = isItemEnabled("Demorpher");
 
 		// Dungeon Loot
 		ConfigDungeonLoot.WHITESTONE_CHANCE = config.get("DungeonLoot", "WhiteStone", 3).getInt();

@@ -18,6 +18,5 @@ public class ConfigItems
 	public static boolean spectreSword;
 	public static boolean spiritBinder;
 	public static boolean imbue;
-	public static boolean demorpher;
 	public static boolean opSpectreKey;
 }
