@@ -10,7 +10,6 @@ public class Settings
 	public static double SPECTRE_IMBUE_CHANCE = 0.1;
 
 	public static double WIRELESSLEVER_RANGE = 10;
-	public static double WIRELESSLEVER_RANGE_SQRD = 100;
 
 	public static int SPECTRE_DIMENSON_ID;
 	public static String FIXED_BACKGROUND = "";

@@ -33,7 +33,10 @@ public class TileEntityWirelessLever extends TileEntity
 	{
 		super.validate();
 
-		loadedLevers.add(this);
+		synchronized (loadedLevers)
+		{
+			loadedLevers.add(this);
+		}
 	}
 
 	@Override
@@ -102,7 +105,10 @@ public class TileEntityWirelessLever extends TileEntity
 	{
 		super.invalidate();
 
-		loadedLevers.remove(this);
+		synchronized (loadedLevers)
+		{
+			loadedLevers.remove(this);
+		}
 		this.worldObj.notifyBlockOfNeighborChange(targetX, targetY, targetZ, ModBlocks.wirelessLever);
 	}
 
@@ -114,14 +120,17 @@ public class TileEntityWirelessLever extends TileEntity
 
 	public static boolean isPowered(World worldObj, int posX, int posY, int posZ)
 	{
-		for (TileEntityWirelessLever te : loadedLevers)
+		synchronized (loadedLevers)
 		{
-			if (te.worldObj == worldObj && te.targetX == posX && te.targetY == posY && te.targetZ == posZ && (te.worldObj.getBlockMetadata(te.xCoord, te.yCoord, te.zCoord) & 8) > 0)
+			for (TileEntityWirelessLever te : loadedLevers)
 			{
-				double distance = Math.sqrt((te.xCoord - te.targetX) * (te.xCoord - te.targetX) + (te.yCoord - te.targetY) * (te.yCoord - te.targetY) + (te.zCoord - te.targetZ) * (te.zCoord - te.targetZ));
-				if (distance <= Settings.WIRELESSLEVER_RANGE)
+				if (te.worldObj == worldObj && te.targetX == posX && te.targetY == posY && te.targetZ == posZ && (te.worldObj.getBlockMetadata(te.xCoord, te.yCoord, te.zCoord) & 8) > 0)
 				{
-					return true;
+					double distance = Math.sqrt((te.xCoord - te.targetX) * (te.xCoord - te.targetX) + (te.yCoord - te.targetY) * (te.yCoord - te.targetY) + (te.zCoord - te.targetZ) * (te.zCoord - te.targetZ));
+					if (distance <= Settings.WIRELESSLEVER_RANGE)
+					{
+						return true;
+					}
 				}
 			}
 		}
