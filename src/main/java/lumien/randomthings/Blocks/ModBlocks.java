@@ -17,7 +17,6 @@ public class ModBlocks
 	public static BlockSpectreBlock spectreBlock;
 	public static BlockLapisLamp spectreLamp;
 	public static BlockWirelessLever wirelessLever;
-	public static BlockCarpentryBench carpentryBench;
 	public static BlockDyeingMachine dyeingMachine;
 	public static BlockImbuingStation imbuingStation;
 	public static BlockAdvancedFluidDisplay advancedFluidDisplay;
@@ -55,8 +54,6 @@ public class ModBlocks
 			spectreLamp = new BlockLapisLamp();
 		if (ConfigBlocks.wirelessLever)
 			wirelessLever = new BlockWirelessLever();
-		if (ConfigBlocks.carpentryBench)
-			carpentryBench = new BlockCarpentryBench();
 		if (ConfigBlocks.dyeingMachine)
 			dyeingMachine = new BlockDyeingMachine();
 		if (ConfigBlocks.imbuingStation)

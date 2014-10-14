@@ -99,7 +99,6 @@ public class RTConfiguration
 		ConfigBlocks.moonSensor = isBlockEnabled("MoonSensor");
 		ConfigBlocks.notificationInterface = isBlockEnabled("NotificationInterface");
 		ConfigBlocks.lapisLamp = isBlockEnabled("LapisLamp");
-		ConfigBlocks.carpentryBench = isBlockEnabled("CarpentryBench");
 		ConfigBlocks.dyeingMachine = isBlockEnabled("DyeingMachine");
 		ConfigBlocks.imbuingStation = isBlockEnabled("ImbuingStation");
 		ConfigBlocks.customWorkbench = isBlockEnabled("CustomWorkbench");

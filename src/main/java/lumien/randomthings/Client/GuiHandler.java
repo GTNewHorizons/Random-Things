@@ -3,7 +3,6 @@ package lumien.randomthings.Client;
 import lumien.randomthings.Items.ItemDropFilter;
 import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Items.ItemEnderLetter;
-import lumien.randomthings.Client.GUI.GuiCarpentryBench;
 import lumien.randomthings.Client.GUI.GuiDropFilter;
 import lumien.randomthings.Client.GUI.GuiDyeingMachine;
 import lumien.randomthings.Client.GUI.GuiImbuingStation;
@@ -16,7 +15,6 @@ import lumien.randomthings.Client.GUI.GuiOpSpectreKey;
 import lumien.randomthings.Client.GUI.GuiPlayerInterface;
 import lumien.randomthings.Client.GUI.GuiSoundRecorder;
 import lumien.randomthings.Client.GUI.GuiVoidStone;
-import lumien.randomthings.Container.ContainerCarpentryBench;
 import lumien.randomthings.Container.ContainerDropFilter;
 import lumien.randomthings.Container.ContainerDyeingMachine;
 import lumien.randomthings.Container.ContainerImbuingStation;
@@ -84,8 +82,6 @@ public class GuiHandler implements IGuiHandler
 				return new ContainerSoundRecorder();
 			case MAGNETIC_FORCE:
 				return new ContainerMagneticForce();
-			case CARPENTRY_BENCH:
-				return new ContainerCarpentryBench(player.inventory,world,x,y,z);
 			case DYEING_MACHINE:
 				return new ContainerDyeingMachine(player.inventory,world,x,y,z);
 			case IMBUING_STATION:
@@ -135,8 +131,6 @@ public class GuiHandler implements IGuiHandler
 				return new GuiSoundRecorder();
 			case MAGNETIC_FORCE:
 				return new GuiMagneticForce();
-			case CARPENTRY_BENCH:
-				return new GuiCarpentryBench(player.inventory,world,x,y,z);
 			case DYEING_MACHINE:
 				return new GuiDyeingMachine(player.inventory,world,x,y,z);
 			case IMBUING_STATION:

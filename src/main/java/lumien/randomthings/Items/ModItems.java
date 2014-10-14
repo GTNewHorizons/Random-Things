@@ -21,7 +21,6 @@ public class ModItems
 	public static ItemOpSpectreKey opSpectreKey;
 	public static ItemSoundRecorder soundRecorder;
 	public static ItemImbue imbue;
-	public static ItemCarpentryPattern carpentryPattern;
 	
 	public static ItemCreativeSword creativeSword;
 	public static ItemCreativeGrower creativeGrower;
@@ -86,6 +85,5 @@ public class ModItems
 		
 		ingredients = new ItemIngredient();
 		filter = new ItemFilter();
-		carpentryPattern = new ItemCarpentryPattern();
 	}
 }

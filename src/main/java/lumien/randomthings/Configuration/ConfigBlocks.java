@@ -11,7 +11,6 @@ public class ConfigBlocks
 	public static boolean notificationInterface;
 	public static boolean lapisLamp;
 	public static boolean wirelessLever;
-	public static boolean carpentryBench;
 	public static boolean dyeingMachine;
 	public static boolean imbuingStation;
 	public static boolean customWorkbench;
