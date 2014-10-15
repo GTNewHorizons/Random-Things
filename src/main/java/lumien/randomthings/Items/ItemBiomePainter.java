@@ -34,6 +34,10 @@ public class ItemBiomePainter extends ItemBase
 					if (is != null && is.getItem() instanceof ItemBiomeCapsule && is.getItemDamage() != 0)
 					{
 						NBTTagCompound nbt = is.stackTagCompound;
+						if (nbt==null)
+						{
+							nbt = is.stackTagCompound = new NBTTagCompound();
+						}
 						int charges = nbt.getInteger("charges");
 						if (charges > 0 || par2EntityPlayer.capabilities.isCreativeMode)
 						{

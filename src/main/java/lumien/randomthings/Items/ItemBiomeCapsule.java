@@ -9,12 +9,14 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.Settings;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class ItemBiomeCapsule extends ItemBase
@@ -35,6 +37,21 @@ public class ItemBiomeCapsule extends ItemBase
 			biomeColors.put(7, 4303848); // Fluss
 			biomeColors.put(8, 6029312); // Nether
 			biomeColors.put(9, 8223332); // The End
+		}
+	}
+
+	@Override
+	public void onUpdate(ItemStack stack, World worldObj, Entity entity, int slot, boolean p_77663_5_)
+	{
+		if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 20 == 0 && stack.getItemDamage() != 0)
+		{
+			int biomeID = stack.getItemDamage() - 1;
+			BiomeGenBase biome = BiomeGenBase.getBiome(biomeID);
+			if (biome == null && entity instanceof EntityPlayer)
+			{
+				((EntityPlayer) entity).inventory.setInventorySlotContents(slot, null);
+				((EntityPlayer) entity).inventoryContainer.detectAndSendChanges();
+			}
 		}
 	}
 
@@ -187,7 +204,14 @@ public class ItemBiomeCapsule extends ItemBase
 		{
 			int biomeID = par1ItemStack.getItemDamage() - 1;
 			BiomeGenBase biome = BiomeGenBase.getBiome(biomeID);
-			return getColorForBiome(biome);
+			if (biome != null)
+			{
+				return getColorForBiome(biome);
+			}
+			else
+			{
+				return BiomeGenBase.ocean.getBiomeFoliageColor(0, 0, 0);
+			}
 		}
 	}
 

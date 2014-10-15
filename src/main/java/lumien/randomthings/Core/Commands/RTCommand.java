@@ -31,7 +31,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class RTCommand extends CommandBase
@@ -189,7 +191,18 @@ public class RTCommand extends CommandBase
 				int biomeID = Integer.parseInt(args[1]);
 				Preconditions.checkArgument(biomeID >= 0, "Invalid Biome ID (%s)", args[0]);
 				ItemStack is = ((EntityPlayer) commandUser).getCurrentEquippedItem();
-				is.setItemDamage(biomeID + 1);
+				if (BiomeGenBase.getBiome(biomeID) != null)
+				{
+					is.setItemDamage(biomeID + 1);
+					if (is.stackTagCompound == null)
+					{
+						is.stackTagCompound = new NBTTagCompound();
+					}
+				}
+				else
+				{
+					commandUser.addChatMessage(new ChatComponentText("This Biome does not exist").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+				}
 			}
 		}
 		else if (subCommand.equals("spectre"))
@@ -242,7 +255,7 @@ public class RTCommand extends CommandBase
 	{
 		if (stringList.length == 1)
 		{
-			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre", "setBiomeCapsule", "spectre", "analyze","bloodmoon");
+			return getListOfStringsMatchingLastWord(stringList, "notify", "moon", "setItemColor", "spectre", "setBiomeCapsule", "spectre", "analyze", "bloodmoon");
 		}
 		else if (stringList[0].equals("notify") && stringList.length == 2)
 		{
