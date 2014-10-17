@@ -112,7 +112,9 @@ public class Recipes
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.dyeingMachine), "wpw", "ptp", "wpw", 'w', new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), 'p', "plankWood", 't', iTransformationCore));
 		if (ConfigBlocks.imbuingStation)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.imbuingStation), "vcv", "tgt", "lel", 'v', iVine, 'c', iCauldron, 't', iTallGrass, 'g', new ItemStack(Blocks.stained_hardened_clay, 1, 13), 'l', iLilypad, 'e', "blockEmerald"));
-
+		if (ConfigBlocks.spectreGlass)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.spectreGlass,16,0),"ggg","geg","ggg",'g',"blockGlass",'e',iEctoplasm));
+		
 		if (ConfigItems.voidStone)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.voidStone, 1), "xox", "oeo", "xox", 'o', "stone", 'e', iEnderPearl));
 		if (ConfigItems.dropFilter)

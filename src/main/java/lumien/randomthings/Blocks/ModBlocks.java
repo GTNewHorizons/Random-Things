@@ -1,6 +1,8 @@
 package lumien.randomthings.Blocks;
 
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.Blocks.Spectre.BlockSpectreBlock;
+import lumien.randomthings.Blocks.Spectre.BlockSpectreGlass;
 import lumien.randomthings.Configuration.ConfigBlocks;
 
 public class ModBlocks
@@ -20,6 +22,7 @@ public class ModBlocks
 	public static BlockDyeingMachine dyeingMachine;
 	public static BlockImbuingStation imbuingStation;
 	public static BlockAdvancedFluidDisplay advancedFluidDisplay;
+	public static BlockSpectreGlass spectreGlass;
 
 	public static void init()
 	{
@@ -58,6 +61,8 @@ public class ModBlocks
 			dyeingMachine = new BlockDyeingMachine();
 		if (ConfigBlocks.imbuingStation)
 			imbuingStation = new BlockImbuingStation();
+		if (ConfigBlocks.spectreGlass)
+			spectreGlass = new BlockSpectreGlass();
 		
 		spectreBlock = new BlockSpectreBlock();
 	}

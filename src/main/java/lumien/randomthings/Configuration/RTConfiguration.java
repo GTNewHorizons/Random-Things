@@ -101,7 +101,7 @@ public class RTConfiguration
 		ConfigBlocks.lapisLamp = isBlockEnabled("LapisLamp");
 		ConfigBlocks.dyeingMachine = isBlockEnabled("DyeingMachine");
 		ConfigBlocks.imbuingStation = isBlockEnabled("ImbuingStation");
-		ConfigBlocks.customWorkbench = isBlockEnabled("CustomWorkbench");
+		ConfigBlocks.spectreGlass = isBlockEnabled("SpectreGlass");
 
 		// Items
 		ConfigItems.biomeCapsule = isItemEnabled("BiomeSolution");

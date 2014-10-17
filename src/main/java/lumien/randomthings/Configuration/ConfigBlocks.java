@@ -13,5 +13,5 @@ public class ConfigBlocks
 	public static boolean wirelessLever;
 	public static boolean dyeingMachine;
 	public static boolean imbuingStation;
-	public static boolean customWorkbench;
+	public static boolean spectreGlass;
 }

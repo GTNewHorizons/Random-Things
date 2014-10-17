@@ -16,6 +16,7 @@ tile.lapisLamp.name=Lapis Lamp
 tile.dyeingMachine.name=Dyeing Machine
 tile.spiritRod.name=Spirit Rod
 tile.imbuingStation.name=Imbuing Station
+tile.spectreGlass.name=Spectre Glass
 
 tile.spectreBlock.name=Spectre Block
 tile.spectreBlock.black.name=Black Spectre Block
