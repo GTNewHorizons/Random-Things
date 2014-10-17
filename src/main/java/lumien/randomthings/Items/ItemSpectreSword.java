@@ -9,6 +9,7 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Library.Colors;
 import lumien.randomthings.Library.PotionEffects;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -44,7 +45,7 @@ public class ItemSpectreSword extends ItemSword
 	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
-		par3List.add(Colors.AQUA + "Soul Solid");
+		par3List.add(Colors.AQUA + I18n.format("text.spectre.soulSolid"));
 	}
 
 	

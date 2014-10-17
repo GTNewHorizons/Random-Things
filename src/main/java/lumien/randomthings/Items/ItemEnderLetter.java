@@ -8,6 +8,7 @@ import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.Library.InventoryUtils;
 import lumien.randomthings.Library.Interfaces.IItemWithProperties;
 import lumien.randomthings.Library.Inventorys.InventoryEnderLetter;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -43,21 +44,21 @@ public class ItemEnderLetter extends ItemBase implements IItemWithProperties
 			String sender = par1ItemStack.stackTagCompound.getString("sender");
 			if (receiver.equals(""))
 			{
-				par3List.add("No Receiver set");
+				par3List.add(I18n.format("text.enderLetter.noReceiver"));
 			}
 			else
 			{
-				par3List.add("Receiver: " + receiver);
+				par3List.add(I18n.format("text.enderLetter.receiver", receiver));
 			}
 
 			if (!sender.equals(""))
 			{
-				par3List.add("Sender: " + sender);
+				par3List.add(I18n.format("text.enderLetter.sender", sender));
 			}
 		}
 		else
 		{
-			par3List.add("No Receiver set");
+			par3List.add(I18n.format("text.enderLetter.noReceiver"));
 		}
 	}
 

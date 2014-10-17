@@ -45,7 +45,7 @@ public class GuiOnlineDetector extends GuiContainer
 	public void initGui()
 	{
 		super.initGui();
-		saveButton = new GuiButton(0, (width / 2 - 50 / 2 + 50), (height / 2 + 10), 50, 20, "Save");
+		saveButton = new GuiButton(0, (width / 2 - 50 / 2 + 50), (height / 2 + 10), 50, 20, I18n.format("text.miscellaneous.save"));
 		this.buttonList.add(saveButton);
 		Keyboard.enableRepeatEvents(true);
 
@@ -96,11 +96,11 @@ public class GuiOnlineDetector extends GuiContainer
 		String toDraw = "";
 		if (teUsername.equals(""))
 		{
-			toDraw = "Detecting nobody";
+			toDraw = I18n.format("text.onlineDetector.detectingNobody");
 		}
 		else
 		{
-			toDraw = "Detecting \"" + teUsername + "\"";
+			toDraw = I18n.format("text.onlineDetector.detecting", teUsername);
 		}
 		fontRendererObj.drawString(toDraw, (xSize / 2) - (fontRendererObj.getStringWidth(toDraw) / 2), 20, 4210752);
 	}

@@ -12,6 +12,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiButtonListtype extends GuiButton
@@ -79,10 +80,10 @@ public class GuiButtonListtype extends GuiButton
 				switch (listType)
 				{
 					case 0:
-						toDraw = "Whitelist";
+						toDraw = I18n.format("text.miscellaneous.whiteList");
 						break;
 					case 1:
-						toDraw = "Blacklist";
+						toDraw = I18n.format("text.miscellaneous.blackList");
 						break;
 				}
 				

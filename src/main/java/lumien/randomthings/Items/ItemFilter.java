@@ -136,9 +136,14 @@ public class ItemFilter extends ItemBase implements IItemWithProperties
 					case 1:
 						if (!(ItemFilter.getItemFilterInv(par2EntityPlayer, par1ItemStack) == null))
 						{
-							par3List.add(ClientUtil.translate("text.miscellaneous.metadata") + ": " + (par1ItemStack.stackTagCompound.getBoolean("metadata") ? "Yes" : "No"));
-							par3List.add(I18n.format("text.miscellaneous.oreDictionary", (Object[]) null) + ": " + (par1ItemStack.stackTagCompound.getBoolean("oreDict") ? "Yes" : "No"));
-							par3List.add(I18n.format("text.miscellaneous.listType", (Object[]) null) + ": " + (par1ItemStack.stackTagCompound.getInteger("listType") == 1 ? "Blacklist" : "Whitelist"));
+							String yes = I18n.format("text.miscellaneous.yes");
+							String no = I18n.format("text.miscellaneous.no");
+							String whiteList = I18n.format("text.miscellaneous.whiteList");
+							String blackList = I18n.format("text.miscellaneous.blackList");
+
+							par3List.add(ClientUtil.translate("text.miscellaneous.metadata") + ": " + (par1ItemStack.stackTagCompound.getBoolean("metadata") ? yes : no));
+							par3List.add(I18n.format("text.miscellaneous.oreDictionary", (Object[]) null) + ": " + (par1ItemStack.stackTagCompound.getBoolean("oreDict") ? yes : no));
+							par3List.add(I18n.format("text.miscellaneous.listType", (Object[]) null) + ": " + (par1ItemStack.stackTagCompound.getInteger("listType") == 1 ? blackList : whiteList));
 							IInventory inventoryFilter = new InventoryItemFilter(par2EntityPlayer, par1ItemStack);
 							inventoryFilter.openInventory();
 							if (inventoryFilter != null)

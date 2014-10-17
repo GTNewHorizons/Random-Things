@@ -11,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.particle.EntityReddustFX;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -33,13 +34,13 @@ public class ItemBlockWirelessLever extends ItemBlock
 	{
 		if (par1ItemStack.stackTagCompound != null && par1ItemStack.stackTagCompound.getBoolean("hasTarget"))
 		{
-			par3List.add("Target X: " + par1ItemStack.stackTagCompound.getInteger("targetX"));
-			par3List.add("Target Y: " + par1ItemStack.stackTagCompound.getInteger("targetY"));
-			par3List.add("Target Z: " + par1ItemStack.stackTagCompound.getInteger("targetZ"));
+			par3List.add(String.format(I18n.format("text.miscellaneous.target.x", par1ItemStack.stackTagCompound.getInteger("targetX"))));
+			par3List.add(String.format(I18n.format("text.miscellaneous.target.y", par1ItemStack.stackTagCompound.getInteger("targetY"))));
+			par3List.add(String.format(I18n.format("text.miscellaneous.target.z", par1ItemStack.stackTagCompound.getInteger("targetZ"))));
 		}
 		else
 		{
-			par3List.add("No target selected (Shift click on a block)");
+			par3List.add(I18n.format("text.miscellaneous.noTarget"));
 		}
 	}
 

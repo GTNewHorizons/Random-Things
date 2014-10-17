@@ -7,6 +7,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.ChestCategory;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -30,7 +31,6 @@ public class ItemCreativeChestGenerator extends ItemCreative
 		this.setFull3D();
 	}
 
-	
 	@Override
 	public void getSubItems(Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_)
 	{
@@ -39,7 +39,6 @@ public class ItemCreativeChestGenerator extends ItemCreative
 		p_150895_3_.add(is);
 	}
 
-	
 	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
@@ -49,8 +48,8 @@ public class ItemCreativeChestGenerator extends ItemCreative
 		if (nbt != null)
 		{
 			ChestCategory selectedCategory = ChestCategory.values()[nbt.getInteger("category")];
-			par3List.add("Category: " + selectedCategory.getName());
-			par3List.add("Shift click to change category");
+			par3List.add(I18n.format("text.miscellaneous.category", selectedCategory.getName()));
+			par3List.add(I18n.format("text.miscellaneous.shiftCategory"));
 		}
 	}
 

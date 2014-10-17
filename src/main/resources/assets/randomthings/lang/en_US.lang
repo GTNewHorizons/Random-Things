@@ -99,12 +99,33 @@ text.miscellaneous.entityName=Entity Name
 text.miscellaneous.connectedTo=Connected to
 text.miscellaneous.invalidArguments=Invalid arguments
 text.miscellaneous.setBonus=Set-Bonus:
+text.miscellaneous.opOnly=Operators only
+text.miscellaneous.creativeOnly=Creative only
+text.miscellaneous.category=Category: %s
+text.miscellaneous.shiftCategory=Shift click to change category
+text.miscellaneous.save=Save
+
+text.miscellaneous.whiteList=Whitelist
+text.miscellaneous.blackList=Blacklist
+
+text.miscellaneous.yes=Yes
+text.miscellaneous.no=No
+
+text.onlineDetector.detectingNobody=Detecting Nobody
+text.onlineDetector.detecting="Detecting %s"
 
 text.miscellaneous.ignoreOreDict=Ignore ore dictionary
 text.miscellaneous.useOreDict=Use ore dictionary
 
 text.miscellaneous.ignoreMetadata=Ignore metadata
 text.miscellaneous.useMetadata=Use metadata
+
+text.miscellaneous.noTarget=No target selected (Shift click on a block)
+text.miscellaneous.target.x=Target-X: %d
+text.miscellaneous.target.y=Target-Y: %d
+text.miscellaneous.target.z=Target-Z: %d
+
+text.spectre.soulSolid=Soul Solid
 
 text.dyed=Dyed %s
 text.color.black=Black
@@ -131,6 +152,9 @@ text.magneticForce.invalidUsername=Invalid Username
 text.magneticForce.noRights=No right
 text.magneticForce.notYourself=Not to yourself
 
+text.enderLetter.noReceiver=No Receiver set
+text.enderLetter.receiver=Receiver: %s
+text.enderLetter.sender=Sender: %s
 text.enderLetter.invalidreceiver=You have specified an invalid receiver
 text.enderLetter.empty=You can't send an empty letter
 
