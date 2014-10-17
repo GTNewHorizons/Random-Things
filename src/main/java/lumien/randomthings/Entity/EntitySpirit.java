@@ -121,9 +121,10 @@ public class EntitySpirit extends EntityMob
 	}
 
 	@Override
-	protected void dropFewItems(boolean par1, int par2)
+	protected void dropFewItems(boolean par1, int looting)
 	{
-		this.entityDropItem(new ItemStack(ModItems.ingredients, this.rand.nextInt(2), 3), 0.0F);
+		int amount = this.rand.nextInt(3) + this.rand.nextInt(1 + looting);
+		this.entityDropItem(new ItemStack(ModItems.ingredients, amount, 3), 0.0F);
 	}
 
 	/**
