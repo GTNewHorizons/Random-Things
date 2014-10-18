@@ -16,6 +16,7 @@ tile.lapisLamp.name=青金石灯
 tile.dyeingMachine.name=混色机器
 tile.spiritRod.name=灵魂手柄
 tile.imbuingStation.name=激素药水酿造台
+tile.spectreGlass.name=灵魂玻璃
 
 tile.spectreBlock.name=幽灵方块
 tile.spectreBlock.black.name=黑色幽灵方块
@@ -99,12 +100,33 @@ text.miscellaneous.entityName=实体名称
 text.miscellaneous.connectedTo=连接到
 text.miscellaneous.invalidArguments=无效的数据
 text.miscellaneous.setBonus=设定奖励:
+text.miscellaneous.opOnly=仅管理员
+text.miscellaneous.creativeOnly=仅创造模式
+text.miscellaneous.category=种类: %s
+text.miscellaneous.shiftCategory=Shift点击改变种类
+text.miscellaneous.save=保存
+
+text.miscellaneous.whiteList=白名单
+text.miscellaneous.blackList=黑名单
+
+text.miscellaneous.yes=是
+text.miscellaneous.no=否
+
+text.onlineDetector.detectingNobody=未探测到任何玩家
+text.onlineDetector.detecting="探测到玩家%s"
 
 text.miscellaneous.ignoreOreDict=无视矿物辞典
 text.miscellaneous.useOreDict=使用矿物辞典
 
 text.miscellaneous.ignoreMetadata=无视MetaData
 text.miscellaneous.useMetadata=使用MetaData
+
+text.miscellaneous.noTarget=无目标锁定(Shift点击方块锁定)
+text.miscellaneous.target.x=目标-X: %d
+text.miscellaneous.target.y=目标-Y: %d
+text.miscellaneous.target.z=目标-Z: %d
+
+text.spectre.soulSolid=灵魂实体
 
 text.dyed=混合成 %s
 text.color.black=黑色
@@ -131,6 +153,9 @@ text.magneticForce.invalidUsername=无效的用户名
 text.magneticForce.noRights=没有权利
 text.magneticForce.notYourself=不能指向你自己
 
+text.enderLetter.noReceiver=尚未收件人
+text.enderLetter.receiver=收件人: %s
+text.enderLetter.sender=寄件人: %s
 text.enderLetter.invalidreceiver=你填写了一个无效的收件人
 text.enderLetter.empty=你不能寄出空的邮件
 
