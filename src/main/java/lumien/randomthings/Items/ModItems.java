@@ -33,6 +33,7 @@ public class ModItems
 	public static ItemSpectreArmor spectreBoots;
 	public static ItemSpectreSword spectreSword;
 	public static ItemSpiritBinder spiritBinder;
+	public static ItemGinto ginto;
 
 	public static void init()
 	{
@@ -82,6 +83,8 @@ public class ModItems
 			creativeChestGenerator = new ItemCreativeChestGenerator();
 		if (ConfigItems.soundRecorder)
 			soundRecorder = new ItemSoundRecorder();
+		if (ConfigItems.ginto)
+			ginto = new ItemGinto();
 		
 		ingredients = new ItemIngredient();
 		filter = new ItemFilter();

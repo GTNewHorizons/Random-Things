@@ -30,11 +30,15 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.ClientTickHandler;
 import lumien.randomthings.Client.Renderer.RenderHealingOrb;
 import lumien.randomthings.Client.Renderer.RenderItemCollector;
+import lumien.randomthings.Client.Renderer.RenderReviveCircle;
+import lumien.randomthings.Client.Renderer.RenderSoul;
 import lumien.randomthings.Client.Renderer.RenderSpirit;
 import lumien.randomthings.Client.Renderer.RenderWhitestone;
 import lumien.randomthings.Client.Renderer.RenderWirelessLever;
 import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.EntityHealingOrb;
+import lumien.randomthings.Entity.EntityReviveCircle;
+import lumien.randomthings.Entity.EntitySoul;
 import lumien.randomthings.Entity.EntitySpirit;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.OverrideUtils;
@@ -65,6 +69,8 @@ public class ClientProxy extends CommonProxy
 
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpirit.class, new RenderSpirit(new ModelSlime(16), new ModelSlime(0), 0.25f));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHealingOrb.class, new RenderHealingOrb());
+		RenderingRegistry.registerEntityRenderingHandler(EntitySoul.class, new RenderSoul());
+		RenderingRegistry.registerEntityRenderingHandler(EntityReviveCircle.class, new RenderReviveCircle());
 		
 		RenderingRegistry.registerBlockHandler(new RenderWirelessLever());
 

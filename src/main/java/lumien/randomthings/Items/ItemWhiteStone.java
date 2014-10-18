@@ -29,7 +29,7 @@ public class ItemWhiteStone extends ItemBase
 
 		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(this, 1, 0), 1, 1, ConfigDungeonLoot.WHITESTONE_CHANCE));
 	}
-	
+
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
@@ -115,7 +115,6 @@ public class ItemWhiteStone extends ItemBase
 		}
 	}
 
-	
 	@Override
 	public void getSubItems(Item p_150895_1_, CreativeTabs p_150895_2_, List p_150895_3_)
 	{

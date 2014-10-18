@@ -21,6 +21,7 @@ import lumien.randomthings.Configuration.RTConfiguration;
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.EntityHealingOrb;
+import lumien.randomthings.Entity.EntitySoul;
 import lumien.randomthings.Entity.EntitySpirit;
 import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
 import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
@@ -94,6 +95,7 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
@@ -271,7 +273,7 @@ public class RTEventHandler
 	{
 		if (ConfigItems.dropFilter)
 		{
-			if (event.entityPlayer != null)
+			if (!event.entityPlayer.worldObj.isRemote && event.entityPlayer != null)
 			{
 				InventoryPlayer playerInventory = event.entityPlayer.inventory;
 				if (playerInventory != null)
@@ -449,6 +451,11 @@ public class RTEventHandler
 	{
 		if (!event.entity.worldObj.isRemote)
 		{
+			if (event.entityLiving instanceof EntityPlayer)
+			{
+				EntityPlayer player = ((EntityPlayer)event.entityLiving);
+				player.worldObj.spawnEntityInWorld(new EntitySoul(player.worldObj,player.posX,player.posY,player.posZ,player.getGameProfile().getName()));
+			}
 			if (ConfigItems.whitestone)
 			{
 				if (event.entityLiving instanceof EntityPlayer && !event.source.canHarmInCreative())

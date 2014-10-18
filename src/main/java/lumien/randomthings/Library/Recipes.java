@@ -142,7 +142,11 @@ public class Recipes
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.biomeCapsule), "dte", "qgq", "ooo", 'd', "blockDiamond", 'e', "gemEmerald", 't', iTransformationCore, 'q', "gemQuartz", 'g', "blockGlass", 'o', iObsidian));
 		if (ConfigItems.biomePainter)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.biomePainter), "xtx", "xwx", "xox", 't', iTransformationCore, 'w', new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), 'o', "stickObsidian"));
-
+		if (ConfigItems.ginto)
+		{
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ginto,1,0),"ixi","xsx",'i',"ingotIron",'s',iSpectreIron,'e',iEctoplasm));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ginto,1,1),"xex","xgx",'e',iEctoplasm,'g',new ItemStack(ModItems.ginto,1,0)));
+		}
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 0), "xrx", "rpr", "xrx", 'r', "dyeRed", 'p', iPaper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ItemFilter.standardItemFilter, "xrx", "rpr", "xrx", 'r', "dyeYellow", 'p', iPaper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 2), "xrx", "rpr", "xrx", 'r', "dyeBlue", 'p', iPaper));
