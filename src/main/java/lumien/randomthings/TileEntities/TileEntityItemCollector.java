@@ -61,25 +61,28 @@ public class TileEntityItemCollector extends TileEntity
 
 						for (EntityItem ei : items)
 						{
-							ItemStack rest = TileEntityHopper.func_145889_a((IInventory) te, ei.getEntityItem(), Facing.oppositeSide[facing.ordinal()]);
-
-							if (rest == null || !rest.equals(ei.getEntityItem()))
+							if (!ei.isDead)
 							{
-								if (tickRate > 2)
+								ItemStack rest = TileEntityHopper.func_145889_a((IInventory) te, ei.getEntityItem(), Facing.oppositeSide[facing.ordinal()]);
+
+								if (rest == null || !rest.equals(ei.getEntityItem()))
 								{
-									tickRate--;
+									if (tickRate > 2)
+									{
+										tickRate--;
+									}
 								}
-							}
 
-							if (rest == null)
-							{
-								ei.setDead();
+								if (rest == null)
+								{
+									ei.setDead();
+								}
+								else if (!rest.equals(ei.getEntityItem()))
+								{
+									ei.setEntityItemStack(rest);
+								}
+								te.markDirty();
 							}
-							else if (!rest.equals(ei.getEntityItem()))
-							{
-								ei.setEntityItemStack(rest);
-							}
-							te.markDirty();
 						}
 					}
 				}
