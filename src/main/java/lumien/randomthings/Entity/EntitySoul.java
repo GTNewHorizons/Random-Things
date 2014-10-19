@@ -129,7 +129,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 			{
 				if (MinecraftServer.getServer().getConfigurationManager().func_152612_a(playerName).getHealth() > 0)
 				{
-					//this.setDead();
+					this.setDead();
 				}
 			}
 		}
