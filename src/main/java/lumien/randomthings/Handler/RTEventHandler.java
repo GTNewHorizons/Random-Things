@@ -12,6 +12,7 @@ import org.lwjgl.opengl.GL12;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import li.cil.oc.api.machine.ExecutionResult.Sleep;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Client.RenderUtils;
@@ -23,6 +24,7 @@ import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.EntityHealingOrb;
 import lumien.randomthings.Entity.EntitySoul;
 import lumien.randomthings.Entity.EntitySpirit;
+import lumien.randomthings.Handler.Bloodmoon.BloodmoonSpawner;
 import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
 import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Handler.Spectre.SpectreHandler;
@@ -64,6 +66,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayer.EnumStatus;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -73,6 +76,8 @@ import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.WorldProvider;
@@ -95,6 +100,7 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -120,6 +126,19 @@ public class RTEventHandler
 	}
 
 	@SubscribeEvent
+	public void sleepInBed(PlayerSleepInBedEvent event)
+	{
+		if (Settings.BLOODMOON_NOSLEEP)
+		{
+			if (RandomThings.proxy.isBloodmoon())
+			{
+				event.result = EnumStatus.OTHER_PROBLEM;
+				event.entityPlayer.addChatMessage(new ChatComponentTranslation("text.bloodmoon.nosleep").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+			}
+		}
+	}
+
+	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void fogColor(FogColors event)
 	{
@@ -127,7 +146,7 @@ public class RTEventHandler
 		{
 			event.red = Math.max(event.red - ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
 			event.green = Math.max(event.green - ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
-			event.blue = Math.max(event.blue -ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
+			event.blue = Math.max(event.blue - ClientBloodmoonHandler.INSTANCE.fogRemove, 0);
 		}
 	}
 
@@ -325,7 +344,7 @@ public class RTEventHandler
 			RandomThings.instance.notificationHandler.drawNotificationOverlay(event.partialTicks);
 		}
 	}
-	
+
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void entityJoinWorldClient(EntityJoinWorldEvent event)
@@ -343,7 +362,7 @@ public class RTEventHandler
 		{
 			ServerBloodmoonHandler.INSTANCE.playerJoinedWorld((EntityPlayer) event.entity);
 		}
-		
+
 		if (VanillaChanges.THROWABLES_MOTION)
 		{
 			if (event.entity instanceof EntityThrowable)
@@ -453,8 +472,8 @@ public class RTEventHandler
 		{
 			if (event.entityLiving instanceof EntityPlayer)
 			{
-				EntityPlayer player = ((EntityPlayer)event.entityLiving);
-				player.worldObj.spawnEntityInWorld(new EntitySoul(player.worldObj,player.posX,player.posY,player.posZ,player.getGameProfile().getName()));
+				EntityPlayer player = ((EntityPlayer) event.entityLiving);
+				player.worldObj.spawnEntityInWorld(new EntitySoul(player.worldObj, player.posX, player.posY, player.posZ, player.getGameProfile().getName()));
 			}
 			if (ConfigItems.whitestone)
 			{

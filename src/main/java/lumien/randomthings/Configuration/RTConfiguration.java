@@ -32,6 +32,7 @@ public class RTConfiguration
 	public static Property bloodMoon_spawnSpeed;
 	public static Property bloodMoon_spawnLimitMult;
 	public static Property bloodMoon_spawnRange;
+	public static Property bloodMoon_noSleep;
 	public static Property bloodMoon_visual_redMoon;
 	public static Property bloodMoon_visual_redLight;
 	public static Property bloodMoon_visual_blackFog;
@@ -66,6 +67,7 @@ public class RTConfiguration
 		bloodMoon_spawnLimitMult = config.get("Settings", "BloodMoonSpawnLimitMult", 3, "With which number should the default entity limit be multiplicated on a blood moon");
 		bloodMoon_spawnRange = config.get("Settings", "BloodMoonSpawnRange", 3, "How close can enemys spawn next to the player on a bloodmoon in blocks? (Vanilla=24)");
 		bloodMoon_chance = config.get("Settings", "BloodMoonChance", 0.05, "The chance of a bloodmoon happening (0=Never;1=Every night;0.05=5% of all nights)");
+		bloodMoon_noSleep = config.get("Settings", "BloodMoonNoSleep", true,"Whether players are NOT allowed to sleep during a bloodmoon");
 		bloodMoon_visual_redMoon = config.get("Settings", "BloodMoonRedMoon", true, "Whether the moon will be red on a Bloodmoon");
 		bloodMoon_visual_redLight = config.get("Settings", "BloodMoonRedLight", true, "Whether light will be tinted red on a Bloodmoon");
 		bloodMoon_visual_blackFog = config.get("Settings", "BloodMoonBlackFog", true, "Whether fog will turn black on a Bloodmoon to look better with the red sky");
@@ -150,7 +152,8 @@ public class RTConfiguration
 		Settings.BLOODMOON_SPAWNLIMIT_MULTIPLIER = bloodMoon_spawnLimitMult.getInt(3);
 		Settings.BLOODMOON_SPAWNRANGE = bloodMoon_spawnRange.getInt(4);
 		Settings.BLOODMOON_SPAWNSPEED = bloodMoon_spawnSpeed.getInt(3);
-
+		Settings.BLOODMOON_NOSLEEP = bloodMoon_noSleep.getBoolean(true);
+		
 		Settings.BLOODMOON_VISUAL_REDMOON = bloodMoon_visual_redMoon.getBoolean();
 		Settings.BLOODMOON_VISUAL_REDLIGHT = bloodMoon_visual_redLight.getBoolean();
 		Settings.BLOODMOON_VISUAL_BLACKFOG = bloodMoon_visual_blackFog.getBoolean();

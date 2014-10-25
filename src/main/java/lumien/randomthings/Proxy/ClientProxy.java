@@ -41,6 +41,8 @@ import lumien.randomthings.Entity.EntityHealingOrb;
 import lumien.randomthings.Entity.EntityReviveCircle;
 import lumien.randomthings.Entity.EntitySoul;
 import lumien.randomthings.Entity.EntitySpirit;
+import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
+import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Items.ItemGinto;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.OverrideUtils;
@@ -58,6 +60,12 @@ public class ClientProxy extends CommonProxy
 	public void registerTickHandler()
 	{
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
+	}
+	
+	@Override
+	public boolean isBloodmoon()
+	{
+		return ClientBloodmoonHandler.INSTANCE.isBloodmoonActive();
 	}
 	
 	@Override
