@@ -63,7 +63,7 @@ public class LetterHandler
 						writeToNBT();
 						RandomThings.instance.saveNBT();
 
-						PacketHandler.INSTANCE.sendTo(new MessageNotification("Received Ender Letter", "Sender: " + toCheck.stackTagCompound.getString("sender"), 100,new ItemStack(ModItems.enderLetter, 1, 1)), (EntityPlayerMP) receiverEntity);
+						PacketHandler.INSTANCE.sendTo(new MessageNotification("Received Ender Letter", "Sender: " + toCheck.stackTagCompound.getString("sender"), 100, new ItemStack(ModItems.enderLetter, 1, 1)), (EntityPlayerMP) receiverEntity);
 					}
 				}
 			}

@@ -8,8 +8,8 @@ public class Notification
 	String description;
 	int duration;
 	ItemStack icon;
-	
-	public Notification(String title,String description,int duration,ItemStack icon)
+
+	public Notification(String title, String description, int duration, ItemStack icon)
 	{
 		this.title = title;
 		this.description = description;

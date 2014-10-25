@@ -2,9 +2,6 @@ package lumien.randomthings;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
-import java.util.Set;
-
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
@@ -36,16 +33,11 @@ import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Potions.ModPotions;
 import lumien.randomthings.Proxy.CommonProxy;
 import lumien.randomthings.TileEntities.ModTileEntities;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
-import cpw.mods.fml.client.IModGuiFactory;
-import cpw.mods.fml.client.config.GuiConfig;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;

@@ -47,30 +47,30 @@ public class GuiDyeingMachine extends GuiContainer
 			this.p -= 0.02f;
 			Color currentObj = new Color(currentColor);
 			Color targetObj = new Color(targetColor);
-			
-			currentColor = new Color(colorMod*(currentObj.getRed() * p + targetObj.getRed() * (1 - p)), colorMod*(currentObj.getGreen() * p + targetObj.getGreen() * (1 - p)), colorMod*(currentObj.getBlue() * p + targetObj.getBlue() * (1 - p))).getRGB();
+
+			currentColor = new Color(colorMod * (currentObj.getRed() * p + targetObj.getRed() * (1 - p)), colorMod * (currentObj.getGreen() * p + targetObj.getGreen() * (1 - p)), colorMod * (currentObj.getBlue() * p + targetObj.getBlue() * (1 - p))).getRGB();
 		}
-		
+
 		if (p <= 0f)
 		{
 			this.currentColor = this.targetColor;
 			this.p = 1;
 		}
-		
-		if (inventorySlots.getSlot(1).getHasStack() && p==1)
+
+		if (inventorySlots.getSlot(1).getHasStack() && p == 1)
 		{
 			ItemStack dye = inventorySlots.getSlot(1).getStack();
 
 			int[] oreDictIds = OreDictionary.getOreIDs(dye);
 
 			int checkDye = Colors.getDyeColor(dye);
-			
-			if (checkDye!=0)
+
+			if (checkDye != 0)
 			{
 				this.targetColor = checkDye;
 			}
 		}
-		else if (!inventorySlots.getSlot(1).getHasStack() && p==1)
+		else if (!inventorySlots.getSlot(1).getHasStack() && p == 1)
 		{
 			targetColor = 9145227;
 		}

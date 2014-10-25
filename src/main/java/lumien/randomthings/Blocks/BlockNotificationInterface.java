@@ -10,8 +10,8 @@ public class BlockNotificationInterface extends BlockContainerBase
 
 	public BlockNotificationInterface()
 	{
-		super("notificationInterface",Material.rock);
-		
+		super("notificationInterface", Material.rock);
+
 		this.setCreativeTab(RandomThings.creativeTab);
 		this.setHardness(0.7f);
 	}

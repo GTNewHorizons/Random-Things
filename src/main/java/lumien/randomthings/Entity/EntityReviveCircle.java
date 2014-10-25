@@ -58,7 +58,7 @@ public class EntityReviveCircle extends Entity
 					if (player.getHealth() <= 0)
 					{
 						EntityPlayerMP revived = player.playerNetServerHandler.playerEntity = MinecraftServer.getServer().getConfigurationManager().respawnPlayer(player, 0, false);
-						if (revived.worldObj.provider.dimensionId!=this.dimension)
+						if (revived.worldObj.provider.dimensionId != this.dimension)
 						{
 							MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(revived, this.worldObj.provider.dimensionId, new TeleporterSpectre((WorldServer) this.worldObj));
 						}

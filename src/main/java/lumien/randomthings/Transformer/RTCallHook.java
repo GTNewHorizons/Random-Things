@@ -16,17 +16,17 @@ public class RTCallHook implements IFMLCallHook
 
 	@Override
 	public Void call() throws Exception
-	{	
+	{
 		File f = new File("config/RandomThings.cfg");
 		config = new Configuration(f);
 		config.load();
-		VanillaChanges.FASTER_LEAVEDECAY = config.get("VanillaChanges", "FasterLeaveDecay", true ,"Leaves will decay much faster when no longer connected to a log").getBoolean(true);
-		VanillaChanges.HARDCORE_DARKNESS = config.get("VanillaChanges", "Hardcore Darkness", false ,"The minimum light will be removed so if there's no light source it's actually going to be completely black").getBoolean(false);
+		VanillaChanges.FASTER_LEAVEDECAY = config.get("VanillaChanges", "FasterLeaveDecay", true, "Leaves will decay much faster when no longer connected to a log").getBoolean(true);
+		VanillaChanges.HARDCORE_DARKNESS = config.get("VanillaChanges", "Hardcore Darkness", false, "The minimum light will be removed so if there's no light source it's actually going to be completely black").getBoolean(false);
 		ConfigBlocks.wirelessLever = config.get("Blocks", "WirelessLever", true).getBoolean(true);
-		
+
 		if (config.hasChanged())
 			config.save();
-		
+
 		return null;
 	}
 

@@ -12,11 +12,11 @@ public class SlotLocked extends Slot
 		super(par1iInventory, par2, par3, par4);
 		// TODO Auto-generated constructor stub
 	}
-	
-    @Override
+
+	@Override
 	public boolean canTakeStack(EntityPlayer par1EntityPlayer)
-    {
-        return false;
-    }
+	{
+		return false;
+	}
 
 }

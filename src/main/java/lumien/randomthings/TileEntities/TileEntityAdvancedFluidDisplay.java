@@ -83,10 +83,10 @@ public class TileEntityAdvancedFluidDisplay extends TileEntity
 				fluids[i] = nbt.getString("fluid" + i);
 			}
 		}
-		
-		for (int i=0;i<flowing.length;i++)
+
+		for (int i = 0; i < flowing.length; i++)
 		{
-			flowing[i] = nbt.getBoolean("flowing"+i);
+			flowing[i] = nbt.getBoolean("flowing" + i);
 		}
 	}
 }

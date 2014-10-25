@@ -17,8 +17,8 @@ public class BlockItemCollector extends BlockContainerBase
 
 	protected BlockItemCollector()
 	{
-		super("itemCollector",Material.rock);
-		this.blockHardness=1.5F;
+		super("itemCollector", Material.rock);
+		this.blockHardness = 1.5F;
 
 		this.setCreativeTab(RandomThings.creativeTab);
 		this.setBlockTextureName("RandomThings:itemCollector/itemCollector");
@@ -40,10 +40,10 @@ public class BlockItemCollector extends BlockContainerBase
 			worldObj.setBlockToAir(posX, posY, posZ);
 		}
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockOnSide(World worldObj, int posX, int posY, int posZ, int side)
-    {
+	{
 		EnumFacing facing = BlockDispenser.func_149937_b(Facing.oppositeSide[side]);
 
 		int targetX = posX + facing.getFrontOffsetX();
@@ -58,7 +58,7 @@ public class BlockItemCollector extends BlockContainerBase
 		{
 			return true;
 		}
-    }
+	}
 
 	@Override
 	public int getRenderType()

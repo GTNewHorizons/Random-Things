@@ -1,7 +1,5 @@
 package lumien.randomthings.Network.Messages;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.world.World;
@@ -14,10 +12,10 @@ public class MessageItemCollector implements IRTMessage
 {
 	int posX, posY, posZ;
 	int rangeX, rangeY, rangeZ;
-	
+
 	public MessageItemCollector()
 	{
-		
+
 	}
 
 	public MessageItemCollector(int posX, int posY, int posZ, int rangeX, int rangeY, int rangeZ)
@@ -30,7 +28,7 @@ public class MessageItemCollector implements IRTMessage
 		this.rangeY = rangeY;
 		this.rangeZ = rangeZ;
 	}
-	
+
 	public MessageItemCollector(TileEntityAdvancedItemCollector te)
 	{
 		this.posX = te.xCoord;
@@ -75,7 +73,7 @@ public class MessageItemCollector implements IRTMessage
 		if (worldObj.getBlock(posX, posY, posZ) == ModBlocks.advancedItemCollector)
 		{
 			TileEntityAdvancedItemCollector te = (TileEntityAdvancedItemCollector) worldObj.getTileEntity(posX, posY, posZ);
-			if (te !=null)
+			if (te != null)
 			{
 				te.setRange(rangeX, rangeY, rangeZ);
 				te.markDirty();

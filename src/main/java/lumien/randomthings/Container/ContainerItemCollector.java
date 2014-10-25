@@ -12,10 +12,10 @@ public class ContainerItemCollector extends Container
 {
 	TileEntityAdvancedItemCollector te;
 
-	public ContainerItemCollector(InventoryPlayer inventoryPlayer,TileEntityAdvancedItemCollector te)
+	public ContainerItemCollector(InventoryPlayer inventoryPlayer, TileEntityAdvancedItemCollector te)
 	{
 		this.te = te;
-		this.addSlotToContainer(new SlotFilter(te.getInventory(),0,80,99,1));
+		this.addSlotToContainer(new SlotFilter(te.getInventory(), 0, 80, 99, 1));
 		bindPlayerInventory(inventoryPlayer);
 	}
 
@@ -34,7 +34,7 @@ public class ContainerItemCollector extends Container
 			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 184));
 		}
 	}
-	
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
 	{
@@ -149,13 +149,13 @@ public class ContainerItemCollector extends Container
 				if (itemstack1 == null && slot.isItemValid(par1ItemStack))
 				{
 					if (1 < par1ItemStack.stackSize)
-					{	
+					{
 						ItemStack copy = par1ItemStack.copy();
 						copy.stackSize = 1;
 						slot.putStack(copy);
-						
-						par1ItemStack.stackSize-=1;
-						flag1=true;
+
+						par1ItemStack.stackSize -= 1;
+						flag1 = true;
 						break;
 					}
 					else
@@ -180,7 +180,6 @@ public class ContainerItemCollector extends Container
 		}
 		return flag1;
 	}
-	
 
 	@Override
 	public boolean canInteractWith(EntityPlayer par1EntityPlayer)

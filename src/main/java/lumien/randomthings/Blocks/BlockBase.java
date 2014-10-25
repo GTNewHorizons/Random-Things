@@ -21,15 +21,15 @@ public class BlockBase extends Block
 		GameRegistry.registerBlock(this, blockName);
 	}
 
-	protected BlockBase(String blockName,Material material,Class itemBlock)
+	protected BlockBase(String blockName, Material material, Class itemBlock)
 	{
 		super(material);
 		this.blockName = blockName;
-		
+
 		this.setCreativeTab(RandomThings.creativeTab);
 		this.setBlockName(blockName);
-		this.setBlockTextureName("RandomThings:"+blockName);
-		
-		GameRegistry.registerBlock(this, itemBlock,blockName);
+		this.setBlockTextureName("RandomThings:" + blockName);
+
+		GameRegistry.registerBlock(this, itemBlock, blockName);
 	}
 }

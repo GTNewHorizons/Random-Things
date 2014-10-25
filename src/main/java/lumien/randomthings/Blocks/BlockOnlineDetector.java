@@ -26,8 +26,8 @@ public class BlockOnlineDetector extends BlockContainerBase
 
 	protected BlockOnlineDetector()
 	{
-		super("onlineDetector",Material.rock);
-		
+		super("onlineDetector", Material.rock);
+
 		this.blockHardness = 2.0F;
 		icons = new IIcon[2];
 	}
@@ -38,38 +38,38 @@ public class BlockOnlineDetector extends BlockContainerBase
 		icons[0] = ir.registerIcon("RandomThings:onlineDetector/offline");
 		icons[1] = ir.registerIcon("RandomThings:onlineDetector/online");
 	}
-	
+
 	@Override
 	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
-    {
-        return true;
-    }
-	
+	{
+		return true;
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
-    public boolean addDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
-    {
+	public boolean addDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
+	{
 		byte b0 = 4;
 
-        for (int i1 = 0; i1 < b0; ++i1)
-        {
-            for (int j1 = 0; j1 < b0; ++j1)
-            {
-                for (int k1 = 0; k1 < b0; ++k1)
-                {
-                    double d0 = x + (i1 + 0.5D) / b0;
-                    double d1 = y + (j1 + 0.5D) / b0;
-                    double d2 = z + (k1 + 0.5D) / b0;
-                    
-                    EntityDiggingFX particle = (new EntityDiggingFX(world, d0, d1, d2, d0 - x - 0.5D, d1 - y - 0.5D, d2 - z - 0.5D, this, 0)).applyColourMultiplier(x, y, z);
-                    particle.setParticleIcon(getIcon(world,x,y,z,0));
-                    effectRenderer.addEffect(particle);
-                }
-            }
-        }
-        
-        return true;
-    }
+		for (int i1 = 0; i1 < b0; ++i1)
+		{
+			for (int j1 = 0; j1 < b0; ++j1)
+			{
+				for (int k1 = 0; k1 < b0; ++k1)
+				{
+					double d0 = x + (i1 + 0.5D) / b0;
+					double d1 = y + (j1 + 0.5D) / b0;
+					double d2 = z + (k1 + 0.5D) / b0;
+
+					EntityDiggingFX particle = (new EntityDiggingFX(world, d0, d1, d2, d0 - x - 0.5D, d1 - y - 0.5D, d2 - z - 0.5D, this, 0)).applyColourMultiplier(x, y, z);
+					particle.setParticleIcon(getIcon(world, x, y, z, 0));
+					effectRenderer.addEffect(particle);
+				}
+			}
+		}
+
+		return true;
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -128,8 +128,8 @@ public class BlockOnlineDetector extends BlockContainerBase
 	@Override
 	public IIcon getIcon(IBlockAccess ba, int posX, int posY, int posZ, int side)
 	{
-		int metadata=ba.getBlockMetadata(posX, posY, posZ);
-		if (metadata==1)
+		int metadata = ba.getBlockMetadata(posX, posY, posZ);
+		if (metadata == 1)
 		{
 			return icons[1];
 		}
@@ -164,15 +164,15 @@ public class BlockOnlineDetector extends BlockContainerBase
 	@Override
 	public int isProvidingStrongPower(IBlockAccess blockAccess, int posX, int posY, int posZ, int side)
 	{
-		int metadata=blockAccess.getBlockMetadata(posX, posY, posZ);
-		return metadata==1?15:0;
+		int metadata = blockAccess.getBlockMetadata(posX, posY, posZ);
+		return metadata == 1 ? 15 : 0;
 	}
 
 	@Override
 	public int isProvidingWeakPower(IBlockAccess blockAccess, int posX, int posY, int posZ, int side)
 	{
-		int metadata=blockAccess.getBlockMetadata(posX, posY, posZ);
-		return metadata==1?15:0;
+		int metadata = blockAccess.getBlockMetadata(posX, posY, posZ);
+		return metadata == 1 ? 15 : 0;
 	}
 
 	@Override

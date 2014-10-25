@@ -30,7 +30,7 @@ public class SoundRecorderHandler
 				{
 					playedSounds.remove(9);
 				}
-				playedSounds.add(0,event.sound.getPositionedSoundLocation().getResourceDomain()+":"+event.sound.getPositionedSoundLocation().getResourcePath());
+				playedSounds.add(0, event.sound.getPositionedSoundLocation().getResourceDomain() + ":" + event.sound.getPositionedSoundLocation().getResourcePath());
 			}
 		}
 	}

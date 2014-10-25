@@ -1,7 +1,6 @@
 package lumien.randomthings.Blocks;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.TileEntities.TileEntityCreativePlayerInterface;
 import net.minecraft.block.material.Material;

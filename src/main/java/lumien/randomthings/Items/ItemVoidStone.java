@@ -1,10 +1,8 @@
 package lumien.randomthings.Items;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.GuiIds;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 

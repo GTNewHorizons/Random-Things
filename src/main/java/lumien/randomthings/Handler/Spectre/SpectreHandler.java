@@ -66,7 +66,7 @@ public class SpectreHandler extends WorldSavedData
 			{
 				WorldServer spectreWorld = MinecraftServer.getServer().worldServerForDimension(Settings.SPECTRE_DIMENSON_ID);
 				int coord = playerConnection.get(cubeOwner);
-				
+
 				if (operator.dimension != Settings.SPECTRE_DIMENSON_ID)
 				{
 					MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension((EntityPlayerMP) operator, Settings.SPECTRE_DIMENSON_ID, new TeleporterSpectre(spectreWorld));
@@ -230,7 +230,7 @@ public class SpectreHandler extends WorldSavedData
 	{
 		ArrayList<String> list = new ArrayList<String>();
 		list.addAll(playerConnection.keySet());
-		PacketHandler.INSTANCE.sendTo(new MessageSpectreData(list), (EntityPlayerMP)player);
+		PacketHandler.INSTANCE.sendTo(new MessageSpectreData(list), (EntityPlayerMP) player);
 	}
 
 }

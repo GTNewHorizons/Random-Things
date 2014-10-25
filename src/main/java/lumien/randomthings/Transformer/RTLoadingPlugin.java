@@ -32,7 +32,7 @@ public class RTLoadingPlugin implements IFMLLoadingPlugin
 	@Override
 	public void injectData(Map<String, Object> data)
 	{
-		IN_MCP = !(Boolean)data.get("runtimeDeobfuscationEnabled");
+		IN_MCP = !(Boolean) data.get("runtimeDeobfuscationEnabled");
 	}
 
 	@Override

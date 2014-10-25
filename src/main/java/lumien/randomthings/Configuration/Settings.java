@@ -19,21 +19,21 @@ public class Settings
 	public static float IMBUING_LENGTH = 200;
 
 	public static int IMBUE_DURATION = 20 * 60 * 5;
-	
+
 	public static int BIOME_CHARGE_TIME = 20;
-	
+
 	public static double DEMORPHER_RANGE = 10;
-	
+
 	public static int DECAY_SPEED = 7;
-	
+
 	public static int DECAY_FUZZ = 5;
-	
+
 	public static int BLOODMOON_SPAWNSPEED = 3;
 	public static int BLOODMOON_SPAWNLIMIT_MULTIPLIER = 3;
 	public static int BLOODMOON_SPAWNRANGE = 4; // 24
 	public static boolean BLOODMOON_NOSLEEP = true;
 	public static float BLOODMOON_CHANCE = 0.05f;
-	
+
 	public static boolean BLOODMOON_VISUAL_REDMOON = true;
 	public static boolean BLOODMOON_VISUAL_REDLIGHT = true;
 	public static boolean BLOODMOON_VISUAL_BLACKFOG = true;

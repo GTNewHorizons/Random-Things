@@ -19,26 +19,26 @@ public class ClientTickHandler
 	{
 		creativeColors = new int[255];
 		opColors = new int[255];
-		
+
 		for (int i = 0; i < 255; i++)
 		{
 			float h = i / 255F;
 			creativeColors[i] = new Color(Color.HSBtoRGB(h, 1f, 1f)).getRGB();
 		}
-		
+
 		for (int i = 0; i < 255; i++)
 		{
-			float h = i / 255F+0.5f;
+			float h = i / 255F + 0.5f;
 			h = Math.min(1, h);
 			opColors[i] = new Color(Color.HSBtoRGB(0, h, 1f)).getRGB();
 		}
 	}
-	
+
 	public static int getCurrentOPColor()
 	{
 		return opColors[counter];
 	}
-	
+
 	public static int getCurrentCreativeColor()
 	{
 		return creativeColors[counter];
@@ -47,7 +47,7 @@ public class ClientTickHandler
 	@SubscribeEvent
 	public void onClientTick(ClientTickEvent event)
 	{
-		if (event.phase == Phase.END &&  Minecraft.getMinecraft().thePlayer!=null)
+		if (event.phase == Phase.END && Minecraft.getMinecraft().thePlayer != null)
 		{
 			if (counter >= creativeColors.length - 1)
 			{

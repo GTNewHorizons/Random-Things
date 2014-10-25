@@ -16,16 +16,16 @@ import net.minecraft.world.World;
 public class BlockDyeingMachine extends BlockContainerBase
 {
 	@SideOnly(Side.CLIENT)
-    private IIcon iconTop;
-    @SideOnly(Side.CLIENT)
-    private IIcon iconFront;
-    @SideOnly(Side.CLIENT)
-    private IIcon iconSide;
+	private IIcon iconTop;
+	@SideOnly(Side.CLIENT)
+	private IIcon iconFront;
+	@SideOnly(Side.CLIENT)
+	private IIcon iconSide;
 
 	public BlockDyeingMachine()
 	{
 		super("dyeingMachine", Material.wood);
-		
+
 		this.setBlockTextureName("RandomThings:dyeingMachine/dyeingMachine");
 		this.setStepSound(soundTypeWood);
 		this.setHardness(0.7F);
@@ -46,19 +46,20 @@ public class BlockDyeingMachine extends BlockContainerBase
 		}
 		return true;
 	}
-	
+
 	@Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int p_149691_1_, int p_149691_2_)
-    {
-        return p_149691_1_ == 1 ? this.iconTop : (p_149691_1_ == 0 ? Blocks.planks.getIcon(p_149691_1_,1) : (p_149691_1_ != 2 && p_149691_1_ != 4 ? this.iconSide : this.iconFront));
-    }
-	
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister p_149651_1_)
-    {
-        this.iconSide = p_149651_1_.registerIcon(this.getTextureName() + "_side");
-        this.iconTop = p_149651_1_.registerIcon(this.getTextureName() + "_top");
-        this.iconFront = p_149651_1_.registerIcon(this.getTextureName() + "_front");
-    }
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int p_149691_1_, int p_149691_2_)
+	{
+		return p_149691_1_ == 1 ? this.iconTop : (p_149691_1_ == 0 ? Blocks.planks.getIcon(p_149691_1_, 1) : (p_149691_1_ != 2 && p_149691_1_ != 4 ? this.iconSide : this.iconFront));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister p_149651_1_)
+	{
+		this.iconSide = p_149651_1_.registerIcon(this.getTextureName() + "_side");
+		this.iconTop = p_149651_1_.registerIcon(this.getTextureName() + "_top");
+		this.iconFront = p_149651_1_.registerIcon(this.getTextureName() + "_front");
+	}
 }

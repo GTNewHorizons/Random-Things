@@ -1,10 +1,8 @@
 package lumien.randomthings.Handler;
 
-import net.minecraft.client.Minecraft;
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
-import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 
 public class LightmapHandler
 {

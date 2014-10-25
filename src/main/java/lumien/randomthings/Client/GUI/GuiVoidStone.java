@@ -11,13 +11,12 @@ import net.minecraft.util.ResourceLocation;
 public class GuiVoidStone extends GuiContainer
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/voidstone.png");
-	
-	
+
 	public GuiVoidStone(InventoryPlayer playerInventory)
 	{
 		super(new ContainerVoidStone(playerInventory));
 	}
-	
+
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{

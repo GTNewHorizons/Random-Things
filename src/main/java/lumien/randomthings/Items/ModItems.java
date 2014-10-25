@@ -21,12 +21,12 @@ public class ModItems
 	public static ItemOpSpectreKey opSpectreKey;
 	public static ItemSoundRecorder soundRecorder;
 	public static ItemImbue imbue;
-	
+
 	public static ItemCreativeSword creativeSword;
 	public static ItemCreativeGrower creativeGrower;
 	public static ItemCreativeChestGenerator creativeChestGenerator;
-	
-	public static ArmorMaterial spectreArmorMaterial = EnumHelper.addArmorMaterial("Spectre", 35, new int[]{3, 9, 7, 3}, 17);
+
+	public static ArmorMaterial spectreArmorMaterial = EnumHelper.addArmorMaterial("Spectre", 35, new int[] { 3, 9, 7, 3 }, 17);
 	public static ItemSpectreArmor spectreHelmet;
 	public static ItemSpectreArmor spectreChestplate;
 	public static ItemSpectreArmor spectreLeggings;
@@ -38,7 +38,7 @@ public class ModItems
 	public static void init()
 	{
 		RandomThings.instance.logger.debug("Initializing Items");
-		
+
 		if (ConfigItems.biomeCapsule)
 			biomeCapsule = new ItemBiomeCapsule();
 		if (ConfigItems.biomePainter)
@@ -74,7 +74,7 @@ public class ModItems
 			spiritBinder = new ItemSpiritBinder();
 		if (ConfigItems.imbue)
 			imbue = new ItemImbue();
-		
+
 		if (ConfigItems.creativeSword)
 			creativeSword = new ItemCreativeSword();
 		if (ConfigItems.creativeGrower)
@@ -85,7 +85,7 @@ public class ModItems
 			soundRecorder = new ItemSoundRecorder();
 		if (ConfigItems.ginto)
 			ginto = new ItemGinto();
-		
+
 		ingredients = new ItemIngredient();
 		filter = new ItemFilter();
 	}

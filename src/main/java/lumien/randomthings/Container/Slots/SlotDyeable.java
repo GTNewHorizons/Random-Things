@@ -25,9 +25,9 @@ public class SlotDyeable extends Slot
 		{
 			return false;
 		}
-		
+
 		Item item = par1ItemStack.getItem();
-		if (item.getClass()==Item.class)
+		if (item.getClass() == Item.class)
 		{
 			return true;
 		}

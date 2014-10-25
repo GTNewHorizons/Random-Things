@@ -63,7 +63,7 @@ public class ModBlocks
 			imbuingStation = new BlockImbuingStation();
 		if (ConfigBlocks.spectreGlass)
 			spectreGlass = new BlockSpectreGlass();
-		
+
 		spectreBlock = new BlockSpectreBlock();
 	}
 }

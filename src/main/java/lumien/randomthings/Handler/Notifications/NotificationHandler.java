@@ -55,7 +55,7 @@ public class NotificationHandler
 
 			if (displayCounter < 20)
 			{
-				drawY = (int) (teiler * ((float) (displayCounter + partialTickTime) - 20F));
+				drawY = (int) (teiler * (displayCounter + partialTickTime - 20F));
 			}
 			else if (displayCounter > currentNotification.duration + 20)
 			{

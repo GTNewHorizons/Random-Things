@@ -51,7 +51,7 @@ public class GuiButtonBooleanProperty extends GuiButton
 		this.gc = gc;
 		this.slot = slot;
 	}
-	
+
 	public void setValue(boolean value)
 	{
 		this.value = value;

@@ -2,22 +2,19 @@ package lumien.randomthings.Blocks.Spectre;
 
 import java.util.List;
 
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.Blocks.BlockBase;
 import lumien.randomthings.Blocks.ItemBlocks.ItemBlockColored;
 import lumien.randomthings.Library.Colors;
 import lumien.randomthings.Library.WorldUtils;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemCloth;
-import net.minecraft.item.ItemColored;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
@@ -28,11 +25,17 @@ public class BlockSpectreBlock extends BlockBase
 {
 	public BlockSpectreBlock()
 	{
-		super("spectreBlock",Material.rock,ItemBlockColored.class);
+		super("spectreBlock", Material.rock, ItemBlockColored.class);
 
 		this.lightValue = 15;
 		this.setBlockUnbreakable().setStepSound(soundTypeGlass);
 		this.setResistance(6000000.0F);
+	}
+
+	@Override
+	public boolean canEntityDestroy(IBlockAccess world, int x, int y, int z, Entity entity)
+	{
+		return false;
 	}
 
 	@Override
@@ -87,6 +90,12 @@ public class BlockSpectreBlock extends BlockBase
 	public boolean renderAsNormalBlock()
 	{
 		return false;
+	}
+
+	@Override
+	public int damageDropped(int p_149692_1_)
+	{
+		return p_149692_1_;
 	}
 
 	@Override

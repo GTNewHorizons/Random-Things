@@ -58,11 +58,11 @@ public class ItemBlockWirelessLever extends ItemBlock
 					double targetX = par1ItemStack.stackTagCompound.getDouble("targetX");
 					double targetY = par1ItemStack.stackTagCompound.getDouble("targetY");
 					double targetZ = par1ItemStack.stackTagCompound.getDouble("targetZ");
-					
+
 					double xCoord = player.posX;
 					double yCoord = player.posY;
 					double zCoord = player.posZ;
-					
+
 					Vector3d vec = new Vector3d(targetX - xCoord, targetY - yCoord, targetZ - zCoord);
 					for (double d = 0; d <= 1; d += 0.02d)
 					{

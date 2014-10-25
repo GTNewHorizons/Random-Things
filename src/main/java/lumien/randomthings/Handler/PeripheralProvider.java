@@ -21,8 +21,8 @@ public class PeripheralProvider implements IPeripheralProvider
 		if (Loader.isModLoaded("ComputerCraft"))
 		{
 			Class clazz = Class.forName("dan200.computercraft.api.ComputerCraftAPI");
-			
-			if (clazz!=null)
+
+			if (clazz != null)
 			{
 				Method m = clazz.getDeclaredMethod("registerPeripheralProvider", Class.forName("dan200.computercraft.api.peripheral.IPeripheralProvider"));
 				m.invoke(null, new PeripheralProvider());
@@ -31,13 +31,13 @@ public class PeripheralProvider implements IPeripheralProvider
 	}
 
 	@Override
-	@Optional.Method(modid="ComputerCraft")
+	@Optional.Method(modid = "ComputerCraft")
 	public IPeripheral getPeripheral(World world, int x, int y, int z, int side)
 	{
 		TileEntity te = world.getTileEntity(x, y, z);
 		if (te instanceof TileEntityCreativePlayerInterface || te instanceof TileEntityOnlineDetector || te instanceof TileEntityNotificationInterface)
 		{
-			return (IPeripheral)te;
+			return (IPeripheral) te;
 		}
 		return null;
 	}

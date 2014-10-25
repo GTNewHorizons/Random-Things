@@ -1,21 +1,13 @@
 package lumien.randomthings.Client.GUI;
 
 import java.util.ArrayList;
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.GUI.Elements.GuiSlotPlayerList;
-import lumien.randomthings.Container.ContainerMagneticForce;
 import lumien.randomthings.Container.ContainerOpSpectreKey;
 import lumien.randomthings.Library.Interfaces.IPlayerListGUI;
-import lumien.randomthings.Network.PacketHandler;
-import lumien.randomthings.Network.Messages.MessageAnswerTeleport;
-import lumien.randomthings.Network.Messages.MessageRequestTeleport;
-
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.network.play.client.C01PacketChatMessage;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiOpSpectreKey extends GuiContainer implements IPlayerListGUI
@@ -32,15 +24,16 @@ public class GuiOpSpectreKey extends GuiContainer implements IPlayerListGUI
 
 		this.xSize = 122;
 		this.ySize = 135;
-		
+
 		players = new ArrayList<String>();
 
 		selected = false;
 	}
 
+	@Override
 	public void pressedPlayer(String player)
 	{
-		Minecraft.getMinecraft().thePlayer.sendChatMessage("/rt spectre "+player);
+		Minecraft.getMinecraft().thePlayer.sendChatMessage("/rt spectre " + player);
 		Minecraft.getMinecraft().thePlayer.closeScreen();
 	}
 

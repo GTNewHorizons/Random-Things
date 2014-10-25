@@ -1,12 +1,8 @@
 package lumien.randomthings.Items;
 
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessagePaintBiome;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -34,7 +30,7 @@ public class ItemBiomePainter extends ItemBase
 					if (is != null && is.getItem() instanceof ItemBiomeCapsule && is.getItemDamage() != 0)
 					{
 						NBTTagCompound nbt = is.stackTagCompound;
-						if (nbt==null)
+						if (nbt == null)
 						{
 							nbt = is.stackTagCompound = new NBTTagCompound();
 						}
@@ -50,7 +46,7 @@ public class ItemBiomePainter extends ItemBase
 								c.setBiomeArray(biomeArray);
 								if (!par2EntityPlayer.capabilities.isCreativeMode)
 								{
-									nbt.setInteger("charges", charges-1);
+									nbt.setInteger("charges", charges - 1);
 									par2EntityPlayer.inventoryContainer.detectAndSendChanges();
 								}
 								PacketHandler.INSTANCE.sendToDimension(new MessagePaintBiome(par4, par5, par6, par3World.provider.dimensionId, biomeID), par3World.provider.dimensionId);

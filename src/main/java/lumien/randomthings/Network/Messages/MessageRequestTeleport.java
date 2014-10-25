@@ -11,8 +11,6 @@ import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageAnswerTeleport.STATUS;
 import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageRequestTeleport implements IRTMessage

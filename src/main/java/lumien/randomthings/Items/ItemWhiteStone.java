@@ -3,8 +3,6 @@ package lumien.randomthings.Items;
 import java.util.List;
 
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
-import cpw.mods.fml.common.registry.GameRegistry;
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.ConfigDungeonLoot;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageWhitestone;

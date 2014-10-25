@@ -1,6 +1,5 @@
 package lumien.randomthings.Proxy;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -17,14 +16,10 @@ import net.minecraft.client.gui.GuiPlayerInfo;
 import net.minecraft.client.gui.GuiVideoSettings;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.network.NetHandlerPlayClient;
-import net.minecraft.client.particle.EntityBreakingFX;
 import net.minecraft.client.particle.EntityCritFX;
 import net.minecraft.client.particle.EntityReddustFX;
 import net.minecraft.client.settings.GameSettings;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import lumien.randomthings.RandomThings;
@@ -42,7 +37,6 @@ import lumien.randomthings.Entity.EntityReviveCircle;
 import lumien.randomthings.Entity.EntitySoul;
 import lumien.randomthings.Entity.EntitySpirit;
 import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
-import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Items.ItemGinto;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.OverrideUtils;
@@ -61,13 +55,13 @@ public class ClientProxy extends CommonProxy
 	{
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 	}
-	
+
 	@Override
 	public boolean isBloodmoon()
 	{
 		return ClientBloodmoonHandler.INSTANCE.isBloodmoonActive();
 	}
-	
+
 	@Override
 	public boolean canBeCollidedWith(EntitySoul soul)
 	{
@@ -95,7 +89,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityHealingOrb.class, new RenderHealingOrb());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoul.class, new RenderSoul());
 		RenderingRegistry.registerEntityRenderingHandler(EntityReviveCircle.class, new RenderReviveCircle());
-		
+
 		RenderingRegistry.registerBlockHandler(new RenderWirelessLever());
 
 		MinecraftForgeClient.registerItemRenderer(ModItems.whitestone, new RenderWhitestone());

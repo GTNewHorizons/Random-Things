@@ -1,7 +1,5 @@
 package lumien.randomthings.Client.Renderer;
 
-import java.awt.Color;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -11,7 +9,6 @@ import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Entity.EntitySoul;
 import lumien.randomthings.Items.ItemGinto;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
@@ -51,7 +48,7 @@ public class RenderSoul extends Render
 			float f6 = 1.0F;
 			float f7 = 1F;
 			float f8 = 1F;
-			GL11.glColor3f(1,1,1);
+			GL11.glColor3f(1, 1, 1);
 			Tessellator tessellator = Tessellator.instance;
 			tessellator.startDrawingQuads();
 			tessellator.setNormal(0.0F, 1.0F, 0.0F);

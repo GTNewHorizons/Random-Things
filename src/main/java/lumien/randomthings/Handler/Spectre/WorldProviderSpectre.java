@@ -23,24 +23,24 @@ public class WorldProviderSpectre extends WorldProvider
 			this.lightBrightnessTable[i] = 1;
 		}
 	}
-	
-    @Override
+
+	@Override
 	public boolean isSurfaceWorld()
-    {
-        return false;
-    }
-    
-    @Override
+	{
+		return false;
+	}
+
+	@Override
 	public boolean canRespawnHere()
-    {
-        return false;
-    }
-    
-    @Override
+	{
+		return false;
+	}
+
+	@Override
 	public boolean doesXZShowFog(int par1, int par2)
-    {
-        return true;
-    }
+	{
+		return true;
+	}
 
 	@Override
 	public void setAllowedSpawnTypes(boolean allowHostile, boolean allowPeaceful)
@@ -66,35 +66,35 @@ public class WorldProviderSpectre extends WorldProvider
 	{
 		return new ChunkProviderSpectre(this.worldObj);
 	}
-	
-    @Override
-	public float[] calcSunriseSunsetColors(float par1, float par2)
-    {
-        return new float[]{0,0,0,0};
-    }
-    
-    @Override
-    public float calculateCelestialAngle(long par1, float par3)
-    {
-    	return 0;
-    }
-    
-    @Override
-	public float getCloudHeight()
-    {
-        return -5;
-    }
-    
-    @Override
-	public String getWelcomeMessage()
-    {
-        return "Entering the Spectre World";
-    }
 
-    @Override
+	@Override
+	public float[] calcSunriseSunsetColors(float par1, float par2)
+	{
+		return new float[] { 0, 0, 0, 0 };
+	}
+
+	@Override
+	public float calculateCelestialAngle(long par1, float par3)
+	{
+		return 0;
+	}
+
+	@Override
+	public float getCloudHeight()
+	{
+		return -5;
+	}
+
+	@Override
+	public String getWelcomeMessage()
+	{
+		return "Entering the Spectre World";
+	}
+
+	@Override
 	public String getDepartMessage()
-    {
-    	return "Leaving the Spectre World";
-    }
+	{
+		return "Leaving the Spectre World";
+	}
 
 }

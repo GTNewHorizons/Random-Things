@@ -10,7 +10,7 @@ import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 
-@Optional.InterfaceList(value = { @Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers"),@Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = "ComputerCraft")})
+@Optional.InterfaceList(value = { @Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers"), @Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = "ComputerCraft") })
 public class TileEntityCreativePlayerInterface extends TileEntityPlayerInterface implements SimpleComponent, IPeripheral
 {
 	@Override

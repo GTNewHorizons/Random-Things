@@ -9,7 +9,7 @@ public class InventoryUtils
 {
 	public static void writeInventoryToNBT(IInventory inventory, NBTTagCompound nbt)
 	{
-		if (nbt==null || inventory==null)
+		if (nbt == null || inventory == null)
 		{
 			return;
 		}
@@ -46,12 +46,12 @@ public class InventoryUtils
 			inventory.setInventorySlotContents(slot, lIS);
 		}
 	}
-	
+
 	public static boolean isInventoryEmpty(IInventory inventory)
 	{
-		for (int slot=0;slot<inventory.getSizeInventory();slot++)
+		for (int slot = 0; slot < inventory.getSizeInventory(); slot++)
 		{
-			if (inventory.getStackInSlot(slot)!=null)
+			if (inventory.getStackInSlot(slot) != null)
 			{
 				return false;
 			}

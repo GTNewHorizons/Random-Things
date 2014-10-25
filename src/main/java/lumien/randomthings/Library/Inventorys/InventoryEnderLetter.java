@@ -84,7 +84,7 @@ public class InventoryEnderLetter extends InventoryBasic
 	protected void setNBT()
 	{
 		ItemStack itemStack = playerEntity.getCurrentEquippedItem();
-		if (itemStack!=null && itemStack.getItem() instanceof ItemEnderLetter)
+		if (itemStack != null && itemStack.getItem() instanceof ItemEnderLetter)
 		{
 			itemStack.setTagCompound(originalIS.getTagCompound());
 		}

@@ -5,9 +5,6 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import lumien.randomthings.RandomThings;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -45,32 +42,30 @@ public class ItemIngredient extends ItemBase
 		ingredients.add(new Ingredient("obsidianStick", "obsidianStick", 64));
 		ingredients.add(new Ingredient("enderFragment", "enderFragment", 16));
 		ingredients.add(new Ingredient("ectoplasm", "ectoplasm", 64));
-		ingredients.add(new Ingredient("spectreIron","spectreIron",64));
-		ingredients.add(new Ingredient("transformationCore","transformationCore",1));
+		ingredients.add(new Ingredient("spectreIron", "spectreIron", 64));
+		ingredients.add(new Ingredient("transformationCore", "transformationCore", 1));
 
 		OreDictionary.registerOre("stickObsidian", new ItemStack(this, 1, 1));
 		OreDictionary.registerOre("obsidianStick", new ItemStack(this, 1, 1));
 		OreDictionary.registerOre("obsidianRod", new ItemStack(this, 1, 1));
-		
-		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH,new WeightedRandomChestContent(new ItemStack(this,1,4), 1, 1, 3));
+
+		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(this, 1, 4), 1, 1, 3));
 
 		this.setHasSubtypes(true);
 	}
-	
-	
-    @Override
+
+	@Override
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
-    {
-		if (par1ItemStack.getItemDamage()==4)
+	{
+		if (par1ItemStack.getItemDamage() == 4)
 		{
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		}
-        return 16777215;
-    }
+		return 16777215;
+	}
 
 	@Override
-	
 	public void getSubItems(Item item, CreativeTabs creativeTab, List list)
 	{
 		for (int i = 0; i < ingredients.size(); i++)
@@ -80,7 +75,6 @@ public class ItemIngredient extends ItemBase
 	}
 
 	@Override
-	
 	public IIcon getIconFromDamage(int damage)
 	{
 		if (ingredients.size() - 1 < damage || damage < 0)
@@ -94,7 +88,6 @@ public class ItemIngredient extends ItemBase
 	}
 
 	@Override
-	
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
 		for (Ingredient i : ingredients)

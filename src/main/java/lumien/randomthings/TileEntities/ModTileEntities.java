@@ -18,7 +18,7 @@ public class ModTileEntities
 		GameRegistry.registerTileEntity(TileEntityFogGenerator.class, "fogGenerator");
 		GameRegistry.registerTileEntity(TileEntityImbuingStation.class, "imbuingStation");
 		GameRegistry.registerTileEntity(TileEntityCustomWorkbench.class, "customWorkbench");
-		
+
 		GameRegistry.registerTileEntity(TileEntityItemCollector.class, "itemcollector");
 		GameRegistry.registerTileEntity(TileEntityAdvancedItemCollector.class, "advancedItemcollector");
 	}

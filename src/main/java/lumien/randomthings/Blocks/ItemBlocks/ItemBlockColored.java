@@ -12,8 +12,9 @@ public class ItemBlockColored extends ItemColored
 		super(block, true);
 	}
 
+	@Override
 	public String getUnlocalizedName(ItemStack is)
-    {
-		return super.getUnlocalizedName()+"."+ItemDye.field_150923_a[is.getItemDamage()];
-    }
+	{
+		return super.getUnlocalizedName() + "." + ItemDye.field_150923_a[is.getItemDamage()];
+	}
 }

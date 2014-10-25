@@ -1,14 +1,6 @@
 package lumien.randomthings.Library;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
-
-import org.apache.logging.log4j.Level;
-
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 

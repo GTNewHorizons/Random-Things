@@ -9,8 +9,6 @@ import net.minecraft.network.INetHandler;
 import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 
-import com.google.common.base.Throwables;
-
 import lumien.randomthings.Library.Reference;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.FMLOutboundHandler;
@@ -45,7 +43,7 @@ public class RandomThingsNetworkWrapper extends SimpleNetworkWrapper
 		channel = channels.get(Side.CLIENT);
 		type = channel.findChannelHandlerNameForType(SimpleIndexedCodec.class);
 		addClientHandlerAfter(channel, type, mh, IRTMessage.class);
-		
+
 		discriminator = 0;
 	}
 
@@ -95,6 +93,7 @@ public class RandomThingsNetworkWrapper extends SimpleNetworkWrapper
 	 *            The message to translate into packet form
 	 * @return A minecraft {@link Packet} suitable for use in minecraft APIs
 	 */
+	@Override
 	public Packet getPacketFrom(IMessage message)
 	{
 		return channels.get(Side.SERVER).generatePacketFrom(message);
@@ -107,6 +106,7 @@ public class RandomThingsNetworkWrapper extends SimpleNetworkWrapper
 	 * @param message
 	 *            The message to send
 	 */
+	@Override
 	public void sendToAll(IMessage message)
 	{
 		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
@@ -122,6 +122,7 @@ public class RandomThingsNetworkWrapper extends SimpleNetworkWrapper
 	 * @param player
 	 *            The player to send it to
 	 */
+	@Override
 	public void sendTo(IMessage message, EntityPlayerMP player)
 	{
 		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.PLAYER);
@@ -139,6 +140,7 @@ public class RandomThingsNetworkWrapper extends SimpleNetworkWrapper
 	 * @param point
 	 *            The {@link TargetPoint} around which to send
 	 */
+	@Override
 	public void sendToAllAround(IMessage message, NetworkRegistry.TargetPoint point)
 	{
 		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALLAROUNDPOINT);
@@ -156,6 +158,7 @@ public class RandomThingsNetworkWrapper extends SimpleNetworkWrapper
 	 * @param dimensionId
 	 *            The dimension id to target
 	 */
+	@Override
 	public void sendToDimension(IMessage message, int dimensionId)
 	{
 		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.DIMENSION);
@@ -170,6 +173,7 @@ public class RandomThingsNetworkWrapper extends SimpleNetworkWrapper
 	 * @param message
 	 *            The message to send
 	 */
+	@Override
 	public void sendToServer(IMessage message)
 	{
 		channels.get(Side.CLIENT).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.TOSERVER);

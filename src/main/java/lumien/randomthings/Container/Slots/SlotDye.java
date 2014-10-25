@@ -18,12 +18,12 @@ public class SlotDye extends Slot
 	public boolean isItemValid(ItemStack par1ItemStack)
 	{
 		int[] oreDictIds = OreDictionary.getOreIDs(par1ItemStack);
-		for (int i:oreDictIds)
+		for (int i : oreDictIds)
 		{
-			for (String s:Colors.oreDictDyes)
+			for (String s : Colors.oreDictDyes)
 			{
 				int dyeID = OreDictionary.getOreID(s);
-				if (dyeID==i)
+				if (dyeID == i)
 				{
 					return true;
 				}

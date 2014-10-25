@@ -2,8 +2,6 @@ package lumien.randomthings.Items;
 
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.RenderUtils;
@@ -37,18 +35,16 @@ public class ItemSpectreSword extends ItemSword
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase hitEntity, EntityLivingBase hittingEntity)
 	{
 		super.hitEntity(par1ItemStack, hitEntity, hittingEntity);
-		hitEntity.addPotionEffect(new PotionEffect(PotionEffects.SLOWNESS,40,2,false));
+		hitEntity.addPotionEffect(new PotionEffect(PotionEffects.SLOWNESS, 40, 2, false));
 		return true;
 	}
 
-	
 	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 		par3List.add(Colors.AQUA + I18n.format("text.spectre.soulSolid"));
 	}
 
-	
 	@Override
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
 	{

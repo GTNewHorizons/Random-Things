@@ -141,15 +141,15 @@ public class BloodmoonSpawner
 
 												if (p_77192_1_.canBlockSeeTheSky(k2, l2, i3) && canCreatureTypeSpawnAtLocation(enumcreaturetype, p_77192_1_, k2, l2, i3))
 												{
-													float f = (float) k2 + 0.5F;
-													float f1 = (float) l2;
-													float f2 = (float) i3 + 0.5F;
+													float f = k2 + 0.5F;
+													float f1 = l2;
+													float f2 = i3 + 0.5F;
 
-													if (p_77192_1_.getClosestPlayer((double) f, (double) f1, (double) f2, Settings.BLOODMOON_SPAWNRANGE) == null)
+													if (p_77192_1_.getClosestPlayer(f, f1, f2, Settings.BLOODMOON_SPAWNRANGE) == null)
 													{
-														float f3 = f - (float) chunkcoordinates.posX;
-														float f4 = f1 - (float) chunkcoordinates.posY;
-														float f5 = f2 - (float) chunkcoordinates.posZ;
+														float f3 = f - chunkcoordinates.posX;
+														float f4 = f1 - chunkcoordinates.posY;
+														float f5 = f2 - chunkcoordinates.posZ;
 														float f6 = f3 * f3 + f4 * f4 + f5 * f5;
 
 														if (f6 >= 576.0F)
@@ -176,7 +176,7 @@ public class BloodmoonSpawner
 																return i;
 															}
 
-															entityliving.setLocationAndAngles((double) f, (double) f1, (double) f2, p_77192_1_.rand.nextFloat() * 360.0F, 0.0F);
+															entityliving.setLocationAndAngles(f, f1, f2, p_77192_1_.rand.nextFloat() * 360.0F, 0.0F);
 
 															Result canSpawn = ForgeEventFactory.canEntitySpawn(entityliving, p_77192_1_, f, f1, f2);
 															if (canSpawn == Result.ALLOW || (canSpawn == Result.DEFAULT && entityliving.getCanSpawnHere()))
@@ -269,9 +269,9 @@ public class BloodmoonSpawner
 
 						if (canCreatureTypeSpawnAtLocation(EnumCreatureType.creature, p_77191_0_, j1, l2, k1))
 						{
-							float f = (float) j1 + 0.5F;
-							float f1 = (float) l2;
-							float f2 = (float) k1 + 0.5F;
+							float f = j1 + 0.5F;
+							float f1 = l2;
+							float f2 = k1 + 0.5F;
 							EntityLiving entityliving;
 
 							try
@@ -284,7 +284,7 @@ public class BloodmoonSpawner
 								continue;
 							}
 
-							entityliving.setLocationAndAngles((double) f, (double) f1, (double) f2, p_77191_6_.nextFloat() * 360.0F, 0.0F);
+							entityliving.setLocationAndAngles(f, f1, f2, p_77191_6_.nextFloat() * 360.0F, 0.0F);
 							p_77191_0_.spawnEntityInWorld(entityliving);
 							ientitylivingdata = entityliving.onSpawnWithEgg(ientitylivingdata);
 							flag = true;

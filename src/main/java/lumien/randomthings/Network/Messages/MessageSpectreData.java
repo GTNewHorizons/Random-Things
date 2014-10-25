@@ -10,20 +10,18 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import lumien.randomthings.Client.GUI.GuiMagneticForce;
 import lumien.randomthings.Client.GUI.GuiOpSpectreKey;
 import lumien.randomthings.Network.IRTMessage;
-import lumien.randomthings.Network.Messages.MessageAnswerTeleport.STATUS;
 
 public class MessageSpectreData implements IRTMessage
 {
 	ArrayList<String> playerList;
-	
+
 	public MessageSpectreData(ArrayList<String> playerList)
 	{
 		this.playerList = playerList;
 	}
-	
+
 	public MessageSpectreData()
 	{
 		this.playerList = new ArrayList<String>();
@@ -33,7 +31,7 @@ public class MessageSpectreData implements IRTMessage
 	public void fromBytes(ByteBuf buf)
 	{
 		int length = buf.readInt();
-		for (int i=0;i<length;i++)
+		for (int i = 0; i < length; i++)
 		{
 			playerList.add(ByteBufUtils.readUTF8String(buf));
 		}
@@ -43,8 +41,8 @@ public class MessageSpectreData implements IRTMessage
 	public void toBytes(ByteBuf buf)
 	{
 		buf.writeInt(playerList.size());
-		
-		for (String player:playerList)
+
+		for (String player : playerList)
 		{
 			ByteBufUtils.writeUTF8String(buf, player);
 		}
@@ -59,7 +57,7 @@ public class MessageSpectreData implements IRTMessage
 
 		if (mc.thePlayer != null && currentScreen != null && currentScreen instanceof GuiOpSpectreKey)
 		{
-			((GuiOpSpectreKey)currentScreen).players.addAll(playerList);
+			((GuiOpSpectreKey) currentScreen).players.addAll(playerList);
 		}
 	}
 }

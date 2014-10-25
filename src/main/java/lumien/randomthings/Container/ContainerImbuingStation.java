@@ -192,14 +192,14 @@ public class ContainerImbuingStation extends Container
 		}
 		return flag1;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-    public void updateProgressBar(int identifier, int value)
+	public void updateProgressBar(int identifier, int value)
 	{
-		if (identifier==0)
+		if (identifier == 0)
 		{
-			this.te.imbuingProgress=value;
+			this.te.imbuingProgress = value;
 		}
 	}
 

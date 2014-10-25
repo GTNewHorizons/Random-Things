@@ -69,7 +69,7 @@ public class WorldUtils
 		worldObj.notifyBlocksOfNeighborChange(posX, posY, posZ + 1, block);
 	}
 
-	public static void generateCube(World worldObj, int posX1, int posY1, int posZ1, int posX2, int posY2, int posZ2, Block b, int metadata,int flag)
+	public static void generateCube(World worldObj, int posX1, int posY1, int posZ1, int posX2, int posY2, int posZ2, Block b, int metadata, int flag)
 	{
 		int minX = Math.min(posX1, posX2);
 		int minY = Math.min(posY1, posY2);

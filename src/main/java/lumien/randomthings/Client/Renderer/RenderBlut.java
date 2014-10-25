@@ -17,8 +17,8 @@ public class RenderBlut
 	final static ResourceLocation blut_vene = new ResourceLocation("randomthings:textures/blut/blut_vene.png");
 	final static ResourceLocation blut_arterie = new ResourceLocation("randomthings:textures/blut/blut_arterie.png");
 	static Minecraft mc = Minecraft.getMinecraft();
-	
-	public static double counter=0;
+
+	public static double counter = 0;
 
 	public static void renderBlut(RenderPlayerEvent.Post event)
 	{
@@ -43,7 +43,7 @@ public class RenderBlut
 
 			Minecraft.getMinecraft().renderEngine.bindTexture(blut_arterie);
 
-			double brightness = Math.abs(Math.sin(counter)*0.5+0.5);
+			double brightness = Math.abs(Math.sin(counter) * 0.5 + 0.5);
 			GL11.glColor3d(brightness, brightness, brightness);
 
 			glDisable(GL_LIGHTING);

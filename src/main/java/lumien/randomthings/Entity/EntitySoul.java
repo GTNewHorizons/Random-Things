@@ -1,12 +1,7 @@
 package lumien.randomthings.Entity;
 
-import java.awt.Color;
-import java.util.HashMap;
-
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Items.ItemGinto;
-import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.WorldUtils;
 import io.netty.buffer.ByteBuf;
 
@@ -15,24 +10,21 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
 public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 {
 	String playerName;
 	int counter = 0;
-	
+
 	public boolean render = false;
-	
+
 	public int type;
 
 	public EntitySoul(World worldObj)
@@ -67,11 +59,13 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 		this.playerName = playerName;
 	}
 
+	@Override
 	public boolean canBeCollidedWith()
 	{
 		return RandomThings.proxy.canBeCollidedWith(this);
 	}
 
+	@Override
 	public boolean interactFirst(EntityPlayer user)
 	{
 		ItemStack equipped = user.getCurrentEquippedItem();
@@ -79,7 +73,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 		{
 			if (!worldObj.isRemote && MinecraftServer.getServer().getConfigurationManager().func_152612_a(playerName) != null)
 			{
-				worldObj.spawnEntityInWorld(new EntityReviveCircle(worldObj,posX,posY,posZ,this));
+				worldObj.spawnEntityInWorld(new EntityReviveCircle(worldObj, posX, posY, posZ, this));
 				if (!user.capabilities.isCreativeMode)
 				{
 					equipped.stackSize--;
@@ -92,6 +86,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 		return false;
 	}
 
+	@Override
 	protected boolean canTriggerWalking()
 	{
 		return false;
@@ -103,6 +98,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 		return null;
 	}
 
+	@Override
 	public AxisAlignedBB getBoundingBox()
 	{
 		return null;
@@ -132,7 +128,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 	@Override
 	protected void entityInit()
 	{
-		type = this.rand.nextInt(2);	
+		type = this.rand.nextInt(2);
 	}
 
 	@Override

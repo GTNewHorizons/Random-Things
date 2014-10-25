@@ -10,28 +10,28 @@ public class SlotVoid extends Slot
 	{
 		super(null, 0, x, y);
 	}
-	
-    @Override
+
+	@Override
 	public void putStack(ItemStack par1ItemStack)
-    {
-        this.onSlotChanged();
-    }
-    
-    @Override
+	{
+		this.onSlotChanged();
+	}
+
+	@Override
 	public ItemStack getStack()
-    {
-        return null;
-    }
-    
-    @Override
+	{
+		return null;
+	}
+
+	@Override
 	public void onSlotChanged()
-    {
-        
-    }
-    
-    @Override
+	{
+
+	}
+
+	@Override
 	public int getSlotStackLimit()
-    {
-        return 64;
-    }
+	{
+		return 64;
+	}
 }

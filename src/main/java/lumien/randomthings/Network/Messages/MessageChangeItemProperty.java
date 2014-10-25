@@ -1,7 +1,5 @@
 package lumien.randomthings.Network.Messages;
 
-import com.google.common.base.Preconditions;
-
 import lumien.randomthings.Library.Interfaces.IItemWithProperties;
 import lumien.randomthings.Network.IRTMessage;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -11,8 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetHandlerPlayServer;
 import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageChangeItemProperty implements IRTMessage

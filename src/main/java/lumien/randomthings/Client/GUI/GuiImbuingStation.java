@@ -28,7 +28,7 @@ public class GuiImbuingStation extends GuiContainer
 
 		this.xSize = 176;
 		this.ySize = 208;
-		
+
 		this.progressBubble = 0;
 	}
 

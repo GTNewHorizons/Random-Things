@@ -2,7 +2,6 @@ package lumien.randomthings.Items;
 
 import java.util.List;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.Library.InventoryUtils;
@@ -11,7 +10,6 @@ import lumien.randomthings.Library.Inventorys.InventoryEnderLetter;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
@@ -152,7 +150,7 @@ public class ItemEnderLetter extends ItemBase implements IItemWithProperties
 	}
 
 	@Override
-	public boolean isValidAttribute(ItemStack is,String attributeName, int attributeType)
+	public boolean isValidAttribute(ItemStack is, String attributeName, int attributeType)
 	{
 		return attributeName.equals("receiver") && attributeType == 1;
 	}

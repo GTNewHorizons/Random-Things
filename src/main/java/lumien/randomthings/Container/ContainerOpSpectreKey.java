@@ -7,7 +7,8 @@ import net.minecraft.server.MinecraftServer;
 
 public class ContainerOpSpectreKey extends Container
 {
-	boolean send=false;
+	boolean send = false;
+
 	@Override
 	public boolean canInteractWith(EntityPlayer player)
 	{
@@ -20,7 +21,7 @@ public class ContainerOpSpectreKey extends Container
 			}
 			return MinecraftServer.getServer().getConfigurationManager().func_152596_g(player.getGameProfile());
 		}
-		
+
 		return true;
 	}
 

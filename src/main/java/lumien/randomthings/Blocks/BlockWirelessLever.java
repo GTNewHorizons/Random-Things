@@ -44,7 +44,7 @@ public class BlockWirelessLever extends BlockLever implements ITileEntityProvide
 		boolean activate = super.onBlockActivated(worldObj, posX, posY, posZ, p_149727_5_, p_149727_6_, p_149727_7_, p_149727_8_, p_149727_9_);
 
 		TileEntityWirelessLever te = (TileEntityWirelessLever) worldObj.getTileEntity(posX, posY, posZ);
-		if (te!=null)
+		if (te != null)
 			te.updateTarget();
 
 		return activate;

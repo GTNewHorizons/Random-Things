@@ -3,8 +3,6 @@ package lumien.randomthings.Network.Messages;
 import java.awt.Color;
 import java.util.Random;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -61,7 +59,7 @@ public class MessagePaintBiome implements IRTMessage
 	public void onMessage(MessageContext ctx)
 	{
 		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-		if (player!=null && player.worldObj.provider.dimensionId == dimensionID)
+		if (player != null && player.worldObj.provider.dimensionId == dimensionID)
 		{
 			Chunk c = player.worldObj.getChunkFromBlockCoords(posX, posZ);
 			byte[] biomeArray = c.getBiomeArray();

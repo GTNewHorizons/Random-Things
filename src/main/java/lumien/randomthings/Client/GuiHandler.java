@@ -42,7 +42,6 @@ import static lumien.randomthings.Library.GuiIds.*;
 public class GuiHandler implements IGuiHandler
 {
 
-	
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
 	{
@@ -57,7 +56,7 @@ public class GuiHandler implements IGuiHandler
 				{
 					inventoryFilter = new InventoryBasic("placeholder", false, 9);
 				}
-				return new ContainerItemFilter(player.getCurrentEquippedItem(),player.inventory, inventoryFilter);
+				return new ContainerItemFilter(player.getCurrentEquippedItem(), player.inventory, inventoryFilter);
 			case ADVANCED_ITEMCOLLECTOR:
 				return new ContainerItemCollector(player.inventory, (TileEntityAdvancedItemCollector) tileEntity);
 			case ONLINE_DETECTOR:
@@ -77,13 +76,13 @@ public class GuiHandler implements IGuiHandler
 				{
 					letterInventory = new InventoryBasic("placeholder", false, 9);
 				}
-				return new ContainerEnderLetter(player.getCurrentEquippedItem(),player.inventory, letterInventory);
+				return new ContainerEnderLetter(player.getCurrentEquippedItem(), player.inventory, letterInventory);
 			case SOUND_RECORDER:
 				return new ContainerSoundRecorder();
 			case MAGNETIC_FORCE:
 				return new ContainerMagneticForce();
 			case DYEING_MACHINE:
-				return new ContainerDyeingMachine(player.inventory,world,x,y,z);
+				return new ContainerDyeingMachine(player.inventory, world, x, y, z);
 			case IMBUING_STATION:
 				return new ContainerImbuingStation(player.inventory, (TileEntityImbuingStation) tileEntity);
 			case OP_SPECTRE_KEY:
@@ -106,7 +105,7 @@ public class GuiHandler implements IGuiHandler
 				{
 					inventoryFilter = new InventoryBasic("placeholder", false, 27);
 				}
-				return new GuiItemFilter(player.getCurrentEquippedItem(),player, player.inventory, inventoryFilter);
+				return new GuiItemFilter(player.getCurrentEquippedItem(), player, player.inventory, inventoryFilter);
 			case ADVANCED_ITEMCOLLECTOR:
 				return new GuiItemCollector(player.inventory, (TileEntityAdvancedItemCollector) tileEntity);
 			case ONLINE_DETECTOR:
@@ -126,13 +125,13 @@ public class GuiHandler implements IGuiHandler
 				{
 					letterInventory = new InventoryBasic("placeholder", false, 9);
 				}
-				return new GuiEnderLetter(player.inventory, letterInventory,player.getCurrentEquippedItem());
+				return new GuiEnderLetter(player.inventory, letterInventory, player.getCurrentEquippedItem());
 			case SOUND_RECORDER:
 				return new GuiSoundRecorder();
 			case MAGNETIC_FORCE:
 				return new GuiMagneticForce();
 			case DYEING_MACHINE:
-				return new GuiDyeingMachine(player.inventory,world,x,y,z);
+				return new GuiDyeingMachine(player.inventory, world, x, y, z);
 			case IMBUING_STATION:
 				return new GuiImbuingStation(player.inventory, (TileEntityImbuingStation) tileEntity);
 			case OP_SPECTRE_KEY:

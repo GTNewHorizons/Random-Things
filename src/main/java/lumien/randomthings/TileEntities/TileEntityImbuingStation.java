@@ -1,6 +1,5 @@
 package lumien.randomthings.TileEntities;
 
-import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipeHandler;
 import lumien.randomthings.Library.InventoryUtils;
@@ -67,10 +66,10 @@ public class TileEntityImbuingStation extends TileEntity implements IInventory
 			}
 		}
 	}
-	
+
 	private boolean canHandleOutput(ItemStack validOutput)
 	{
-		if (validOutput==null || inventory.getStackInSlot(4)==null)
+		if (validOutput == null || inventory.getStackInSlot(4) == null)
 		{
 			return true;
 		}
@@ -78,14 +77,14 @@ public class TileEntityImbuingStation extends TileEntity implements IInventory
 		{
 			ItemStack currentInOutput = inventory.getStackInSlot(4);
 			ItemStack requiredOutput = validOutput;
-			
+
 			if (!InventoryUtils.areItemStackContentEqual(currentInOutput, requiredOutput))
 			{
 				return false;
 			}
 			else
 			{
-				if (currentInOutput.stackSize+requiredOutput.stackSize>currentInOutput.getMaxStackSize())
+				if (currentInOutput.stackSize + requiredOutput.stackSize > currentInOutput.getMaxStackSize())
 				{
 					return false;
 				}
@@ -97,7 +96,7 @@ public class TileEntityImbuingStation extends TileEntity implements IInventory
 	private void imbue()
 	{
 		// Set Output
-		if (this.inventory.getStackInSlot(4)==null)
+		if (this.inventory.getStackInSlot(4) == null)
 		{
 			this.inventory.setInventorySlotContents(4, currentOutput.copy());
 		}
@@ -105,9 +104,9 @@ public class TileEntityImbuingStation extends TileEntity implements IInventory
 		{
 			this.inventory.decrStackSize(4, -currentOutput.stackSize);
 		}
-		
+
 		// Decrease Ingredients
-		for (int slot=0;slot<this.inventory.getSizeInventory()-1;slot++)
+		for (int slot = 0; slot < this.inventory.getSizeInventory() - 1; slot++)
 		{
 			this.inventory.decrStackSize(slot, 1);
 		}
@@ -164,7 +163,7 @@ public class TileEntityImbuingStation extends TileEntity implements IInventory
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{
-		return player.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
+		return player.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	@Override

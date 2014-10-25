@@ -6,7 +6,6 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.Settings;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
@@ -46,7 +45,7 @@ public class BlockFertilizedDirt extends BlockBase
 
 		this.setBlockTextureName("RandomThings:fertilizedDirt");
 	}
-	
+
 	@Override
 	public String getUnlocalizedName()
 	{

@@ -9,11 +9,8 @@ import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Configuration.ConfigItems;
-import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Items.ItemBiomeCapsule;
-import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageNotification;
 

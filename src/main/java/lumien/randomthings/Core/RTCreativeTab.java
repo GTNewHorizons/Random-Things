@@ -10,14 +10,14 @@ public class RTCreativeTab extends CreativeTabs
 
 	public RTCreativeTab()
 	{
-		super ("Random Things");
+		super("Random Things");
 	}
 
 	@Override
-    public ItemStack getIconItemStack()
-    {
-        return new ItemStack(ModItems.ingredients,0);
-    }
+	public ItemStack getIconItemStack()
+	{
+		return new ItemStack(ModItems.ingredients, 0);
+	}
 
 	@Override
 	public Item getTabIconItem()

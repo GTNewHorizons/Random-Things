@@ -1,19 +1,15 @@
 package lumien.randomthings.Items;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.GuiIds;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ItemMagneticForce extends ItemBase
 {
-	double r=0;
+	double r = 0;
+
 	public ItemMagneticForce()
 	{
 		super("magneticForce");
@@ -24,7 +20,7 @@ public class ItemMagneticForce extends ItemBase
 	{
 		if (!par2World.isRemote)
 		{
-			par3EntityPlayer.openGui(RandomThings.instance, GuiIds.MAGNETIC_FORCE, par2World, (int)par3EntityPlayer.posX, (int)par3EntityPlayer.posY, (int)par3EntityPlayer.posZ);
+			par3EntityPlayer.openGui(RandomThings.instance, GuiIds.MAGNETIC_FORCE, par2World, (int) par3EntityPlayer.posX, (int) par3EntityPlayer.posY, (int) par3EntityPlayer.posZ);
 		}
 		return par1ItemStack;
 	}

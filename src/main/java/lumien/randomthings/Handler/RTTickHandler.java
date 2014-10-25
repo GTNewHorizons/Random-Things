@@ -1,9 +1,6 @@
 package lumien.randomthings.Handler;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.SpawnerAnimals;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.Renderer.RenderBlut;
 import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;

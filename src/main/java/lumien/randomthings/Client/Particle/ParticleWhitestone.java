@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityPortalFX;
 import net.minecraft.entity.player.EntityPlayer;
 
-
 public class ParticleWhitestone extends EntityPortalFX
 {
 	EntityPlayer followPlayer;
@@ -38,7 +37,7 @@ public class ParticleWhitestone extends EntityPortalFX
 		// this.setRBGColorF(0, 0, 0);
 
 		this.particleMaxAge = 40;
-		this.setParticleTextureIndex((int)(Math.random() * 26.0D + 1.0D + 224.0D));
+		this.setParticleTextureIndex((int) (Math.random() * 26.0D + 1.0D + 224.0D));
 		// this.particleAlpha = 0;
 	}
 

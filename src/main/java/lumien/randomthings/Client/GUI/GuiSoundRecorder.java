@@ -15,26 +15,26 @@ public class GuiSoundRecorder extends GuiContainer
 	public GuiSoundRecorder()
 	{
 		super(new ContainerSoundRecorder());
-		
-		this.xSize=181;
-		this.ySize=130;
+
+		this.xSize = 181;
+		this.ySize = 130;
 	}
-	
+
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2)
 	{
 		fontRendererObj.drawString(I18n.format("item.soundRecorder.name", new Object[0]), 5, 6, 400000);
-		
-		for (int i=0;i<RandomThings.instance.soundRecorderHandler.playedSounds.size();i++)
+
+		for (int i = 0; i < RandomThings.instance.soundRecorderHandler.playedSounds.size(); i++)
 		{
 			String s = RandomThings.instance.soundRecorderHandler.playedSounds.get(i);
 			if (!s.equals(""))
 			{
-				fontRendererObj.drawString(s, 5, 6+fontRendererObj.FONT_HEIGHT*(i+1), 4210752);
+				fontRendererObj.drawString(s, 5, 6 + fontRendererObj.FONT_HEIGHT * (i + 1), 4210752);
 			}
 		}
 	}
-	
+
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
 	{

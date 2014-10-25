@@ -2,7 +2,6 @@ package lumien.randomthings.Client.GUI;
 
 import lumien.randomthings.Client.GUI.Elements.Buttons.GuiButtonBooleanProperty;
 import lumien.randomthings.Client.GUI.Elements.Buttons.GuiButtonListtype;
-import lumien.randomthings.Client.GUI.Elements.Buttons.GuiButtonOreDictionary;
 import lumien.randomthings.Container.ContainerItemFilter;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.ClientUtil;
@@ -48,7 +47,7 @@ public class GuiItemFilter extends GuiContainer
 		metadataButton = new GuiButtonBooleanProperty(this, "metadata", Item.getIdFromItem(ModItems.filter), 1, player.inventory.currentItem, 0, guiLeft + 195, guiTop + 4, new ResourceLocation("randomthings:textures/gui/buttonMetadata.png"), ClientUtil.translate("text.miscellaneous.useMetadata"), ClientUtil.translate("text.miscellaneous.ignoreMetadata"));
 		metadataButton.setValue(itemFilter.stackTagCompound.getBoolean("metadata"));
 		this.buttonList.add(metadataButton);
-		
+
 		oreDictButton = new GuiButtonBooleanProperty(this, "oreDict", Item.getIdFromItem(ModItems.filter), 1, player.inventory.currentItem, 0, guiLeft + 173, guiTop + 4, new ResourceLocation("randomthings:textures/gui/buttonOreDict.png"), ClientUtil.translate("text.miscellaneous.useOreDict"), ClientUtil.translate("text.miscellaneous.ignoreOreDict"));
 		oreDictButton.setValue(itemFilter.stackTagCompound.getBoolean("oreDict"));
 		this.buttonList.add(oreDictButton);

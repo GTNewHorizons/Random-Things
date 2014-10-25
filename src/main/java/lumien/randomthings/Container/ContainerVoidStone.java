@@ -12,7 +12,7 @@ public class ContainerVoidStone extends Container
 {
 	public ContainerVoidStone(InventoryPlayer playerInventory)
 	{
-		this.addSlotToContainer(new SlotVoid(80,18));
+		this.addSlotToContainer(new SlotVoid(80, 18));
 		bindPlayerInventory(playerInventory);
 	}
 
@@ -21,17 +21,17 @@ public class ContainerVoidStone extends Container
 	{
 		return true;
 	}
-	
+
 	@Override
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
-    {
+	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+	{
 		Slot slot = (Slot) this.inventorySlots.get(par2);
-		if (slot!=null)
+		if (slot != null)
 		{
 			slot.putStack(null);
 		}
-        return null;
-    }
+		return null;
+	}
 
 	protected void bindPlayerInventory(InventoryPlayer inventoryPlayer)
 	{

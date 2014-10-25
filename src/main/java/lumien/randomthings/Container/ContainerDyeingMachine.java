@@ -7,13 +7,11 @@ import lumien.randomthings.Container.Slots.SlotDyeable;
 import lumien.randomthings.Library.Colors;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -88,6 +86,7 @@ public class ContainerDyeingMachine extends Container
 		}
 	}
 
+	@Override
 	public void onContainerClosed(EntityPlayer par1EntityPlayer)
 	{
 		super.onContainerClosed(par1EntityPlayer);
@@ -125,7 +124,7 @@ public class ContainerDyeingMachine extends Container
 	@Override
 	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
 	{
-		return this.worldObj.getBlock(this.posX, this.posY, this.posZ) != ModBlocks.dyeingMachine ? false : par1EntityPlayer.getDistanceSq((double) this.posX + 0.5D, (double) this.posY + 0.5D, (double) this.posZ + 0.5D) <= 64.0D;
+		return this.worldObj.getBlock(this.posX, this.posY, this.posZ) != ModBlocks.dyeingMachine ? false : par1EntityPlayer.getDistanceSq(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D) <= 64.0D;
 	}
 
 	@Override

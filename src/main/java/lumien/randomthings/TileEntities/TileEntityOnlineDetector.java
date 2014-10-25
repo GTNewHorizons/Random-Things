@@ -40,15 +40,15 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
 	{
 		if (!worldObj.isRemote)
 		{
-			if (worldObj.getTotalWorldTime()%20L==0L)
+			if (worldObj.getTotalWorldTime() % 20L == 0L)
 			{
-				int playerOnline = WorldUtils.isPlayerOnline(username)?1:0;
-				int metadata=this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-				
-				if (playerOnline !=metadata)
+				int playerOnline = WorldUtils.isPlayerOnline(username) ? 1 : 0;
+				int metadata = this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+
+				if (playerOnline != metadata)
 				{
 					this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, playerOnline, 3);
-					
+
 					WorldUtils.notifyStrong(worldObj, xCoord, yCoord, zCoord, this.blockType);
 				}
 			}
@@ -156,8 +156,8 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
 		}
 		return null;
 	}
-	
-	private Map<Integer,String> generatePlayerMap()
+
+	private Map<Integer, String> generatePlayerMap()
 	{
 		List playerEntityList = MinecraftServer.getServer().getConfigurationManager().playerEntityList;
 		String[] playerNameList = new String[playerEntityList.size()];
@@ -165,14 +165,14 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
 		{
 			playerNameList[i] = ((EntityPlayer) playerEntityList.get(i)).getCommandSenderName();
 		}
-		
-		HashMap<Integer,String> map = new HashMap<Integer,String>();
-		
-		for (int index=0;index<playerNameList.length;index++)
+
+		HashMap<Integer, String> map = new HashMap<Integer, String>();
+
+		for (int index = 0; index < playerNameList.length; index++)
 		{
 			map.put(index, playerNameList[index]);
 		}
-		
+
 		return map;
 	}
 

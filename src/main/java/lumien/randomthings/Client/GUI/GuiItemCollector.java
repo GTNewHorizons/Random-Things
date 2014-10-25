@@ -84,7 +84,7 @@ public class GuiItemCollector extends GuiContainer
 		{
 			te.rangeZ++;
 		}
-		
+
 		if (te.rangeX < 0)
 		{
 			te.rangeX = 0;

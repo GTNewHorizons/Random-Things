@@ -1,7 +1,6 @@
 package lumien.randomthings.Handler.ImbuingStation;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 
 import lumien.randomthings.Library.InventoryUtils;
@@ -55,7 +54,7 @@ public class ImbuingRecipe
 
 		for (ItemStack is : providedIngredients.keySet())
 		{
-			if (!providedIngredients.get(is) && !(is==null))
+			if (!providedIngredients.get(is) && !(is == null))
 			{
 				return false;
 			}
@@ -63,22 +62,22 @@ public class ImbuingRecipe
 
 		return true;
 	}
-	
+
 	public boolean containsAsIngredient(ItemStack is)
 	{
 		if (InventoryUtils.areItemStackContentEqual(toImbue, is) || ItemUtils.areOreDictionaried(toImbue, is))
 		{
 			return true;
 		}
-		
-		for (ItemStack ingredient:ingredients)
+
+		for (ItemStack ingredient : ingredients)
 		{
 			if (InventoryUtils.areItemStackContentEqual(ingredient, is) || ItemUtils.areOreDictionaried(ingredient, is))
 			{
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 

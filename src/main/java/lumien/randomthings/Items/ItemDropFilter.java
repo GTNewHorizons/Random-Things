@@ -2,7 +2,6 @@ package lumien.randomthings.Items;
 
 import java.util.List;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.Library.Inventorys.InventoryDropFilter;
@@ -26,16 +25,15 @@ public class ItemDropFilter extends ItemBase
 		this.setMaxStackSize(1);
 		this.setHasSubtypes(true);
 	}
-	
-	
-    @Override
+
+	@Override
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 		if (!(ItemDropFilter.getDropFilterInv(par2EntityPlayer, par1ItemStack) == null))
 		{
 			IInventory inventoryFilter = new InventoryDropFilter(par2EntityPlayer, par1ItemStack);
 			inventoryFilter.openInventory();
-			if (inventoryFilter.getStackInSlot(0)!=null)
+			if (inventoryFilter.getStackInSlot(0) != null)
 			{
 				ModItems.filter.addInformation(inventoryFilter.getStackInSlot(0), par2EntityPlayer, par3List, par4);
 			}
@@ -49,14 +47,14 @@ public class ItemDropFilter extends ItemBase
 		icons[0] = ir.registerIcon("RandomThings:dropFilter");
 		icons[1] = ir.registerIcon("RandomThings:dropFilterVoiding");
 	}
-	
+
 	@Override
 	public void getSubItems(Item item, CreativeTabs creativeTab, List list)
 	{
 		list.add(new ItemStack(item, 1, 0));
 		list.add(new ItemStack(item, 1, 1));
 	}
-	
+
 	@Override
 	public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
 	{
@@ -78,7 +76,6 @@ public class ItemDropFilter extends ItemBase
 		return par1ItemStack;
 	}
 
-	
 	@Override
 	public IIcon getIconFromDamage(int metadata)
 	{
@@ -102,7 +99,7 @@ public class ItemDropFilter extends ItemBase
 
 		return dropFilterInventory;
 	}
-	
+
 	@Override
 	public String getUnlocalizedName(ItemStack par1ItemStack)
 	{
@@ -118,7 +115,7 @@ public class ItemDropFilter extends ItemBase
 		}
 		return "item." + type;
 	}
-	
+
 	public static IInventory getDropFilterInv(EntityPlayer player, ItemStack dropFilterStack)
 	{
 		IInventory dropFilter = null;

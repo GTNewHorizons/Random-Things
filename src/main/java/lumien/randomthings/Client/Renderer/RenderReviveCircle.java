@@ -1,7 +1,5 @@
 package lumien.randomthings.Client.Renderer;
 
-import java.awt.Color;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -28,23 +26,23 @@ public class RenderReviveCircle extends Render
 		Minecraft.getMinecraft().entityRenderer.disableLightmap(0);
 
 		GL11.glTranslatef((float) posX + 0.5f, (float) posY + 0.13f, (float) posZ + 0.5f);
-		
+
 		this.bindEntityTexture(circle);
 
 		GL11.glTranslatef(-0.5f, 0, -0.5f);
-		
-		if (circle.age<40)
+
+		if (circle.age < 40)
 		{
-			GL11.glScalef(circle.age*0.05f+partialTickTime*0.05f, 1, circle.age*0.05f+partialTickTime*0.05f);
+			GL11.glScalef(circle.age * 0.05f + partialTickTime * 0.05f, 1, circle.age * 0.05f + partialTickTime * 0.05f);
 		}
 		else
 		{
 			GL11.glScalef(2, 1, 2);
 		}
-		GL11.glRotatef(circle.age*20 + partialTickTime*20, 0f, 1, 0f);
+		GL11.glRotatef(circle.age * 20 + partialTickTime * 20, 0f, 1, 0f);
 		GL11.glTranslatef(0.5f, 0, 0.5f);
 		GL11.glRotatef(90, 1, 0, 0);
-		
+
 		int i = 1;
 		float f2 = 1;
 		float f3 = 0;

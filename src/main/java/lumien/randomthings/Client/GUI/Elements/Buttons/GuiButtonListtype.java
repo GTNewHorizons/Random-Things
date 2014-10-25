@@ -21,22 +21,22 @@ public class GuiButtonListtype extends GuiButton
 	int listType;
 	GuiContainer gc;
 
-	public GuiButtonListtype(GuiContainer gc,int id,int posX,int posY,int type)
+	public GuiButtonListtype(GuiContainer gc, int id, int posX, int posY, int type)
 	{
 		super(id, posX, posY, "");
-		
+
 		this.listType = type;
 		this.gc = gc;
-		
-		this.width=20;
-		this.height=20;
+
+		this.width = 20;
+		this.height = 20;
 	}
-	
+
 	public void setType(int type)
 	{
 		this.listType = type;
 	}
-	
+
 	public int getType()
 	{
 		return listType;
@@ -55,9 +55,9 @@ public class GuiButtonListtype extends GuiButton
 			GL11.glEnable(GL11.GL_BLEND);
 			OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			
-			this.drawTexturedModalRect(this.xPosition, this.yPosition, listType*20, (k-1) * 20, 20, 20);
-			
+
+			this.drawTexturedModalRect(this.xPosition, this.yPosition, listType * 20, (k - 1) * 20, 20, 20);
+
 			this.mouseDragged(p_146112_1_, p_146112_2_, p_146112_3_);
 			int l = 14737632;
 
@@ -73,10 +73,10 @@ public class GuiButtonListtype extends GuiButton
 			{
 				l = 16777120;
 			}
-			
-			if (k==2)
+
+			if (k == 2)
 			{
-				String toDraw="";
+				String toDraw = "";
 				switch (listType)
 				{
 					case 0:
@@ -86,17 +86,17 @@ public class GuiButtonListtype extends GuiButton
 						toDraw = I18n.format("text.miscellaneous.blackList");
 						break;
 				}
-				
+
 				ArrayList<String> strings = new ArrayList<String>();
 				strings.add(toDraw);
-				
+
 				GL11.glPushMatrix();
 				this.drawHoveringText(strings, xPosition + 13, yPosition + 18, Minecraft.getMinecraft().fontRenderer);
 				GL11.glPopMatrix();
 			}
 		}
 	}
-	
+
 	protected void drawHoveringText(List par1List, int par2, int par3, FontRenderer font)
 	{
 		if (!par1List.isEmpty())
@@ -135,7 +135,7 @@ public class GuiButtonListtype extends GuiButton
 			{
 				j1 = gc.height - k1 - 6;
 			}
-			
+
 			this.zLevel = 300.0F;
 			int l1 = -267386864;
 			this.drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);

@@ -40,6 +40,7 @@ public class EntitySpirit extends EntityMob
 		this.lifetime = 20 * 20;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public float getShadowSize()
 	{

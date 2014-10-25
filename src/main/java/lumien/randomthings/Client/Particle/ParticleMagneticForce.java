@@ -17,7 +17,7 @@ public class ParticleMagneticForce extends EntityFX
 
 	public ParticleMagneticForce(EntityPlayer followPlayer, double offsetX, double offsetZ)
 	{
-		super(followPlayer.worldObj, followPlayer.posX+offsetX, followPlayer.posY-followPlayer.yOffset, followPlayer.posZ+offsetZ, 0, 0, 0);
+		super(followPlayer.worldObj, followPlayer.posX + offsetX, followPlayer.posY - followPlayer.yOffset, followPlayer.posZ + offsetZ, 0, 0, 0);
 
 		rng = new Random();
 
@@ -51,10 +51,10 @@ public class ParticleMagneticForce extends EntityFX
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
-		
-		modY+=0.1;
-		
-		this.setPosition(followPlayer.posX+offsetX, followPlayer.posY+modY, followPlayer.posZ+offsetZ);
+
+		modY += 0.1;
+
+		this.setPosition(followPlayer.posX + offsetX, followPlayer.posY + modY, followPlayer.posZ + offsetZ);
 
 		if (this.particleAge++ >= this.particleMaxAge)
 		{

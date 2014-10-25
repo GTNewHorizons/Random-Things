@@ -14,8 +14,8 @@ public class ModelItemCollector extends ModelBase
 	ModelRenderer Shape3;
 	ModelRenderer Shape4;
 	ModelRenderer Shape5;
-	
-	private float color=0.2F;
+
+	private float color = 0.2F;
 
 	public ModelItemCollector()
 	{
@@ -58,11 +58,11 @@ public class ModelItemCollector extends ModelBase
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
-		
-		color+=0.01F;
-		
-		float colorMod = (float) (0.25F*Math.sin(color)+0.55F);
-		
+
+		color += 0.01F;
+
+		float colorMod = (float) (0.25F * Math.sin(color) + 0.55F);
+
 		setRotationAngles(f, f1, f2, f3, f4, f5);
 		Shape1.render(f5);
 		Shape2.render(f5);

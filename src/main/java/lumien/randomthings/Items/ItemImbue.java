@@ -3,10 +3,8 @@ package lumien.randomthings.Items;
 import java.util.ArrayList;
 import java.util.List;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Library.PotionEffects;
@@ -15,7 +13,6 @@ import lumien.randomthings.Potions.ModPotions;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityPotion;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -40,14 +37,14 @@ public class ItemImbue extends ItemBase
 	{
 		return EnumAction.drink;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
 	{
 		super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
-		
-		if (par1ItemStack.getItemDamage()==1)
+
+		if (par1ItemStack.getItemDamage() == 1)
 		{
 			par3List.add("I will work with ANY entity as");
 			par3List.add("soon as there are Forge Hooks for me");

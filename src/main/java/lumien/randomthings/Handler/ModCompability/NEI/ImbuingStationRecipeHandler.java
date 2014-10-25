@@ -23,6 +23,7 @@ import codechicken.nei.recipe.TemplateRecipeHandler;
 public class ImbuingStationRecipeHandler extends TemplateRecipeHandler
 {
 	static Gui gui = new Gui();
+
 	public class CachedImbuingRecipe extends CachedRecipe
 	{
 		ArrayList<PositionedStack> ingredients;

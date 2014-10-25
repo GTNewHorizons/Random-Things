@@ -139,7 +139,7 @@ public class TileEntityAdvancedItemCollector extends TileEntity
 			tickCounter++;
 			if (tickCounter >= tickRate)
 			{
-				tickCounter=0;
+				tickCounter = 0;
 				int targetX, targetY, targetZ;
 
 				EnumFacing facing = BlockDispenser.func_149937_b(Facing.oppositeSide[worldObj.getBlockMetadata(xCoord, yCoord, zCoord)]);
@@ -158,8 +158,8 @@ public class TileEntityAdvancedItemCollector extends TileEntity
 						AxisAlignedBB bounding = AxisAlignedBB.getBoundingBox(xCoord - rangeX, yCoord - rangeY, zCoord - rangeZ, xCoord + rangeX + 1, yCoord + rangeY + 1, zCoord + rangeZ + 1);
 
 						List<EntityItem> items = worldObj.getEntitiesWithinAABB(EntityItem.class, bounding);
-						
-						if (items.size()==0)
+
+						if (items.size() == 0)
 						{
 							if (tickRate < 20)
 							{

@@ -8,8 +8,8 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityCustomWorkbench extends TileEntity
 {
-	String blockName="";
-	int blockDamage=0;
+	String blockName = "";
+	int blockDamage = 0;
 
 	@Override
 	public Packet getDescriptionPacket()

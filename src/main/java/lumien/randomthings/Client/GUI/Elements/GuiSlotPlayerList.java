@@ -2,7 +2,6 @@ package lumien.randomthings.Client.GUI.Elements;
 
 import java.util.ArrayList;
 
-import lumien.randomthings.Client.GUI.GuiMagneticForce;
 import lumien.randomthings.Library.Interfaces.IPlayerListGUI;
 
 import org.lwjgl.opengl.GL11;

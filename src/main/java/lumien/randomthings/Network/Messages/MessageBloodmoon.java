@@ -10,12 +10,12 @@ import lumien.randomthings.Network.IRTMessage;
 public class MessageBloodmoon implements IRTMessage
 {
 	boolean bloodMoon;
-	
+
 	public MessageBloodmoon()
 	{
-		
+
 	}
-	
+
 	public MessageBloodmoon(boolean bloodMoon)
 	{
 		this.bloodMoon = bloodMoon;

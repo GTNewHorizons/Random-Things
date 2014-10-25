@@ -25,14 +25,13 @@ public class Colors
 	public final static String LIGHT_PURPLE = "\247" + "d";
 	public final static String YELLOW = "\247" + "e";
 	public final static String WHITE = "\247" + "f";
-	
+
 	public static final Color[] dyeColors = new Color[ItemDye.field_150922_c.length];
 	{
-		
-	}
-	
-	public static final String[] oreDictDyes = new String[] { "dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow", "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite" };
 
+	}
+
+	public static final String[] oreDictDyes = new String[] { "dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow", "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite" };
 
 	public static int getDyeColor(ItemStack is)
 	{
@@ -49,10 +48,10 @@ public class Colors
 				}
 			}
 		}
-		
+
 		return 0;
 	}
-	
+
 	public static int getDye(ItemStack is)
 	{
 		int[] oreDictIds = OreDictionary.getOreIDs(is);

@@ -19,24 +19,23 @@ public class GuiButtonOreDictionary extends GuiButton
 	ResourceLocation oreButtonTextures = new ResourceLocation("randomthings:textures/gui/buttonOreDict.png");
 	boolean enabled;
 	GuiContainer gc;
-	
 
-	public GuiButtonOreDictionary(GuiContainer gc,int id,int posX,int posY,boolean enabled)
+	public GuiButtonOreDictionary(GuiContainer gc, int id, int posX, int posY, boolean enabled)
 	{
 		super(id, posX, posY, "");
-		
+
 		this.enabled = enabled;
-		this.width=20;
-		this.height=20;
+		this.width = 20;
+		this.height = 20;
 
 		this.gc = gc;
 	}
-	
+
 	public void setEnabled(boolean state)
 	{
 		this.enabled = state;
 	}
-	
+
 	public boolean isEnabled()
 	{
 		return enabled;
@@ -55,9 +54,9 @@ public class GuiButtonOreDictionary extends GuiButton
 			GL11.glEnable(GL11.GL_BLEND);
 			OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			
-			this.drawTexturedModalRect(this.xPosition, this.yPosition, (!enabled?0:1)*20, (k-1) * 20, 20, 20);
-			
+
+			this.drawTexturedModalRect(this.xPosition, this.yPosition, (!enabled ? 0 : 1) * 20, (k - 1) * 20, 20, 20);
+
 			this.mouseDragged(p_146112_1_, p_146112_2_, p_146112_3_);
 			int l = 14737632;
 
@@ -73,27 +72,27 @@ public class GuiButtonOreDictionary extends GuiButton
 			{
 				l = 16777120;
 			}
-			
-			if (k==2)
+
+			if (k == 2)
 			{
-				String toDraw="";
+				String toDraw = "";
 				if (enabled)
 				{
-					toDraw="Use ore dictionary";
+					toDraw = "Use ore dictionary";
 				}
 				else
 				{
-					toDraw="Ignore ore dictionary";
+					toDraw = "Ignore ore dictionary";
 				}
-				
+
 				ArrayList<String> strings = new ArrayList<String>();
 				strings.add(toDraw);
-				
+
 				this.drawHoveringText(strings, xPosition + 13, yPosition + 18, Minecraft.getMinecraft().fontRenderer);
 			}
 		}
 	}
-	
+
 	protected void drawHoveringText(List par1List, int par2, int par3, FontRenderer font)
 	{
 		if (!par1List.isEmpty())
@@ -132,7 +131,7 @@ public class GuiButtonOreDictionary extends GuiButton
 			{
 				j1 = gc.height - k1 - 6;
 			}
-			
+
 			this.zLevel = 300.0F;
 			int l1 = -267386864;
 			this.drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);

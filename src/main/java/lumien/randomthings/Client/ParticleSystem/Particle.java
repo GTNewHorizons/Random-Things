@@ -1,8 +1,6 @@
 package lumien.randomthings.Client.ParticleSystem;
 
-import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
-import javax.vecmath.Vector4f;
 
 public class Particle
 {
@@ -16,14 +14,14 @@ public class Particle
 	public Particle()
 	{
 		this.energy = 0;
-		this.pos = new Vector3f(0,0,0);
-		this.velocity = new Vector3f(0,0,0);
-		this.gravity = new Vector3f(0,0,0);
+		this.pos = new Vector3f(0, 0, 0);
+		this.velocity = new Vector3f(0, 0, 0);
+		this.gravity = new Vector3f(0, 0, 0);
 	}
-	
-	public void setGravity(float gX,float gY,float gZ)
+
+	public void setGravity(float gX, float gY, float gZ)
 	{
-		this.gravity.set(gX,gY,gZ);
+		this.gravity.set(gX, gY, gZ);
 	}
 
 	public void setPosition(float x, float y, float z)

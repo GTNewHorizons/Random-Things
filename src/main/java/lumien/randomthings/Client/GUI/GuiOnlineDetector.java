@@ -25,18 +25,18 @@ public class GuiOnlineDetector extends GuiContainer
 	public GuiOnlineDetector(TileEntityOnlineDetector te)
 	{
 		super(new ContainerOnlineDetector());
-		
+
 		this.te = te;
 		this.ySize = 80;
 		this.xSize = 160;
 	}
-	
+
 	@Override
 	protected void actionPerformed(GuiButton buttonPressed)
 	{
-		if (buttonPressed==saveButton && !usernameInput.getText().equals(""))
+		if (buttonPressed == saveButton && !usernameInput.getText().equals(""))
 		{
-			MessageOnlineDetector packet = new MessageOnlineDetector(usernameInput.getText(),te.xCoord,te.yCoord,te.zCoord,te.getWorldObj().provider.dimensionId);
+			MessageOnlineDetector packet = new MessageOnlineDetector(usernameInput.getText(), te.xCoord, te.yCoord, te.zCoord, te.getWorldObj().provider.dimensionId);
 			PacketHandler.INSTANCE.sendToServer(packet);
 		}
 	}

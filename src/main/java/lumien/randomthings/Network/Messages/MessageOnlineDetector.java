@@ -1,8 +1,6 @@
 package lumien.randomthings.Network.Messages;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
@@ -35,11 +33,11 @@ public class MessageOnlineDetector implements IRTMessage
 	public void toBytes(ByteBuf buffer)
 	{
 		ByteBufUtils.writeUTF8String(buffer, username);
-		
+
 		buffer.writeInt(posX);
 		buffer.writeInt(posY);
 		buffer.writeInt(posZ);
-		
+
 		buffer.writeInt(dimensionID);
 	}
 
@@ -47,11 +45,11 @@ public class MessageOnlineDetector implements IRTMessage
 	public void fromBytes(ByteBuf buffer)
 	{
 		username = ByteBufUtils.readUTF8String(buffer);
-		
+
 		posX = buffer.readInt();
 		posY = buffer.readInt();
 		posZ = buffer.readInt();
-		
+
 		dimensionID = buffer.readInt();
 	}
 

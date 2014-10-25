@@ -8,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -22,7 +21,7 @@ public class ItemOpSpectreKey extends ItemOp
 	{
 		super("opSpectreKey");
 	}
-	
+
 	@Override
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
 	{
@@ -36,7 +35,7 @@ public class ItemOpSpectreKey extends ItemOp
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
 	{
 		if (player.worldObj.isRemote && count < 20)
-		{	
+		{
 			EntityFX particle;
 			float t = 1F / 255F;
 			if (Minecraft.getMinecraft().thePlayer == player)
@@ -70,7 +69,7 @@ public class ItemOpSpectreKey extends ItemOp
 		}
 		return par1ItemStack;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack par1ItemStack, int pass)

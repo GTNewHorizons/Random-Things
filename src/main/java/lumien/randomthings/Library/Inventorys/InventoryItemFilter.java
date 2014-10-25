@@ -89,7 +89,6 @@ public class InventoryItemFilter extends InventoryBasic
 	protected void writeToNBT()
 	{
 
-
 		NBTTagList itemList = new NBTTagList();
 		for (int i = 0; i < getSizeInventory(); i++)
 		{

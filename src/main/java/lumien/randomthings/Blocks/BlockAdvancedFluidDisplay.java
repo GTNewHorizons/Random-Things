@@ -1,7 +1,6 @@
 package lumien.randomthings.Blocks;
 
 import lumien.randomthings.TileEntities.TileEntityAdvancedFluidDisplay;
-import lumien.randomthings.TileEntities.TileEntityFluidDisplay;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;

@@ -20,13 +20,13 @@ public class InventoryDropFilter extends InventoryBasic
 
 		this.player = player;
 		this.dropFilter = dropFilter;
-		
+
 		if (!hasInventory())
 		{
 			createInventory();
 		}
 	}
-	
+
 	@Override
 	public void openInventory()
 	{
@@ -41,7 +41,7 @@ public class InventoryDropFilter extends InventoryBasic
 
 	private boolean hasInventory()
 	{
-		if (dropFilter.stackTagCompound==null)
+		if (dropFilter.stackTagCompound == null)
 		{
 			return false;
 		}
@@ -73,7 +73,7 @@ public class InventoryDropFilter extends InventoryBasic
 	{
 		ItemStack itemStack = player.getCurrentEquippedItem();
 
-		if (itemStack!=null && itemStack.getItem() instanceof ItemDropFilter)
+		if (itemStack != null && itemStack.getItem() instanceof ItemDropFilter)
 		{
 			itemStack.setTagCompound(dropFilter.getTagCompound());
 		}
@@ -87,7 +87,7 @@ public class InventoryDropFilter extends InventoryBasic
 
 	protected void writeToNBT()
 	{
-		if (dropFilter.stackTagCompound==null)
+		if (dropFilter.stackTagCompound == null)
 		{
 			dropFilter.stackTagCompound = new NBTTagCompound();
 		}
@@ -125,7 +125,7 @@ public class InventoryDropFilter extends InventoryBasic
 		}
 		reading = false;
 	}
-	
+
 	@Override
 	public String getInventoryName()
 	{

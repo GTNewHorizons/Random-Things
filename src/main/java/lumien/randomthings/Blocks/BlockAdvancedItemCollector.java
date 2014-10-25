@@ -26,64 +26,64 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 
 	protected BlockAdvancedItemCollector()
 	{
-		super("advancedItemCollector",Material.rock);
-		this.blockHardness=1.5F;
+		super("advancedItemCollector", Material.rock);
+		this.blockHardness = 1.5F;
 
 		this.setBlockTextureName("RandomThings:itemCollector/advancedItemCollector");
 		this.setBlockBounds(0.35F, 0, 0.35F, 0.65F, 0.3F, 0.65F);
 		this.
-		
+
 		rng = new Random();
 	}
-	
+
 	@Override
 	public void breakBlock(World worldObj, int posX, int posY, int posZ, Block block, int metadata)
-    {
-        TileEntityAdvancedItemCollector tileEntityAdvancedItemCollector = (TileEntityAdvancedItemCollector)worldObj.getTileEntity(posX, posY, posZ);
+	{
+		TileEntityAdvancedItemCollector tileEntityAdvancedItemCollector = (TileEntityAdvancedItemCollector) worldObj.getTileEntity(posX, posY, posZ);
 
-        if (tileEntityAdvancedItemCollector != null)
-        {
-        	IInventory inventory = tileEntityAdvancedItemCollector.getInventory();
-            for (int i1 = 0; i1 < inventory.getSizeInventory(); ++i1)
-            {
-                ItemStack itemstack = inventory.getStackInSlot(i1);
+		if (tileEntityAdvancedItemCollector != null)
+		{
+			IInventory inventory = tileEntityAdvancedItemCollector.getInventory();
+			for (int i1 = 0; i1 < inventory.getSizeInventory(); ++i1)
+			{
+				ItemStack itemstack = inventory.getStackInSlot(i1);
 
-                if (itemstack != null)
-                {
-                    float f = this.rng.nextFloat() * 0.8F + 0.1F;
-                    float f1 = this.rng.nextFloat() * 0.8F + 0.1F;
-                    EntityItem entityitem;
+				if (itemstack != null)
+				{
+					float f = this.rng.nextFloat() * 0.8F + 0.1F;
+					float f1 = this.rng.nextFloat() * 0.8F + 0.1F;
+					EntityItem entityitem;
 
-                    for (float f2 = this.rng.nextFloat() * 0.8F + 0.1F; itemstack.stackSize > 0; worldObj.spawnEntityInWorld(entityitem))
-                    {
-                        int j1 = this.rng.nextInt(21) + 10;
+					for (float f2 = this.rng.nextFloat() * 0.8F + 0.1F; itemstack.stackSize > 0; worldObj.spawnEntityInWorld(entityitem))
+					{
+						int j1 = this.rng.nextInt(21) + 10;
 
-                        if (j1 > itemstack.stackSize)
-                        {
-                            j1 = itemstack.stackSize;
-                        }
+						if (j1 > itemstack.stackSize)
+						{
+							j1 = itemstack.stackSize;
+						}
 
-                        itemstack.stackSize -= j1;
-                        entityitem = new EntityItem(worldObj, posX + f, posY + f1, posZ + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
-                        float f3 = 0.05F;
-                        entityitem.motionX = (float)this.rng.nextGaussian() * f3;
-                        entityitem.motionY = (float)this.rng.nextGaussian() * f3 + 0.2F;
-                        entityitem.motionZ = (float)this.rng.nextGaussian() * f3;
+						itemstack.stackSize -= j1;
+						entityitem = new EntityItem(worldObj, posX + f, posY + f1, posZ + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
+						float f3 = 0.05F;
+						entityitem.motionX = (float) this.rng.nextGaussian() * f3;
+						entityitem.motionY = (float) this.rng.nextGaussian() * f3 + 0.2F;
+						entityitem.motionZ = (float) this.rng.nextGaussian() * f3;
 
-                        if (itemstack.hasTagCompound())
-                        {
-                            entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
-                        }
-                    }
-                }
-            }
+						if (itemstack.hasTagCompound())
+						{
+							entityitem.getEntityItem().setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
+						}
+					}
+				}
+			}
 
-            worldObj.func_147453_f(posX, posY, posZ, block);
-        }
+			worldObj.func_147453_f(posX, posY, posZ, block);
+		}
 
-        super.breakBlock(worldObj, posX, posY, posZ, block, metadata);
-    }
-	
+		super.breakBlock(worldObj, posX, posY, posZ, block, metadata);
+	}
+
 	@Override
 	public boolean onBlockActivated(World worldObj, int poxX, int poxY, int poxZ, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 	{
@@ -109,10 +109,10 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 			worldObj.setBlockToAir(posX, posY, posZ);
 		}
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockOnSide(World worldObj, int posX, int posY, int posZ, int side)
-    {
+	{
 		EnumFacing facing = BlockDispenser.func_149937_b(Facing.oppositeSide[side]);
 
 		int targetX = posX + facing.getFrontOffsetX();
@@ -127,7 +127,7 @@ public class BlockAdvancedItemCollector extends BlockContainerBase
 		{
 			return true;
 		}
-    }
+	}
 
 	@Override
 	public int getRenderType()

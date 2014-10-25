@@ -3,8 +3,6 @@ package lumien.randomthings.Items;
 import java.util.List;
 import java.util.Random;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.ChestCategory;
 
 import net.minecraft.client.resources.I18n;

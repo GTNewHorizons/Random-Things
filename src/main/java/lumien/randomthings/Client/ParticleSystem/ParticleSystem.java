@@ -4,17 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.FloatBuffer;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
-import javax.vecmath.Vector4f;
-
 import lumien.randomthings.RandomThings;
-
-import net.minecraft.client.Minecraft;
 
 import org.apache.logging.log4j.Level;
 import org.lwjgl.BufferUtils;
@@ -22,14 +13,9 @@ import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 
-import sun.rmi.transport.proxy.CGIHandler;
-
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.opengl.GL30.*;
-import static org.lwjgl.opengl.GL31.*;
-import static org.lwjgl.opengl.GL33.*;
 
 public class ParticleSystem
 {
@@ -44,7 +30,7 @@ public class ParticleSystem
 
 	int maxParticles;
 	int generationSpeed;
-	
+
 	int vertexBufferID;
 
 	public ParticleSystem(Vector3f emissionPoint, int maxParticles, int generationSpeed)
@@ -56,7 +42,7 @@ public class ParticleSystem
 		this.lastUsedPosition = 0;
 		initiateParticles();
 		inititateShaders();
-		
+
 		vertexBufferID = glGenBuffers();
 	}
 
@@ -164,15 +150,15 @@ public class ParticleSystem
 		{
 			if (!p.isDead())
 			{
-				vertexBuffer.put(p.pos.x+partialTickTime*p.velocity.x);
-				vertexBuffer.put(p.pos.y+partialTickTime*p.velocity.y);
-				vertexBuffer.put(p.pos.z+partialTickTime*p.velocity.z);
+				vertexBuffer.put(p.pos.x + partialTickTime * p.velocity.x);
+				vertexBuffer.put(p.pos.y + partialTickTime * p.velocity.y);
+				vertexBuffer.put(p.pos.z + partialTickTime * p.velocity.z);
 			}
 		}
 		vertexBuffer.rewind();
-		
-		//glUseProgram(programID);
-		
+
+		// glUseProgram(programID);
+
 		glPointSize(5);
 		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
@@ -184,23 +170,23 @@ public class ParticleSystem
 		glDisableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glUseProgram(0);
-		
+
 		glEnable(GL_LIGHTING);
 		glEnable(GL_TEXTURE_2D);
 	}
-	
-	private void checkGLError(String p_71361_1_)
-    {
-        int i = GL11.glGetError();
 
-        if (i != 0)
-        {
-            String s1 = GLU.gluErrorString(i);
-            RandomThings.instance.logger.error("########## GL ERROR ##########");
-            RandomThings.instance.logger.error("@ " + p_71361_1_);
-            RandomThings.instance.logger.error(i + ": " + s1);
-        }
-    }
+	private void checkGLError(String p_71361_1_)
+	{
+		int i = GL11.glGetError();
+
+		if (i != 0)
+		{
+			String s1 = GLU.gluErrorString(i);
+			RandomThings.instance.logger.error("########## GL ERROR ##########");
+			RandomThings.instance.logger.error("@ " + p_71361_1_);
+			RandomThings.instance.logger.error(i + ": " + s1);
+		}
+	}
 
 	private int createShader(String filename, int shaderType) throws Exception
 	{

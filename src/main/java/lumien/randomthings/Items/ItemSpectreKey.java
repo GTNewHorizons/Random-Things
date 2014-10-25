@@ -1,8 +1,5 @@
 package lumien.randomthings.Items;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.RandomThings;
@@ -11,14 +8,10 @@ import lumien.randomthings.Configuration.Settings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntitySmokeFX;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class ItemSpectreKey extends ItemBase
@@ -31,7 +24,6 @@ public class ItemSpectreKey extends ItemBase
 		this.setMaxStackSize(1);
 	}
 
-	
 	@Override
 	public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
 	{
@@ -45,7 +37,7 @@ public class ItemSpectreKey extends ItemBase
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
 	{
 		if (player.worldObj.isRemote && count < 60)
-		{	
+		{
 			EntityFX particle;
 			float t = 1F / 255F;
 			if (Minecraft.getMinecraft().thePlayer == player)
@@ -86,7 +78,7 @@ public class ItemSpectreKey extends ItemBase
 		}
 		return par1ItemStack;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean hasEffect(ItemStack par1ItemStack, int pass)
