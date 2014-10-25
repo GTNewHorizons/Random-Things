@@ -2,6 +2,8 @@ package lumien.randomthings.Proxy;
 
 import java.util.ArrayList;
 
+import lumien.randomthings.Entity.EntitySoul;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 
@@ -9,6 +11,11 @@ public class CommonProxy
 {
 	public int itemCollectorRenderType;
 	private static final MinecraftServer server = MinecraftServer.getServer();
+	
+	public boolean canBeCollidedWith(EntitySoul soul)
+	{
+		return false;
+	}
 	
 	public void registerRenderers()
 	{

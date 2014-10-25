@@ -23,6 +23,7 @@ import net.minecraft.client.particle.EntityReddustFX;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemDye;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -40,6 +41,7 @@ import lumien.randomthings.Entity.EntityHealingOrb;
 import lumien.randomthings.Entity.EntityReviveCircle;
 import lumien.randomthings.Entity.EntitySoul;
 import lumien.randomthings.Entity.EntitySpirit;
+import lumien.randomthings.Items.ItemGinto;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.OverrideUtils;
 import lumien.randomthings.Library.RenderIds;
@@ -56,6 +58,20 @@ public class ClientProxy extends CommonProxy
 	public void registerTickHandler()
 	{
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
+	}
+	
+	@Override
+	public boolean canBeCollidedWith(EntitySoul soul)
+	{
+		ItemStack equipped = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
+		if (equipped != null && (equipped.getItem() instanceof ItemGinto) && equipped.getItemDamage() == 1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	@Override

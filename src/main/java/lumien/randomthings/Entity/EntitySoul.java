@@ -71,15 +71,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 
 	public boolean canBeCollidedWith()
 	{
-		ItemStack equipped = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
-		if (equipped != null && (equipped.getItem() instanceof ItemGinto) && equipped.getItemDamage() == 1)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return RandomThings.proxy.canBeCollidedWith(this);
 	}
 
 	public boolean interactFirst(EntityPlayer user)
