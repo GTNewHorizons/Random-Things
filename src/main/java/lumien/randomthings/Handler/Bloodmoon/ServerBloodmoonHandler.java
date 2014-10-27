@@ -44,9 +44,12 @@ public class ServerBloodmoonHandler
 			int time = (int) (world.getWorldTime() % 24000);
 			if (bloodMoon)
 			{
-				for (int i = 0; i < Settings.BLOODMOON_SPAWNSPEED; i++)
+				if (world.getGameRules().getGameRuleBooleanValue("doMobSpawning"))
 				{
-					int chunks = bloodMoonSpawner.findChunksForSpawning((WorldServer) world, true, false, world.getTotalWorldTime() % 20 == 0);
+					for (int i = 0; i < Settings.BLOODMOON_SPAWNSPEED; i++)
+					{
+						bloodMoonSpawner.findChunksForSpawning((WorldServer) world, true, false, world.getTotalWorldTime() % 20 == 0);
+					}
 				}
 
 				if (time >= 0 && time < 12000)
