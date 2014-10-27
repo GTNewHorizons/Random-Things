@@ -2,6 +2,7 @@ package lumien.randomthings.Entity;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Items.ItemGinto;
+import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.WorldUtils;
 import io.netty.buffer.ByteBuf;
 
@@ -77,6 +78,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 				if (!user.capabilities.isCreativeMode)
 				{
 					equipped.stackSize--;
+					user.inventory.addItemStackToInventory(new ItemStack(ModItems.ginto, 1, 0));
 					user.inventory.markDirty();
 					user.inventoryContainer.detectAndSendChanges();
 				}
