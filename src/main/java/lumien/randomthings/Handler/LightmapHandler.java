@@ -53,7 +53,7 @@ public class LightmapHandler
 
 			if (Settings.BLOODMOON_VISUAL_REDLIGHT && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
 			{
-				originalValue -= ClientBloodmoonHandler.INSTANCE.lightSub;
+				originalValue -= ClientBloodmoonHandler.INSTANCE.lightSub*1.9f;
 			}
 
 			return Math.max(originalValue, 0);
