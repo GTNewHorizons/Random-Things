@@ -433,7 +433,7 @@ public class RTEventHandler
 	{
 		if (!event.entity.worldObj.isRemote)
 		{
-			if (event.entityLiving instanceof EntityPlayer)
+			if (event.entityLiving instanceof EntityPlayer && !(event.entityLiving instanceof FakePlayer))
 			{
 				EntityPlayer player = ((EntityPlayer) event.entityLiving);
 				player.worldObj.spawnEntityInWorld(new EntitySoul(player.worldObj, player.posX, player.posY, player.posZ, player.getGameProfile().getName()));
