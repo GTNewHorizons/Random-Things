@@ -22,6 +22,11 @@ public class CommonProxy
 	{
 		return ServerBloodmoonHandler.INSTANCE.isBloodmoonActive();
 	}
+	
+	public void setContainerProperty(int index,int value)
+	{
+		
+	}
 
 	public void registerRenderers()
 	{

@@ -70,18 +70,24 @@ public class Recipes
 	static ItemStack iEnderFragment = new ItemStack(ModItems.ingredients, 1, 2);
 	static ItemStack iEctoplasm = new ItemStack(ModItems.ingredients, 1, 3);
 	static ItemStack iSpectreIron = new ItemStack(ModItems.ingredients, 1, 4);
+	static ItemStack iEnderDiamond = new ItemStack(ModItems.ingredients, 1, 6);
+	static ItemStack iEnergizedWater = new ItemStack(ModItems.ingredients, 1, 7);
+
 	static ItemStack iTransformationCore = new ItemStack(ModItems.ingredients, 1, 5);
 	static ItemStack iSpiderEye = new ItemStack(Items.spider_eye, 1, 0);
 	static ItemStack iAllium = new ItemStack(Blocks.red_flower, 1, 2);
 
 	public static void init()
 	{
+		// Always there
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.imbuingStation), "vcv", "tgt", "lel", 'v', iVine, 'c', iCauldron, 't', iTallGrass, 'g', new ItemStack(Blocks.stained_hardened_clay, 1, 13), 'l', iLilypad, 'e', "blockEmerald"));
 		// Crafting Items
 		GameRegistry.addRecipe(new ShapedOreRecipe(iPlayerCore, "xlx", "lel", "xlx", 'l', "gemLapis", 'e', "gemEmerald"));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 3, 1), "o", "o", 'o', iObsidian));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 4, 2), "fe", 'e', iEnderPearl, 'f', iFlint));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, 4), "ei", 'e', iEctoplasm, 'i', "ingotIron"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.ingredients, 1, 5), "dyeRed", "dyeOrange", "dyeYellow", "dyeGreen", "dyeCyan", "dyePurple", "dyeGray", "dyeLime", "dyeMagenta"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 1, 6), "xex", "ede", "xex", 'e', iEnderPearl, 'd', "gemDiamond"));
 
 		if (ConfigBlocks.playerInterface)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.playerInterface), "oeo", "omo", "ono", 'o', iObsidian, 'e', iEnderChest, 'm', iPlayerCore, 'n', iNetherstar));
@@ -109,10 +115,12 @@ public class Recipes
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.wirelessLever), "r", "l", 'r', "blockRedstone", 'l', iLever));
 		if (ConfigBlocks.dyeingMachine)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.dyeingMachine), "wpw", "ptp", "wpw", 'w', new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE), 'p', "plankWood", 't', iTransformationCore));
-		if (ConfigBlocks.imbuingStation)
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.imbuingStation), "vcv", "tgt", "lel", 'v', iVine, 'c', iCauldron, 't', iTallGrass, 'g', new ItemStack(Blocks.stained_hardened_clay, 1, 13), 'l', iLilypad, 'e', "blockEmerald"));
 		if (ConfigBlocks.spectreGlass)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.spectreGlass, 16, 0), "ggg", "geg", "ggg", 'g', "blockGlass", 'e', iEctoplasm));
+		if (ConfigBlocks.energyDistributor)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.energyDistributor), "iri", "beb", "iri", 'i', "blockIron", 'b', "blockRedstone", 'r', iRedstoneRepeater, 'e', iEnergizedWater));
+		if (ConfigBlocks.enderEnergyDistributor && ConfigBlocks.energyDistributor)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.enderEnergyDistributor), "ede", "dsd", "ede", 'd', iEnderDiamond, 's', new ItemStack(ModBlocks.energyDistributor)));
 
 		if (ConfigItems.voidStone)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.voidStone, 1), "xox", "oeo", "xox", 'o', "stone", 'e', iEnderPearl));
@@ -146,21 +154,28 @@ public class Recipes
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ginto, 1, 0), "ixi", "xsx", 'i', "ingotIron", 's', iSpectreIron, 'e', iEctoplasm));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ginto, 1, 1), "xex", "xgx", 'e', iEctoplasm, 'g', new ItemStack(ModItems.ginto, 1, 0)));
 		}
+		
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 0), "xrx", "rpr", "xrx", 'r', "dyeRed", 'p', iPaper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ItemFilter.standardItemFilter, "xrx", "rpr", "xrx", 'r', "dyeYellow", 'p', iPaper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 2), "xrx", "rpr", "xrx", 'r', "dyeBlue", 'p', iPaper));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 3), "xrx", "rpr", "xrx", 'r', "dyePurple", 'p', iPaper));
 
 		addImbuingRecipes();
 	}
 
 	private static void addImbuingRecipes()
 	{
-		ImbuingRecipeHandler.addRecipe(iSpiderEye, iAllium, iRedMushroom, iWaterBottle, imbuePoison);
-		ImbuingRecipeHandler.addRecipe(iDiamond, iEmerald, iGoldIngot, iWaterBottle, imbueExperience);
-		ImbuingRecipeHandler.addRecipe(iFlint, iBlazeRod, iNetherBrick, iWaterBottle, imbueFire);
-		ImbuingRecipeHandler.addRecipe(iWitherSkull, iBone, iCoal, iWaterBottle, imbueWither);
-		ImbuingRecipeHandler.addRecipe(iRottenflesh, iQuartzBlock, iGhastTear, iWaterBottle, imbueWeakness);
-		ImbuingRecipeHandler.addRecipe(iEctoplasm, iLapisBlock, iDaisy, iWaterBottle, imbueSpectre);
+		if (ConfigItems.imbue)
+		{
+			ImbuingRecipeHandler.addRecipe(iSpiderEye, iAllium, iRedMushroom, iWaterBottle, imbuePoison);
+			ImbuingRecipeHandler.addRecipe(iDiamond, iEmerald, iGoldIngot, iWaterBottle, imbueExperience);
+			ImbuingRecipeHandler.addRecipe(iFlint, iBlazeRod, iNetherBrick, iWaterBottle, imbueFire);
+			ImbuingRecipeHandler.addRecipe(iWitherSkull, iBone, iCoal, iWaterBottle, imbueWither);
+			ImbuingRecipeHandler.addRecipe(iRottenflesh, iQuartzBlock, iGhastTear, iWaterBottle, imbueWeakness);
+			ImbuingRecipeHandler.addRecipe(iEctoplasm, iLapisBlock, iDaisy, iWaterBottle, imbueSpectre);
+		}
+
+		ImbuingRecipeHandler.addRecipe(new ItemStack(Items.gunpowder), new ItemStack(Items.glowstone_dust), new ItemStack(Items.redstone), iWaterBottle, new ItemStack(ModItems.ingredients, 1, 7));
 	}
 
 	private static void addArmorRecipes(ItemStack material, ItemStack helmet, ItemStack chestPlate, ItemStack leggings, ItemStack boots)

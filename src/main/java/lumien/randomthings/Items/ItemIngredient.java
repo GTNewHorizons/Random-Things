@@ -44,6 +44,8 @@ public class ItemIngredient extends ItemBase
 		ingredients.add(new Ingredient("ectoplasm", "ectoplasm", 64));
 		ingredients.add(new Ingredient("spectreIron", "spectreIron", 64));
 		ingredients.add(new Ingredient("transformationCore", "transformationCore", 1));
+		ingredients.add(new Ingredient("enderDiamond", "enderDiamond", 64));
+		ingredients.add(new Ingredient("energizedWater", "energizedWater", 16));
 
 		OreDictionary.registerOre("stickObsidian", new ItemStack(this, 1, 1));
 		OreDictionary.registerOre("obsidianStick", new ItemStack(this, 1, 1));

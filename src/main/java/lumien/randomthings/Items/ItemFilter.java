@@ -6,6 +6,7 @@ import org.lwjgl.input.Keyboard;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Library.ClientUtil;
+import lumien.randomthings.Library.DimensionCoordinate;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.Library.ItemUtils;
 import lumien.randomthings.Library.Texts;
@@ -28,7 +29,7 @@ public class ItemFilter extends ItemBase implements IItemWithProperties
 {
 	public enum FilterType
 	{
-		BLOCK, ITEM, ENTITY;
+		BLOCK, ITEM, ENTITY, POSITION;
 	}
 
 	public static ItemStack standardItemFilter;
@@ -39,8 +40,6 @@ public class ItemFilter extends ItemBase implements IItemWithProperties
 	{
 		super("filter");
 		this.setHasSubtypes(true);
-
-		icons = new IIcon[3];
 
 		standardItemFilter = new ItemStack(this, 1, 1);
 		standardItemFilter.stackTagCompound = new NBTTagCompound();
@@ -167,13 +166,19 @@ public class ItemFilter extends ItemBase implements IItemWithProperties
 							par3List.add(I18n.format("text.miscellaneous.entityName", (Object[]) null) + ": " + entityName);
 						}
 						break;
+					case 3:
+						DimensionCoordinate dc = getPosition(par1ItemStack);
+						par3List.add(I18n.format("text.miscellaneous.dimension",dc.dimension));
+						par3List.add(I18n.format("text.miscellaneous.position.x",dc.posX));
+						par3List.add(I18n.format("text.miscellaneous.position.y",dc.posY));
+						par3List.add(I18n.format("text.miscellaneous.position.z",dc.posZ));
 				}
 			}
 		}
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int posX, int posY, int posZ, int par7, float par8, float par9, float par10)
 	{
 		if (par1ItemStack.stackTagCompound == null)
 		{
@@ -182,12 +187,28 @@ public class ItemFilter extends ItemBase implements IItemWithProperties
 		switch (par1ItemStack.getItemDamage())
 		{
 			case 0:
-				Block b = par3World.getBlock(par4, par5, par6);
+				Block b = par3World.getBlock(posX, posY, posZ);
 				par1ItemStack.stackTagCompound.setString("block", Block.blockRegistry.getNameForObject(b));
-				par1ItemStack.stackTagCompound.setInteger("metadata", par3World.getBlockMetadata(par4, par5, par6));
+				par1ItemStack.stackTagCompound.setInteger("metadata", par3World.getBlockMetadata(posX, posY, posZ));
+				return true;
+			case 3:
+				par1ItemStack.stackTagCompound.setInteger("dimension", par3World.provider.dimensionId);
+				par1ItemStack.stackTagCompound.setInteger("filterX", posX);
+				par1ItemStack.stackTagCompound.setInteger("filterY", posY);
+				par1ItemStack.stackTagCompound.setInteger("filterZ", posZ);
 				return true;
 		}
 		return false;
+	}
+	
+	public static DimensionCoordinate getPosition(ItemStack positionFilter)
+	{
+		if (positionFilter.stackTagCompound == null)
+		{
+			positionFilter.stackTagCompound = new NBTTagCompound();
+		}
+		
+		return new DimensionCoordinate(positionFilter.stackTagCompound.getInteger("dimension"),positionFilter.stackTagCompound.getInteger("filterX"),positionFilter.stackTagCompound.getInteger("filterY"),positionFilter.stackTagCompound.getInteger("filterZ"));
 	}
 
 	@Override
@@ -250,9 +271,11 @@ public class ItemFilter extends ItemBase implements IItemWithProperties
 	@Override
 	public void registerIcons(IIconRegister par1IconRegister)
 	{
+		icons = new IIcon[4];
 		icons[0] = par1IconRegister.registerIcon("RandomThings:filter/blockFilter");
 		icons[1] = par1IconRegister.registerIcon("RandomThings:filter/itemFilter");
 		icons[2] = par1IconRegister.registerIcon("RandomThings:filter/entityFilter");
+		icons[3] = par1IconRegister.registerIcon("RandomThings:filter/positionFilter");
 	}
 
 	public static FilterType getFilterType(int damage)
@@ -311,6 +334,9 @@ public class ItemFilter extends ItemBase implements IItemWithProperties
 			case 2: // Entity Filter
 				type = "filterEntity";
 				break;
+			case 3: // Position Filter
+				type = "filterPosition";
+				break;
 		}
 		return "item." + type;
 	}
@@ -327,6 +353,10 @@ public class ItemFilter extends ItemBase implements IItemWithProperties
 		ItemStack entityFilter = new ItemStack(item, 1, 2); // Entity Filter
 		entityFilter.stackTagCompound = new NBTTagCompound();
 		list.add(entityFilter);
+		
+		ItemStack positionFilter = new ItemStack(item, 1, 3); // Block Filter
+		positionFilter.stackTagCompound = new NBTTagCompound();
+		list.add(positionFilter);
 	}
 
 	@Override

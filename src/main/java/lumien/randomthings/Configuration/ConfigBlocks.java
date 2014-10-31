@@ -12,6 +12,7 @@ public class ConfigBlocks
 	public static boolean lapisLamp;
 	public static boolean wirelessLever;
 	public static boolean dyeingMachine;
-	public static boolean imbuingStation;
 	public static boolean spectreGlass;
+	public static boolean energyDistributor;
+	public static boolean enderEnergyDistributor;
 }

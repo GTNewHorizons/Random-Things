@@ -2,9 +2,15 @@ package lumien.randomthings.Blocks;
 
 import lumien.randomthings.RandomThings;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public abstract class BlockContainerBase extends BlockContainer
@@ -40,6 +46,26 @@ public abstract class BlockContainerBase extends BlockContainer
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@Override
+	public void onBlockPlacedBy(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityLiving, ItemStack is)
+	{
+		super.onBlockPlacedBy(worldObj, posX, posY, posZ, entityLiving, is);
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister ir)
+	{
+		super.registerBlockIcons(ir);
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta)
+	{
+		return super.getIcon(side, meta);
 	}
 
 	protected abstract <T extends TileEntity> Class getTileEntityClass();

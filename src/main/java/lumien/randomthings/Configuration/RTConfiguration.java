@@ -100,8 +100,9 @@ public class RTConfiguration
 		ConfigBlocks.notificationInterface = isBlockEnabled("NotificationInterface");
 		ConfigBlocks.lapisLamp = isBlockEnabled("LapisLamp");
 		ConfigBlocks.dyeingMachine = isBlockEnabled("DyeingMachine");
-		ConfigBlocks.imbuingStation = isBlockEnabled("ImbuingStation");
 		ConfigBlocks.spectreGlass = isBlockEnabled("SpectreGlass");
+		ConfigBlocks.energyDistributor = isBlockEnabled("EnergyDistributor");
+		ConfigBlocks.enderEnergyDistributor = isBlockEnabled("EnderEnergyDistributor");
 
 		// Items
 		ConfigItems.biomeCapsule = isItemEnabled("BiomeSolution");

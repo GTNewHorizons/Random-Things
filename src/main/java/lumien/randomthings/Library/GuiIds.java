@@ -14,6 +14,7 @@ public class GuiIds
 	public static final int SOUND_RECORDER = 9;
 	public static final int MAGNETIC_FORCE = 10;
 	public static final int IMBUING_STATION = 11;
-
+	public static final int ENERGY_DISTRIBUTOR = 12;
 	public static final int OP_SPECTRE_KEY = 13;
+	public static final int ENDER_ENERGY_DISTRIBUTOR = 14;
 }

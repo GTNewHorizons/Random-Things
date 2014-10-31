@@ -19,6 +19,7 @@ import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.particle.EntityCritFX;
 import net.minecraft.client.particle.EntityReddustFX;
 import net.minecraft.client.settings.GameSettings;
+import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -41,6 +42,7 @@ import lumien.randomthings.Items.ItemGinto;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.OverrideUtils;
 import lumien.randomthings.Library.RenderIds;
+import lumien.randomthings.Library.Interfaces.IContainerWithProperties;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import lumien.randomthings.TileEntities.TileEntityItemCollector;
 import lumien.randomthings.Transformer.MCPNames;
@@ -60,6 +62,17 @@ public class ClientProxy extends CommonProxy
 	public boolean isBloodmoon()
 	{
 		return ClientBloodmoonHandler.INSTANCE.isBloodmoonActive();
+	}
+
+	@Override
+	public void setContainerProperty(int index, int value)
+	{
+		Container openContainer = Minecraft.getMinecraft().thePlayer.openContainer;
+		if (openContainer != null && openContainer instanceof IContainerWithProperties)
+		{
+			IContainerWithProperties prop = (IContainerWithProperties) openContainer;
+			prop.setValue(index, value);
+		}
 	}
 
 	@Override

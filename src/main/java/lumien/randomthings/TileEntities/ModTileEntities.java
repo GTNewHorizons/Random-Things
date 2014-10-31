@@ -1,5 +1,7 @@
 package lumien.randomthings.TileEntities;
 
+import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnderEnergyDistributor;
+import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnergyDistributor;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModTileEntities
@@ -18,6 +20,8 @@ public class ModTileEntities
 		GameRegistry.registerTileEntity(TileEntityFogGenerator.class, "fogGenerator");
 		GameRegistry.registerTileEntity(TileEntityImbuingStation.class, "imbuingStation");
 		GameRegistry.registerTileEntity(TileEntityCustomWorkbench.class, "customWorkbench");
+		GameRegistry.registerTileEntity(TileEntityEnergyDistributor.class, "energyDistributor");
+		GameRegistry.registerTileEntity(TileEntityEnderEnergyDistributor.class, "enderEnergyDistributor");
 
 		GameRegistry.registerTileEntity(TileEntityItemCollector.class, "itemcollector");
 		GameRegistry.registerTileEntity(TileEntityAdvancedItemCollector.class, "advancedItemcollector");

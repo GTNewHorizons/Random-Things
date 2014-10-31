@@ -1,6 +1,9 @@
 package lumien.randomthings.Blocks;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
+import lumien.randomthings.Blocks.EnergyDistributors.BlockEnderEnergyDistributor;
+import lumien.randomthings.Blocks.EnergyDistributors.BlockEnergyDistributor;
 import lumien.randomthings.Blocks.Spectre.BlockSpectreBlock;
 import lumien.randomthings.Blocks.Spectre.BlockSpectreGlass;
 import lumien.randomthings.Configuration.ConfigBlocks;
@@ -23,6 +26,9 @@ public class ModBlocks
 	public static BlockImbuingStation imbuingStation;
 	public static BlockAdvancedFluidDisplay advancedFluidDisplay;
 	public static BlockSpectreGlass spectreGlass;
+	
+	public static BlockEnergyDistributor energyDistributor;
+	public static BlockEnderEnergyDistributor enderEnergyDistributor;
 
 	public static void init()
 	{
@@ -59,11 +65,15 @@ public class ModBlocks
 			wirelessLever = new BlockWirelessLever();
 		if (ConfigBlocks.dyeingMachine)
 			dyeingMachine = new BlockDyeingMachine();
-		if (ConfigBlocks.imbuingStation)
-			imbuingStation = new BlockImbuingStation();
 		if (ConfigBlocks.spectreGlass)
 			spectreGlass = new BlockSpectreGlass();
+		if (ConfigBlocks.energyDistributor)
+			energyDistributor = new BlockEnergyDistributor();
+		if (ConfigBlocks.enderEnergyDistributor)
+			enderEnergyDistributor = new BlockEnderEnergyDistributor();
 
+		// Always there
 		spectreBlock = new BlockSpectreBlock();
+		imbuingStation = new BlockImbuingStation();
 	}
 }

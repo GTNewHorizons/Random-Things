@@ -17,6 +17,8 @@ tile.dyeingMachine.name=Dyeing Machine
 tile.spiritRod.name=Spirit Rod
 tile.imbuingStation.name=Imbuing Station
 tile.spectreGlass.name=Spectre Glass
+tile.energyDistributor.name=Energy Distributor
+tile.enderEnergyDistributor.name=Ender Energy Distributor
 
 tile.spectreBlock.name=Spectre Block
 tile.spectreBlock.black.name=Black Spectre Block
@@ -72,6 +74,8 @@ item.enderFragment.name=Ender Fragment
 item.ectoplasm.name=Ectoplasm
 item.spectreIron.name=Spectre Iron
 item.transformationCore.name=Transformation Core
+item.enderDiamond.name=Ender Diamond
+item.energizedWater.name=Energized Water
 item.error.name=Invalid Item
 
 item.imbue.poison.name=Flask of Poison
@@ -126,6 +130,11 @@ text.miscellaneous.noTarget=No target selected (Shift click on a block)
 text.miscellaneous.target.x=Target-X: %d
 text.miscellaneous.target.y=Target-Y: %d
 text.miscellaneous.target.z=Target-Z: %d
+
+text.miscellaneous.position.x=Pos-X: %d
+text.miscellaneous.position.y=Pos-Y: %d
+text.miscellaneous.position.z=Pos-Z: %d
+text.miscellaneous.dimension=Dimension: %d
 
 text.spectre.soulSolid=Soul Solid
 

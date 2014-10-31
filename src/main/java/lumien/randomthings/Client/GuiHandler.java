@@ -5,6 +5,8 @@ import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Items.ItemEnderLetter;
 import lumien.randomthings.Client.GUI.GuiDropFilter;
 import lumien.randomthings.Client.GUI.GuiDyeingMachine;
+import lumien.randomthings.Client.GUI.GuiEnderEnergyDistributor;
+import lumien.randomthings.Client.GUI.GuiEnergyDistributor;
 import lumien.randomthings.Client.GUI.GuiImbuingStation;
 import lumien.randomthings.Client.GUI.GuiItemCollector;
 import lumien.randomthings.Client.GUI.GuiItemFilter;
@@ -17,6 +19,8 @@ import lumien.randomthings.Client.GUI.GuiSoundRecorder;
 import lumien.randomthings.Client.GUI.GuiVoidStone;
 import lumien.randomthings.Container.ContainerDropFilter;
 import lumien.randomthings.Container.ContainerDyeingMachine;
+import lumien.randomthings.Container.ContainerEnderEnergyDistributor;
+import lumien.randomthings.Container.ContainerEnergyDistributor;
 import lumien.randomthings.Container.ContainerImbuingStation;
 import lumien.randomthings.Container.ContainerItemCollector;
 import lumien.randomthings.Container.ContainerItemFilter;
@@ -31,6 +35,8 @@ import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import lumien.randomthings.TileEntities.TileEntityImbuingStation;
 import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
 import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
+import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnderEnergyDistributor;
+import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnergyDistributor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
@@ -87,6 +93,10 @@ public class GuiHandler implements IGuiHandler
 				return new ContainerImbuingStation(player.inventory, (TileEntityImbuingStation) tileEntity);
 			case OP_SPECTRE_KEY:
 				return new ContainerOpSpectreKey();
+			case ENERGY_DISTRIBUTOR:
+				return new ContainerEnergyDistributor((TileEntityEnergyDistributor) tileEntity);
+			case ENDER_ENERGY_DISTRIBUTOR:
+				return new ContainerEnderEnergyDistributor(player.inventory, (TileEntityEnderEnergyDistributor) tileEntity);
 		}
 		return null;
 	}
@@ -136,6 +146,10 @@ public class GuiHandler implements IGuiHandler
 				return new GuiImbuingStation(player.inventory, (TileEntityImbuingStation) tileEntity);
 			case OP_SPECTRE_KEY:
 				return new GuiOpSpectreKey();
+			case ENERGY_DISTRIBUTOR:
+				return new GuiEnergyDistributor((TileEntityEnergyDistributor) tileEntity);
+			case ENDER_ENERGY_DISTRIBUTOR:
+				return new GuiEnderEnergyDistributor(player.inventory,(TileEntityEnderEnergyDistributor) tileEntity);
 		}
 		return null;
 	}

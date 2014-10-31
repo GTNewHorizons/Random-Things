@@ -1,6 +1,6 @@
 package lumien.randomthings.Library;
 
-public class DimensionCoordinates
+public class DimensionCoordinate
 {
 	/** the dimension */
 	public int dimension;
@@ -12,12 +12,20 @@ public class DimensionCoordinates
 	/** the z coordinate */
 	public int posZ;
 
-	public DimensionCoordinates(int dimension, int posX, int posY, int posZ)
+	public DimensionCoordinate(int dimension, int posX, int posY, int posZ)
 	{
 		this.dimension = dimension;
 		this.posX = posX;
 		this.posY = posY;
 		this.posZ = posZ;
+	}
+
+	public double getDistanceSqrd(double posX, double posY, double posZ)
+	{
+		double difX = posX - this.posX;
+		double difY = posY - this.posY;
+		double difZ = posZ - this.posZ;
+		return difX * difX + difY * difY + difZ * difZ;
 	}
 
 	@Override
@@ -29,13 +37,13 @@ public class DimensionCoordinates
 	@Override
 	public boolean equals(Object object)
 	{
-		if (!(object instanceof DimensionCoordinates))
+		if (!(object instanceof DimensionCoordinate))
 		{
 			return false;
 		}
 		else
 		{
-			DimensionCoordinates dimensionCoordinates = (DimensionCoordinates) object;
+			DimensionCoordinate dimensionCoordinates = (DimensionCoordinate) object;
 			return this.dimension == dimensionCoordinates.dimension && this.posX == dimensionCoordinates.posX && this.posY == dimensionCoordinates.posY && this.posZ == dimensionCoordinates.posZ;
 		}
 	}

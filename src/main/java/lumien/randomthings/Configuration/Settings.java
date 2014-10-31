@@ -38,4 +38,16 @@ public class Settings
 	public static boolean BLOODMOON_VISUAL_REDLIGHT = true;
 	public static boolean BLOODMOON_VISUAL_BLACKFOG = true;
 	public static boolean BLOODMOON_VISUAL_REDSKY = true;
+
+	public static int ENERGY_DISTRIBUTOR_PERTICK = 400;
+	public static int ENERGY_DISTRIBUTOR_PERMACHINE = 60;
+	public static int ENERGY_DISTRIBUTOR_MAXMACHINES = 15;
+	public static int ENERGY_DISTRIBUTOR_BUFFERSIZE = 1000000;
+
+	public static int ENDER_ENERGY_DISTRIBUTOR_PERTICK = 800;
+	public static int ENDER_ENERGY_DISTRIBUTOR_PERMACHINE = 100;
+	public static int ENDER_ENERGY_DISTRIBUTOR_BUFFERSIZE = 1500000;
+	public static int ENDER_ENERGY_DISTRIBUTOR_RANGE = 6;
+	public static int ENDER_ENERGY_DISTRIBUTOR_MAXMACHINES = 30;
+	public static int ENDER_ENERGY_DISTRIBUTOR_RANGE_SQRD = 36;
 }

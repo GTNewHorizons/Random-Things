@@ -22,5 +22,6 @@ public class PacketHandler
 		INSTANCE.registerMessage(MessageChangeItemProperty.class);
 		INSTANCE.registerMessage(MessageSpectreData.class);
 		INSTANCE.registerMessage(MessageBloodmoon.class);
+		INSTANCE.registerMessage(MessageContainerProperty.class);
 	}
 }

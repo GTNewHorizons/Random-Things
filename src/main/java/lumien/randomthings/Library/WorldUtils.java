@@ -1,6 +1,9 @@
 package lumien.randomthings.Library;
 
+import java.util.HashSet;
 import java.util.List;
+
+import lumien.randomthings.Library.Interfaces.IValidator;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.block.Block;
@@ -10,6 +13,7 @@ import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class WorldUtils
@@ -114,6 +118,31 @@ public class WorldUtils
 				}
 			}
 			return false;
+		}
+	}
+
+	public static HashSet<TileEntity> getConnectedTEs(World worldObj, int posX, int posY, int posZ, IValidator validator)
+	{
+		HashSet<TileEntity> tes = new HashSet<TileEntity>();
+		recConnectedTEs(tes,worldObj,posX,posY,posZ,validator);
+		return tes;
+	}
+
+	public static void recConnectedTEs(HashSet<TileEntity> tes, World worldObj, int posX, int posY, int posZ, IValidator validator)
+	{
+		TileEntity te = worldObj.getTileEntity(posX, posY, posZ);
+		if (te != null && !tes.contains(te) && validator.matches(te))
+		{
+			tes.add(te);
+
+			recConnectedTEs(tes, worldObj, posX - 1, posY, posZ, validator);
+			recConnectedTEs(tes, worldObj, posX + 1, posY, posZ, validator);
+
+			recConnectedTEs(tes, worldObj, posX, posY + 1, posZ, validator);
+			recConnectedTEs(tes, worldObj, posX, posY - 1, posZ, validator);
+
+			recConnectedTEs(tes, worldObj, posX, posY, posZ + 1, validator);
+			recConnectedTEs(tes, worldObj, posX, posY, posZ - 1, validator);
 		}
 	}
 }
