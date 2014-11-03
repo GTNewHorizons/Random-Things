@@ -172,7 +172,6 @@ public class ItemBiomeCapsule extends ItemBase
 						charges++;
 						is.stackTagCompound.setInteger("charges", charges);
 					}
-
 				}
 			}
 		}
@@ -225,7 +224,14 @@ public class ItemBiomeCapsule extends ItemBase
 		{
 			int biomeID = par1ItemStack.getItemDamage() - 1;
 			BiomeGenBase biome = BiomeGenBase.getBiome(biomeID);
-			biomeName = biome.biomeName;
+			if (biome != null)
+			{
+				biomeName = biome.biomeName;
+			}
+			else
+			{
+				biomeName = "Invalid";
+			}
 		}
 		return biomeName + " Capsule";
 	}
