@@ -13,6 +13,7 @@ public class Settings
 
 	public static int SPECTRE_DIMENSON_ID;
 	public static String FIXED_BACKGROUND = "";
+	public static boolean SPECTRE_DIMENSION_FOG = true;
 
 	public static int FERTILIZED_DIRT_GROWTH = 3;
 

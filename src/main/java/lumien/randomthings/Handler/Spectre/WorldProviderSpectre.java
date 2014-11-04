@@ -39,7 +39,7 @@ public class WorldProviderSpectre extends WorldProvider
 	@Override
 	public boolean doesXZShowFog(int par1, int par2)
 	{
-		return true;
+		return Settings.SPECTRE_DIMENSION_FOG;
 	}
 
 	@Override

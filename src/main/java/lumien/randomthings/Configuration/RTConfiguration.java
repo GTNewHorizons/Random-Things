@@ -18,6 +18,7 @@ public class RTConfiguration
 	public static Property spiritChanceSword;
 	public static Property fixedBackground;
 	public static Property spectreDimensionID;
+	public static Property spectreDimensionFog;
 	public static Property wirelessLeverRange;
 	public static Property spectreImbueChance;
 	public static Property fertilizedDirtGrowthModifier;
@@ -55,6 +56,7 @@ public class RTConfiguration
 		wirelessLeverRange = config.get("Settings", "WirelessLeverRange", 10, "The range of a wireless lever in blocks");
 		fixedBackground = config.get("VanillaChanges", "fixedBackground", "", "If this is not empty the options background will not be random but the one specified here. This has to be the name of a block texture without the .png").setRequiresMcRestart(true);
 		spectreDimensionID = config.get("Settings", "SpectreDimensionID", -1, "The Dimension ID of the spectre World. On first run and when you set this setting to -1 RandomThings will try to find a dimensionID itself").setRequiresMcRestart(true);
+		spectreDimensionFog = config.get("Settings", "SpectreDimensionFog", true);
 		spectreImbueChance = config.get("Settings", "SpectreImbueChance", 0.1, "The chance of phasing through an attack while being imbued with spectre").setMinValue(0).setMaxValue(1);
 		fertilizedDirtGrowthModifier = config.get("Settings", "FertilizedDirtGrowthModifier", 3, "How often should Fertilize Dirt tick the plant above it when it's ticked itself?");
 		imbueDuration = config.get("Settings", "ImbueDuration", 20 * 60 * 5, "The duration of imbues (in ticks)");
@@ -141,6 +143,7 @@ public class RTConfiguration
 		Settings.WIRELESSLEVER_RANGE = wirelessLeverRange.getDouble(10);
 		Settings.FIXED_BACKGROUND = fixedBackground.getString();
 		Settings.SPECTRE_DIMENSON_ID = spectreDimensionID.getInt();
+		Settings.SPECTRE_DIMENSION_FOG = spectreDimensionFog.getBoolean();
 		Settings.SPECTRE_IMBUE_CHANCE = spectreImbueChance.getDouble();
 		Settings.FERTILIZED_DIRT_GROWTH = fertilizedDirtGrowthModifier.getInt();
 		Settings.IMBUE_DURATION = imbueDuration.getInt();
