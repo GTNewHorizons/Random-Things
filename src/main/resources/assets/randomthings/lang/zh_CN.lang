@@ -6,17 +6,19 @@ tile.fertilizedDirt.name=沃土
 tile.itemCollector.name=物品收集器
 tile.advancedItemCollector.name=高级物品收集器
 tile.onlineDetector.name=在线侦测器
-tile.fluidRouter.name=液体路由器[开发中]
+tile.fluidRouter.name=液体路由器 [开发中]
 tile.moonSensor.name=月相传感器
 tile.notificationInterface.name=通知接口
 tile.wirelessLever.name=无线拉杆
 tile.soundBox.name=音箱
-tile.carpentryBench.name=木匠工作台[开发中]
+tile.carpentryBench.name=木匠工作台 [开发中]
 tile.lapisLamp.name=青金石灯
 tile.dyeingMachine.name=混色机器
 tile.spiritRod.name=灵魂手柄
 tile.imbuingStation.name=激素药水酿造台
 tile.spectreGlass.name=灵魂玻璃
+tile.energyDistributor.name=能量分配器
+tile.enderEnergyDistributor.name=末影能量分配器
 
 tile.spectreBlock.name=幽灵方块
 tile.spectreBlock.black.name=黑色幽灵方块
@@ -44,8 +46,8 @@ item.filterPosition.name=方位过滤器
 item.biomeSolution.name=解决方案
 item.biomeCapsule.name=生物群系胶囊
 item.biomePainter.name=生物群系画刷
-item.whitestoneUncharged.name=白石 [未充能]
-item.whitestoneCharged.name=白石 [充能]
+item.whitestoneUncharged.name=白石 <未充能>
+item.whitestoneCharged.name=白石 <充能>
 item.kojaku.name=Kojaku
 item.voidStone.name=虚空之石
 item.dropFilter.name=掉落物过滤器
@@ -61,7 +63,8 @@ item.spectreLeggings.name=灵魂护腿
 item.spectreBoots.name=灵魂靴子
 item.spiritBinder.name=灵魂容器
 item.magneticForce.name=磁力仪
-item.ginto.name=Ginto
+item.gintoEmpty.name=银瓶 <空>
+item.gintoFilled.name=银瓶 <满>
 item.creativeSword.name=创造模式之剑
 item.creativeGrower.name=创造模式之锄
 item.creativeChestGenerator.name=箱子生成权杖
@@ -71,6 +74,8 @@ item.enderFragment.name=末影碎片
 item.ectoplasm.name=灵气
 item.spectreIron.name=灵魂之铁
 item.transformationCore.name=转换核心
+item.enderDiamond.name=末影钻石
+item.energizedWater.name=充能水
 item.error.name=无效物品
 
 item.imbue.poison.name=毒性激素药水
@@ -89,21 +94,21 @@ imbue.spectre=灵魂感染
 
 entity.spirit.name=灵魂
 
-text.miscellaneous.press=按住 %s 来查看详细信息
+text.miscellaneous.press=按住%s来查看详细信息
 text.miscellaneous.shift=Shift
 text.miscellaneous.block=方块
-text.miscellaneous.metadata=元数据
+text.miscellaneous.metadata=MetaData
 text.miscellaneous.oreDictionary=矿物辞典
 text.miscellaneous.listType=类型列表
-text.miscellaneous.entityid=实体 ID
+text.miscellaneous.entityid=实体ID
 text.miscellaneous.entityName=实体名称
 text.miscellaneous.connectedTo=连接到
 text.miscellaneous.invalidArguments=无效的数据
-text.miscellaneous.setBonus=设定奖励:
+text.miscellaneous.setBonus=设定奖励: 
 text.miscellaneous.opOnly=仅管理员
 text.miscellaneous.creativeOnly=仅创造模式
 text.miscellaneous.category=种类: %s
-text.miscellaneous.shiftCategory=Shift点击改变种类
+text.miscellaneous.shiftCategory=Shift左击改变种类
 text.miscellaneous.save=保存
 
 text.miscellaneous.whiteList=白名单
@@ -126,9 +131,14 @@ text.miscellaneous.target.x=目标-X: %d
 text.miscellaneous.target.y=目标-Y: %d
 text.miscellaneous.target.z=目标-Z: %d
 
+text.miscellaneous.position.x=坐标-X: %d
+text.miscellaneous.position.y=坐标-Y: %d
+text.miscellaneous.position.z=坐标-Z: %d
+text.miscellaneous.dimension=位于世界: %d
+
 text.spectre.soulSolid=灵魂实体
 
-text.dyed=混合成 %s
+text.dyed=混合成%s
 text.color.black=黑色
 text.color.red=红色
 text.color.green=绿色
@@ -146,7 +156,7 @@ text.color.magenta=品红色
 text.color.orange=橙色
 text.color.white=白色
 
-text.error.nbt=无法读取NBT信息, 末影邮件或磁力仪等物品将在游戏重启后消失.
+text.error.nbt=无法读取NBT信息,末影邮件及磁力仪等物品将在游戏重启后消失
 
 text.magneticForce.notOnline=离线
 text.magneticForce.invalidUsername=无效的用户名
@@ -159,5 +169,6 @@ text.enderLetter.sender=寄件人: %s
 text.enderLetter.invalidreceiver=你填写了一个无效的收件人
 text.enderLetter.empty=你不能寄出空的邮件
 
-text.bloodmoon.command=明晚的月亮将被血色染红...
+text.bloodmoon.command=明晚将出现血月
 text.bloodmoon.notify=血月升起...
+text.bloodmoon.nosleep=此刻你并不感到疲倦
