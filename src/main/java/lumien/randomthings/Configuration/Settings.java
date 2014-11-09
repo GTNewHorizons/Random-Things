@@ -34,6 +34,7 @@ public class Settings
 	public static int BLOODMOON_SPAWNRANGE = 4; // 24
 	public static boolean BLOODMOON_NOSLEEP = true;
 	public static float BLOODMOON_CHANCE = 0.05f;
+	public static boolean BLOODMOON_VANISH = false;
 
 	public static boolean BLOODMOON_VISUAL_REDMOON = true;
 	public static boolean BLOODMOON_VISUAL_REDLIGHT = true;

@@ -181,6 +181,12 @@ public class BloodmoonSpawner
 															Result canSpawn = ForgeEventFactory.canEntitySpawn(entityliving, p_77192_1_, f, f1, f2);
 															if (canSpawn == Result.ALLOW || (canSpawn == Result.DEFAULT && entityliving.getCanSpawnHere()))
 															{
+																// Bloodmoon Data
+																if (Settings.BLOODMOON_VANISH)
+																{
+																	entityliving.getEntityData().setBoolean("bloodmoonSpawned", true);
+																}
+																
 																++i2;
 																p_77192_1_.spawnEntityInWorld(entityliving);
 																if (!ForgeEventFactory.doSpecialSpawn(entityliving, p_77192_1_, f, f1, f2))
@@ -237,68 +243,6 @@ public class BloodmoonSpawner
 			Block block = p_77190_1_.getBlock(p_77190_2_, p_77190_3_ - 1, p_77190_4_);
 			boolean spawnBlock = block.canCreatureSpawn(p_77190_0_, p_77190_1_, p_77190_2_, p_77190_3_ - 1, p_77190_4_);
 			return spawnBlock && block != Blocks.bedrock && !p_77190_1_.getBlock(p_77190_2_, p_77190_3_, p_77190_4_).isNormalCube() && !p_77190_1_.getBlock(p_77190_2_, p_77190_3_, p_77190_4_).getMaterial().isLiquid() && !p_77190_1_.getBlock(p_77190_2_, p_77190_3_ + 1, p_77190_4_).isNormalCube();
-		}
-	}
-
-	/**
-	 * Called during chunk generation to spawn initial creatures.
-	 */
-	public static void performWorldGenSpawning(World p_77191_0_, BiomeGenBase p_77191_1_, int p_77191_2_, int p_77191_3_, int p_77191_4_, int p_77191_5_, Random p_77191_6_)
-	{
-		List list = p_77191_1_.getSpawnableList(EnumCreatureType.creature);
-
-		if (!list.isEmpty())
-		{
-			while (p_77191_6_.nextFloat() < p_77191_1_.getSpawningChance())
-			{
-				BiomeGenBase.SpawnListEntry spawnlistentry = (BiomeGenBase.SpawnListEntry) WeightedRandom.getRandomItem(p_77191_0_.rand, list);
-				IEntityLivingData ientitylivingdata = null;
-				int i1 = spawnlistentry.minGroupCount + p_77191_6_.nextInt(1 + spawnlistentry.maxGroupCount - spawnlistentry.minGroupCount);
-				int j1 = p_77191_2_ + p_77191_6_.nextInt(p_77191_4_);
-				int k1 = p_77191_3_ + p_77191_6_.nextInt(p_77191_5_);
-				int l1 = j1;
-				int i2 = k1;
-
-				for (int j2 = 0; j2 < i1; ++j2)
-				{
-					boolean flag = false;
-
-					for (int k2 = 0; !flag && k2 < 4; ++k2)
-					{
-						int l2 = p_77191_0_.getTopSolidOrLiquidBlock(j1, k1);
-
-						if (canCreatureTypeSpawnAtLocation(EnumCreatureType.creature, p_77191_0_, j1, l2, k1))
-						{
-							float f = j1 + 0.5F;
-							float f1 = l2;
-							float f2 = k1 + 0.5F;
-							EntityLiving entityliving;
-
-							try
-							{
-								entityliving = (EntityLiving) spawnlistentry.entityClass.getConstructor(new Class[] { World.class }).newInstance(new Object[] { p_77191_0_ });
-							}
-							catch (Exception exception)
-							{
-								exception.printStackTrace();
-								continue;
-							}
-
-							entityliving.setLocationAndAngles(f, f1, f2, p_77191_6_.nextFloat() * 360.0F, 0.0F);
-							p_77191_0_.spawnEntityInWorld(entityliving);
-							ientitylivingdata = entityliving.onSpawnWithEgg(ientitylivingdata);
-							flag = true;
-						}
-
-						j1 += p_77191_6_.nextInt(5) - p_77191_6_.nextInt(5);
-
-						for (k1 += p_77191_6_.nextInt(5) - p_77191_6_.nextInt(5); j1 < p_77191_2_ || j1 >= p_77191_2_ + p_77191_4_ || k1 < p_77191_3_ || k1 >= p_77191_3_ + p_77191_4_; k1 = i2 + p_77191_6_.nextInt(5) - p_77191_6_.nextInt(5))
-						{
-							j1 = l1 + p_77191_6_.nextInt(5) - p_77191_6_.nextInt(5);
-						}
-					}
-				}
-			}
 		}
 	}
 }

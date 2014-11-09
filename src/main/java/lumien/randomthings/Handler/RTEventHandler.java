@@ -14,6 +14,7 @@ import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.EntityHealingOrb;
 import lumien.randomthings.Entity.EntitySoul;
 import lumien.randomthings.Entity.EntitySpirit;
+import lumien.randomthings.Handler.Bloodmoon.BloodmoonSpawner;
 import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
 import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Handler.Spectre.SpectreHandler;
@@ -24,6 +25,9 @@ import lumien.randomthings.Items.ItemSpectreArmor;
 import lumien.randomthings.Items.ItemWhiteStone;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.PotionEffects;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.Network.Messages.MessageAnswerTeleport;
+import lumien.randomthings.Network.Messages.MessageAnswerTeleport.STATUS;
 import lumien.randomthings.Potions.ModPotions;
 import lumien.randomthings.Transformer.MCPNames;
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
@@ -54,6 +58,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
@@ -65,6 +70,7 @@ import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -90,6 +96,21 @@ public class RTEventHandler
 			e.printStackTrace();
 			RandomThings.instance.logger.log(Level.ERROR, "Couldn't find experienceValue in EntityLiving, experience imbue will not work :(");
 			experienceValue = null;
+		}
+	}
+
+	@SubscribeEvent
+	public void livingUpdate(LivingUpdateEvent event)
+	{
+		if (Settings.BLOODMOON_VANISH && !event.entityLiving.worldObj.isRemote)
+		{
+			if (event.entityLiving.dimension == 0)
+			{
+				if (event.entityLiving.getEntityData().getBoolean("bloodmoonSpawned") && !ServerBloodmoonHandler.INSTANCE.isBloodmoonActive() && Math.random() <= 0.2f)
+				{
+					event.entityLiving.setDead();
+				}
+			}
 		}
 	}
 
@@ -258,6 +279,7 @@ public class RTEventHandler
 	@SubscribeEvent
 	public void itemPickUp(EntityItemPickupEvent event)
 	{
+
 		if (ConfigItems.dropFilter)
 		{
 			if (!event.entityPlayer.worldObj.isRemote && event.entityPlayer != null)
