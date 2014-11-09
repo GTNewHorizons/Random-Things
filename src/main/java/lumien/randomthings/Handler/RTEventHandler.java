@@ -17,6 +17,7 @@ import lumien.randomthings.Entity.EntitySpirit;
 import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
 import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Handler.Spectre.SpectreHandler;
+import lumien.randomthings.Items.ItemBloodstone;
 import lumien.randomthings.Items.ItemDropFilter;
 import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Items.ItemSpectreArmor;
@@ -38,6 +39,8 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayer.EnumStatus;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -46,6 +49,7 @@ import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentTranslation;
@@ -64,6 +68,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -378,6 +383,26 @@ public class RTEventHandler
 		}
 	}
 
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public void playerDrops(PlayerDropsEvent event)
+	{
+		if (!event.entityPlayer.worldObj.isRemote)
+		{
+			for (EntityItem entityItem : event.drops)
+			{
+				if (entityItem.getEntityItem().getItem() instanceof ItemBloodstone)
+				{
+					ItemStack item = entityItem.getEntityItem();
+					if (item.stackTagCompound != null)
+					{
+						item.stackTagCompound.setInteger("charges", 0);
+						entityItem.setEntityItemStack(item);
+					}
+				}
+			}
+		}
+	}
+
 	@SubscribeEvent
 	public void livingHurt(LivingHurtEvent event)
 	{
@@ -465,6 +490,36 @@ public class RTEventHandler
 						}
 					}
 
+				}
+			}
+
+			if (ConfigItems.bloodStone)
+			{
+				if (event.entity instanceof IMob && !event.isCanceled())
+				{
+					Entity killer = event.source.getEntity();
+					if (killer != null && killer instanceof EntityPlayer)
+					{
+						EntityPlayer player = (EntityPlayer) killer;
+						for (int slot = 0; slot < player.inventory.getSizeInventory(); slot++)
+						{
+							ItemStack isSlot = player.inventory.getStackInSlot(slot);
+							if (isSlot != null && isSlot.getItem() instanceof ItemBloodstone)
+							{
+								if (isSlot.stackTagCompound == null)
+								{
+									isSlot.stackTagCompound = new NBTTagCompound();
+								}
+								int currentCharges = isSlot.stackTagCompound.getInteger("charges");
+								if (currentCharges < ItemBloodstone.MAX_CHARGES)
+								{
+									isSlot.stackTagCompound.setInteger("charges", currentCharges + 1);
+								}
+								player.inventoryContainer.detectAndSendChanges();
+								break;
+							}
+						}
+					}
 				}
 			}
 

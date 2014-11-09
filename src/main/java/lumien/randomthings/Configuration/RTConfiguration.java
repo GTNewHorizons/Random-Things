@@ -125,6 +125,7 @@ public class RTConfiguration
 		ConfigItems.creativeChestGenerator = isItemEnabled("CreativeChestGenerator");
 		ConfigItems.imbue = isItemEnabled("Imbues");
 		ConfigItems.ginto = isItemEnabled("Ginto");
+		ConfigItems.bloodStone = isItemEnabled("Bloodstone");
 
 		// Dungeon Loot
 		ConfigDungeonLoot.WHITESTONE_CHANCE = config.get("DungeonLoot", "WhiteStone", 3).getInt();

@@ -71,6 +71,7 @@ item.spectreIron.name=Spectre Iron
 item.transformationCore.name=Transformation Core
 item.enderDiamond.name=Ender Diamond
 item.energizedWater.name=Energized Water
+item.bloodStone.name=Bloodstone
 item.error.name=Invalid Item
 
 item.imbue.poison.name=Flask of Poison
@@ -105,6 +106,7 @@ text.miscellaneous.creativeOnly=Creative only
 text.miscellaneous.category=Category: %s
 text.miscellaneous.shiftCategory=Shift click to change category
 text.miscellaneous.save=Save
+text.miscellaneous.charges=Charges: %d
 
 text.miscellaneous.whiteList=Whitelist
 text.miscellaneous.blackList=Blacklist

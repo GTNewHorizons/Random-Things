@@ -3,11 +3,16 @@ package lumien.randomthings.Items;
 import java.util.List;
 
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
+import lumien.randomthings.RandomThings;
 import lumien.randomthings.Configuration.ConfigDungeonLoot;
+import lumien.randomthings.Configuration.ConfigItems;
+import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
+import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageWhitestone;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -26,6 +31,12 @@ public class ItemWhiteStone extends ItemBase
 		this.setMaxStackSize(1);
 
 		ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(new ItemStack(this, 1, 0), 1, 1, ConfigDungeonLoot.WHITESTONE_CHANCE));
+	}
+
+	@Override
+	public int getDurabilityColor(ItemStack item, double health)
+	{
+		return 16777215;
 	}
 
 	@Override
@@ -59,6 +70,12 @@ public class ItemWhiteStone extends ItemBase
 	}
 
 	@Override
+	public boolean showDamage(ItemStack item)
+	{
+		return item.getItemDamage() == 0;
+	}
+
+	@Override
 	public boolean showDurabilityBar(ItemStack stack)
 	{
 		return false;
@@ -68,7 +85,7 @@ public class ItemWhiteStone extends ItemBase
 	public void onUpdate(ItemStack stack, World worldObj, Entity entity, int par4, boolean par5)
 	{
 		int time = (int) (worldObj.getWorldTime() % 24000);
-		if (stack.getItemDamage() == 0 && (entity instanceof EntityPlayer) && worldObj.getCurrentMoonPhaseFactor() == 1F && time >= 18000 && time <= 22000 && worldObj.canBlockSeeTheSky((int) Math.floor(entity.posX), (int) Math.floor(entity.posY), (int) Math.floor(entity.posZ)))
+		if (stack.getItemDamage() == 0 && !worldObj.isRemote && (entity instanceof EntityPlayer) && worldObj.getCurrentMoonPhaseFactor() == 1F && time >= 18000 && time <= 22000 && worldObj.canBlockSeeTheSky((int) Math.floor(entity.posX), (int) Math.floor(entity.posY), (int) Math.floor(entity.posZ)))
 		{
 			EntityPlayer player = (EntityPlayer) entity;
 
@@ -77,7 +94,6 @@ public class ItemWhiteStone extends ItemBase
 				stack.stackTagCompound = new NBTTagCompound();
 				stack.stackTagCompound.setInteger("charge", 0);
 			}
-
 			int charges = stack.stackTagCompound.getInteger("charge");
 
 			stack.stackTagCompound.setInteger("charge", charges += 1);
@@ -111,6 +127,33 @@ public class ItemWhiteStone extends ItemBase
 				return 1 - stack.stackTagCompound.getInteger("charge") / 1200F;
 			}
 		}
+	}
+
+	@Override
+	public boolean onEntityItemUpdate(EntityItem entityItem)
+	{
+		if (ConfigItems.bloodStone && entityItem.dimension == 0 && entityItem.getEntityItem().getItemDamage() == 1 && entityItem.worldObj.canBlockSeeTheSky((int) Math.floor(entityItem.posX), (int) Math.floor(entityItem.posY), (int) Math.floor(entityItem.posZ)))
+		{
+			if (entityItem.worldObj.isRemote)
+			{
+				if (ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
+					RandomThings.proxy.spawnColoredDust(entityItem.posX, entityItem.posY, entityItem.posZ, 0, 0.1, 0, 1, 0, 0);
+			}
+			else
+			{
+				if (ServerBloodmoonHandler.INSTANCE.isBloodmoonActive())
+				{
+					entityItem.getEntityData().setInteger("progress", entityItem.getEntityData().getInteger("progress") + 1);
+
+					if (entityItem.getEntityData().getInteger("progress") >= 200)
+					{
+						entityItem.setEntityItemStack(new ItemStack(ModItems.bloodStone));
+					}
+				}
+			}
+		}
+
+		return false;
 	}
 
 	@Override

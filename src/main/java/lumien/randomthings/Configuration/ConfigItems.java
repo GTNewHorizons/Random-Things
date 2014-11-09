@@ -20,4 +20,5 @@ public class ConfigItems
 	public static boolean imbue;
 	public static boolean opSpectreKey;
 	public static boolean ginto;
+	public static boolean bloodStone;
 }

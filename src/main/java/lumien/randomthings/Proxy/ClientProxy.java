@@ -27,10 +27,10 @@ import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.ClientTickHandler;
 import lumien.randomthings.Client.Renderer.RenderHealingOrb;
 import lumien.randomthings.Client.Renderer.RenderItemCollector;
+import lumien.randomthings.Client.Renderer.RenderRTItem;
 import lumien.randomthings.Client.Renderer.RenderReviveCircle;
 import lumien.randomthings.Client.Renderer.RenderSoul;
 import lumien.randomthings.Client.Renderer.RenderSpirit;
-import lumien.randomthings.Client.Renderer.RenderWhitestone;
 import lumien.randomthings.Client.Renderer.RenderWirelessLever;
 import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.EntityHealingOrb;
@@ -105,7 +105,9 @@ public class ClientProxy extends CommonProxy
 
 		RenderingRegistry.registerBlockHandler(new RenderWirelessLever());
 
-		MinecraftForgeClient.registerItemRenderer(ModItems.whitestone, new RenderWhitestone());
+		RenderRTItem rtRenderer = new RenderRTItem();
+		MinecraftForgeClient.registerItemRenderer(ModItems.whitestone, rtRenderer);
+		MinecraftForgeClient.registerItemRenderer(ModItems.bloodStone, rtRenderer);
 	}
 
 	@Override
