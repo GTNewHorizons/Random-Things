@@ -30,7 +30,7 @@ dependencies {
 
 
 
-version = "2.1.9"
+version = "2.2.0"
 group= "lumien.randomthings" 
 archivesBaseName = "RandomThings"
 
