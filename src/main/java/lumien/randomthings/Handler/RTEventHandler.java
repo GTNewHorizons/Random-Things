@@ -274,6 +274,19 @@ public class RTEventHandler
 			event.world.mapStorage.setData("SpectreHandler", spectreHandler);
 			RandomThings.instance.spectreHandler = spectreHandler;
 		}
+
+		if (!event.world.isRemote && event.world.provider.dimensionId == 0)
+		{
+			ServerBloodmoonHandler.INSTANCE = (ServerBloodmoonHandler) event.world.mapStorage.loadData(ServerBloodmoonHandler.class, "Bloodmoon");
+
+			if (ServerBloodmoonHandler.INSTANCE == null)
+			{
+				ServerBloodmoonHandler.INSTANCE = new ServerBloodmoonHandler();
+				ServerBloodmoonHandler.INSTANCE.markDirty();
+			}
+
+			event.world.mapStorage.setData("Bloodmoon", ServerBloodmoonHandler.INSTANCE);
+		}
 	}
 
 	@SubscribeEvent

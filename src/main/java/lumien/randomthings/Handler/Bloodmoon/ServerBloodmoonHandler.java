@@ -7,23 +7,34 @@ import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageBloodmoon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.WorldServer;
 
-public class ServerBloodmoonHandler
+public class ServerBloodmoonHandler extends WorldSavedData
 {
-	public static final ServerBloodmoonHandler INSTANCE = new ServerBloodmoonHandler();
+	public static ServerBloodmoonHandler INSTANCE;
 
 	private BloodmoonSpawner bloodMoonSpawner;
 
 	boolean bloodMoon;
 	boolean forceBloodMoon;
 
-	private ServerBloodmoonHandler()
+	public ServerBloodmoonHandler()
 	{
+		super("Bloodmoon");
+		bloodMoonSpawner = new BloodmoonSpawner();
+		bloodMoon = false;
+		forceBloodMoon = false;
+	}
+	
+	public ServerBloodmoonHandler(String name)
+	{
+		super("Bloodmoon");
 		bloodMoonSpawner = new BloodmoonSpawner();
 		bloodMoon = false;
 		forceBloodMoon = false;
@@ -81,6 +92,7 @@ public class ServerBloodmoonHandler
 		if (this.bloodMoon != bloodMoon)
 		{
 			PacketHandler.INSTANCE.sendToDimension(new MessageBloodmoon(bloodMoon), 0);
+			this.markDirty();
 		}
 		this.bloodMoon = bloodMoon;
 	}
@@ -88,10 +100,25 @@ public class ServerBloodmoonHandler
 	public void force()
 	{
 		forceBloodMoon = true;
+		this.markDirty();
 	}
 
 	public boolean isBloodmoonActive()
 	{
 		return bloodMoon;
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt)
+	{
+		this.bloodMoon = nbt.getBoolean("bloodMoon");
+		this.forceBloodMoon = nbt.getBoolean("forceBloodMoon");
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbt)
+	{
+		nbt.setBoolean("bloodMoon", bloodMoon);
+		nbt.setBoolean("forceBloodMoon", forceBloodMoon);
 	}
 }
