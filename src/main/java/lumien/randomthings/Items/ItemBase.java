@@ -27,6 +27,12 @@ public class ItemBase extends Item
 	}
 	
 	@Override
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World worldObj, int posX, int posY, int posZ, int side, float p_77648_8_, float p_77648_9_, float p_77648_10_)
+	{
+		return super.onItemUse(is, player, worldObj, posX, posY, posZ, side, p_77648_8_, p_77648_9_, p_77648_10_);
+	}
+	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack is, EntityPlayer player, List informationList, boolean extendedInformation)
 	{

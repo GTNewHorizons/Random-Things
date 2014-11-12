@@ -121,4 +121,9 @@ public class ServerBloodmoonHandler extends WorldSavedData
 		nbt.setBoolean("bloodMoon", bloodMoon);
 		nbt.setBoolean("forceBloodMoon", forceBloodMoon);
 	}
+
+	public boolean isBloodmoonScheduled()
+	{
+		return forceBloodMoon;
+	}
 }

@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Client.ClientTickHandler;
+import lumien.randomthings.Client.Renderer.RenderBloodmoonCircle;
 import lumien.randomthings.Client.Renderer.RenderHealingOrb;
 import lumien.randomthings.Client.Renderer.RenderItemCollector;
 import lumien.randomthings.Client.Renderer.RenderRTItem;
@@ -33,6 +34,7 @@ import lumien.randomthings.Client.Renderer.RenderSoul;
 import lumien.randomthings.Client.Renderer.RenderSpirit;
 import lumien.randomthings.Client.Renderer.RenderWirelessLever;
 import lumien.randomthings.Configuration.VanillaChanges;
+import lumien.randomthings.Entity.EntityBloodmoonCircle;
 import lumien.randomthings.Entity.EntityHealingOrb;
 import lumien.randomthings.Entity.EntityReviveCircle;
 import lumien.randomthings.Entity.EntitySoul;
@@ -102,6 +104,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityHealingOrb.class, new RenderHealingOrb());
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoul.class, new RenderSoul());
 		RenderingRegistry.registerEntityRenderingHandler(EntityReviveCircle.class, new RenderReviveCircle());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBloodmoonCircle.class, new RenderBloodmoonCircle());
 
 		RenderingRegistry.registerBlockHandler(new RenderWirelessLever());
 

@@ -89,6 +89,7 @@ imbue.weakness=Weakness Imbue
 imbue.spectre=Spectre Imbue
 
 entity.spirit.name=Spirit
+entity.bloodmoonCircle.name=Bloodmoon Circle
 
 text.miscellaneous.press=Press %s for more information
 text.miscellaneous.shift=shift

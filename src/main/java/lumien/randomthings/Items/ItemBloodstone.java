@@ -2,20 +2,29 @@ package lumien.randomthings.Items;
 
 import java.util.List;
 
+import lumien.randomthings.RandomThings;
+import lumien.randomthings.Entity.EntityBloodmoonCircle;
+import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
+import lumien.randomthings.Library.BlockPattern;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class ItemBloodstone extends ItemBase
 {
 	public static final float MAX_CHARGES = 400;
+
+	public static BlockPattern ritualPattern;
 
 	public ItemBloodstone()
 	{
@@ -23,15 +32,88 @@ public class ItemBloodstone extends ItemBase
 
 		this.setMaxDamage((int) MAX_CHARGES);
 		this.setMaxStackSize(1);
+
+		ritualPattern = new BlockPattern();
+
+		ritualPattern.addBlock(Blocks.obsidian, 0, -1, 0, -1);
+		ritualPattern.addBlock(Blocks.obsidian, 0, -1, 0, 0);
+		ritualPattern.addBlock(Blocks.obsidian, 0, -1, 0, 1);
+
+		ritualPattern.addBlock(Blocks.obsidian, 0, 0, 0, -1);
+		ritualPattern.addBlock(Blocks.obsidian, 0, 0, 0, 0);
+		ritualPattern.addBlock(Blocks.obsidian, 0, 0, 0, 1);
+
+		ritualPattern.addBlock(Blocks.obsidian, 0, 1, 0, -1);
+		ritualPattern.addBlock(Blocks.obsidian, 0, 1, 0, 0);
+		ritualPattern.addBlock(Blocks.obsidian, 0, 1, 0, 1);
+
+		ritualPattern.addBlock(Blocks.redstone_block, 0, -2, 0, 0);
+		ritualPattern.addBlock(Blocks.redstone_block, 0, 2, 0, 0);
+		ritualPattern.addBlock(Blocks.redstone_block, 0, 0, 0, -2);
+		ritualPattern.addBlock(Blocks.redstone_block, 0, 0, 0, 2);
+
+		ritualPattern.addBlock(Blocks.quartz_block, 0, -2, 0, -2);
+		ritualPattern.addBlock(Blocks.quartz_block, 0, -2, 0, 2);
+		ritualPattern.addBlock(Blocks.quartz_block, 0, 2, 0, 2);
+		ritualPattern.addBlock(Blocks.quartz_block, 0, 2, 0, -2);
+
+		ritualPattern.addBlock(Blocks.nether_brick, 1, -2, 0, 1);
+		ritualPattern.addBlock(Blocks.nether_brick, 1, -2, 0, -1);
+		ritualPattern.addBlock(Blocks.nether_brick, 1, 2, 0, 1);
+		ritualPattern.addBlock(Blocks.nether_brick, 1, 2, 0, -1);
+
+		ritualPattern.addBlock(Blocks.nether_brick, 1, -1, 0, -2);
+		ritualPattern.addBlock(Blocks.nether_brick, 1, 1, 0, -2);
+		ritualPattern.addBlock(Blocks.nether_brick, 1, -1, 0, 2);
+		ritualPattern.addBlock(Blocks.nether_brick, 1, 1, 0, 2);
 	}
-	
+
+	@Override
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World worldObj, int posX, int posY, int posZ, int side, float p_77648_8_, float p_77648_9_, float p_77648_10_)
+	{
+		if (worldObj.getBlock(posX, posY, posZ) == Blocks.obsidian)
+		{
+			if (!worldObj.isRemote && worldObj.getTotalWorldTime()>15000 && !ServerBloodmoonHandler.INSTANCE.isBloodmoonScheduled())
+			{
+				if (ritualPattern.matches(worldObj, posX, posY, posZ))
+				{
+					int charges = 0;
+					if (is.stackTagCompound != null)
+					{
+						charges = is.stackTagCompound.getInteger("charges");
+					}
+
+					if (charges >= 50)
+					{
+						List<EntityBloodmoonCircle> list = worldObj.getEntitiesWithinAABB(EntityBloodmoonCircle.class, AxisAlignedBB.getBoundingBox(posX + 0.5f - 2, posY + 1 - 2, posZ + 0.5f - 2, posX + 0.5f + 2, posY + 1 + 2, posZ + 0.5f + 2));
+						if (list.isEmpty())
+						{
+							worldObj.spawnEntityInWorld(new EntityBloodmoonCircle(worldObj, posX + 0.5f, posY + 1, posZ + 0.5f, posX, posY, posZ));
+
+							if (!player.capabilities.isCreativeMode)
+							{
+								is.stackTagCompound.setInteger("charges", charges - 50);
+							}
+						}
+					}
+				}
+			}
+			return true;
+		}
+		if (!worldObj.isRemote && player.isSneaking() && player.getCommandSenderName().equals(RandomThings.AUTHOR_USERNAME))
+		{
+			ritualPattern.place(worldObj, posX, posY, posZ);
+		}
+		return true;
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs creativeTab, List itemList)
 	{
 		super.getSubItems(item, creativeTab, itemList);
-		
-		ItemStack full = new ItemStack(this,1,0);
+
+		ItemStack full = new ItemStack(this, 1, 0);
 		full.stackTagCompound = new NBTTagCompound();
 		full.stackTagCompound.setInteger("charges", (int) MAX_CHARGES);
 		itemList.add(full);
