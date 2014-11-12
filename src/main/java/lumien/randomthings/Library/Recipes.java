@@ -121,7 +121,9 @@ public class Recipes
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.energyDistributor), "iri", "beb", "iri", 'i', "blockIron", 'b', "blockRedstone", 'r', iRedstoneRepeater, 'e', iEnergizedWater));
 		if (ConfigBlocks.enderEnergyDistributor && ConfigBlocks.energyDistributor)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.enderEnergyDistributor), "ede", "dsd", "ede", 'd', iEnderDiamond, 's', new ItemStack(ModBlocks.energyDistributor)));
-
+		if (ConfigBlocks.bloodMoonSensor)
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.bloodMoonSensor), "ggg", "rqr", "sss", 'g', "blockGlass", 'r', "dustRedstone", 's', "slabWood", 'q', "gemQuartz"));
+		
 		if (ConfigItems.voidStone)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.voidStone, 1), "xox", "oeo", "xox", 'o', "stone", 'e', iEnderPearl));
 		if (ConfigItems.dropFilter)

@@ -15,6 +15,7 @@ tile.imbuingStation.name=Imbuing Station
 tile.spectreGlass.name=Spectre Glass
 tile.energyDistributor.name=Energy Distributor
 tile.enderEnergyDistributor.name=Ender Energy Distributor
+tile.bloodMoonSensor.name=Bloodmoon Sensor
 
 tile.spectreBlock.name=Spectre Block
 tile.spectreBlock.black.name=Black Spectre Block

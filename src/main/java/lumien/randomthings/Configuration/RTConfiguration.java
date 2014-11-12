@@ -101,6 +101,7 @@ public class RTConfiguration
 		ConfigBlocks.itemCollector = isBlockEnabled("ItemCollector");
 		ConfigBlocks.onlineDetector = isBlockEnabled("OnlineDetector");
 		ConfigBlocks.moonSensor = isBlockEnabled("MoonSensor");
+		ConfigBlocks.bloodMoonSensor = isBlockEnabled("BloodmoonSensor");
 		ConfigBlocks.notificationInterface = isBlockEnabled("NotificationInterface");
 		ConfigBlocks.lapisLamp = isBlockEnabled("LapisLamp");
 		ConfigBlocks.dyeingMachine = isBlockEnabled("DyeingMachine");
