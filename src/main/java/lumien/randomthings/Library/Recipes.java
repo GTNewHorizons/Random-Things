@@ -1,5 +1,11 @@
 package lumien.randomthings.Library;
 
+import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Configuration.ConfigBlocks;
+import lumien.randomthings.Configuration.ConfigItems;
+import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipeHandler;
+import lumien.randomthings.Items.ItemFilter;
+import lumien.randomthings.Items.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -8,12 +14,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.common.registry.GameRegistry;
-import lumien.randomthings.Blocks.ModBlocks;
-import lumien.randomthings.Configuration.ConfigBlocks;
-import lumien.randomthings.Configuration.ConfigItems;
-import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipeHandler;
-import lumien.randomthings.Items.ItemFilter;
-import lumien.randomthings.Items.ModItems;
 
 public class Recipes
 {
@@ -102,7 +102,6 @@ public class Recipes
 		{
 			ItemStack iItemCollector = new ItemStack(ModBlocks.itemCollector);
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector, 1), "xhx", "rer", "xox", 'h', iHopper, 'r', "dustRedstone", 'e', iEnderPearl, 'o', "stickObsidian"));
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.itemCollector, 1), "xhx", "rer", "xox", 'h', iHopper, 'r', "dustRedstone", 'e', iEnderPearl, 'o', "obsidianRod"));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.advancedItemCollector, 1), "xdx", "gig", 'd', "gemDiamond", 'g', "dustGlowstone", 'i', iItemCollector));
 		}
 		if (ConfigBlocks.onlineDetector)
@@ -123,7 +122,7 @@ public class Recipes
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.enderEnergyDistributor), "ede", "dsd", "ede", 'd', iEnderDiamond, 's', new ItemStack(ModBlocks.energyDistributor)));
 		if (ConfigBlocks.bloodMoonSensor)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.bloodMoonSensor), "ggg", "rqr", "sss", 'g', "blockGlass", 'r', "dustRedstone", 's', "slabWood", 'q', "gemQuartz"));
-		
+
 		if (ConfigItems.voidStone)
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.voidStone, 1), "xox", "oeo", "xox", 'o', "stone", 'e', iEnderPearl));
 		if (ConfigItems.dropFilter)
@@ -156,7 +155,7 @@ public class Recipes
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ginto, 1, 0), "ixi", "xsx", 'i', "ingotIron", 's', iSpectreIron, 'e', iEctoplasm));
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ginto, 1, 1), "xex", "xgx", 'e', iEctoplasm, 'g', new ItemStack(ModItems.ginto, 1, 0)));
 		}
-		
+
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 0), "xrx", "rpr", "xrx", 'r', "dyeRed", 'p', iPaper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(ItemFilter.standardItemFilter, "xrx", "rpr", "xrx", 'r', "dyeYellow", 'p', iPaper));
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.filter, 1, 2), "xrx", "rpr", "xrx", 'r', "dyeBlue", 'p', iPaper));

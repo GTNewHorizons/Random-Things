@@ -18,6 +18,7 @@ import lumien.randomthings.Entity.ModEntitys;
 import lumien.randomthings.Handler.BackgroundHandler;
 import lumien.randomthings.Handler.LetterHandler;
 import lumien.randomthings.Handler.MagneticForceHandler;
+import lumien.randomthings.Handler.ModCompHandler;
 import lumien.randomthings.Handler.PeripheralProvider;
 import lumien.randomthings.Handler.RTEventHandler;
 import lumien.randomthings.Handler.RTTickHandler;
@@ -80,7 +81,6 @@ public class RandomThings
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		logger = event.getModLog();
-
 		RTConfiguration.init(event);
 		RTConfiguration.syncConfig();
 
@@ -146,6 +146,7 @@ public class RandomThings
 		}
 
 		ModPotions.init();
+		ModCompHandler.postInit();
 	}
 
 	public boolean canBeDeactivated()
