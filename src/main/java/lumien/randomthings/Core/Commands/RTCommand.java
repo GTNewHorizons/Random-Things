@@ -221,6 +221,7 @@ public class RTCommand extends CommandBase
 				{
 					player.addChatMessage(new ChatComponentText("Start"));
 					player.addChatMessage(new ChatComponentText("Display-Name: " + item.getDisplayName()));
+					player.addChatMessage(new ChatComponentText("Class-Name: " + item.getItem().getClass()));
 					player.addChatMessage(new ChatComponentText("Metadata: " + item.getItemDamage()));
 					player.addChatMessage(new ChatComponentText("NBT: " + (item.stackTagCompound != null ? "Yes" : "No")));
 					player.addChatMessage(new ChatComponentText("Registered-Name: \"" + GameRegistry.findUniqueIdentifierFor(item.getItem()) + "\""));
