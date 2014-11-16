@@ -154,48 +154,56 @@ public class RenderUtils
 		}
 	}
 
-	public static void drawCube(float posX, float posY, float posZ)
+	public static void drawCube(float posX, float posY, float posZ, float size)
+	{
+		drawCube(posX, posY, posZ, size, 1, 1, 1, 0.5f);
+	}
+
+	public static void drawCube(float posX, float posY, float posZ, float size, float red, float green, float blue, float alpha)
 	{
 		Minecraft.getMinecraft().entityRenderer.disableLightmap(0);
+		
+		Tessellator t = Tessellator.instance;
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		
 		GL11.glPushMatrix();
 		GL11.glTranslatef(posX, posY, posZ);
+		
+		t.startDrawingQuads();
+		t.setColorRGBA_F(red, green, blue, alpha);
+		
+		t.addVertex(0F, 0F, 0F); // P1
+		t.addVertex(0F, size, 0F); // P2
+		t.addVertex(size, size, 0F); // P3
+		t.addVertex(size, 0F, 0F); // P4
 
-		glBegin(GL_QUADS);
-		glColor3f(1, 0, 0);
+		t.addVertex(size, size, 0F); // P1
+		t.addVertex(size, size, size); // P2
+		t.addVertex(size, 0F, size); // P3
+		t.addVertex(size, 0F, 0F); // P4
 
-		glVertex3f(0F, 0F, 0F); // P1
-		glVertex3f(0F, 1F, 0F); // P2
-		glVertex3f(1F, 1F, 0F); // P3
-		glVertex3f(1F, 0F, 0F); // P4
+		t.addVertex(size, size, size); // P1
+		t.addVertex(0F, size, size); // P1
+		t.addVertex(0F, 0F, size); // P1
+		t.addVertex(size, 0F, size); // P1
 
-		glVertex3f(1F, 1F, 0F); // P1
-		glVertex3f(1F, 1F, 1F); // P2
-		glVertex3f(1F, 0F, 1F); // P3
-		glVertex3f(1F, 0F, 0F); // P4
+		t.addVertex(0F, size, size); // P1
+		t.addVertex(0F, size, 0F); // P1
+		t.addVertex(0F, 0F, 0F); // P1
+		t.addVertex(0F, 0F, size); // P1
 
-		glVertex3f(1F, 1F, 1F); // P1
-		glVertex3f(0F, 1F, 1F); // P1
-		glVertex3f(0F, 0F, 1F); // P1
-		glVertex3f(1F, 0F, 1F); // P1
+		t.addVertex(0F, 0F, 0F); // P1
+		t.addVertex(size, 0F, 0F); // P1
+		t.addVertex(size, 0F, size); // P1
+		t.addVertex(0F, 0F, size); // P1
 
-		glVertex3f(0F, 1F, 1F); // P1
-		glVertex3f(0F, 1F, 0F); // P1
-		glVertex3f(0F, 0F, 0F); // P1
-		glVertex3f(0F, 0F, 1F); // P1
-
-		glVertex3f(0F, 0F, 0F); // P1
-		glVertex3f(1F, 0F, 0F); // P1
-		glVertex3f(1F, 0F, 1F); // P1
-		glVertex3f(0F, 0F, 1F); // P1
-
-		glVertex3f(0F, 1F, 0F); // P1
-		glVertex3f(0F, 1F, 1F); // P2
-		glVertex3f(1F, 1F, 1F); // P3
-		glVertex3f(1F, 1F, 0F); // P4
-
-		glEnd();
-
+		t.addVertex(0F, size, 0F); // P1
+		t.addVertex(0F, size, size); // P2
+		t.addVertex(size, size, size); // P3
+		t.addVertex(size, size, 0F); // P4
+		
+		t.draw();
+		
 		GL11.glPopMatrix();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 

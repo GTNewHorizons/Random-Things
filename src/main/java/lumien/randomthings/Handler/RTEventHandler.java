@@ -1,12 +1,18 @@
 package lumien.randomthings.Handler;
 
+import static org.lwjgl.opengl.GL11.GL_BLEND;
+import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
+import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
+import static org.lwjgl.opengl.GL11.glAlphaFunc;
+import static org.lwjgl.opengl.GL11.glBlendFunc;
+import static org.lwjgl.opengl.GL11.glColor4f;
+import static org.lwjgl.opengl.GL11.glEnable;
+
 import java.lang.reflect.Field;
-import org.apache.logging.log4j.Level;
-import org.lwjgl.opengl.GL11;
-import static org.lwjgl.opengl.GL11.*;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Configuration.ConfigItems;
 import lumien.randomthings.Configuration.RTConfiguration;
 import lumien.randomthings.Configuration.Settings;
@@ -14,7 +20,6 @@ import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.EntityHealingOrb;
 import lumien.randomthings.Entity.EntitySoul;
 import lumien.randomthings.Entity.EntitySpirit;
-import lumien.randomthings.Handler.Bloodmoon.BloodmoonSpawner;
 import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
 import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Handler.Spectre.SpectreHandler;
@@ -24,19 +29,10 @@ import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Items.ItemSpectreArmor;
 import lumien.randomthings.Items.ItemWhiteStone;
 import lumien.randomthings.Items.ModItems;
+import lumien.randomthings.Library.DimensionCoordinate;
 import lumien.randomthings.Library.PotionEffects;
-import lumien.randomthings.Network.PacketHandler;
-import lumien.randomthings.Network.Messages.MessageAnswerTeleport;
-import lumien.randomthings.Network.Messages.MessageAnswerTeleport.STATUS;
 import lumien.randomthings.Potions.ModPotions;
 import lumien.randomthings.Transformer.MCPNames;
-import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
@@ -58,19 +54,19 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.client.event.EntityViewRenderEvent.FogColors;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent17;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -78,6 +74,18 @@ import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.WorldEvent;
+
+import org.apache.logging.log4j.Level;
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class RTEventHandler
 {
@@ -97,6 +105,40 @@ public class RTEventHandler
 			RandomThings.instance.logger.log(Level.ERROR, "Couldn't find experienceValue in EntityLiving, experience imbue will not work :(");
 			experienceValue = null;
 		}
+	}
+
+	@SubscribeEvent
+	public void renderWorldPost(RenderWorldLastEvent event)
+	{
+		Minecraft mc = FMLClientHandler.instance().getClient();
+		EntityPlayer player = mc.thePlayer;
+		if (player != null)
+		{
+			ItemStack item = player.getCurrentEquippedItem();
+			if (item != null && item.getItem() == ModItems.filter && item.getItemDamage() == ItemFilter.FilterType.POSITION.ordinal() && item.stackTagCompound != null)
+			{
+				DimensionCoordinate pos = ItemFilter.getPosition(item);
+
+				if (player.dimension == pos.dimension)
+				{
+					double playerX = player.prevPosX + (player.posX - player.prevPosX) * event.partialTicks;
+					double playerY = player.prevPosY + (player.posY - player.prevPosY) * event.partialTicks;
+					double playerZ = player.prevPosZ + (player.posZ - player.prevPosZ) * event.partialTicks;
+
+					RenderUtils.enableDefaultBlending();
+
+					GL11.glPushMatrix();
+					{
+						GL11.glTranslated(-playerX, -playerY, -playerZ);
+						RenderUtils.drawCube(pos.posX - 0.01F, pos.posY - 0.01F, pos.posZ - 0.01F, 1.02f, 0.4f, 0, 1, 0.2f);
+					}
+					GL11.glPopMatrix();
+
+					GL11.glDisable(GL_BLEND);
+				}
+			}
+		}
+
 	}
 
 	@SubscribeEvent
