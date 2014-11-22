@@ -108,6 +108,7 @@ public class RTEventHandler
 	}
 
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void renderWorldPost(RenderWorldLastEvent event)
 	{
 		Minecraft mc = FMLClientHandler.instance().getClient();
