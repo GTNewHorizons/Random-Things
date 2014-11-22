@@ -3,7 +3,7 @@ tile.creativePlayerInterface.name=Interface creative du joueur
 tile.fluidDisplay.name=Affichage des fluides
 tile.advancedFluidDisplay.name=Affichage avancé des fluides
 tile.fertilizedDirt.name=Terre fertilisée
-tile.itemCollector.name=Cllecteur d'item
+tile.itemCollector.name=Collecteur d'item
 tile.advancedItemCollector.name=Collecteur avancé d'item
 tile.onlineDetector.name=Dectecteur de présence en ligne
 tile.moonSensor.name=Capteur de phase de lune
@@ -16,6 +16,7 @@ tile.spectreGlass.name=verre fantomatique
 tile.energyDistributor.name=Distributeur d'énergie
 tile.enderEnergyDistributor.name=Distributeur d'énergie Ender
 tile.bloodMoonSensor.name=Capteur de lune de sang
+
 tile.spectreBlock.name=Bloc fantomatique
 tile.spectreBlock.black.name=Bloc noir fantomatique
 tile.spectreBlock.red.name=Bloc rouge fantomatique
@@ -33,6 +34,7 @@ tile.spectreBlock.lightBlue.name=Bloc bleu claire fantomatique
 tile.spectreBlock.magenta.name=Bloc magenta fantomatique
 tile.spectreBlock.orange.name=Bloc orange fantomatique
 tile.spectreBlock.white.name=Bloc blanc fantomatique
+
 itemGroup.Random Things=Chose au hasard
 item.filterBlock.name=Filtre de bloc
 item.filterItem.name=Filtre d'item
@@ -72,20 +74,24 @@ item.enderDiamond.name=Diamant de l'ender
 item.energizedWater.name=Eau energisé
 item.bloodStone.name=Pierre de sang
 item.error.name=Item invalide
+
 item.imbue.poison.name=Flace de poison
 item.imbue.experience.name=Flacon d'experience
 item.imbue.fire.name=Flacon de feu
 item.imbue.wither.name=Flacon de flétrissement
 item.imbue.weakness.name=Flacon de faiblesse
 item.imbue.spectre.name=Flacon spectrale
+
 imbue.poison=Poison imprégné
 imbue.experience=Experience imprégné
 imbue.fire=Feu imprégné
 imbue.wither=Wither imprégné
 imbue.weakness=Faiblesse imprégné
 imbue.spectre=Spectre imprégné
+
 entity.spirit.name=Esprit
 entity.bloodmoonCircle.name=Cercle de la lune de sang
+
 text.miscellaneous.press=Appuyer sur %s pour plus d'info
 text.miscellaneous.shift=shift
 text.miscellaneous.block=Bloc
@@ -103,25 +109,34 @@ text.miscellaneous.category=Catégorie: %s
 text.miscellaneous.shiftCategory=Shift click pour changer la catégorie
 text.miscellaneous.save=Sauvegarder
 text.miscellaneous.charges=Charges: %d
+
 text.miscellaneous.whiteList=Whitelist
 text.miscellaneous.blackList=Blacklist
+
 text.miscellaneous.yes=Oui
 text.miscellaneous.no=Non
+
 text.onlineDetector.detectingNobody=Personne détecté
 text.onlineDetector.detecting="Detection %s"
+
 text.miscellaneous.ignoreOreDict=Ignorer le dictionnaire de minerais
 text.miscellaneous.useOreDict=Utiliser le dictionnaire de minerais
+
 text.miscellaneous.ignoreMetadata=Ignorer le metadata
 text.miscellaneous.useMetadata=Utiliser le metadata
+
 text.miscellaneous.noTarget=Aucune cible selectionnée (Shift click sur un bloc)
 text.miscellaneous.target.x=Cible-X: %d
 text.miscellaneous.target.y=Cible-Y: %d
 text.miscellaneous.target.z=Cible-Z: %d
+
 text.miscellaneous.position.x=Pos-X: %d
 text.miscellaneous.position.y=Pos-Y: %d
 text.miscellaneous.position.z=Pos-Z: %d
 text.miscellaneous.dimension=Dimension: %d
+
 text.spectre.soulSolid=Âme pleine
+
 text.dyed=Dyed %s
 text.color.black=Noir
 text.color.red=Rouge
@@ -139,16 +154,20 @@ text.color.lightBlue=Bleu claire
 text.color.magenta=Magenta
 text.color.orange=Orange
 text.color.white=Blanc
+
 text.error.nbt=Ne peut pas utiliser le fichier NBT Mod, des choses comme des lettres ou des événements magnétiques ne survivront pas après un redémarrage.
+
 text.magneticForce.notOnline=Pas en ligne
 text.magneticForce.invalidUsername=Nom d'utilisateur invalide
 text.magneticForce.noRights=Pas le droit
 text.magneticForce.notYourself=Pas pour vous
+
 text.enderLetter.noReceiver=Pas de receveur mit
 text.enderLetter.receiver=Receveur: %s
 text.enderLetter.sender=Envoyeur: %s
 text.enderLetter.invalidreceiver=Vous avez specicifé un mauvais receveur
 text.enderLetter.empty=Vous ne pouvez pas envoyer un lettre vide
+
 text.bloodmoon.command=Il va y avoir une lune de sang la nuit prochaine
 text.bloodmoon.notify=La lune de sang s'éléve...
 text.bloodmoon.nosleep=Vous n'avez pas l'air si fatigué maintenant
