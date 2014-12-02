@@ -42,6 +42,29 @@ public class BackgroundHandler
 			e.printStackTrace();
 		}
 	}
+	
+	public static void setBackground(ResourceLocation rl)
+	{
+		try
+		{
+			for (Field f : Gui.class.getFields())
+			{
+				if (f.getType() == ResourceLocation.class)
+				{
+					ResourceLocation r = (ResourceLocation) f.get(null);
+					if (r.getResourcePath().equals("textures/gui/options_background.png"))
+					{
+						OverrideUtils.setFinalStatic(f, rl);
+						return;
+					}
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 
 	public static void setRandomBackground()
 	{
@@ -49,7 +72,7 @@ public class BackgroundHandler
 		{
 			if (!Settings.FIXED_BACKGROUND.equals(""))
 			{
-				setBackgroundBlock(Settings.FIXED_BACKGROUND);
+				setBackground(new ResourceLocation(Settings.FIXED_BACKGROUND));
 			}
 			else
 			{
