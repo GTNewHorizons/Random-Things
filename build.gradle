@@ -24,13 +24,13 @@ repositories {
 
 dependencies {
     compile group: 'li.cil.oc', name: 'OpenComputers', version: 'MC1.7.2-1.2.13.150', classifier: 'api'
-    compile "codechicken:NotEnoughItems:1.7.10-1.0.2.30:dev"
+    //compile "codechicken:NotEnoughItems:1.7.10-1.0.3.68:dev"
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
 
 
-version = "2.2.1"
+version = "2.2.2"
 group= "lumien.randomthings" 
 archivesBaseName = "RandomThings"
 
@@ -47,7 +47,7 @@ jar {
 }
 
 minecraft {
-    version = "1.7.10-10.13.1.1217"
+    version = "1.7.10-10.13.2.1236"
     runDir = "eclipse/assets"
     
     replaceIn "Library/Reference.java"
