@@ -42,8 +42,8 @@ public class BlockEnergyDistributor extends BlockContainerBase
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		front = ir.registerIcon("RandomThings:energyDistributorFront");
-		sides = ir.registerIcon("RandomThings:energyDistributorSides");
+		front = ir.registerIcon("RandomThings:distributorBasic_Out");
+		sides = ir.registerIcon("RandomThings:distributorBasic_In");
 	}
 
 	@Override
