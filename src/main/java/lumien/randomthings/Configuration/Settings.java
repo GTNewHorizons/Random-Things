@@ -35,6 +35,8 @@ public class Settings
 	public static boolean BLOODMOON_NOSLEEP = true;
 	public static float BLOODMOON_CHANCE = 0.05f;
 	public static boolean BLOODMOON_VANISH = false;
+	public static boolean BLOODMOON_RESPECT_GAMERULE = true;
+	public static boolean BLOODMOON_MESSAGE = true;
 
 	public static boolean BLOODMOON_VISUAL_REDMOON = true;
 	public static boolean BLOODMOON_VISUAL_REDLIGHT = true;

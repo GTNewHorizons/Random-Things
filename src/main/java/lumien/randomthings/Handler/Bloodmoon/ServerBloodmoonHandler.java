@@ -31,7 +31,7 @@ public class ServerBloodmoonHandler extends WorldSavedData
 		bloodMoon = false;
 		forceBloodMoon = false;
 	}
-	
+
 	public ServerBloodmoonHandler(String name)
 	{
 		super("Bloodmoon");
@@ -55,7 +55,7 @@ public class ServerBloodmoonHandler extends WorldSavedData
 			int time = (int) (world.getWorldTime() % 24000);
 			if (bloodMoon)
 			{
-				if (world.getGameRules().getGameRuleBooleanValue("doMobSpawning"))
+				if (!Settings.BLOODMOON_RESPECT_GAMERULE || world.getGameRules().getGameRuleBooleanValue("doMobSpawning"))
 				{
 					for (int i = 0; i < Settings.BLOODMOON_SPAWNSPEED; i++)
 					{
@@ -77,9 +77,12 @@ public class ServerBloodmoonHandler extends WorldSavedData
 						forceBloodMoon = false;
 						setBloodmoon(true);
 
-						for (EntityPlayer player : ((List<EntityPlayer>) world.playerEntities))
+						if (Settings.BLOODMOON_MESSAGE)
 						{
-							player.addChatMessage(new ChatComponentTranslation("text.bloodmoon.notify", new Object[0]).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+							for (EntityPlayer player : ((List<EntityPlayer>) world.playerEntities))
+							{
+								player.addChatMessage(new ChatComponentTranslation("text.bloodmoon.notify", new Object[0]).setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+							}
 						}
 					}
 				}
