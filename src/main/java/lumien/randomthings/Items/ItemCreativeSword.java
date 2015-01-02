@@ -1,8 +1,10 @@
 package lumien.randomthings.Items;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
@@ -31,4 +33,10 @@ public class ItemCreativeSword extends ItemCreative
 		}
 		return false;
 	}
+	
+	@Override
+    public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z, EntityPlayer player)
+    {
+        return true;
+    }
 }

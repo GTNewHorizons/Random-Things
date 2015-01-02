@@ -24,6 +24,7 @@ import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
 import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Handler.Spectre.SpectreHandler;
 import lumien.randomthings.Items.ItemBloodstone;
+import lumien.randomthings.Items.ItemCreativeSword;
 import lumien.randomthings.Items.ItemDropFilter;
 import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Items.ItemSpectreArmor;
@@ -71,8 +72,12 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
+import net.minecraftforge.event.entity.player.PlayerEvent.HarvestCheck;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
 import org.apache.logging.log4j.Level;
@@ -104,6 +109,24 @@ public class RTEventHandler
 			e.printStackTrace();
 			RandomThings.instance.logger.log(Level.ERROR, "Couldn't find experienceValue in EntityLiving, experience imbue will not work :(");
 			experienceValue = null;
+		}
+	}
+	
+	@SubscribeEvent
+	public void breakBlock(BreakEvent event)
+	{
+		if (event.getPlayer().getCurrentEquippedItem()!=null && event.getPlayer().getCurrentEquippedItem().getItem() instanceof ItemCreativeSword)
+		{
+			event.setCanceled(true);
+		}
+	}
+	
+	@SubscribeEvent
+	public void breakSpeed(BreakSpeed event)
+	{
+		if (event.entityPlayer.getCurrentEquippedItem()!=null && event.entityPlayer.getCurrentEquippedItem().getItem() instanceof ItemCreativeSword)
+		{
+			event.newSpeed = 0;
 		}
 	}
 
