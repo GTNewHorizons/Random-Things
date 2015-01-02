@@ -36,7 +36,6 @@ public class BlockLapisLamp extends BlockBase
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World worldObj, int posX, int posY, int posZ, Random rng)
 	{
-		System.out.println("rng");
 		worldObj.updateLightByType(EnumSkyBlock.Block, posX, posY, posZ);
 	}
 
