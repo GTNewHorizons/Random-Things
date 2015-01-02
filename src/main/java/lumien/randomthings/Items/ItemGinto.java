@@ -40,8 +40,6 @@ public class ItemGinto extends ItemBase
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir)
 	{
-		super.registerIcons(ir);
-
 		icons = new IIcon[2];
 		icons[0] = ir.registerIcon("RandomThings:ginto_empty");
 		icons[1] = ir.registerIcon("RandomThings:ginto_filled");
