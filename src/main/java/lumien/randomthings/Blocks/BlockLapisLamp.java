@@ -1,11 +1,17 @@
 package lumien.randomthings.Blocks;
 
+import java.util.Random;
+
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class BlockLapisLamp extends BlockBase
 {
@@ -24,6 +30,14 @@ public class BlockLapisLamp extends BlockBase
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		return 16777215;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(World worldObj, int posX, int posY, int posZ, Random rng)
+	{
+		System.out.println("rng");
+		worldObj.updateLightByType(EnumSkyBlock.Block, posX, posY, posZ);
 	}
 
 	@Override
