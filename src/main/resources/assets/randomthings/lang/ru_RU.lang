@@ -6,17 +6,16 @@ tile.fertilizedDirt.name=Удобрённая земля
 tile.itemCollector.name=Собиратель предметов
 tile.advancedItemCollector.name=Продвинутый собиратель предметов
 tile.onlineDetector.name=Детектор онлайн-игроков
-tile.fluidRouter.name=Маршрутизатор жидкостей [WIP]
 tile.moonSensor.name=Датчик лунных фаз
 tile.notificationInterface.name=Интерфейс уведомлений
 tile.wirelessLever.name=Беспроводной рычаг
-tile.soundBox.name=Резонаторный ящик
-tile.carpentryBench.name=Верстак плотника [WIP]
 tile.lapisLamp.name=Лазуритовый светильник
-tile.dyeingMachine.name=Механизм покраски
-tile.spiritRod.name=Палочка духа
+tile.dyeingMachine.name=Покрасочный механизм
 tile.imbuingStation.name=Станция наполнения
 tile.spectreGlass.name=Призрачное стекло
+tile.energyDistributor.name=Распределитель энергии
+tile.enderEnergyDistributor.name=Распределитель энергии Края
+tile.bloodMoonSensor.name=Датчик кровавой луны
 
 tile.spectreBlock.name=Призрачный блок
 tile.spectreBlock.black.name=Чёрный призрачный блок
@@ -46,7 +45,6 @@ item.biomeCapsule.name=Biome Capsule
 item.biomePainter.name=Biome Painter
 item.whitestoneUncharged.name=Белый камень [Незаряженный]
 item.whitestoneCharged.name=Белый камень [Заряженный]
-item.kojaku.name=Kojaku
 item.voidStone.name=Пустотный камень
 item.dropFilter.name=Фильтр упавших предметов
 item.dropFilterVoiding.name=Пустотный фильтр упавших предметов
@@ -72,6 +70,9 @@ item.enderFragment.name=Фрагмент Края
 item.ectoplasm.name=Эктоплазма
 item.spectreIron.name=Призрачное железо
 item.transformationCore.name=Ядро трансформации
+item.enderDiamond.name=Алмаз Края
+item.energizedWater.name=Заряженная вода
+item.bloodStone.name=Кровавый камень
 item.error.name=Недействительный предмет
 
 item.imbue.poison.name=Фляга яда
@@ -89,6 +90,7 @@ imbue.weakness=Настой слабости
 imbue.spectre=Настой призрачности
 
 entity.spirit.name=Дух
+entity.bloodmoonCircle.name=Круг кровавой луны
 
 text.miscellaneous.press=Нажмите %s для подробной информации
 text.miscellaneous.shift=shift
@@ -106,6 +108,7 @@ text.miscellaneous.creativeOnly=Только для творческого ре�
 text.miscellaneous.category=Категория: %s
 text.miscellaneous.shiftCategory=Shift-ПКМ, чтобы изменить категорию
 text.miscellaneous.save=Сохранить
+text.miscellaneous.charges=Заряжает: %d
 
 text.miscellaneous.whiteList=Белый список
 text.miscellaneous.blackList=Чёрный список
@@ -126,6 +129,11 @@ text.miscellaneous.noTarget=Цель не выбрана (Shift-ПКМ по бл
 text.miscellaneous.target.x=Координата-X: %d
 text.miscellaneous.target.y=Координата-Y: %d
 text.miscellaneous.target.z=Координата-Z: %d
+
+text.miscellaneous.position.x=Координата-X: %d
+text.miscellaneous.position.y=Координата-Y: %d
+text.miscellaneous.position.z=Координата-Z: %d
+text.miscellaneous.dimension=Измерение: %d
 
 text.spectre.soulSolid=Твёрдая душа
 
@@ -160,5 +168,6 @@ text.enderLetter.sender=Отправитель: %s
 text.enderLetter.invalidreceiver=Вы указали неправильного получателя
 text.enderLetter.empty=Вы не можете отправить пустое письмо
 
-text.bloodmoon.command=Полнолуние будет следующей ночью
-text.bloodmoon.notify=Полнолуние начинается...
+text.bloodmoon.command=Кровавая луна будет следующей ночью
+text.bloodmoon.notify=Кровавая луна наступает...
+text.bloodmoon.nosleep=Вы не чувствуете себя усталым
