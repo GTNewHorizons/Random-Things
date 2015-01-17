@@ -117,7 +117,7 @@ public class MagneticForceHandler
 				}
 				if (targetEntity != null)
 				{
-					Set<EntityPlayer> trackingTarget = ((WorldServer) userEntity.worldObj).getEntityTracker().getTrackingPlayers(targetEntity);
+					Set<EntityPlayer> trackingTarget = ((WorldServer) targetEntity.worldObj).getEntityTracker().getTrackingPlayers(targetEntity);
 					PacketHandler.INSTANCE.sendTo(new MessageMagneticForceParticle(targetEntity.getEntityId(), targetEntity.worldObj.provider.dimensionId, f), targetEntity);
 
 					for (EntityPlayer player : trackingTarget)
