@@ -57,15 +57,15 @@ public class ItemBloodstone extends ItemBase
 		ritualPattern.addBlock(Blocks.quartz_block, 0, 2, 0, 2);
 		ritualPattern.addBlock(Blocks.quartz_block, 0, 2, 0, -2);
 
-		ritualPattern.addBlock(Blocks.nether_brick, 1, -2, 0, 1);
-		ritualPattern.addBlock(Blocks.nether_brick, 1, -2, 0, -1);
-		ritualPattern.addBlock(Blocks.nether_brick, 1, 2, 0, 1);
-		ritualPattern.addBlock(Blocks.nether_brick, 1, 2, 0, -1);
+		ritualPattern.addBlock(Blocks.nether_brick, 0, -2, 0, 1);
+		ritualPattern.addBlock(Blocks.nether_brick, 0, -2, 0, -1);
+		ritualPattern.addBlock(Blocks.nether_brick, 0, 2, 0, 1);
+		ritualPattern.addBlock(Blocks.nether_brick, 0, 2, 0, -1);
 
-		ritualPattern.addBlock(Blocks.nether_brick, 1, -1, 0, -2);
-		ritualPattern.addBlock(Blocks.nether_brick, 1, 1, 0, -2);
-		ritualPattern.addBlock(Blocks.nether_brick, 1, -1, 0, 2);
-		ritualPattern.addBlock(Blocks.nether_brick, 1, 1, 0, 2);
+		ritualPattern.addBlock(Blocks.nether_brick, 0, -1, 0, -2);
+		ritualPattern.addBlock(Blocks.nether_brick, 0, 1, 0, -2);
+		ritualPattern.addBlock(Blocks.nether_brick, 0, -1, 0, 2);
+		ritualPattern.addBlock(Blocks.nether_brick, 0, 1, 0, 2);
 	}
 
 	@Override
