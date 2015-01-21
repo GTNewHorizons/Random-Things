@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    compile group: 'li.cil.oc', name: 'OpenComputers', version: 'MC1.7.2-1.2.13.150', classifier: 'api'
+    compile "li.cil.oc:OpenComputers:MC1.7.10-1.4.+:api"
     //compile "codechicken:NotEnoughItems:1.7.10-1.0.3.68:dev"
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

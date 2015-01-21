@@ -1,8 +1,8 @@
 package lumien.randomthings.TileEntities;
 
-import li.cil.oc.api.network.Arguments;
-import li.cil.oc.api.network.Callback;
-import li.cil.oc.api.network.Context;
+import li.cil.oc.api.machine.Arguments;
+import li.cil.oc.api.machine.Callback;
+import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.SimpleComponent;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.Optional.Interface;
