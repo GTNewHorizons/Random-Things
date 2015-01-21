@@ -105,7 +105,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntitySoul.class, new RenderSoul());
 		RenderingRegistry.registerEntityRenderingHandler(EntityReviveCircle.class, new RenderReviveCircle());
 		RenderingRegistry.registerEntityRenderingHandler(EntityBloodmoonCircle.class, new RenderBloodmoonCircle());
-
+		
 		RenderingRegistry.registerBlockHandler(new RenderWirelessLever());
 
 		RenderRTItem rtRenderer = new RenderRTItem();

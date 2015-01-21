@@ -58,9 +58,10 @@ public class MessageAnswerTeleport implements IRTMessage
 		buf.writeInt(status.ordinal());
 	}
 
-	public void setStatus(STATUS status)
+	public MessageAnswerTeleport setStatus(STATUS status)
 	{
 		this.status = status;
+		return this;
 	}
 
 }

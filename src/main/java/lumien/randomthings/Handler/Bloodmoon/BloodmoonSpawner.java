@@ -14,6 +14,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
@@ -175,7 +176,7 @@ public class BloodmoonSpawner
 																exception.printStackTrace();
 																return i;
 															}
-
+															
 															entityliving.setLocationAndAngles(f, f1, f2, p_77192_1_.rand.nextFloat() * 360.0F, 0.0F);
 
 															Result canSpawn = ForgeEventFactory.canEntitySpawn(entityliving, p_77192_1_, f, f1, f2);

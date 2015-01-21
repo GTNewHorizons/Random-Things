@@ -149,7 +149,7 @@ public class GuiHandler implements IGuiHandler
 			case ENERGY_DISTRIBUTOR:
 				return new GuiEnergyDistributor((TileEntityEnergyDistributor) tileEntity);
 			case ENDER_ENERGY_DISTRIBUTOR:
-				return new GuiEnderEnergyDistributor(player.inventory,(TileEntityEnderEnergyDistributor) tileEntity);
+				return new GuiEnderEnergyDistributor(player.inventory, (TileEntityEnderEnergyDistributor) tileEntity);
 		}
 		return null;
 	}

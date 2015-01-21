@@ -17,6 +17,7 @@ import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.JumpInsnNode;
 import org.objectweb.asm.tree.LabelNode;
 import org.objectweb.asm.tree.LdcInsnNode;
+import org.objectweb.asm.tree.LocalVariableNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
@@ -38,8 +39,7 @@ public class RTClassTransformer implements IClassTransformer
 		{
 			return patchLeaveClass(basicClass);
 		}
-		else if (transformedName.equals("net.minecraft.client.renderer.EntityRenderer")) // &&
-																							// VanillaChanges.HARDCORE_DARKNESS
+		else if (transformedName.equals("net.minecraft.client.renderer.EntityRenderer")) 
 		{
 			return patchEntityRendererClass(basicClass);
 		}

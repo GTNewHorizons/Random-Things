@@ -8,6 +8,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -46,6 +47,12 @@ public abstract class BlockContainerBase extends BlockContainer
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@Override
+	public boolean onBlockActivated(World worldObj, int posX, int posY, int posZ, EntityPlayer entityPlayer, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_)
+	{
+		return super.onBlockActivated(worldObj, posX, posY, posZ, entityPlayer, p_149727_6_, p_149727_7_, p_149727_8_, p_149727_9_);
 	}
 	
 	@Override
