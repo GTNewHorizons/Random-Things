@@ -45,6 +45,12 @@ public class BlockFertilizedDirt extends BlockBase
 
 		this.setBlockTextureName("RandomThings:fertilizedDirt");
 	}
+	
+	@Override
+    public boolean renderAsNormalBlock()
+    {
+        return !tilled;
+    }
 
 	@Override
 	public String getUnlocalizedName()
