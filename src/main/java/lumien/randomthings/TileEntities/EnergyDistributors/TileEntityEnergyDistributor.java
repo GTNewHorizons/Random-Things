@@ -4,6 +4,7 @@ import java.util.HashSet;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyReceiver;
 
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Library.WorldUtils;
@@ -19,7 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityEnergyDistributor extends TileEntity implements IEnergyHandler
+public class TileEntityEnergyDistributor extends TileEntity implements IEnergyReceiver
 {
 	protected HashSet<TileEntity> receiverCache;
 
@@ -35,7 +36,7 @@ public class TileEntityEnergyDistributor extends TileEntity implements IEnergyHa
 		@Override
 		public boolean matches(Object o)
 		{
-			return o instanceof TileEntity & !(o instanceof TileEntityEnergyDistributor) && o instanceof IEnergyHandler;
+			return o instanceof TileEntity & !(o instanceof TileEntityEnergyDistributor) && o instanceof IEnergyReceiver;
 		}
 	};
 
@@ -99,8 +100,8 @@ public class TileEntityEnergyDistributor extends TileEntity implements IEnergyHa
 			{
 				if (!te.isInvalid())
 				{
-					IEnergyHandler eh = (IEnergyHandler) te;
-					int consumed = eh.receiveEnergy(ForgeDirection.UP, Math.min(limit, Math.min(buffer.getEnergyStored(), Settings.ENERGY_DISTRIBUTOR_PERMACHINE)), false);
+					IEnergyReceiver er = (IEnergyReceiver) te;
+					int consumed = er.receiveEnergy(ForgeDirection.UP, Math.min(limit, Math.min(buffer.getEnergyStored(), Settings.ENERGY_DISTRIBUTOR_PERMACHINE)), false);
 					limit -= consumed;
 					buffer.setEnergyStored(buffer.getEnergyStored() - consumed);
 					energyDistributedLastTick +=consumed;
@@ -134,12 +135,6 @@ public class TileEntityEnergyDistributor extends TileEntity implements IEnergyHa
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate)
 	{
 		return buffer.receiveEnergy(maxReceive, simulate);
-	}
-
-	@Override
-	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate)
-	{
-		return buffer.extractEnergy(maxExtract, simulate);
 	}
 
 	@Override

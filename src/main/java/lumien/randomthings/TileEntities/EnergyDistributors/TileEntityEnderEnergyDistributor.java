@@ -4,6 +4,7 @@ import java.util.HashSet;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
+import cofh.api.energy.IEnergyReceiver;
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Library.DimensionCoordinate;
@@ -18,7 +19,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityEnderEnergyDistributor extends TileEntity implements IEnergyHandler
+public class TileEntityEnderEnergyDistributor extends TileEntity implements IEnergyReceiver
 {
 	InventoryBasic targetSlots = new InventoryBasic("Targets", false, 8);
 
@@ -34,7 +35,7 @@ public class TileEntityEnderEnergyDistributor extends TileEntity implements IEne
 		@Override
 		public boolean matches(Object o)
 		{
-			return o instanceof TileEntity & !(o instanceof TileEntityEnderEnergyDistributor) && o instanceof IEnergyHandler;
+			return o instanceof TileEntity & !(o instanceof TileEntityEnderEnergyDistributor) && o instanceof IEnergyReceiver;
 		}
 	};
 
@@ -88,7 +89,7 @@ public class TileEntityEnderEnergyDistributor extends TileEntity implements IEne
 					WorldUtils.recConnectedTEs(receiverCache, worldObj, dc.posX, dc.posY, dc.posZ, validator);
 
 					TileEntity te = worldObj.getTileEntity(dc.posX, dc.posY, dc.posZ);
-					if (te != null && !te.isInvalid() && te instanceof IEnergyHandler && !(te instanceof TileEntityEnderEnergyDistributor))
+					if (te != null && !te.isInvalid() && te instanceof IEnergyReceiver && !(te instanceof TileEntityEnderEnergyDistributor))
 					{
 						receiverCache.add(te);
 					}
@@ -120,8 +121,8 @@ public class TileEntityEnderEnergyDistributor extends TileEntity implements IEne
 			{
 				if (!te.isInvalid())
 				{
-					IEnergyHandler eh = (IEnergyHandler) te;
-					int consumed = eh.receiveEnergy(ForgeDirection.UP, Math.min(limit, Math.min(buffer.getEnergyStored(), Settings.ENDER_ENERGY_DISTRIBUTOR_PERMACHINE)), false);
+					IEnergyReceiver er = (IEnergyReceiver) te;
+					int consumed = er.receiveEnergy(ForgeDirection.UP, Math.min(limit, Math.min(buffer.getEnergyStored(), Settings.ENDER_ENERGY_DISTRIBUTOR_PERMACHINE)), false);
 					limit -= consumed;
 					buffer.setEnergyStored(buffer.getEnergyStored() - consumed);
 					energyDistributedLastTick += consumed;
@@ -145,12 +146,6 @@ public class TileEntityEnderEnergyDistributor extends TileEntity implements IEne
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate)
 	{
 		return buffer.receiveEnergy(maxReceive, simulate);
-	}
-
-	@Override
-	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate)
-	{
-		return buffer.extractEnergy(maxExtract, simulate);
 	}
 
 	@Override
