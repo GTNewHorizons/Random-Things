@@ -355,13 +355,13 @@ public class RTEventHandler
 		}
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void itemPickUp(EntityItemPickupEvent event)
 	{
 
 		if (ConfigItems.dropFilter)
 		{
-			if (!event.entityPlayer.worldObj.isRemote && event.entityPlayer != null)
+			if (!event.entityPlayer.worldObj.isRemote)
 			{
 				InventoryPlayer playerInventory = event.entityPlayer.inventory;
 				if (playerInventory != null)
