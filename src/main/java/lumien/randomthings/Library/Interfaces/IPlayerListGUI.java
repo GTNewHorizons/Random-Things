@@ -1,8 +1,6 @@
 package lumien.randomthings.Library.Interfaces;
 
-public interface IPlayerListGUI
-{
+public interface IPlayerListGUI {
 
-	void pressedPlayer(String string);
-
+    void pressedPlayer(String string);
 }

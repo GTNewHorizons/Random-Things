@@ -2,22 +2,16 @@ package lumien.randomthings.Handler.ModCompability.MFR;
 
 import java.lang.reflect.Method;
 
-public class MFRRegistry
-{
-	public static void registerSafariNetBlacklist(Class<?> blacklistedEntity)
-	{
-		try
-		{
-			Class<?> registry = Class.forName("powercrystals.minefactoryreloaded.MFRRegistry");
-			if(registry != null)
-			{
-				Method reg = registry.getMethod("registerSafariNetBlacklist", Class.class);
-				reg.invoke(registry, blacklistedEntity);
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
+public class MFRRegistry {
+    public static void registerSafariNetBlacklist(Class<?> blacklistedEntity) {
+        try {
+            Class<?> registry = Class.forName("powercrystals.minefactoryreloaded.MFRRegistry");
+            if (registry != null) {
+                Method reg = registry.getMethod("registerSafariNetBlacklist", Class.class);
+                reg.invoke(registry, blacklistedEntity);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
