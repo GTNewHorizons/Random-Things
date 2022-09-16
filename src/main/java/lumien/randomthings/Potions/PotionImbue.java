@@ -1,44 +1,35 @@
 package lumien.randomthings.Potions;
 
-import java.awt.Color;
-
-import org.lwjgl.opengl.GL11;
-
-import lumien.randomthings.Client.RenderUtils;
-import lumien.randomthings.Library.PotionIds;
-import lumien.randomthings.Transformer.MCPNames;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Client.RenderUtils;
+import lumien.randomthings.Library.PotionIds;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
 
 public class PotionImbue extends Potion
 {
 	static float cf = 1F / 255F;
 	Color potionColor;
 	ResourceLocation icon;
-	static final ResourceLocation inventory = new ResourceLocation("randomthings:textures/customInventory.png");
 
 	public PotionImbue(String name, int potionID, int color, ResourceLocation icon)
 	{
 		super(potionID, false, color);
-
 		this.icon = icon;
 		this.setPotionName(name);
-		this.potionColor = new Color(this.getLiquidColor());
+		this.potionColor = new Color(color);
 	}
 
 	@Override
 	public int getLiquidColor()
 	{
-		StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-		if (stackTraceElements.length > 3 && stackTraceElements[3].getMethodName().equals(MCPNames.method("func_70679_bo")))
-		{
-			return 0;
-		}
-
-		return super.getLiquidColor();
+		/*Override super and return 0 to not render potion particles on the player*/
+		return 0;
 	}
 
 	@Override
