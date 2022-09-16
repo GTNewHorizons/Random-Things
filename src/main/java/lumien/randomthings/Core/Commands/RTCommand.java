@@ -1,25 +1,15 @@
 package lumien.randomthings.Core.Commands;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.base.Preconditions;
-
 import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.common.registry.GameRegistry;
-
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Items.ItemBiomeCapsule;
-import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Network.Messages.MessageNotification;
-
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.RandomThings;
 import net.minecraft.block.Block;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.command.PlayerNotFoundException;
-import net.minecraft.command.WrongUsageException;
+import net.minecraft.command.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -33,26 +23,22 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.Collections;
+import java.util.List;
+
 public class RTCommand extends CommandBase
 {
-	private List<String> aliases;
-
-	public RTCommand()
-	{
-		aliases = new ArrayList<String>();
-		aliases.add("rt");
-	}
 
 	@Override
 	public String getCommandName()
 	{
-		return "rt";
+		return "randomthings";
 	}
 
 	@Override
 	public String getCommandUsage(ICommandSender var1)
 	{
-		return "rt <command>";
+		return getCommandName() + " <command>";
 	}
 
 	@Override
@@ -64,7 +50,7 @@ public class RTCommand extends CommandBase
 	@Override
 	public List getCommandAliases()
 	{
-		return aliases;
+		return Collections.singletonList("rt");
 	}
 
 	@Override
