@@ -106,14 +106,6 @@ public class RandomThings {
             BackgroundHandler.setRandomBackground();
             soundRecorderHandler = new SoundRecorderHandler();
         }
-
-        // Version Checker
-        String VERSION_CHECKER_MODID = "VersionChecker";
-        FMLInterModComms.sendRuntimeMessage(
-                Reference.MOD_ID,
-                VERSION_CHECKER_MODID,
-                "addVersionCheck",
-                "https://raw.github.com/lumien231/Random-Things/master/version.json");
     }
 
     @EventHandler
