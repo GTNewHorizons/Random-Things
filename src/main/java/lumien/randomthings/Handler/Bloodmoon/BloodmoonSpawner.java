@@ -25,7 +25,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 public class BloodmoonSpawner {
     /** The 17x17 area around the player where mobs can spawn */
-    private HashMap eligibleChunksForSpawning = new HashMap();
+    private final HashMap eligibleChunksForSpawning = new HashMap();
 
     private static final String __OBFID = "CL_00000152";
 

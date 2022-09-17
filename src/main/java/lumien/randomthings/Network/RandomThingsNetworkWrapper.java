@@ -19,8 +19,8 @@ import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 
 public class RandomThingsNetworkWrapper extends SimpleNetworkWrapper {
-    private EnumMap<Side, FMLEmbeddedChannel> channels;
-    private SimpleIndexedCodec packetCodec;
+    private final EnumMap<Side, FMLEmbeddedChannel> channels;
+    private final SimpleIndexedCodec packetCodec;
 
     RTMessageHandler mh;
     int discriminator;

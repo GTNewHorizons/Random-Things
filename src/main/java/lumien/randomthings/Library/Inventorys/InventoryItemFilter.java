@@ -8,8 +8,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 public class InventoryItemFilter extends InventoryBasic {
-    private EntityPlayer playerEntity;
-    private ItemStack originalIS;
+    private final EntityPlayer playerEntity;
+    private final ItemStack originalIS;
 
     private boolean reading = false;
 

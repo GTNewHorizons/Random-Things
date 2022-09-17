@@ -13,8 +13,8 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class MCPNames {
-    private static Map<String, String> fields;
-    private static Map<String, String> methods;
+    private static final Map<String, String> fields;
+    private static final Map<String, String> methods;
 
     static {
         if (mcp()) {

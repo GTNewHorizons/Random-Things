@@ -14,7 +14,7 @@ public enum ChestCategory {
 
     private final String name;
 
-    private ChestCategory(String n) {
+    ChestCategory(String n) {
         name = n;
     }
 

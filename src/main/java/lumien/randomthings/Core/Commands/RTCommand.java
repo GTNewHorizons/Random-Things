@@ -3,6 +3,8 @@ package lumien.randomthings.Core.Commands;
 import com.google.common.base.Preconditions;
 import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.common.registry.GameRegistry;
+import java.util.Collections;
+import java.util.List;
 import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Items.ItemBiomeCapsule;
 import lumien.randomthings.Library.Reference;
@@ -23,9 +25,6 @@ import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.Collections;
-import java.util.List;
 
 public class RTCommand extends CommandBase {
 

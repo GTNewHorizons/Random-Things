@@ -1,6 +1,6 @@
 tile.playerinterface.name=Spieler-Interface
-tile.fluidDisplay.name=Flüssigkeits-Display
-tile.fertilizedDirt.name=Gedüngte Erde
+tile.fluidDisplay.name=Fl?ssigkeits-Display
+tile.fertilizedDirt.name=Ged?ngte Erde
 tile.itemCollector.name=Item-Sammler
 tile.advancedItemCollector.name=Fortgeschrittener Item-Sammler
 tile.onlineDetector.name=Online-Detektor
@@ -8,15 +8,13 @@ tile.onlineDetector.name=Online-Detektor
 item.filterBlock.name=Block-Filter
 item.filterItem.name=Item-Filter
 item.filterEntity.name=Entity-Filter
-item.biomeSolution.name=Lösung
+item.biomeSolution.name=L?sung
 item.biomeCapsule.name=Biomkapsel[WIP]
 item.biomePainter.name=Biommaler[WIP]
-item.whitestone.name=Weißer Stein
-item.kojaku.name=Kojaku
 item.creativeChestGenerator.name=Kreativer Kisten Generator
 
 item.playerCore.name=Spieler-Kern
 item.obsidianStick.name=Obsidianstab
-item.error.name=Ungültiges Item
+item.error.name=Ung?ltiges Item
 
 itemGroup.Random Things=Random Things

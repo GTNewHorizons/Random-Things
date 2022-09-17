@@ -11,7 +11,7 @@ public class MessageItemFilter implements IRTMessage {
         OREDICT,
         METADATA,
         LISTTYPE,
-        NBT;
+        NBT
     }
 
     ACTION action;

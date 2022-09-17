@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
 public class ItemCreativeChestGenerator extends ItemCreative {
-    private static Random rng = new Random();
+    private static final Random rng = new Random();
 
     public ItemCreativeChestGenerator() {
         super("creativeChestGenerator");

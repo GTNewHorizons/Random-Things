@@ -18,7 +18,7 @@ public interface IPeripheral {
      * This can be queried from lua by calling peripheral.getType()
      * @return 	A string identifying the type of peripheral.
      */
-    public String getType();
+    String getType();
 
     /**
      * Should return an array of strings that identify the methods that this
@@ -27,7 +27,7 @@ public interface IPeripheral {
      * @return 	An array of strings representing method names.
      * @see 	#callMethod
      */
-    public String[] getMethodNames();
+    String[] getMethodNames();
 
     /**
      * This is called when a lua program on an attached computercraft calls peripheral.call() with
@@ -57,8 +57,7 @@ public interface IPeripheral {
      *						arguments are supplied to your method.
      * @see 	#getMethodNames
      */
-    public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments)
-            throws Exception;
+    Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments) throws Exception;
 
     /**
      * Is called when canAttachToSide has returned true, and a computercraft is attaching to the peripheral.
@@ -74,7 +73,7 @@ public interface IPeripheral {
      *							computers can be attached to a peripheral at once.
      * @see		#detach
      */
-    public void attach(IComputerAccess computer);
+    void attach(IComputerAccess computer);
 
     /**
      * Is called when a computercraft is detaching from the peripheral.
@@ -89,7 +88,7 @@ public interface IPeripheral {
      *							computers can be attached to a peripheral at once.
      * @see		#detach
      */
-    public void detach(IComputerAccess computer);
+    void detach(IComputerAccess computer);
 
-    public boolean equals(IPeripheral other);
+    boolean equals(IPeripheral other);
 }

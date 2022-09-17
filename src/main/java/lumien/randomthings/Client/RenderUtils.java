@@ -78,9 +78,7 @@ public class RenderUtils {
     public static float interpolateRotation(float p_77034_1_, float p_77034_2_, float p_77034_3_) {
         float f3;
 
-        for (f3 = p_77034_2_ - p_77034_1_; f3 < -180.0F; f3 += 360.0F) {
-            ;
-        }
+        for (f3 = p_77034_2_ - p_77034_1_; f3 < -180.0F; f3 += 360.0F) {}
 
         while (f3 >= 180.0F) {
             f3 -= 360.0F;

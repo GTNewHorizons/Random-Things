@@ -22,15 +22,15 @@ public interface ITurtleAccess {
      * Returns the world in which the turtle resides.
      * @return the world in which the turtle resides.
      */
-    public World getWorld();
+    World getWorld();
 
     /**
      * Returns a vector containing the integer co-ordinates at which the turtle resides.
      * @return a vector containing the integer co-ordinates at which the turtle resides.
      */
-    public ChunkCoordinates getPosition();
+    ChunkCoordinates getPosition();
 
-    public boolean teleportTo(World world, int x, int y, int z);
+    boolean teleportTo(World world, int x, int y, int z);
 
     /**
      * Returns a vector containing the floating point co-ordinates at which the turtle is rendered.
@@ -38,40 +38,40 @@ public interface ITurtleAccess {
      * @param f The subframe fraction
      * @return a vector containing the floating point co-ordinates at which the turtle resides.
      */
-    public Vec3 getVisualPosition(float f);
+    Vec3 getVisualPosition(float f);
 
-    public float getVisualYaw(float f);
+    float getVisualYaw(float f);
 
     /**
      * Returns the world direction the turtle is currently facing.
      * @return the world direction the turtle is currently facing.
      */
-    public int getDirection();
+    int getDirection();
 
-    public void setDirection(int dir);
+    void setDirection(int dir);
 
-    public int getSelectedSlot();
+    int getSelectedSlot();
 
-    public void setSelectedSlot(int slot);
+    void setSelectedSlot(int slot);
 
-    public IInventory getInventory();
+    IInventory getInventory();
 
-    public boolean isFuelNeeded();
+    boolean isFuelNeeded();
 
-    public int getFuelLevel();
+    int getFuelLevel();
 
-    public void setFuelLevel(int fuel);
+    void setFuelLevel(int fuel);
 
-    public int getFuelLimit();
+    int getFuelLimit();
 
     /**
      * Removes some fuel from the turtles fuel supply. Negative numbers can be passed in to INCREASE the fuel level of the turtle.
      * @return Whether the turtle was able to consume the ammount of fuel specified. Will return false if you supply a number
      * greater than the current fuel level of the turtle.
      */
-    public boolean consumeFuel(int fuel);
+    boolean consumeFuel(int fuel);
 
-    public void addFuel(int fuel);
+    void addFuel(int fuel);
 
     /**
      * Adds a custom command to the turtles command queue. Unlike peripheral methods, these custom commands will be executed
@@ -84,25 +84,25 @@ public interface ITurtleAccess {
      * unchanged if called from a peripheral method.
      * @see ITurtleCommand
      */
-    public Object[] executeCommand(ILuaContext context, ITurtleCommand command) throws Exception;
+    Object[] executeCommand(ILuaContext context, ITurtleCommand command) throws Exception;
 
-    public void playAnimation(TurtleAnimation animation);
+    void playAnimation(TurtleAnimation animation);
 
     /**
      * Returns the turtle on the specified side of the turtle, if there is one.
      * @return the turtle on the specified side of the turtle, if there is one.
      */
-    public ITurtleUpgrade getUpgrade(TurtleSide side);
+    ITurtleUpgrade getUpgrade(TurtleSide side);
 
-    public void setUpgrade(TurtleSide side, ITurtleUpgrade upgrade);
+    void setUpgrade(TurtleSide side, ITurtleUpgrade upgrade);
 
     /**
      * Returns the peripheral created by the upgrade on the specified side of the turtle, if there is one.
      * @return the peripheral created by the upgrade on the specified side of the turtle, if there is one.
      */
-    public IPeripheral getPeripheral(TurtleSide side);
+    IPeripheral getPeripheral(TurtleSide side);
 
-    public NBTTagCompound getUpgradeNBTData(TurtleSide side);
+    NBTTagCompound getUpgradeNBTData(TurtleSide side);
 
-    public void updateUpgradeNBTData(TurtleSide side);
+    void updateUpgradeNBTData(TurtleSide side);
 }

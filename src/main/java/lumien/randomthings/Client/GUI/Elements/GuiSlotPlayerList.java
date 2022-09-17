@@ -11,8 +11,8 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Rectangle;
 
 public class GuiSlotPlayerList extends GuiScrollingList {
-    private ArrayList<String> players;
-    private IPlayerListGUI parent;
+    private final ArrayList<String> players;
+    private final IPlayerListGUI parent;
 
     public GuiSlotPlayerList(
             IPlayerListGUI parent,

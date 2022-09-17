@@ -41,12 +41,14 @@ public class ClientBloodmoonHandler {
         }
     }
 
+    @SuppressWarnings("unused")
     public static void moonColorHook() {
         if (Settings.BLOODMOON_VISUAL_REDMOON && ClientBloodmoonHandler.INSTANCE.bloodMoon) {
             GL11.glColor3f(0.8f, 0, 0);
         }
     }
 
+    @SuppressWarnings("unused")
     public static void skyColorHook(Vec3 color) {
         if (Settings.BLOODMOON_VISUAL_REDSKY && ClientBloodmoonHandler.INSTANCE.bloodMoon) {
             color.xCoord += INSTANCE.skyColorAdd;

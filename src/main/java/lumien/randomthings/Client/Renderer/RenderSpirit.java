@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 public class RenderSpirit extends RenderLiving {
     private static final ResourceLocation slimeTextures =
             new ResourceLocation("RandomThings:textures/entitys/spirit.png");
-    private ModelBase scaleAmount;
+    private final ModelBase scaleAmount;
 
     float t = 1F / 255F;
 

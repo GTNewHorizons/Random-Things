@@ -20,10 +20,10 @@ public class ContainerDyeingMachine extends Container {
     IInventory ingredients = new InventoryCrafting(this, 2, 1);
     IInventory result = new InventoryCraftResult();
 
-    private int posX;
-    private int posY;
-    private int posZ;
-    private World worldObj;
+    private final int posX;
+    private final int posY;
+    private final int posZ;
+    private final World worldObj;
 
     public ContainerDyeingMachine(InventoryPlayer playerInventory, World worldObj, int posX, int posY, int posZ) {
         this.posX = posX;

@@ -17,7 +17,7 @@ import net.minecraft.world.WorldServer;
 public class ServerBloodmoonHandler extends WorldSavedData {
     public static ServerBloodmoonHandler INSTANCE;
 
-    private BloodmoonSpawner bloodMoonSpawner;
+    private final BloodmoonSpawner bloodMoonSpawner;
 
     boolean bloodMoon;
     boolean forceBloodMoon;

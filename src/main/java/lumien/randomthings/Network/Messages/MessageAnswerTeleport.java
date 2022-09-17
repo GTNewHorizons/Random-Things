@@ -15,7 +15,7 @@ public class MessageAnswerTeleport implements IRTMessage {
         NOT_ONLINE,
         SAME_PLAYER,
         NO_RIGHT,
-        INVALID_USERNAME;
+        INVALID_USERNAME
     }
 
     private STATUS status;

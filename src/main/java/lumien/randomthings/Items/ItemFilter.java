@@ -28,7 +28,7 @@ public class ItemFilter extends ItemBase implements IItemWithProperties {
         BLOCK,
         ITEM,
         ENTITY,
-        POSITION;
+        POSITION
     }
 
     public static ItemStack standardItemFilter;

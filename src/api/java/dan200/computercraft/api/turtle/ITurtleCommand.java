@@ -19,5 +19,5 @@ public interface ITurtleCommand {
      * @see ITurtleAccess#issueCommand(ITurtleCommand)
      * @see dan200.computercraft.api.turtle.TurtleCommandResult
      */
-    public TurtleCommandResult execute(ITurtleAccess turtle);
+    TurtleCommandResult execute(ITurtleAccess turtle);
 }

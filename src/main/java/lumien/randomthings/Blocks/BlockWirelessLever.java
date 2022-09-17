@@ -17,14 +17,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockWirelessLever extends BlockLever implements ITileEntityProvider {
-    public BlockWirelessLever() {
+    public BlockWirelessLever() { // TODO this block is missing in game ??
         this.setCreativeTab(RandomThings.creativeTab);
         this.setBlockName("wirelessLever");
         this.isBlockContainer = true;
-
         this.setHardness(0.5f);
         this.setStepSound(soundTypeWood);
-
         this.setBlockTextureName("RandomThings:wirelessLever");
         GameRegistry.registerBlock(this, ItemBlockWirelessLever.class, "wirelessLever");
     }
