@@ -16,7 +16,7 @@ import org.objectweb.asm.tree.*;
 
 public class RTClassTransformer implements IClassTransformer {
 
-    private static final Logger coreLogger = LogManager.getLogger("RandomThingsCore");
+    public static final Logger coreLogger = LogManager.getLogger("RandomThingsCore");
 
     @Override
     public byte[] transform(String obfName, String transformedName, byte[] basicClass) {
@@ -42,9 +42,7 @@ public class RTClassTransformer implements IClassTransformer {
             ClassNode classNode = new ClassNode();
             ClassReader classReader = new ClassReader(basicClass);
             classReader.accept(classNode, 0);
-
-            coreLogger.log(Level.INFO, "Found Render Global Class: " + classNode.name);
-
+            coreLogger.log(Level.INFO, "Transforming : " + classNode.name);
             MethodNode renderSky = null;
 
             for (MethodNode mn : classNode.methods) {
@@ -94,7 +92,6 @@ public class RTClassTransformer implements IClassTransformer {
 
             ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
             classNode.accept(writer);
-
             return writer.toByteArray();
         } catch (Exception e) {
             e.printStackTrace();
@@ -107,9 +104,7 @@ public class RTClassTransformer implements IClassTransformer {
             ClassNode classNode = new ClassNode();
             ClassReader classReader = new ClassReader(basicClass);
             classReader.accept(classNode, 0);
-
-            coreLogger.log(Level.INFO, "Found Item Class: " + classNode.name);
-
+            coreLogger.log(Level.INFO, "Transforming : " + classNode.name);
             MethodNode getColorFromItemStack = null;
 
             for (MethodNode mn : classNode.methods) {
@@ -144,7 +139,6 @@ public class RTClassTransformer implements IClassTransformer {
 
             ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
             classNode.accept(writer);
-
             return writer.toByteArray();
         } catch (Exception e) {
             e.printStackTrace();
@@ -157,7 +151,7 @@ public class RTClassTransformer implements IClassTransformer {
             ClassNode classNode = new ClassNode();
             ClassReader classReader = new ClassReader(basicClass);
             classReader.accept(classNode, 0);
-            coreLogger.log(Level.INFO, "Found World Class: " + classNode.name);
+            coreLogger.log(Level.INFO, "Transforming : " + classNode.name);
 
             int removeIndex = 0;
 
@@ -214,7 +208,6 @@ public class RTClassTransformer implements IClassTransformer {
 
             ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
             classNode.accept(writer);
-
             return writer.toByteArray();
         } catch (Exception e) {
             e.printStackTrace();
@@ -227,7 +220,7 @@ public class RTClassTransformer implements IClassTransformer {
             ClassNode classNode = new ClassNode();
             ClassReader classReader = new ClassReader(basicClass);
             classReader.accept(classNode, 0);
-            coreLogger.log(Level.INFO, "Found EntityRenderer Class: " + classNode.name);
+            coreLogger.log(Level.INFO, "Transforming : " + classNode.name);
 
             int removeIndex = 0;
 
@@ -298,7 +291,6 @@ public class RTClassTransformer implements IClassTransformer {
 
             ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
             classNode.accept(writer);
-
             return writer.toByteArray();
         } catch (Exception e) {
             e.printStackTrace();
@@ -311,7 +303,7 @@ public class RTClassTransformer implements IClassTransformer {
             ClassNode classNode = new ClassNode();
             ClassReader classReader = new ClassReader(basicClass);
             classReader.accept(classNode, 0);
-            coreLogger.log(Level.INFO, "Found Leave Class: " + classNode.name);
+            coreLogger.log(Level.INFO, "Transforming : " + classNode.name);
 
             ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
             classNode.accept(writer);

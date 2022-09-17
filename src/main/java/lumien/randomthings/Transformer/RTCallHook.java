@@ -8,12 +8,11 @@ import lumien.randomthings.Configuration.VanillaChanges;
 import net.minecraftforge.common.config.Configuration;
 
 public class RTCallHook implements IFMLCallHook {
-    public static Configuration config;
 
     @Override
-    public Void call() throws Exception {
-        File f = new File("config/RandomThings.cfg");
-        config = new Configuration(f);
+    public Void call() {
+        final File file = new File("config/RandomThings.cfg");
+        final Configuration config = new Configuration(file);
         config.load();
         VanillaChanges.FASTER_LEAVEDECAY = config.get(
                         "VanillaChanges",
@@ -28,6 +27,7 @@ public class RTCallHook implements IFMLCallHook {
                         "The minimum light will be removed so if there's no light source it's actually going to be completely black")
                 .getBoolean(false);
         ConfigBlocks.wirelessLever = config.get("Blocks", "WirelessLever", true).getBoolean(true);
+        RTClassTransformer.coreLogger.info("Loaded early config from RTCallHook");
 
         if (config.hasChanged()) config.save();
 
