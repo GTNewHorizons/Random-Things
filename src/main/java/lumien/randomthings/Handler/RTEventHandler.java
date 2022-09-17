@@ -40,7 +40,7 @@ import lumien.randomthings.Library.DimensionCoordinate;
 import lumien.randomthings.Library.PotionEffects;
 import lumien.randomthings.Potions.ModPotions;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Transformer.MCPNames;
+import lumien.randomthings.Transformer.RTLoadingPlugin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
@@ -93,7 +93,8 @@ public class RTEventHandler {
 
     public RTEventHandler() {
         try {
-            experienceValue = EntityLiving.class.getDeclaredField(MCPNames.field("field_70728_aV"));
+            experienceValue =
+                    EntityLiving.class.getDeclaredField(RTLoadingPlugin.isObf ? "field_70728_aV" : "experienceValue");
             experienceValue.setAccessible(true);
         } catch (Exception e) {
             e.printStackTrace();

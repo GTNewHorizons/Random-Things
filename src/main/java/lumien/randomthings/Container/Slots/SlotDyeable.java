@@ -2,7 +2,7 @@ package lumien.randomthings.Container.Slots;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import lumien.randomthings.Transformer.MCPNames;
+import lumien.randomthings.Transformer.RTLoadingPlugin;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
@@ -27,7 +27,11 @@ public class SlotDyeable extends Slot {
             return true;
         }
         try {
-            item.getClass().getDeclaredMethod(MCPNames.method("func_82790_a"), ItemStack.class, int.class);
+            item.getClass()
+                    .getDeclaredMethod(
+                            RTLoadingPlugin.isObf ? "func_82790_a" : "getColorFromItemStack",
+                            ItemStack.class,
+                            int.class);
             return false;
         } catch (NoSuchMethodException e) {
             return true;

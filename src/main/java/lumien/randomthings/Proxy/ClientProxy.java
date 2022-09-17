@@ -9,20 +9,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import lumien.randomthings.Client.ClientTickHandler;
-import lumien.randomthings.Client.Renderer.RenderBloodmoonCircle;
-import lumien.randomthings.Client.Renderer.RenderHealingOrb;
-import lumien.randomthings.Client.Renderer.RenderItemCollector;
-import lumien.randomthings.Client.Renderer.RenderRTItem;
-import lumien.randomthings.Client.Renderer.RenderReviveCircle;
-import lumien.randomthings.Client.Renderer.RenderSoul;
-import lumien.randomthings.Client.Renderer.RenderSpirit;
-import lumien.randomthings.Client.Renderer.RenderWirelessLever;
+import lumien.randomthings.Client.Renderer.*;
 import lumien.randomthings.Configuration.VanillaChanges;
-import lumien.randomthings.Entity.EntityBloodmoonCircle;
-import lumien.randomthings.Entity.EntityHealingOrb;
-import lumien.randomthings.Entity.EntityReviveCircle;
-import lumien.randomthings.Entity.EntitySoul;
-import lumien.randomthings.Entity.EntitySpirit;
+import lumien.randomthings.Entity.*;
 import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
 import lumien.randomthings.Items.ItemGinto;
 import lumien.randomthings.Items.ModItems;
@@ -32,7 +21,7 @@ import lumien.randomthings.Library.RenderIds;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import lumien.randomthings.TileEntities.TileEntityItemCollector;
-import lumien.randomthings.Transformer.MCPNames;
+import lumien.randomthings.Transformer.RTLoadingPlugin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiPlayerInfo;
 import net.minecraft.client.gui.GuiVideoSettings;
@@ -143,8 +132,8 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void postInit() {
         if (VanillaChanges.LOCKED_GAMMA) {
-            GameSettings.Options[] videoOptions =
-                    ReflectionHelper.getPrivateValue(GuiVideoSettings.class, null, MCPNames.field("field_146502_i"));
+            GameSettings.Options[] videoOptions = ReflectionHelper.getPrivateValue(
+                    GuiVideoSettings.class, null, RTLoadingPlugin.isObf ? "field_146502_i" : "videoOptions");
             ArrayList<GameSettings.Options> options = new ArrayList<GameSettings.Options>(Arrays.asList(videoOptions));
 
             Iterator<GameSettings.Options> iterator = options.iterator();
@@ -158,7 +147,8 @@ public class ClientProxy extends CommonProxy {
             RandomThings.instance.logger.log(Level.INFO, "Removing Gamma from settings... (GammaLock is on)");
             try {
                 OverrideUtils.setFinalStatic(
-                        GuiVideoSettings.class.getDeclaredField(MCPNames.field("field_146502_i")),
+                        GuiVideoSettings.class.getDeclaredField(
+                                RTLoadingPlugin.isObf ? "field_146502_i" : "videoOptions"),
                         options.toArray(videoOptions));
             } catch (NoSuchFieldException e) {
                 e.printStackTrace();

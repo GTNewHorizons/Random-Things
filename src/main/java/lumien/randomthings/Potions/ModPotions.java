@@ -5,7 +5,7 @@ import lumien.randomthings.Configuration.RTConfiguration;
 import lumien.randomthings.Library.OverrideUtils;
 import lumien.randomthings.Library.PotionIds;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Transformer.MCPNames;
+import lumien.randomthings.Transformer.RTLoadingPlugin;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Property;
@@ -81,7 +81,7 @@ public class ModPotions {
     public static void resizePotionArray(int newSize) {
         try {
             OverrideUtils.setFinalStatic(
-                    Potion.class.getDeclaredField(MCPNames.field("field_76425_a")),
+                    Potion.class.getDeclaredField(RTLoadingPlugin.isObf ? "field_76425_a" : "potionTypes"),
                     Arrays.copyOf(Potion.potionTypes, newSize));
         } catch (Exception e) {
             RandomThings.instance.logger.log(

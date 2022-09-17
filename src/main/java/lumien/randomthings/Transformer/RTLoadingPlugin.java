@@ -5,7 +5,8 @@ import java.util.Map;
 
 @IFMLLoadingPlugin.SortingIndex(1001)
 public class RTLoadingPlugin implements IFMLLoadingPlugin {
-    public static boolean IN_MCP = false;
+
+    public static boolean isObf;
 
     @Override
     public String[] getASMTransformerClass() {
@@ -26,7 +27,7 @@ public class RTLoadingPlugin implements IFMLLoadingPlugin {
 
     @Override
     public void injectData(Map<String, Object> data) {
-        IN_MCP = !(Boolean) data.get("runtimeDeobfuscationEnabled");
+        isObf = (Boolean) data.get("runtimeDeobfuscationEnabled");
     }
 
     @Override
