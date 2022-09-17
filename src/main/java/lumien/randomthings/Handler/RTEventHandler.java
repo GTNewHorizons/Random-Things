@@ -329,6 +329,7 @@ public class RTEventHandler {
             if (!event.entityPlayer.worldObj.isRemote) {
                 InventoryPlayer playerInventory = event.entityPlayer.inventory;
                 if (playerInventory != null) {
+                    // TODO code a better way to know if the player has an item drop filter than looping on whole inventory
                     for (int slot = 0; slot < playerInventory.getSizeInventory(); slot++) {
                         ItemStack is = playerInventory.getStackInSlot(slot);
                         if (is != null && is.getItem() instanceof ItemDropFilter) {

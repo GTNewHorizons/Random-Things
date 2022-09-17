@@ -35,8 +35,5 @@ public class RTCallHook implements IFMLCallHook {
     }
 
     @Override
-    public void injectData(Map<String, Object> data) {
-        // TODO Auto-generated method stub
-
-    }
+    public void injectData(Map<String, Object> data) {}
 }

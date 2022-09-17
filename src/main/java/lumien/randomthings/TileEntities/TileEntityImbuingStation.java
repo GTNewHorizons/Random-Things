@@ -134,20 +134,13 @@ public class TileEntityImbuingStation extends TileEntity implements IInventory {
     }
 
     @Override
-    public void openInventory() {
-        // TODO Auto-generated method stub
-
-    }
+    public void openInventory() {}
 
     @Override
-    public void closeInventory() {
-        // TODO Auto-generated method stub
-
-    }
+    public void closeInventory() {}
 
     @Override
     public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
-        // TODO Auto-generated method stub
         return false;
     }
 }

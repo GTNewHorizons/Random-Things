@@ -30,9 +30,6 @@ public interface ITurtleAccess {
      */
     public ChunkCoordinates getPosition();
 
-    /**
-     * TODO: Document me
-     */
     public boolean teleportTo(World world, int x, int y, int z);
 
     /**
@@ -43,9 +40,6 @@ public interface ITurtleAccess {
      */
     public Vec3 getVisualPosition(float f);
 
-    /**
-     * TODO: Document me
-     */
     public float getVisualYaw(float f);
 
     /**
@@ -54,44 +48,20 @@ public interface ITurtleAccess {
      */
     public int getDirection();
 
-    /**
-     * TODO: Document me
-     */
     public void setDirection(int dir);
 
-    /**
-     * TODO: Document me
-     */
     public int getSelectedSlot();
 
-    /**
-     * TODO: Document me
-     */
     public void setSelectedSlot(int slot);
 
-    /**
-     * TODO: Document me
-     */
     public IInventory getInventory();
 
-    /**
-     * TODO: Document me
-     */
     public boolean isFuelNeeded();
 
-    /**
-     * TODO: Document me
-     */
     public int getFuelLevel();
 
-    /**
-     * TODO: Document me
-     */
     public void setFuelLevel(int fuel);
 
-    /**
-     * TODO: Document me
-     */
     public int getFuelLimit();
 
     /**
@@ -101,9 +71,6 @@ public interface ITurtleAccess {
      */
     public boolean consumeFuel(int fuel);
 
-    /**
-     * TODO: Document me
-     */
     public void addFuel(int fuel);
 
     /**
@@ -119,9 +86,6 @@ public interface ITurtleAccess {
      */
     public Object[] executeCommand(ILuaContext context, ITurtleCommand command) throws Exception;
 
-    /**
-     * TODO: Document me
-     */
     public void playAnimation(TurtleAnimation animation);
 
     /**
@@ -130,9 +94,6 @@ public interface ITurtleAccess {
      */
     public ITurtleUpgrade getUpgrade(TurtleSide side);
 
-    /**
-     * TODO: Document me
-     */
     public void setUpgrade(TurtleSide side, ITurtleUpgrade upgrade);
 
     /**
@@ -141,13 +102,7 @@ public interface ITurtleAccess {
      */
     public IPeripheral getPeripheral(TurtleSide side);
 
-    /**
-     * TODO: Document me
-     */
     public NBTTagCompound getUpgradeNBTData(TurtleSide side);
 
-    /**
-     * TODO: Document me
-     */
     public void updateUpgradeNBTData(TurtleSide side);
 }

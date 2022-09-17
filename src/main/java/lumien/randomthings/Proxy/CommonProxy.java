@@ -48,8 +48,5 @@ public class CommonProxy {
         return players;
     }
 
-    public void postInit() {
-        // TODO Auto-generated method stub
-
-    }
+    public void postInit() {}
 }
