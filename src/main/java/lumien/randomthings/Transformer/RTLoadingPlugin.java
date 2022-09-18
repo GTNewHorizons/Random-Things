@@ -6,13 +6,13 @@ import java.util.Map;
 @IFMLLoadingPlugin.SortingIndex(1001)
 public class RTLoadingPlugin implements IFMLLoadingPlugin {
 
-    public static boolean isObf;
+    // TODO delete class
+
+    public static boolean isObf; // TODO move all uses of this to mixins
 
     @Override
     public String[] getASMTransformerClass() {
-        // This will return the name of the class
-        // "mod.culegooner.EDClassTransformer"
-        return new String[] {RTClassTransformer.class.getName()};
+        return null;
     }
 
     @Override
@@ -22,7 +22,7 @@ public class RTLoadingPlugin implements IFMLLoadingPlugin {
 
     @Override
     public String getSetupClass() {
-        return RTCallHook.class.getName();
+        return null;
     }
 
     @Override

@@ -4,7 +4,7 @@ import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
 
-public class LightmapHandler {
+public class LightmapHandler { // TODO rename hook and move to a hook class
     static final float sinMax = (float) (Math.PI / 12000d);
 
     public static int manipulateRed(int originalValue) {
@@ -20,11 +20,9 @@ public class LightmapHandler {
             if (VanillaChanges.HARDCORE_DARKNESS) {
                 originalValue -= 14;
             }
-
             if (Settings.BLOODMOON_VISUAL_REDLIGHT && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive()) {
                 originalValue -= ClientBloodmoonHandler.INSTANCE.lightSub;
             }
-
             return Math.max(originalValue, 0);
         } else {
             return originalValue;
@@ -36,11 +34,9 @@ public class LightmapHandler {
             if (VanillaChanges.HARDCORE_DARKNESS) {
                 originalValue -= 14;
             }
-
             if (Settings.BLOODMOON_VISUAL_REDLIGHT && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive()) {
                 originalValue -= ClientBloodmoonHandler.INSTANCE.lightSub * 1.9f;
             }
-
             return Math.max(originalValue, 0);
         } else {
             return originalValue;

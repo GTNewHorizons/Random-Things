@@ -17,7 +17,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockWirelessLever extends BlockLever implements ITileEntityProvider {
-    public BlockWirelessLever() { // TODO this block is missing in game ??
+    public BlockWirelessLever() {
         this.setCreativeTab(RandomThings.creativeTab);
         this.setBlockName("wirelessLever");
         this.isBlockContainer = true;

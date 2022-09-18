@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.7.11",
+  "package": "lumien.randomthings.Mixins.Minecraft",
+  "plugin": "lumien.randomthings.Mixins.RTMixinPlugin",
+  "refmap": "mixins.RandomThings.refmap.json",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [],
+  "client": [],
+  "server": []
+}

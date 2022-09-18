@@ -11,8 +11,12 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+@SuppressWarnings("unused")
 public class CoreHandler {
-    static Random rng = new Random();
+
+    // TODO injecter directement dans les mixins et/ou garder hook et renomer la classe
+
+    private static final Random rng = new Random();
 
     public static void handleLeaveDecay(World worldObj, int posX, int posY, int posZ, Block block) {
         if (VanillaChanges.FASTER_LEAVEDECAY) {
@@ -22,7 +26,6 @@ public class CoreHandler {
                     posZ,
                     block,
                     Settings.DECAY_SPEED + (Settings.DECAY_FUZZ > 0 ? rng.nextInt(Settings.DECAY_FUZZ) : 0));
-            return;
         }
     }
 
@@ -37,7 +40,6 @@ public class CoreHandler {
     @SideOnly(Side.CLIENT)
     public static int getColorFromItemStack(ItemStack is, int renderPass) {
         if (is.stackTagCompound != null) {
-            long time = System.currentTimeMillis();
             if (is.stackTagCompound.hasKey("customRTColor")) {
                 return is.stackTagCompound.getInteger("customRTColor");
             }
