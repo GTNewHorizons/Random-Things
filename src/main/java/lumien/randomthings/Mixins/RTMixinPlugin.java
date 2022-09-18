@@ -28,12 +28,6 @@ public class RTMixinPlugin implements IMixinConfigPlugin {
                         true,
                         "Leaves will decay much faster when no longer connected to a log")
                 .getBoolean(true);
-        VanillaChanges.HARDCORE_DARKNESS = config.get(
-                        "VanillaChanges",
-                        "Hardcore Darkness",
-                        false,
-                        "The minimum light will be removed so if there's no light source it's actually going to be completely black")
-                .getBoolean(false);
         ConfigBlocks.wirelessLever = config.get("Blocks", "WirelessLever", true).getBoolean(true);
         LOG.info("Loaded early config");
         if (config.hasChanged()) config.save();

@@ -1,26 +1,13 @@
 package lumien.randomthings.Handler;
 
 import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
 
-public class LightmapHandler { // TODO rename hook and move to a hook class
-    static final float sinMax = (float) (Math.PI / 12000d);
-
-    public static int manipulateRed(int originalValue) {
-        if (VanillaChanges.HARDCORE_DARKNESS) {
-            return Math.max(originalValue - 14, 0);
-        } else {
-            return originalValue;
-        }
-    }
+public class LightmapHandler {
 
     public static int manipulateGreen(int originalValue) {
-        if (ClientBloodmoonHandler.INSTANCE.isBloodmoonActive() || VanillaChanges.HARDCORE_DARKNESS) {
-            if (VanillaChanges.HARDCORE_DARKNESS) {
-                originalValue -= 14;
-            }
-            if (Settings.BLOODMOON_VISUAL_REDLIGHT && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive()) {
+        if (ClientBloodmoonHandler.INSTANCE.isBloodmoonActive()) {
+            if (Settings.BLOODMOON_VISUAL_REDLIGHT) {
                 originalValue -= ClientBloodmoonHandler.INSTANCE.lightSub;
             }
             return Math.max(originalValue, 0);
@@ -30,11 +17,8 @@ public class LightmapHandler { // TODO rename hook and move to a hook class
     }
 
     public static int manipulateBlue(int originalValue) {
-        if (ClientBloodmoonHandler.INSTANCE.isBloodmoonActive() || VanillaChanges.HARDCORE_DARKNESS) {
-            if (VanillaChanges.HARDCORE_DARKNESS) {
-                originalValue -= 14;
-            }
-            if (Settings.BLOODMOON_VISUAL_REDLIGHT && ClientBloodmoonHandler.INSTANCE.isBloodmoonActive()) {
+        if (ClientBloodmoonHandler.INSTANCE.isBloodmoonActive()) {
+            if (Settings.BLOODMOON_VISUAL_REDLIGHT) {
                 originalValue -= ClientBloodmoonHandler.INSTANCE.lightSub * 1.9f;
             }
             return Math.max(originalValue, 0);

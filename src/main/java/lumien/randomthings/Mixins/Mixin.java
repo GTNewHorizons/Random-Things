@@ -18,11 +18,7 @@ public enum Mixin {
     ENTITY_RENDERER("MixinEntityRenderer", Side.CLIENT, () -> true),
     ITEM("MixinItem", Side.CLIENT, () -> true),
     RENDER_GLOBAL("MixinRenderGlobal", Side.CLIENT, () -> true),
-    WORLD("MixinWorld", Side.BOTH, () -> ConfigBlocks.wirelessLever),
-    WORLD_CLIENT(
-            "MixinWorld_Client",
-            Side.CLIENT,
-            () -> VanillaChanges.HARDCORE_DARKNESS); // OK  // TODO delete hardcore drakness, the other mod is better
+    WORLD("MixinWorld", Side.BOTH, () -> ConfigBlocks.wirelessLever);
 
     public final String mixinClass;
     private final Side side;

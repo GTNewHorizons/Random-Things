@@ -8,11 +8,6 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(EntityRenderer.class)
 public class MixinEntityRenderer {
-    @ModifyVariable(method = "updateLightmap", at = @At(value = "STORE"), index = 19, name = "j", ordinal = 1)
-    private int rtManipulateRed(int val) {
-        return LightmapHandler.manipulateRed(val);
-    }
-
     @ModifyVariable(method = "updateLightmap", at = @At(value = "STORE"), index = 20, name = "k", ordinal = 2)
     private int rtManipulateGreen(int val) {
         return LightmapHandler.manipulateGreen(val);
