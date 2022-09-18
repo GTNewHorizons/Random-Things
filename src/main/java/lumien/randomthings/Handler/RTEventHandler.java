@@ -1,12 +1,6 @@
 package lumien.randomthings.Handler;
 
-import static org.lwjgl.opengl.GL11.GL_BLEND;
-import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.glAlphaFunc;
-import static org.lwjgl.opengl.GL11.glBlendFunc;
-import static org.lwjgl.opengl.GL11.glColor4f;
-import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.*;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
@@ -16,7 +10,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.lang.reflect.Field;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Configuration.ConfigItems;
@@ -29,18 +22,12 @@ import lumien.randomthings.Entity.EntitySpirit;
 import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
 import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Handler.Spectre.SpectreHandler;
-import lumien.randomthings.Items.ItemBloodstone;
-import lumien.randomthings.Items.ItemCreativeSword;
-import lumien.randomthings.Items.ItemDropFilter;
-import lumien.randomthings.Items.ItemFilter;
-import lumien.randomthings.Items.ItemSpectreArmor;
-import lumien.randomthings.Items.ItemWhiteStone;
-import lumien.randomthings.Items.ModItems;
+import lumien.randomthings.Items.*;
 import lumien.randomthings.Library.DimensionCoordinate;
 import lumien.randomthings.Library.PotionEffects;
+import lumien.randomthings.Mixins.Minecraft.EntityLivingAccessor;
 import lumien.randomthings.Potions.ModPotions;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Transformer.RTLoadingPlugin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
@@ -75,34 +62,14 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.entity.player.PlayerDropsEvent;
+import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
-import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
-import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
 
+@SuppressWarnings("unused")
 public class RTEventHandler {
-    Field experienceValue;
-    static final float sinMax = (float) (Math.PI / 12000d);
-
-    public RTEventHandler() {
-        try {
-            experienceValue =
-                    EntityLiving.class.getDeclaredField(RTLoadingPlugin.isObf ? "field_70728_aV" : "experienceValue");
-            experienceValue.setAccessible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            RandomThings.instance.logger.log(
-                    Level.ERROR, "Couldn't find experienceValue in EntityLiving, experience imbue will not work :(");
-            experienceValue = null;
-        }
-    }
 
     @SubscribeEvent
     public void breakBlock(BreakEvent event) {
@@ -583,20 +550,14 @@ public class RTEventHandler {
             }
 
             if (ConfigItems.imbue
-                    && experienceValue != null
                     && event.entityLiving instanceof EntityLiving
                     && event.source.getEntity() != null
                     && event.source.getEntity() instanceof EntityLivingBase) {
                 EntityLivingBase livingAttacker = (EntityLivingBase) event.source.getEntity();
                 EntityLiving attacked = (EntityLiving) event.entityLiving;
                 if (livingAttacker.isPotionActive(ModPotions.imbueExperience)) {
-                    try {
-                        experienceValue.set(attacked, (Float) experienceValue.get(attacked) * 1.5F);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        RandomThings.instance.logger.log(
-                                Level.WARN, "Couldn't reflect on experienceValue, imbue won't work");
-                    }
+                    final int buffedExp = (int) (((EntityLivingAccessor) attacked).getExperienceValue() * 1.5f);
+                    ((EntityLivingAccessor) attacked).setExperienceValue(buffedExp);
                 }
             }
         }

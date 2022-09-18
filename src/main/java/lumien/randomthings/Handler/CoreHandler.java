@@ -14,8 +14,6 @@ import net.minecraft.world.World;
 @SuppressWarnings("unused")
 public class CoreHandler {
 
-    // TODO injecter directement dans les mixins et/ou garder hook et renomer la classe
-
     private static final Random rng = new Random();
 
     public static void handleLeaveDecay(World worldObj, int posX, int posY, int posZ, Block block) {

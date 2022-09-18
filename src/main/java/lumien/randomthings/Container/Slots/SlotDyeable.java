@@ -2,10 +2,8 @@ package lumien.randomthings.Container.Slots;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import lumien.randomthings.Transformer.RTLoadingPlugin;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
@@ -21,20 +19,6 @@ public class SlotDyeable extends Slot {
         if (par1ItemStack.getItem() instanceof ItemBlock) {
             return false;
         }
-
-        Item item = par1ItemStack.getItem();
-        if (item.getClass() == Item.class) {
-            return true;
-        }
-        try {
-            item.getClass()
-                    .getDeclaredMethod(
-                            RTLoadingPlugin.isObf ? "func_82790_a" : "getColorFromItemStack",
-                            ItemStack.class,
-                            int.class);
-            return false;
-        } catch (NoSuchMethodException e) {
-            return true;
-        }
+        return par1ItemStack.getItem() != null;
     }
 }

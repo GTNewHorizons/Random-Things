@@ -3,38 +3,28 @@ package lumien.randomthings.Proxy;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.ReflectionHelper;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import lumien.randomthings.Client.ClientTickHandler;
 import lumien.randomthings.Client.Renderer.*;
-import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Entity.*;
 import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
 import lumien.randomthings.Items.ItemGinto;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.Interfaces.IContainerWithProperties;
-import lumien.randomthings.Library.OverrideUtils;
 import lumien.randomthings.Library.RenderIds;
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import lumien.randomthings.TileEntities.TileEntityItemCollector;
-import lumien.randomthings.Transformer.RTLoadingPlugin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiPlayerInfo;
-import net.minecraft.client.gui.GuiVideoSettings;
 import net.minecraft.client.model.ModelSlime;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.particle.EntityCritFX;
 import net.minecraft.client.particle.EntityReddustFX;
-import net.minecraft.client.settings.GameSettings;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
-import org.apache.logging.log4j.Level;
 
 public class ClientProxy extends CommonProxy {
     RenderItemCollector renderer;
@@ -125,40 +115,6 @@ public class ClientProxy extends CommonProxy {
         for (GuiPlayerInfo info : list) {
             players.add(info.name);
         }
-
         return players;
-    }
-
-    @Override
-    public void postInit() {
-        if (VanillaChanges.LOCKED_GAMMA) {
-            GameSettings.Options[] videoOptions = ReflectionHelper.getPrivateValue(
-                    GuiVideoSettings.class, null, RTLoadingPlugin.isObf ? "field_146502_i" : "videoOptions");
-            ArrayList<GameSettings.Options> options = new ArrayList<GameSettings.Options>(Arrays.asList(videoOptions));
-
-            Iterator<GameSettings.Options> iterator = options.iterator();
-            while (iterator.hasNext()) {
-                GameSettings.Options option = iterator.next();
-                if (option == GameSettings.Options.GAMMA) {
-                    iterator.remove();
-                }
-            }
-
-            RandomThings.instance.logger.log(Level.INFO, "Removing Gamma from settings... (GammaLock is on)");
-            try {
-                OverrideUtils.setFinalStatic(
-                        GuiVideoSettings.class.getDeclaredField(
-                                RTLoadingPlugin.isObf ? "field_146502_i" : "videoOptions"),
-                        options.toArray(videoOptions));
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (SecurityException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                // Still works
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
 }

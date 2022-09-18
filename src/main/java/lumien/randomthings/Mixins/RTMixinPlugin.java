@@ -28,6 +28,9 @@ public class RTMixinPlugin implements IMixinConfigPlugin {
                         true,
                         "Leaves will decay much faster when no longer connected to a log")
                 .getBoolean(true);
+        VanillaChanges.LOCKED_GAMMA = config.get("VanillaChanges", "LockedGamma", false, "Locks the Gamma to 0")
+                .setRequiresMcRestart(true)
+                .getBoolean(false);
         ConfigBlocks.wirelessLever = config.get("Blocks", "WirelessLever", true).getBoolean(true);
         LOG.info("Loaded early config");
         if (config.hasChanged()) config.save();

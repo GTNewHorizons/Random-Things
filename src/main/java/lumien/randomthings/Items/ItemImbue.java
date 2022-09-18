@@ -34,17 +34,6 @@ public class ItemImbue extends ItemBase {
         return EnumAction.drink;
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-        super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
-
-        if (par1ItemStack.getItemDamage() == 1) {
-            par3List.add("I will work with ANY entity as");
-            par3List.add("soon as there are Forge Hooks for me");
-        }
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     public int getColorFromItemStack(ItemStack is, int pass) {

@@ -2,10 +2,9 @@ package lumien.randomthings.Potions;
 
 import java.util.Arrays;
 import lumien.randomthings.Configuration.RTConfiguration;
-import lumien.randomthings.Library.OverrideUtils;
 import lumien.randomthings.Library.PotionIds;
+import lumien.randomthings.Mixins.Minecraft.PotionAccessor;
 import lumien.randomthings.RandomThings;
-import lumien.randomthings.Transformer.RTLoadingPlugin;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Property;
@@ -79,15 +78,7 @@ public class ModPotions {
     }
 
     public static void resizePotionArray(int newSize) {
-        try {
-            OverrideUtils.setFinalStatic(
-                    Potion.class.getDeclaredField(RTLoadingPlugin.isObf ? "field_76425_a" : "potionTypes"),
-                    Arrays.copyOf(Potion.potionTypes, newSize));
-        } catch (Exception e) {
-            RandomThings.instance.logger.log(
-                    Level.WARN, "Couldn't extend Potion ID Array for more IDs, potions might not work as expected.");
-            e.printStackTrace();
-        }
+        PotionAccessor.setPotionTypes(Arrays.copyOf(Potion.potionTypes, newSize));
     }
 
     public static int getFreePotionID() {
@@ -96,10 +87,8 @@ public class ModPotions {
                 return i;
             }
         }
-
         int oldLength = Potion.potionTypes.length;
-        resizePotionArray(Potion.potionTypes.length + 20);
-
+        resizePotionArray(Potion.potionTypes.length + 1);
         return oldLength;
     }
 }
