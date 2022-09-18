@@ -44,11 +44,6 @@ public class GuiOpSpectreKey extends GuiContainer implements IPlayerListGUI {
                 this, this.mc, 100, 110, guiX + xSize / 2 - 100 / 2, guiY - 10 + ySize / 2 - 100 / 2 + 10, players);
     }
 
-    @Override
-    public void updateScreen() {
-        super.updateScreen();
-    }
-
     public int getGuiLeft() {
         return guiLeft;
     }

@@ -70,7 +70,7 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
         Item i = GameData.getItemRegistry().getObject(iconString);
         Block b = GameData.getBlockRegistry().getObject(iconString);
 
-        ItemStack is = null;
+        ItemStack is;
 
         if (i != null) {
             is = new ItemStack(i, 1, metadata);
@@ -97,57 +97,56 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
     @Optional.Method(modid = "ComputerCraft")
     public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments)
             throws Exception {
-        switch (method) {
-            case 0:
-                if (arguments.length < 5) {
-                    throw new Exception(
-                            "Usage: sendNotification(Receiver,Title,Description,DisplayDuration,IconString,(optional) metadata)");
-                } else {
-                    String receiver = arguments[0] + "";
-                    String title = arguments[1] + "";
-                    String description = arguments[2] + "";
-                    int duration = (int) Math.floor(Double.parseDouble(arguments[3] + ""));
+        if (method == 0) {
+            if (arguments.length < 5) {
+                throw new Exception(
+                        "Usage: sendNotification(Receiver,Title,Description,DisplayDuration,IconString,(optional) metadata)");
+            } else {
+                String receiver = arguments[0] + "";
+                String title = arguments[1] + "";
+                String description = arguments[2] + "";
+                int duration = (int) Math.floor(Double.parseDouble(arguments[3] + ""));
 
-                    String iconString = arguments[4] + "";
+                String iconString = arguments[4] + "";
 
-                    int metadata = 0;
-                    if (arguments.length > 5) {
-                        metadata = (int) Double.parseDouble(arguments[5] + "");
-                    }
-
-                    if (duration <= 0) {
-                        throw new Exception("Duration has to be > 0");
-                    }
-
-                    if (!WorldUtils.isPlayerOnline(receiver)) {
-                        throw new Exception("Selected Receiver is not Online");
-                    } else {
-                        Item i = GameData.getItemRegistry().getObject(iconString);
-                        Block b = GameData.getBlockRegistry().getObject(iconString);
-
-                        ItemStack is = null;
-
-                        if (i != null) {
-                            is = new ItemStack(i, 1, metadata);
-                        } else if (b != null) {
-                            is = new ItemStack(b, 1, metadata);
-                        } else {
-                            throw new Exception("Invalid IconString");
-                        }
-
-                        EntityPlayerMP receiverEntity = MinecraftServer.getServer()
-                                .getConfigurationManager()
-                                .func_152612_a(receiver);
-                        if (receiverEntity == null) {
-                            throw new Exception("Player entity not found");
-                        }
-
-                        MessageNotification packet = new MessageNotification(title, description, duration, is);
-
-                        PacketHandler.INSTANCE.sendTo(packet, receiverEntity);
-                        return null;
-                    }
+                int metadata = 0;
+                if (arguments.length > 5) {
+                    metadata = (int) Double.parseDouble(arguments[5] + "");
                 }
+
+                if (duration <= 0) {
+                    throw new Exception("Duration has to be > 0");
+                }
+
+                if (!WorldUtils.isPlayerOnline(receiver)) {
+                    throw new Exception("Selected Receiver is not Online");
+                } else {
+                    Item i = GameData.getItemRegistry().getObject(iconString);
+                    Block b = GameData.getBlockRegistry().getObject(iconString);
+
+                    ItemStack is = null;
+
+                    if (i != null) {
+                        is = new ItemStack(i, 1, metadata);
+                    } else if (b != null) {
+                        is = new ItemStack(b, 1, metadata);
+                    } else {
+                        throw new Exception("Invalid IconString");
+                    }
+
+                    EntityPlayerMP receiverEntity = MinecraftServer.getServer()
+                            .getConfigurationManager()
+                            .func_152612_a(receiver);
+                    if (receiverEntity == null) {
+                        throw new Exception("Player entity not found");
+                    }
+
+                    MessageNotification packet = new MessageNotification(title, description, duration, is);
+
+                    PacketHandler.INSTANCE.sendTo(packet, receiverEntity);
+                    return null;
+                }
+            }
         }
         throw new Exception("Usage: sendNotification(Receiver,Title,Description,IconString)");
     }

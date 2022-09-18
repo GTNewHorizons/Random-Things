@@ -34,7 +34,7 @@ public class MessageItemFilter implements IRTMessage {
 
     @Override
     public void onMessage(MessageContext ctx) {
-        String toToggle = "";
+        String toToggle;
         ItemStack filter = ctx.getServerHandler().playerEntity.getCurrentEquippedItem();
         if (filter != null && filter.getItem() instanceof ItemFilter) {
             switch (action) {
@@ -45,10 +45,6 @@ public class MessageItemFilter implements IRTMessage {
                 case LISTTYPE:
                     int oldType = filter.stackTagCompound.getInteger("listType");
                     filter.stackTagCompound.setInteger("listType", oldType == 0 ? 1 : 0);
-                    break;
-                case METADATA:
-                    break;
-                case NBT:
                     break;
                 default:
                     break;

@@ -30,11 +30,6 @@ public class GuiImbuingStation extends GuiContainer {
     }
 
     @Override
-    public void initGui() {
-        super.initGui();
-    }
-
-    @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
         this.mc.renderEngine.bindTexture(background);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

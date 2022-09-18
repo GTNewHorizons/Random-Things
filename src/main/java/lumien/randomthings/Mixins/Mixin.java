@@ -11,7 +11,6 @@ import lumien.randomthings.Configuration.VanillaChanges;
  * Exception: Reference.java, as long as it is used for Strings only!
  */
 public enum Mixin {
-
     ENTITYLIVING_ACCESSOR("EntityLivingAccessor", Side.BOTH, () -> true),
     POTION_ACCESSOR("PotionAccessor", Side.BOTH, () -> true),
     BLOCK_LEAVES_BASE("MixinBlockLeavesBase", Side.BOTH, () -> VanillaChanges.FASTER_LEAVEDECAY),

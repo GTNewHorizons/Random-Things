@@ -10,7 +10,7 @@ import net.minecraft.item.ItemDye;
 import net.minecraft.util.ResourceLocation;
 
 public class BackgroundHandler {
-    static Field f;
+
     static String[] validBlocks = new String[] {
         "netherrack",
         "wool_colored",
@@ -82,14 +82,19 @@ public class BackgroundHandler {
             } else {
                 String randomBlock = validBlocks[rng.nextInt(validBlocks.length)];
 
-                if (randomBlock.equals("hardened_clay")) {
-                    randomBlock = randomBlock + "_stained_"
-                            + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
-                } else if (randomBlock.equals("wool_colored")) {
-                    randomBlock =
-                            randomBlock + "_" + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
-                } else if (randomBlock.equals("log") || randomBlock.equals("planks")) {
-                    randomBlock = randomBlock + "_" + logTypes[rng.nextInt(logTypes.length)];
+                switch (randomBlock) {
+                    case "hardened_clay":
+                        randomBlock = randomBlock + "_stained_"
+                                + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
+                        break;
+                    case "wool_colored":
+                        randomBlock =
+                                randomBlock + "_" + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
+                        break;
+                    case "log":
+                    case "planks":
+                        randomBlock = randomBlock + "_" + logTypes[rng.nextInt(logTypes.length)];
+                        break;
                 }
 
                 setBackgroundBlock(randomBlock);

@@ -64,9 +64,6 @@ public class BlockSpectreGlass extends BlockBase {
 
         if (block == this) {
             return false;
-        } else if (ba.isAirBlock(x, y, z) || !block.isOpaqueCube()) {
-            return true;
-        }
-        return false;
+        } else return ba.isAirBlock(x, y, z) || !block.isOpaqueCube();
     }
 }

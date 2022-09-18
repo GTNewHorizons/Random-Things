@@ -46,8 +46,8 @@ public class ContainerEnergyDistributor extends Container implements IContainerW
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (int i = 0; i < this.crafters.size(); ++i) {
-            ICrafting icrafting = (ICrafting) this.crafters.get(i);
+        for (Object crafter : this.crafters) {
+            ICrafting icrafting = (ICrafting) crafter;
             EntityPlayerMP player = (EntityPlayerMP) icrafting;
             if (this.oldBuffer != this.te.getEnergyStored(ForgeDirection.DOWN)) {
                 PacketHandler.INSTANCE.sendTo(

@@ -124,8 +124,7 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
 
     @Override
     @Optional.Method(modid = "ComputerCraft")
-    public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments)
-            throws Exception {
+    public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments) {
         switch (method) {
             case 0:
                 if (arguments.length < 1) {

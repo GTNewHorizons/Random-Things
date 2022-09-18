@@ -25,7 +25,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 public class BloodmoonSpawner {
     /** The 17x17 area around the player where mobs can spawn */
-    private final HashMap eligibleChunksForSpawning = new HashMap();
+    private final HashMap<ChunkCoordIntPair, Boolean> eligibleChunksForSpawning = new HashMap<>();
 
     private static final String __OBFID = "CL_00000152";
 
@@ -64,9 +64,9 @@ public class BloodmoonSpawner {
                         ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(l + j, i1 + k);
 
                         if (!flag3) {
-                            this.eligibleChunksForSpawning.put(chunkcoordintpair, Boolean.valueOf(false));
+                            this.eligibleChunksForSpawning.put(chunkcoordintpair, Boolean.FALSE);
                         } else if (!this.eligibleChunksForSpawning.containsKey(chunkcoordintpair)) {
-                            this.eligibleChunksForSpawning.put(chunkcoordintpair, Boolean.valueOf(true));
+                            this.eligibleChunksForSpawning.put(chunkcoordintpair, Boolean.TRUE);
                         }
                     }
                 }

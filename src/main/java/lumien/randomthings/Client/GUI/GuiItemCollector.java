@@ -110,9 +110,4 @@ public class GuiItemCollector extends GuiContainer {
 
         fontRendererObj.drawString("Filter: ", 48, 103, 0x000000);
     }
-
-    @Override
-    public void updateScreen() {
-        super.updateScreen();
-    }
 }

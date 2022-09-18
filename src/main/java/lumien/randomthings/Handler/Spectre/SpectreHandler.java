@@ -51,7 +51,6 @@ public class SpectreHandler extends WorldSavedData {
             if (!playerConnection.containsKey(cubeOwner)) {
                 operator.addChatComponentMessage(
                         new ChatComponentText(cubeOwner + " does not have a cube in the spectre dimension"));
-                return;
             } else {
                 WorldServer spectreWorld =
                         MinecraftServer.getServer().worldServerForDimension(Settings.SPECTRE_DIMENSON_ID);
@@ -73,7 +72,7 @@ public class SpectreHandler extends WorldSavedData {
 
     public void teleportPlayerToSpectreWorld(EntityPlayerMP player) {
         String playerName = player.getCommandSenderName();
-        int coord = 0;
+        int coord;
         WorldServer spectreWorld = MinecraftServer.getServer().worldServerForDimension(Settings.SPECTRE_DIMENSON_ID);
         if (playerConnection.containsKey(playerName)) {
             coord = playerConnection.get(playerName);

@@ -52,11 +52,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public boolean canBeCollidedWith(EntitySoul soul) {
         ItemStack equipped = Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem();
-        if (equipped != null && (equipped.getItem() instanceof ItemGinto) && equipped.getItemDamage() == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return equipped != null && (equipped.getItem() instanceof ItemGinto) && equipped.getItemDamage() == 1;
     }
 
     @Override

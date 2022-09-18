@@ -82,15 +82,15 @@ public class ItemFilter extends ItemBase implements IItemWithProperties {
             ItemStack is = filterInventory.getStackInSlot(slot);
             if (is != null) {
                 if (oreDict && ItemUtils.areOreDictionaried(is, toCheck)) {
-                    return listType == 0 ? true : false;
+                    return listType == 0;
                 }
                 if (metadata ? is.isItemEqual(toCheck) : isItemEqualIgnoreMetadata(is, toCheck)) {
-                    return listType == 0 ? true : false;
+                    return listType == 0;
                 }
             }
         }
 
-        return listType == 0 ? false : true;
+        return listType != 0;
     }
 
     private static boolean isItemEqualIgnoreMetadata(ItemStack is1, ItemStack is2) {
@@ -263,8 +263,6 @@ public class ItemFilter extends ItemBase implements IItemWithProperties {
 
     public static FilterType getFilterType(int damage) {
         switch (damage) {
-            case 0:
-                return FilterType.BLOCK;
             case 1:
                 return FilterType.ITEM;
             case 2:
@@ -335,9 +333,8 @@ public class ItemFilter extends ItemBase implements IItemWithProperties {
 
     @Override
     public boolean isValidAttribute(ItemStack is, String attributeName, int attributeType) {
-        switch (is.getItemDamage()) {
-            case 1:
-                return (attributeName.equals("oreDict") || attributeName.equals("metadata")) && attributeType == 0;
+        if (is.getItemDamage() == 1) {
+            return (attributeName.equals("oreDict") || attributeName.equals("metadata")) && attributeType == 0;
         }
         return false;
     }

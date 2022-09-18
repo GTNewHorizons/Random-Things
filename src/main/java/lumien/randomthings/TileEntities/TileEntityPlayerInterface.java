@@ -96,7 +96,6 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 
     private void checkPlayerEntity() {
         if (this.playerEntity == null) {
-            return;
         } else if (this.playerEntity.isDead) {
             this.playerEntity = null;
         }

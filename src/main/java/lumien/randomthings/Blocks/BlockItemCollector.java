@@ -46,11 +46,7 @@ public class BlockItemCollector extends BlockContainerBase {
         int targetY = posY + facing.getFrontOffsetY();
         int targetZ = posZ + facing.getFrontOffsetZ();
 
-        if (worldObj.isAirBlock(targetX, targetY, targetZ)) {
-            return false;
-        } else {
-            return true;
-        }
+        return !worldObj.isAirBlock(targetX, targetY, targetZ);
     }
 
     @Override

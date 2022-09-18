@@ -104,7 +104,6 @@ public class ItemEnderLetter extends ItemBase implements IItemWithProperties {
                     new ChatComponentTranslation("text.enderLetter.invalidreceiver");
             invalidReceiverMessage.getChatStyle().setColor(EnumChatFormatting.RED);
             sender.addChatMessage(invalidReceiverMessage);
-            return;
         } else {
             IInventory inventory = ItemEnderLetter.getLetterInventory(sender);
             inventory.openInventory();

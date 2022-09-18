@@ -34,7 +34,7 @@ public class ParticleSystem {
 
     public ParticleSystem(Vector3f emissionPoint, int maxParticles, int generationSpeed) {
         particles = new Particle[maxParticles];
-        this.maxParticles = maxParticles = 1;
+        this.maxParticles = 1;
         this.generationSpeed = generationSpeed;
         this.emissionPoint = emissionPoint;
         this.lastUsedPosition = 0;

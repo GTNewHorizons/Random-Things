@@ -101,9 +101,8 @@ public class ContainerDyeingMachine extends Container {
 
     @Override
     public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
-        return this.worldObj.getBlock(this.posX, this.posY, this.posZ) != ModBlocks.dyeingMachine
-                ? false
-                : par1EntityPlayer.getDistanceSq(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D) <= 64.0D;
+        return this.worldObj.getBlock(this.posX, this.posY, this.posZ) == ModBlocks.dyeingMachine
+                && par1EntityPlayer.getDistanceSq(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D) <= 64.0D;
     }
 
     @Override
@@ -203,15 +202,13 @@ public class ContainerDyeingMachine extends Container {
                         slot.putStack(copy);
 
                         par1ItemStack.stackSize -= 1;
-                        flag1 = true;
-                        break;
                     } else {
                         slot.putStack(par1ItemStack.copy());
                         slot.onSlotChanged();
                         par1ItemStack.stackSize = 0;
-                        flag1 = true;
-                        break;
                     }
+                    flag1 = true;
+                    break;
                 }
 
                 if (par4) {

@@ -15,7 +15,6 @@ public class ClientBloodmoonHandler {
     public float lightSub;
     public float fogRemove;
     private float skyColorAdd;
-    private float moonColorRed;
 
     static float d = 1f / 15000f;
     static int difTime = 0;
@@ -30,7 +29,7 @@ public class ClientBloodmoonHandler {
                 difTime = (int) (Minecraft.getMinecraft().theWorld.getWorldTime() % 24000) - 12000;
                 lightSub = (float) (Math.sin(difTime * sinMax) * 150f);
                 skyColorAdd = (float) (Math.sin(difTime * sinMax) * 0.1f);
-                moonColorRed = (float) (Math.sin(difTime * sinMax) * 0.7f);
+                float moonColorRed = (float) (Math.sin(difTime * sinMax) * 0.7f);
 
                 fogRemove = (float) (Math.sin(difTime * sinMax) * d * 6000f);
 

@@ -138,15 +138,13 @@ public class ContainerImbuingStation extends Container {
                         slot.putStack(copy);
 
                         par1ItemStack.stackSize -= 1;
-                        flag1 = true;
-                        break;
                     } else {
                         slot.putStack(par1ItemStack.copy());
                         slot.onSlotChanged();
                         par1ItemStack.stackSize = 0;
-                        flag1 = true;
-                        break;
                     }
+                    flag1 = true;
+                    break;
                 }
 
                 if (par4) {
@@ -182,8 +180,8 @@ public class ContainerImbuingStation extends Container {
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (int i = 0; i < this.crafters.size(); ++i) {
-            ICrafting icrafting = (ICrafting) this.crafters.get(i);
+        for (Object crafter : this.crafters) {
+            ICrafting icrafting = (ICrafting) crafter;
 
             if (this.lastImbuingProgress != this.te.imbuingProgress) {
                 icrafting.sendProgressBarUpdate(this, 0, this.te.imbuingProgress);

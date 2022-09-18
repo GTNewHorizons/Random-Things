@@ -79,19 +79,15 @@ public class BlockFertilizedDirt extends BlockBase {
 
         switch (plantType) {
             case Desert:
+            case Beach:
+            case Plains:
+            case Cave:
                 return !tilled;
             case Nether:
+            case Water:
                 return false;
             case Crop:
                 return tilled;
-            case Cave:
-                return !tilled;
-            case Plains:
-                return !tilled;
-            case Water:
-                return false;
-            case Beach:
-                return !tilled;
         }
 
         return false;

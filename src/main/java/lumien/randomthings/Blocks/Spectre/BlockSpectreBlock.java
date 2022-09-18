@@ -106,9 +106,8 @@ public class BlockSpectreBlock extends BlockBase {
 
         if (block == this && ba.getBlockMetadata(x, y, z) == myMetadata) {
             return false;
-        } else if (ba.isAirBlock(x, y, z) || !block.isOpaqueCube()) {
-            return true;
+        } else {
+            return ba.isAirBlock(x, y, z) || !block.isOpaqueCube();
         }
-        return false;
     }
 }

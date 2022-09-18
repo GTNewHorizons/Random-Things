@@ -1,5 +1,6 @@
 package lumien.randomthings.Handler.Spectre;
 
+import java.util.Arrays;
 import lumien.randomthings.Configuration.Settings;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -15,9 +16,7 @@ public class WorldProviderSpectre extends WorldProvider {
 
     @Override
     protected void generateLightBrightnessTable() {
-        for (int i = 0; i < this.lightBrightnessTable.length; i++) {
-            this.lightBrightnessTable[i] = 1;
-        }
+        Arrays.fill(this.lightBrightnessTable, 1);
     }
 
     @Override

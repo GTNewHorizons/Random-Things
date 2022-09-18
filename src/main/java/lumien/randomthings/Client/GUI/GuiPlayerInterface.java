@@ -33,11 +33,6 @@ public class GuiPlayerInterface extends GuiContainer {
     }
 
     @Override
-    public void onGuiClosed() {
-        super.onGuiClosed();
-    }
-
-    @Override
     protected void mouseClicked(int par1, int par2, int par3) {
         super.mouseClicked(par1, par2, par3);
     }
@@ -60,10 +55,5 @@ public class GuiPlayerInterface extends GuiContainer {
                 (xSize / 2 - fontRendererObj.getStringWidth(connectedTo) / 2),
                 (ySize / 2 - fontRendererObj.FONT_HEIGHT / 2),
                 4210752);
-    }
-
-    @Override
-    public void updateScreen() {
-        super.updateScreen();
     }
 }

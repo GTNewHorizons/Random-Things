@@ -61,17 +61,13 @@ public class TileEntityImbuingStation extends TileEntity implements IInventory {
             return true;
         } else {
             ItemStack currentInOutput = inventory.getStackInSlot(4);
-            ItemStack requiredOutput = validOutput;
 
-            if (!InventoryUtils.areItemStackContentEqual(currentInOutput, requiredOutput)) {
+            if (!InventoryUtils.areItemStackContentEqual(currentInOutput, validOutput)) {
                 return false;
             } else {
-                if (currentInOutput.stackSize + requiredOutput.stackSize > currentInOutput.getMaxStackSize()) {
-                    return false;
-                }
+                return currentInOutput.stackSize + validOutput.stackSize <= currentInOutput.getMaxStackSize();
             }
         }
-        return true;
     }
 
     private void imbue() {

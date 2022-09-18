@@ -91,7 +91,7 @@ public class RTCommand extends CommandBase {
                 metadata = CommandBase.parseInt(commandUser, args[6]);
             }
 
-            ItemStack is = null;
+            ItemStack is;
 
             if (i != null) {
                 is = new ItemStack(i, 1, metadata);
@@ -125,7 +125,6 @@ public class RTCommand extends CommandBase {
                         .setWorldTime(commandUser.getEntityWorld().provider.getWorldTime() % 24000 + 24000 * moonPhase);
             } else {
                 commandUser.addChatMessage(invalidArguments);
-                return;
             }
         } else if (subCommand.equals("setItemColor")) {
             if (commandUser instanceof EntityPlayer) {

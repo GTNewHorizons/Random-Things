@@ -39,11 +39,10 @@ public class RenderRTItem implements IItemRenderer {
             Tessellator tessellator = Tessellator.instance;
 
             int color = ((ItemBase) item.getItem()).getDurabilityColor(item, health);
-            int l = color;
             int i1 = (255 - k) / 4 << 16 | 16128;
-            this.renderQuad(tessellator, 0 + 2, 0 + 13, 13, 2, 0);
+            this.renderQuad(tessellator, 2, 0 + 13, 13, 2, 0);
             this.renderQuad(tessellator, 0 + 2, 0 + 13, 12, 1, i1);
-            this.renderQuad(tessellator, 0 + 2, 0 + 13, j1, 1, l);
+            this.renderQuad(tessellator, 0 + 2, 0 + 13, j1, 1, color);
             GL11.glEnable(GL11.GL_TEXTURE_2D);
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glEnable(GL11.GL_DEPTH_TEST);

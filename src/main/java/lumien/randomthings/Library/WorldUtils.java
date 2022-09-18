@@ -51,7 +51,6 @@ public class WorldUtils {
                 return;
             }
         }
-        return;
     }
 
     public static void dropItemStack(World world, double x, double y, double z, ItemStack stack) {
@@ -112,8 +111,8 @@ public class WorldUtils {
             NetHandlerPlayClient netclienthandler = Minecraft.getMinecraft().thePlayer.sendQueue;
             List list = netclienthandler.playerInfoList;
 
-            for (int i = 0; i < list.size(); i++) {
-                GuiPlayerInfo guiplayerinfo = (GuiPlayerInfo) list.get(i);
+            for (Object o : list) {
+                GuiPlayerInfo guiplayerinfo = (GuiPlayerInfo) o;
                 if (guiplayerinfo.name.toLowerCase().equals(username.toLowerCase())) {
                     return true;
                 }

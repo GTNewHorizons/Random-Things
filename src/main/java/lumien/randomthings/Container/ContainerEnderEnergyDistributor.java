@@ -132,15 +132,13 @@ public class ContainerEnderEnergyDistributor extends Container implements IConta
                         slot.putStack(copy);
 
                         par1ItemStack.stackSize -= 1;
-                        flag1 = true;
-                        break;
                     } else {
                         slot.putStack(par1ItemStack.copy());
                         slot.onSlotChanged();
                         par1ItemStack.stackSize = 0;
-                        flag1 = true;
-                        break;
                     }
+                    flag1 = true;
+                    break;
                 }
 
                 if (par4) {
@@ -186,8 +184,8 @@ public class ContainerEnderEnergyDistributor extends Container implements IConta
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (int i = 0; i < this.crafters.size(); ++i) {
-            ICrafting icrafting = (ICrafting) this.crafters.get(i);
+        for (Object crafter : this.crafters) {
+            ICrafting icrafting = (ICrafting) crafter;
             EntityPlayerMP player = (EntityPlayerMP) icrafting;
             if (this.oldBuffer != this.te.getEnergyStored(ForgeDirection.DOWN)) {
                 PacketHandler.INSTANCE.sendTo(

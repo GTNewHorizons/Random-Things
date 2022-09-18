@@ -26,9 +26,6 @@ public class Colors {
 
     public static final Color[] dyeColors = new Color[ItemDye.field_150922_c.length];
 
-    {
-    }
-
     public static final String[] oreDictDyes = new String[] {
         "dyeBlack",
         "dyeRed",

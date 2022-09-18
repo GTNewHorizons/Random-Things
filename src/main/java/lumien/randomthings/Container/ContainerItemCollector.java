@@ -127,15 +127,13 @@ public class ContainerItemCollector extends Container {
                         slot.putStack(copy);
 
                         par1ItemStack.stackSize -= 1;
-                        flag1 = true;
-                        break;
                     } else {
                         slot.putStack(par1ItemStack.copy());
                         slot.onSlotChanged();
                         par1ItemStack.stackSize = 0;
-                        flag1 = true;
-                        break;
                     }
+                    flag1 = true;
+                    break;
                 }
 
                 if (par4) {
