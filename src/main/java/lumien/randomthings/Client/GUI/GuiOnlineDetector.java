@@ -83,9 +83,9 @@ public class GuiOnlineDetector extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-        fontRendererObj.drawString(I18n.format("tile.onlineDetector.name", new Object[0]), 8, 6, 4210752);
+        fontRendererObj.drawString(I18n.format("tile.onlineDetector.name"), 8, 6, 4210752);
         String teUsername = te.getPlayerName();
-        String toDraw = "";
+        String toDraw;
         if (teUsername.equals("")) {
             toDraw = I18n.format("text.onlineDetector.detectingNobody");
         } else {

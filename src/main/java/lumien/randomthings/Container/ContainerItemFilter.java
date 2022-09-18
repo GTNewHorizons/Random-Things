@@ -16,13 +16,9 @@ public class ContainerItemFilter extends Container {
     public ContainerItemFilter(ItemStack filter, IInventory playerInventory, IInventory filterInventory) {
         this.filterInventory = filterInventory;
         filterInventory.openInventory();
-
-        for (int row = 0; row < 1; row++) {
-            for (int col = 0; col < 9; ++col) {
-                addSlotToContainer(new Slot(filterInventory, col + row * 9, 8 + col * 18, 18 + row * 18));
-            }
+        for (int col = 0; col < 9; ++col) {
+            addSlotToContainer(new Slot(filterInventory, col, 8 + col * 18, 18));
         }
-
         bindPlayerInventory((InventoryPlayer) playerInventory);
     }
 

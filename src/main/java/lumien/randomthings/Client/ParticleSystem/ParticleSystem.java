@@ -197,8 +197,7 @@ public class ParticleSystem {
                 try {
                     reader.close();
                 } catch (Exception exc) {
-                    if (innerExc == null) innerExc = exc;
-                    else exc.printStackTrace();
+                    innerExc = exc;
                 }
             }
             if (innerExc != null) throw innerExc;

@@ -33,9 +33,7 @@ public abstract class BlockContainerBase extends BlockContainer {
     public final TileEntity createNewTileEntity(World var1, int var2) {
         try {
             return (TileEntity) getTileEntityClass().newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
         return null;

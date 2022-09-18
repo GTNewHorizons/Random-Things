@@ -28,7 +28,7 @@ public class ItemUtils {
             return null;
         }
 
-        ArrayList<Integer> oreIDs = new ArrayList<Integer>();
+        ArrayList<Integer> oreIDs = new ArrayList<>();
 
         for (int id : OreDictionary.getOreIDs(itemStack)) {
             oreIDs.add(id);

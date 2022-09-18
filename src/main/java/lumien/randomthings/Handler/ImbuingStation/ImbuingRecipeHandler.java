@@ -5,7 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
 public class ImbuingRecipeHandler {
-    public static ArrayList<ImbuingRecipe> imbuingRecipes = new ArrayList<ImbuingRecipe>();
+    public static ArrayList<ImbuingRecipe> imbuingRecipes = new ArrayList<>();
 
     public static ItemStack getRecipeOutput(IInventory imbuingItems) {
         for (ImbuingRecipe ir : imbuingRecipes) {

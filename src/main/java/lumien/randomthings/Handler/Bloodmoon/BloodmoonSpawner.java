@@ -43,7 +43,7 @@ public class BloodmoonSpawner {
      * eligibleChunksForSpawning. pars: the world, hostileCreatures,
      * passiveCreatures. returns number of eligible chunks.
      */
-    public int findChunksForSpawning(
+    public int findChunksForSpawning( // TODO excuse me wtf ???
             WorldServer p_77192_1_, boolean p_77192_2_, boolean p_77192_3_, boolean p_77192_4_) {
         if (!p_77192_2_ && !p_77192_3_) {
             return 0;
@@ -88,15 +88,16 @@ public class BloodmoonSpawner {
                                         * Settings.BLOODMOON_SPAWNLIMIT_MULTIPLIER
                                         * this.eligibleChunksForSpawning.size()
                                         / 256) {
-                    Iterator iterator = this.eligibleChunksForSpawning.keySet().iterator();
-                    ArrayList<ChunkCoordIntPair> tmp = new ArrayList(eligibleChunksForSpawning.keySet());
+                    Iterator<ChunkCoordIntPair> iterator =
+                            this.eligibleChunksForSpawning.keySet().iterator();
+                    ArrayList<ChunkCoordIntPair> tmp = new ArrayList<>(eligibleChunksForSpawning.keySet());
                     Collections.shuffle(tmp);
                     iterator = tmp.iterator();
                     label110:
                     while (iterator.hasNext()) {
-                        ChunkCoordIntPair chunkcoordintpair1 = (ChunkCoordIntPair) iterator.next();
+                        ChunkCoordIntPair chunkcoordintpair1 = iterator.next();
 
-                        if (!((Boolean) this.eligibleChunksForSpawning.get(chunkcoordintpair1)).booleanValue()) {
+                        if (!(Boolean) this.eligibleChunksForSpawning.get(chunkcoordintpair1)) {
                             ChunkPosition chunkposition = func_151350_a(
                                     p_77192_1_, chunkcoordintpair1.chunkXPos, chunkcoordintpair1.chunkZPos);
                             int j1 = chunkposition.chunkPosX;

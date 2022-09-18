@@ -12,6 +12,6 @@ public class ClientUtil {
     }
 
     public static String translate(String key) {
-        return I18n.format(key, new Object[] {});
+        return I18n.format(key);
     }
 }

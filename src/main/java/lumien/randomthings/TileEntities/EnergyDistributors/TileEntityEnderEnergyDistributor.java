@@ -27,18 +27,13 @@ public class TileEntityEnderEnergyDistributor extends TileEntity implements IEne
     int energyDistributedLastTick;
     int machinesConnected;
 
-    IValidator validator = new IValidator() {
-        @Override
-        public boolean matches(Object o) {
-            return o instanceof TileEntity & !(o instanceof TileEntityEnderEnergyDistributor)
-                    && o instanceof IEnergyReceiver;
-        }
-    };
+    IValidator validator = o ->
+            o instanceof TileEntity & !(o instanceof TileEntityEnderEnergyDistributor) && o instanceof IEnergyReceiver;
 
     public TileEntityEnderEnergyDistributor() {
         super();
         buffer = new EnergyStorage(Settings.ENDER_ENERGY_DISTRIBUTOR_BUFFERSIZE);
-        receiverCache = new HashSet<TileEntity>();
+        receiverCache = new HashSet<>();
         machinesConnected = 0;
     }
 
@@ -67,7 +62,7 @@ public class TileEntityEnderEnergyDistributor extends TileEntity implements IEne
     }
 
     private void fillReceiverCache() {
-        receiverCache = new HashSet<TileEntity>();
+        receiverCache = new HashSet<>();
         for (int i = 0; i < targetSlots.getSizeInventory(); i++) {
             ItemStack is = targetSlots.getStackInSlot(i);
             if (is != null) {

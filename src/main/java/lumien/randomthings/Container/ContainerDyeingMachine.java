@@ -52,7 +52,7 @@ public class ContainerDyeingMachine extends Container {
             copy.stackSize = 1;
             copy.stackTagCompound.setInteger("customRTColor", dyeColor);
             this.result.setInventorySlotContents(0, copy);
-        } else if (toDye != null && dye == null) {
+        } else if (toDye != null) {
             ItemStack copy = toDye.copy();
             copy.stackSize = 1;
             if (copy.stackTagCompound != null) {
@@ -64,7 +64,7 @@ public class ContainerDyeingMachine extends Container {
                     copy.stackTagCompound = null;
                 }
                 this.result.setInventorySlotContents(0, copy);
-            } else if (copy.stackTagCompound == null) {
+            } else {
                 this.result.setInventorySlotContents(0, null);
             }
         } else {
@@ -123,7 +123,7 @@ public class ContainerDyeingMachine extends Container {
             }
 
             if (itemstack1.stackSize == 0) {
-                slot.putStack((ItemStack) null);
+                slot.putStack(null);
             } else {
                 slot.onSlotChanged();
             }

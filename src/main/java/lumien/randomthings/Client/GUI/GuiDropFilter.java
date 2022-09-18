@@ -18,9 +18,9 @@ public class GuiDropFilter extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         if (Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem().getItemDamage() == 0) {
-            fontRendererObj.drawString(I18n.format("item.dropFilter.name", new Object[0]), 8, 6, 4210752);
+            fontRendererObj.drawString(I18n.format("item.dropFilter.name"), 8, 6, 4210752);
         } else {
-            fontRendererObj.drawString(I18n.format("item.dropFilterVoiding.name", new Object[0]), 8, 6, 4210752);
+            fontRendererObj.drawString(I18n.format("item.dropFilterVoiding.name"), 8, 6, 4210752);
         }
     }
 

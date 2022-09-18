@@ -28,12 +28,12 @@ public class ItemBlockWirelessLever extends ItemBlock {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
         if (par1ItemStack.stackTagCompound != null && par1ItemStack.stackTagCompound.getBoolean("hasTarget")) {
-            par3List.add(String.format(
-                    I18n.format("text.miscellaneous.target.x", par1ItemStack.stackTagCompound.getInteger("targetX"))));
-            par3List.add(String.format(
-                    I18n.format("text.miscellaneous.target.y", par1ItemStack.stackTagCompound.getInteger("targetY"))));
-            par3List.add(String.format(
-                    I18n.format("text.miscellaneous.target.z", par1ItemStack.stackTagCompound.getInteger("targetZ"))));
+            par3List.add(
+                    I18n.format("text.miscellaneous.target.x", par1ItemStack.stackTagCompound.getInteger("targetX")));
+            par3List.add(
+                    I18n.format("text.miscellaneous.target.y", par1ItemStack.stackTagCompound.getInteger("targetY")));
+            par3List.add(
+                    I18n.format("text.miscellaneous.target.z", par1ItemStack.stackTagCompound.getInteger("targetZ")));
         } else {
             par3List.add(I18n.format("text.miscellaneous.noTarget"));
         }

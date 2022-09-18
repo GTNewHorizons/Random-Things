@@ -1,7 +1,6 @@
 package lumien.randomthings.Client.GUI.Elements.Buttons;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import lumien.randomthings.Network.Messages.MessageChangeItemProperty;
 import lumien.randomthings.Network.PacketHandler;
@@ -74,7 +73,6 @@ public class GuiButtonBooleanProperty extends GuiButton {
     @Override
     public void drawButton(Minecraft p_146112_1_, int p_146112_2_, int p_146112_3_) {
         if (this.visible) {
-            FontRenderer fontrenderer = p_146112_1_.fontRenderer;
             p_146112_1_.getTextureManager().bindTexture(buttonImage);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             this.field_146123_n = p_146112_2_ >= this.xPosition
@@ -89,25 +87,16 @@ public class GuiButtonBooleanProperty extends GuiButton {
             this.drawTexturedModalRect(this.xPosition, this.yPosition, (!value ? 0 : 1) * 20, (k - 1) * 20, 20, 20);
 
             this.mouseDragged(p_146112_1_, p_146112_2_, p_146112_3_);
-            int l = 14737632;
-
-            if (packedFGColour != 0) {
-                l = packedFGColour;
-            } else if (!this.value) {
-                l = 10526880;
-            } else if (this.field_146123_n) {
-                l = 16777120;
-            }
 
             if (k == 2) {
-                String toDraw = "";
+                String toDraw;
                 if (value) {
                     toDraw = toolTipTrue;
                 } else {
                     toDraw = toolTipFalse;
                 }
 
-                ArrayList<String> strings = new ArrayList<String>();
+                ArrayList<String> strings = new ArrayList<>();
                 strings.add(toDraw);
 
                 this.drawHoveringText(strings, xPosition + 13, yPosition + 18, Minecraft.getMinecraft().fontRenderer);
@@ -115,17 +104,14 @@ public class GuiButtonBooleanProperty extends GuiButton {
         }
     }
 
-    protected void drawHoveringText(List par1List, int par2, int par3, FontRenderer font) {
+    protected void drawHoveringText(List<String> par1List, int par2, int par3, FontRenderer font) {
         if (!par1List.isEmpty()) {
             GL11.glDisable(GL12.GL_RESCALE_NORMAL);
             GL11.glDisable(GL11.GL_DEPTH_TEST);
             int k = 0;
-            Iterator iterator = par1List.iterator();
 
-            while (iterator.hasNext()) {
-                String s = (String) iterator.next();
+            for (String s : par1List) {
                 int l = font.getStringWidth(s);
-
                 if (l > k) {
                     k = l;
                 }
@@ -162,7 +148,7 @@ public class GuiButtonBooleanProperty extends GuiButton {
             this.drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3, j2, j2);
 
             for (int k2 = 0; k2 < par1List.size(); ++k2) {
-                String s1 = (String) par1List.get(k2);
+                String s1 = par1List.get(k2);
                 font.drawStringWithShadow(s1, i1, j1, -1);
 
                 if (k2 == 0) {

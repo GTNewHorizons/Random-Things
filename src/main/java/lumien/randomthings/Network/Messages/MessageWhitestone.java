@@ -33,7 +33,7 @@ public class MessageWhitestone implements IRTMessage {
     @SideOnly(Side.CLIENT)
     public void onMessage(MessageContext ctx) {
         Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(playerID);
-        if (entity != null && entity instanceof EntityPlayer) {
+        if (entity instanceof EntityPlayer) {
             for (int i = 0; i < 10; i++) {
                 Minecraft.getMinecraft()
                         .effectRenderer

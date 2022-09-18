@@ -124,7 +124,7 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
                     Item i = GameData.getItemRegistry().getObject(iconString);
                     Block b = GameData.getBlockRegistry().getObject(iconString);
 
-                    ItemStack is = null;
+                    ItemStack is;
 
                     if (i != null) {
                         is = new ItemStack(i, 1, metadata);

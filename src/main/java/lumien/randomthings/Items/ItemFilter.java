@@ -63,7 +63,7 @@ public class ItemFilter extends ItemBase implements IItemWithProperties {
             return false;
         }
 
-        if (filter.getItem() == null && !(filter.getItem() instanceof ItemFilter) || filter.getItemDamage() != 1) {
+        if (filter.getItem() == null || filter.getItemDamage() != 1) {
             return false;
         }
 
@@ -129,12 +129,10 @@ public class ItemFilter extends ItemBase implements IItemWithProperties {
                                             : whiteList));
                             IInventory inventoryFilter = new InventoryItemFilter(par2EntityPlayer, par1ItemStack);
                             inventoryFilter.openInventory();
-                            if (inventoryFilter != null) {
-                                for (int i = 0; i < 9; i++) {
-                                    ItemStack isg = inventoryFilter.getStackInSlot(i);
-                                    if (isg != null) {
-                                        par3List.add("- " + isg.getDisplayName());
-                                    }
+                            for (int i = 0; i < 9; i++) {
+                                ItemStack isg = inventoryFilter.getStackInSlot(i);
+                                if (isg != null) {
+                                    par3List.add("- " + isg.getDisplayName());
                                 }
                             }
                         }

@@ -33,7 +33,7 @@ public class GuiEnderLetter extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-        fontRendererObj.drawString(I18n.format("item.enderLetter.name", new Object[0]), 8, 6, 4210752);
+        fontRendererObj.drawString(I18n.format("item.enderLetter.name"), 8, 6, 4210752);
     }
 
     @Override

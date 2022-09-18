@@ -37,7 +37,7 @@ public class ItemSpectreArmor extends ItemArmor {
                             || par1ItemStack == chestplate
                             || par1ItemStack == leggings
                             || par1ItemStack == boots) {
-                        par3List.add(Colors.DARK_AQUA + I18n.format("text.miscellaneous.setBonus", new Object[0]));
+                        par3List.add(Colors.DARK_AQUA + I18n.format("text.miscellaneous.setBonus"));
                         par3List.add(Colors.AQUA + "- Damage done to enemies creates orbs");
                         par3List.add(Colors.AQUA + "that heal the player with the lowest health nearby.");
                         par3List.add(Colors.AQUA + "- Semi Transparent Character Model");

@@ -16,7 +16,7 @@ public class GuiVoidStone extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-        fontRendererObj.drawString(I18n.format("item.voidStone.name", new Object[0]), 8, 6, 12500670);
+        fontRendererObj.drawString(I18n.format("item.voidStone.name"), 8, 6, 12500670);
     }
 
     @Override

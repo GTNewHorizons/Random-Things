@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import org.lwjgl.util.vector.Vector3f;
 
 public class TileEntityWirelessLever extends TileEntity {
-    public static HashSet<TileEntityWirelessLever> loadedLevers = new HashSet<TileEntityWirelessLever>();
+    public static HashSet<TileEntityWirelessLever> loadedLevers = new HashSet<>();
 
     int targetX, targetY, targetZ;
 

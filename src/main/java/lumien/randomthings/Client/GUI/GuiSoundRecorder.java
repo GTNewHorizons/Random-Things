@@ -19,7 +19,7 @@ public class GuiSoundRecorder extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-        fontRendererObj.drawString(I18n.format("item.soundRecorder.name", new Object[0]), 5, 6, 400000);
+        fontRendererObj.drawString(I18n.format("item.soundRecorder.name"), 5, 6, 400000);
 
         for (int i = 0; i < RandomThings.instance.soundRecorderHandler.playedSounds.size(); i++) {
             String s = RandomThings.instance.soundRecorderHandler.playedSounds.get(i);

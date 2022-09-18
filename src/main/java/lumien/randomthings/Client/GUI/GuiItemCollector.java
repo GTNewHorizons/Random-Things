@@ -54,7 +54,7 @@ public class GuiItemCollector extends GuiContainer {
 
     @Override
     protected void actionPerformed(GuiButton par1GuiButton) {
-        MessageItemCollector packet = null;
+        MessageItemCollector packet;
         if (par1GuiButton == minusX) {
             te.rangeX--;
         } else if (par1GuiButton == plusX) {
@@ -98,7 +98,7 @@ public class GuiItemCollector extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-        fontRendererObj.drawString(I18n.format("tile.advancedItemCollector.name", new Object[0]), 8, 6, 4210752);
+        fontRendererObj.drawString(I18n.format("tile.advancedItemCollector.name"), 8, 6, 4210752);
 
         String radiusX = "Radius X: " + te.rangeX;
         String radiusY = "Radius Y: " + te.rangeY;

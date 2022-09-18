@@ -141,7 +141,7 @@ public class ItemBloodstone extends ItemBase {
         if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
 
-            int rate = -1;
+            int rate;
             if (charges <= 200) {
                 rate = (int) (200 - 180F / 200 * charges);
             } else {

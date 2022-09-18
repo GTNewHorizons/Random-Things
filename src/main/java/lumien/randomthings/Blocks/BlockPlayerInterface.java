@@ -14,9 +14,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class BlockPlayerInterface extends BlockContainerBase {
-    IIcon texture_bottom;
-    IIcon texture_top;
-    IIcon texture_side;
 
     IIcon[] icons;
 
@@ -72,9 +69,7 @@ public class BlockPlayerInterface extends BlockContainerBase {
             int poxZ,
             EntityLivingBase par5EntityLivingBase,
             ItemStack par6ItemStack) {
-        if (par5EntityLivingBase != null
-                && par5EntityLivingBase instanceof EntityPlayerMP
-                && par1World.getTileEntity(poxX, poxY, poxZ) != null) {
+        if (par5EntityLivingBase instanceof EntityPlayerMP && par1World.getTileEntity(poxX, poxY, poxZ) != null) {
             EntityPlayerMP player = (EntityPlayerMP) par5EntityLivingBase;
             ((TileEntityPlayerInterface) par1World.getTileEntity(poxX, poxY, poxZ))
                     .setPlayerName(player.getCommandSenderName());

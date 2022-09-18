@@ -22,7 +22,7 @@ public class RandomThingsConfigGUI extends GuiConfig {
     }
 
     private static List<IConfigElement> getConfigElements() {
-        List<IConfigElement> list = new ArrayList<IConfigElement>();
+        List<IConfigElement> list = new ArrayList<>();
         list.add(new DummyCategoryElement(
                 "settings",
                 "Settings",

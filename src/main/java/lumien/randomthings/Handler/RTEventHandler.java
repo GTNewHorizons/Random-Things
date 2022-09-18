@@ -185,10 +185,10 @@ public class RTEventHandler {
 
                 int indexDye;
                 if ((indexDye = getDyeFromColor(dyeColor)) != -1) {
-                    dye = I18n.format("text.color." + ItemDye.field_150923_a[indexDye], new Object[] {});
+                    dye = I18n.format("text.color." + ItemDye.field_150923_a[indexDye]);
                 }
 
-                event.toolTip.add(I18n.format("text.dyed", new Object[] {dye}));
+                event.toolTip.add(I18n.format("text.dyed", dye));
             }
         }
     }
@@ -443,7 +443,7 @@ public class RTEventHandler {
                         attacker = arrow.shootingEntity;
                     }
                 }
-                if (attacker != null && attacker instanceof EntityPlayer) {
+                if (attacker instanceof EntityPlayer) {
                     EntityPlayer player = (EntityPlayer) attacker;
 
                     ItemStack helmet = player.getCurrentArmor(0);
@@ -473,13 +473,13 @@ public class RTEventHandler {
     public void entityDeath(LivingDeathEvent event) {
         if (!event.entity.worldObj.isRemote) {
             if (event.entityLiving instanceof EntityPlayer && !(event.entityLiving instanceof FakePlayer)) {
-                EntityPlayer player = ((EntityPlayer) event.entityLiving);
-                player.worldObj.spawnEntityInWorld(new EntitySoul(
-                        player.worldObj,
-                        player.posX,
-                        player.posY,
-                        player.posZ,
-                        player.getGameProfile().getName()));
+                EntityPlayer deadPlayer = ((EntityPlayer) event.entityLiving);
+                deadPlayer.worldObj.spawnEntityInWorld(new EntitySoul(
+                        deadPlayer.worldObj,
+                        deadPlayer.posX,
+                        deadPlayer.posY,
+                        deadPlayer.posZ,
+                        deadPlayer.getGameProfile().getName()));
             }
             if (ConfigItems.whitestone) {
                 if (event.entityLiving instanceof EntityPlayer && !event.source.canHarmInCreative()) {
@@ -509,7 +509,7 @@ public class RTEventHandler {
             if (ConfigItems.bloodStone) {
                 if (event.entity instanceof IMob && !event.isCanceled()) {
                     Entity killer = event.source.getEntity();
-                    if (killer != null && killer instanceof EntityPlayer) {
+                    if (killer instanceof EntityPlayer) {
                         EntityPlayer player = (EntityPlayer) killer;
                         for (int slot = 0; slot < player.inventory.getSizeInventory(); slot++) {
                             ItemStack isSlot = player.inventory.getStackInSlot(slot);

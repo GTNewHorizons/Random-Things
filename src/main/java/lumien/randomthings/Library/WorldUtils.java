@@ -26,29 +26,28 @@ public class WorldUtils {
             int originalMetadata) {
         Block atPositionBlock = worldObj.getBlock(startX, startY, startZ);
         int atPositionMetadata = worldObj.getBlockMetadata(startX, startY, startZ);
-        if ((atPositionBlock == b && atPositionMetadata == metadata)
-                || atPositionBlock.isAir(worldObj, startX, startY, startZ)) {
-            return;
-        } else if (atPositionBlock == originalBlock && atPositionMetadata == originalMetadata) {
-            worldObj.setBlock(startX, startY, startZ, b, metadata, 2);
+        if ((atPositionBlock != b || atPositionMetadata != metadata)
+                && !atPositionBlock.isAir(worldObj, startX, startY, startZ)) {
+            if (atPositionBlock == originalBlock && atPositionMetadata == originalMetadata) {
+                worldObj.setBlock(startX, startY, startZ, b, metadata, 2);
 
-            try {
-                setConnectedBlocksTo(
-                        worldObj, startX, startY + 1, startZ, b, metadata, originalBlock, originalMetadata);
-                setConnectedBlocksTo(
-                        worldObj, startX, startY - 1, startZ, b, metadata, originalBlock, originalMetadata);
+                try {
+                    setConnectedBlocksTo(
+                            worldObj, startX, startY + 1, startZ, b, metadata, originalBlock, originalMetadata);
+                    setConnectedBlocksTo(
+                            worldObj, startX, startY - 1, startZ, b, metadata, originalBlock, originalMetadata);
 
-                setConnectedBlocksTo(
-                        worldObj, startX + 1, startY, startZ, b, metadata, originalBlock, originalMetadata);
-                setConnectedBlocksTo(
-                        worldObj, startX - 1, startY, startZ, b, metadata, originalBlock, originalMetadata);
+                    setConnectedBlocksTo(
+                            worldObj, startX + 1, startY, startZ, b, metadata, originalBlock, originalMetadata);
+                    setConnectedBlocksTo(
+                            worldObj, startX - 1, startY, startZ, b, metadata, originalBlock, originalMetadata);
 
-                setConnectedBlocksTo(
-                        worldObj, startX, startY, startZ + 1, b, metadata, originalBlock, originalMetadata);
-                setConnectedBlocksTo(
-                        worldObj, startX, startY, startZ - 1, b, metadata, originalBlock, originalMetadata);
-            } catch (StackOverflowError e) {
-                return;
+                    setConnectedBlocksTo(
+                            worldObj, startX, startY, startZ + 1, b, metadata, originalBlock, originalMetadata);
+                    setConnectedBlocksTo(
+                            worldObj, startX, startY, startZ - 1, b, metadata, originalBlock, originalMetadata);
+                } catch (StackOverflowError ignored) {
+                }
             }
         }
     }
@@ -113,7 +112,7 @@ public class WorldUtils {
 
             for (Object o : list) {
                 GuiPlayerInfo guiplayerinfo = (GuiPlayerInfo) o;
-                if (guiplayerinfo.name.toLowerCase().equals(username.toLowerCase())) {
+                if (guiplayerinfo.name.equalsIgnoreCase(username)) {
                     return true;
                 }
             }
@@ -123,7 +122,7 @@ public class WorldUtils {
 
     public static HashSet<TileEntity> getConnectedTEs(
             World worldObj, int posX, int posY, int posZ, IValidator validator) {
-        HashSet<TileEntity> tes = new HashSet<TileEntity>();
+        HashSet<TileEntity> tes = new HashSet<>();
         recConnectedTEs(tes, worldObj, posX, posY, posZ, validator);
         return tes;
     }

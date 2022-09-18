@@ -26,7 +26,7 @@ public class ItemBiomeCapsule extends ItemBase {
         super("biomeCapsule");
         this.setMaxStackSize(1);
 
-        biomeColors = new HashMap<Integer, Integer>();
+        biomeColors = new HashMap<>();
         {
             biomeColors.put(0, 1452177); // Ozean
             biomeColors.put(7, 4303848); // Fluss
@@ -182,7 +182,7 @@ public class ItemBiomeCapsule extends ItemBase {
 
     @Override
     public String getItemStackDisplayName(ItemStack par1ItemStack) {
-        String biomeName = "";
+        String biomeName;
         if (par1ItemStack.getItemDamage() == 0) {
             return ("" + StatCollector.translateToLocal("item.biomeCapsule" + ".name")).trim();
         } else {

@@ -45,11 +45,11 @@ public class GuiEnergyDistributor extends GuiContainer {
                 13107200);
 
         if (mouseX > x && mouseX < x + 35 && mouseY > y + 33 && mouseY < y + 33 + 14) {
-            ArrayList<String> toDraw = new ArrayList<String>();
+            ArrayList<String> toDraw = new ArrayList<>();
             toDraw.add("Energy distributed last tick");
             this.drawHoveringText(toDraw, x, y + 35 + 30, fontRendererObj);
         } else if (mouseX > x + 103 && mouseX < x + 103 + 20 && mouseY > y + 33 && mouseY < y + 33 + 14) {
-            ArrayList<String> toDraw = new ArrayList<String>();
+            ArrayList<String> toDraw = new ArrayList<>();
             toDraw.add("Machines Connected");
             this.drawHoveringText(toDraw, x, y + 35 + 30, fontRendererObj);
         }
@@ -57,7 +57,7 @@ public class GuiEnergyDistributor extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        fontRendererObj.drawString(I18n.format("tile.energyDistributor.name", new Object[0]), 8, 6, 4210752);
+        fontRendererObj.drawString(I18n.format("tile.energyDistributor.name"), 8, 6, 4210752);
 
         int distributed = ((ContainerEnergyDistributor) this.inventorySlots).energyDistributedLastTick;
         fontRendererObj.drawString(

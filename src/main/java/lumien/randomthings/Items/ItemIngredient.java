@@ -13,7 +13,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.lwjgl.opengl.GL11;
 
 public class ItemIngredient extends ItemBase {
-    private class Ingredient {
+    private static class Ingredient {
         IIcon icon;
         String iconName;
         String unlocalizedName;
@@ -30,7 +30,7 @@ public class ItemIngredient extends ItemBase {
 
     public ItemIngredient() {
         super("ingredient");
-        ingredients = new ArrayList<Ingredient>();
+        ingredients = new ArrayList<>();
 
         ingredients.add(new Ingredient("playerCore", "playerCore", 64));
         ingredients.add(new Ingredient("obsidianStick", "obsidianStick", 64));

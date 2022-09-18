@@ -46,7 +46,6 @@ public class RTTickHandler {
             case START:
                 if (event.type == TickEvent.Type.SERVER) {
                     MagneticForceHandler.INSTANCE.update();
-
                     RandomThings.instance.letterHandler.update();
                     if (RandomThings.instance.spectreHandler != null) {
                         RandomThings.instance.spectreHandler.update();

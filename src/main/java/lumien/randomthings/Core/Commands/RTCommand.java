@@ -189,7 +189,7 @@ public class RTCommand extends CommandBase {
             }
         } else if (subCommand.equals("bloodmoon")) {
             ServerBloodmoonHandler.INSTANCE.force();
-            commandUser.addChatMessage(new ChatComponentTranslation("text.bloodmoon.command", new Object[0]));
+            commandUser.addChatMessage(new ChatComponentTranslation("text.bloodmoon.command"));
         }
     }
 

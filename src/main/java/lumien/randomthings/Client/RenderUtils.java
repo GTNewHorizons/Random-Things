@@ -51,7 +51,7 @@ public class RenderUtils {
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(
-                p_73729_1_ + 0, p_73729_2_ + p_73729_6_, zLevel, (p_73729_3_ + 0) * f, (p_73729_4_ + p_73729_6_) * f1);
+                p_73729_1_, p_73729_2_ + p_73729_6_, zLevel, (p_73729_3_) * f, (p_73729_4_ + p_73729_6_) * f1);
         tessellator.addVertexWithUV(
                 p_73729_1_ + p_73729_5_,
                 p_73729_2_ + p_73729_6_,
@@ -59,19 +59,18 @@ public class RenderUtils {
                 (p_73729_3_ + p_73729_5_) * f,
                 (p_73729_4_ + p_73729_6_) * f1);
         tessellator.addVertexWithUV(
-                p_73729_1_ + p_73729_5_, p_73729_2_ + 0, zLevel, (p_73729_3_ + p_73729_5_) * f, (p_73729_4_ + 0) * f1);
-        tessellator.addVertexWithUV(
-                p_73729_1_ + 0, p_73729_2_ + 0, zLevel, (p_73729_3_ + 0) * f, (p_73729_4_ + 0) * f1);
+                p_73729_1_ + p_73729_5_, p_73729_2_, zLevel, (p_73729_3_ + p_73729_5_) * f, (p_73729_4_) * f1);
+        tessellator.addVertexWithUV(p_73729_1_, p_73729_2_, zLevel, (p_73729_3_) * f, (p_73729_4_) * f1);
         tessellator.draw();
     }
 
     public static void drawTexturedQuad(int x, int y, int width, int height, double zLevel) {
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(x + 0, y + height, zLevel, 0, 1);
+        tessellator.addVertexWithUV(x, y + height, zLevel, 0, 1);
         tessellator.addVertexWithUV(x + width, y + height, zLevel, 1, 1);
-        tessellator.addVertexWithUV(x + width, y + 0, zLevel, 1, 0);
-        tessellator.addVertexWithUV(x + 0, y + 0, zLevel, 0, 0);
+        tessellator.addVertexWithUV(x + width, y, zLevel, 1, 0);
+        tessellator.addVertexWithUV(x, y, zLevel, 0, 0);
         tessellator.draw();
     }
 

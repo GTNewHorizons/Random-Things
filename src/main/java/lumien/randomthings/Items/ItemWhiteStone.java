@@ -40,11 +40,8 @@ public class ItemWhiteStone extends ItemBase {
     @Override
     public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
         if (stack.getItemDamage() == 0) {
-            double charge;
-            if (stack.stackTagCompound == null) {
-                charge = 0;
-            } else {
-                charge = stack.stackTagCompound.getInteger("charge") / 1200D * 100D;
+            if (stack.stackTagCompound != null) {
+                double charge = stack.stackTagCompound.getInteger("charge") / 1200D * 100D;
                 charge = round(charge, 2);
                 par3List.add("Charge: " + charge + "%");
             }

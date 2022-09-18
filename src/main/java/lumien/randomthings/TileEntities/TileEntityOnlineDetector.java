@@ -145,7 +145,7 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
             playerNameList[i] = ((EntityPlayer) playerEntityList.get(i)).getCommandSenderName();
         }
 
-        HashMap<Integer, String> map = new HashMap<Integer, String>();
+        HashMap<Integer, String> map = new HashMap<>();
 
         for (int index = 0; index < playerNameList.length; index++) {
             map.put(index, playerNameList[index]);

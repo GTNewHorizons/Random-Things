@@ -14,7 +14,7 @@ public class ImbuingRecipe {
 
     public ImbuingRecipe(ItemStack toImbue, ItemStack result, ItemStack... ingredients) {
         this.toImbue = toImbue;
-        this.ingredients = new ArrayList<ItemStack>();
+        this.ingredients = new ArrayList<>();
         this.result = result;
         for (ItemStack is : ingredients) {
             if (is != null) this.ingredients.add(is);
@@ -22,7 +22,7 @@ public class ImbuingRecipe {
     }
 
     public boolean matchesInventory(IInventory e) {
-        HashMap<ItemStack, Boolean> providedIngredients = new HashMap<ItemStack, Boolean>();
+        HashMap<ItemStack, Boolean> providedIngredients = new HashMap<>();
         ItemStack i1 = e.getStackInSlot(0);
         ItemStack i2 = e.getStackInSlot(1);
         ItemStack i3 = e.getStackInSlot(2);

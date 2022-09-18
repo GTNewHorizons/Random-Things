@@ -38,7 +38,7 @@ public class CommonProxy {
     public void registerTickHandler() {}
 
     public ArrayList<String> getUsernameList() {
-        ArrayList<String> players = new ArrayList<String>();
+        ArrayList<String> players = new ArrayList<>();
         for (int i = 0; i < server.getConfigurationManager().playerEntityList.size(); ++i) {
             players.add(((EntityPlayerMP)
                             server.getConfigurationManager().playerEntityList.get(i))

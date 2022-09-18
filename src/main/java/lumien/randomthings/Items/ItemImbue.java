@@ -130,7 +130,7 @@ public class ItemImbue extends ItemBase {
 
         PotionEffect pe = new PotionEffect(imbueID, Settings.IMBUE_DURATION, 0, false);
 
-        ArrayList<ItemStack> curatives = new ArrayList<ItemStack>();
+        ArrayList<ItemStack> curatives = new ArrayList<>();
         pe.setCurativeItems(curatives);
 
         addImbue(player, pe);

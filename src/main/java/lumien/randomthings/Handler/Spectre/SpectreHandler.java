@@ -31,15 +31,15 @@ public class SpectreHandler extends WorldSavedData {
     HashMap<String, Integer> playerConnection;
     World worldObj;
 
+    public SpectreHandler() {
+        this("SpectreHandler");
+    }
+
     public SpectreHandler(String s) {
         super("SpectreHandler");
         nextCoord = 0;
-        playerConnection = new HashMap<String, Integer>();
+        playerConnection = new HashMap<>();
         spectreDimensionID = Settings.SPECTRE_DIMENSON_ID;
-    }
-
-    public SpectreHandler() {
-        this("SpectreHandler");
     }
 
     public void setWorld(World w) {
@@ -224,14 +224,13 @@ public class SpectreHandler extends WorldSavedData {
     }
 
     public void reset() {
-        playerConnection = new HashMap<String, Integer>();
+        playerConnection = new HashMap<>();
         nextCoord = 0;
         this.markDirty();
     }
 
     public void sendData(EntityPlayer player) {
-        ArrayList<String> list = new ArrayList<String>();
-        list.addAll(playerConnection.keySet());
-        PacketHandler.INSTANCE.sendTo(new MessageSpectreData(list), (EntityPlayerMP) player);
+        PacketHandler.INSTANCE.sendTo(
+                new MessageSpectreData(new ArrayList<>(playerConnection.keySet())), (EntityPlayerMP) player);
     }
 }

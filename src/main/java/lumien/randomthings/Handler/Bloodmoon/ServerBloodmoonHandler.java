@@ -65,9 +65,8 @@ public class ServerBloodmoonHandler extends WorldSavedData {
 
                         if (Settings.BLOODMOON_MESSAGE) {
                             for (EntityPlayer player : ((List<EntityPlayer>) world.playerEntities)) {
-                                player.addChatMessage(
-                                        new ChatComponentTranslation("text.bloodmoon.notify", new Object[0])
-                                                .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                                player.addChatMessage(new ChatComponentTranslation("text.bloodmoon.notify")
+                                        .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                             }
                         }
                     }

@@ -12,7 +12,7 @@ public class SoundRecorderHandler {
     public ArrayList<String> playedSounds;
 
     public SoundRecorderHandler() {
-        playedSounds = new ArrayList<String>();
+        playedSounds = new ArrayList<>();
     }
 
     public void soundPlayed(PlaySoundEvent17 event) {

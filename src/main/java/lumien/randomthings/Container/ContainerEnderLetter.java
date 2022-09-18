@@ -16,19 +16,14 @@ public class ContainerEnderLetter extends Container {
     public ContainerEnderLetter(ItemStack letter, IInventory playerInventory, IInventory letterInventory) {
         this.letterInventory = letterInventory;
         this.letter = letter;
-
         letterInventory.openInventory();
-
-        for (int row = 0; row < 1; row++) {
-            for (int col = 0; col < 9; ++col) {
-                if (letter.getItemDamage() == 0) {
-                    addSlotToContainer(new Slot(letterInventory, col + row * 9, 8 + col * 18, 18 + row * 18));
-                } else {
-                    addSlotToContainer(new SlotOutputOnly(letterInventory, col + row * 9, 8 + col * 18, 18 + row * 18));
-                }
+        for (int col = 0; col < 9; ++col) {
+            if (letter.getItemDamage() == 0) {
+                addSlotToContainer(new Slot(letterInventory, col, 8 + col * 18, 18));
+            } else {
+                addSlotToContainer(new SlotOutputOnly(letterInventory, col, 8 + col * 18, 18));
             }
         }
-
         bindPlayerInventory((InventoryPlayer) playerInventory);
     }
 
@@ -50,7 +45,7 @@ public class ContainerEnderLetter extends Container {
             }
 
             if (itemstack1.stackSize == 0) {
-                slot.putStack((ItemStack) null);
+                slot.putStack(null);
             } else {
                 slot.onSlotChanged();
             }

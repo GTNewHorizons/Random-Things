@@ -43,7 +43,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void setContainerProperty(int index, int value) {
         Container openContainer = Minecraft.getMinecraft().thePlayer.openContainer;
-        if (openContainer != null && openContainer instanceof IContainerWithProperties) {
+        if (openContainer instanceof IContainerWithProperties) {
             IContainerWithProperties prop = (IContainerWithProperties) openContainer;
             prop.setValue(index, value);
         }
@@ -107,7 +107,7 @@ public class ClientProxy extends CommonProxy {
     public ArrayList<String> getUsernameList() {
         NetHandlerPlayClient nethandlerplayclient = ClientProxy.mc.thePlayer.sendQueue;
         List<GuiPlayerInfo> list = nethandlerplayclient.playerInfoList;
-        ArrayList<String> players = new ArrayList<String>();
+        ArrayList<String> players = new ArrayList<>();
         for (GuiPlayerInfo info : list) {
             players.add(info.name);
         }

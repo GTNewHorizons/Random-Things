@@ -40,9 +40,9 @@ public class RenderRTItem implements IItemRenderer {
 
             int color = ((ItemBase) item.getItem()).getDurabilityColor(item, health);
             int i1 = (255 - k) / 4 << 16 | 16128;
-            this.renderQuad(tessellator, 2, 0 + 13, 13, 2, 0);
-            this.renderQuad(tessellator, 0 + 2, 0 + 13, 12, 1, i1);
-            this.renderQuad(tessellator, 0 + 2, 0 + 13, j1, 1, color);
+            this.renderQuad(tessellator, 2, 13, 13, 2, 0);
+            this.renderQuad(tessellator, 2, 13, 12, 1, i1);
+            this.renderQuad(tessellator, 2, 13, j1, 1, color);
             GL11.glEnable(GL11.GL_TEXTURE_2D);
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -53,10 +53,10 @@ public class RenderRTItem implements IItemRenderer {
     private void renderQuad(Tessellator par1Tessellator, int par2, int par3, int par4, int par5, int par6) {
         par1Tessellator.startDrawingQuads();
         par1Tessellator.setColorOpaque_I(par6);
-        par1Tessellator.addVertex(par2 + 0, par3 + 0, 0.0D);
-        par1Tessellator.addVertex(par2 + 0, par3 + par5, 0.0D);
+        par1Tessellator.addVertex(par2, par3, 0.0D);
+        par1Tessellator.addVertex(par2, par3 + par5, 0.0D);
         par1Tessellator.addVertex(par2 + par4, par3 + par5, 0.0D);
-        par1Tessellator.addVertex(par2 + par4, par3 + 0, 0.0D);
+        par1Tessellator.addVertex(par2 + par4, par3, 0.0D);
         par1Tessellator.draw();
     }
 }

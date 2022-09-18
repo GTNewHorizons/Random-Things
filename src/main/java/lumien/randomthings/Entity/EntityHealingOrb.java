@@ -102,14 +102,6 @@ public class EntityHealingOrb extends Entity {
     public int getBrightnessForRender(float par1) {
         float f1 = 0.5F;
 
-        if (f1 < 0.0F) {
-            f1 = 0.0F;
-        }
-
-        if (f1 > 1.0F) {
-            f1 = 1.0F;
-        }
-
         int i = super.getBrightnessForRender(par1);
         int j = i & 255;
         int k = i >> 16 & 255;

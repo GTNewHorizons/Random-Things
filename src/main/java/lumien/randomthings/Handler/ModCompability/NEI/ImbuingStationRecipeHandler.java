@@ -25,7 +25,7 @@ public class ImbuingStationRecipeHandler extends TemplateRecipeHandler {
         PositionedStack result;
 
         public CachedImbuingRecipe(ArrayList<ItemStack> ingredients, ItemStack toImbue, ItemStack result) {
-            this.ingredients = new ArrayList<PositionedStack>();
+            this.ingredients = new ArrayList<>();
             this.toImbue = new PositionedStack(toImbue, 48 + 176 / 2 - 129 / 2, 48);
             this.result = new PositionedStack(result, 93 + 176 / 2 - 129 / 2, 48);
 
@@ -73,7 +73,7 @@ public class ImbuingStationRecipeHandler extends TemplateRecipeHandler {
         }
     }
 
-    public static final HashSet<CachedImbuingRecipe> aimbuings = new HashSet<CachedImbuingRecipe>();
+    public static final HashSet<CachedImbuingRecipe> aimbuings = new HashSet<>();
 
     @Override
     public int recipiesPerPage() {

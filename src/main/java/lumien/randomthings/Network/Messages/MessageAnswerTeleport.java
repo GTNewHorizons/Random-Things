@@ -26,7 +26,7 @@ public class MessageAnswerTeleport implements IRTMessage {
         Minecraft mc = Minecraft.getMinecraft();
         GuiScreen currentScreen = Minecraft.getMinecraft().currentScreen;
 
-        if (mc.thePlayer != null && currentScreen != null && currentScreen instanceof GuiMagneticForce) {
+        if (mc.thePlayer != null && currentScreen instanceof GuiMagneticForce) {
             if (status == STATUS.OKAY) {
                 mc.thePlayer.closeScreen();
             } else {

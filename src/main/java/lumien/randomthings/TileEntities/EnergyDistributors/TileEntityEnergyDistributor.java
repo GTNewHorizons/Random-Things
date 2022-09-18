@@ -24,16 +24,11 @@ public class TileEntityEnergyDistributor extends TileEntity implements IEnergyRe
     int energyDistributedLastTick;
     int machinesConnected;
 
-    IValidator validator = new IValidator() {
-        @Override
-        public boolean matches(Object o) {
-            return o instanceof TileEntity & !(o instanceof TileEntityEnergyDistributor)
-                    && o instanceof IEnergyReceiver;
-        }
-    };
+    IValidator validator =
+            o -> o instanceof TileEntity & !(o instanceof TileEntityEnergyDistributor) && o instanceof IEnergyReceiver;
 
     public TileEntityEnergyDistributor() {
-        receiverCache = new HashSet<TileEntity>();
+        receiverCache = new HashSet<>();
         facing = ForgeDirection.UP;
         buffer = new EnergyStorage(Settings.ENERGY_DISTRIBUTOR_BUFFERSIZE);
         energyDistributedLastTick = 0;

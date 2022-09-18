@@ -19,7 +19,7 @@ public class MessageSpectreData implements IRTMessage {
     }
 
     public MessageSpectreData() {
-        this.playerList = new ArrayList<String>();
+        this.playerList = new ArrayList<>();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class MessageSpectreData implements IRTMessage {
         Minecraft mc = Minecraft.getMinecraft();
         GuiScreen currentScreen = Minecraft.getMinecraft().currentScreen;
 
-        if (mc.thePlayer != null && currentScreen != null && currentScreen instanceof GuiOpSpectreKey) {
+        if (mc.thePlayer != null && currentScreen instanceof GuiOpSpectreKey) {
             ((GuiOpSpectreKey) currentScreen).players.addAll(playerList);
         }
     }

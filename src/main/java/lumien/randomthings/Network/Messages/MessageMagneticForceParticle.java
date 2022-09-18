@@ -30,7 +30,7 @@ public class MessageMagneticForceParticle implements IRTMessage {
         EntityPlayer thePlayer = Minecraft.getMinecraft().thePlayer;
         if (thePlayer != null && thePlayer.worldObj != null && thePlayer.worldObj.provider.dimensionId == dimensionID) {
             Entity e = thePlayer.worldObj.getEntityByID(entityID);
-            if (e != null && e instanceof EntityPlayer) {
+            if (e instanceof EntityPlayer) {
                 double mX = 1 * Math.cos(f);
                 double mY = 1 * Math.sin(f);
                 Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleMagneticForce((EntityPlayer) e, mX, mY));

@@ -5,7 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
 public class BlockPattern {
-    private class BlockInfo {
+    private static class BlockInfo {
         Block block;
         int metadata;
 
@@ -26,7 +26,7 @@ public class BlockPattern {
     ArrayList<BlockInfo> blockInfos;
 
     public BlockPattern() {
-        blockInfos = new ArrayList<BlockInfo>();
+        blockInfos = new ArrayList<>();
     }
 
     public void addBlock(Block block, int metadata, int modX, int modY, int modZ) {

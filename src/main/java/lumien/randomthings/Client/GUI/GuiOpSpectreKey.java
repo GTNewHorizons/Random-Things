@@ -22,7 +22,7 @@ public class GuiOpSpectreKey extends GuiContainer implements IPlayerListGUI {
         this.xSize = 122;
         this.ySize = 135;
 
-        players = new ArrayList<String>();
+        players = new ArrayList<>();
 
         selected = false;
     }

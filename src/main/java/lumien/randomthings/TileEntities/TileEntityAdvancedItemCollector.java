@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -50,21 +49,21 @@ public class TileEntityAdvancedItemCollector extends TileEntity {
         this.rangeZ = rangeZ;
 
         if (rangeX < 0) {
-            rangeX = 0;
+            this.rangeX = 0;
         } else if (rangeX > 10) {
-            rangeX = 10;
+            this.rangeX = 10;
         }
 
         if (rangeY < 0) {
-            rangeY = 0;
+            this.rangeY = 0;
         } else if (rangeY > 10) {
-            rangeY = 10;
+            this.rangeY = 10;
         }
 
         if (rangeZ < 0) {
-            rangeZ = 0;
+            this.rangeZ = 0;
         } else if (rangeZ > 10) {
-            rangeZ = 10;
+            this.rangeZ = 10;
         }
     }
 
@@ -128,7 +127,7 @@ public class TileEntityAdvancedItemCollector extends TileEntity {
 
                 if (block != null) {
                     TileEntity te = worldObj.getTileEntity(targetX, targetY, targetZ);
-                    if (te != null && (te instanceof IInventory || te instanceof ISidedInventory)) {
+                    if (te instanceof IInventory) {
                         AxisAlignedBB bounding = AxisAlignedBB.getBoundingBox(
                                 xCoord - rangeX,
                                 yCoord - rangeY,

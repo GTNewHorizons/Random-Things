@@ -33,8 +33,7 @@ public final class ComputerCraftAPI {
         findCC();
         if (computerCraft_createUniqueNumberedSaveDir != null) {
             try {
-                return ((Integer) computerCraft_createUniqueNumberedSaveDir.invoke(null, world, parentSubPath))
-                        .intValue();
+                return (Integer) computerCraft_createUniqueNumberedSaveDir.invoke(null, world, parentSubPath);
             } catch (Exception e) {
                 // It failed
             }
@@ -155,8 +154,7 @@ public final class ComputerCraftAPI {
         findCC();
         if (computerCraft_getDefaultBundledRedstoneOutput != null) {
             try {
-                return ((Integer) computerCraft_getDefaultBundledRedstoneOutput.invoke(null, world, x, y, z, side))
-                        .intValue();
+                return (Integer) computerCraft_getDefaultBundledRedstoneOutput.invoke(null, world, x, y, z, side);
             } catch (Exception e) {
                 // It failed
             }

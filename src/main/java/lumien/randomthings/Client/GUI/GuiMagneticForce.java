@@ -72,7 +72,7 @@ public class GuiMagneticForce extends GuiContainer implements IPlayerListGUI {
         counter++;
 
         if (counter % 5 == 0) {
-            players.removeAll(new ArrayList<String>(players));
+            players.removeAll(new ArrayList<>(players));
             players.addAll(RandomThings.proxy.getUsernameList());
 
             if (!mc.thePlayer.getCommandSenderName().equals(RandomThings.AUTHOR_USERNAME))
@@ -94,16 +94,16 @@ public class GuiMagneticForce extends GuiContainer implements IPlayerListGUI {
             String toDraw = "";
             switch (status) {
                 case INVALID_USERNAME:
-                    toDraw = I18n.format("text.magneticForce.invalidUsername", new Object[0]);
+                    toDraw = I18n.format("text.magneticForce.invalidUsername");
                     break;
                 case NOT_ONLINE:
-                    toDraw = I18n.format("text.magneticForce.notOnline", new Object[0]);
+                    toDraw = I18n.format("text.magneticForce.notOnline");
                     break;
                 case NO_RIGHT:
-                    toDraw = I18n.format("text.magneticForce.noRights", new Object[0]);
+                    toDraw = I18n.format("text.magneticForce.noRights");
                     break;
                 case SAME_PLAYER:
-                    toDraw = I18n.format("text.magneticForce.notYourself", new Object[0]);
+                    toDraw = I18n.format("text.magneticForce.notYourself");
                     break;
                 default:
                     break;

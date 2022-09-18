@@ -33,7 +33,7 @@ public class NotificationHandler {
     int drawY;
 
     public NotificationHandler() {
-        queuedNotifications = new ConcurrentLinkedQueue<Notification>();
+        queuedNotifications = new ConcurrentLinkedQueue<>();
         currentNotification = null;
 
         tickCounter = 0;

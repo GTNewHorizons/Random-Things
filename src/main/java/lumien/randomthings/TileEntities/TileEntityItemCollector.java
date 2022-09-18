@@ -5,7 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityHopper;
@@ -37,7 +36,7 @@ public class TileEntityItemCollector extends TileEntity {
 
                 if (block != null) {
                     TileEntity te = worldObj.getTileEntity(targetX, targetY, targetZ);
-                    if (te != null && (te instanceof IInventory || te instanceof ISidedInventory)) {
+                    if (te instanceof IInventory) {
                         int range = 2;
                         AxisAlignedBB bounding = AxisAlignedBB.getBoundingBox(
                                 xCoord - range,

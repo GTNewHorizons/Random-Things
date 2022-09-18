@@ -1,7 +1,6 @@
 package lumien.randomthings.Handler;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Set;
 import lumien.randomthings.Network.Messages.MessageMagneticForceParticle;
 import lumien.randomthings.Network.PacketHandler;
@@ -19,7 +18,7 @@ public class MagneticForceHandler {
     ArrayList<MagneticForceEvent> events;
 
     public MagneticForceHandler() {
-        this.events = new ArrayList<MagneticForceEvent>();
+        this.events = new ArrayList<>();
     }
 
     public void readFromNBT(NBTTagCompound nbt) {
@@ -48,7 +47,7 @@ public class MagneticForceHandler {
         RandomThings.instance.saveNBT();
     }
 
-    private class MagneticForceEvent {
+    private static class MagneticForceEvent {
         String user;
         String target;
         int progress;
@@ -147,13 +146,7 @@ public class MagneticForceHandler {
 
     public void update() {
         int size = events.size();
-        Iterator<MagneticForceEvent> iterator = events.iterator();
-        while (iterator.hasNext()) {
-            MagneticForceEvent event = iterator.next();
-            if (event.tick()) {
-                iterator.remove();
-            }
-        }
+        events.removeIf(MagneticForceEvent::tick);
         if (size != events.size()) {
             writeToNBT(RandomThings.instance.modNBT);
             RandomThings.instance.saveNBT();

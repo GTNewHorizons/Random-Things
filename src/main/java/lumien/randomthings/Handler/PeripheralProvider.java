@@ -19,13 +19,10 @@ public class PeripheralProvider implements IPeripheralProvider {
                     IllegalArgumentException, InvocationTargetException {
         if (Loader.isModLoaded("ComputerCraft")) {
             Class clazz = Class.forName("dan200.computercraft.api.ComputerCraftAPI");
-
-            if (clazz != null) {
-                Method m = clazz.getDeclaredMethod(
-                        "registerPeripheralProvider",
-                        Class.forName("dan200.computercraft.api.peripheral.IPeripheralProvider"));
-                m.invoke(null, new PeripheralProvider());
-            }
+            Method m = clazz.getDeclaredMethod(
+                    "registerPeripheralProvider",
+                    Class.forName("dan200.computercraft.api.peripheral.IPeripheralProvider"));
+            m.invoke(null, new PeripheralProvider());
         }
     }
 

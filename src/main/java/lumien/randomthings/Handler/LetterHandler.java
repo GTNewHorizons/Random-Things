@@ -6,7 +6,6 @@ import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Network.Messages.MessageNotification;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.RandomThings;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,7 +19,7 @@ public class LetterHandler {
     final int tickRate;
 
     public LetterHandler() {
-        waitingLetters = new ArrayList<ItemStack>();
+        waitingLetters = new ArrayList<>();
 
         tickCounter = 0;
         tickRate = 60;
@@ -41,7 +40,7 @@ public class LetterHandler {
                 ItemStack toCheck = iterator.next();
 
                 String receiver = toCheck.stackTagCompound.getString("receiver");
-                EntityPlayer receiverEntity =
+                EntityPlayerMP receiverEntity =
                         MinecraftServer.getServer().getConfigurationManager().func_152612_a(receiver);
                 if (receiverEntity != null) {
                     int freeSlot = receiverEntity.inventory.getFirstEmptyStack();
@@ -60,7 +59,7 @@ public class LetterHandler {
                                         "Sender: " + toCheck.stackTagCompound.getString("sender"),
                                         100,
                                         new ItemStack(ModItems.enderLetter, 1, 1)),
-                                (EntityPlayerMP) receiverEntity);
+                                receiverEntity);
                     }
                 }
             }

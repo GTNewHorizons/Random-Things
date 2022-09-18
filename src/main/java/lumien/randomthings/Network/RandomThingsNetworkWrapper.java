@@ -81,7 +81,7 @@ public class RandomThingsNetworkWrapper extends SimpleNetworkWrapper {
 
     private <REPLY extends IMessage, REQ extends IMessage> SimpleChannelHandlerWrapper<REQ, REPLY> getHandlerWrapper(
             IMessageHandler<? super REQ, ? extends REPLY> messageHandler, Side side, Class<REQ> requestType) {
-        return new SimpleChannelHandlerWrapper<REQ, REPLY>(messageHandler, side, requestType);
+        return new SimpleChannelHandlerWrapper<>(messageHandler, side, requestType);
     }
 
     /**

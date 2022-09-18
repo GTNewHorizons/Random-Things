@@ -22,7 +22,7 @@ public class ItemCreativeSword extends ItemCreative {
     @Override
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
         if (entity instanceof EntityLiving) {
-            ((EntityLiving) entity).attackEntityFrom(DamageSource.causePlayerDamage(player), DAMAGE);
+            entity.attackEntityFrom(DamageSource.causePlayerDamage(player), DAMAGE);
         }
         return false;
     }
