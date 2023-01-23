@@ -10,9 +10,9 @@ import lumien.randomthings.Library.Reference;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.spongepowered.asm.lib.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
+import org.spongepowered.libraries.org.objectweb.asm.tree.ClassNode;
 
 public class RTMixinPlugin implements IMixinConfigPlugin {
 
