@@ -1,10 +1,8 @@
 package lumien.randomthings.Handler;
 
-import java.lang.reflect.Field;
 import java.util.Random;
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Configuration.VanillaChanges;
-import lumien.randomthings.Library.OverrideUtils;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.item.ItemDye;
 import net.minecraft.util.ResourceLocation;
@@ -44,34 +42,12 @@ public class BackgroundHandler {
     static String[] logTypes = new String[] {"acacia", "big_oak", "birch", "jungle", "oak", "spruce"};
 
     public static void setBackgroundBlock(String block) {
-        try {
-            for (Field f : Gui.class.getFields()) {
-                if (f.getType() == ResourceLocation.class) {
-                    ResourceLocation r = (ResourceLocation) f.get(null);
-                    if (r.getResourcePath().equals("textures/gui/options_background.png")) {
-                        OverrideUtils.setFinalStatic(f, new ResourceLocation("textures/blocks/" + block + ".png"));
-                        return;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        setBackground(new ResourceLocation("textures/blocks/" + block + ".png"));
     }
 
     public static void setBackground(ResourceLocation rl) {
-        try {
-            for (Field f : Gui.class.getFields()) {
-                if (f.getType() == ResourceLocation.class) {
-                    ResourceLocation r = (ResourceLocation) f.get(null);
-                    if (r.getResourcePath().equals("textures/gui/options_background.png")) {
-                        OverrideUtils.setFinalStatic(f, rl);
-                        return;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (Gui.optionsBackground.getResourcePath().equals("textures/gui/options_background.png")) {
+            Gui.optionsBackground = rl;
         }
     }
 
