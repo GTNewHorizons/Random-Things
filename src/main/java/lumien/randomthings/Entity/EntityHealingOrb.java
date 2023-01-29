@@ -1,6 +1,7 @@
 package lumien.randomthings.Entity;
 
 import java.util.List;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,6 +9,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityHealingOrb extends Entity {
+
     int energy = 600;
     float healAmount;
     EntityPlayer followPlayer;

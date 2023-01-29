@@ -1,6 +1,7 @@
 package lumien.randomthings.Items;
 
 import java.util.List;
+
 import lumien.randomthings.Library.ClientUtil;
 import lumien.randomthings.Library.DimensionCoordinate;
 import lumien.randomthings.Library.GuiIds;
@@ -9,6 +10,7 @@ import lumien.randomthings.Library.Inventorys.InventoryItemFilter;
 import lumien.randomthings.Library.ItemUtils;
 import lumien.randomthings.Library.Texts;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.resources.I18n;
@@ -21,9 +23,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
 import org.lwjgl.input.Keyboard;
 
 public class ItemFilter extends ItemBase implements IItemWithProperties {
+
     public enum FilterType {
         BLOCK,
         ITEM,
@@ -108,8 +112,9 @@ public class ItemFilter extends ItemBase implements IItemWithProperties {
                         String block = par1ItemStack.stackTagCompound.getString("block");
                         if (!block.equals("")) {
                             par3List.add(I18n.format("text.miscellaneous.block", (Object[]) null) + ": " + block);
-                            par3List.add(I18n.format("text.miscellaneous.metadata", (Object[]) null) + ": "
-                                    + par1ItemStack.stackTagCompound.getInteger("metadata"));
+                            par3List.add(
+                                    I18n.format("text.miscellaneous.metadata", (Object[]) null) + ": "
+                                            + par1ItemStack.stackTagCompound.getInteger("metadata"));
                         }
                         break;
                     case 1:
@@ -119,14 +124,16 @@ public class ItemFilter extends ItemBase implements IItemWithProperties {
                             String whiteList = I18n.format("text.miscellaneous.whiteList");
                             String blackList = I18n.format("text.miscellaneous.blackList");
 
-                            par3List.add(ClientUtil.translate("text.miscellaneous.metadata") + ": "
-                                    + (par1ItemStack.stackTagCompound.getBoolean("metadata") ? yes : no));
-                            par3List.add(I18n.format("text.miscellaneous.oreDictionary", (Object[]) null) + ": "
-                                    + (par1ItemStack.stackTagCompound.getBoolean("oreDict") ? yes : no));
-                            par3List.add(I18n.format("text.miscellaneous.listType", (Object[]) null) + ": "
-                                    + (par1ItemStack.stackTagCompound.getInteger("listType") == 1
-                                            ? blackList
-                                            : whiteList));
+                            par3List.add(
+                                    ClientUtil.translate("text.miscellaneous.metadata") + ": "
+                                            + (par1ItemStack.stackTagCompound.getBoolean("metadata") ? yes : no));
+                            par3List.add(
+                                    I18n.format("text.miscellaneous.oreDictionary", (Object[]) null) + ": "
+                                            + (par1ItemStack.stackTagCompound.getBoolean("oreDict") ? yes : no));
+                            par3List.add(
+                                    I18n.format("text.miscellaneous.listType", (Object[]) null) + ": "
+                                            + (par1ItemStack.stackTagCompound.getInteger("listType") == 1 ? blackList
+                                                    : whiteList));
                             IInventory inventoryFilter = new InventoryItemFilter(par2EntityPlayer, par1ItemStack);
                             inventoryFilter.openInventory();
                             for (int i = 0; i < 9; i++) {
@@ -158,17 +165,8 @@ public class ItemFilter extends ItemBase implements IItemWithProperties {
     }
 
     @Override
-    public boolean onItemUse(
-            ItemStack par1ItemStack,
-            EntityPlayer par2EntityPlayer,
-            World par3World,
-            int posX,
-            int posY,
-            int posZ,
-            int par7,
-            float par8,
-            float par9,
-            float par10) {
+    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int posX,
+            int posY, int posZ, int par7, float par8, float par9, float par10) {
         if (par1ItemStack.stackTagCompound == null) {
             par1ItemStack.stackTagCompound = new NBTTagCompound();
         }

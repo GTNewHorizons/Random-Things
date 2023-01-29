@@ -3,6 +3,7 @@ package lumien.randomthings.Client.Renderer;
 import lumien.randomthings.Client.Model.ModelItemCollector;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import lumien.randomthings.TileEntities.TileEntityItemCollector;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -11,15 +12,17 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
 import org.lwjgl.opengl.GL11;
 
 public class RenderItemCollector extends TileEntitySpecialRenderer {
+
     static final ModelItemCollector model = new ModelItemCollector();
 
-    public static ResourceLocation itemCollector =
-            (new ResourceLocation("RandomThings:textures/blocks/itemCollector/itemCollectorModel.png"));
-    ResourceLocation advancedItemCollector =
-            (new ResourceLocation("RandomThings:textures/blocks/itemCollector/advancedItemCollectorModel.png"));
+    public static ResourceLocation itemCollector = (new ResourceLocation(
+            "RandomThings:textures/blocks/itemCollector/itemCollectorModel.png"));
+    ResourceLocation advancedItemCollector = (new ResourceLocation(
+            "RandomThings:textures/blocks/itemCollector/advancedItemCollectorModel.png"));
 
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {

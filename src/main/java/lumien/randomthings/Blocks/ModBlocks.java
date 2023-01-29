@@ -8,6 +8,7 @@ import lumien.randomthings.Configuration.ConfigBlocks;
 import lumien.randomthings.RandomThings;
 
 public class ModBlocks {
+
     public static BlockPlayerInterface playerInterface;
     public static BlockCreativePlayerInterface creativePlayerInterface;
     public static BlockFluidDisplay fluidDisplay;

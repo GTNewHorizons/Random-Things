@@ -1,9 +1,9 @@
 package lumien.randomthings.Blocks.Spectre;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
+
 import lumien.randomthings.Blocks.BlockBase;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -12,9 +12,14 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockSpectreGlass extends BlockBase {
+
     public BlockSpectreGlass() {
         super("spectreGlass", Material.ground);
 
@@ -40,16 +45,10 @@ public class BlockSpectreGlass extends BlockBase {
     }
 
     @Override
-    public void addCollisionBoxesToList(
-            World p_149743_1_,
-            int p_149743_2_,
-            int p_149743_3_,
-            int p_149743_4_,
-            AxisAlignedBB p_149743_5_,
-            List p_149743_6_,
-            Entity entity) {
-        AxisAlignedBB axisalignedbb1 =
-                this.getCollisionBoundingBoxFromPool(p_149743_1_, p_149743_2_, p_149743_3_, p_149743_4_);
+    public void addCollisionBoxesToList(World p_149743_1_, int p_149743_2_, int p_149743_3_, int p_149743_4_,
+            AxisAlignedBB p_149743_5_, List p_149743_6_, Entity entity) {
+        AxisAlignedBB axisalignedbb1 = this
+                .getCollisionBoundingBoxFromPool(p_149743_1_, p_149743_2_, p_149743_3_, p_149743_4_);
 
         if (axisalignedbb1 != null && p_149743_5_.intersectsWith(axisalignedbb1) && (entity instanceof EntityPlayer)) {
             p_149743_6_.add(axisalignedbb1);

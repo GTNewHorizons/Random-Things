@@ -1,9 +1,11 @@
 package lumien.randomthings.Handler.Bloodmoon;
 
 import java.util.List;
+
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Network.Messages.MessageBloodmoon;
 import lumien.randomthings.Network.PacketHandler;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,6 +17,7 @@ import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.WorldServer;
 
 public class ServerBloodmoonHandler extends WorldSavedData {
+
     public static ServerBloodmoonHandler INSTANCE;
 
     private final BloodmoonSpawner bloodMoonSpawner;
@@ -50,7 +53,10 @@ public class ServerBloodmoonHandler extends WorldSavedData {
                         || world.getGameRules().getGameRuleBooleanValue("doMobSpawning")) {
                     for (int i = 0; i < Settings.BLOODMOON_SPAWNSPEED; i++) {
                         bloodMoonSpawner.findChunksForSpawning(
-                                (WorldServer) world, true, false, world.getTotalWorldTime() % 20 == 0);
+                                (WorldServer) world,
+                                true,
+                                false,
+                                world.getTotalWorldTime() % 20 == 0);
                     }
                 }
 
@@ -65,8 +71,9 @@ public class ServerBloodmoonHandler extends WorldSavedData {
 
                         if (Settings.BLOODMOON_MESSAGE) {
                             for (EntityPlayer player : ((List<EntityPlayer>) world.playerEntities)) {
-                                player.addChatMessage(new ChatComponentTranslation("text.bloodmoon.notify")
-                                        .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                                player.addChatMessage(
+                                        new ChatComponentTranslation("text.bloodmoon.notify")
+                                                .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                             }
                         }
                     }

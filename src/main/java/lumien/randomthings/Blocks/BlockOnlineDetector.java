@@ -1,11 +1,11 @@
 package lumien.randomthings.Blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.Random;
+
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityDiggingFX;
@@ -18,7 +18,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockOnlineDetector extends BlockContainerBase {
+
     IIcon[] icons;
     Random rand = new Random();
 
@@ -53,8 +57,15 @@ public class BlockOnlineDetector extends BlockContainerBase {
                     double d2 = z + (k1 + 0.5D) / b0;
 
                     EntityDiggingFX particle = (new EntityDiggingFX(
-                                    world, d0, d1, d2, d0 - x - 0.5D, d1 - y - 0.5D, d2 - z - 0.5D, this, 0))
-                            .applyColourMultiplier(x, y, z);
+                            world,
+                            d0,
+                            d1,
+                            d2,
+                            d0 - x - 0.5D,
+                            d1 - y - 0.5D,
+                            d2 - z - 0.5D,
+                            this,
+                            0)).applyColourMultiplier(x, y, z);
                     particle.setParticleIcon(getIcon(world, x, y, z, 0));
                     effectRenderer.addEffect(particle);
                 }
@@ -106,18 +117,17 @@ public class BlockOnlineDetector extends BlockContainerBase {
         }
 
         EntityDiggingFX particle = (EntityDiggingFX) new EntityDiggingFX(
-                        worldObj,
-                        d0,
-                        d1,
-                        d2,
-                        0.0D,
-                        0.0D,
-                        0.0D,
-                        this,
-                        worldObj.getBlockMetadata(target.blockX, target.blockY, target.blockZ))
-                .applyColourMultiplier(target.blockX, target.blockY, target.blockZ)
-                .multiplyVelocity(0.2F)
-                .multipleParticleScaleBy(0.6F);
+                worldObj,
+                d0,
+                d1,
+                d2,
+                0.0D,
+                0.0D,
+                0.0D,
+                this,
+                worldObj.getBlockMetadata(target.blockX, target.blockY, target.blockZ))
+                        .applyColourMultiplier(target.blockX, target.blockY, target.blockZ).multiplyVelocity(0.2F)
+                        .multipleParticleScaleBy(0.6F);
 
         particle.setParticleIcon(getIcon(worldObj, target.blockX, target.blockY, target.blockZ, 0));
 
@@ -152,16 +162,8 @@ public class BlockOnlineDetector extends BlockContainerBase {
     }
 
     @Override
-    public boolean onBlockActivated(
-            World worldObj,
-            int posX,
-            int posY,
-            int posZ,
-            EntityPlayer player,
-            int p_149727_6_,
-            float p_149727_7_,
-            float p_149727_8_,
-            float p_149727_9_) {
+    public boolean onBlockActivated(World worldObj, int posX, int posY, int posZ, EntityPlayer player, int p_149727_6_,
+            float p_149727_7_, float p_149727_8_, float p_149727_9_) {
         if (!worldObj.isRemote) {
             player.openGui(RandomThings.instance, GuiIds.ONLINE_DETECTOR, worldObj, posX, posY, posZ);
         }

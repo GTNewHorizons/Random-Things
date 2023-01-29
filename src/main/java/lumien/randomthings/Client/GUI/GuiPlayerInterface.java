@@ -2,19 +2,22 @@ package lumien.randomthings.Client.GUI;
 
 import lumien.randomthings.Container.ContainerPlayerInterface;
 import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.tileentity.RenderEndPortal;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiPlayerInterface extends GuiContainer {
+
     TileEntityPlayerInterface te;
     RenderEndPortal renderer = new RenderEndPortal();
 
     final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/playerInterface.png");
-    final ResourceLocation background_creative =
-            new ResourceLocation("randomthings:textures/gui/playerInterface_creative.png");
+    final ResourceLocation background_creative = new ResourceLocation(
+            "randomthings:textures/gui/playerInterface_creative.png");
 
     public GuiPlayerInterface(TileEntityPlayerInterface te) {
         super(new ContainerPlayerInterface(te));

@@ -1,11 +1,14 @@
 package lumien.randomthings.Library;
 
 import java.util.ArrayList;
+
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
 public class BlockPattern {
+
     private static class BlockInfo {
+
         Block block;
         int metadata;
 

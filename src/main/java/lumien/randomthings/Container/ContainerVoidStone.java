@@ -2,6 +2,7 @@ package lumien.randomthings.Container;
 
 import lumien.randomthings.Container.Slots.SlotLocked;
 import lumien.randomthings.Container.Slots.SlotVoid;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -9,6 +10,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerVoidStone extends Container {
+
     public ContainerVoidStone(InventoryPlayer playerInventory) {
         this.addSlotToContainer(new SlotVoid(80, 18));
         bindPlayerInventory(playerInventory);

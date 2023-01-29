@@ -5,6 +5,7 @@ import lumien.randomthings.Library.Interfaces.IContainerWithProperties;
 import lumien.randomthings.Network.Messages.MessageContainerProperty;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnderEnergyDistributor;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -15,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class ContainerEnderEnergyDistributor extends Container implements IContainerWithProperties {
+
     TileEntityEnderEnergyDistributor te;
     int oldBuffer;
     int oldEnergyDistributedLastTick;
@@ -85,8 +87,7 @@ public class ContainerEnderEnergyDistributor extends Container implements IConta
                 slot = (Slot) this.inventorySlots.get(k);
                 itemstack1 = slot.getStack();
 
-                if (itemstack1 != null
-                        && itemstack1.getItem() == par1ItemStack.getItem()
+                if (itemstack1 != null && itemstack1.getItem() == par1ItemStack.getItem()
                         && (!par1ItemStack.getHasSubtypes()
                                 || par1ItemStack.getItemDamage() == itemstack1.getItemDamage())
                         && ItemStack.areItemStackTagsEqual(par1ItemStack, itemstack1)
@@ -174,8 +175,8 @@ public class ContainerEnderEnergyDistributor extends Container implements IConta
 
         EntityPlayerMP player = (EntityPlayerMP) crafting;
 
-        PacketHandler.INSTANCE.sendTo(
-                new MessageContainerProperty(0, this.te.getEnergyStored(ForgeDirection.DOWN)), player);
+        PacketHandler.INSTANCE
+                .sendTo(new MessageContainerProperty(0, this.te.getEnergyStored(ForgeDirection.DOWN)), player);
         PacketHandler.INSTANCE.sendTo(new MessageContainerProperty(1, this.te.getEnergyDistributedLastTick()), player);
         PacketHandler.INSTANCE.sendTo(new MessageContainerProperty(2, this.te.getMachinesConnected()), player);
     }
@@ -188,14 +189,14 @@ public class ContainerEnderEnergyDistributor extends Container implements IConta
             ICrafting icrafting = (ICrafting) crafter;
             EntityPlayerMP player = (EntityPlayerMP) icrafting;
             if (this.oldBuffer != this.te.getEnergyStored(ForgeDirection.DOWN)) {
-                PacketHandler.INSTANCE.sendTo(
-                        new MessageContainerProperty(0, this.te.getEnergyStored(ForgeDirection.DOWN)), player);
+                PacketHandler.INSTANCE
+                        .sendTo(new MessageContainerProperty(0, this.te.getEnergyStored(ForgeDirection.DOWN)), player);
                 this.oldBuffer = te.getEnergyStored(ForgeDirection.DOWN);
             }
 
             if (this.oldEnergyDistributedLastTick != this.te.getEnergyDistributedLastTick()) {
-                PacketHandler.INSTANCE.sendTo(
-                        new MessageContainerProperty(1, this.te.getEnergyDistributedLastTick()), player);
+                PacketHandler.INSTANCE
+                        .sendTo(new MessageContainerProperty(1, this.te.getEnergyDistributedLastTick()), player);
                 this.oldEnergyDistributedLastTick = te.getEnergyStored(ForgeDirection.DOWN);
             }
 

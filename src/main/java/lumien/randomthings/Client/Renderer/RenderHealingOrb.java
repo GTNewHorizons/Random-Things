@@ -1,26 +1,28 @@
 package lumien.randomthings.Client.Renderer;
 
 import lumien.randomthings.Entity.EntityHealingOrb;
+
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RenderHealingOrb extends Render {
-    private static final ResourceLocation experienceOrbTextures =
-            new ResourceLocation("RandomThings:textures/entitys/healingOrb.png");
-    private static final String __OBFID = "CL_00000993";
+
+    private static final ResourceLocation experienceOrbTextures = new ResourceLocation(
+            "RandomThings:textures/entitys/healingOrb.png");
 
     public RenderHealingOrb() {
         this.shadowSize = 0F;
         this.shadowOpaque = 0F;
     }
 
-    public void doRender(
-            EntityHealingOrb entityHealingOrb, double par2, double par4, double par6, float par8, float par9) {
+    public void doRender(EntityHealingOrb entityHealingOrb, double par2, double par4, double par6, float par8,
+            float par9) {
         GL11.glPushMatrix();
         GL11.glTranslatef((float) par2, (float) par4, (float) par6);
         this.bindEntityTexture(entityHealingOrb);
@@ -57,16 +59,14 @@ public class RenderHealingOrb extends Render {
     }
 
     /**
-     * Returns the location of an entity's texture. Doesn't seem to be called
-     * unless you call Render.bindEntityTexture.
+     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
     protected ResourceLocation getEntityTexture(EntityHealingOrb par1EntityXPOrb) {
         return experienceOrbTextures;
     }
 
     /**
-     * Returns the location of an entity's texture. Doesn't seem to be called
-     * unless you call Render.bindEntityTexture.
+     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
     @Override
     protected ResourceLocation getEntityTexture(Entity par1Entity) {

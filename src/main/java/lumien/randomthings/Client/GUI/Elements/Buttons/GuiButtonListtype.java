@@ -2,6 +2,7 @@ package lumien.randomthings.Client.GUI.Elements.Buttons;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -9,10 +10,12 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class GuiButtonListtype extends GuiButton {
+
     ResourceLocation listTypeTextures = new ResourceLocation("randomthings:textures/gui/buttonListType.png");
     int listType;
     GuiContainer gc;
@@ -40,8 +43,7 @@ public class GuiButtonListtype extends GuiButton {
         if (this.visible) {
             p_146112_1_.getTextureManager().bindTexture(listTypeTextures);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            this.field_146123_n = p_146112_2_ >= this.xPosition
-                    && p_146112_3_ >= this.yPosition
+            this.field_146123_n = p_146112_2_ >= this.xPosition && p_146112_3_ >= this.yPosition
                     && p_146112_2_ < this.xPosition + this.width
                     && p_146112_3_ < this.yPosition + this.height;
             int k = this.getHoverState(this.field_146123_n);

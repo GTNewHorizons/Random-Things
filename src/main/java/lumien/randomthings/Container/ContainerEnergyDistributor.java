@@ -4,6 +4,7 @@ import lumien.randomthings.Library.Interfaces.IContainerWithProperties;
 import lumien.randomthings.Network.Messages.MessageContainerProperty;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnergyDistributor;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
@@ -11,6 +12,7 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class ContainerEnergyDistributor extends Container implements IContainerWithProperties {
+
     TileEntityEnergyDistributor te;
     int oldBuffer;
     int oldEnergyDistributedLastTick;
@@ -36,8 +38,8 @@ public class ContainerEnergyDistributor extends Container implements IContainerW
 
         EntityPlayerMP player = (EntityPlayerMP) crafting;
 
-        PacketHandler.INSTANCE.sendTo(
-                new MessageContainerProperty(0, this.te.getEnergyStored(ForgeDirection.DOWN)), player);
+        PacketHandler.INSTANCE
+                .sendTo(new MessageContainerProperty(0, this.te.getEnergyStored(ForgeDirection.DOWN)), player);
         PacketHandler.INSTANCE.sendTo(new MessageContainerProperty(1, this.te.getEnergyDistributedLastTick()), player);
         PacketHandler.INSTANCE.sendTo(new MessageContainerProperty(2, this.te.getMachinesConnected()), player);
     }
@@ -50,14 +52,14 @@ public class ContainerEnergyDistributor extends Container implements IContainerW
             ICrafting icrafting = (ICrafting) crafter;
             EntityPlayerMP player = (EntityPlayerMP) icrafting;
             if (this.oldBuffer != this.te.getEnergyStored(ForgeDirection.DOWN)) {
-                PacketHandler.INSTANCE.sendTo(
-                        new MessageContainerProperty(0, this.te.getEnergyStored(ForgeDirection.DOWN)), player);
+                PacketHandler.INSTANCE
+                        .sendTo(new MessageContainerProperty(0, this.te.getEnergyStored(ForgeDirection.DOWN)), player);
                 this.oldBuffer = te.getEnergyStored(ForgeDirection.DOWN);
             }
 
             if (this.oldEnergyDistributedLastTick != this.te.getEnergyDistributedLastTick()) {
-                PacketHandler.INSTANCE.sendTo(
-                        new MessageContainerProperty(1, this.te.getEnergyDistributedLastTick()), player);
+                PacketHandler.INSTANCE
+                        .sendTo(new MessageContainerProperty(1, this.te.getEnergyDistributedLastTick()), player);
                 this.oldEnergyDistributedLastTick = te.getEnergyStored(ForgeDirection.DOWN);
             }
 

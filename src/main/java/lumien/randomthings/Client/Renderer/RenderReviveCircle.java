@@ -1,19 +1,23 @@
 package lumien.randomthings.Client.Renderer;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Entity.EntityReviveCircle;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 @SideOnly(Side.CLIENT)
 public class RenderReviveCircle extends Render {
+
     ResourceLocation texture = new ResourceLocation("RandomThings:textures/entitys/reviveCircle.png");
 
     private void doRender(EntityReviveCircle circle, double posX, double posY, double posZ, float partialTickTime) {
@@ -30,7 +34,9 @@ public class RenderReviveCircle extends Render {
 
         if (circle.age < 40) {
             GL11.glScalef(
-                    circle.age * 0.05f + partialTickTime * 0.05f, 1, circle.age * 0.05f + partialTickTime * 0.05f);
+                    circle.age * 0.05f + partialTickTime * 0.05f,
+                    1,
+                    circle.age * 0.05f + partialTickTime * 0.05f);
         } else {
             GL11.glScalef(2, 1, 2);
         }
@@ -70,12 +76,7 @@ public class RenderReviveCircle extends Render {
     }
 
     @Override
-    public void doRender(
-            Entity p_76986_1_,
-            double p_76986_2_,
-            double p_76986_4_,
-            double p_76986_6_,
-            float p_76986_8_,
+    public void doRender(Entity p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_,
             float p_76986_9_) {
         doRender((EntityReviveCircle) p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_9_);
     }

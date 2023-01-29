@@ -1,10 +1,9 @@
 package lumien.randomthings.Items;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
+
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -14,7 +13,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ItemBase extends Item {
+
     public ItemBase(String name) {
         this.setUnlocalizedName(name);
         this.setCreativeTab(RandomThings.creativeTab);
@@ -24,17 +28,8 @@ public class ItemBase extends Item {
     }
 
     @Override
-    public boolean onItemUse(
-            ItemStack is,
-            EntityPlayer player,
-            World worldObj,
-            int posX,
-            int posY,
-            int posZ,
-            int side,
-            float p_77648_8_,
-            float p_77648_9_,
-            float p_77648_10_) {
+    public boolean onItemUse(ItemStack is, EntityPlayer player, World worldObj, int posX, int posY, int posZ, int side,
+            float p_77648_8_, float p_77648_9_, float p_77648_10_) {
         return super.onItemUse(is, player, worldObj, posX, posY, posZ, side, p_77648_8_, p_77648_9_, p_77648_10_);
     }
 

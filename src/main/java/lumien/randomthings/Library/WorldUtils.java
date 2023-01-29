@@ -1,9 +1,10 @@
 package lumien.randomthings.Library;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import java.util.HashSet;
 import java.util.List;
+
 import lumien.randomthings.Library.Interfaces.IValidator;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiPlayerInfo;
@@ -14,16 +15,12 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+
 public class WorldUtils {
-    public static void setConnectedBlocksTo(
-            World worldObj,
-            int startX,
-            int startY,
-            int startZ,
-            Block b,
-            int metadata,
-            Block originalBlock,
-            int originalMetadata) {
+
+    public static void setConnectedBlocksTo(World worldObj, int startX, int startY, int startZ, Block b, int metadata,
+            Block originalBlock, int originalMetadata) {
         Block atPositionBlock = worldObj.getBlock(startX, startY, startZ);
         int atPositionMetadata = worldObj.getBlockMetadata(startX, startY, startZ);
         if ((atPositionBlock != b || atPositionMetadata != metadata)
@@ -33,21 +30,62 @@ public class WorldUtils {
 
                 try {
                     setConnectedBlocksTo(
-                            worldObj, startX, startY + 1, startZ, b, metadata, originalBlock, originalMetadata);
+                            worldObj,
+                            startX,
+                            startY + 1,
+                            startZ,
+                            b,
+                            metadata,
+                            originalBlock,
+                            originalMetadata);
                     setConnectedBlocksTo(
-                            worldObj, startX, startY - 1, startZ, b, metadata, originalBlock, originalMetadata);
+                            worldObj,
+                            startX,
+                            startY - 1,
+                            startZ,
+                            b,
+                            metadata,
+                            originalBlock,
+                            originalMetadata);
 
                     setConnectedBlocksTo(
-                            worldObj, startX + 1, startY, startZ, b, metadata, originalBlock, originalMetadata);
+                            worldObj,
+                            startX + 1,
+                            startY,
+                            startZ,
+                            b,
+                            metadata,
+                            originalBlock,
+                            originalMetadata);
                     setConnectedBlocksTo(
-                            worldObj, startX - 1, startY, startZ, b, metadata, originalBlock, originalMetadata);
+                            worldObj,
+                            startX - 1,
+                            startY,
+                            startZ,
+                            b,
+                            metadata,
+                            originalBlock,
+                            originalMetadata);
 
                     setConnectedBlocksTo(
-                            worldObj, startX, startY, startZ + 1, b, metadata, originalBlock, originalMetadata);
+                            worldObj,
+                            startX,
+                            startY,
+                            startZ + 1,
+                            b,
+                            metadata,
+                            originalBlock,
+                            originalMetadata);
                     setConnectedBlocksTo(
-                            worldObj, startX, startY, startZ - 1, b, metadata, originalBlock, originalMetadata);
-                } catch (StackOverflowError ignored) {
-                }
+                            worldObj,
+                            startX,
+                            startY,
+                            startZ - 1,
+                            b,
+                            metadata,
+                            originalBlock,
+                            originalMetadata);
+                } catch (StackOverflowError ignored) {}
             }
         }
     }
@@ -73,17 +111,8 @@ public class WorldUtils {
         worldObj.notifyBlocksOfNeighborChange(posX, posY, posZ + 1, block);
     }
 
-    public static void generateCube(
-            World worldObj,
-            int posX1,
-            int posY1,
-            int posZ1,
-            int posX2,
-            int posY2,
-            int posZ2,
-            Block b,
-            int metadata,
-            int flag) {
+    public static void generateCube(World worldObj, int posX1, int posY1, int posZ1, int posX2, int posY2, int posZ2,
+            Block b, int metadata, int flag) {
         int minX = Math.min(posX1, posX2);
         int minY = Math.min(posY1, posY2);
         int minZ = Math.min(posZ1, posZ2);
@@ -120,15 +149,15 @@ public class WorldUtils {
         }
     }
 
-    public static HashSet<TileEntity> getConnectedTEs(
-            World worldObj, int posX, int posY, int posZ, IValidator validator) {
+    public static HashSet<TileEntity> getConnectedTEs(World worldObj, int posX, int posY, int posZ,
+            IValidator validator) {
         HashSet<TileEntity> tes = new HashSet<>();
         recConnectedTEs(tes, worldObj, posX, posY, posZ, validator);
         return tes;
     }
 
-    public static void recConnectedTEs(
-            HashSet<TileEntity> tes, World worldObj, int posX, int posY, int posZ, IValidator validator) {
+    public static void recConnectedTEs(HashSet<TileEntity> tes, World worldObj, int posX, int posY, int posZ,
+            IValidator validator) {
         TileEntity te = worldObj.getTileEntity(posX, posY, posZ);
         if (te != null && !tes.contains(te) && validator.matches(te)) {
             tes.add(te);

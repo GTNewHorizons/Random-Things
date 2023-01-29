@@ -1,22 +1,21 @@
 package lumien.randomthings.TileEntities;
 
+import li.cil.oc.api.machine.Arguments;
+import li.cil.oc.api.machine.Callback;
+import li.cil.oc.api.machine.Context;
+import li.cil.oc.api.network.SimpleComponent;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.Optional.Interface;
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
-import li.cil.oc.api.machine.Arguments;
-import li.cil.oc.api.machine.Callback;
-import li.cil.oc.api.machine.Context;
-import li.cil.oc.api.network.SimpleComponent;
 
 @Optional.InterfaceList(
-        value = {
-            @Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers"),
-            @Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = "ComputerCraft")
-        })
+        value = { @Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers"),
+                @Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = "ComputerCraft") })
 public class TileEntityCreativePlayerInterface extends TileEntityPlayerInterface
         implements SimpleComponent, IPeripheral {
+
     @Override
     @Optional.Method(modid = "OpenComputers")
     public String getComponentName() {
@@ -26,7 +25,7 @@ public class TileEntityCreativePlayerInterface extends TileEntityPlayerInterface
     @Callback
     @Optional.Method(modid = "OpenComputers")
     public Object[] getPlayerName(Context context, Arguments args) {
-        return new Object[] {this.getPlayerName()};
+        return new Object[] { this.getPlayerName() };
     }
 
     @Callback
@@ -39,7 +38,7 @@ public class TileEntityCreativePlayerInterface extends TileEntityPlayerInterface
     @Callback
     @Optional.Method(modid = "OpenComputers")
     public Object[] isCurrentlyConnected(Context context, Arguments args) {
-        return new Object[] {this.playerEntity != null};
+        return new Object[] { this.playerEntity != null };
     }
 
     @Override
@@ -57,7 +56,7 @@ public class TileEntityCreativePlayerInterface extends TileEntityPlayerInterface
     @Override
     @Optional.Method(modid = "ComputerCraft")
     public String[] getMethodNames() {
-        return new String[] {"getPlayerName", "setPlayerName", "isCurrentlyConnected"};
+        return new String[] { "getPlayerName", "setPlayerName", "isCurrentlyConnected" };
     }
 
     @Override
@@ -65,7 +64,7 @@ public class TileEntityCreativePlayerInterface extends TileEntityPlayerInterface
     public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments) {
         switch (method) {
             case 0:
-                return new Object[] {this.getPlayerName()};
+                return new Object[] { this.getPlayerName() };
             case 1:
                 if (arguments.length < 1) {
                     return null;
@@ -73,7 +72,7 @@ public class TileEntityCreativePlayerInterface extends TileEntityPlayerInterface
                 this.setPlayerName(arguments[0] + "");
                 break;
             case 2:
-                return new Object[] {this.playerEntity != null};
+                return new Object[] { this.playerEntity != null };
         }
         return null;
     }

@@ -1,19 +1,21 @@
 package lumien.randomthings.Client.Particle;
 
 import java.util.Random;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityPortalFX;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class ParticleWhitestone extends EntityPortalFX {
+
     EntityPlayer followPlayer;
 
     Random rng;
 
     double modX, modY, modZ;
 
-    public ParticleWhitestone(
-            EntityPlayer followPlayer, double par2, double par4, double par6, double par8, double par10, double par12) {
+    public ParticleWhitestone(EntityPlayer followPlayer, double par2, double par4, double par6, double par8,
+            double par10, double par12) {
         super(followPlayer.worldObj, par2, par4, par6, par8, par10, par12);
 
         rng = new Random();

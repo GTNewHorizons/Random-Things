@@ -1,45 +1,24 @@
 package lumien.randomthings.Handler;
 
 import java.util.Random;
+
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Configuration.VanillaChanges;
+
 import net.minecraft.client.gui.Gui;
 import net.minecraft.item.ItemDye;
 import net.minecraft.util.ResourceLocation;
 
 public class BackgroundHandler {
 
-    static String[] validBlocks = new String[] {
-        "netherrack",
-        "wool_colored",
-        "stonebrick",
-        "stonebrick_mossy",
-        "sponge",
-        "stone",
-        "red_sand",
-        "sand",
-        "bedrock",
-        "brick",
-        "clay",
-        "cobblestone",
-        "cobblestone_mossy",
-        "dirt",
-        "end_stone",
-        "glowstone",
-        "gravel",
-        "hardened_clay",
-        "hay_block_top",
-        "ice",
-        "log",
-        "melon_side",
-        "mycelium_top",
-        "nether_brick",
-        "portal"
-    };
+    static String[] validBlocks = new String[] { "netherrack", "wool_colored", "stonebrick", "stonebrick_mossy",
+            "sponge", "stone", "red_sand", "sand", "bedrock", "brick", "clay", "cobblestone", "cobblestone_mossy",
+            "dirt", "end_stone", "glowstone", "gravel", "hardened_clay", "hay_block_top", "ice", "log", "melon_side",
+            "mycelium_top", "nether_brick", "portal" };
 
     static Random rng = new Random();
 
-    static String[] logTypes = new String[] {"acacia", "big_oak", "birch", "jungle", "oak", "spruce"};
+    static String[] logTypes = new String[] { "acacia", "big_oak", "birch", "jungle", "oak", "spruce" };
 
     public static void setBackgroundBlock(String block) {
         setBackground(new ResourceLocation("textures/blocks/" + block + ".png"));
@@ -64,8 +43,8 @@ public class BackgroundHandler {
                                 + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
                         break;
                     case "wool_colored":
-                        randomBlock =
-                                randomBlock + "_" + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
+                        randomBlock = randomBlock + "_"
+                                + ItemDye.field_150921_b[rng.nextInt(ItemDye.field_150921_b.length)];
                         break;
                     case "log":
                     case "planks":

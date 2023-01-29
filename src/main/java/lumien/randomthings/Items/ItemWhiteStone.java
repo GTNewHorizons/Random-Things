@@ -1,7 +1,7 @@
 package lumien.randomthings.Items;
 
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import java.util.List;
+
 import lumien.randomthings.Configuration.ConfigDungeonLoot;
 import lumien.randomthings.Configuration.ConfigItems;
 import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
@@ -9,6 +9,7 @@ import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Network.Messages.MessageWhitestone;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -20,7 +21,10 @@ import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
+
 public class ItemWhiteStone extends ItemBase {
+
     public ItemWhiteStone() {
         super("whitestone");
         this.setTextureName("RandomThings:whitestone");
@@ -70,14 +74,15 @@ public class ItemWhiteStone extends ItemBase {
     @Override
     public void onUpdate(ItemStack stack, World worldObj, Entity entity, int par4, boolean par5) {
         int time = (int) (worldObj.getWorldTime() % 24000);
-        if (stack.getItemDamage() == 0
-                && !worldObj.isRemote
+        if (stack.getItemDamage() == 0 && !worldObj.isRemote
                 && (entity instanceof EntityPlayer)
                 && worldObj.getCurrentMoonPhaseFactor() == 1F
                 && time >= 18000
                 && time <= 22000
                 && worldObj.canBlockSeeTheSky(
-                        (int) Math.floor(entity.posX), (int) Math.floor(entity.posY), (int) Math.floor(entity.posZ))) {
+                        (int) Math.floor(entity.posX),
+                        (int) Math.floor(entity.posY),
+                        (int) Math.floor(entity.posZ))) {
             EntityPlayer player = (EntityPlayer) entity;
 
             if (stack.stackTagCompound == null) {
@@ -88,10 +93,9 @@ public class ItemWhiteStone extends ItemBase {
 
             stack.stackTagCompound.setInteger("charge", charges += 1);
 
-            if (charges % 5 == 0)
-                PacketHandler.INSTANCE.sendToAllAround(
-                        new MessageWhitestone(entity.getEntityId()),
-                        new TargetPoint(worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 16));
+            if (charges % 5 == 0) PacketHandler.INSTANCE.sendToAllAround(
+                    new MessageWhitestone(entity.getEntityId()),
+                    new TargetPoint(worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 16));
 
             if (charges == 1201) {
                 stack.stackTagCompound.setInteger("charge", 0);
@@ -115,20 +119,18 @@ public class ItemWhiteStone extends ItemBase {
 
     @Override
     public boolean onEntityItemUpdate(EntityItem entityItem) {
-        if (ConfigItems.bloodStone
-                && entityItem.dimension == 0
+        if (ConfigItems.bloodStone && entityItem.dimension == 0
                 && entityItem.getEntityItem().getItemDamage() == 1
                 && entityItem.worldObj.canBlockSeeTheSky(
-                        (int) Math.floor(entityItem.posX), (int) Math.floor(entityItem.posY), (int)
-                                Math.floor(entityItem.posZ))) {
+                        (int) Math.floor(entityItem.posX),
+                        (int) Math.floor(entityItem.posY),
+                        (int) Math.floor(entityItem.posZ))) {
             if (entityItem.worldObj.isRemote) {
-                if (ClientBloodmoonHandler.INSTANCE.isBloodmoonActive())
-                    RandomThings.proxy.spawnColoredDust(
-                            entityItem.posX, entityItem.posY, entityItem.posZ, 0, 0.1, 0, 1, 0, 0);
+                if (ClientBloodmoonHandler.INSTANCE.isBloodmoonActive()) RandomThings.proxy
+                        .spawnColoredDust(entityItem.posX, entityItem.posY, entityItem.posZ, 0, 0.1, 0, 1, 0, 0);
             } else {
                 if (ServerBloodmoonHandler.INSTANCE.isBloodmoonActive()) {
-                    entityItem
-                            .getEntityData()
+                    entityItem.getEntityData()
                             .setInteger("progress", entityItem.getEntityData().getInteger("progress") + 1);
 
                     if (entityItem.getEntityData().getInteger("progress") >= 200) {

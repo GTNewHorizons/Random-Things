@@ -5,6 +5,7 @@ import lumien.randomthings.Container.Slots.SlotDye;
 import lumien.randomthings.Container.Slots.SlotDyeCrafting;
 import lumien.randomthings.Container.Slots.SlotDyeable;
 import lumien.randomthings.Library.Colors;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -17,6 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class ContainerDyeingMachine extends Container {
+
     IInventory ingredients = new InventoryCrafting(this, 2, 1);
     IInventory result = new InventoryCraftResult();
 
@@ -155,8 +157,7 @@ public class ContainerDyeingMachine extends Container {
                 slot = (Slot) this.inventorySlots.get(k);
                 itemstack1 = slot.getStack();
 
-                if (itemstack1 != null
-                        && itemstack1.getItem() == par1ItemStack.getItem()
+                if (itemstack1 != null && itemstack1.getItem() == par1ItemStack.getItem()
                         && (!par1ItemStack.getHasSubtypes()
                                 || par1ItemStack.getItemDamage() == itemstack1.getItemDamage())
                         && ItemStack.areItemStackTagsEqual(par1ItemStack, itemstack1)

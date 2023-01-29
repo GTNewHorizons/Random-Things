@@ -1,18 +1,23 @@
 package lumien.randomthings.Items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
+
 import lumien.randomthings.Library.Colors;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ItemSpectreArmor extends ItemArmor {
+
     public ItemSpectreArmor(int armortype) {
         super(ModItems.spectreArmorMaterial, 3, armortype);
 
@@ -29,12 +34,10 @@ public class ItemSpectreArmor extends ItemArmor {
             ItemStack boots = player.getCurrentArmor(3);
 
             if (helmet != null && chestplate != null && leggings != null && boots != null) {
-                if (helmet.getItem() instanceof ItemSpectreArmor
-                        && chestplate.getItem() instanceof ItemSpectreArmor
+                if (helmet.getItem() instanceof ItemSpectreArmor && chestplate.getItem() instanceof ItemSpectreArmor
                         && leggings.getItem() instanceof ItemSpectreArmor
                         && boots.getItem() instanceof ItemSpectreArmor) {
-                    if (par1ItemStack == helmet
-                            || par1ItemStack == chestplate
+                    if (par1ItemStack == helmet || par1ItemStack == chestplate
                             || par1ItemStack == leggings
                             || par1ItemStack == boots) {
                         par3List.add(Colors.DARK_AQUA + I18n.format("text.miscellaneous.setBonus"));
@@ -53,7 +56,9 @@ public class ItemSpectreArmor extends ItemArmor {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         return String.format(
                 "RandomThings:textures/models/armor/%s_layer_%d%s.png",
-                "spectre", (slot == 2 ? 2 : 1), type == null ? "" : String.format("_%s", type));
+                "spectre",
+                (slot == 2 ? 2 : 1),
+                type == null ? "" : String.format("_%s", type));
     }
 
     @Override

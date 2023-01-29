@@ -1,12 +1,15 @@
 package lumien.randomthings.Network.Messages;
 
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import io.netty.buffer.ByteBuf;
 import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Network.IRTMessage;
+
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import io.netty.buffer.ByteBuf;
+
 public class MessageItemFilter implements IRTMessage {
+
     public enum ACTION {
         OREDICT,
         METADATA,

@@ -1,16 +1,19 @@
 package lumien.randomthings.Client.Renderer;
 
 import lumien.randomthings.Entity.EntitySpirit;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class RenderSpirit extends RenderLiving {
-    private static final ResourceLocation slimeTextures =
-            new ResourceLocation("RandomThings:textures/entitys/spirit.png");
+
+    private static final ResourceLocation slimeTextures = new ResourceLocation(
+            "RandomThings:textures/entitys/spirit.png");
     private final ModelBase scaleAmount;
 
     float t = 1F / 255F;
@@ -45,8 +48,8 @@ public class RenderSpirit extends RenderLiving {
     }
 
     /**
-     * Allows the render to do any OpenGL state modifications necessary before
-     * the model is rendered. Args: entityLiving, partialTickTime
+     * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
+     * entityLiving, partialTickTime
      */
     protected void preRenderCallback(EntitySpirit spirit, float par2) {
         GL11.glScalef(1, 1, 1);
@@ -58,16 +61,15 @@ public class RenderSpirit extends RenderLiving {
     }
 
     /**
-     * Returns the location of an entity's texture. Doesn't seem to be called
-     * unless you call Render.bindEntityTexture.
+     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
     protected ResourceLocation getEntityTexture(EntitySpirit par1EntitySpirit) {
         return slimeTextures;
     }
 
     /**
-     * Allows the render to do any OpenGL state modifications necessary before
-     * the model is rendered. Args: entityLiving, partialTickTime
+     * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
+     * entityLiving, partialTickTime
      */
     @Override
     protected void preRenderCallback(EntityLivingBase par1EntityLivingBase, float par2) {
@@ -83,8 +85,7 @@ public class RenderSpirit extends RenderLiving {
     }
 
     /**
-     * Returns the location of an entity's texture. Doesn't seem to be called
-     * unless you call Render.bindEntityTexture.
+     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
     @Override
     protected ResourceLocation getEntityTexture(Entity par1Entity) {

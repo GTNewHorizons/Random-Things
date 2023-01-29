@@ -2,12 +2,15 @@ package lumien.randomthings.Handler.ImbuingStation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import lumien.randomthings.Library.InventoryUtils;
 import lumien.randomthings.Library.ItemUtils;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
 public class ImbuingRecipe {
+
     ItemStack toImbue;
     ArrayList<ItemStack> ingredients;
     ItemStack result;

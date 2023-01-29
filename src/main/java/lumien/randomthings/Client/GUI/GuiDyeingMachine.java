@@ -1,8 +1,10 @@
 package lumien.randomthings.Client.GUI;
 
 import java.awt.Color;
+
 import lumien.randomthings.Container.ContainerDyeingMachine;
 import lumien.randomthings.Library.Colors;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -10,9 +12,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiDyeingMachine extends GuiContainer {
+
     final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/dyeingMachine.png");
 
     int targetColor;
@@ -42,10 +46,9 @@ public class GuiDyeingMachine extends GuiContainer {
             Color targetObj = new Color(targetColor);
 
             currentColor = new Color(
-                            colorMod * (currentObj.getRed() * p + targetObj.getRed() * (1 - p)),
-                            colorMod * (currentObj.getGreen() * p + targetObj.getGreen() * (1 - p)),
-                            colorMod * (currentObj.getBlue() * p + targetObj.getBlue() * (1 - p)))
-                    .getRGB();
+                    colorMod * (currentObj.getRed() * p + targetObj.getRed() * (1 - p)),
+                    colorMod * (currentObj.getGreen() * p + targetObj.getGreen() * (1 - p)),
+                    colorMod * (currentObj.getBlue() * p + targetObj.getBlue() * (1 - p))).getRGB();
         }
 
         if (p <= 0f) {

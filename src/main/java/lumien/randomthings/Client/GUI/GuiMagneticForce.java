@@ -1,6 +1,7 @@
 package lumien.randomthings.Client.GUI;
 
 import java.util.ArrayList;
+
 import lumien.randomthings.Client.GUI.Elements.GuiSlotPlayerList;
 import lumien.randomthings.Container.ContainerMagneticForce;
 import lumien.randomthings.Library.Interfaces.IPlayerListGUI;
@@ -8,12 +9,15 @@ import lumien.randomthings.Network.Messages.MessageAnswerTeleport;
 import lumien.randomthings.Network.Messages.MessageRequestTeleport;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiMagneticForce extends GuiContainer implements IPlayerListGUI {
+
     final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/magneticForce.png");
     GuiSlotPlayerList playerList;
     ArrayList<String> players;
@@ -63,7 +67,13 @@ public class GuiMagneticForce extends GuiContainer implements IPlayerListGUI {
         players.remove(mc.thePlayer.getCommandSenderName());
 
         playerList = new GuiSlotPlayerList(
-                this, this.mc, 100, 110, guiX + xSize / 2 - 100 / 2, guiY - 10 + ySize / 2 - 100 / 2 + 10, players);
+                this,
+                this.mc,
+                100,
+                110,
+                guiX + xSize / 2 - 100 / 2,
+                guiY - 10 + ySize / 2 - 100 / 2 + 10,
+                players);
     }
 
     @Override

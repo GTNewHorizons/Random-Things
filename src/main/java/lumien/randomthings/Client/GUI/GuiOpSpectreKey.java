@@ -1,15 +1,19 @@
 package lumien.randomthings.Client.GUI;
 
 import java.util.ArrayList;
+
 import lumien.randomthings.Client.GUI.Elements.GuiSlotPlayerList;
 import lumien.randomthings.Container.ContainerOpSpectreKey;
 import lumien.randomthings.Library.Interfaces.IPlayerListGUI;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiOpSpectreKey extends GuiContainer implements IPlayerListGUI {
+
     final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/opSpectreKey.png");
     GuiSlotPlayerList playerList;
     public ArrayList<String> players;
@@ -41,7 +45,13 @@ public class GuiOpSpectreKey extends GuiContainer implements IPlayerListGUI {
         int guiY = (height / 2 - ySize / 2);
 
         playerList = new GuiSlotPlayerList(
-                this, this.mc, 100, 110, guiX + xSize / 2 - 100 / 2, guiY - 10 + ySize / 2 - 100 / 2 + 10, players);
+                this,
+                this.mc,
+                100,
+                110,
+                guiX + xSize / 2 - 100 / 2,
+                guiY - 10 + ySize / 2 - 100 / 2 + 10,
+                players);
     }
 
     public int getGuiLeft() {

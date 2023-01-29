@@ -1,11 +1,10 @@
 package lumien.randomthings.Blocks.EnergyDistributors;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.Blocks.BlockContainerBase;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnderEnergyDistributor;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -15,7 +14,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockEnderEnergyDistributor extends BlockContainerBase {
+
     @SideOnly(Side.CLIENT)
     IIcon top;
 
@@ -34,10 +37,10 @@ public class BlockEnderEnergyDistributor extends BlockContainerBase {
     }
 
     @Override
-    public void breakBlock(
-            World p_149749_1_, int p_149749_2_, int p_149749_3_, int p_149749_4_, Block p_149749_5_, int p_149749_6_) {
-        TileEntityEnderEnergyDistributor distributor =
-                (TileEntityEnderEnergyDistributor) p_149749_1_.getTileEntity(p_149749_2_, p_149749_3_, p_149749_4_);
+    public void breakBlock(World p_149749_1_, int p_149749_2_, int p_149749_3_, int p_149749_4_, Block p_149749_5_,
+            int p_149749_6_) {
+        TileEntityEnderEnergyDistributor distributor = (TileEntityEnderEnergyDistributor) p_149749_1_
+                .getTileEntity(p_149749_2_, p_149749_3_, p_149749_4_);
 
         if (distributor != null) {
             distributor.dropItems();
@@ -54,16 +57,8 @@ public class BlockEnderEnergyDistributor extends BlockContainerBase {
     }
 
     @Override
-    public boolean onBlockActivated(
-            World worldObj,
-            int posX,
-            int posY,
-            int posZ,
-            EntityPlayer player,
-            int par6,
-            float par7,
-            float par8,
-            float par9) {
+    public boolean onBlockActivated(World worldObj, int posX, int posY, int posZ, EntityPlayer player, int par6,
+            float par7, float par8, float par9) {
         if (!worldObj.isRemote) {
             player.openGui(RandomThings.instance, GuiIds.ENDER_ENERGY_DISTRIBUTOR, worldObj, posX, posY, posZ);
         }

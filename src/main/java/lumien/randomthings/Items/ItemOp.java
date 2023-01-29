@@ -1,7 +1,9 @@
 package lumien.randomthings.Items;
 
 import java.util.List;
+
 import lumien.randomthings.Client.ClientTickHandler;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -9,13 +11,14 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
 public class ItemOp extends ItemBase {
+
     public ItemOp(String name) {
         super(name);
     }
 
     @Override
-    public void onUpdate(
-            ItemStack itemStack, World worldObj, net.minecraft.entity.Entity entity, int slot, boolean p_77663_5_) {
+    public void onUpdate(ItemStack itemStack, World worldObj, net.minecraft.entity.Entity entity, int slot,
+            boolean p_77663_5_) {
         if (worldObj.getTotalWorldTime() % 10 == 0 && !worldObj.isRemote) {
             if (entity instanceof EntityPlayer) {
                 EntityPlayer player = (EntityPlayer) entity;

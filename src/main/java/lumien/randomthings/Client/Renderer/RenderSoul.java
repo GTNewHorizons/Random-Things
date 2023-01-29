@@ -1,21 +1,25 @@
 package lumien.randomthings.Client.Renderer;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Entity.EntitySoul;
 import lumien.randomthings.Items.ItemGinto;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 @SideOnly(Side.CLIENT)
 public class RenderSoul extends Render {
+
     ResourceLocation soul1 = new ResourceLocation("RandomThings:textures/entitys/soul1.png");
     ResourceLocation soul2 = new ResourceLocation("RandomThings:textures/entitys/soul2.png");
 

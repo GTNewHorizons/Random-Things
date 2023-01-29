@@ -1,10 +1,8 @@
 package lumien.randomthings.Proxy;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
 import java.util.ArrayList;
 import java.util.List;
+
 import lumien.randomthings.Client.ClientTickHandler;
 import lumien.randomthings.Client.Renderer.*;
 import lumien.randomthings.Entity.*;
@@ -15,6 +13,7 @@ import lumien.randomthings.Library.Interfaces.IContainerWithProperties;
 import lumien.randomthings.Library.RenderIds;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import lumien.randomthings.TileEntities.TileEntityItemCollector;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiPlayerInfo;
 import net.minecraft.client.model.ModelSlime;
@@ -26,7 +25,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
+
 public class ClientProxy extends CommonProxy {
+
     RenderItemCollector renderer;
     private static final Minecraft mc = Minecraft.getMinecraft();
 
@@ -64,7 +68,8 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAdvancedItemCollector.class, renderer);
 
         RenderingRegistry.registerEntityRenderingHandler(
-                EntitySpirit.class, new RenderSpirit(new ModelSlime(16), new ModelSlime(0), 0.25f));
+                EntitySpirit.class,
+                new RenderSpirit(new ModelSlime(16), new ModelSlime(0), 0.25f));
         RenderingRegistry.registerEntityRenderingHandler(EntityHealingOrb.class, new RenderHealingOrb());
         RenderingRegistry.registerEntityRenderingHandler(EntitySoul.class, new RenderSoul());
         RenderingRegistry.registerEntityRenderingHandler(EntityReviveCircle.class, new RenderReviveCircle());
@@ -87,16 +92,8 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void spawnColoredDust(
-            double x,
-            double y,
-            double z,
-            double motionX,
-            double motionY,
-            double motionZ,
-            float red,
-            float green,
-            float blue) {
+    public void spawnColoredDust(double x, double y, double z, double motionX, double motionY, double motionZ,
+            float red, float green, float blue) {
         EntityReddustFX particle = new EntityReddustFX(Minecraft.getMinecraft().theWorld, x, y, z, 0, 0, 0);
         particle.setRBGColorF(red, green, blue);
         particle.motionY = motionY;

@@ -1,19 +1,16 @@
 package lumien.randomthings.TileEntities;
 
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.Optional.Interface;
-import dan200.computercraft.api.lua.ILuaContext;
-import dan200.computercraft.api.peripheral.IComputerAccess;
-import dan200.computercraft.api.peripheral.IPeripheral;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.SimpleComponent;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Library.WorldUtils;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -22,12 +19,17 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.Optional.Interface;
+import dan200.computercraft.api.lua.ILuaContext;
+import dan200.computercraft.api.peripheral.IComputerAccess;
+import dan200.computercraft.api.peripheral.IPeripheral;
+
 @Optional.InterfaceList(
-        value = {
-            @Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers"),
-            @Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = "ComputerCraft")
-        })
+        value = { @Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers"),
+                @Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = "ComputerCraft") })
 public class TileEntityOnlineDetector extends TileEntity implements SimpleComponent, IPeripheral {
+
     String username;
 
     int tickRate = 20;
@@ -95,7 +97,7 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
     @Callback
     @Optional.Method(modid = "OpenComputers")
     public Object[] isPlayerOnline(Context context, Arguments args) {
-        return new Object[] {WorldUtils.isPlayerOnline(args.checkString(0))};
+        return new Object[] { WorldUtils.isPlayerOnline(args.checkString(0)) };
     }
 
     @Callback
@@ -107,7 +109,7 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
             playerNameList[i] = ((EntityPlayer) playerEntityList.get(i)).getCommandSenderName();
         }
 
-        return new Object[] {playerNameList};
+        return new Object[] { playerNameList };
     }
 
     @Override
@@ -119,7 +121,7 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
     @Override
     @Optional.Method(modid = "ComputerCraft")
     public String[] getMethodNames() {
-        return new String[] {"isPlayerOnline", "getPlayerList"};
+        return new String[] { "isPlayerOnline", "getPlayerList" };
     }
 
     @Override
@@ -130,10 +132,10 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
                 if (arguments.length < 1) {
                     return null;
                 } else {
-                    return new Object[] {WorldUtils.isPlayerOnline(arguments[0] + "")};
+                    return new Object[] { WorldUtils.isPlayerOnline(arguments[0] + "") };
                 }
             case 1:
-                return new Object[] {generatePlayerMap()};
+                return new Object[] { generatePlayerMap() };
         }
         return null;
     }

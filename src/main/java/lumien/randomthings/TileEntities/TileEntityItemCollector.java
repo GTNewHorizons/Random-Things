@@ -1,6 +1,7 @@
 package lumien.randomthings.TileEntities;
 
 import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.entity.item.EntityItem;
@@ -25,8 +26,8 @@ public class TileEntityItemCollector extends TileEntity {
                 tickCounter = 0;
                 int targetX, targetY, targetZ;
 
-                EnumFacing facing = BlockDispenser.func_149937_b(
-                        Facing.oppositeSide[worldObj.getBlockMetadata(xCoord, yCoord, zCoord)]);
+                EnumFacing facing = BlockDispenser
+                        .func_149937_b(Facing.oppositeSide[worldObj.getBlockMetadata(xCoord, yCoord, zCoord)]);
 
                 targetX = xCoord + facing.getFrontOffsetX();
                 targetY = yCoord + facing.getFrontOffsetY();
@@ -55,7 +56,9 @@ public class TileEntityItemCollector extends TileEntity {
                         for (EntityItem ei : items) {
                             if (!ei.isDead) {
                                 ItemStack rest = TileEntityHopper.func_145889_a(
-                                        (IInventory) te, ei.getEntityItem(), Facing.oppositeSide[facing.ordinal()]);
+                                        (IInventory) te,
+                                        ei.getEntityItem(),
+                                        Facing.oppositeSide[facing.ordinal()]);
 
                                 if (rest == null || !rest.equals(ei.getEntityItem())) {
                                     if (tickRate > 2) {

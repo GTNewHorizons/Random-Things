@@ -1,12 +1,12 @@
 package lumien.randomthings.Blocks.Spectre;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
+
 import lumien.randomthings.Blocks.BlockBase;
 import lumien.randomthings.Blocks.ItemBlocks.ItemBlockColored;
 import lumien.randomthings.Library.Colors;
 import lumien.randomthings.Library.WorldUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,7 +19,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockSpectreBlock extends BlockBase {
+
     public BlockSpectreBlock() {
         super("spectreBlock", Material.rock, ItemBlockColored.class);
 
@@ -34,22 +38,21 @@ public class BlockSpectreBlock extends BlockBase {
     }
 
     @Override
-    public boolean onBlockActivated(
-            World worldObj,
-            int i,
-            int j,
-            int k,
-            EntityPlayer entityplayer,
-            int par6,
-            float par7,
-            float par8,
-            float par9) {
+    public boolean onBlockActivated(World worldObj, int i, int j, int k, EntityPlayer entityplayer, int par6,
+            float par7, float par8, float par9) {
         if (entityplayer.getCurrentEquippedItem() != null) {
             int dye = Colors.getDye(entityplayer.getCurrentEquippedItem());
             if (dye != -1) {
                 if (!worldObj.isRemote) {
                     WorldUtils.setConnectedBlocksTo(
-                            worldObj, i, j, k, this, dye, this, worldObj.getBlockMetadata(i, j, k));
+                            worldObj,
+                            i,
+                            j,
+                            k,
+                            this,
+                            dye,
+                            this,
+                            worldObj.getBlockMetadata(i, j, k));
                 }
 
                 return true;

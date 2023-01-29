@@ -1,10 +1,9 @@
 package lumien.randomthings.Blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.TileEntities.TileEntityImbuingStation;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,7 +11,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockImbuingStation extends BlockContainerBase {
+
     IIcon[] icons;
 
     public BlockImbuingStation() {
@@ -47,16 +50,8 @@ public class BlockImbuingStation extends BlockContainerBase {
     }
 
     @Override
-    public boolean onBlockActivated(
-            World worldObj,
-            int posX,
-            int posY,
-            int posZ,
-            EntityPlayer player,
-            int par6,
-            float par7,
-            float par8,
-            float par9) {
+    public boolean onBlockActivated(World worldObj, int posX, int posY, int posZ, EntityPlayer player, int par6,
+            float par7, float par8, float par9) {
         if (!worldObj.isRemote) {
             player.openGui(RandomThings.instance, GuiIds.IMBUING_STATION, worldObj, posX, posY, posZ);
         }

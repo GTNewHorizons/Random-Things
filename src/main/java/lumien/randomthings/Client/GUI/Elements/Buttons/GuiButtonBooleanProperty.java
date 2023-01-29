@@ -2,8 +2,10 @@ package lumien.randomthings.Client.GUI.Elements.Buttons;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import lumien.randomthings.Network.Messages.MessageChangeItemProperty;
 import lumien.randomthings.Network.PacketHandler;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.FontRenderer;
@@ -11,10 +13,12 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class GuiButtonBooleanProperty extends GuiButton {
+
     boolean value;
 
     String propertyName;
@@ -29,18 +33,8 @@ public class GuiButtonBooleanProperty extends GuiButton {
 
     ResourceLocation buttonImage;
 
-    public GuiButtonBooleanProperty(
-            GuiContainer gc,
-            String propertyName,
-            int itemID,
-            int itemDamage,
-            int slot,
-            int buttonID,
-            int posX,
-            int posY,
-            ResourceLocation image,
-            String toolTipTrue,
-            String toolTipFalse) {
+    public GuiButtonBooleanProperty(GuiContainer gc, String propertyName, int itemID, int itemDamage, int slot,
+            int buttonID, int posX, int posY, ResourceLocation image, String toolTipTrue, String toolTipFalse) {
         super(buttonID, posX, posY, "");
 
         this.buttonImage = image;
@@ -66,8 +60,8 @@ public class GuiButtonBooleanProperty extends GuiButton {
         super.func_146113_a(p_146113_1_);
 
         this.value = !value;
-        PacketHandler.INSTANCE.sendToServer(
-                new MessageChangeItemProperty(itemID, itemDamage, slot, propertyName, this.value));
+        PacketHandler.INSTANCE
+                .sendToServer(new MessageChangeItemProperty(itemID, itemDamage, slot, propertyName, this.value));
     }
 
     @Override
@@ -75,8 +69,7 @@ public class GuiButtonBooleanProperty extends GuiButton {
         if (this.visible) {
             p_146112_1_.getTextureManager().bindTexture(buttonImage);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            this.field_146123_n = p_146112_2_ >= this.xPosition
-                    && p_146112_3_ >= this.yPosition
+            this.field_146123_n = p_146112_2_ >= this.xPosition && p_146112_3_ >= this.yPosition
                     && p_146112_2_ < this.xPosition + this.width
                     && p_146112_3_ < this.yPosition + this.height;
             int k = this.getHoverState(this.field_146123_n);

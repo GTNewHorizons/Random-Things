@@ -2,11 +2,13 @@ package lumien.randomthings.Items;
 
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ItemMagneticForce extends ItemBase {
+
     double r = 0;
 
     public ItemMagneticForce() {

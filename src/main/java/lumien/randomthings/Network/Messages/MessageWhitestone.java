@@ -1,16 +1,19 @@
 package lumien.randomthings.Network.Messages;
 
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import io.netty.buffer.ByteBuf;
 import lumien.randomthings.Client.Particle.ParticleWhitestone;
 import lumien.randomthings.Network.IRTMessage;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import io.netty.buffer.ByteBuf;
+
 public class MessageWhitestone implements IRTMessage {
+
     int playerID;
 
     public MessageWhitestone() {}
@@ -35,10 +38,15 @@ public class MessageWhitestone implements IRTMessage {
         Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(playerID);
         if (entity instanceof EntityPlayer) {
             for (int i = 0; i < 10; i++) {
-                Minecraft.getMinecraft()
-                        .effectRenderer
-                        .addEffect(new ParticleWhitestone(
-                                (EntityPlayer) entity, 0, 0, 0, Math.random() * 2 - 1, 0, Math.random() * 2 - 1));
+                Minecraft.getMinecraft().effectRenderer.addEffect(
+                        new ParticleWhitestone(
+                                (EntityPlayer) entity,
+                                0,
+                                0,
+                                0,
+                                Math.random() * 2 - 1,
+                                0,
+                                Math.random() * 2 - 1));
             }
         }
     }

@@ -2,6 +2,7 @@ package lumien.randomthings.Items;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -10,10 +11,13 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.oredict.OreDictionary;
+
 import org.lwjgl.opengl.GL11;
 
 public class ItemIngredient extends ItemBase {
+
     private static class Ingredient {
+
         IIcon icon;
         String iconName;
         String unlocalizedName;
@@ -46,7 +50,8 @@ public class ItemIngredient extends ItemBase {
         OreDictionary.registerOre("obsidianRod", new ItemStack(this, 1, 1));
 
         ChestGenHooks.addItem(
-                ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(this, 1, 4), 1, 1, 3));
+                ChestGenHooks.VILLAGE_BLACKSMITH,
+                new WeightedRandomChestContent(new ItemStack(this, 1, 4), 1, 1, 3));
 
         this.setHasSubtypes(true);
     }

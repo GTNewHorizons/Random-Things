@@ -1,11 +1,5 @@
 package lumien.randomthings.TileEntities;
 
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.Optional.Interface;
-import cpw.mods.fml.common.registry.GameData;
-import dan200.computercraft.api.lua.ILuaContext;
-import dan200.computercraft.api.peripheral.IComputerAccess;
-import dan200.computercraft.api.peripheral.IPeripheral;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
@@ -13,6 +7,7 @@ import li.cil.oc.api.network.SimpleComponent;
 import lumien.randomthings.Library.WorldUtils;
 import lumien.randomthings.Network.Messages.MessageNotification;
 import lumien.randomthings.Network.PacketHandler;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -20,11 +15,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.Optional.Interface;
+import cpw.mods.fml.common.registry.GameData;
+import dan200.computercraft.api.lua.ILuaContext;
+import dan200.computercraft.api.peripheral.IComputerAccess;
+import dan200.computercraft.api.peripheral.IPeripheral;
+
 @Optional.InterfaceList(
-        value = {
-            @Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers"),
-            @Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = "ComputerCraft")
-        })
+        value = { @Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers"),
+                @Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = "ComputerCraft") })
 public class TileEntityNotificationInterface extends TileEntity implements IPeripheral, SimpleComponent {
 
     @Override
@@ -42,7 +42,7 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
     @Override
     @Optional.Method(modid = "ComputerCraft")
     public String[] getMethodNames() {
-        return new String[] {"sendNotification"};
+        return new String[] { "sendNotification" };
     }
 
     @Callback
@@ -80,8 +80,7 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
             throw new Exception("Invalid IconString");
         }
 
-        EntityPlayerMP receiverEntity =
-                MinecraftServer.getServer().getConfigurationManager().func_152612_a(receiver);
+        EntityPlayerMP receiverEntity = MinecraftServer.getServer().getConfigurationManager().func_152612_a(receiver);
         if (receiverEntity == null) {
             return new Object[] {};
         }
@@ -134,8 +133,7 @@ public class TileEntityNotificationInterface extends TileEntity implements IPeri
                         throw new Exception("Invalid IconString");
                     }
 
-                    EntityPlayerMP receiverEntity = MinecraftServer.getServer()
-                            .getConfigurationManager()
+                    EntityPlayerMP receiverEntity = MinecraftServer.getServer().getConfigurationManager()
                             .func_152612_a(receiver);
                     if (receiverEntity == null) {
                         throw new Exception("Player entity not found");

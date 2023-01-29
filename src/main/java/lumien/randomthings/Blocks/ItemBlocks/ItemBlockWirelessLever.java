@@ -1,10 +1,11 @@
 package lumien.randomthings.Blocks.ItemBlocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
+
 import javax.vecmath.Vector3d;
+
 import lumien.randomthings.TileEntities.TileEntityWirelessLever;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -17,7 +18,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ItemBlockWirelessLever extends ItemBlock {
+
     public ItemBlockWirelessLever(Block b) {
         super(b);
 
@@ -73,34 +78,25 @@ public class ItemBlockWirelessLever extends ItemBlock {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean func_150936_a(
-            World p_150936_1_,
-            int p_150936_2_,
-            int p_150936_3_,
-            int p_150936_4_,
-            int p_150936_5_,
-            EntityPlayer p_150936_6_,
-            ItemStack p_150936_7_) {
+    public boolean func_150936_a(World p_150936_1_, int p_150936_2_, int p_150936_3_, int p_150936_4_, int p_150936_5_,
+            EntityPlayer p_150936_6_, ItemStack p_150936_7_) {
         if (p_150936_6_.isSneaking()) {
             return true;
         } else {
             return super.func_150936_a(
-                    p_150936_1_, p_150936_2_, p_150936_3_, p_150936_4_, p_150936_5_, p_150936_6_, p_150936_7_);
+                    p_150936_1_,
+                    p_150936_2_,
+                    p_150936_3_,
+                    p_150936_4_,
+                    p_150936_5_,
+                    p_150936_6_,
+                    p_150936_7_);
         }
     }
 
     @Override
-    public boolean onItemUseFirst(
-            ItemStack stack,
-            EntityPlayer player,
-            World world,
-            int posX,
-            int posY,
-            int posZ,
-            int side,
-            float hitX,
-            float hitY,
-            float hitZ) {
+    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int posX, int posY, int posZ,
+            int side, float hitX, float hitY, float hitZ) {
         if (player.isSneaking()) {
             if (!world.isRemote) {
                 if (stack.stackTagCompound == null) {
@@ -120,18 +116,8 @@ public class ItemBlockWirelessLever extends ItemBlock {
     }
 
     @Override
-    public boolean placeBlockAt(
-            ItemStack stack,
-            EntityPlayer player,
-            World world,
-            int x,
-            int y,
-            int z,
-            int side,
-            float hitX,
-            float hitY,
-            float hitZ,
-            int metadata) {
+    public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
+            float hitX, float hitY, float hitZ, int metadata) {
         if (player.isSneaking()) {
             return false;
         }

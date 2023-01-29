@@ -1,12 +1,15 @@
 package lumien.randomthings.Items;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.Configuration.ConfigItems;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class ModItems {
+
     public static ItemFilter filter;
     public static ItemBiomeCapsule biomeCapsule;
     public static ItemBiomePainter biomePainter;
@@ -26,8 +29,8 @@ public class ModItems {
     public static ItemCreativeGrower creativeGrower;
     public static ItemCreativeChestGenerator creativeChestGenerator;
 
-    public static ArmorMaterial spectreArmorMaterial =
-            EnumHelper.addArmorMaterial("Spectre", 35, new int[] {3, 9, 7, 3}, 17);
+    public static ArmorMaterial spectreArmorMaterial = EnumHelper
+            .addArmorMaterial("Spectre", 35, new int[] { 3, 9, 7, 3 }, 17);
     public static ItemSpectreArmor spectreHelmet;
     public static ItemSpectreArmor spectreChestplate;
     public static ItemSpectreArmor spectreLeggings;
@@ -49,17 +52,13 @@ public class ModItems {
         if (ConfigItems.spectreKey) spectreKey = new ItemSpectreKey();
         if (ConfigItems.opSpectreKey) opSpectreKey = new ItemOpSpectreKey();
         if (ConfigItems.spectreArmor) {
-            spectreHelmet = (ItemSpectreArmor) new ItemSpectreArmor(0)
-                    .setUnlocalizedName("spectreHelmet")
+            spectreHelmet = (ItemSpectreArmor) new ItemSpectreArmor(0).setUnlocalizedName("spectreHelmet")
                     .setTextureName("RandomThings:armor/spectreHelmet");
-            spectreChestplate = (ItemSpectreArmor) new ItemSpectreArmor(1)
-                    .setUnlocalizedName("spectreChestplate")
+            spectreChestplate = (ItemSpectreArmor) new ItemSpectreArmor(1).setUnlocalizedName("spectreChestplate")
                     .setTextureName("RandomThings:armor/spectreChestplate");
-            spectreLeggings = (ItemSpectreArmor) new ItemSpectreArmor(2)
-                    .setUnlocalizedName("spectreLeggings")
+            spectreLeggings = (ItemSpectreArmor) new ItemSpectreArmor(2).setUnlocalizedName("spectreLeggings")
                     .setTextureName("RandomThings:armor/spectreLeggings");
-            spectreBoots = (ItemSpectreArmor) new ItemSpectreArmor(3)
-                    .setUnlocalizedName("spectreBoots")
+            spectreBoots = (ItemSpectreArmor) new ItemSpectreArmor(3).setUnlocalizedName("spectreBoots")
                     .setTextureName("RandomThings:armor/spectreBoots");
             GameRegistry.registerItem(spectreHelmet, "spectreHelmet");
             GameRegistry.registerItem(spectreChestplate, "spectreChestplate");

@@ -1,12 +1,15 @@
 package lumien.randomthings.Proxy;
 
 import java.util.ArrayList;
+
 import lumien.randomthings.Entity.EntitySoul;
 import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 
 public class CommonProxy {
+
     public int itemCollectorRenderType;
     private static final MinecraftServer server = MinecraftServer.getServer();
 
@@ -24,25 +27,16 @@ public class CommonProxy {
 
     public void spawnPfeilParticle(double x, double y, double z, double motionX, double motionY, double motionZ) {}
 
-    public void spawnColoredDust(
-            double x,
-            double y,
-            double z,
-            double motionX,
-            double motionY,
-            double motionZ,
-            float red,
-            float green,
-            float blue) {}
+    public void spawnColoredDust(double x, double y, double z, double motionX, double motionY, double motionZ,
+            float red, float green, float blue) {}
 
     public void registerTickHandler() {}
 
     public ArrayList<String> getUsernameList() {
         ArrayList<String> players = new ArrayList<>();
         for (int i = 0; i < server.getConfigurationManager().playerEntityList.size(); ++i) {
-            players.add(((EntityPlayerMP)
-                            server.getConfigurationManager().playerEntityList.get(i))
-                    .getCommandSenderName());
+            players.add(
+                    ((EntityPlayerMP) server.getConfigurationManager().playerEntityList.get(i)).getCommandSenderName());
         }
 
         return players;

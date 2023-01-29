@@ -1,10 +1,9 @@
 package lumien.randomthings.Items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntitySmokeFX;
@@ -13,6 +12,9 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemSpectreKey extends ItemBase {
 
@@ -93,8 +95,7 @@ public class ItemSpectreKey extends ItemBase {
     }
 
     /**
-     * returns the action that specifies what animation to play when the items
-     * is being used
+     * returns the action that specifies what animation to play when the items is being used
      */
     @Override
     public EnumAction getItemUseAction(ItemStack par1ItemStack) {
@@ -102,8 +103,7 @@ public class ItemSpectreKey extends ItemBase {
     }
 
     /**
-     * Called whenever this item is equipped and the right mouse button is
-     * pressed. Args: itemStack, world, entityPlayer
+     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {

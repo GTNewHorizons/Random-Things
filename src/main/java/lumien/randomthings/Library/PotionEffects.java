@@ -1,6 +1,7 @@
 package lumien.randomthings.Library;
 
 public class PotionEffects {
+
     public static final int SPEED = 1;
     public static final int SLOWNESS = 2;
     public static final int HASTE = 3;

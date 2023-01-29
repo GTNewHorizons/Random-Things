@@ -2,6 +2,7 @@ package lumien.randomthings.Container;
 
 import lumien.randomthings.Container.Slots.SlotLocked;
 import lumien.randomthings.Items.ItemFilter;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -10,6 +11,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerItemFilter extends Container {
+
     IInventory filterInventory;
     ItemStack filter;
 
@@ -68,8 +70,7 @@ public class ContainerItemFilter extends Container {
     public boolean canInteractWith(EntityPlayer entityplayer) {
         return entityplayer.getCurrentEquippedItem() != null
                 && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemFilter
-                && ItemFilter.getFilterType(
-                                entityplayer.getCurrentEquippedItem().getItemDamage())
+                && ItemFilter.getFilterType(entityplayer.getCurrentEquippedItem().getItemDamage())
                         == ItemFilter.FilterType.ITEM;
     }
 }

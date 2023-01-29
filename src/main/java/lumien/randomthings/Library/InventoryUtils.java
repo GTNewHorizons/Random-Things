@@ -6,6 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 public class InventoryUtils {
+
     public static void writeInventoryToNBT(IInventory inventory, NBTTagCompound nbt) {
         if (nbt == null || inventory == null) {
             return;

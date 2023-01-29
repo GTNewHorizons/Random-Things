@@ -1,11 +1,12 @@
 package lumien.randomthings.Items;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import java.util.List;
+
 import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Library.Colors;
 import lumien.randomthings.Library.PotionEffects;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,9 +16,12 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.util.EnumHelper;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class ItemSpectreSword extends ItemSword {
-    public static final Item.ToolMaterial spectreToolMaterial =
-            EnumHelper.addToolMaterial("Spectre", 3, 1700, 8.2f, 4f, 16);
+
+    public static final Item.ToolMaterial spectreToolMaterial = EnumHelper
+            .addToolMaterial("Spectre", 3, 1700, 8.2f, 4f, 16);
 
     public ItemSpectreSword() {
         super(spectreToolMaterial);

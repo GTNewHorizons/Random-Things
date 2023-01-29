@@ -1,7 +1,9 @@
 package lumien.randomthings.TileEntities;
 
 import java.util.List;
+
 import lumien.randomthings.Items.ItemFilter;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.entity.item.EntityItem;
@@ -19,6 +21,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Facing;
 
 public class TileEntityAdvancedItemCollector extends TileEntity {
+
     public int rangeX, rangeY, rangeZ;
     private int tickRate = 20;
     private int tickCounter = 0;
@@ -31,6 +34,7 @@ public class TileEntityAdvancedItemCollector extends TileEntity {
         rangeZ = 2;
 
         inventory = new InventoryBasic("AdvancedItemCollector", false, 1) {
+
             @Override
             public boolean isItemValidForSlot(int slot, ItemStack par2ItemStack) {
                 return par2ItemStack.getItem() instanceof ItemFilter
@@ -116,8 +120,8 @@ public class TileEntityAdvancedItemCollector extends TileEntity {
                 tickCounter = 0;
                 int targetX, targetY, targetZ;
 
-                EnumFacing facing = BlockDispenser.func_149937_b(
-                        Facing.oppositeSide[worldObj.getBlockMetadata(xCoord, yCoord, zCoord)]);
+                EnumFacing facing = BlockDispenser
+                        .func_149937_b(Facing.oppositeSide[worldObj.getBlockMetadata(xCoord, yCoord, zCoord)]);
 
                 targetX = xCoord + facing.getFrontOffsetX();
                 targetY = yCoord + facing.getFrontOffsetY();
@@ -148,7 +152,9 @@ public class TileEntityAdvancedItemCollector extends TileEntity {
                             if (inventory.getStackInSlot(0) == null
                                     || ItemFilter.matchesItem(inventory.getStackInSlot(0), ei.getEntityItem())) {
                                 ItemStack rest = TileEntityHopper.func_145889_a(
-                                        (IInventory) te, ei.getEntityItem(), Facing.oppositeSide[facing.ordinal()]);
+                                        (IInventory) te,
+                                        ei.getEntityItem(),
+                                        Facing.oppositeSide[facing.ordinal()]);
                                 if (rest == null) {
                                     if (tickRate > 2) {
                                         tickRate--;

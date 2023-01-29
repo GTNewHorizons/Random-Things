@@ -2,6 +2,7 @@ package lumien.randomthings.Container;
 
 import lumien.randomthings.Container.Slots.SlotLocked;
 import lumien.randomthings.Container.Slots.SlotOutputOnly;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -10,6 +11,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerEnderLetter extends Container {
+
     IInventory letterInventory;
     ItemStack letter;
 
@@ -77,8 +79,7 @@ public class ContainerEnderLetter extends Container {
                 slot = (Slot) this.inventorySlots.get(k);
                 itemstack1 = slot.getStack();
 
-                if (itemstack1 != null
-                        && itemstack1.getItem() == par1ItemStack.getItem()
+                if (itemstack1 != null && itemstack1.getItem() == par1ItemStack.getItem()
                         && (!par1ItemStack.getHasSubtypes()
                                 || par1ItemStack.getItemDamage() == itemstack1.getItemDamage())
                         && ItemStack.areItemStackTagsEqual(par1ItemStack, itemstack1)) {

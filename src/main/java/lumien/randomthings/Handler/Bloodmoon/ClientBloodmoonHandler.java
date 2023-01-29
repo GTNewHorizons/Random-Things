@@ -1,12 +1,15 @@
 package lumien.randomthings.Handler.Bloodmoon;
 
 import lumien.randomthings.Configuration.Settings;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
 import org.lwjgl.opengl.GL11;
 
 public class ClientBloodmoonHandler {
+
     public static final ClientBloodmoonHandler INSTANCE = new ClientBloodmoonHandler();
     boolean bloodMoon;
 

@@ -2,6 +2,7 @@ package lumien.randomthings.Items;
 
 import lumien.randomthings.Network.Messages.MessagePaintBiome;
 import lumien.randomthings.Network.PacketHandler;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,6 +10,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 public class ItemBiomePainter extends ItemBase {
+
     public ItemBiomePainter() {
         super("biomePainter");
         this.setMaxStackSize(1);
@@ -16,17 +18,8 @@ public class ItemBiomePainter extends ItemBase {
     }
 
     @Override
-    public boolean onItemUse(
-            ItemStack par1ItemStack,
-            EntityPlayer par2EntityPlayer,
-            World par3World,
-            int par4,
-            int par5,
-            int par6,
-            int par7,
-            float par8,
-            float par9,
-            float par10) {
+    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4,
+            int par5, int par6, int par7, float par8, float par9, float par10) {
         if (par2EntityPlayer.inventory.hasItem(ModItems.biomeCapsule)) {
             if (!par3World.isRemote) {
                 for (int i = 0; i < par2EntityPlayer.inventory.getSizeInventory(); i++) {
@@ -50,7 +43,11 @@ public class ItemBiomePainter extends ItemBase {
                                 }
                                 PacketHandler.INSTANCE.sendToDimension(
                                         new MessagePaintBiome(
-                                                par4, par5, par6, par3World.provider.dimensionId, biomeID),
+                                                par4,
+                                                par5,
+                                                par6,
+                                                par3World.provider.dimensionId,
+                                                biomeID),
                                         par3World.provider.dimensionId);
                             }
                         }

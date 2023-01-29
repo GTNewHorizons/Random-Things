@@ -1,8 +1,8 @@
 package lumien.randomthings.Client.Renderer;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Library.RenderIds;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -11,14 +11,16 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+
 public class RenderWirelessLever implements ISimpleBlockRenderingHandler {
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {}
 
     @Override
-    public boolean renderWorldBlock(
-            IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
+            RenderBlocks renderer) {
         int l = renderer.blockAccess.getBlockMetadata(x, y, z);
         int i1 = l & 7;
         boolean flag = (l & 8) > 0;

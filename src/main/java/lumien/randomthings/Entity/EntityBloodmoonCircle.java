@@ -1,17 +1,20 @@
 package lumien.randomthings.Entity;
 
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import io.netty.buffer.ByteBuf;
 import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Items.ItemBloodstone;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import io.netty.buffer.ByteBuf;
+
 public class EntityBloodmoonCircle extends Entity implements IEntityAdditionalSpawnData {
+
     public int age;
 
     int centerX, centerY, centerZ;
@@ -24,8 +27,8 @@ public class EntityBloodmoonCircle extends Entity implements IEntityAdditionalSp
         this.ignoreFrustumCheck = true;
     }
 
-    public EntityBloodmoonCircle(
-            World worldObj, double posX, double posY, double posZ, int centerX, int centerY, int centerZ) {
+    public EntityBloodmoonCircle(World worldObj, double posX, double posY, double posZ, int centerX, int centerY,
+            int centerZ) {
         super(worldObj);
 
         this.setPosition(posX, posY, posZ);
@@ -99,14 +102,14 @@ public class EntityBloodmoonCircle extends Entity implements IEntityAdditionalSp
 
         if (worldObj.isRemote) {
             if (age < 100) {
-                RandomThings.proxy.spawnColoredDust(
-                        centerX + 2 + 0.5, centerY + 1, centerZ + 2 + 0.5, 0, 0.1, 0, 1, 1, 1);
-                RandomThings.proxy.spawnColoredDust(
-                        centerX - 2 + 0.5, centerY + 1, centerZ + 2 + 0.5, 0, 0.1, 0, 1, 1, 1);
-                RandomThings.proxy.spawnColoredDust(
-                        centerX - 2 + 0.5, centerY + 1, centerZ - 2 + 0.5, 0, 0.1, 0, 1, 1, 1);
-                RandomThings.proxy.spawnColoredDust(
-                        centerX + 2 + 0.5, centerY + 1, centerZ - 2 + 0.5, 0, 0.1, 0, 1, 1, 1);
+                RandomThings.proxy
+                        .spawnColoredDust(centerX + 2 + 0.5, centerY + 1, centerZ + 2 + 0.5, 0, 0.1, 0, 1, 1, 1);
+                RandomThings.proxy
+                        .spawnColoredDust(centerX - 2 + 0.5, centerY + 1, centerZ + 2 + 0.5, 0, 0.1, 0, 1, 1, 1);
+                RandomThings.proxy
+                        .spawnColoredDust(centerX - 2 + 0.5, centerY + 1, centerZ - 2 + 0.5, 0, 0.1, 0, 1, 1, 1);
+                RandomThings.proxy
+                        .spawnColoredDust(centerX + 2 + 0.5, centerY + 1, centerZ - 2 + 0.5, 0, 0.1, 0, 1, 1, 1);
             } else if (age > 150 && age < 300) {
                 RandomThings.proxy.spawnColoredDust(centerX + 0.5, centerY + 1, centerZ + 2 + 0.5, 0, 0.1, 0, 1, 0, 0);
                 RandomThings.proxy.spawnColoredDust(centerX - 2 + 0.5, centerY + 1, centerZ + 0.5, 0, 0.1, 0, 1, 0, 0);

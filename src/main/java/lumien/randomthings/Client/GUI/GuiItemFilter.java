@@ -7,6 +7,7 @@ import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.ClientUtil;
 import lumien.randomthings.Network.Messages.MessageItemFilter;
 import lumien.randomthings.Network.PacketHandler;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
@@ -15,9 +16,11 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiItemFilter extends GuiContainer {
+
     final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/itemFilter.png");
     EntityPlayer player;
     ItemStack itemFilter;
@@ -26,8 +29,8 @@ public class GuiItemFilter extends GuiContainer {
     GuiButtonBooleanProperty metadataButton;
     GuiButtonListtype listTypeButton;
 
-    public GuiItemFilter(
-            ItemStack filter, EntityPlayer player, IInventory inventoryPlayer, IInventory inventoryFilter) {
+    public GuiItemFilter(ItemStack filter, EntityPlayer player, IInventory inventoryPlayer,
+            IInventory inventoryFilter) {
         super(new ContainerItemFilter(filter, inventoryPlayer, inventoryFilter));
 
         xSize = 220;
@@ -72,7 +75,11 @@ public class GuiItemFilter extends GuiContainer {
         this.buttonList.add(oreDictButton);
 
         listTypeButton = new GuiButtonListtype(
-                this, 1, guiLeft + 173, guiTop + 4 + 22, itemFilter.stackTagCompound.getInteger("listType"));
+                this,
+                1,
+                guiLeft + 173,
+                guiTop + 4 + 22,
+                itemFilter.stackTagCompound.getInteger("listType"));
         this.buttonList.add(listTypeButton);
     }
 

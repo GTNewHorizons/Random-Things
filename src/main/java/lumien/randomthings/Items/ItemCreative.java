@@ -1,7 +1,9 @@
 package lumien.randomthings.Items;
 
 import java.util.List;
+
 import lumien.randomthings.Client.ClientTickHandler;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

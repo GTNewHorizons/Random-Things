@@ -3,6 +3,7 @@ package lumien.randomthings.Client.ParticleSystem;
 import javax.vecmath.Vector3f;
 
 public class Particle {
+
     Vector3f pos;
     Vector3f velocity;
     Vector3f gravity;

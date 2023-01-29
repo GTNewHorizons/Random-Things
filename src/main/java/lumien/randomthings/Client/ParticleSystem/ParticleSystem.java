@@ -9,8 +9,11 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.FloatBuffer;
 import java.nio.charset.StandardCharsets;
+
 import javax.vecmath.Vector3f;
+
 import lumien.randomthings.RandomThings;
+
 import org.apache.logging.log4j.Level;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.ARBShaderObjects;
@@ -18,6 +21,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 
 public class ParticleSystem {
+
     int programID;
     int vertexShaderID;
     int fragmentShaderID;
@@ -170,7 +174,8 @@ public class ParticleSystem {
             glShaderSource(shader, readFileAsString(filename));
             glCompileShader(shader);
             if (ARBShaderObjects.glGetObjectParameteriARB(shader, ARBShaderObjects.GL_OBJECT_COMPILE_STATUS_ARB)
-                    == GL11.GL_FALSE) throw new RuntimeException("Error creating shader");
+                    == GL11.GL_FALSE)
+                throw new RuntimeException("Error creating shader");
             return shader;
         } catch (Exception exc) {
             ARBShaderObjects.glDeleteObjectARB(shader);

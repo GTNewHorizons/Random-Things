@@ -1,13 +1,11 @@
 package lumien.randomthings.Network.Messages;
 
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import io.netty.buffer.ByteBuf;
 import java.awt.Color;
 import java.util.Random;
+
 import lumien.randomthings.Items.ItemBiomeCapsule;
 import lumien.randomthings.Network.IRTMessage;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntitySmokeFX;
@@ -15,7 +13,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import io.netty.buffer.ByteBuf;
+
 public class MessagePaintBiome implements IRTMessage {
+
     int posX, posY, posZ, dimensionID, biomeID;
 
     public MessagePaintBiome() {}
@@ -55,9 +59,7 @@ public class MessagePaintBiome implements IRTMessage {
             byte[] biomeArray = c.getBiomeArray();
             biomeArray[(posZ & 15) << 4 | (posX & 15)] = (byte) (biomeID & 255);
             c.setBiomeArray(biomeArray);
-            Minecraft.getMinecraft()
-                    .thePlayer
-                    .worldObj
+            Minecraft.getMinecraft().thePlayer.worldObj
                     .markBlocksDirtyVertical(posX, posZ, 0, player.worldObj.getActualHeight());
             BiomeGenBase biome = BiomeGenBase.getBiome(biomeID);
             int colorInt = ItemBiomeCapsule.getColorForBiome(biome);

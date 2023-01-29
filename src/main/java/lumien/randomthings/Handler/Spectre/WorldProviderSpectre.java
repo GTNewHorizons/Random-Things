@@ -1,13 +1,16 @@
 package lumien.randomthings.Handler.Spectre;
 
 import java.util.Arrays;
+
 import lumien.randomthings.Configuration.Settings;
+
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.chunk.IChunkProvider;
 
 public class WorldProviderSpectre extends WorldProvider {
+
     private float[] colorsSunriseSunset;
 
     public WorldProviderSpectre() {
@@ -57,7 +60,7 @@ public class WorldProviderSpectre extends WorldProvider {
 
     @Override
     public float[] calcSunriseSunsetColors(float par1, float par2) {
-        return new float[] {0, 0, 0, 0};
+        return new float[] { 0, 0, 0, 0 };
     }
 
     @Override

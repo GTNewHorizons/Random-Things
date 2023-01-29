@@ -1,12 +1,12 @@
 package lumien.randomthings.Items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
+
 import lumien.randomthings.Entity.EntityBloodmoonCircle;
 import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Library.BlockPattern;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -18,7 +18,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ItemBloodstone extends ItemBase {
+
     public static final float MAX_CHARGES = 400;
 
     public static BlockPattern ritualPattern;
@@ -65,20 +69,10 @@ public class ItemBloodstone extends ItemBase {
     }
 
     @Override
-    public boolean onItemUse(
-            ItemStack is,
-            EntityPlayer player,
-            World worldObj,
-            int posX,
-            int posY,
-            int posZ,
-            int side,
-            float p_77648_8_,
-            float p_77648_9_,
-            float p_77648_10_) {
+    public boolean onItemUse(ItemStack is, EntityPlayer player, World worldObj, int posX, int posY, int posZ, int side,
+            float p_77648_8_, float p_77648_9_, float p_77648_10_) {
         if (worldObj.getBlock(posX, posY, posZ) == Blocks.obsidian) {
-            if (!worldObj.isRemote
-                    && worldObj.getTotalWorldTime() > 15000
+            if (!worldObj.isRemote && worldObj.getTotalWorldTime() > 15000
                     && !ServerBloodmoonHandler.INSTANCE.isBloodmoonScheduled()) {
                 if (ritualPattern.matches(worldObj, posX, posY, posZ)) {
                     int charges = 0;
@@ -97,8 +91,15 @@ public class ItemBloodstone extends ItemBase {
                                         posY + 1 + 2,
                                         posZ + 0.5f + 2));
                         if (list.isEmpty()) {
-                            worldObj.spawnEntityInWorld(new EntityBloodmoonCircle(
-                                    worldObj, posX + 0.5f, posY + 1, posZ + 0.5f, posX, posY, posZ));
+                            worldObj.spawnEntityInWorld(
+                                    new EntityBloodmoonCircle(
+                                            worldObj,
+                                            posX + 0.5f,
+                                            posY + 1,
+                                            posZ + 0.5f,
+                                            posX,
+                                            posY,
+                                            posZ));
 
                             if (!player.capabilities.isCreativeMode) {
                                 is.stackTagCompound.setInteger("charges", charges - 50);
@@ -109,8 +110,7 @@ public class ItemBloodstone extends ItemBase {
             }
             return true;
         }
-        if (!worldObj.isRemote
-                && player.isSneaking()
+        if (!worldObj.isRemote && player.isSneaking()
                 && player.getCommandSenderName().equals(RandomThings.AUTHOR_USERNAME)) {
             ritualPattern.place(worldObj, posX, posY, posZ);
         }

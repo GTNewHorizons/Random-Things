@@ -1,17 +1,20 @@
 package lumien.randomthings.Handler;
 
+import lumien.randomthings.Client.Renderer.RenderBlut;
+import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
+import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
+import lumien.randomthings.RandomThings;
+
+import net.minecraft.client.Minecraft;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.WorldTickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import lumien.randomthings.Client.Renderer.RenderBlut;
-import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
-import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
-import lumien.randomthings.RandomThings;
-import net.minecraft.client.Minecraft;
 
 public class RTTickHandler {
+
     @SubscribeEvent
     public void tick(TickEvent event) {
         switch (event.side) {

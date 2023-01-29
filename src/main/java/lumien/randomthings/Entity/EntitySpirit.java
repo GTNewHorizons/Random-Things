@@ -1,8 +1,7 @@
 package lumien.randomthings.Entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.Items.ModItems;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.item.Item;
@@ -11,7 +10,11 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class EntitySpirit extends EntityMob {
+
     ChunkCoordinates spawnPosition;
     int lifetime;
 
@@ -64,8 +67,7 @@ public class EntitySpirit extends EntityMob {
     protected void updateAITasks() {
         super.updateAITasks();
 
-        if (this.spawnPosition == null
-                || this.rand.nextInt(30) == 0
+        if (this.spawnPosition == null || this.rand.nextInt(30) == 0
                 || this.spawnPosition.getDistanceSquared((int) this.posX, (int) this.posY, (int) this.posZ) < 4.0F) {
             this.spawnPosition = new ChunkCoordinates(
                     (int) this.posX + this.rand.nextInt(7) - this.rand.nextInt(7),
@@ -122,9 +124,8 @@ public class EntitySpirit extends EntityMob {
     protected void fall(float par1) {}
 
     /**
-     * Takes in the distance the entity has fallen this tick and whether its on
-     * the ground to update the fall distance and deal fall damage if landing on
-     * the ground. Args: distanceFallenThisTick, onGround
+     * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
+     * and deal fall damage if landing on the ground. Args: distanceFallenThisTick, onGround
      */
     @Override
     protected void updateFallState(double par1, boolean par3) {}
@@ -151,11 +152,9 @@ public class EntitySpirit extends EntityMob {
 
             if (this.onGround) {
                 f2 = this.worldObj.getBlock(
-                                        MathHelper.floor_double(this.posX),
-                                        MathHelper.floor_double(this.boundingBox.minY) - 1,
-                                        MathHelper.floor_double(this.posZ))
-                                .slipperiness
-                        * 0.91F;
+                        MathHelper.floor_double(this.posX),
+                        MathHelper.floor_double(this.boundingBox.minY) - 1,
+                        MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
             }
 
             float f3 = 0.16277136F / (f2 * f2 * f2);
@@ -164,11 +163,9 @@ public class EntitySpirit extends EntityMob {
 
             if (this.onGround) {
                 f2 = this.worldObj.getBlock(
-                                        MathHelper.floor_double(this.posX),
-                                        MathHelper.floor_double(this.boundingBox.minY) - 1,
-                                        MathHelper.floor_double(this.posZ))
-                                .slipperiness
-                        * 0.91F;
+                        MathHelper.floor_double(this.posX),
+                        MathHelper.floor_double(this.boundingBox.minY) - 1,
+                        MathHelper.floor_double(this.posZ)).slipperiness * 0.91F;
             }
 
             this.moveEntity(this.motionX, this.motionY, this.motionZ);

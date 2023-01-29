@@ -1,6 +1,7 @@
 package lumien.randomthings.TileEntities;
 
 import lumien.randomthings.Blocks.ModBlocks;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -14,6 +15,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityPlayerInterface extends TileEntity implements ISidedInventory {
+
     String playerName;
     EntityPlayerMP playerEntity;
 
@@ -64,24 +66,27 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
         if (!this.worldObj.isRemote) {
             if (this.worldObj.getTotalWorldTime() % 20 == 0) {
                 if (this.playerEntity == null && !this.playerName.equals("")) {
-                    EntityPlayerMP tempPlayer = MinecraftServer.getServer()
-                            .getConfigurationManager()
+                    EntityPlayerMP tempPlayer = MinecraftServer.getServer().getConfigurationManager()
                             .func_152612_a(this.playerName);
                     if (tempPlayer != null) {
-                        playerEntity = MinecraftServer.getServer()
-                                .getConfigurationManager()
+                        playerEntity = MinecraftServer.getServer().getConfigurationManager()
                                 .func_152612_a(this.playerName);
                         this.worldObj.notifyBlocksOfNeighborChange(
-                                this.xCoord, this.yCoord, this.zCoord, ModBlocks.playerInterface);
+                                this.xCoord,
+                                this.yCoord,
+                                this.zCoord,
+                                ModBlocks.playerInterface);
                     }
                 } else {
-                    EntityPlayerMP tempPlayer = MinecraftServer.getServer()
-                            .getConfigurationManager()
+                    EntityPlayerMP tempPlayer = MinecraftServer.getServer().getConfigurationManager()
                             .func_152612_a(this.playerName);
                     if (tempPlayer != playerEntity) {
                         this.playerEntity = null;
                         this.worldObj.notifyBlocksOfNeighborChange(
-                                this.xCoord, this.yCoord, this.zCoord, ModBlocks.playerInterface);
+                                this.xCoord,
+                                this.yCoord,
+                                this.zCoord,
+                                ModBlocks.playerInterface);
                     }
                 }
             }
@@ -194,15 +199,12 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         checkPlayerEntity();
-        if (this.playerEntity == null
-                || this.playerEntity.inventoryContainer == null
+        if (this.playerEntity == null || this.playerEntity.inventoryContainer == null
                 || this.playerEntity.inventory == null
                 || this.playerEntity.inventoryContainer.getSlotFromInventory(this.playerEntity.inventory, i) == null) {
             return false;
         }
-        return this.playerEntity
-                .inventoryContainer
-                .getSlotFromInventory(this.playerEntity.inventory, i)
+        return this.playerEntity.inventoryContainer.getSlotFromInventory(this.playerEntity.inventory, i)
                 .isItemValid(itemstack);
     }
 

@@ -3,15 +3,18 @@ package lumien.randomthings.Client.Renderer;
 import static org.lwjgl.opengl.GL11.*;
 
 import lumien.randomthings.Client.RenderUtils;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+
 import org.lwjgl.opengl.GL11;
 
 public class RenderBlut {
+
     static final ResourceLocation blut_vene = new ResourceLocation("randomthings:textures/blut/blut_vene.png");
     static final ResourceLocation blut_arterie = new ResourceLocation("randomthings:textures/blut/blut_arterie.png");
     static Minecraft mc = Minecraft.getMinecraft();

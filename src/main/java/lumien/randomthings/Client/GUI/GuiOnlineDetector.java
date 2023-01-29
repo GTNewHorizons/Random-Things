@@ -4,15 +4,18 @@ import lumien.randomthings.Container.ContainerOnlineDetector;
 import lumien.randomthings.Network.Messages.MessageOnlineDetector;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 public class GuiOnlineDetector extends GuiContainer {
+
     TileEntityOnlineDetector te;
 
     final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/onlineDetector.png");
@@ -32,7 +35,11 @@ public class GuiOnlineDetector extends GuiContainer {
     protected void actionPerformed(GuiButton buttonPressed) {
         if (buttonPressed == saveButton && !usernameInput.getText().equals("")) {
             MessageOnlineDetector packet = new MessageOnlineDetector(
-                    usernameInput.getText(), te.xCoord, te.yCoord, te.zCoord, te.getWorldObj().provider.dimensionId);
+                    usernameInput.getText(),
+                    te.xCoord,
+                    te.yCoord,
+                    te.zCoord,
+                    te.getWorldObj().provider.dimensionId);
             PacketHandler.INSTANCE.sendToServer(packet);
         }
     }
@@ -41,7 +48,12 @@ public class GuiOnlineDetector extends GuiContainer {
     public void initGui() {
         super.initGui();
         saveButton = new GuiButton(
-                0, (width / 2 - 50 / 2 + 50), (height / 2 + 10), 50, 20, I18n.format("text.miscellaneous.save"));
+                0,
+                (width / 2 - 50 / 2 + 50),
+                (height / 2 + 10),
+                50,
+                20,
+                I18n.format("text.miscellaneous.save"));
         this.buttonList.add(saveButton);
         Keyboard.enableRepeatEvents(true);
 
@@ -63,9 +75,8 @@ public class GuiOnlineDetector extends GuiContainer {
 
     @Override
     protected void keyTyped(char par1, int pressedKey) {
-        if (pressedKey == Keyboard.KEY_ESCAPE
-                || (!this.usernameInput.isFocused()
-                        && pressedKey == this.mc.gameSettings.keyBindInventory.getKeyCode())) {
+        if (pressedKey == Keyboard.KEY_ESCAPE || (!this.usernameInput.isFocused()
+                && pressedKey == this.mc.gameSettings.keyBindInventory.getKeyCode())) {
             this.mc.thePlayer.closeScreen();
         }
         this.usernameInput.textboxKeyTyped(par1, pressedKey);

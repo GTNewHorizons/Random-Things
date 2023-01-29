@@ -1,16 +1,21 @@
 package lumien.randomthings.Potions;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.awt.*;
+
 import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Library.PotionIds;
+
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class PotionImbue extends Potion {
+
     static float cf = 1F / 255F;
     Color potionColor;
     ResourceLocation icon;
@@ -24,7 +29,7 @@ public class PotionImbue extends Potion {
 
     @Override
     public int getLiquidColor() {
-        /*Override super and return 0 to not render potion particles on the player*/
+        /* Override super and return 0 to not render potion particles on the player */
         return 0;
     }
 

@@ -2,14 +2,6 @@ package lumien.randomthings.Handler;
 
 import static org.lwjgl.opengl.GL11.*;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Configuration.ConfigItems;
@@ -28,6 +20,7 @@ import lumien.randomthings.Library.PotionEffects;
 import lumien.randomthings.Mixins.Minecraft.EntityLivingAccessor;
 import lumien.randomthings.Potions.ModPotions;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
@@ -66,7 +59,17 @@ import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.WorldEvent;
+
 import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SuppressWarnings("unused")
 public class RTEventHandler {
@@ -94,8 +97,7 @@ public class RTEventHandler {
         EntityPlayer player = mc.thePlayer;
         if (player != null) {
             ItemStack item = player.getCurrentEquippedItem();
-            if (item != null
-                    && item.getItem() == ModItems.filter
+            if (item != null && item.getItem() == ModItems.filter
                     && item.getItemDamage() == ItemFilter.FilterType.POSITION.ordinal()
                     && item.stackTagCompound != null) {
                 DimensionCoordinate pos = ItemFilter.getPosition(item);
@@ -111,7 +113,14 @@ public class RTEventHandler {
                     {
                         GL11.glTranslated(-playerX, -playerY, -playerZ);
                         RenderUtils.drawCube(
-                                pos.posX - 0.01F, pos.posY - 0.01F, pos.posZ - 0.01F, 1.02f, 0.4f, 0, 1, 0.2f);
+                                pos.posX - 0.01F,
+                                pos.posY - 0.01F,
+                                pos.posZ - 0.01F,
+                                1.02f,
+                                0.4f,
+                                0,
+                                1,
+                                0.2f);
                     }
                     GL11.glPopMatrix();
 
@@ -139,8 +148,9 @@ public class RTEventHandler {
         if (Settings.BLOODMOON_NOSLEEP) {
             if (RandomThings.proxy.isBloodmoon()) {
                 event.result = EnumStatus.OTHER_PROBLEM;
-                event.entityPlayer.addChatMessage(new ChatComponentTranslation("text.bloodmoon.nosleep")
-                        .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                event.entityPlayer.addChatMessage(
+                        new ChatComponentTranslation("text.bloodmoon.nosleep")
+                                .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
             }
         }
     }
@@ -221,8 +231,7 @@ public class RTEventHandler {
             ItemStack boots = player.getCurrentArmor(3);
 
             if (helmet != null && chestplate != null && leggings != null && boots != null) {
-                if (helmet.getItem() instanceof ItemSpectreArmor
-                        && chestplate.getItem() instanceof ItemSpectreArmor
+                if (helmet.getItem() instanceof ItemSpectreArmor && chestplate.getItem() instanceof ItemSpectreArmor
                         && leggings.getItem() instanceof ItemSpectreArmor
                         && boots.getItem() instanceof ItemSpectreArmor) {
                     glEnable(GL_BLEND);
@@ -264,8 +273,8 @@ public class RTEventHandler {
     @SubscribeEvent
     public void loadWorld(WorldEvent.Load event) {
         if (!event.world.isRemote && event.world.provider.dimensionId == Settings.SPECTRE_DIMENSON_ID) {
-            SpectreHandler spectreHandler =
-                    (SpectreHandler) event.world.mapStorage.loadData(SpectreHandler.class, "SpectreHandler");
+            SpectreHandler spectreHandler = (SpectreHandler) event.world.mapStorage
+                    .loadData(SpectreHandler.class, "SpectreHandler");
             if (spectreHandler == null) {
                 spectreHandler = new SpectreHandler();
                 spectreHandler.markDirty();
@@ -278,8 +287,8 @@ public class RTEventHandler {
         }
 
         if (!event.world.isRemote && event.world.provider.dimensionId == 0) {
-            ServerBloodmoonHandler.INSTANCE =
-                    (ServerBloodmoonHandler) event.world.mapStorage.loadData(ServerBloodmoonHandler.class, "Bloodmoon");
+            ServerBloodmoonHandler.INSTANCE = (ServerBloodmoonHandler) event.world.mapStorage
+                    .loadData(ServerBloodmoonHandler.class, "Bloodmoon");
 
             if (ServerBloodmoonHandler.INSTANCE == null) {
                 ServerBloodmoonHandler.INSTANCE = new ServerBloodmoonHandler();
@@ -320,15 +329,9 @@ public class RTEventHandler {
                                                         event.entityPlayer,
                                                         "random.pop",
                                                         0.2F,
-                                                        ((event.entityPlayer
-                                                                                                .getRNG()
-                                                                                                .nextFloat()
-                                                                                        - event.entityPlayer
-                                                                                                .getRNG()
-                                                                                                .nextFloat())
-                                                                                * 0.7F
-                                                                        + 1.0F)
-                                                                * 2.0F);
+                                                        ((event.entityPlayer.getRNG().nextFloat()
+                                                                - event.entityPlayer.getRNG().nextFloat()) * 0.7F
+                                                                + 1.0F) * 2.0F);
                                                 break;
                                         }
                                         event.setCanceled(true);
@@ -456,12 +459,13 @@ public class RTEventHandler {
                                 && chestplate.getItem() instanceof ItemSpectreArmor
                                 && leggings.getItem() instanceof ItemSpectreArmor
                                 && boots.getItem() instanceof ItemSpectreArmor) {
-                            player.worldObj.spawnEntityInWorld(new EntityHealingOrb(
-                                    player.worldObj,
-                                    event.entityLiving.posX,
-                                    event.entityLiving.posY + event.entityLiving.height / 2,
-                                    event.entityLiving.posZ,
-                                    event.ammount / 10));
+                            player.worldObj.spawnEntityInWorld(
+                                    new EntityHealingOrb(
+                                            player.worldObj,
+                                            event.entityLiving.posX,
+                                            event.entityLiving.posY + event.entityLiving.height / 2,
+                                            event.entityLiving.posZ,
+                                            event.ammount / 10));
                         }
                     }
                 }
@@ -474,12 +478,13 @@ public class RTEventHandler {
         if (!event.entity.worldObj.isRemote) {
             if (event.entityLiving instanceof EntityPlayer && !(event.entityLiving instanceof FakePlayer)) {
                 EntityPlayer deadPlayer = ((EntityPlayer) event.entityLiving);
-                deadPlayer.worldObj.spawnEntityInWorld(new EntitySoul(
-                        deadPlayer.worldObj,
-                        deadPlayer.posX,
-                        deadPlayer.posY,
-                        deadPlayer.posZ,
-                        deadPlayer.getGameProfile().getName()));
+                deadPlayer.worldObj.spawnEntityInWorld(
+                        new EntitySoul(
+                                deadPlayer.worldObj,
+                                deadPlayer.posX,
+                                deadPlayer.posY,
+                                deadPlayer.posZ,
+                                deadPlayer.getGameProfile().getName()));
             }
             if (ConfigItems.whitestone) {
                 if (event.entityLiving instanceof EntityPlayer && !event.source.canHarmInCreative()) {
@@ -530,27 +535,28 @@ public class RTEventHandler {
             }
 
             if (ConfigItems.spectreArmor || ConfigItems.spectreKey || ConfigItems.spectreSword) {
-                if (event.source.getEntity() != null
-                        && !(event.source.getEntity() instanceof FakePlayer)
+                if (event.source.getEntity() != null && !(event.source.getEntity() instanceof FakePlayer)
                         && event.source.getEntity() instanceof EntityPlayer
                         && !(event.entity instanceof EntitySpirit)) {
                     EntityPlayer player = (EntityPlayer) event.source.getEntity();
                     double chance = Settings.SPIRIT_CHANCE;
-                    if (ConfigItems.spectreSword
-                            && player.getCurrentEquippedItem() != null
+                    if (ConfigItems.spectreSword && player.getCurrentEquippedItem() != null
                             && player.getCurrentEquippedItem().getItem() == ModItems.spectreSword) {
                         chance = Settings.SPIRIT_CHANCE_SWORD;
                     }
                     double random = Math.random();
                     if (random <= chance) {
-                        player.worldObj.spawnEntityInWorld(new EntitySpirit(
-                                player.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ));
+                        player.worldObj.spawnEntityInWorld(
+                                new EntitySpirit(
+                                        player.worldObj,
+                                        event.entity.posX,
+                                        event.entity.posY,
+                                        event.entity.posZ));
                     }
                 }
             }
 
-            if (ConfigItems.imbue
-                    && event.entityLiving instanceof EntityLiving
+            if (ConfigItems.imbue && event.entityLiving instanceof EntityLiving
                     && event.source.getEntity() != null
                     && event.source.getEntity() instanceof EntityLivingBase) {
                 EntityLivingBase livingAttacker = (EntityLivingBase) event.source.getEntity();

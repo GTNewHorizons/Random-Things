@@ -1,6 +1,7 @@
 package lumien.randomthings.Library;
 
 public enum ChestCategory {
+
     MINESHAFT_CORRIDOR("mineshaftCorridor"),
     PYRAMID_DESERT_CHEST("pyramidDesertyChest"),
     PYRAMID_JUNGLE_CHEST("pyramidJungleChest"),

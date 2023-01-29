@@ -4,10 +4,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
 import lumien.randomthings.Configuration.ConfigBlocks;
 import lumien.randomthings.Configuration.VanillaChanges;
 import lumien.randomthings.Library.Reference;
+
 import net.minecraftforge.common.config.Configuration;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
@@ -23,14 +26,12 @@ public class RTMixinPlugin implements IMixinConfigPlugin {
         final Configuration config = new Configuration(file);
         config.load();
         VanillaChanges.FASTER_LEAVEDECAY = config.get(
-                        "VanillaChanges",
-                        "FasterLeaveDecay",
-                        true,
-                        "Leaves will decay much faster when no longer connected to a log")
-                .getBoolean(true);
+                "VanillaChanges",
+                "FasterLeaveDecay",
+                true,
+                "Leaves will decay much faster when no longer connected to a log").getBoolean(true);
         VanillaChanges.LOCKED_GAMMA = config.get("VanillaChanges", "LockedGamma", false, "Locks the Gamma to 0")
-                .setRequiresMcRestart(true)
-                .getBoolean(false);
+                .setRequiresMcRestart(true).getBoolean(false);
         ConfigBlocks.wirelessLever = config.get("Blocks", "WirelessLever", true).getBoolean(true);
         LOG.info("Loaded early config");
         if (config.hasChanged()) config.save();

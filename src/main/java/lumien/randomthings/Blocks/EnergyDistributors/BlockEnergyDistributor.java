@@ -1,11 +1,10 @@
 package lumien.randomthings.Blocks.EnergyDistributors;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.Blocks.BlockContainerBase;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnergyDistributor;
+
 import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -18,7 +17,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class BlockEnergyDistributor extends BlockContainerBase {
+
     @SideOnly(Side.CLIENT)
     IIcon front;
 
@@ -44,24 +47,16 @@ public class BlockEnergyDistributor extends BlockContainerBase {
     }
 
     @Override
-    public void onBlockPlacedBy(
-            World worldObj, int posX, int posY, int posZ, EntityLivingBase entityLiving, ItemStack is) {
+    public void onBlockPlacedBy(World worldObj, int posX, int posY, int posZ, EntityLivingBase entityLiving,
+            ItemStack is) {
         int l = BlockPistonBase.determineOrientation(worldObj, posX, posY, posZ, entityLiving);
         TileEntityEnergyDistributor te = (TileEntityEnergyDistributor) worldObj.getTileEntity(posX, posY, posZ);
         te.facing = ForgeDirection.getOrientation(l);
     }
 
     @Override
-    public boolean onBlockActivated(
-            World worldObj,
-            int posX,
-            int posY,
-            int posZ,
-            EntityPlayer player,
-            int par6,
-            float par7,
-            float par8,
-            float par9) {
+    public boolean onBlockActivated(World worldObj, int posX, int posY, int posZ, EntityPlayer player, int par6,
+            float par7, float par8, float par9) {
         if (!worldObj.isRemote) {
             player.openGui(RandomThings.instance, GuiIds.ENERGY_DISTRIBUTOR, worldObj, posX, posY, posZ);
         }

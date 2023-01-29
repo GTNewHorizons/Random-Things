@@ -1,14 +1,10 @@
 package lumien.randomthings.Entity;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import io.netty.buffer.ByteBuf;
 import lumien.randomthings.Items.ItemGinto;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.WorldUtils;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,7 +13,14 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import io.netty.buffer.ByteBuf;
+
 public class EntitySoul extends Entity implements IEntityAdditionalSpawnData {
+
     String playerName;
     int counter = 0;
 
@@ -99,11 +102,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData {
         counter++;
         if (!worldObj.isRemote) {
             if (MinecraftServer.getServer().getConfigurationManager().func_152612_a(playerName) != null) {
-                if (MinecraftServer.getServer()
-                                .getConfigurationManager()
-                                .func_152612_a(playerName)
-                                .getHealth()
-                        > 0) {
+                if (MinecraftServer.getServer().getConfigurationManager().func_152612_a(playerName).getHealth() > 0) {
                     this.setDead();
                 }
             }

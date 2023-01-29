@@ -1,8 +1,8 @@
 package lumien.randomthings.Blocks;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.TileEntities.TileEntityFluidDisplay;
+
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -16,7 +16,10 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class BlockFluidDisplay extends BlockContainer {
+
     public BlockFluidDisplay() {
         super(Material.glass);
         this.setBlockName("fluidDisplay");
@@ -51,8 +54,8 @@ public class BlockFluidDisplay extends BlockContainer {
     }
 
     @Override
-    public boolean onBlockActivated(
-            World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7, float par8, float par9) {
+    public boolean onBlockActivated(World world, int i, int j, int k, EntityPlayer entityplayer, int par6, float par7,
+            float par8, float par9) {
         TileEntityFluidDisplay te = (TileEntityFluidDisplay) world.getTileEntity(i, j, k);
         ItemStack currentItem = entityplayer.getCurrentEquippedItem();
 

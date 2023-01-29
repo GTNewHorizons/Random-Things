@@ -1,12 +1,12 @@
 package lumien.randomthings.Library;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Configuration.ConfigBlocks;
 import lumien.randomthings.Configuration.ConfigItems;
 import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipeHandler;
 import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Items.ModItems;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -15,7 +15,10 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class Recipes {
+
     static ItemStack iObsidian = new ItemStack(Block.getBlockFromName("obsidian"));
     static ItemStack iEnderChest = new ItemStack(net.minecraft.init.Blocks.ender_chest);
     static ItemStack iNetherstar = new ItemStack(Items.nether_star);
@@ -78,357 +81,430 @@ public class Recipes {
 
     public static void init() {
         // Always there
-        GameRegistry.addRecipe(new ShapedOreRecipe(
-                new ItemStack(ModBlocks.imbuingStation),
-                "vcv",
-                "tgt",
-                "lel",
-                'v',
-                iVine,
-                'c',
-                iCauldron,
-                't',
-                iTallGrass,
-                'g',
-                new ItemStack(Blocks.stained_hardened_clay, 1, 13),
-                'l',
-                iLilypad,
-                'e',
-                "blockEmerald"));
+        GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModBlocks.imbuingStation),
+                        "vcv",
+                        "tgt",
+                        "lel",
+                        'v',
+                        iVine,
+                        'c',
+                        iCauldron,
+                        't',
+                        iTallGrass,
+                        'g',
+                        new ItemStack(Blocks.stained_hardened_clay, 1, 13),
+                        'l',
+                        iLilypad,
+                        'e',
+                        "blockEmerald"));
         // Crafting Items
-        GameRegistry.addRecipe(
-                new ShapedOreRecipe(iPlayerCore, "xlx", "lel", "xlx", 'l', "gemLapis", 'e', "gemEmerald"));
-        GameRegistry.addRecipe(
-                new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 3, 1), "o", "o", 'o', iObsidian));
+        GameRegistry
+                .addRecipe(new ShapedOreRecipe(iPlayerCore, "xlx", "lel", "xlx", 'l', "gemLapis", 'e', "gemEmerald"));
+        GameRegistry
+                .addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 3, 1), "o", "o", 'o', iObsidian));
         GameRegistry.addRecipe(
                 new ShapedOreRecipe(new ItemStack(ModItems.ingredients, 4, 2), "fe", 'e', iEnderPearl, 'f', iFlint));
-        GameRegistry.addRecipe(new ShapedOreRecipe(
-                new ItemStack(ModItems.ingredients, 1, 4), "ei", 'e', iEctoplasm, 'i', "ingotIron"));
-        GameRegistry.addRecipe(new ShapelessOreRecipe(
-                new ItemStack(ModItems.ingredients, 1, 5),
-                "dyeRed",
-                "dyeOrange",
-                "dyeYellow",
-                "dyeGreen",
-                "dyeCyan",
-                "dyePurple",
-                "dyeGray",
-                "dyeLime",
-                "dyeMagenta"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(
-                new ItemStack(ModItems.ingredients, 1, 6), "xex", "ede", "xex", 'e', iEnderPearl, 'd', "gemDiamond"));
+        GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModItems.ingredients, 1, 4),
+                        "ei",
+                        'e',
+                        iEctoplasm,
+                        'i',
+                        "ingotIron"));
+        GameRegistry.addRecipe(
+                new ShapelessOreRecipe(
+                        new ItemStack(ModItems.ingredients, 1, 5),
+                        "dyeRed",
+                        "dyeOrange",
+                        "dyeYellow",
+                        "dyeGreen",
+                        "dyeCyan",
+                        "dyePurple",
+                        "dyeGray",
+                        "dyeLime",
+                        "dyeMagenta"));
+        GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModItems.ingredients, 1, 6),
+                        "xex",
+                        "ede",
+                        "xex",
+                        'e',
+                        iEnderPearl,
+                        'd',
+                        "gemDiamond"));
 
-        if (ConfigBlocks.playerInterface)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModBlocks.playerInterface),
-                    "oeo",
-                    "omo",
-                    "ono",
-                    'o',
-                    iObsidian,
-                    'e',
-                    iEnderChest,
-                    'm',
-                    iPlayerCore,
-                    'n',
-                    iNetherstar));
+        if (ConfigBlocks.playerInterface) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModBlocks.playerInterface),
+                        "oeo",
+                        "omo",
+                        "ono",
+                        'o',
+                        iObsidian,
+                        'e',
+                        iEnderChest,
+                        'm',
+                        iPlayerCore,
+                        'n',
+                        iNetherstar));
         if (ConfigBlocks.fluidDisplay) {
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModBlocks.fluidDisplay, 8),
-                    "ggg",
-                    "gbg",
-                    "ggg",
-                    'g',
-                    "paneGlass",
-                    'b',
-                    iGlassBottle));
+            GameRegistry.addRecipe(
+                    new ShapedOreRecipe(
+                            new ItemStack(ModBlocks.fluidDisplay, 8),
+                            "ggg",
+                            "gbg",
+                            "ggg",
+                            'g',
+                            "paneGlass",
+                            'b',
+                            iGlassBottle));
             GameRegistry.addRecipe(
                     new ShapelessOreRecipe(ModBlocks.advancedFluidDisplay, ModBlocks.fluidDisplay, "gemLapis"));
         }
-        if (ConfigBlocks.fertilizedDirt)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModBlocks.fertilizedDirt, 1),
-                    "brb",
-                    "rdr",
-                    "brb",
-                    'b',
-                    iBonemeal,
-                    'r',
-                    iRottenflesh,
-                    'd',
-                    iDirt));
+        if (ConfigBlocks.fertilizedDirt) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModBlocks.fertilizedDirt, 1),
+                        "brb",
+                        "rdr",
+                        "brb",
+                        'b',
+                        iBonemeal,
+                        'r',
+                        iRottenflesh,
+                        'd',
+                        iDirt));
         if (ConfigBlocks.itemCollector) {
             ItemStack iItemCollector = new ItemStack(ModBlocks.itemCollector);
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModBlocks.itemCollector, 1),
-                    "xhx",
-                    "rer",
-                    "xox",
-                    'h',
-                    iHopper,
-                    'r',
-                    "dustRedstone",
-                    'e',
-                    iEnderPearl,
-                    'o',
-                    "stickObsidian"));
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModBlocks.advancedItemCollector, 1),
-                    "xdx",
-                    "gig",
-                    'd',
-                    "gemDiamond",
-                    'g',
-                    "dustGlowstone",
-                    'i',
-                    iItemCollector));
+            GameRegistry.addRecipe(
+                    new ShapedOreRecipe(
+                            new ItemStack(ModBlocks.itemCollector, 1),
+                            "xhx",
+                            "rer",
+                            "xox",
+                            'h',
+                            iHopper,
+                            'r',
+                            "dustRedstone",
+                            'e',
+                            iEnderPearl,
+                            'o',
+                            "stickObsidian"));
+            GameRegistry.addRecipe(
+                    new ShapedOreRecipe(
+                            new ItemStack(ModBlocks.advancedItemCollector, 1),
+                            "xdx",
+                            "gig",
+                            'd',
+                            "gemDiamond",
+                            'g',
+                            "dustGlowstone",
+                            'i',
+                            iItemCollector));
         }
-        if (ConfigBlocks.onlineDetector)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModBlocks.onlineDetector, 1),
-                    "sts",
-                    "rer",
-                    "sts",
-                    's',
-                    "stone",
-                    't',
-                    iRedstoneTorch,
-                    'r',
-                    "dustRedstone",
-                    'e',
-                    "gemLapis"));
-        if (ConfigBlocks.moonSensor)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModBlocks.moonSensor, 1),
-                    "ggg",
-                    "lql",
-                    "sss",
-                    'g',
-                    "blockGlass",
-                    'l',
-                    "gemLapis",
-                    's',
-                    "slabWood",
-                    'q',
-                    "gemQuartz"));
-        if (ConfigBlocks.lapisLamp)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModBlocks.spectreLamp, 4, 0),
-                    "isi",
-                    "sls",
-                    "isi",
-                    's',
-                    "blockGlass",
-                    'i',
-                    "ingotIron",
-                    'l',
-                    "gemLapis"));
-        if (ConfigBlocks.wirelessLever)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModBlocks.wirelessLever), "r", "l", 'r', "blockRedstone", 'l', iLever));
-        if (ConfigBlocks.dyeingMachine)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModBlocks.dyeingMachine),
-                    "wpw",
-                    "ptp",
-                    "wpw",
-                    'w',
-                    new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE),
-                    'p',
-                    "plankWood",
-                    't',
-                    iTransformationCore));
-        if (ConfigBlocks.spectreGlass)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModBlocks.spectreGlass, 16, 0),
-                    "ggg",
-                    "geg",
-                    "ggg",
-                    'g',
-                    "blockGlass",
-                    'e',
-                    iEctoplasm));
-        if (ConfigBlocks.energyDistributor)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModBlocks.energyDistributor),
-                    "iri",
-                    "beb",
-                    "iri",
-                    'i',
-                    "blockIron",
-                    'b',
-                    "blockRedstone",
-                    'r',
-                    iRedstoneRepeater,
-                    'e',
-                    iEnergizedWater));
-        if (ConfigBlocks.enderEnergyDistributor && ConfigBlocks.energyDistributor)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModBlocks.enderEnergyDistributor),
-                    "ede",
-                    "dsd",
-                    "ede",
-                    'd',
-                    iEnderDiamond,
-                    's',
-                    new ItemStack(ModBlocks.energyDistributor)));
-        if (ConfigBlocks.bloodMoonSensor)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModBlocks.bloodMoonSensor),
-                    "ggg",
-                    "rqr",
-                    "sss",
-                    'g',
-                    "blockGlass",
-                    'r',
-                    "dustRedstone",
-                    's',
-                    "slabWood",
-                    'q',
-                    "gemQuartz"));
+        if (ConfigBlocks.onlineDetector) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModBlocks.onlineDetector, 1),
+                        "sts",
+                        "rer",
+                        "sts",
+                        's',
+                        "stone",
+                        't',
+                        iRedstoneTorch,
+                        'r',
+                        "dustRedstone",
+                        'e',
+                        "gemLapis"));
+        if (ConfigBlocks.moonSensor) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModBlocks.moonSensor, 1),
+                        "ggg",
+                        "lql",
+                        "sss",
+                        'g',
+                        "blockGlass",
+                        'l',
+                        "gemLapis",
+                        's',
+                        "slabWood",
+                        'q',
+                        "gemQuartz"));
+        if (ConfigBlocks.lapisLamp) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModBlocks.spectreLamp, 4, 0),
+                        "isi",
+                        "sls",
+                        "isi",
+                        's',
+                        "blockGlass",
+                        'i',
+                        "ingotIron",
+                        'l',
+                        "gemLapis"));
+        if (ConfigBlocks.wirelessLever) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModBlocks.wirelessLever),
+                        "r",
+                        "l",
+                        'r',
+                        "blockRedstone",
+                        'l',
+                        iLever));
+        if (ConfigBlocks.dyeingMachine) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModBlocks.dyeingMachine),
+                        "wpw",
+                        "ptp",
+                        "wpw",
+                        'w',
+                        new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE),
+                        'p',
+                        "plankWood",
+                        't',
+                        iTransformationCore));
+        if (ConfigBlocks.spectreGlass) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModBlocks.spectreGlass, 16, 0),
+                        "ggg",
+                        "geg",
+                        "ggg",
+                        'g',
+                        "blockGlass",
+                        'e',
+                        iEctoplasm));
+        if (ConfigBlocks.energyDistributor) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModBlocks.energyDistributor),
+                        "iri",
+                        "beb",
+                        "iri",
+                        'i',
+                        "blockIron",
+                        'b',
+                        "blockRedstone",
+                        'r',
+                        iRedstoneRepeater,
+                        'e',
+                        iEnergizedWater));
+        if (ConfigBlocks.enderEnergyDistributor && ConfigBlocks.energyDistributor) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModBlocks.enderEnergyDistributor),
+                        "ede",
+                        "dsd",
+                        "ede",
+                        'd',
+                        iEnderDiamond,
+                        's',
+                        new ItemStack(ModBlocks.energyDistributor)));
+        if (ConfigBlocks.bloodMoonSensor) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModBlocks.bloodMoonSensor),
+                        "ggg",
+                        "rqr",
+                        "sss",
+                        'g',
+                        "blockGlass",
+                        'r',
+                        "dustRedstone",
+                        's',
+                        "slabWood",
+                        'q',
+                        "gemQuartz"));
 
-        if (ConfigItems.voidStone)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModItems.voidStone, 1), "xox", "oeo", "xox", 'o', "stone", 'e', iEnderPearl));
+        if (ConfigItems.voidStone) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModItems.voidStone, 1),
+                        "xox",
+                        "oeo",
+                        "xox",
+                        'o',
+                        "stone",
+                        'e',
+                        iEnderPearl));
         if (ConfigItems.dropFilter) {
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModItems.dropFilter, 1, 0),
-                    "lsl",
-                    "sfs",
-                    "lsl",
-                    'l',
-                    iLeather,
-                    's',
-                    iString,
-                    'f',
-                    iFlint));
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModItems.dropFilter, 1, 1),
-                    "fe",
-                    'f',
-                    new ItemStack(ModItems.dropFilter, 1, 0),
-                    'e',
-                    ConfigItems.voidStone ? ModItems.voidStone : iEnderPearl));
+            GameRegistry.addRecipe(
+                    new ShapedOreRecipe(
+                            new ItemStack(ModItems.dropFilter, 1, 0),
+                            "lsl",
+                            "sfs",
+                            "lsl",
+                            'l',
+                            iLeather,
+                            's',
+                            iString,
+                            'f',
+                            iFlint));
+            GameRegistry.addRecipe(
+                    new ShapedOreRecipe(
+                            new ItemStack(ModItems.dropFilter, 1, 1),
+                            "fe",
+                            'f',
+                            new ItemStack(ModItems.dropFilter, 1, 0),
+                            'e',
+                            ConfigItems.voidStone ? ModItems.voidStone : iEnderPearl));
         }
         if (ConfigItems.enderLetter) {
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModItems.enderLetter, 1, 0), "fpl", 'f', iEnderFragment, 'p', iPaper, 'l', iLeather));
+            GameRegistry.addRecipe(
+                    new ShapedOreRecipe(
+                            new ItemStack(ModItems.enderLetter, 1, 0),
+                            "fpl",
+                            'f',
+                            iEnderFragment,
+                            'p',
+                            iPaper,
+                            'l',
+                            iLeather));
         }
-        if (ConfigItems.spectreArmor)
-            addArmorRecipes(
-                    iSpectreIron,
-                    new ItemStack(ModItems.spectreHelmet),
-                    new ItemStack(ModItems.spectreChestplate),
-                    new ItemStack(ModItems.spectreLeggings),
-                    new ItemStack(ModItems.spectreBoots));
-        if (ConfigItems.spectreSword)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModItems.spectreSword),
-                    "xsx",
-                    "xsx",
-                    "xox",
-                    's',
-                    iSpectreIron,
-                    'o',
-                    "stickObsidian"));
-        if (ConfigItems.spectreKey)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModItems.spectreKey), "xsx", "xtx", 's', iSpectreIron, 't', "stickWood"));
-        if (ConfigItems.magneticForce)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModItems.magneticForce),
-                    "xex",
-                    "xmx",
-                    "xpx",
-                    'e',
-                    iEnderPearl,
-                    'm',
-                    "gemEmerald",
-                    'p',
-                    iPaper));
-        if (ConfigItems.spiritBinder)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModItems.spiritBinder),
-                    "ses",
-                    "ene",
-                    "ses",
-                    's',
-                    iEctoplasm,
-                    'e',
-                    iEnderPearl,
-                    'n',
-                    iNetherstar));
-        if (ConfigItems.soundRecorder)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModItems.soundRecorder),
-                    "xrx",
-                    "wiw",
-                    "wiw",
-                    'r',
-                    iRedstoneTorch,
-                    'w',
-                    "plankWood",
-                    'i',
-                    "ingotIron"));
-        if (ConfigItems.biomeCapsule)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModItems.biomeCapsule),
-                    "dte",
-                    "qgq",
-                    "ooo",
-                    'd',
-                    "blockDiamond",
-                    'e',
-                    "gemEmerald",
-                    't',
-                    iTransformationCore,
-                    'q',
-                    "gemQuartz",
-                    'g',
-                    "blockGlass",
-                    'o',
-                    iObsidian));
-        if (ConfigItems.biomePainter)
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModItems.biomePainter),
-                    "xtx",
-                    "xwx",
-                    "xox",
-                    't',
-                    iTransformationCore,
-                    'w',
-                    new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE),
-                    'o',
-                    "stickObsidian"));
+        if (ConfigItems.spectreArmor) addArmorRecipes(
+                iSpectreIron,
+                new ItemStack(ModItems.spectreHelmet),
+                new ItemStack(ModItems.spectreChestplate),
+                new ItemStack(ModItems.spectreLeggings),
+                new ItemStack(ModItems.spectreBoots));
+        if (ConfigItems.spectreSword) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModItems.spectreSword),
+                        "xsx",
+                        "xsx",
+                        "xox",
+                        's',
+                        iSpectreIron,
+                        'o',
+                        "stickObsidian"));
+        if (ConfigItems.spectreKey) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModItems.spectreKey),
+                        "xsx",
+                        "xtx",
+                        's',
+                        iSpectreIron,
+                        't',
+                        "stickWood"));
+        if (ConfigItems.magneticForce) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModItems.magneticForce),
+                        "xex",
+                        "xmx",
+                        "xpx",
+                        'e',
+                        iEnderPearl,
+                        'm',
+                        "gemEmerald",
+                        'p',
+                        iPaper));
+        if (ConfigItems.spiritBinder) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModItems.spiritBinder),
+                        "ses",
+                        "ene",
+                        "ses",
+                        's',
+                        iEctoplasm,
+                        'e',
+                        iEnderPearl,
+                        'n',
+                        iNetherstar));
+        if (ConfigItems.soundRecorder) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModItems.soundRecorder),
+                        "xrx",
+                        "wiw",
+                        "wiw",
+                        'r',
+                        iRedstoneTorch,
+                        'w',
+                        "plankWood",
+                        'i',
+                        "ingotIron"));
+        if (ConfigItems.biomeCapsule) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModItems.biomeCapsule),
+                        "dte",
+                        "qgq",
+                        "ooo",
+                        'd',
+                        "blockDiamond",
+                        'e',
+                        "gemEmerald",
+                        't',
+                        iTransformationCore,
+                        'q',
+                        "gemQuartz",
+                        'g',
+                        "blockGlass",
+                        'o',
+                        iObsidian));
+        if (ConfigItems.biomePainter) GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModItems.biomePainter),
+                        "xtx",
+                        "xwx",
+                        "xox",
+                        't',
+                        iTransformationCore,
+                        'w',
+                        new ItemStack(Blocks.wool, 1, OreDictionary.WILDCARD_VALUE),
+                        'o',
+                        "stickObsidian"));
         if (ConfigItems.ginto) {
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModItems.ginto, 1, 0),
-                    "ixi",
-                    "xsx",
-                    'i',
-                    "ingotIron",
-                    's',
-                    iSpectreIron,
-                    'e',
-                    iEctoplasm));
-            GameRegistry.addRecipe(new ShapedOreRecipe(
-                    new ItemStack(ModItems.ginto, 1, 1),
-                    "xex",
-                    "xgx",
-                    'e',
-                    iEctoplasm,
-                    'g',
-                    new ItemStack(ModItems.ginto, 1, 0)));
+            GameRegistry.addRecipe(
+                    new ShapedOreRecipe(
+                            new ItemStack(ModItems.ginto, 1, 0),
+                            "ixi",
+                            "xsx",
+                            'i',
+                            "ingotIron",
+                            's',
+                            iSpectreIron,
+                            'e',
+                            iEctoplasm));
+            GameRegistry.addRecipe(
+                    new ShapedOreRecipe(
+                            new ItemStack(ModItems.ginto, 1, 1),
+                            "xex",
+                            "xgx",
+                            'e',
+                            iEctoplasm,
+                            'g',
+                            new ItemStack(ModItems.ginto, 1, 0)));
         }
 
-        GameRegistry.addRecipe(new ShapedOreRecipe(
-                new ItemStack(ModItems.filter, 1, 0), "xrx", "rpr", "xrx", 'r', "dyeRed", 'p', iPaper));
+        GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModItems.filter, 1, 0),
+                        "xrx",
+                        "rpr",
+                        "xrx",
+                        'r',
+                        "dyeRed",
+                        'p',
+                        iPaper));
         GameRegistry.addRecipe(
                 new ShapedOreRecipe(ItemFilter.standardItemFilter, "xrx", "rpr", "xrx", 'r', "dyeYellow", 'p', iPaper));
-        GameRegistry.addRecipe(new ShapedOreRecipe(
-                new ItemStack(ModItems.filter, 1, 2), "xrx", "rpr", "xrx", 'r', "dyeBlue", 'p', iPaper));
-        GameRegistry.addRecipe(new ShapedOreRecipe(
-                new ItemStack(ModItems.filter, 1, 3), "xrx", "rpr", "xrx", 'r', "dyePurple", 'p', iPaper));
+        GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModItems.filter, 1, 2),
+                        "xrx",
+                        "rpr",
+                        "xrx",
+                        'r',
+                        "dyeBlue",
+                        'p',
+                        iPaper));
+        GameRegistry.addRecipe(
+                new ShapedOreRecipe(
+                        new ItemStack(ModItems.filter, 1, 3),
+                        "xrx",
+                        "rpr",
+                        "xrx",
+                        'r',
+                        "dyePurple",
+                        'p',
+                        iPaper));
 
         addImbuingRecipes();
     }
@@ -451,8 +527,8 @@ public class Recipes {
                 new ItemStack(ModItems.ingredients, 1, 7));
     }
 
-    private static void addArmorRecipes(
-            ItemStack material, ItemStack helmet, ItemStack chestPlate, ItemStack leggings, ItemStack boots) {
+    private static void addArmorRecipes(ItemStack material, ItemStack helmet, ItemStack chestPlate, ItemStack leggings,
+            ItemStack boots) {
         GameRegistry.addRecipe(helmet, "mmm", "mxm", 'm', material);
         GameRegistry.addRecipe(chestPlate, "mxm", "mmm", "mmm", 'm', material);
         GameRegistry.addRecipe(leggings, "mmm", "mxm", "mxm", 'm', material);

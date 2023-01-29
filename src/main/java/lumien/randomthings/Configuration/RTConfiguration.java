@@ -1,14 +1,17 @@
 package lumien.randomthings.Configuration;
 
-import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import lumien.randomthings.Handler.MagneticForceHandler;
 import lumien.randomthings.Library.Reference;
+
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
+import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+
 public class RTConfiguration {
+
     public static Configuration config;
 
     // Settings
@@ -67,28 +70,28 @@ public class RTConfiguration {
                 "SpiritChanceSword",
                 0.1,
                 "The chance of a spirit spawning when you have a spirit binder in your inventory and kill the entity with a spectre sword. (0-1)");
-        wirelessLeverRange =
-                config.get("Settings", "WirelessLeverRange", 10, "The range of a wireless lever in blocks");
+        wirelessLeverRange = config
+                .get("Settings", "WirelessLeverRange", 10, "The range of a wireless lever in blocks");
         fixedBackground = config.get(
-                        "VanillaChanges",
-                        "fixedBackground",
-                        "",
-                        "If this is not empty the options background will not be random but the one specified here. This has to be a Resource Location, for more information visit the Curse Forge Page of Custom Backgrounds")
+                "VanillaChanges",
+                "fixedBackground",
+                "",
+                "If this is not empty the options background will not be random but the one specified here. This has to be a Resource Location, for more information visit the Curse Forge Page of Custom Backgrounds")
                 .setRequiresMcRestart(true);
         spectreDimensionID = config.get(
-                        "Settings",
-                        "SpectreDimensionID",
-                        -1,
-                        "The Dimension ID of the spectre World. On first run and when you set this setting to -1 RandomThings will try to find a dimensionID itself")
+                "Settings",
+                "SpectreDimensionID",
+                -1,
+                "The Dimension ID of the spectre World. On first run and when you set this setting to -1 RandomThings will try to find a dimensionID itself")
                 .setRequiresMcRestart(true);
         spectreDimensionFog = config.get("Settings", "SpectreDimensionFog", true);
-        spectreImbueChance = config.get(
+        spectreImbueChance = config
+                .get(
                         "Settings",
                         "SpectreImbueChance",
                         0.1,
                         "The chance of phasing through an attack while being imbued with spectre")
-                .setMinValue(0)
-                .setMaxValue(1);
+                .setMinValue(0).setMaxValue(1);
         fertilizedDirtGrowthModifier = config.get(
                 "Settings",
                 "FertilizedDirtGrowthModifier",
@@ -96,16 +99,22 @@ public class RTConfiguration {
                 "How often should Fertilize Dirt tick the plant above it when it's ticked itself?");
         imbueDuration = config.get("Settings", "ImbueDuration", 20 * 60 * 5, "The duration of imbues (in ticks)");
         biomeChargeTime = config.get(
-                "Settings", "BiomeChargeTime", 20, "The amount of ticks the biome capsule needs to collect 1 charge");
+                "Settings",
+                "BiomeChargeTime",
+                20,
+                "The amount of ticks the biome capsule needs to collect 1 charge");
         decaySpeed = config.get(
-                "Settings", "LeaveDecaySpeed", 7, "The amount of ticks every leave needs to decay (Lower is faster)");
+                "Settings",
+                "LeaveDecaySpeed",
+                7,
+                "The amount of ticks every leave needs to decay (Lower is faster)");
         decayFuzz = config.get(
                 "Settings",
                 "LeaveDecayFuzz",
                 5,
                 "A random number from 0-thisconfigoption will be added to the decay speed for every Leave. Setting this to 0 will decay leaves rather linear while higher numbers will let the whole thing look more natural");
-        bloodMoon_spawnSpeed = config.get(
-                "Settings", "BloodMoonSpawnSpeed", 3, "How much faster enemys spawn on a bloodmoon (0=Vanilla)");
+        bloodMoon_spawnSpeed = config
+                .get("Settings", "BloodMoonSpawnSpeed", 3, "How much faster enemys spawn on a bloodmoon (0=Vanilla)");
         bloodMoon_spawnLimitMult = config.get(
                 "Settings",
                 "BloodMoonSpawnLimitMult",
@@ -122,9 +131,12 @@ public class RTConfiguration {
                 0.05,
                 "The chance of a bloodmoon happening (0=Never;1=Every night;0.05=5% of all nights)");
         bloodMoon_noSleep = config.get(
-                "Settings", "BloodMoonNoSleep", true, "Whether players are NOT allowed to sleep during a bloodmoon");
-        bloodMoon_vanish = config.get(
-                "Settings", "BloodmoonVanish", false, "Should monsters spawned by a bloodmoon vanish at dawn?");
+                "Settings",
+                "BloodMoonNoSleep",
+                true,
+                "Whether players are NOT allowed to sleep during a bloodmoon");
+        bloodMoon_vanish = config
+                .get("Settings", "BloodmoonVanish", false, "Should monsters spawned by a bloodmoon vanish at dawn?");
         bloodMoon_respectGamerule = config.get(
                 "Settings",
                 "BloodmoonRespectGamerule",
@@ -135,17 +147,17 @@ public class RTConfiguration {
                 "BloodmoonMessage",
                 true,
                 "Whether players in the overworld should receive a message at the beginning of the bloodmoon");
-        bloodMoon_visual_redMoon =
-                config.get("Settings", "BloodMoonRedMoon", true, "Whether the moon will be red on a Bloodmoon");
-        bloodMoon_visual_redLight =
-                config.get("Settings", "BloodMoonRedLight", true, "Whether light will be tinted red on a Bloodmoon");
+        bloodMoon_visual_redMoon = config
+                .get("Settings", "BloodMoonRedMoon", true, "Whether the moon will be red on a Bloodmoon");
+        bloodMoon_visual_redLight = config
+                .get("Settings", "BloodMoonRedLight", true, "Whether light will be tinted red on a Bloodmoon");
         bloodMoon_visual_blackFog = config.get(
                 "Settings",
                 "BloodMoonBlackFog",
                 true,
                 "Whether fog will turn black on a Bloodmoon to look better with the red sky");
-        bloodMoon_visual_redSky =
-                config.get("Settings", "BloodMoonRedSky", true, "Whether the sky will turn red on a Bloodmoon");
+        bloodMoon_visual_redSky = config
+                .get("Settings", "BloodMoonRedSky", true, "Whether the sky will turn red on a Bloodmoon");
 
         // PotionIds
         ConfigCategory c = config.getCategory("potionids");
@@ -201,31 +213,28 @@ public class RTConfiguration {
         ConfigItems.bloodStone = isItemEnabled("Bloodstone");
 
         // Dungeon Loot
-        ConfigDungeonLoot.WHITESTONE_CHANCE =
-                config.get("DungeonLoot", "WhiteStone", 3).getInt();
+        ConfigDungeonLoot.WHITESTONE_CHANCE = config.get("DungeonLoot", "WhiteStone", 3).getInt();
 
         // Vanilla Changes
-        VanillaChanges.MODIFIED_BACKGROUND = config.get(
+        VanillaChanges.MODIFIED_BACKGROUND = config
+                .get(
                         "VanillaChanges",
                         "ModifiedBackgrounds",
                         true,
                         "The normal dirt background will be replaced with a different block each start")
-                .setRequiresMcRestart(true)
-                .getBoolean(true);
+                .setRequiresMcRestart(true).getBoolean(true);
         VanillaChanges.LOCKED_GAMMA = config.get("VanillaChanges", "LockedGamma", false, "Locks the Gamma to 0")
-                .setRequiresMcRestart(true)
-                .getBoolean(false);
+                .setRequiresMcRestart(true).getBoolean(false);
         VanillaChanges.FASTER_LEAVEDECAY = config.get(
-                        "VanillaChanges",
-                        "FasterLeaveDecay",
-                        true,
-                        "Leaves will decay much faster when no longer connected to a log")
-                .getBoolean(true);
+                "VanillaChanges",
+                "FasterLeaveDecay",
+                true,
+                "Leaves will decay much faster when no longer connected to a log").getBoolean(true);
         VanillaChanges.THROWABLES_MOTION = config.get(
-                        "VanillaChanges",
-                        "ThrowableMotion",
-                        false,
-                        "When you throw something or shoot an arrow the motion of the player will be added to the motion of the projectile")
+                "VanillaChanges",
+                "ThrowableMotion",
+                false,
+                "When you throw something or shoot an arrow the motion of the player will be added to the motion of the projectile")
                 .getBoolean(false);
 
         // Settings
@@ -257,8 +266,7 @@ public class RTConfiguration {
         Settings.BLOODMOON_VISUAL_REDSKY = bloodMoon_visual_redSky.getBoolean();
 
         MagneticForceHandler.TELEPORT_LENGTH = RTConfiguration.config
-                .get("Settings", "MagneticForceTeleportLength", 200, "In ticks (20=1 Second)")
-                .getInt();
+                .get("Settings", "MagneticForceTeleportLength", 200, "In ticks (20=1 Second)").getInt();
 
         if (RTConfiguration.config.hasChanged()) RTConfiguration.config.save();
     }

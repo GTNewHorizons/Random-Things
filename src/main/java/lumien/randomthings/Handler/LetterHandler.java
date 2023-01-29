@@ -2,10 +2,12 @@ package lumien.randomthings.Handler;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Network.Messages.MessageNotification;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,6 +15,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.MinecraftServer;
 
 public class LetterHandler {
+
     ArrayList<ItemStack> waitingLetters;
 
     int tickCounter;
@@ -40,8 +43,8 @@ public class LetterHandler {
                 ItemStack toCheck = iterator.next();
 
                 String receiver = toCheck.stackTagCompound.getString("receiver");
-                EntityPlayerMP receiverEntity =
-                        MinecraftServer.getServer().getConfigurationManager().func_152612_a(receiver);
+                EntityPlayerMP receiverEntity = MinecraftServer.getServer().getConfigurationManager()
+                        .func_152612_a(receiver);
                 if (receiverEntity != null) {
                     int freeSlot = receiverEntity.inventory.getFirstEmptyStack();
                     if (freeSlot != -1) {

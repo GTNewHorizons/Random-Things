@@ -3,6 +3,7 @@ package lumien.randomthings.Handler.Notifications;
 import net.minecraft.item.ItemStack;
 
 public class Notification {
+
     String title;
     String description;
     int duration;

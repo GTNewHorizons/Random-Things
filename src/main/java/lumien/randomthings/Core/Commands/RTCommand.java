@@ -1,16 +1,15 @@
 package lumien.randomthings.Core.Commands;
 
-import com.google.common.base.Preconditions;
-import cpw.mods.fml.common.registry.GameData;
-import cpw.mods.fml.common.registry.GameRegistry;
 import java.util.Collections;
 import java.util.List;
+
 import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 import lumien.randomthings.Items.ItemBiomeCapsule;
 import lumien.randomthings.Library.Reference;
 import lumien.randomthings.Network.Messages.MessageNotification;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.block.Block;
 import net.minecraft.command.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,6 +24,11 @@ import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.oredict.OreDictionary;
+
+import com.google.common.base.Preconditions;
+
+import cpw.mods.fml.common.registry.GameData;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class RTCommand extends CommandBase {
 
@@ -51,8 +55,8 @@ public class RTCommand extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender commandUser, String[] args) {
-        ChatComponentText invalidArguments =
-                new ChatComponentText("/rt <notify|moon|setItemColor|setBiomeCapsule|analyze|bloodmoon>");
+        ChatComponentText invalidArguments = new ChatComponentText(
+                "/rt <notify|moon|setItemColor|setBiomeCapsule|analyze|bloodmoon>");
         invalidArguments.getChatStyle().setColor(EnumChatFormatting.RED);
         if (args.length == 0) {
             commandUser.addChatMessage(invalidArguments);
@@ -110,8 +114,9 @@ public class RTCommand extends CommandBase {
                 return;
             }
             if (args[1].equals("get")) {
-                commandUser.addChatMessage(new ChatComponentText(
-                        "Moon Factor: " + commandUser.getEntityWorld().getCurrentMoonPhaseFactor()));
+                commandUser.addChatMessage(
+                        new ChatComponentText(
+                                "Moon Factor: " + commandUser.getEntityWorld().getCurrentMoonPhaseFactor()));
             } else if (args[1].equals("set") && args.length > 2) {
                 int moonPhase = CommandBase.parseInt(commandUser, args[2]);
 
@@ -120,8 +125,7 @@ public class RTCommand extends CommandBase {
                     return;
                 }
 
-                commandUser
-                        .getEntityWorld()
+                commandUser.getEntityWorld()
                         .setWorldTime(commandUser.getEntityWorld().provider.getWorldTime() % 24000 + 24000 * moonPhase);
             } else {
                 commandUser.addChatMessage(invalidArguments);
@@ -155,8 +159,9 @@ public class RTCommand extends CommandBase {
                         is.stackTagCompound = new NBTTagCompound();
                     }
                 } else {
-                    commandUser.addChatMessage(new ChatComponentText("This Biome does not exist")
-                            .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                    commandUser.addChatMessage(
+                            new ChatComponentText("This Biome does not exist")
+                                    .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                 }
             }
         } else if (subCommand.equals("spectre")) {
@@ -172,13 +177,14 @@ public class RTCommand extends CommandBase {
                 if (item != null) {
                     player.addChatMessage(new ChatComponentText("Start"));
                     player.addChatMessage(new ChatComponentText("Display-Name: " + item.getDisplayName()));
-                    player.addChatMessage(new ChatComponentText(
-                            "Class-Name: " + item.getItem().getClass()));
+                    player.addChatMessage(new ChatComponentText("Class-Name: " + item.getItem().getClass()));
                     player.addChatMessage(new ChatComponentText("Metadata: " + item.getItemDamage()));
                     player.addChatMessage(
                             new ChatComponentText("NBT: " + (item.stackTagCompound != null ? "Yes" : "No")));
-                    player.addChatMessage(new ChatComponentText(
-                            "Registered-Name: \"" + GameRegistry.findUniqueIdentifierFor(item.getItem()) + "\""));
+                    player.addChatMessage(
+                            new ChatComponentText(
+                                    "Registered-Name: \"" + GameRegistry.findUniqueIdentifierFor(item.getItem())
+                                            + "\""));
                     player.addChatMessage(new ChatComponentText("Ore-Dictionary:"));
                     int[] ids = OreDictionary.getOreIDs(item);
                     for (int id : ids) {

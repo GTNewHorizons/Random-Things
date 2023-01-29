@@ -1,9 +1,8 @@
 package lumien.randomthings.Container;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.Container.Slots.SlotOutputOnly;
 import lumien.randomthings.TileEntities.TileEntityImbuingStation;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -11,7 +10,11 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ContainerImbuingStation extends Container {
+
     TileEntityImbuingStation te;
     public int lastImbuingProgress;
 
@@ -91,8 +94,7 @@ public class ContainerImbuingStation extends Container {
                 slot = (Slot) this.inventorySlots.get(k);
                 itemstack1 = slot.getStack();
 
-                if (itemstack1 != null
-                        && itemstack1.getItem() == par1ItemStack.getItem()
+                if (itemstack1 != null && itemstack1.getItem() == par1ItemStack.getItem()
                         && (!par1ItemStack.getHasSubtypes()
                                 || par1ItemStack.getItemDamage() == itemstack1.getItemDamage())
                         && ItemStack.areItemStackTagsEqual(par1ItemStack, itemstack1)

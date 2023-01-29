@@ -2,6 +2,7 @@ package lumien.randomthings.Blocks;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.TileEntities.TileEntityItemCollector;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.material.Material;
@@ -25,8 +26,8 @@ public class BlockItemCollector extends BlockContainerBase {
 
     @Override
     public void onNeighborBlockChange(World worldObj, int posX, int posY, int posZ, Block block) {
-        EnumFacing facing =
-                BlockDispenser.func_149937_b(Facing.oppositeSide[worldObj.getBlockMetadata(posX, posY, posZ)]);
+        EnumFacing facing = BlockDispenser
+                .func_149937_b(Facing.oppositeSide[worldObj.getBlockMetadata(posX, posY, posZ)]);
 
         int targetX = posX + facing.getFrontOffsetX();
         int targetY = posY + facing.getFrontOffsetY();
@@ -60,8 +61,8 @@ public class BlockItemCollector extends BlockContainerBase {
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(
-            World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_) {
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_,
+            int p_149668_4_) {
         return null;
     }
 
@@ -71,16 +72,8 @@ public class BlockItemCollector extends BlockContainerBase {
     }
 
     @Override
-    public int onBlockPlaced(
-            World p_149660_1_,
-            int posX,
-            int posY,
-            int posZ,
-            int side,
-            float hitX,
-            float hitY,
-            float hitZ,
-            int metadata) {
+    public int onBlockPlaced(World p_149660_1_, int posX, int posY, int posZ, int side, float hitX, float hitY,
+            float hitZ, int metadata) {
         return side;
     }
 

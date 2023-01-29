@@ -1,14 +1,14 @@
 package lumien.randomthings.TileEntities.EnergyDistributors;
 
-import cofh.api.energy.EnergyStorage;
-import cofh.api.energy.IEnergyReceiver;
 import java.util.HashSet;
+
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Items.ItemFilter;
 import lumien.randomthings.Library.DimensionCoordinate;
 import lumien.randomthings.Library.Interfaces.IValidator;
 import lumien.randomthings.Library.InventoryUtils;
 import lumien.randomthings.Library.WorldUtils;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
@@ -17,7 +17,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cofh.api.energy.EnergyStorage;
+import cofh.api.energy.IEnergyReceiver;
+
 public class TileEntityEnderEnergyDistributor extends TileEntity implements IEnergyReceiver {
+
     InventoryBasic targetSlots = new InventoryBasic("Targets", false, 8);
 
     protected HashSet<TileEntity> receiverCache;
@@ -27,8 +31,8 @@ public class TileEntityEnderEnergyDistributor extends TileEntity implements IEne
     int energyDistributedLastTick;
     int machinesConnected;
 
-    IValidator validator = o ->
-            o instanceof TileEntity & !(o instanceof TileEntityEnderEnergyDistributor) && o instanceof IEnergyReceiver;
+    IValidator validator = o -> o instanceof TileEntity & !(o instanceof TileEntityEnderEnergyDistributor)
+            && o instanceof IEnergyReceiver;
 
     public TileEntityEnderEnergyDistributor() {
         super();
@@ -72,8 +76,7 @@ public class TileEntityEnderEnergyDistributor extends TileEntity implements IEne
                     WorldUtils.recConnectedTEs(receiverCache, worldObj, dc.posX, dc.posY, dc.posZ, validator);
 
                     TileEntity te = worldObj.getTileEntity(dc.posX, dc.posY, dc.posZ);
-                    if (te != null
-                            && !te.isInvalid()
+                    if (te != null && !te.isInvalid()
                             && te instanceof IEnergyReceiver
                             && !(te instanceof TileEntityEnderEnergyDistributor)) {
                         receiverCache.add(te);

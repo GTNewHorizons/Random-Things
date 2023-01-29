@@ -1,10 +1,12 @@
 package lumien.randomthings.Client.Particle;
 
 import java.util.Random;
+
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class ParticleMagneticForce extends EntityFX {
+
     EntityPlayer followPlayer;
 
     Random rng;

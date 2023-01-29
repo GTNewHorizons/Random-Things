@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
 public class ItemCreativeSword extends ItemCreative {
+
     int DAMAGE = 100000;
 
     public ItemCreativeSword() {

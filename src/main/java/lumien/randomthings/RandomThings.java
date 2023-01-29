@@ -1,20 +1,8 @@
 package lumien.randomthings;
 
-import com.google.common.collect.ImmutableList;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
-import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import java.io.File;
 import java.io.IOException;
+
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Client.GuiHandler;
 import lumien.randomthings.Configuration.RTConfiguration;
@@ -42,13 +30,30 @@ import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.Potions.ModPotions;
 import lumien.randomthings.Proxy.CommonProxy;
 import lumien.randomthings.TileEntities.ModTileEntities;
+
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
+
+import com.google.common.collect.ImmutableList;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(
         modid = Reference.MOD_ID,
@@ -56,6 +61,7 @@ import org.apache.logging.log4j.Logger;
         version = Reference.MOD_VERSION,
         guiFactory = "lumien.randomthings.Client.Config.RandomThingsGuiFactory")
 public class RandomThings {
+
     @Instance(Reference.MOD_ID)
     public static RandomThings instance;
 

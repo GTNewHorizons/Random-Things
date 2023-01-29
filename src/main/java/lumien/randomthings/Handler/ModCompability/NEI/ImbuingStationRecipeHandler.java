@@ -1,25 +1,31 @@
 package lumien.randomthings.Handler.ModCompability.NEI;
 
-import codechicken.nei.PositionedStack;
-import codechicken.nei.recipe.TemplateRecipeHandler;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
 import lumien.randomthings.Client.GUI.GuiImbuingStation;
 import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipe;
 import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipeHandler;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
+import codechicken.nei.PositionedStack;
+import codechicken.nei.recipe.TemplateRecipeHandler;
+
 public class ImbuingStationRecipeHandler extends TemplateRecipeHandler {
+
     static Gui gui = new Gui();
 
     public class CachedImbuingRecipe extends CachedRecipe {
+
         ArrayList<PositionedStack> ingredients;
         PositionedStack toImbue;
         PositionedStack result;

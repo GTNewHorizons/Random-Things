@@ -3,6 +3,7 @@ package lumien.randomthings.Blocks;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -45,16 +46,8 @@ public class BlockPlayerInterface extends BlockContainerBase {
     }
 
     @Override
-    public boolean onBlockActivated(
-            World par1World,
-            int poxX,
-            int poxY,
-            int poxZ,
-            EntityPlayer par5EntityPlayer,
-            int par6,
-            float par7,
-            float par8,
-            float par9) {
+    public boolean onBlockActivated(World par1World, int poxX, int poxY, int poxZ, EntityPlayer par5EntityPlayer,
+            int par6, float par7, float par8, float par9) {
         if (!par1World.isRemote) {
             par5EntityPlayer.openGui(RandomThings.instance, GuiIds.PLAYER_INTERFACE, par1World, poxX, poxY, poxZ);
         }
@@ -62,12 +55,7 @@ public class BlockPlayerInterface extends BlockContainerBase {
     }
 
     @Override
-    public void onBlockPlacedBy(
-            World par1World,
-            int poxX,
-            int poxY,
-            int poxZ,
-            EntityLivingBase par5EntityLivingBase,
+    public void onBlockPlacedBy(World par1World, int poxX, int poxY, int poxZ, EntityLivingBase par5EntityLivingBase,
             ItemStack par6ItemStack) {
         if (par5EntityLivingBase instanceof EntityPlayerMP && par1World.getTileEntity(poxX, poxY, poxZ) != null) {
             EntityPlayerMP player = (EntityPlayerMP) par5EntityLivingBase;

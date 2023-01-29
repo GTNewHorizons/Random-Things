@@ -1,6 +1,7 @@
 package lumien.randomthings.Configuration;
 
 public class Settings {
+
     public static boolean FERTILIZEDDIRT_GROWTHINDICATOR = false;
 
     public static double SPIRIT_CHANCE = 0.02;

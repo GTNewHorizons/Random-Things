@@ -1,6 +1,7 @@
 package lumien.randomthings.Library.Inventorys;
 
 import lumien.randomthings.Items.ItemDropFilter;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
@@ -8,6 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 public class InventoryDropFilter extends InventoryBasic {
+
     ItemStack dropFilter;
     EntityPlayer player;
 
@@ -93,8 +95,8 @@ public class InventoryDropFilter extends InventoryBasic {
     protected void readFromNBT() {
         reading = true;
 
-        NBTTagList itemList =
-                (NBTTagList) ((NBTTagCompound) dropFilter.stackTagCompound.getTag("Inventory")).getTag("Items");
+        NBTTagList itemList = (NBTTagList) ((NBTTagCompound) dropFilter.stackTagCompound.getTag("Inventory"))
+                .getTag("Items");
         for (int i = 0; i < itemList.tagCount(); i++) {
             NBTTagCompound slotEntry = itemList.getCompoundTagAt(i);
             int j = slotEntry.getByte("Slot") & 0xff;

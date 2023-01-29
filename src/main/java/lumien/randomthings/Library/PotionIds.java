@@ -1,6 +1,7 @@
 package lumien.randomthings.Library;
 
 public class PotionIds {
+
     public static int IMBUE_POISON;
     public static int IMBUE_EXPERIENCE;
     public static int IMBUE_FIRE;

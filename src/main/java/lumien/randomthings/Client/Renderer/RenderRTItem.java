@@ -1,12 +1,14 @@
 package lumien.randomthings.Client.Renderer;
 
 import lumien.randomthings.Items.ItemBase;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+
 import org.lwjgl.opengl.GL11;
 
 public class RenderRTItem implements IItemRenderer {
@@ -26,7 +28,12 @@ public class RenderRTItem implements IItemRenderer {
         RenderItem ri = new RenderItem();
         RenderBlocks rb = (RenderBlocks) data[0];
         ri.renderItemIntoGUI(
-                Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), item, 0, 0, true);
+                Minecraft.getMinecraft().fontRenderer,
+                Minecraft.getMinecraft().getTextureManager(),
+                item,
+                0,
+                0,
+                true);
         if (((ItemBase) item.getItem()).showDamage(item)) {
             double health = item.getItem().getDurabilityForDisplay(item);
             int j1 = (int) Math.round(13.0D - health * 13.0D);

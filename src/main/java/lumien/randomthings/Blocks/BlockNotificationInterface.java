@@ -2,6 +2,7 @@ package lumien.randomthings.Blocks;
 
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.TileEntities.TileEntityNotificationInterface;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 

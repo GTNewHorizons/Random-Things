@@ -1,11 +1,11 @@
 package lumien.randomthings.TileEntities;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.HashSet;
+
 import lumien.randomthings.Blocks.ItemBlocks.ItemBlockWirelessLever;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Configuration.Settings;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -16,9 +16,14 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
 import org.lwjgl.util.vector.Vector3f;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class TileEntityWirelessLever extends TileEntity {
+
     public static HashSet<TileEntityWirelessLever> loadedLevers = new HashSet<>();
 
     int targetX, targetY, targetZ;
@@ -37,8 +42,7 @@ public class TileEntityWirelessLever extends TileEntity {
     public void updateEntity() {
         if (worldObj.isRemote && worldObj.getTotalWorldTime() % 2 == 0) {
             EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
-            if (player.getCurrentEquippedItem() != null
-                    && player.getCurrentEquippedItem() != null
+            if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem() != null
                     && player.getCurrentEquippedItem().getItem() instanceof ItemBlockWirelessLever) {
                 Vector3f vec = new Vector3f(targetX - xCoord, targetY - yCoord, targetZ - zCoord);
                 for (double d = 0; d <= 1; d += 0.02d) {
@@ -103,22 +107,22 @@ public class TileEntityWirelessLever extends TileEntity {
     }
 
     @Override
-    public boolean shouldRefresh(
-            Block oldBlock, Block newBlock, int oldMeta, int newMeta, World world, int x, int y, int z) {
+    public boolean shouldRefresh(Block oldBlock, Block newBlock, int oldMeta, int newMeta, World world, int x, int y,
+            int z) {
         return (oldBlock != newBlock);
     }
 
     public static boolean isPowered(World worldObj, int posX, int posY, int posZ) {
         synchronized (loadedLevers) {
             for (TileEntityWirelessLever te : loadedLevers) {
-                if (te.worldObj == worldObj
-                        && te.targetX == posX
+                if (te.worldObj == worldObj && te.targetX == posX
                         && te.targetY == posY
                         && te.targetZ == posZ
                         && (te.worldObj.getBlockMetadata(te.xCoord, te.yCoord, te.zCoord) & 8) > 0) {
-                    double distance = Math.sqrt((te.xCoord - te.targetX) * (te.xCoord - te.targetX)
-                            + (te.yCoord - te.targetY) * (te.yCoord - te.targetY)
-                            + (te.zCoord - te.targetZ) * (te.zCoord - te.targetZ));
+                    double distance = Math.sqrt(
+                            (te.xCoord - te.targetX) * (te.xCoord - te.targetX)
+                                    + (te.yCoord - te.targetY) * (te.yCoord - te.targetY)
+                                    + (te.zCoord - te.targetZ) * (te.zCoord - te.targetZ));
                     if (distance <= Settings.WIRELESSLEVER_RANGE) {
                         return true;
                     }

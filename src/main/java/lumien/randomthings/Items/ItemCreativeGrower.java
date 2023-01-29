@@ -1,12 +1,14 @@
 package lumien.randomthings.Items;
 
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ItemCreativeGrower extends ItemCreative {
+
     int TICKS = 300;
 
     public ItemCreativeGrower() {
@@ -19,17 +21,8 @@ public class ItemCreativeGrower extends ItemCreative {
     }
 
     @Override
-    public boolean onItemUse(
-            ItemStack par1ItemStack,
-            EntityPlayer par2EntityPlayer,
-            World par3World,
-            int par4,
-            int par5,
-            int par6,
-            int par7,
-            float par8,
-            float par9,
-            float par10) {
+    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4,
+            int par5, int par6, int par7, float par8, float par9, float par10) {
         Random rng = new Random();
         for (int i = 0; i < TICKS; i++) {
             if (!par3World.isAirBlock(par4, par5, par6)) {

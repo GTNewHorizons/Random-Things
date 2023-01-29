@@ -1,6 +1,7 @@
 package lumien.randomthings.Library;
 
 public class DimensionCoordinate {
+
     /** the dimension */
     public int dimension;
 
@@ -36,8 +37,7 @@ public class DimensionCoordinate {
             return false;
         } else {
             DimensionCoordinate dimensionCoordinates = (DimensionCoordinate) object;
-            return this.dimension == dimensionCoordinates.dimension
-                    && this.posX == dimensionCoordinates.posX
+            return this.dimension == dimensionCoordinates.dimension && this.posX == dimensionCoordinates.posX
                     && this.posY == dimensionCoordinates.posY
                     && this.posZ == dimensionCoordinates.posZ;
         }

@@ -4,6 +4,7 @@ import lumien.randomthings.Container.ContainerEnderLetter;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Network.Messages.MessageChangeItemProperty;
 import lumien.randomthings.Network.PacketHandler;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -13,10 +14,12 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 public class GuiEnderLetter extends GuiContainer {
+
     final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/enderLetter.png");
 
     GuiTextField receiverName;
@@ -54,12 +57,13 @@ public class GuiEnderLetter extends GuiContainer {
 
         if (!oldReceiver.equals(receiverName.getText())) {
             oldReceiver = receiverName.getText();
-            PacketHandler.INSTANCE.sendToServer(new MessageChangeItemProperty(
-                    Item.getIdFromItem(ModItems.enderLetter),
-                    0,
-                    thePlayer.inventory.currentItem,
-                    "receiver",
-                    oldReceiver));
+            PacketHandler.INSTANCE.sendToServer(
+                    new MessageChangeItemProperty(
+                            Item.getIdFromItem(ModItems.enderLetter),
+                            0,
+                            thePlayer.inventory.currentItem,
+                            "receiver",
+                            oldReceiver));
         }
     }
 
@@ -67,8 +71,12 @@ public class GuiEnderLetter extends GuiContainer {
     public void initGui() {
         super.initGui();
 
-        receiverName =
-                new GuiTextField(this.fontRendererObj, (width - xSize) / 2 + 92, (height - ySize) / 2 + 5, 76, 10);
+        receiverName = new GuiTextField(
+                this.fontRendererObj,
+                (width - xSize) / 2 + 92,
+                (height - ySize) / 2 + 5,
+                76,
+                10);
         receiverName.setFocused(false);
         receiverName.setCanLoseFocus(true);
         Keyboard.enableRepeatEvents(true);
@@ -85,12 +93,13 @@ public class GuiEnderLetter extends GuiContainer {
     @Override
     public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
-        PacketHandler.INSTANCE.sendToServer(new MessageChangeItemProperty(
-                Item.getIdFromItem(ModItems.enderLetter),
-                0,
-                thePlayer.inventory.currentItem,
-                "receiver",
-                receiverName.getText()));
+        PacketHandler.INSTANCE.sendToServer(
+                new MessageChangeItemProperty(
+                        Item.getIdFromItem(ModItems.enderLetter),
+                        0,
+                        thePlayer.inventory.currentItem,
+                        "receiver",
+                        receiverName.getText()));
     }
 
     @Override
@@ -101,9 +110,8 @@ public class GuiEnderLetter extends GuiContainer {
 
     @Override
     protected void keyTyped(char par1, int pressedKey) {
-        if (pressedKey == Keyboard.KEY_ESCAPE
-                || (!this.receiverName.isFocused()
-                        && pressedKey == this.mc.gameSettings.keyBindInventory.getKeyCode())) {
+        if (pressedKey == Keyboard.KEY_ESCAPE || (!this.receiverName.isFocused()
+                && pressedKey == this.mc.gameSettings.keyBindInventory.getKeyCode())) {
             this.mc.thePlayer.closeScreen();
         }
         if (receiverName.isFocused()) {

@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -17,6 +19,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 public class ItemBiomeCapsule extends ItemBase {
+
     public static HashMap<Integer, Integer> biomeColors;
     static Random rng = new Random();
 
@@ -88,8 +91,8 @@ public class ItemBiomeCapsule extends ItemBase {
     public boolean onEntityItemUpdate(EntityItem entityItem) {
         if (entityItem.worldObj.isRemote) {
             ItemStack is = entityItem.getEntityItem();
-            BiomeGenBase biome = entityItem.worldObj.getBiomeGenForCoords(
-                    (int) Math.floor(entityItem.posX), (int) Math.floor(entityItem.posZ));
+            BiomeGenBase biome = entityItem.worldObj
+                    .getBiomeGenForCoords((int) Math.floor(entityItem.posX), (int) Math.floor(entityItem.posZ));
 
             NBTTagCompound nbt = is.stackTagCompound;
             if (nbt == null) {
@@ -122,7 +125,8 @@ public class ItemBiomeCapsule extends ItemBase {
                     int currentTime = nbt.getInteger("selectingTimer");
                     if (currentTime == 1) {
                         BiomeGenBase biome = entityItem.worldObj.getBiomeGenForCoords(
-                                (int) Math.floor(entityItem.posX), (int) Math.floor(entityItem.posZ));
+                                (int) Math.floor(entityItem.posX),
+                                (int) Math.floor(entityItem.posZ));
                         ItemStack is = entityItem.getEntityItem();
                         is.setItemDamage(biome.biomeID + 1);
                         entityItem.setEntityItemStack(is);

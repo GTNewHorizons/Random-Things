@@ -2,6 +2,7 @@ package lumien.randomthings.Core.Commands;
 
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,15 +1,18 @@
 package lumien.randomthings.Library.Inventorys;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import lumien.randomthings.Items.ItemEnderLetter;
 import lumien.randomthings.Library.InventoryUtils;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+
 public class InventoryEnderLetter extends InventoryBasic {
+
     private final EntityPlayer playerEntity;
     private final ItemStack originalIS;
 
@@ -99,8 +102,8 @@ public class InventoryEnderLetter extends InventoryBasic {
     protected void readFromNBT() {
         reading = true;
 
-        NBTTagList itemList =
-                (NBTTagList) ((NBTTagCompound) originalIS.stackTagCompound.getTag("Inventory")).getTag("Items");
+        NBTTagList itemList = (NBTTagList) ((NBTTagCompound) originalIS.stackTagCompound.getTag("Inventory"))
+                .getTag("Items");
         for (int i = 0; i < itemList.tagCount(); i++) {
             NBTTagCompound slotEntry = itemList.getCompoundTagAt(i);
             int j = slotEntry.getByte("Slot") & 0xff;

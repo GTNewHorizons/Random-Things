@@ -1,16 +1,19 @@
 package lumien.randomthings.Network.Messages;
 
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import io.netty.buffer.ByteBuf;
 import lumien.randomthings.Client.Particle.ParticleMagneticForce;
 import lumien.randomthings.Network.IRTMessage;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import io.netty.buffer.ByteBuf;
+
 public class MessageMagneticForceParticle implements IRTMessage {
+
     int entityID;
     int dimensionID;
 

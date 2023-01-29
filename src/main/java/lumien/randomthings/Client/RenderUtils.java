@@ -4,6 +4,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 import java.awt.Color;
 import java.nio.IntBuffer;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.Tessellator;
@@ -14,17 +15,22 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
+
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
 public class RenderUtils {
+
     static Gui gui = new Gui();
 
     public static void fillAreaWithIcon(IIcon icon, int x, int y, int width, int height) {
         int scale = computeGuiScale();
 
         glScissor(
-                0, Minecraft.getMinecraft().displayHeight - (y + height) * scale, (width + x) * scale, height * scale);
+                0,
+                Minecraft.getMinecraft().displayHeight - (y + height) * scale,
+                (width + x) * scale,
+                height * scale);
         glEnable(GL_SCISSOR_TEST);
 
         int cols = MathHelper.ceiling_float_int(width / 16F);
@@ -38,20 +44,18 @@ public class RenderUtils {
         glDisable(GL_SCISSOR_TEST);
     }
 
-    public static void drawTexturedModalRect(
-            int p_73729_1_,
-            int p_73729_2_,
-            int p_73729_3_,
-            int p_73729_4_,
-            int p_73729_5_,
-            int p_73729_6_,
-            int zLevel) {
+    public static void drawTexturedModalRect(int p_73729_1_, int p_73729_2_, int p_73729_3_, int p_73729_4_,
+            int p_73729_5_, int p_73729_6_, int zLevel) {
         float f = 0.00390625F;
         float f1 = 0.00390625F;
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(
-                p_73729_1_, p_73729_2_ + p_73729_6_, zLevel, (p_73729_3_) * f, (p_73729_4_ + p_73729_6_) * f1);
+                p_73729_1_,
+                p_73729_2_ + p_73729_6_,
+                zLevel,
+                (p_73729_3_) * f,
+                (p_73729_4_ + p_73729_6_) * f1);
         tessellator.addVertexWithUV(
                 p_73729_1_ + p_73729_5_,
                 p_73729_2_ + p_73729_6_,
@@ -59,7 +63,11 @@ public class RenderUtils {
                 (p_73729_3_ + p_73729_5_) * f,
                 (p_73729_4_ + p_73729_6_) * f1);
         tessellator.addVertexWithUV(
-                p_73729_1_ + p_73729_5_, p_73729_2_, zLevel, (p_73729_3_ + p_73729_5_) * f, (p_73729_4_) * f1);
+                p_73729_1_ + p_73729_5_,
+                p_73729_2_,
+                zLevel,
+                (p_73729_3_ + p_73729_5_) * f,
+                (p_73729_4_) * f1);
         tessellator.addVertexWithUV(p_73729_1_, p_73729_2_, zLevel, (p_73729_3_) * f, (p_73729_4_) * f1);
         tessellator.draw();
     }
@@ -127,8 +135,7 @@ public class RenderUtils {
             k = 1000;
         }
 
-        while (scaleFactor < k
-                && mc.displayWidth / (scaleFactor + 1) >= 320
+        while (scaleFactor < k && mc.displayWidth / (scaleFactor + 1) >= 320
                 && mc.displayHeight / (scaleFactor + 1) >= 240) {
             ++scaleFactor;
         }
@@ -143,8 +150,8 @@ public class RenderUtils {
         if (fluidStack != null) {
             Fluid fluid = fluidStack.getFluid();
             IIcon fluidIcon = fluid.getStillIcon();
-            int fluidHeight =
-                    MathHelper.ceiling_float_int((fluidStack.amount / (float) tankInfo.capacity) * fullHeight);
+            int fluidHeight = MathHelper
+                    .ceiling_float_int((fluidStack.amount / (float) tankInfo.capacity) * fullHeight);
 
             GL11.glDisable(GL_BLEND);
             glColor3f(1, 1, 1);
@@ -157,8 +164,8 @@ public class RenderUtils {
         drawCube(posX, posY, posZ, size, 1, 1, 1, 0.5f);
     }
 
-    public static void drawCube(
-            float posX, float posY, float posZ, float size, float red, float green, float blue, float alpha) {
+    public static void drawCube(float posX, float posY, float posZ, float size, float red, float green, float blue,
+            float alpha) {
         Minecraft.getMinecraft().entityRenderer.disableLightmap(0);
 
         Tessellator t = Tessellator.instance;

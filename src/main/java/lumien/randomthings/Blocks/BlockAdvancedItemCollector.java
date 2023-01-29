@@ -1,9 +1,11 @@
 package lumien.randomthings.Blocks;
 
 import java.util.Random;
+
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.material.Material;
@@ -20,6 +22,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockAdvancedItemCollector extends BlockContainerBase {
+
     Random rng;
 
     protected BlockAdvancedItemCollector() {
@@ -33,8 +36,8 @@ public class BlockAdvancedItemCollector extends BlockContainerBase {
 
     @Override
     public void breakBlock(World worldObj, int posX, int posY, int posZ, Block block, int metadata) {
-        TileEntityAdvancedItemCollector tileEntityAdvancedItemCollector =
-                (TileEntityAdvancedItemCollector) worldObj.getTileEntity(posX, posY, posZ);
+        TileEntityAdvancedItemCollector tileEntityAdvancedItemCollector = (TileEntityAdvancedItemCollector) worldObj
+                .getTileEntity(posX, posY, posZ);
 
         if (tileEntityAdvancedItemCollector != null) {
             IInventory inventory = tileEntityAdvancedItemCollector.getInventory();
@@ -46,9 +49,8 @@ public class BlockAdvancedItemCollector extends BlockContainerBase {
                     float f1 = this.rng.nextFloat() * 0.8F + 0.1F;
                     EntityItem entityitem;
 
-                    for (float f2 = this.rng.nextFloat() * 0.8F + 0.1F;
-                            itemstack.stackSize > 0;
-                            worldObj.spawnEntityInWorld(entityitem)) {
+                    for (float f2 = this.rng.nextFloat() * 0.8F + 0.1F; itemstack.stackSize > 0; worldObj
+                            .spawnEntityInWorld(entityitem)) {
                         int j1 = this.rng.nextInt(21) + 10;
 
                         if (j1 > itemstack.stackSize) {
@@ -68,8 +70,8 @@ public class BlockAdvancedItemCollector extends BlockContainerBase {
                         entityitem.motionZ = (float) this.rng.nextGaussian() * f3;
 
                         if (itemstack.hasTagCompound()) {
-                            entityitem.getEntityItem().setTagCompound((NBTTagCompound)
-                                    itemstack.getTagCompound().copy());
+                            entityitem.getEntityItem()
+                                    .setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
                         }
                     }
                 }
@@ -82,16 +84,8 @@ public class BlockAdvancedItemCollector extends BlockContainerBase {
     }
 
     @Override
-    public boolean onBlockActivated(
-            World worldObj,
-            int poxX,
-            int poxY,
-            int poxZ,
-            EntityPlayer par5EntityPlayer,
-            int par6,
-            float par7,
-            float par8,
-            float par9) {
+    public boolean onBlockActivated(World worldObj, int poxX, int poxY, int poxZ, EntityPlayer par5EntityPlayer,
+            int par6, float par7, float par8, float par9) {
         if (!worldObj.isRemote) {
             par5EntityPlayer.openGui(RandomThings.instance, GuiIds.ADVANCED_ITEMCOLLECTOR, worldObj, poxX, poxY, poxZ);
         }
@@ -100,8 +94,8 @@ public class BlockAdvancedItemCollector extends BlockContainerBase {
 
     @Override
     public void onNeighborBlockChange(World worldObj, int posX, int posY, int posZ, Block block) {
-        EnumFacing facing =
-                BlockDispenser.func_149937_b(Facing.oppositeSide[worldObj.getBlockMetadata(posX, posY, posZ)]);
+        EnumFacing facing = BlockDispenser
+                .func_149937_b(Facing.oppositeSide[worldObj.getBlockMetadata(posX, posY, posZ)]);
 
         int targetX = posX + facing.getFrontOffsetX();
         int targetY = posY + facing.getFrontOffsetY();
@@ -135,8 +129,8 @@ public class BlockAdvancedItemCollector extends BlockContainerBase {
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(
-            World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_) {
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_,
+            int p_149668_4_) {
         return null;
     }
 
@@ -146,16 +140,8 @@ public class BlockAdvancedItemCollector extends BlockContainerBase {
     }
 
     @Override
-    public int onBlockPlaced(
-            World p_149660_1_,
-            int posX,
-            int posY,
-            int posZ,
-            int side,
-            float hitX,
-            float hitY,
-            float hitZ,
-            int metadata) {
+    public int onBlockPlaced(World p_149660_1_, int posX, int posY, int posZ, int side, float hitX, float hitY,
+            float hitZ, int metadata) {
         return side;
     }
 

@@ -1,12 +1,15 @@
 package lumien.randomthings.Client;
 
+import java.awt.Color;
+
+import net.minecraft.client.Minecraft;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import java.awt.Color;
-import net.minecraft.client.Minecraft;
 
 public class ClientTickHandler {
+
     static int counter = 0;
     static boolean raising = true;
 

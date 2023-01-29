@@ -2,11 +2,13 @@ package lumien.randomthings.Items;
 
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ItemVoidStone extends ItemBase {
+
     public ItemVoidStone() {
         super("voidStone");
         this.setMaxStackSize(1);

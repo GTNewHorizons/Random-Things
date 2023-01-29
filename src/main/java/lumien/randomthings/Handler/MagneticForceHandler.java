@@ -2,9 +2,11 @@ package lumien.randomthings.Handler;
 
 import java.util.ArrayList;
 import java.util.Set;
+
 import lumien.randomthings.Network.Messages.MessageMagneticForceParticle;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,6 +15,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
 
 public class MagneticForceHandler {
+
     public static int TELEPORT_LENGTH = 200; // 10 Seconds
     public static MagneticForceHandler INSTANCE = new MagneticForceHandler();
     ArrayList<MagneticForceEvent> events;
@@ -48,6 +51,7 @@ public class MagneticForceHandler {
     }
 
     private static class MagneticForceEvent {
+
         String user;
         String target;
         int progress;
@@ -82,39 +86,44 @@ public class MagneticForceHandler {
                 return true;
             } else {
                 f += 0.1f;
-                EntityPlayerMP userEntity =
-                        MinecraftServer.getServer().getConfigurationManager().func_152612_a(user);
-                EntityPlayerMP targetEntity =
-                        MinecraftServer.getServer().getConfigurationManager().func_152612_a(target);
+                EntityPlayerMP userEntity = MinecraftServer.getServer().getConfigurationManager().func_152612_a(user);
+                EntityPlayerMP targetEntity = MinecraftServer.getServer().getConfigurationManager()
+                        .func_152612_a(target);
 
                 if (userEntity != null) {
-                    Set<EntityPlayer> trackingUser = ((WorldServer) userEntity.worldObj)
-                            .getEntityTracker()
+                    Set<EntityPlayer> trackingUser = ((WorldServer) userEntity.worldObj).getEntityTracker()
                             .getTrackingPlayers(userEntity);
                     PacketHandler.INSTANCE.sendTo(
                             new MessageMagneticForceParticle(
-                                    userEntity.getEntityId(), userEntity.worldObj.provider.dimensionId, f),
+                                    userEntity.getEntityId(),
+                                    userEntity.worldObj.provider.dimensionId,
+                                    f),
                             userEntity);
                     for (EntityPlayer player : trackingUser) {
                         PacketHandler.INSTANCE.sendTo(
                                 new MessageMagneticForceParticle(
-                                        userEntity.getEntityId(), userEntity.worldObj.provider.dimensionId, f),
+                                        userEntity.getEntityId(),
+                                        userEntity.worldObj.provider.dimensionId,
+                                        f),
                                 (EntityPlayerMP) player);
                     }
                 }
                 if (targetEntity != null) {
-                    Set<EntityPlayer> trackingTarget = ((WorldServer) targetEntity.worldObj)
-                            .getEntityTracker()
+                    Set<EntityPlayer> trackingTarget = ((WorldServer) targetEntity.worldObj).getEntityTracker()
                             .getTrackingPlayers(targetEntity);
                     PacketHandler.INSTANCE.sendTo(
                             new MessageMagneticForceParticle(
-                                    targetEntity.getEntityId(), targetEntity.worldObj.provider.dimensionId, f),
+                                    targetEntity.getEntityId(),
+                                    targetEntity.worldObj.provider.dimensionId,
+                                    f),
                             targetEntity);
 
                     for (EntityPlayer player : trackingTarget) {
                         PacketHandler.INSTANCE.sendTo(
                                 new MessageMagneticForceParticle(
-                                        targetEntity.getEntityId(), targetEntity.worldObj.provider.dimensionId, f),
+                                        targetEntity.getEntityId(),
+                                        targetEntity.worldObj.provider.dimensionId,
+                                        f),
                                 (EntityPlayerMP) player);
                     }
                 }
@@ -124,10 +133,8 @@ public class MagneticForceHandler {
         }
 
         private void teleport() {
-            EntityPlayerMP userEntity =
-                    MinecraftServer.getServer().getConfigurationManager().func_152612_a(user);
-            EntityPlayerMP targetEntity =
-                    MinecraftServer.getServer().getConfigurationManager().func_152612_a(target);
+            EntityPlayerMP userEntity = MinecraftServer.getServer().getConfigurationManager().func_152612_a(user);
+            EntityPlayerMP targetEntity = MinecraftServer.getServer().getConfigurationManager().func_152612_a(target);
 
             if (userEntity != null && targetEntity != null) {
                 userEntity.mountEntity(null);

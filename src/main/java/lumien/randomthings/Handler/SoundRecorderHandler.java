@@ -1,14 +1,17 @@
 package lumien.randomthings.Handler;
 
 import java.util.ArrayList;
+
 import lumien.randomthings.Configuration.ConfigItems;
 import lumien.randomthings.Items.ModItems;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.sound.PlaySoundEvent17;
 
 public class SoundRecorderHandler {
+
     public ArrayList<String> playedSounds;
 
     public SoundRecorderHandler() {

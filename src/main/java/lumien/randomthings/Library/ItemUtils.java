@@ -1,10 +1,12 @@
 package lumien.randomthings.Library;
 
 import java.util.ArrayList;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemUtils {
+
     public static boolean areOreDictionaried(ItemStack item1, ItemStack item2) {
         ArrayList<Integer> ids1 = getOreIDs(item1);
         ArrayList<Integer> ids2 = getOreIDs(item2);

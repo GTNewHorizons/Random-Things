@@ -1,16 +1,18 @@
 package lumien.randomthings.Mixins;
 
-import cpw.mods.fml.relauncher.FMLLaunchHandler;
 import java.util.function.Supplier;
+
 import lumien.randomthings.Configuration.ConfigBlocks;
 import lumien.randomthings.Configuration.VanillaChanges;
+import cpw.mods.fml.relauncher.FMLLaunchHandler;
 
 /**
- * IMPORTANT: Do not make any references to any mod from this file. This file is loaded quite early on and if
- * you refer to other mods you load them as well. The consequence is: You can't inject any previously loaded classes!
- * Exception: Reference.java, as long as it is used for Strings only!
+ * IMPORTANT: Do not make any references to any mod from this file. This file is loaded quite early on and if you refer
+ * to other mods you load them as well. The consequence is: You can't inject any previously loaded classes! Exception:
+ * Reference.java, as long as it is used for Strings only!
  */
 public enum Mixin {
+
     ENTITYLIVING_ACCESSOR("EntityLivingAccessor", Side.BOTH, () -> true),
     POTION_ACCESSOR("PotionAccessor", Side.BOTH, () -> true),
     BLOCK_LEAVES_BASE("MixinBlockLeavesBase", Side.BOTH, () -> VanillaChanges.FASTER_LEAVEDECAY),
@@ -31,10 +33,8 @@ public enum Mixin {
     }
 
     public boolean shouldLoad() {
-        return shouldApply.get()
-                && (side == Side.BOTH
-                        || (side == Side.SERVER && FMLLaunchHandler.side().isServer())
-                        || (side == Side.CLIENT && FMLLaunchHandler.side().isClient()));
+        return shouldApply.get() && (side == Side.BOTH || (side == Side.SERVER && FMLLaunchHandler.side().isServer())
+                || (side == Side.CLIENT && FMLLaunchHandler.side().isClient()));
     }
 }
 

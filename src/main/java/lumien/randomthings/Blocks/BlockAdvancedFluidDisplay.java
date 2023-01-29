@@ -1,6 +1,7 @@
 package lumien.randomthings.Blocks;
 
 import lumien.randomthings.TileEntities.TileEntityAdvancedFluidDisplay;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +15,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BlockAdvancedFluidDisplay extends BlockContainerBase {
+
     public BlockAdvancedFluidDisplay() {
         super("advancedFluidDisplay", Material.glass);
 
@@ -32,10 +34,9 @@ public class BlockAdvancedFluidDisplay extends BlockContainerBase {
 
     @Override
     public IIcon getIcon(IBlockAccess par1IBlockAccess, int posX, int posY, int posZ, int side) {
-        TileEntityAdvancedFluidDisplay te =
-                (TileEntityAdvancedFluidDisplay) par1IBlockAccess.getTileEntity(posX, posY, posZ);
-        if (te == null
-                || te.getFluid(side) == null
+        TileEntityAdvancedFluidDisplay te = (TileEntityAdvancedFluidDisplay) par1IBlockAccess
+                .getTileEntity(posX, posY, posZ);
+        if (te == null || te.getFluid(side) == null
                 || te.getFluid(side).equals("")
                 || FluidRegistry.getFluid(te.getFluid(side)) == null) {
             return blockIcon;
@@ -49,16 +50,8 @@ public class BlockAdvancedFluidDisplay extends BlockContainerBase {
     }
 
     @Override
-    public boolean onBlockActivated(
-            World world,
-            int posX,
-            int posY,
-            int posZ,
-            EntityPlayer entityplayer,
-            int side,
-            float par7,
-            float par8,
-            float par9) {
+    public boolean onBlockActivated(World world, int posX, int posY, int posZ, EntityPlayer entityplayer, int side,
+            float par7, float par8, float par9) {
         TileEntityAdvancedFluidDisplay te = (TileEntityAdvancedFluidDisplay) world.getTileEntity(posX, posY, posZ);
         ItemStack currentItem = entityplayer.getCurrentEquippedItem();
 

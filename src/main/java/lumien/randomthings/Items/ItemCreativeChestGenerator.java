@@ -2,7 +2,9 @@ package lumien.randomthings.Items;
 
 import java.util.List;
 import java.util.Random;
+
 import lumien.randomthings.Library.ChestCategory;
+
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
 public class ItemCreativeChestGenerator extends ItemCreative {
+
     private static final Random rng = new Random();
 
     public ItemCreativeChestGenerator() {
@@ -50,8 +53,7 @@ public class ItemCreativeChestGenerator extends ItemCreative {
         if (nbt != null) {
             ChestCategory selectedCategory = ChestCategory.values()[nbt.getInteger("category")];
             return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(par1ItemStack) + ".name"))
-                            .trim()
-                    + " (" + selectedCategory.getName() + ")";
+                    .trim() + " (" + selectedCategory.getName() + ")";
         } else {
             return ("" + StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(par1ItemStack) + ".name"))
                     .trim();
@@ -79,17 +81,8 @@ public class ItemCreativeChestGenerator extends ItemCreative {
     }
 
     @Override
-    public boolean onItemUse(
-            ItemStack par1ItemStack,
-            EntityPlayer entityPlayer,
-            World worldObj,
-            int posX,
-            int posY,
-            int posZ,
-            int side,
-            float par8,
-            float par9,
-            float par10) {
+    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer entityPlayer, World worldObj, int posX, int posY,
+            int posZ, int side, float par8, float par9, float par10) {
         if (!worldObj.isRemote && !entityPlayer.isSneaking()) {
             if (side == 0) {
                 --posY;
@@ -125,8 +118,8 @@ public class ItemCreativeChestGenerator extends ItemCreative {
                             par1ItemStack.stackTagCompound = new NBTTagCompound();
                             par1ItemStack.stackTagCompound.setInteger("category", 0);
                         }
-                        ChestCategory category =
-                                ChestCategory.values()[par1ItemStack.stackTagCompound.getInteger("category")];
+                        ChestCategory category = ChestCategory.values()[par1ItemStack.stackTagCompound
+                                .getInteger("category")];
                         worldObj.setBlock(posX, posY, posZ, Blocks.chest);
                         WeightedRandomChestContent.generateChestContents(
                                 rng,

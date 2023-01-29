@@ -3,6 +3,7 @@ package lumien.randomthings.Network;
 import lumien.randomthings.Network.Messages.*;
 
 public class PacketHandler {
+
     public static final RandomThingsNetworkWrapper INSTANCE = new RandomThingsNetworkWrapper();
 
     public static void init() {

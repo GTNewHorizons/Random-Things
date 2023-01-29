@@ -1,11 +1,11 @@
 package lumien.randomthings.TileEntities.EnergyDistributors;
 
-import cofh.api.energy.EnergyStorage;
-import cofh.api.energy.IEnergyReceiver;
 import java.util.HashSet;
+
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Library.Interfaces.IValidator;
 import lumien.randomthings.Library.WorldUtils;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -14,7 +14,11 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cofh.api.energy.EnergyStorage;
+import cofh.api.energy.IEnergyReceiver;
+
 public class TileEntityEnergyDistributor extends TileEntity implements IEnergyReceiver {
+
     protected HashSet<TileEntity> receiverCache;
 
     public ForgeDirection facing;
@@ -24,8 +28,8 @@ public class TileEntityEnergyDistributor extends TileEntity implements IEnergyRe
     int energyDistributedLastTick;
     int machinesConnected;
 
-    IValidator validator =
-            o -> o instanceof TileEntity & !(o instanceof TileEntityEnergyDistributor) && o instanceof IEnergyReceiver;
+    IValidator validator = o -> o instanceof TileEntity & !(o instanceof TileEntityEnergyDistributor)
+            && o instanceof IEnergyReceiver;
 
     public TileEntityEnergyDistributor() {
         receiverCache = new HashSet<>();
@@ -95,7 +99,11 @@ public class TileEntityEnergyDistributor extends TileEntity implements IEnergyRe
 
     protected void fillReceiverCache() {
         receiverCache = WorldUtils.getConnectedTEs(
-                worldObj, xCoord + facing.offsetX, yCoord + facing.offsetY, zCoord + facing.offsetZ, validator);
+                worldObj,
+                xCoord + facing.offsetX,
+                yCoord + facing.offsetY,
+                zCoord + facing.offsetZ,
+                validator);
         machinesConnected = receiverCache.size();
         while (receiverCache.size() > Settings.ENERGY_DISTRIBUTOR_MAXMACHINES) {
             receiverCache.remove(receiverCache.toArray()[0]);

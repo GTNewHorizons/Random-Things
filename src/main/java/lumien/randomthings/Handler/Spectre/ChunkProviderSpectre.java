@@ -1,6 +1,7 @@
 package lumien.randomthings.Handler.Spectre;
 
 import java.util.List;
+
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.IProgressUpdate;
 import net.minecraft.world.ChunkPosition;
@@ -10,6 +11,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 
 public class ChunkProviderSpectre implements IChunkProvider {
+
     World worldObj;
 
     public ChunkProviderSpectre(World worldObj) {
@@ -25,9 +27,8 @@ public class ChunkProviderSpectre implements IChunkProvider {
     }
 
     /**
-     * Will return back a chunk, if it doesn't exist and its not a MP client it
-     * will generates all the blocks for the specified chunk from the map seed
-     * and chunk seed
+     * Will return back a chunk, if it doesn't exist and its not a MP client it will generates all the blocks for the
+     * specified chunk from the map seed and chunk seed
      */
     @Override
     public Chunk provideChunk(int par1, int par2) {
@@ -52,9 +53,8 @@ public class ChunkProviderSpectre implements IChunkProvider {
     public void populate(IChunkProvider par1IChunkProvider, int par2, int par3) {}
 
     /**
-     * Two modes of operation: if passed true, save all Chunks in one go. If
-     * passed false, save up to two chunks. Return true if all chunks have been
-     * saved.
+     * Two modes of operation: if passed true, save all Chunks in one go. If passed false, save up to two chunks. Return
+     * true if all chunks have been saved.
      */
     @Override
     public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate) {
@@ -62,15 +62,14 @@ public class ChunkProviderSpectre implements IChunkProvider {
     }
 
     /**
-     * Save extra data not associated with any Chunk. Not saved during autosave,
-     * only during world unload. Currently unimplemented.
+     * Save extra data not associated with any Chunk. Not saved during autosave, only during world unload. Currently
+     * unimplemented.
      */
     @Override
     public void saveExtraData() {}
 
     /**
-     * Unloads chunks that are marked to be unloaded. This is not guaranteed to
-     * unload every such chunk.
+     * Unloads chunks that are marked to be unloaded. This is not guaranteed to unload every such chunk.
      */
     @Override
     public boolean unloadQueuedChunks() {
@@ -94,8 +93,7 @@ public class ChunkProviderSpectre implements IChunkProvider {
     }
 
     /**
-     * Returns a list of creatures of the specified type that can spawn at the
-     * given location.
+     * Returns a list of creatures of the specified type that can spawn at the given location.
      */
     @Override
     public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4) {

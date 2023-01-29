@@ -1,17 +1,21 @@
 package lumien.randomthings.Client.GUI;
 
 import java.util.ArrayList;
+
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Container.ContainerEnderEnergyDistributor;
 import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnderEnergyDistributor;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiEnderEnergyDistributor extends GuiContainer {
+
     final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/enderEnergyDistributor.png");
     int maxStorage;
 
@@ -62,10 +66,16 @@ public class GuiEnderEnergyDistributor extends GuiContainer {
 
         int distributed = ((ContainerEnderEnergyDistributor) this.inventorySlots).energyDistributedLastTick;
         fontRendererObj.drawString(
-                "Edlt: " + distributed + "/" + Settings.ENDER_ENERGY_DISTRIBUTOR_PERTICK + " RF", 16, 34, 4210752);
+                "Edlt: " + distributed + "/" + Settings.ENDER_ENERGY_DISTRIBUTOR_PERTICK + " RF",
+                16,
+                34,
+                4210752);
 
         int machinesConnected = ((ContainerEnderEnergyDistributor) this.inventorySlots).machinesConnected;
         fontRendererObj.drawString(
-                "MC: " + machinesConnected + "/" + Settings.ENDER_ENERGY_DISTRIBUTOR_MAXMACHINES, 103, 34, 4210752);
+                "MC: " + machinesConnected + "/" + Settings.ENDER_ENERGY_DISTRIBUTOR_MAXMACHINES,
+                103,
+                34,
+                4210752);
     }
 }

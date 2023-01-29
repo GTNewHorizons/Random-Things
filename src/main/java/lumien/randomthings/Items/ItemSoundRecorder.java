@@ -1,16 +1,19 @@
 package lumien.randomthings.Items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ItemSoundRecorder extends ItemBase {
+
     IIcon[] icons;
 
     public ItemSoundRecorder() {

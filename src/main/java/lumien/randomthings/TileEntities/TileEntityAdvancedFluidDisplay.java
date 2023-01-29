@@ -7,6 +7,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityAdvancedFluidDisplay extends TileEntity {
+
     String[] fluids;
     boolean[] flowing;
 

@@ -3,6 +3,7 @@ package lumien.randomthings.Blocks;
 import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.TileEntities.TileEntityCreativePlayerInterface;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,6 +12,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 public class BlockCreativePlayerInterface extends BlockContainerBase {
+
     IIcon texture_bottom;
     IIcon texture_top;
     IIcon texture_side;
@@ -47,16 +49,8 @@ public class BlockCreativePlayerInterface extends BlockContainerBase {
     }
 
     @Override
-    public boolean onBlockActivated(
-            World par1World,
-            int poxX,
-            int posY,
-            int poxZ,
-            EntityPlayer par5EntityPlayer,
-            int par6,
-            float par7,
-            float par8,
-            float par9) {
+    public boolean onBlockActivated(World par1World, int poxX, int posY, int poxZ, EntityPlayer par5EntityPlayer,
+            int par6, float par7, float par8, float par9) {
         if (!par1World.isRemote) {
             par5EntityPlayer.openGui(RandomThings.instance, GuiIds.PLAYER_INTERFACE, par1World, poxX, posY, poxZ);
         }

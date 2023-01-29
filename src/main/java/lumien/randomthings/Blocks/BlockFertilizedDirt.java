@@ -1,8 +1,10 @@
 package lumien.randomthings.Blocks;
 
 import java.util.Random;
+
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.RandomThings;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -15,6 +17,7 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockFertilizedDirt extends BlockBase {
+
     boolean tilled;
 
     protected BlockFertilizedDirt(boolean tilled) {
@@ -50,10 +53,15 @@ public class BlockFertilizedDirt extends BlockBase {
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(
-            World p_149668_1_, int p_149668_2_, int p_149668_3_, int p_149668_4_) {
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_149668_2_, int p_149668_3_,
+            int p_149668_4_) {
         return AxisAlignedBB.getBoundingBox(
-                p_149668_2_, p_149668_3_, p_149668_4_, p_149668_2_ + 1, p_149668_3_ + 1, p_149668_4_ + 1);
+                p_149668_2_,
+                p_149668_3_,
+                p_149668_4_,
+                p_149668_2_ + 1,
+                p_149668_3_ + 1,
+                p_149668_4_ + 1);
     }
 
     @Override
@@ -72,8 +80,8 @@ public class BlockFertilizedDirt extends BlockBase {
     }
 
     @Override
-    public boolean canSustainPlant(
-            IBlockAccess world, int x, int y, int z, ForgeDirection direction, IPlantable plantable) {
+    public boolean canSustainPlant(IBlockAccess world, int x, int y, int z, ForgeDirection direction,
+            IPlantable plantable) {
         Block plant = plantable.getPlant(world, x, y + 1, z);
         EnumPlantType plantType = plantable.getPlantType(world, x, y + 1, z);
 

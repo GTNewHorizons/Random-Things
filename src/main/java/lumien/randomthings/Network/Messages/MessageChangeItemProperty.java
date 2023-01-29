@@ -1,17 +1,20 @@
 package lumien.randomthings.Network.Messages;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import io.netty.buffer.ByteBuf;
 import lumien.randomthings.Library.Interfaces.IItemWithProperties;
 import lumien.randomthings.Network.IRTMessage;
+
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetHandlerPlayServer;
 
+import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import io.netty.buffer.ByteBuf;
+
 public class MessageChangeItemProperty implements IRTMessage {
+
     String propertyName;
 
     int propertyType; // 0=Boolean,1=String,2=Int,3=Long
@@ -61,8 +64,7 @@ public class MessageChangeItemProperty implements IRTMessage {
 
         if (slot >= 0 && slot < player.inventory.getSizeInventory() && propertyName != null) {
             ItemStack is = player.inventory.getStackInSlot(slot);
-            if (is != null
-                    && is.getItem() instanceof IItemWithProperties
+            if (is != null && is.getItem() instanceof IItemWithProperties
                     && is.getItem() != null
                     && Item.getItemById(itemID) == is.getItem()
                     && itemDamage == is.getItemDamage()) {

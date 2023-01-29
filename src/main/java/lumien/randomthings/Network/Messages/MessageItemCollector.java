@@ -1,13 +1,16 @@
 package lumien.randomthings.Network.Messages;
 
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import io.netty.buffer.ByteBuf;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Network.IRTMessage;
 import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
+
 import net.minecraft.world.World;
 
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import io.netty.buffer.ByteBuf;
+
 public class MessageItemCollector implements IRTMessage {
+
     int posX, posY, posZ;
     int rangeX, rangeY, rangeZ;
 
@@ -61,8 +64,8 @@ public class MessageItemCollector implements IRTMessage {
         World worldObj = ctx.getServerHandler().playerEntity.worldObj;
 
         if (worldObj.getBlock(posX, posY, posZ) == ModBlocks.advancedItemCollector) {
-            TileEntityAdvancedItemCollector te =
-                    (TileEntityAdvancedItemCollector) worldObj.getTileEntity(posX, posY, posZ);
+            TileEntityAdvancedItemCollector te = (TileEntityAdvancedItemCollector) worldObj
+                    .getTileEntity(posX, posY, posZ);
             if (te != null) {
                 te.setRange(rangeX, rangeY, rangeZ);
                 te.markDirty();

@@ -1,26 +1,25 @@
 package lumien.randomthings.Client.GUI.Elements;
 
-import cpw.mods.fml.client.GuiScrollingList;
 import java.util.ArrayList;
+
 import lumien.randomthings.Library.Interfaces.IPlayerListGUI;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Rectangle;
 
+import cpw.mods.fml.client.GuiScrollingList;
+
 public class GuiSlotPlayerList extends GuiScrollingList {
+
     private final ArrayList<String> players;
     private final IPlayerListGUI parent;
 
-    public GuiSlotPlayerList(
-            IPlayerListGUI parent,
-            Minecraft client,
-            int width,
-            int height,
-            int posX,
-            int posY,
+    public GuiSlotPlayerList(IPlayerListGUI parent, Minecraft client, int width, int height, int posX, int posY,
             ArrayList<String> playerList) {
         super(client, width, height, posY, posY + height, posX, Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT);
 
@@ -64,8 +63,11 @@ public class GuiSlotPlayerList extends GuiScrollingList {
         String player = players.get(var1);
         int color = 0xFFFFFF;
 
-        Rectangle slotRect =
-                new Rectangle(this.left + 3, var3, fontRenderer.getStringWidth(player), fontRenderer.FONT_HEIGHT);
+        Rectangle slotRect = new Rectangle(
+                this.left + 3,
+                var3,
+                fontRenderer.getStringWidth(player),
+                fontRenderer.FONT_HEIGHT);
 
         if (slotRect.contains(mouseX, mouseY)) {
             color = 0xFFD700;
