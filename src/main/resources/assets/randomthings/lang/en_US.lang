@@ -92,6 +92,10 @@ imbue.spectre=Spectre Imbue
 entity.spirit.name=Spirit
 entity.bloodmoonCircle.name=Bloodmoon Circle
 
+text.tooltip.item.dropFilter.generic=Takes Item Filter
+text.tooltip.item.dropFilter=Prevents pick up of filtered items
+text.tooltip.item.dropFilterVoiding=Voids filtered items on pick up
+
 text.miscellaneous.press=Press %s for more information
 text.miscellaneous.shift=shift
 text.miscellaneous.block=Block
