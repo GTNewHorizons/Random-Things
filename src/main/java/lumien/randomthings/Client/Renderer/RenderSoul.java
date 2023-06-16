@@ -1,9 +1,5 @@
 package lumien.randomthings.Client.Renderer;
 
-import lumien.randomthings.Client.RenderUtils;
-import lumien.randomthings.Entity.EntitySoul;
-import lumien.randomthings.Items.ItemGinto;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
@@ -16,6 +12,9 @@ import org.lwjgl.opengl.GL12;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Client.RenderUtils;
+import lumien.randomthings.Entity.EntitySoul;
+import lumien.randomthings.Items.ItemGinto;
 
 @SideOnly(Side.CLIENT)
 public class RenderSoul extends Render {

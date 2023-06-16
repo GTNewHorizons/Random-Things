@@ -1,13 +1,5 @@
 package lumien.randomthings.Client.GUI;
 
-import lumien.randomthings.Client.GUI.Elements.Buttons.GuiButtonBooleanProperty;
-import lumien.randomthings.Client.GUI.Elements.Buttons.GuiButtonListtype;
-import lumien.randomthings.Container.ContainerItemFilter;
-import lumien.randomthings.Items.ModItems;
-import lumien.randomthings.Library.ClientUtil;
-import lumien.randomthings.Network.Messages.MessageItemFilter;
-import lumien.randomthings.Network.PacketHandler;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
@@ -18,6 +10,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
+
+import lumien.randomthings.Client.GUI.Elements.Buttons.GuiButtonBooleanProperty;
+import lumien.randomthings.Client.GUI.Elements.Buttons.GuiButtonListtype;
+import lumien.randomthings.Container.ContainerItemFilter;
+import lumien.randomthings.Items.ModItems;
+import lumien.randomthings.Library.ClientUtil;
+import lumien.randomthings.Network.Messages.MessageItemFilter;
+import lumien.randomthings.Network.PacketHandler;
 
 public class GuiItemFilter extends GuiContainer {
 

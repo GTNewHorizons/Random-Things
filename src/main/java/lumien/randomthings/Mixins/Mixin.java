@@ -2,9 +2,9 @@ package lumien.randomthings.Mixins;
 
 import java.util.function.Supplier;
 
+import cpw.mods.fml.relauncher.FMLLaunchHandler;
 import lumien.randomthings.Configuration.ConfigBlocks;
 import lumien.randomthings.Configuration.VanillaChanges;
-import cpw.mods.fml.relauncher.FMLLaunchHandler;
 
 /**
  * IMPORTANT: Do not make any references to any mod from this file. This file is loaded quite early on and if you refer

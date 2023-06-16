@@ -2,13 +2,6 @@ package lumien.randomthings.TileEntities.EnergyDistributors;
 
 import java.util.HashSet;
 
-import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Items.ItemFilter;
-import lumien.randomthings.Library.DimensionCoordinate;
-import lumien.randomthings.Library.Interfaces.IValidator;
-import lumien.randomthings.Library.InventoryUtils;
-import lumien.randomthings.Library.WorldUtils;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
@@ -19,6 +12,12 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyReceiver;
+import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Items.ItemFilter;
+import lumien.randomthings.Library.DimensionCoordinate;
+import lumien.randomthings.Library.Interfaces.IValidator;
+import lumien.randomthings.Library.InventoryUtils;
+import lumien.randomthings.Library.WorldUtils;
 
 public class TileEntityEnderEnergyDistributor extends TileEntity implements IEnergyReceiver {
 

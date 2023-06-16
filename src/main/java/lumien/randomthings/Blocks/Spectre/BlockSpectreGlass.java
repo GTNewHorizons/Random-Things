@@ -2,8 +2,6 @@ package lumien.randomthings.Blocks.Spectre;
 
 import java.util.List;
 
-import lumien.randomthings.Blocks.BlockBase;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -17,6 +15,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Blocks.BlockBase;
 
 public class BlockSpectreGlass extends BlockBase {
 

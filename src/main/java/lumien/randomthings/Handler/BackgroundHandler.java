@@ -2,12 +2,12 @@ package lumien.randomthings.Handler;
 
 import java.util.Random;
 
-import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Configuration.VanillaChanges;
-
 import net.minecraft.client.gui.Gui;
 import net.minecraft.item.ItemDye;
 import net.minecraft.util.ResourceLocation;
+
+import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Configuration.VanillaChanges;
 
 public class BackgroundHandler {
 

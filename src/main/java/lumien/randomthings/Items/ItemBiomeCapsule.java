@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -17,6 +14,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+
+import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.RandomThings;
 
 public class ItemBiomeCapsule extends ItemBase {
 

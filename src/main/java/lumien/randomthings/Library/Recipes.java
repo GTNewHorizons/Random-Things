@@ -1,12 +1,5 @@
 package lumien.randomthings.Library;
 
-import lumien.randomthings.Blocks.ModBlocks;
-import lumien.randomthings.Configuration.ConfigBlocks;
-import lumien.randomthings.Configuration.ConfigItems;
-import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipeHandler;
-import lumien.randomthings.Items.ItemFilter;
-import lumien.randomthings.Items.ModItems;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -16,6 +9,12 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Configuration.ConfigBlocks;
+import lumien.randomthings.Configuration.ConfigItems;
+import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipeHandler;
+import lumien.randomthings.Items.ItemFilter;
+import lumien.randomthings.Items.ModItems;
 
 public class Recipes {
 

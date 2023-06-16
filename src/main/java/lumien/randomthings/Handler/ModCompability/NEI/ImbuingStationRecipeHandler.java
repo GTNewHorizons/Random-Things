@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import lumien.randomthings.Client.GUI.GuiImbuingStation;
-import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipe;
-import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipeHandler;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -19,6 +15,9 @@ import org.lwjgl.opengl.GL11;
 
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import lumien.randomthings.Client.GUI.GuiImbuingStation;
+import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipe;
+import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipeHandler;
 
 public class ImbuingStationRecipeHandler extends TemplateRecipeHandler {
 

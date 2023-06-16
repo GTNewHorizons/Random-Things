@@ -1,10 +1,10 @@
 package lumien.randomthings.Library;
 
-import lumien.randomthings.Client.Audio.BroadcastSoundEffect;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+
+import lumien.randomthings.Client.Audio.BroadcastSoundEffect;
 
 public class ClientUtil {
 

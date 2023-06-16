@@ -1,8 +1,5 @@
 package lumien.randomthings.Blocks;
 
-import lumien.randomthings.RandomThings;
-import lumien.randomthings.TileEntities.TileEntityFluidDisplay;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -17,6 +14,8 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import lumien.randomthings.RandomThings;
+import lumien.randomthings.TileEntities.TileEntityFluidDisplay;
 
 public class BlockFluidDisplay extends BlockContainer {
 

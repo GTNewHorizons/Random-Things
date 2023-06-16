@@ -2,10 +2,6 @@ package lumien.randomthings.Client.GUI;
 
 import java.util.ArrayList;
 
-import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Container.ContainerEnderEnergyDistributor;
-import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnderEnergyDistributor;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,6 +9,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
+
+import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Container.ContainerEnderEnergyDistributor;
+import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnderEnergyDistributor;
 
 public class GuiEnderEnergyDistributor extends GuiContainer {
 

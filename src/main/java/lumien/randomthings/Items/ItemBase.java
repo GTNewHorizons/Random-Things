@@ -2,8 +2,6 @@ package lumien.randomthings.Items;
 
 import java.util.List;
 
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -16,6 +14,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.RandomThings;
 
 public class ItemBase extends Item {
 

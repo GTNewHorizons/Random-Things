@@ -1,14 +1,14 @@
 package lumien.randomthings.Container;
 
-import lumien.randomthings.Container.Slots.SlotLocked;
-import lumien.randomthings.Container.Slots.SlotOutputOnly;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import lumien.randomthings.Container.Slots.SlotLocked;
+import lumien.randomthings.Container.Slots.SlotOutputOnly;
 
 public class ContainerEnderLetter extends Container {
 

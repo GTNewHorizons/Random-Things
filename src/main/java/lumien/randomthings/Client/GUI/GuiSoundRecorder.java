@@ -1,13 +1,13 @@
 package lumien.randomthings.Client.GUI;
 
-import lumien.randomthings.Container.ContainerSoundRecorder;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
+
+import lumien.randomthings.Container.ContainerSoundRecorder;
+import lumien.randomthings.RandomThings;
 
 public class GuiSoundRecorder extends GuiContainer {
 

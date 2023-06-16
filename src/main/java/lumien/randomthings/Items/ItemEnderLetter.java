@@ -2,12 +2,6 @@ package lumien.randomthings.Items;
 
 import java.util.List;
 
-import lumien.randomthings.Library.GuiIds;
-import lumien.randomthings.Library.Interfaces.IItemWithProperties;
-import lumien.randomthings.Library.InventoryUtils;
-import lumien.randomthings.Library.Inventorys.InventoryEnderLetter;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -17,6 +11,12 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
+
+import lumien.randomthings.Library.GuiIds;
+import lumien.randomthings.Library.Interfaces.IItemWithProperties;
+import lumien.randomthings.Library.InventoryUtils;
+import lumien.randomthings.Library.Inventorys.InventoryEnderLetter;
+import lumien.randomthings.RandomThings;
 
 public class ItemEnderLetter extends ItemBase implements IItemWithProperties {
 

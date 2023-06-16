@@ -2,16 +2,16 @@ package lumien.randomthings.Potions;
 
 import java.util.Arrays;
 
-import lumien.randomthings.Configuration.RTConfiguration;
-import lumien.randomthings.Library.PotionIds;
-import lumien.randomthings.Mixins.Minecraft.PotionAccessor;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Property;
 
 import org.apache.logging.log4j.Level;
+
+import lumien.randomthings.Configuration.RTConfiguration;
+import lumien.randomthings.Library.PotionIds;
+import lumien.randomthings.Mixins.Minecraft.PotionAccessor;
+import lumien.randomthings.RandomThings;
 
 public class ModPotions {
 

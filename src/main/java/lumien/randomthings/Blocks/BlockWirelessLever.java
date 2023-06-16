@@ -2,11 +2,6 @@ package lumien.randomthings.Blocks;
 
 import java.util.Random;
 
-import lumien.randomthings.Blocks.ItemBlocks.ItemBlockWirelessLever;
-import lumien.randomthings.Library.RenderIds;
-import lumien.randomthings.RandomThings;
-import lumien.randomthings.TileEntities.TileEntityWirelessLever;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLever;
 import net.minecraft.block.ITileEntityProvider;
@@ -18,6 +13,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import lumien.randomthings.Blocks.ItemBlocks.ItemBlockWirelessLever;
+import lumien.randomthings.Library.RenderIds;
+import lumien.randomthings.RandomThings;
+import lumien.randomthings.TileEntities.TileEntityWirelessLever;
 
 public class BlockWirelessLever extends BlockLever implements ITileEntityProvider {
 

@@ -2,12 +2,12 @@ package lumien.randomthings.Handler.Spectre;
 
 import java.util.Arrays;
 
-import lumien.randomthings.Configuration.Settings;
-
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.WorldChunkManagerHell;
 import net.minecraft.world.chunk.IChunkProvider;
+
+import lumien.randomthings.Configuration.Settings;
 
 public class WorldProviderSpectre extends WorldProvider {
 

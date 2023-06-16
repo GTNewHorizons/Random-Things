@@ -2,10 +2,6 @@ package lumien.randomthings.Items;
 
 import java.util.List;
 
-import lumien.randomthings.Library.GuiIds;
-import lumien.randomthings.Library.Inventorys.InventoryDropFilter;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +11,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import lumien.randomthings.Library.GuiIds;
+import lumien.randomthings.Library.Inventorys.InventoryDropFilter;
+import lumien.randomthings.RandomThings;
 
 public class ItemDropFilter extends ItemBase {
 

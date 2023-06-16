@@ -2,9 +2,6 @@ package lumien.randomthings.Blocks;
 
 import java.util.Random;
 
-import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -15,6 +12,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.RandomThings;
 
 public class BlockFertilizedDirt extends BlockBase {
 

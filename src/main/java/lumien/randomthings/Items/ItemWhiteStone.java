@@ -2,14 +2,6 @@ package lumien.randomthings.Items;
 
 import java.util.List;
 
-import lumien.randomthings.Configuration.ConfigDungeonLoot;
-import lumien.randomthings.Configuration.ConfigItems;
-import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
-import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
-import lumien.randomthings.Network.Messages.MessageWhitestone;
-import lumien.randomthings.Network.PacketHandler;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -22,6 +14,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
+import lumien.randomthings.Configuration.ConfigDungeonLoot;
+import lumien.randomthings.Configuration.ConfigItems;
+import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
+import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
+import lumien.randomthings.Network.Messages.MessageWhitestone;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.RandomThings;
 
 public class ItemWhiteStone extends ItemBase {
 

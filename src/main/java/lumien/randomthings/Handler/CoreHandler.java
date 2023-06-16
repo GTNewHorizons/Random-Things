@@ -2,17 +2,16 @@ package lumien.randomthings.Handler;
 
 import java.util.Random;
 
-import lumien.randomthings.Configuration.ConfigBlocks;
-import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Configuration.VanillaChanges;
-import lumien.randomthings.TileEntities.TileEntityWirelessLever;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Configuration.ConfigBlocks;
+import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Configuration.VanillaChanges;
+import lumien.randomthings.TileEntities.TileEntityWirelessLever;
 
 @SuppressWarnings("unused")
 public class CoreHandler {

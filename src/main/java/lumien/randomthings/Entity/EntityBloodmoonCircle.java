@@ -1,9 +1,5 @@
 package lumien.randomthings.Entity;
 
-import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
-import lumien.randomthings.Items.ItemBloodstone;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,6 +8,9 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import io.netty.buffer.ByteBuf;
+import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
+import lumien.randomthings.Items.ItemBloodstone;
+import lumien.randomthings.RandomThings;
 
 public class EntityBloodmoonCircle extends Entity implements IEntityAdditionalSpawnData {
 

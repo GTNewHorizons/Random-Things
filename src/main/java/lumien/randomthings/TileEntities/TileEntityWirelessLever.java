@@ -2,10 +2,6 @@ package lumien.randomthings.TileEntities;
 
 import java.util.HashSet;
 
-import lumien.randomthings.Blocks.ItemBlocks.ItemBlockWirelessLever;
-import lumien.randomthings.Blocks.ModBlocks;
-import lumien.randomthings.Configuration.Settings;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -21,6 +17,9 @@ import org.lwjgl.util.vector.Vector3f;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Blocks.ItemBlocks.ItemBlockWirelessLever;
+import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Configuration.Settings;
 
 public class TileEntityWirelessLever extends TileEntity {
 

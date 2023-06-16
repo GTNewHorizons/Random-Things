@@ -1,12 +1,12 @@
 package lumien.randomthings.Library.Inventorys;
 
-import lumien.randomthings.Items.ItemDropFilter;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
+import lumien.randomthings.Items.ItemDropFilter;
 
 public class InventoryDropFilter extends InventoryBasic {
 

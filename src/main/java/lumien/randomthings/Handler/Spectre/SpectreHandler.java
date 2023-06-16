@@ -3,14 +3,6 @@ package lumien.randomthings.Handler.Spectre;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import lumien.randomthings.Blocks.ModBlocks;
-import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Library.PotionEffects;
-import lumien.randomthings.Library.WorldUtils;
-import lumien.randomthings.Network.Messages.MessageSpectreData;
-import lumien.randomthings.Network.PacketHandler;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -26,6 +18,14 @@ import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.WorldServer;
 
 import org.apache.logging.log4j.Level;
+
+import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Library.PotionEffects;
+import lumien.randomthings.Library.WorldUtils;
+import lumien.randomthings.Network.Messages.MessageSpectreData;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.RandomThings;
 
 public class SpectreHandler extends WorldSavedData {
 

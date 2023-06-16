@@ -3,8 +3,6 @@ package lumien.randomthings.Library;
 import java.util.HashSet;
 import java.util.List;
 
-import lumien.randomthings.Library.Interfaces.IValidator;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiPlayerInfo;
@@ -16,6 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import lumien.randomthings.Library.Interfaces.IValidator;
 
 public class WorldUtils {
 

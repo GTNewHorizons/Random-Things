@@ -1,7 +1,5 @@
 package lumien.randomthings.Client.Renderer;
 
-import lumien.randomthings.Entity.EntitySpirit;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
@@ -9,6 +7,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
+
+import lumien.randomthings.Entity.EntitySpirit;
 
 public class RenderSpirit extends RenderLiving {
 

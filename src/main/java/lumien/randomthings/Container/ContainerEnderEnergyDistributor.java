@@ -1,11 +1,5 @@
 package lumien.randomthings.Container;
 
-import lumien.randomthings.Container.Slots.SlotFilter;
-import lumien.randomthings.Library.Interfaces.IContainerWithProperties;
-import lumien.randomthings.Network.Messages.MessageContainerProperty;
-import lumien.randomthings.Network.PacketHandler;
-import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnderEnergyDistributor;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -14,6 +8,12 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import lumien.randomthings.Container.Slots.SlotFilter;
+import lumien.randomthings.Library.Interfaces.IContainerWithProperties;
+import lumien.randomthings.Network.Messages.MessageContainerProperty;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnderEnergyDistributor;
 
 public class ContainerEnderEnergyDistributor extends Container implements IContainerWithProperties {
 

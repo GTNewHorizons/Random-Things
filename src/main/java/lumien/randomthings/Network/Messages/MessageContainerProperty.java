@@ -1,9 +1,9 @@
 package lumien.randomthings.Network.Messages;
 
-import lumien.randomthings.Network.IRTMessage;
-import lumien.randomthings.RandomThings;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import lumien.randomthings.Network.IRTMessage;
+import lumien.randomthings.RandomThings;
 
 public class MessageContainerProperty implements IRTMessage {
 

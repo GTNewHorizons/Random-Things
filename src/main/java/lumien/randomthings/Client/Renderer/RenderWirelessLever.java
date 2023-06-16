@@ -1,8 +1,5 @@
 package lumien.randomthings.Client.Renderer;
 
-import lumien.randomthings.Blocks.ModBlocks;
-import lumien.randomthings.Library.RenderIds;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -12,6 +9,8 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Library.RenderIds;
 
 public class RenderWirelessLever implements ISimpleBlockRenderingHandler {
 

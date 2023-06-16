@@ -2,10 +2,6 @@ package lumien.randomthings.Blocks;
 
 import java.util.Random;
 
-import lumien.randomthings.Library.GuiIds;
-import lumien.randomthings.RandomThings;
-import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityDiggingFX;
@@ -20,6 +16,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Library.GuiIds;
+import lumien.randomthings.RandomThings;
+import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
 
 public class BlockOnlineDetector extends BlockContainerBase {
 

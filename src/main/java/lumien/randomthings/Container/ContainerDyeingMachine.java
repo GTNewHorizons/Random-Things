@@ -1,11 +1,5 @@
 package lumien.randomthings.Container;
 
-import lumien.randomthings.Blocks.ModBlocks;
-import lumien.randomthings.Container.Slots.SlotDye;
-import lumien.randomthings.Container.Slots.SlotDyeCrafting;
-import lumien.randomthings.Container.Slots.SlotDyeable;
-import lumien.randomthings.Library.Colors;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -16,6 +10,12 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
+import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Container.Slots.SlotDye;
+import lumien.randomthings.Container.Slots.SlotDyeCrafting;
+import lumien.randomthings.Container.Slots.SlotDyeable;
+import lumien.randomthings.Library.Colors;
 
 public class ContainerDyeingMachine extends Container {
 

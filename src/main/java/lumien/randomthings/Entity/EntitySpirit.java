@@ -1,7 +1,5 @@
 package lumien.randomthings.Entity;
 
-import lumien.randomthings.Items.ModItems;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.item.Item;
@@ -12,6 +10,7 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Items.ModItems;
 
 public class EntitySpirit extends EntityMob {
 

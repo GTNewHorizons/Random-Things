@@ -1,7 +1,5 @@
 package lumien.randomthings.Blocks;
 
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -15,6 +13,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.RandomThings;
 
 public abstract class BlockContainerBase extends BlockContainer {
 

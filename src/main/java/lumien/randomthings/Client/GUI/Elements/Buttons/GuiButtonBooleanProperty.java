@@ -3,9 +3,6 @@ package lumien.randomthings.Client.GUI.Elements.Buttons;
 import java.util.ArrayList;
 import java.util.List;
 
-import lumien.randomthings.Network.Messages.MessageChangeItemProperty;
-import lumien.randomthings.Network.PacketHandler;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.FontRenderer;
@@ -16,6 +13,9 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
+import lumien.randomthings.Network.Messages.MessageChangeItemProperty;
+import lumien.randomthings.Network.PacketHandler;
 
 public class GuiButtonBooleanProperty extends GuiButton {
 

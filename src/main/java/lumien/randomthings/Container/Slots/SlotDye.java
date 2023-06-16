@@ -1,11 +1,11 @@
 package lumien.randomthings.Container.Slots;
 
-import lumien.randomthings.Library.Colors;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import lumien.randomthings.Library.Colors;
 
 public class SlotDye extends Slot {
 

@@ -1,8 +1,5 @@
 package lumien.randomthings.Network.Messages;
 
-import lumien.randomthings.Client.GUI.GuiMagneticForce;
-import lumien.randomthings.Network.IRTMessage;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 
@@ -10,6 +7,8 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import lumien.randomthings.Client.GUI.GuiMagneticForce;
+import lumien.randomthings.Network.IRTMessage;
 
 public class MessageAnswerTeleport implements IRTMessage {
 

@@ -1,9 +1,9 @@
 package lumien.randomthings.Entity;
 
-import lumien.randomthings.Handler.ModCompability.MFR.MFRRegistry;
-import lumien.randomthings.RandomThings;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import lumien.randomthings.Handler.ModCompability.MFR.MFRRegistry;
+import lumien.randomthings.RandomThings;
 
 public class ModEntitys {
 

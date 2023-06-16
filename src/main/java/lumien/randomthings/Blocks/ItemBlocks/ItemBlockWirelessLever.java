@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.vecmath.Vector3d;
 
-import lumien.randomthings.TileEntities.TileEntityWirelessLever;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -20,6 +18,7 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.TileEntities.TileEntityWirelessLever;
 
 public class ItemBlockWirelessLever extends ItemBlock {
 

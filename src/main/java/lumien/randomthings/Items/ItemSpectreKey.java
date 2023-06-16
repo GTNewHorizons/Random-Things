@@ -1,9 +1,5 @@
 package lumien.randomthings.Items;
 
-import lumien.randomthings.Client.RenderUtils;
-import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntitySmokeFX;
@@ -15,6 +11,9 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Client.RenderUtils;
+import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.RandomThings;
 
 public class ItemSpectreKey extends ItemBase {
 

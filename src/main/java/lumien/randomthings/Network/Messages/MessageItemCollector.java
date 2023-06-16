@@ -1,13 +1,12 @@
 package lumien.randomthings.Network.Messages;
 
-import lumien.randomthings.Blocks.ModBlocks;
-import lumien.randomthings.Network.IRTMessage;
-import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
-
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Network.IRTMessage;
+import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 
 public class MessageItemCollector implements IRTMessage {
 

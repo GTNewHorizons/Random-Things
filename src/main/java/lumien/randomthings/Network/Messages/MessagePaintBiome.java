@@ -3,9 +3,6 @@ package lumien.randomthings.Network.Messages;
 import java.awt.Color;
 import java.util.Random;
 
-import lumien.randomthings.Items.ItemBiomeCapsule;
-import lumien.randomthings.Network.IRTMessage;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntitySmokeFX;
@@ -17,6 +14,8 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import lumien.randomthings.Items.ItemBiomeCapsule;
+import lumien.randomthings.Network.IRTMessage;
 
 public class MessagePaintBiome implements IRTMessage {
 

@@ -1,8 +1,5 @@
 package lumien.randomthings.Container;
 
-import lumien.randomthings.Container.Slots.SlotOutputOnly;
-import lumien.randomthings.TileEntities.TileEntityImbuingStation;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -12,6 +9,8 @@ import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Container.Slots.SlotOutputOnly;
+import lumien.randomthings.TileEntities.TileEntityImbuingStation;
 
 public class ContainerImbuingStation extends Container {
 

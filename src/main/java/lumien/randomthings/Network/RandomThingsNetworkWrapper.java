@@ -2,8 +2,6 @@ package lumien.randomthings.Network;
 
 import java.util.EnumMap;
 
-import lumien.randomthings.Library.Reference;
-
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.Packet;
@@ -20,6 +18,7 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleIndexedCodec;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import io.netty.channel.ChannelFutureListener;
+import lumien.randomthings.Library.Reference;
 
 public class RandomThingsNetworkWrapper extends SimpleNetworkWrapper {
 

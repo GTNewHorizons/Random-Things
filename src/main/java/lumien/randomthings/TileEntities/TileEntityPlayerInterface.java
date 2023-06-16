@@ -1,7 +1,5 @@
 package lumien.randomthings.TileEntities;
 
-import lumien.randomthings.Blocks.ModBlocks;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,6 +11,8 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
+
+import lumien.randomthings.Blocks.ModBlocks;
 
 public class TileEntityPlayerInterface extends TileEntity implements ISidedInventory {
 

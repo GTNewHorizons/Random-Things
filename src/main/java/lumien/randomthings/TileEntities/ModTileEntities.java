@@ -1,8 +1,8 @@
 package lumien.randomthings.TileEntities;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnderEnergyDistributor;
 import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnergyDistributor;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModTileEntities {
 

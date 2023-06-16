@@ -2,11 +2,6 @@ package lumien.randomthings.Blocks.Spectre;
 
 import java.util.List;
 
-import lumien.randomthings.Blocks.BlockBase;
-import lumien.randomthings.Blocks.ItemBlocks.ItemBlockColored;
-import lumien.randomthings.Library.Colors;
-import lumien.randomthings.Library.WorldUtils;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -21,6 +16,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Blocks.BlockBase;
+import lumien.randomthings.Blocks.ItemBlocks.ItemBlockColored;
+import lumien.randomthings.Library.Colors;
+import lumien.randomthings.Library.WorldUtils;
 
 public class BlockSpectreBlock extends BlockBase {
 

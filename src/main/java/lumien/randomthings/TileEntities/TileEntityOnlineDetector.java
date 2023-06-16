@@ -4,13 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import li.cil.oc.api.machine.Arguments;
-import li.cil.oc.api.machine.Callback;
-import li.cil.oc.api.machine.Context;
-import li.cil.oc.api.network.SimpleComponent;
-import lumien.randomthings.Blocks.ModBlocks;
-import lumien.randomthings.Library.WorldUtils;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -24,6 +17,12 @@ import cpw.mods.fml.common.Optional.Interface;
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
+import li.cil.oc.api.machine.Arguments;
+import li.cil.oc.api.machine.Callback;
+import li.cil.oc.api.machine.Context;
+import li.cil.oc.api.network.SimpleComponent;
+import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Library.WorldUtils;
 
 @Optional.InterfaceList(
         value = { @Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers"),

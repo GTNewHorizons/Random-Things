@@ -2,11 +2,11 @@ package lumien.randomthings.Proxy;
 
 import java.util.ArrayList;
 
-import lumien.randomthings.Entity.EntitySoul;
-import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
-
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+
+import lumien.randomthings.Entity.EntitySoul;
+import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
 
 public class CommonProxy {
 

@@ -1,13 +1,5 @@
 package lumien.randomthings.TileEntities;
 
-import li.cil.oc.api.machine.Arguments;
-import li.cil.oc.api.machine.Callback;
-import li.cil.oc.api.machine.Context;
-import li.cil.oc.api.network.SimpleComponent;
-import lumien.randomthings.Library.WorldUtils;
-import lumien.randomthings.Network.Messages.MessageNotification;
-import lumien.randomthings.Network.PacketHandler;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -21,6 +13,13 @@ import cpw.mods.fml.common.registry.GameData;
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
+import li.cil.oc.api.machine.Arguments;
+import li.cil.oc.api.machine.Callback;
+import li.cil.oc.api.machine.Context;
+import li.cil.oc.api.network.SimpleComponent;
+import lumien.randomthings.Library.WorldUtils;
+import lumien.randomthings.Network.Messages.MessageNotification;
+import lumien.randomthings.Network.PacketHandler;
 
 @Optional.InterfaceList(
         value = { @Interface(iface = "li.cil.oc.api.network.SimpleComponent", modid = "OpenComputers"),

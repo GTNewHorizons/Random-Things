@@ -1,14 +1,14 @@
 package lumien.randomthings.Client.GUI;
 
-import lumien.randomthings.Container.ContainerPlayerInterface;
-import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.tileentity.RenderEndPortal;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
+
+import lumien.randomthings.Container.ContainerPlayerInterface;
+import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
 
 public class GuiPlayerInterface extends GuiContainer {
 
