@@ -2,25 +2,6 @@ package lumien.randomthings.Handler;
 
 import static org.lwjgl.opengl.GL11.*;
 
-import lumien.randomthings.Blocks.ModBlocks;
-import lumien.randomthings.Client.RenderUtils;
-import lumien.randomthings.Configuration.ConfigItems;
-import lumien.randomthings.Configuration.RTConfiguration;
-import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Configuration.VanillaChanges;
-import lumien.randomthings.Entity.EntityHealingOrb;
-import lumien.randomthings.Entity.EntitySoul;
-import lumien.randomthings.Entity.EntitySpirit;
-import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
-import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
-import lumien.randomthings.Handler.Spectre.SpectreHandler;
-import lumien.randomthings.Items.*;
-import lumien.randomthings.Library.DimensionCoordinate;
-import lumien.randomthings.Library.PotionEffects;
-import lumien.randomthings.Mixins.Minecraft.EntityLivingAccessor;
-import lumien.randomthings.Potions.ModPotions;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
@@ -70,6 +51,24 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Client.RenderUtils;
+import lumien.randomthings.Configuration.ConfigItems;
+import lumien.randomthings.Configuration.RTConfiguration;
+import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Configuration.VanillaChanges;
+import lumien.randomthings.Entity.EntityHealingOrb;
+import lumien.randomthings.Entity.EntitySoul;
+import lumien.randomthings.Entity.EntitySpirit;
+import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
+import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
+import lumien.randomthings.Handler.Spectre.SpectreHandler;
+import lumien.randomthings.Items.*;
+import lumien.randomthings.Library.DimensionCoordinate;
+import lumien.randomthings.Library.PotionEffects;
+import lumien.randomthings.Mixins.Minecraft.EntityLivingAccessor;
+import lumien.randomthings.Potions.ModPotions;
+import lumien.randomthings.RandomThings;
 
 @SuppressWarnings("unused")
 public class RTEventHandler {
@@ -302,40 +301,30 @@ public class RTEventHandler {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void itemPickUp(EntityItemPickupEvent event) {
 
-        if (ConfigItems.dropFilter) {
-            if (!event.entityPlayer.worldObj.isRemote) {
-                InventoryPlayer playerInventory = event.entityPlayer.inventory;
-                if (playerInventory != null) {
-                    // TODO code a better way to know if the player has an item drop filter than looping on whole
-                    // inventory
-                    for (int slot = 0; slot < playerInventory.getSizeInventory(); slot++) {
-                        ItemStack is = playerInventory.getStackInSlot(slot);
-                        if (is != null && is.getItem() instanceof ItemDropFilter) {
-                            IInventory inventory = ItemDropFilter.getDropFilterInv(event.entityPlayer, is);
-                            if (inventory != null) {
-                                inventory.openInventory();
-                                ItemStack itemFilter = inventory.getStackInSlot(0);
-                                if (itemFilter != null) {
-                                    if (ItemFilter.matchesItem(itemFilter, event.item.getEntityItem())) {
-                                        switch (is.getItemDamage()) {
-                                            case 0:
-                                                event.item.delayBeforeCanPickup = 20;
-                                                break;
-                                            case 1:
-                                                event.item.delayBeforeCanPickup = 20;
-                                                event.item.age = event.item.lifespan - 10;
-                                                event.entityPlayer.onItemPickup(event.item, 0);
-                                                event.item.worldObj.playSoundAtEntity(
-                                                        event.entityPlayer,
-                                                        "random.pop",
-                                                        0.2F,
-                                                        ((event.entityPlayer.getRNG().nextFloat()
-                                                                - event.entityPlayer.getRNG().nextFloat()) * 0.7F
-                                                                + 1.0F) * 2.0F);
-                                                break;
-                                        }
-                                        event.setCanceled(true);
-                                        return;
+        if (!event.entityPlayer.worldObj.isRemote && ConfigItems.dropFilter) {
+            InventoryPlayer playerInventory = event.entityPlayer.inventory;
+            if (playerInventory != null) {
+                // TODO code a better way to know if the player has an drop filter than looping on whole
+                // inventory
+                for (int slot = 0; slot < playerInventory.getSizeInventory(); slot++) {
+                    ItemStack dropFilter = playerInventory.getStackInSlot(slot);
+                    if (dropFilter != null && dropFilter.getItem() instanceof ItemDropFilter) {
+                        IInventory inventory = ItemDropFilter.getDropFilterInv(event.entityPlayer, dropFilter);
+                        if (inventory != null) {
+                            inventory.openInventory();
+                            ItemStack itemFilter = inventory.getStackInSlot(0);
+                            if (itemFilter != null) {
+                                if (ItemFilter.matchesItem(itemFilter, event.item.getEntityItem())) {
+                                    switch (dropFilter.getItemDamage()) {
+                                        // Drop Filter
+                                        case 0:
+                                            event.item.delayBeforeCanPickup = 20;
+                                            event.setCanceled(true);
+                                            break;
+                                        // Voiding Drop Filter
+                                        case 1:
+                                            event.item.getEntityItem().stackSize = 0;
+                                            break;
                                     }
                                 }
                             }
