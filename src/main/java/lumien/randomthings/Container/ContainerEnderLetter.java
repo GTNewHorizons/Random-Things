@@ -1,16 +1,14 @@
 package lumien.randomthings.Container;
 
-import lumien.randomthings.Container.Slots.SlotLocked;
-import lumien.randomthings.Container.Slots.SlotOutputOnly;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerEnderLetter extends Container {
+import lumien.randomthings.Container.Slots.SlotOutputOnly;
+
+public class ContainerEnderLetter extends ContainerItem {
 
     IInventory letterInventory;
     ItemStack letter;
@@ -136,24 +134,8 @@ public class ContainerEnderLetter extends Container {
         return flag1;
     }
 
-    protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 9; j++) {
-                addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 51 + i * 18));
-            }
-        }
-
-        for (int i = 0; i < 9; i++) {
-            if (inventoryPlayer.getStackInSlot(i) == inventoryPlayer.player.getCurrentEquippedItem()) {
-                addSlotToContainer(new SlotLocked(inventoryPlayer, i, 8 + i * 18, 109));
-            } else {
-                addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 109));
-            }
-        }
-    }
-
     @Override
-    public boolean canInteractWith(EntityPlayer entityplayer) {
-        return true;
+    public int getPlayerInventoryAndHotbarOffset() {
+        return 9;
     }
 }

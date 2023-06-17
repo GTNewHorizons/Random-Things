@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import lumien.randomthings.Configuration.Settings;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
@@ -25,6 +23,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.event.ForgeEventFactory;
 
 import cpw.mods.fml.common.eventhandler.Event.Result;
+import lumien.randomthings.Configuration.Settings;
 
 public class BloodmoonSpawner {
 

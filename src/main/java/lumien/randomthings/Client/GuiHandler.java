@@ -2,6 +2,13 @@ package lumien.randomthings.Client;
 
 import static lumien.randomthings.Library.GuiIds.*;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryBasic;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+
+import cpw.mods.fml.common.network.IGuiHandler;
 import lumien.randomthings.Client.GUI.GuiDropFilter;
 import lumien.randomthings.Client.GUI.GuiDyeingMachine;
 import lumien.randomthings.Client.GUI.GuiEnderEnergyDistributor;
@@ -39,14 +46,6 @@ import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 import lumien.randomthings.TileEntities.TileEntityImbuingStation;
 import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
 import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-
-import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
 
@@ -123,7 +122,7 @@ public class GuiHandler implements IGuiHandler {
                 if (inventoryDropFilter == null) {
                     inventoryDropFilter = new InventoryBasic("placeholder", false, 1);
                 }
-                return new GuiDropFilter(player.inventory, inventoryDropFilter);
+                return new GuiDropFilter(player, player.inventory, inventoryDropFilter);
             case ENDER_LETTER:
                 IInventory letterInventory = ItemFilter.getItemFilterInv(player);
                 if (letterInventory == null) {

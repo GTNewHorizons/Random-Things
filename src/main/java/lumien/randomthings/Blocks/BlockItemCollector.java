@@ -1,8 +1,5 @@
 package lumien.randomthings.Blocks;
 
-import lumien.randomthings.RandomThings;
-import lumien.randomthings.TileEntities.TileEntityItemCollector;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.material.Material;
@@ -12,6 +9,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Facing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import lumien.randomthings.RandomThings;
+import lumien.randomthings.TileEntities.TileEntityItemCollector;
 
 public class BlockItemCollector extends BlockContainerBase {
 

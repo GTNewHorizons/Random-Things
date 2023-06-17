@@ -2,15 +2,6 @@ package lumien.randomthings.Items;
 
 import java.util.List;
 
-import lumien.randomthings.Library.ClientUtil;
-import lumien.randomthings.Library.DimensionCoordinate;
-import lumien.randomthings.Library.GuiIds;
-import lumien.randomthings.Library.Interfaces.IItemWithProperties;
-import lumien.randomthings.Library.Inventorys.InventoryItemFilter;
-import lumien.randomthings.Library.ItemUtils;
-import lumien.randomthings.Library.Texts;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.resources.I18n;
@@ -25,6 +16,15 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
+
+import lumien.randomthings.Library.ClientUtil;
+import lumien.randomthings.Library.DimensionCoordinate;
+import lumien.randomthings.Library.GuiIds;
+import lumien.randomthings.Library.Interfaces.IItemWithProperties;
+import lumien.randomthings.Library.Inventorys.InventoryItemFilter;
+import lumien.randomthings.Library.ItemUtils;
+import lumien.randomthings.Library.Texts;
+import lumien.randomthings.RandomThings;
 
 public class ItemFilter extends ItemBase implements IItemWithProperties {
 

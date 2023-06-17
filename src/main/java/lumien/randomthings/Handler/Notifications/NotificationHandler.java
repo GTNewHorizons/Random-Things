@@ -2,9 +2,6 @@ package lumien.randomthings.Handler.Notifications;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import lumien.randomthings.Client.RenderUtils;
-import lumien.randomthings.Library.ClientUtil;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
@@ -15,6 +12,9 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
+import lumien.randomthings.Client.RenderUtils;
+import lumien.randomthings.Library.ClientUtil;
 
 public class NotificationHandler {
 

@@ -1,11 +1,10 @@
 package lumien.randomthings.Blocks;
 
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.block.BlockDaylightDetector;
 import net.minecraft.world.World;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import lumien.randomthings.RandomThings;
 
 public class BlockMoonSensor extends BlockDaylightDetector {
 

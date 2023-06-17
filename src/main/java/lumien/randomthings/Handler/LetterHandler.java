@@ -3,16 +3,16 @@ package lumien.randomthings.Handler;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import lumien.randomthings.Items.ModItems;
-import lumien.randomthings.Network.Messages.MessageNotification;
-import lumien.randomthings.Network.PacketHandler;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.MinecraftServer;
+
+import lumien.randomthings.Items.ModItems;
+import lumien.randomthings.Network.Messages.MessageNotification;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.RandomThings;
 
 public class LetterHandler {
 

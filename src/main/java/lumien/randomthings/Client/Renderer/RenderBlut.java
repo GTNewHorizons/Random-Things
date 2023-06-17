@@ -2,8 +2,6 @@ package lumien.randomthings.Client.Renderer;
 
 import static org.lwjgl.opengl.GL11.*;
 
-import lumien.randomthings.Client.RenderUtils;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelBox;
@@ -12,6 +10,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 
 import org.lwjgl.opengl.GL11;
+
+import lumien.randomthings.Client.RenderUtils;
 
 public class RenderBlut {
 

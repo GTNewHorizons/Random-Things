@@ -1,14 +1,13 @@
 package lumien.randomthings.Configuration;
 
-import lumien.randomthings.Handler.MagneticForceHandler;
-import lumien.randomthings.Library.Reference;
-
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import lumien.randomthings.Handler.MagneticForceHandler;
+import lumien.randomthings.Library.Reference;
 
 public class RTConfiguration {
 

@@ -2,8 +2,6 @@ package lumien.randomthings.Client.GUI.Elements;
 
 import java.util.ArrayList;
 
-import lumien.randomthings.Library.Interfaces.IPlayerListGUI;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -13,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Rectangle;
 
 import cpw.mods.fml.client.GuiScrollingList;
+import lumien.randomthings.Library.Interfaces.IPlayerListGUI;
 
 public class GuiSlotPlayerList extends GuiScrollingList {
 

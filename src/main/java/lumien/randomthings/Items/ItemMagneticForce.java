@@ -1,11 +1,11 @@
 package lumien.randomthings.Items;
 
-import lumien.randomthings.Library.GuiIds;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import lumien.randomthings.Library.GuiIds;
+import lumien.randomthings.RandomThings;
 
 public class ItemMagneticForce extends ItemBase {
 

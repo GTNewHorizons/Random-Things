@@ -1,10 +1,5 @@
 package lumien.randomthings.Client.GUI;
 
-import lumien.randomthings.Container.ContainerItemCollector;
-import lumien.randomthings.Network.Messages.MessageItemCollector;
-import lumien.randomthings.Network.PacketHandler;
-import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
@@ -12,6 +7,11 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
+
+import lumien.randomthings.Container.ContainerItemCollector;
+import lumien.randomthings.Network.Messages.MessageItemCollector;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 
 public class GuiItemCollector extends GuiContainer {
 

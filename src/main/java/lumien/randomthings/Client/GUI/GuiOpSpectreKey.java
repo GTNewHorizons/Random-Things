@@ -2,15 +2,15 @@ package lumien.randomthings.Client.GUI;
 
 import java.util.ArrayList;
 
-import lumien.randomthings.Client.GUI.Elements.GuiSlotPlayerList;
-import lumien.randomthings.Container.ContainerOpSpectreKey;
-import lumien.randomthings.Library.Interfaces.IPlayerListGUI;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
+
+import lumien.randomthings.Client.GUI.Elements.GuiSlotPlayerList;
+import lumien.randomthings.Container.ContainerOpSpectreKey;
+import lumien.randomthings.Library.Interfaces.IPlayerListGUI;
 
 public class GuiOpSpectreKey extends GuiContainer implements IPlayerListGUI {
 

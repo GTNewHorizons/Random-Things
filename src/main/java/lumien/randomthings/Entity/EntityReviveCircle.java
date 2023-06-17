@@ -1,13 +1,13 @@
 package lumien.randomthings.Entity;
 
-import lumien.randomthings.Handler.Spectre.TeleporterSpectre;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+
+import lumien.randomthings.Handler.Spectre.TeleporterSpectre;
 
 public class EntityReviveCircle extends Entity {
 

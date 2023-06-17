@@ -3,17 +3,6 @@ package lumien.randomthings.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
-import lumien.randomthings.Client.ClientTickHandler;
-import lumien.randomthings.Client.Renderer.*;
-import lumien.randomthings.Entity.*;
-import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
-import lumien.randomthings.Items.ItemGinto;
-import lumien.randomthings.Items.ModItems;
-import lumien.randomthings.Library.Interfaces.IContainerWithProperties;
-import lumien.randomthings.Library.RenderIds;
-import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
-import lumien.randomthings.TileEntities.TileEntityItemCollector;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiPlayerInfo;
 import net.minecraft.client.model.ModelSlime;
@@ -28,6 +17,16 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
+import lumien.randomthings.Client.ClientTickHandler;
+import lumien.randomthings.Client.Renderer.*;
+import lumien.randomthings.Entity.*;
+import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
+import lumien.randomthings.Items.ItemGinto;
+import lumien.randomthings.Items.ModItems;
+import lumien.randomthings.Library.Interfaces.IContainerWithProperties;
+import lumien.randomthings.Library.RenderIds;
+import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
+import lumien.randomthings.TileEntities.TileEntityItemCollector;
 
 public class ClientProxy extends CommonProxy {
 

@@ -1,10 +1,5 @@
 package lumien.randomthings.Blocks.EnergyDistributors;
 
-import lumien.randomthings.Blocks.BlockContainerBase;
-import lumien.randomthings.Library.GuiIds;
-import lumien.randomthings.RandomThings;
-import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnergyDistributor;
-
 import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -19,6 +14,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Blocks.BlockContainerBase;
+import lumien.randomthings.Library.GuiIds;
+import lumien.randomthings.RandomThings;
+import lumien.randomthings.TileEntities.EnergyDistributors.TileEntityEnergyDistributor;
 
 public class BlockEnergyDistributor extends BlockContainerBase {
 

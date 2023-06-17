@@ -3,13 +3,6 @@ package lumien.randomthings.Core.Commands;
 import java.util.Collections;
 import java.util.List;
 
-import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
-import lumien.randomthings.Items.ItemBiomeCapsule;
-import lumien.randomthings.Library.Reference;
-import lumien.randomthings.Network.Messages.MessageNotification;
-import lumien.randomthings.Network.PacketHandler;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.block.Block;
 import net.minecraft.command.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,6 +22,12 @@ import com.google.common.base.Preconditions;
 
 import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.common.registry.GameRegistry;
+import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
+import lumien.randomthings.Items.ItemBiomeCapsule;
+import lumien.randomthings.Library.Reference;
+import lumien.randomthings.Network.Messages.MessageNotification;
+import lumien.randomthings.Network.PacketHandler;
+import lumien.randomthings.RandomThings;
 
 public class RTCommand extends CommandBase {
 

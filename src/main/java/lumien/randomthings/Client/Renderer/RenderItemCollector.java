@@ -1,9 +1,5 @@
 package lumien.randomthings.Client.Renderer;
 
-import lumien.randomthings.Client.Model.ModelItemCollector;
-import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
-import lumien.randomthings.TileEntities.TileEntityItemCollector;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -14,6 +10,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
+
+import lumien.randomthings.Client.Model.ModelItemCollector;
+import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
+import lumien.randomthings.TileEntities.TileEntityItemCollector;
 
 public class RenderItemCollector extends TileEntitySpecialRenderer {
 

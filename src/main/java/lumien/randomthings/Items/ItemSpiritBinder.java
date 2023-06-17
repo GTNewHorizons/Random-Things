@@ -2,8 +2,6 @@ package lumien.randomthings.Items;
 
 import java.util.List;
 
-import lumien.randomthings.Library.Colors;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockMobSpawner;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +13,7 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Library.Colors;
 
 public class ItemSpiritBinder extends ItemBase {
 

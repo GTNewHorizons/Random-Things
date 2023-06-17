@@ -1,7 +1,5 @@
 package lumien.randomthings.Client.Renderer;
 
-import lumien.randomthings.Items.ItemBase;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -10,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
+
+import lumien.randomthings.Items.ItemBase;
 
 public class RenderRTItem implements IItemRenderer {
 

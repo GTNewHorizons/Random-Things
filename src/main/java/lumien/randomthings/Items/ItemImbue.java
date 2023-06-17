@@ -3,12 +3,6 @@ package lumien.randomthings.Items;
 import java.util.ArrayList;
 import java.util.List;
 
-import lumien.randomthings.Client.RenderUtils;
-import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Library.PotionEffects;
-import lumien.randomthings.Library.PotionIds;
-import lumien.randomthings.Potions.ModPotions;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +16,11 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Client.RenderUtils;
+import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Library.PotionEffects;
+import lumien.randomthings.Library.PotionIds;
+import lumien.randomthings.Potions.ModPotions;
 
 public class ItemImbue extends ItemBase {
 

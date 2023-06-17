@@ -3,15 +3,14 @@ package lumien.randomthings.Client.Config;
 import java.util.ArrayList;
 import java.util.List;
 
-import lumien.randomthings.Configuration.RTConfiguration;
-import lumien.randomthings.Library.Reference;
-
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
 
 import cpw.mods.fml.client.config.DummyConfigElement.DummyCategoryElement;
 import cpw.mods.fml.client.config.GuiConfig;
 import cpw.mods.fml.client.config.IConfigElement;
+import lumien.randomthings.Configuration.RTConfiguration;
+import lumien.randomthings.Library.Reference;
 
 public class RandomThingsConfigGUI extends GuiConfig {
 

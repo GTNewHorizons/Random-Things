@@ -12,13 +12,13 @@ import java.nio.charset.StandardCharsets;
 
 import javax.vecmath.Vector3f;
 
-import lumien.randomthings.RandomThings;
-
 import org.apache.logging.log4j.Level;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
+
+import lumien.randomthings.RandomThings;
 
 public class ParticleSystem {
 

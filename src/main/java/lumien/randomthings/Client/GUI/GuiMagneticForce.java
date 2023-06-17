@@ -2,6 +2,12 @@ package lumien.randomthings.Client.GUI;
 
 import java.util.ArrayList;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
 import lumien.randomthings.Client.GUI.Elements.GuiSlotPlayerList;
 import lumien.randomthings.Container.ContainerMagneticForce;
 import lumien.randomthings.Library.Interfaces.IPlayerListGUI;
@@ -9,12 +15,6 @@ import lumien.randomthings.Network.Messages.MessageAnswerTeleport;
 import lumien.randomthings.Network.Messages.MessageRequestTeleport;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.RandomThings;
-
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
 
 public class GuiMagneticForce extends GuiContainer implements IPlayerListGUI {
 

@@ -1,7 +1,5 @@
 package lumien.randomthings.Blocks;
 
-import lumien.randomthings.TileEntities.TileEntityAdvancedFluidDisplay;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,6 +11,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+
+import lumien.randomthings.TileEntities.TileEntityAdvancedFluidDisplay;
 
 public class BlockAdvancedFluidDisplay extends BlockContainerBase {
 

@@ -1,10 +1,10 @@
 package lumien.randomthings.Container;
 
-import lumien.randomthings.Configuration.ConfigItems;
-import lumien.randomthings.Items.ModItems;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+
+import lumien.randomthings.Configuration.ConfigItems;
+import lumien.randomthings.Items.ModItems;
 
 public class ContainerMagneticForce extends Container {
 

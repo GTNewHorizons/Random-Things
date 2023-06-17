@@ -2,11 +2,6 @@ package lumien.randomthings.Items;
 
 import java.util.List;
 
-import lumien.randomthings.Client.RenderUtils;
-import lumien.randomthings.Library.Colors;
-import lumien.randomthings.Library.PotionEffects;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +12,10 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.util.EnumHelper;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import lumien.randomthings.Client.RenderUtils;
+import lumien.randomthings.Library.Colors;
+import lumien.randomthings.Library.PotionEffects;
+import lumien.randomthings.RandomThings;
 
 public class ItemSpectreSword extends ItemSword {
 

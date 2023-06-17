@@ -2,10 +2,6 @@ package lumien.randomthings.Handler.Bloodmoon;
 
 import java.util.List;
 
-import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Network.Messages.MessageBloodmoon;
-import lumien.randomthings.Network.PacketHandler;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,6 +11,10 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.WorldServer;
+
+import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Network.Messages.MessageBloodmoon;
+import lumien.randomthings.Network.PacketHandler;
 
 public class ServerBloodmoonHandler extends WorldSavedData {
 

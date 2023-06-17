@@ -1,10 +1,5 @@
 package lumien.randomthings.Client.GUI;
 
-import lumien.randomthings.Container.ContainerEnderLetter;
-import lumien.randomthings.Items.ModItems;
-import lumien.randomthings.Network.Messages.MessageChangeItemProperty;
-import lumien.randomthings.Network.PacketHandler;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -17,6 +12,11 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
+
+import lumien.randomthings.Container.ContainerEnderLetter;
+import lumien.randomthings.Items.ModItems;
+import lumien.randomthings.Network.Messages.MessageChangeItemProperty;
+import lumien.randomthings.Network.PacketHandler;
 
 public class GuiEnderLetter extends GuiContainer {
 

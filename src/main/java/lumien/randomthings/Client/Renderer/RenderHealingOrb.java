@@ -1,7 +1,5 @@
 package lumien.randomthings.Client.Renderer;
 
-import lumien.randomthings.Entity.EntityHealingOrb;
-
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
@@ -10,6 +8,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
+import lumien.randomthings.Entity.EntityHealingOrb;
 
 public class RenderHealingOrb extends Render {
 

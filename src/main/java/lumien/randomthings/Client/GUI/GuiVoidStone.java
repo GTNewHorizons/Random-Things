@@ -1,13 +1,13 @@
 package lumien.randomthings.Client.GUI;
 
-import lumien.randomthings.Container.ContainerVoidStone;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
+
+import lumien.randomthings.Container.ContainerVoidStone;
 
 public class GuiVoidStone extends GuiContainer {
 
@@ -25,7 +25,6 @@ public class GuiVoidStone extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
         this.mc.renderEngine.bindTexture(background);
-        // this.mc.renderEngine.bindTexture("/gui/demo_bg.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;

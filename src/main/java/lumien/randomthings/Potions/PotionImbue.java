@@ -2,9 +2,6 @@ package lumien.randomthings.Potions;
 
 import java.awt.*;
 
-import lumien.randomthings.Client.RenderUtils;
-import lumien.randomthings.Library.PotionIds;
-
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
@@ -13,6 +10,8 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Client.RenderUtils;
+import lumien.randomthings.Library.PotionIds;
 
 public class PotionImbue extends Potion {
 

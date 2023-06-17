@@ -2,11 +2,8 @@ package lumien.randomthings.Items;
 
 import java.util.List;
 
-import lumien.randomthings.Library.GuiIds;
-import lumien.randomthings.Library.Inventorys.InventoryDropFilter;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -15,6 +12,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import lumien.randomthings.Library.GuiIds;
+import lumien.randomthings.Library.Inventorys.InventoryDropFilter;
+import lumien.randomthings.RandomThings;
 
 public class ItemDropFilter extends ItemBase {
 
@@ -28,6 +29,10 @@ public class ItemDropFilter extends ItemBase {
 
     @Override
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+        par3List.add(I18n.format("text.tooltip.item.dropFilter.generic"));
+        if (par1ItemStack.getItemDamage() == 0) par3List.add(I18n.format("text.tooltip.item.dropFilter"));
+        else if (par1ItemStack.getItemDamage() == 1) par3List.add(I18n.format("text.tooltip.item.dropFilterVoiding"));
+
         if (!(ItemDropFilter.getDropFilterInv(par2EntityPlayer, par1ItemStack) == null)) {
             IInventory inventoryFilter = new InventoryDropFilter(par2EntityPlayer, par1ItemStack);
             inventoryFilter.openInventory();

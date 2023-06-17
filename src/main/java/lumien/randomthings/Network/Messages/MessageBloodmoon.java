@@ -1,11 +1,11 @@
 package lumien.randomthings.Network.Messages;
 
-import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
-import lumien.randomthings.Network.IRTMessage;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
+import lumien.randomthings.Network.IRTMessage;
 
 public class MessageBloodmoon implements IRTMessage {
 

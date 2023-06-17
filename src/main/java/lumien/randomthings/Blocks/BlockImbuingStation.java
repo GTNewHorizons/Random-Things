@@ -1,9 +1,5 @@
 package lumien.randomthings.Blocks;
 
-import lumien.randomthings.Library.GuiIds;
-import lumien.randomthings.RandomThings;
-import lumien.randomthings.TileEntities.TileEntityImbuingStation;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,6 +9,9 @@ import net.minecraft.world.World;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Library.GuiIds;
+import lumien.randomthings.RandomThings;
+import lumien.randomthings.TileEntities.TileEntityImbuingStation;
 
 public class BlockImbuingStation extends BlockContainerBase {
 

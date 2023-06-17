@@ -2,8 +2,6 @@ package lumien.randomthings.TileEntities;
 
 import java.util.List;
 
-import lumien.randomthings.Items.ItemFilter;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.entity.item.EntityItem;
@@ -19,6 +17,8 @@ import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Facing;
+
+import lumien.randomthings.Items.ItemFilter;
 
 public class TileEntityAdvancedItemCollector extends TileEntity {
 

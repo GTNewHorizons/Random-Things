@@ -1,7 +1,5 @@
 package lumien.randomthings.Mixins.Minecraft;
 
-import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
-
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.entity.Entity;
@@ -12,6 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
 
 @Mixin(RenderGlobal.class)
 public class MixinRenderGlobal {

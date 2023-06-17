@@ -3,8 +3,6 @@ package lumien.randomthings.Items;
 import java.util.List;
 import java.util.Random;
 
-import lumien.randomthings.Library.ChestCategory;
-
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +15,8 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
+
+import lumien.randomthings.Library.ChestCategory;
 
 public class ItemCreativeChestGenerator extends ItemCreative {
 

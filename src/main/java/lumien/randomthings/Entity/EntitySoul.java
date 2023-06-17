@@ -1,10 +1,5 @@
 package lumien.randomthings.Entity;
 
-import lumien.randomthings.Items.ItemGinto;
-import lumien.randomthings.Items.ModItems;
-import lumien.randomthings.Library.WorldUtils;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -18,6 +13,10 @@ import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import lumien.randomthings.Items.ItemGinto;
+import lumien.randomthings.Items.ModItems;
+import lumien.randomthings.Library.WorldUtils;
+import lumien.randomthings.RandomThings;
 
 public class EntitySoul extends Entity implements IEntityAdditionalSpawnData {
 

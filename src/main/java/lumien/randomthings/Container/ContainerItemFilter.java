@@ -1,16 +1,14 @@
 package lumien.randomthings.Container;
 
-import lumien.randomthings.Container.Slots.SlotLocked;
-import lumien.randomthings.Items.ItemFilter;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerItemFilter extends Container {
+import lumien.randomthings.Items.ItemFilter;
+
+public class ContainerItemFilter extends ContainerItem {
 
     IInventory filterInventory;
     ItemStack filter;
@@ -25,18 +23,18 @@ public class ContainerItemFilter extends Container {
     }
 
     @Override
-    public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer) {
-        if (par1 < 9 && par1 >= 0) {
-            if (par4EntityPlayer.inventory.getItemStack() != null) {
-                ItemStack holdItem = par4EntityPlayer.inventory.getItemStack().copy();
+    public ItemStack slotClick(int slotId, int clickedButton, int mode, EntityPlayer player) {
+        if (slotId < 9 && slotId >= 0) {
+            if (player.inventory.getItemStack() != null) {
+                ItemStack holdItem = player.inventory.getItemStack().copy();
                 holdItem.stackSize = 1;
-                filterInventory.setInventorySlotContents(par1, holdItem);
+                filterInventory.setInventorySlotContents(slotId, holdItem);
             } else {
-                filterInventory.setInventorySlotContents(par1, null);
+                filterInventory.setInventorySlotContents(slotId, null);
             }
             return null;
         } else {
-            return super.slotClick(par1, par2, par3, par4EntityPlayer);
+            return super.slotClick(slotId, clickedButton, mode, player);
         }
     }
 
@@ -50,27 +48,16 @@ public class ContainerItemFilter extends Container {
         return false;
     }
 
-    protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 9; j++) {
-                addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 51 + i * 18));
-            }
-        }
-
-        for (int i = 0; i < 9; i++) {
-            if (inventoryPlayer.getStackInSlot(i) == inventoryPlayer.player.getCurrentEquippedItem()) {
-                addSlotToContainer(new SlotLocked(inventoryPlayer, i, 8 + i * 18, 109));
-            } else {
-                addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 109));
-            }
-        }
-    }
-
     @Override
     public boolean canInteractWith(EntityPlayer entityplayer) {
         return entityplayer.getCurrentEquippedItem() != null
                 && entityplayer.getCurrentEquippedItem().getItem() instanceof ItemFilter
                 && ItemFilter.getFilterType(entityplayer.getCurrentEquippedItem().getItemDamage())
                         == ItemFilter.FilterType.ITEM;
+    }
+
+    @Override
+    public int getPlayerInventoryAndHotbarOffset() {
+        return 9;
     }
 }

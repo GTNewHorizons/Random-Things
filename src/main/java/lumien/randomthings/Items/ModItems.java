@@ -1,12 +1,11 @@
 package lumien.randomthings.Items;
 
-import lumien.randomthings.Configuration.ConfigItems;
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import lumien.randomthings.Configuration.ConfigItems;
+import lumien.randomthings.RandomThings;
 
 public class ModItems {
 

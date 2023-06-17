@@ -1,9 +1,5 @@
 package lumien.randomthings.Blocks;
 
-import lumien.randomthings.Library.GuiIds;
-import lumien.randomthings.RandomThings;
-import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,6 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import lumien.randomthings.Library.GuiIds;
+import lumien.randomthings.RandomThings;
+import lumien.randomthings.TileEntities.TileEntityPlayerInterface;
 
 public class BlockPlayerInterface extends BlockContainerBase {
 

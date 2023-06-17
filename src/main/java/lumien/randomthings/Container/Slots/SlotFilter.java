@@ -1,10 +1,10 @@
 package lumien.randomthings.Container.Slots;
 
-import lumien.randomthings.Items.ItemFilter;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import lumien.randomthings.Items.ItemFilter;
 
 public class SlotFilter extends Slot {
 

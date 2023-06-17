@@ -1,15 +1,15 @@
 package lumien.randomthings.TileEntities;
 
-import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipeHandler;
-import lumien.randomthings.Library.InventoryUtils;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+
+import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Handler.ImbuingStation.ImbuingRecipeHandler;
+import lumien.randomthings.Library.InventoryUtils;
 
 public class TileEntityImbuingStation extends TileEntity implements IInventory {
 

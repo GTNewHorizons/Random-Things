@@ -2,13 +2,13 @@ package lumien.randomthings.Items;
 
 import java.util.List;
 
-import lumien.randomthings.Client.ClientTickHandler;
-
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
+
+import lumien.randomthings.Client.ClientTickHandler;
 
 public class ItemOp extends ItemBase {
 

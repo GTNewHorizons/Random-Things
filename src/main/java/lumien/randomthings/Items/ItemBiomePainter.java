@@ -1,13 +1,13 @@
 package lumien.randomthings.Items;
 
-import lumien.randomthings.Network.Messages.MessagePaintBiome;
-import lumien.randomthings.Network.PacketHandler;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+
+import lumien.randomthings.Network.Messages.MessagePaintBiome;
+import lumien.randomthings.Network.PacketHandler;
 
 public class ItemBiomePainter extends ItemBase {
 

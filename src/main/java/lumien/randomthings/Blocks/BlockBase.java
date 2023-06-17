@@ -1,11 +1,10 @@
 package lumien.randomthings.Blocks;
 
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import lumien.randomthings.RandomThings;
 
 public class BlockBase extends Block {
 

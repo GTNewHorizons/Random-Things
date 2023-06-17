@@ -1,13 +1,13 @@
 package lumien.randomthings.Mixins.Minecraft;
 
-import lumien.randomthings.Handler.CoreHandler;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
+
+import lumien.randomthings.Handler.CoreHandler;
 
 @Mixin(BlockLeavesBase.class)
 public abstract class MixinBlockLeavesBase extends Block {

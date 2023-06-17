@@ -1,12 +1,12 @@
 package lumien.randomthings.Mixins.Minecraft;
 
-import lumien.randomthings.Handler.LightmapHandler;
-
 import net.minecraft.client.renderer.EntityRenderer;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+
+import lumien.randomthings.Handler.LightmapHandler;
 
 @Mixin(EntityRenderer.class)
 public class MixinEntityRenderer {

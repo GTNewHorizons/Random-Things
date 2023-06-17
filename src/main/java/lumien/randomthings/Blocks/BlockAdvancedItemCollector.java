@@ -2,10 +2,6 @@ package lumien.randomthings.Blocks;
 
 import java.util.Random;
 
-import lumien.randomthings.Library.GuiIds;
-import lumien.randomthings.RandomThings;
-import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.material.Material;
@@ -20,6 +16,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Facing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import lumien.randomthings.Library.GuiIds;
+import lumien.randomthings.RandomThings;
+import lumien.randomthings.TileEntities.TileEntityAdvancedItemCollector;
 
 public class BlockAdvancedItemCollector extends BlockContainerBase {
 

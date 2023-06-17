@@ -1,8 +1,5 @@
 package lumien.randomthings.Library.Inventorys;
 
-import lumien.randomthings.Items.ItemEnderLetter;
-import lumien.randomthings.Library.InventoryUtils;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
@@ -10,6 +7,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import lumien.randomthings.Items.ItemEnderLetter;
+import lumien.randomthings.Library.InventoryUtils;
 
 public class InventoryEnderLetter extends InventoryBasic {
 

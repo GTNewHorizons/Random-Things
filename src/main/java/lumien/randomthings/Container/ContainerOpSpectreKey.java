@@ -1,10 +1,10 @@
 package lumien.randomthings.Container;
 
-import lumien.randomthings.RandomThings;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.server.MinecraftServer;
+
+import lumien.randomthings.RandomThings;
 
 public class ContainerOpSpectreKey extends Container {
 

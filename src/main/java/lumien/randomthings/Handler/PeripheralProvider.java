@@ -3,10 +3,6 @@ package lumien.randomthings.Handler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import lumien.randomthings.TileEntities.TileEntityCreativePlayerInterface;
-import lumien.randomthings.TileEntities.TileEntityNotificationInterface;
-import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
-
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -14,6 +10,9 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheralProvider;
+import lumien.randomthings.TileEntities.TileEntityCreativePlayerInterface;
+import lumien.randomthings.TileEntities.TileEntityNotificationInterface;
+import lumien.randomthings.TileEntities.TileEntityOnlineDetector;
 
 @Optional.Interface(iface = "dan200.computercraft.api.peripheral.IPeripheralProvider", modid = "ComputerCraft")
 public class PeripheralProvider implements IPeripheralProvider {
