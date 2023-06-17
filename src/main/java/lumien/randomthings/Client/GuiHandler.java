@@ -122,7 +122,7 @@ public class GuiHandler implements IGuiHandler {
                 if (inventoryDropFilter == null) {
                     inventoryDropFilter = new InventoryBasic("placeholder", false, 1);
                 }
-                return new GuiDropFilter(player.inventory, inventoryDropFilter);
+                return new GuiDropFilter(player, player.inventory, inventoryDropFilter);
             case ENDER_LETTER:
                 IInventory letterInventory = ItemFilter.getItemFilterInv(player);
                 if (letterInventory == null) {
