@@ -48,6 +48,8 @@ public class ServerBloodmoonHandler extends WorldSavedData {
     public void endWorldTick(World world) {
         if (world.provider.dimensionId == 0) {
             int time = (int) (world.getWorldTime() % 24000);
+            int date = (int) Math.floor(world.getWorldTime() / 24000d);
+
             if (bloodMoon) {
                 if (!Settings.BLOODMOON_RESPECT_GAMERULE
                         || world.getGameRules().getGameRuleBooleanValue("doMobSpawning")) {
@@ -65,7 +67,7 @@ public class ServerBloodmoonHandler extends WorldSavedData {
                 }
             } else {
                 if (time == 12000) {
-                    if (forceBloodMoon || Math.random() < Settings.BLOODMOON_CHANCE) {
+                    if (forceBloodMoon || isBloodMoonCycle(date) || Math.random() < Settings.BLOODMOON_CHANCE) {
                         forceBloodMoon = false;
                         setBloodmoon(true);
 
@@ -113,5 +115,12 @@ public class ServerBloodmoonHandler extends WorldSavedData {
 
     public boolean isBloodmoonScheduled() {
         return forceBloodMoon;
+    }
+
+    public boolean isBloodMoonCycle(int day) {
+        if (Settings.BLOODMOON_CYCLE > 0 && day > 0) {
+            return day % Settings.BLOODMOON_CYCLE == 0;
+        }
+        return false;
     }
 }
