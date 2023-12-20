@@ -1,6 +1,18 @@
 package lumien.randomthings.Network;
 
-import lumien.randomthings.Network.Messages.*;
+import lumien.randomthings.Network.Messages.MessageAnswerTeleport;
+import lumien.randomthings.Network.Messages.MessageBloodmoon;
+import lumien.randomthings.Network.Messages.MessageChangeItemProperty;
+import lumien.randomthings.Network.Messages.MessageContainerProperty;
+import lumien.randomthings.Network.Messages.MessageItemCollector;
+import lumien.randomthings.Network.Messages.MessageItemFilter;
+import lumien.randomthings.Network.Messages.MessageMagneticForceParticle;
+import lumien.randomthings.Network.Messages.MessageNotification;
+import lumien.randomthings.Network.Messages.MessageOnlineDetector;
+import lumien.randomthings.Network.Messages.MessagePaintBiome;
+import lumien.randomthings.Network.Messages.MessageRequestTeleport;
+import lumien.randomthings.Network.Messages.MessageSpectreData;
+import lumien.randomthings.Network.Messages.MessageWhitestone;
 
 public class PacketHandler {
 

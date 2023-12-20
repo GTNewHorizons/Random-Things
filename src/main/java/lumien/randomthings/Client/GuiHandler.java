@@ -1,6 +1,19 @@
 package lumien.randomthings.Client;
 
-import static lumien.randomthings.Library.GuiIds.*;
+import static lumien.randomthings.Library.GuiIds.ADVANCED_ITEMCOLLECTOR;
+import static lumien.randomthings.Library.GuiIds.DROP_FILTER;
+import static lumien.randomthings.Library.GuiIds.DYEING_MACHINE;
+import static lumien.randomthings.Library.GuiIds.ENDER_ENERGY_DISTRIBUTOR;
+import static lumien.randomthings.Library.GuiIds.ENDER_LETTER;
+import static lumien.randomthings.Library.GuiIds.ENERGY_DISTRIBUTOR;
+import static lumien.randomthings.Library.GuiIds.IMBUING_STATION;
+import static lumien.randomthings.Library.GuiIds.ITEM_FILTER;
+import static lumien.randomthings.Library.GuiIds.MAGNETIC_FORCE;
+import static lumien.randomthings.Library.GuiIds.ONLINE_DETECTOR;
+import static lumien.randomthings.Library.GuiIds.OP_SPECTRE_KEY;
+import static lumien.randomthings.Library.GuiIds.PLAYER_INTERFACE;
+import static lumien.randomthings.Library.GuiIds.SOUND_RECORDER;
+import static lumien.randomthings.Library.GuiIds.VOID_STONE;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

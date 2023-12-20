@@ -5,6 +5,8 @@
  */
 package dan200.computercraft.api.peripheral;
 
+import net.minecraft.world.World;
+
 import dan200.computercraft.api.filesystem.IMount;
 import dan200.computercraft.api.filesystem.IWritableMount;
 

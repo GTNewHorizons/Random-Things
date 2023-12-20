@@ -1,6 +1,6 @@
 package lumien.randomthings.Potions;
 
-import java.awt.*;
+import java.awt.Color;
 
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;

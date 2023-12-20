@@ -1,6 +1,18 @@
 package lumien.randomthings.Client.Renderer;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_BLEND;
+import static org.lwjgl.opengl.GL11.GL_LIGHTING;
+import static org.lwjgl.opengl.GL11.GL_QUADS;
+import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glDisable;
+import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.glEnd;
+import static org.lwjgl.opengl.GL11.glPopMatrix;
+import static org.lwjgl.opengl.GL11.glPushMatrix;
+import static org.lwjgl.opengl.GL11.glRotatef;
+import static org.lwjgl.opengl.GL11.glTexCoord2d;
+import static org.lwjgl.opengl.GL11.glTranslated;
+import static org.lwjgl.opengl.GL11.glVertex3d;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
