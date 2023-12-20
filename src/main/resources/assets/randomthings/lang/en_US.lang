@@ -89,7 +89,7 @@ imbue.wither=Wither Imbue
 imbue.weakness=Weakness Imbue
 imbue.spectre=Spectre Imbue
 
-entity.spirit.name=Spirit
+entity.RandomThings.spirit.name=Spirit
 entity.bloodmoonCircle.name=Bloodmoon Circle
 
 text.tooltip.item.dropFilter.generic=Takes Item Filter
