@@ -1,8 +1,8 @@
 // Add your dependencies here
 
 dependencies {
-    compileOnly("com.github.GTNewHorizons:OpenComputers:1.10.6-GTNH:api") {
+    compileOnly("com.github.GTNewHorizons:OpenComputers:1.10.7-GTNH:api") {
         transitive = false
     }
-    api("com.github.GTNewHorizons:NotEnoughItems:2.5.4-GTNH:dev")
+    api("com.github.GTNewHorizons:NotEnoughItems:2.5.24-GTNH:dev")
 }
