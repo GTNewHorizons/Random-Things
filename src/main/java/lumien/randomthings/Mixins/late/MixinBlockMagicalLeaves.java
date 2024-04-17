@@ -1,4 +1,4 @@
-package lumien.randomthings.Mixins.Minecraft;
+package lumien.randomthings.Mixins.late;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
