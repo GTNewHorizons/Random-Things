@@ -27,7 +27,7 @@ public class ContainerItemFilter extends ContainerItem {
         if (slotId < 9 && slotId >= 0) {
             if (player.inventory.getItemStack() != null) {
                 ItemStack holdItem = player.inventory.getItemStack().copy();
-                holdItem.stackSize = 1;
+                holdItem.stackSize = 0;
                 filterInventory.setInventorySlotContents(slotId, holdItem);
             } else {
                 filterInventory.setInventorySlotContents(slotId, null);
