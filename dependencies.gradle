@@ -1,9 +1,9 @@
 // Add your dependencies here
 
 dependencies {
-    compileOnly("com.github.GTNewHorizons:OpenComputers:1.11.2-GTNH:api") {
+    compileOnly("com.github.GTNewHorizons:OpenComputers:1.11.12-GTNH:api") {
         transitive = false
     }
     compileOnly("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev") { transitive = false }
-    api("com.github.GTNewHorizons:NotEnoughItems:2.7.11-GTNH:dev")
+    api("com.github.GTNewHorizons:NotEnoughItems:2.7.34-GTNH:dev")
 }
