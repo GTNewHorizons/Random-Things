@@ -129,10 +129,10 @@ public class ItemWhiteStone extends ItemBase {
                         .spawnColoredDust(entityItem.posX, entityItem.posY, entityItem.posZ, 0, 0.1, 0, 1, 0, 0);
             } else {
                 if (ServerBloodmoonHandler.INSTANCE.isBloodmoonActive()) {
-                    entityItem.getEntityData()
-                            .setInteger("progress", entityItem.getEntityData().getInteger("progress") + 1);
-
-                    if (entityItem.getEntityData().getInteger("progress") >= 200) {
+                    final NBTTagCompound nbt = entityItem.getEntityData();
+                    final int newProgress = nbt.getInteger("progress") + 1;
+                    nbt.setInteger("progress", newProgress);
+                    if (newProgress >= 200) {
                         entityItem.setEntityItemStack(new ItemStack(ModItems.bloodStone));
                     }
                 }

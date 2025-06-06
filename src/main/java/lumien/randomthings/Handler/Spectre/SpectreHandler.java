@@ -23,6 +23,7 @@ import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Library.PotionEffects;
 import lumien.randomthings.Library.WorldUtils;
+import lumien.randomthings.Mixins.Minecraft.EntityAccessor;
 import lumien.randomthings.Network.Messages.MessageSpectreData;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.RandomThings;
@@ -170,17 +171,28 @@ public class SpectreHandler extends WorldSavedData {
     }
 
     public void teleportPlayerOutOfSpectreWorld(EntityPlayerMP player) {
-        if (player.getEntityData().hasKey("oldPosX")) {
-            int oldDimension = player.getEntityData().getInteger("oldDimension");
-            double oldPosX = player.getEntityData().getDouble("oldPosX");
-            double oldPosY = player.getEntityData().getDouble("oldPosY");
-            double oldPosZ = player.getEntityData().getDouble("oldPosZ");
+        if (((EntityAccessor) player).getCustomEntityData() != null) {
+            NBTTagCompound nbt = player.getEntityData();
+            if (nbt.hasKey("oldPosX")) {
+                int oldDimension = nbt.getInteger("oldDimension");
+                double oldPosX = nbt.getDouble("oldPosX");
+                double oldPosY = nbt.getDouble("oldPosY");
+                double oldPosZ = nbt.getDouble("oldPosZ");
+                MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(
+                        player,
+                        oldDimension,
+                        new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(oldDimension)));
+                player.setPositionAndUpdate(oldPosX, oldPosY, oldPosZ);
+            } else {
+                ChunkCoordinates cc = MinecraftServer.getServer().worldServerForDimension(0).provider
+                        .getRandomizedSpawnPoint();
+                MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(
+                        player,
+                        0,
+                        new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(0)));
 
-            MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(
-                    player,
-                    oldDimension,
-                    new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(oldDimension)));
-            player.setPositionAndUpdate(oldPosX, oldPosY, oldPosZ);
+                player.setPositionAndUpdate(cc.posX, cc.posY, cc.posZ);
+            }
         } else {
             ChunkCoordinates cc = MinecraftServer.getServer().worldServerForDimension(0).provider
                     .getRandomizedSpawnPoint();

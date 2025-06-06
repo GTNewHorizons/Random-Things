@@ -83,6 +83,7 @@ import lumien.randomthings.Items.ItemWhiteStone;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.DimensionCoordinate;
 import lumien.randomthings.Library.PotionEffects;
+import lumien.randomthings.Mixins.Minecraft.EntityAccessor;
 import lumien.randomthings.Mixins.Minecraft.EntityLivingAccessor;
 import lumien.randomthings.Potions.ModPotions;
 import lumien.randomthings.RandomThings;
@@ -149,12 +150,12 @@ public class RTEventHandler {
     @SubscribeEvent
     public void livingUpdate(LivingUpdateEvent event) {
         if (Settings.BLOODMOON_VANISH && !event.entityLiving.worldObj.isRemote) {
-            if (event.entityLiving.dimension == 0) {
-                if (event.entityLiving.getEntityData().getBoolean("bloodmoonSpawned")
-                        && !ServerBloodmoonHandler.INSTANCE.isBloodmoonActive()
-                        && Math.random() <= 0.2f) {
-                    event.entityLiving.setDead();
-                }
+            final EntityLivingBase entity = event.entityLiving;
+            if (entity.dimension == 0 && ((EntityAccessor) entity).getCustomEntityData() != null
+                    && entity.getEntityData().getBoolean("bloodmoonSpawned")
+                    && !ServerBloodmoonHandler.INSTANCE.isBloodmoonActive()
+                    && Math.random() <= 0.2f) {
+                entity.setDead();
             }
         }
     }
@@ -279,10 +280,11 @@ public class RTEventHandler {
                     movementFactor = provider.getMovementFactor();
                 }
             }
-            player.getEntityData().setInteger("oldDimension", event.fromDim);
-            player.getEntityData().setDouble("oldPosX", player.posX / movementFactor);
-            player.getEntityData().setDouble("oldPosY", player.posY);
-            player.getEntityData().setDouble("oldPosZ", player.posZ / movementFactor);
+            final NBTTagCompound nbt = player.getEntityData();
+            nbt.setInteger("oldDimension", event.fromDim);
+            nbt.setDouble("oldPosX", player.posX / movementFactor);
+            nbt.setDouble("oldPosY", player.posY);
+            nbt.setDouble("oldPosZ", player.posZ / movementFactor);
         }
     }
 

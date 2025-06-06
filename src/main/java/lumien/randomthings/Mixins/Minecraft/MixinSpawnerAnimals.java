@@ -65,7 +65,6 @@ public class MixinSpawnerAnimals implements SpawnerAnimalsExt {
                     target = "Lnet/minecraft/world/WorldServer;spawnEntityInWorld(Lnet/minecraft/entity/Entity;)Z"))
     private Entity rt$addBloodMoonTag(Entity entity) {
         if (rt$isBloodMoon && Settings.BLOODMOON_VANISH) {
-            // TODO avoid NBT spam
             entity.getEntityData().setBoolean("bloodmoonSpawned", true);
         }
         return entity;
