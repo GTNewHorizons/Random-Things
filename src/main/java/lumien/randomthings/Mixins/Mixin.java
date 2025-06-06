@@ -13,12 +13,13 @@ import lumien.randomthings.Configuration.VanillaChanges;
  */
 public enum Mixin {
 
-    ENTITYLIVING_ACCESSOR("EntityLivingAccessor", Side.BOTH, () -> true),
-    POTION_ACCESSOR("PotionAccessor", Side.BOTH, () -> true),
     BLOCK_LEAVES_BASE("MixinBlockLeavesBase", Side.BOTH, () -> VanillaChanges.FASTER_LEAVEDECAY),
+    ENTITYLIVING_ACCESSOR("EntityLivingAccessor", Side.BOTH, () -> true),
     ENTITY_RENDERER("MixinEntityRenderer", Side.CLIENT, () -> true),
     GUIVIDEOSETTINGS("MixinGuiVideoSettings", Side.CLIENT, () -> VanillaChanges.LOCKED_GAMMA),
     ITEM("MixinItem", Side.CLIENT, () -> true),
+    MINECRAFT_SERVER("WorldAccessor", Side.BOTH, () -> true),
+    POTION_ACCESSOR("PotionAccessor", Side.BOTH, () -> true),
     RENDER_GLOBAL("MixinRenderGlobal", Side.CLIENT, () -> true),
     WORLD("MixinWorld", Side.BOTH, () -> ConfigBlocks.wirelessLever);
 
