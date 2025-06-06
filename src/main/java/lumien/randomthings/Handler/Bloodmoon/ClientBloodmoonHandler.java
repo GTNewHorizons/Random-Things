@@ -26,31 +26,28 @@ public class ClientBloodmoonHandler {
         bloodMoon = false;
     }
 
-    public void tick(World worldObj) {
+    public void tick() {
         if (bloodMoon) {
-            if (Minecraft.getMinecraft().theWorld != null) {
-                difTime = (int) (Minecraft.getMinecraft().theWorld.getWorldTime() % 24000) - 12000;
+            final World world = Minecraft.getMinecraft().theWorld;
+            if (world != null) {
+                difTime = (int) (world.getWorldTime() % 24000) - 12000;
                 lightSub = (float) (Math.sin(difTime * sinMax) * 150f);
                 skyColorAdd = (float) (Math.sin(difTime * sinMax) * 0.1f);
                 float moonColorRed = (float) (Math.sin(difTime * sinMax) * 0.7f);
-
                 fogRemove = (float) (Math.sin(difTime * sinMax) * d * 6000f);
-
-                if (worldObj.provider.dimensionId != 0) {
+                if (world.provider.dimensionId != 0) {
                     bloodMoon = false;
                 }
             }
         }
     }
 
-    @SuppressWarnings("unused")
     public static void moonColorHook() {
         if (Settings.BLOODMOON_VISUAL_REDMOON && ClientBloodmoonHandler.INSTANCE.bloodMoon) {
             GL11.glColor3f(0.8f, 0, 0);
         }
     }
 
-    @SuppressWarnings("unused")
     public static void skyColorHook(Vec3 color) {
         if (Settings.BLOODMOON_VISUAL_REDSKY && ClientBloodmoonHandler.INSTANCE.bloodMoon) {
             color.xCoord += INSTANCE.skyColorAdd;

@@ -22,7 +22,9 @@ import org.apache.logging.log4j.Level;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Library.PotionEffects;
+import lumien.randomthings.Library.RandomThingsNBTKeys;
 import lumien.randomthings.Library.WorldUtils;
+import lumien.randomthings.Mixins.Minecraft.EntityAccessor;
 import lumien.randomthings.Network.Messages.MessageSpectreData;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.RandomThings;
@@ -108,40 +110,35 @@ public class SpectreHandler extends WorldSavedData {
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
-        nbt.setInteger("nextCoord", nextCoord);
-        nbt.setInteger("spectreDimensionID", spectreDimensionID);
+        nbt.setInteger(RandomThingsNBTKeys.NEXTCOORD, nextCoord);
+        nbt.setInteger(RandomThingsNBTKeys.SPECTREDIMENSIONID, spectreDimensionID);
         NBTTagList tagList = new NBTTagList();
-
         for (String playerName : playerConnection.keySet()) {
             NBTTagCompound compound = new NBTTagCompound();
-            compound.setString("playerName", playerName);
+            compound.setString(RandomThingsNBTKeys.PLAYERNAME, playerName);
             int position = playerConnection.get(playerName);
-            compound.setInteger("position", position);
+            compound.setInteger(RandomThingsNBTKeys.POSITION, position);
             tagList.appendTag(compound);
         }
-
-        nbt.setTag("playerList", tagList);
-
-        nbt.setBoolean("newVersion", true);
+        nbt.setTag(RandomThingsNBTKeys.PLAYERLIST, tagList);
+        nbt.setBoolean(RandomThingsNBTKeys.NEWVERSION, true);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
-        nextCoord = nbt.getInteger("nextCoord");
-        spectreDimensionID = nbt.getInteger("spectreDimensionID");
-
-        NBTTagList tagList = nbt.getTagList("playerList", 10);
+        nextCoord = nbt.getInteger(RandomThingsNBTKeys.NEXTCOORD);
+        spectreDimensionID = nbt.getInteger(RandomThingsNBTKeys.SPECTREDIMENSIONID);
+        NBTTagList tagList = nbt.getTagList(RandomThingsNBTKeys.PLAYERLIST, 10);
 
         for (int i = 0; i < tagList.tagCount(); i++) {
             NBTTagCompound compound = tagList.getCompoundTagAt(i);
-
-            String playerName = compound.getString("playerName");
-            int position = compound.getInteger("position");
+            String playerName = compound.getString(RandomThingsNBTKeys.PLAYERNAME);
+            int position = compound.getInteger(RandomThingsNBTKeys.POSITION);
             playerConnection.put(playerName, position);
         }
 
         // Old Version PATCH
-        boolean newVersion = nbt.getBoolean("newVersion");
+        boolean newVersion = nbt.getBoolean(RandomThingsNBTKeys.NEWVERSION);
         if (!newVersion) {
             reset();
             RandomThings.instance.logger.log(
@@ -170,17 +167,28 @@ public class SpectreHandler extends WorldSavedData {
     }
 
     public void teleportPlayerOutOfSpectreWorld(EntityPlayerMP player) {
-        if (player.getEntityData().hasKey("oldPosX")) {
-            int oldDimension = player.getEntityData().getInteger("oldDimension");
-            double oldPosX = player.getEntityData().getDouble("oldPosX");
-            double oldPosY = player.getEntityData().getDouble("oldPosY");
-            double oldPosZ = player.getEntityData().getDouble("oldPosZ");
+        if (((EntityAccessor) player).getCustomEntityData() != null) {
+            NBTTagCompound nbt = player.getEntityData();
+            if (nbt.hasKey(RandomThingsNBTKeys.OLD_POSX)) {
+                int oldDimension = nbt.getInteger(RandomThingsNBTKeys.OLD_DIMENSION);
+                double oldPosX = nbt.getDouble(RandomThingsNBTKeys.OLD_POSX);
+                double oldPosY = nbt.getDouble(RandomThingsNBTKeys.OLD_POSY);
+                double oldPosZ = nbt.getDouble(RandomThingsNBTKeys.OLD_POSZ);
+                MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(
+                        player,
+                        oldDimension,
+                        new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(oldDimension)));
+                player.setPositionAndUpdate(oldPosX, oldPosY, oldPosZ);
+            } else {
+                ChunkCoordinates cc = MinecraftServer.getServer().worldServerForDimension(0).provider
+                        .getRandomizedSpawnPoint();
+                MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(
+                        player,
+                        0,
+                        new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(0)));
 
-            MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(
-                    player,
-                    oldDimension,
-                    new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(oldDimension)));
-            player.setPositionAndUpdate(oldPosX, oldPosY, oldPosZ);
+                player.setPositionAndUpdate(cc.posX, cc.posY, cc.posZ);
+            }
         } else {
             ChunkCoordinates cc = MinecraftServer.getServer().worldServerForDimension(0).provider
                     .getRandomizedSpawnPoint();
