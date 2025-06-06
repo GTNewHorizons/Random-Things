@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Library.RandomThingsNBTKeys;
 import lumien.randomthings.Mixins.ducks.SpawnerAnimalsExt;
 
 // priority : needs to run after hodgepodge (900) and after archaic fix (1000)
@@ -65,7 +66,7 @@ public class MixinSpawnerAnimals implements SpawnerAnimalsExt {
                     target = "Lnet/minecraft/world/WorldServer;spawnEntityInWorld(Lnet/minecraft/entity/Entity;)Z"))
     private Entity rt$addBloodMoonTag(Entity entity) {
         if (rt$isBloodMoon && Settings.BLOODMOON_VANISH) {
-            entity.getEntityData().setBoolean("bloodmoonSpawned", true);
+            entity.getEntityData().setBoolean(RandomThingsNBTKeys.BLOODMOON_SPAWNED, true);
         }
         return entity;
     }

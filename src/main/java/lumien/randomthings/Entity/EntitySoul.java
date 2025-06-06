@@ -15,6 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 import lumien.randomthings.Items.ItemGinto;
 import lumien.randomthings.Items.ModItems;
+import lumien.randomthings.Library.RandomThingsNBTKeys;
 import lumien.randomthings.Library.WorldUtils;
 import lumien.randomthings.RandomThings;
 
@@ -117,14 +118,14 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData {
 
     @Override
     protected void readEntityFromNBT(NBTTagCompound nbt) {
-        this.playerName = nbt.getString("playerName");
-        this.type = nbt.getInteger("type");
+        this.playerName = nbt.getString(RandomThingsNBTKeys.PLAYERNAME);
+        this.type = nbt.getInteger(RandomThingsNBTKeys.TYPE);
     }
 
     @Override
     protected void writeEntityToNBT(NBTTagCompound nbt) {
-        nbt.setString("playerName", playerName);
-        nbt.setInteger("type", type);
+        nbt.setString(RandomThingsNBTKeys.PLAYERNAME, playerName);
+        nbt.setInteger(RandomThingsNBTKeys.TYPE, type);
     }
 
     @Override

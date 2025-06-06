@@ -16,6 +16,7 @@ import lumien.randomthings.Library.GuiIds;
 import lumien.randomthings.Library.Interfaces.IItemWithProperties;
 import lumien.randomthings.Library.InventoryUtils;
 import lumien.randomthings.Library.Inventorys.InventoryEnderLetter;
+import lumien.randomthings.Library.RandomThingsNBTKeys;
 import lumien.randomthings.RandomThings;
 
 public class ItemEnderLetter extends ItemBase implements IItemWithProperties {
@@ -34,15 +35,14 @@ public class ItemEnderLetter extends ItemBase implements IItemWithProperties {
     @Override
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
         if (par1ItemStack.stackTagCompound != null) {
-            String receiver = par1ItemStack.stackTagCompound.getString("receiver");
-            String sender = par1ItemStack.stackTagCompound.getString("sender");
-            if (receiver.equals("")) {
+            String receiver = par1ItemStack.stackTagCompound.getString(RandomThingsNBTKeys.RECEIVER);
+            String sender = par1ItemStack.stackTagCompound.getString(RandomThingsNBTKeys.SENDER);
+            if (receiver.isEmpty()) {
                 par3List.add(I18n.format("text.enderLetter.noReceiver"));
             } else {
                 par3List.add(I18n.format("text.enderLetter.receiver", receiver));
             }
-
-            if (!sender.equals("")) {
+            if (!sender.isEmpty()) {
                 par3List.add(I18n.format("text.enderLetter.sender", sender));
             }
         } else {
@@ -100,8 +100,8 @@ public class ItemEnderLetter extends ItemBase implements IItemWithProperties {
     }
 
     private void sendLetter(ItemStack letter, EntityPlayer sender) {
-        String receiver = letter.stackTagCompound.getString("receiver");
-        if (receiver.trim().equals("")) {
+        String receiver = letter.stackTagCompound.getString(RandomThingsNBTKeys.RECEIVER);
+        if (receiver.trim().isEmpty()) {
             ChatComponentTranslation invalidReceiverMessage = new ChatComponentTranslation(
                     "text.enderLetter.invalidreceiver");
             invalidReceiverMessage.getChatStyle().setColor(EnumChatFormatting.RED);
@@ -115,7 +115,7 @@ public class ItemEnderLetter extends ItemBase implements IItemWithProperties {
                 sender.addChatMessage(emptyLetterMessage);
                 return;
             }
-            letter.stackTagCompound.setString("sender", sender.getCommandSenderName());
+            letter.stackTagCompound.setString(RandomThingsNBTKeys.SENDER, sender.getCommandSenderName());
 
             sender.worldObj.playSoundAtEntity(sender, "mob.endermen.portal", 0.1F, 2F);
             sender.inventory.setInventorySlotContents(sender.inventory.currentItem, null);
@@ -131,6 +131,6 @@ public class ItemEnderLetter extends ItemBase implements IItemWithProperties {
 
     @Override
     public boolean isValidAttribute(ItemStack is, String attributeName, int attributeType) {
-        return attributeName.equals("receiver") && attributeType == 1;
+        return attributeName.equals(RandomThingsNBTKeys.RECEIVER) && attributeType == 1;
     }
 }

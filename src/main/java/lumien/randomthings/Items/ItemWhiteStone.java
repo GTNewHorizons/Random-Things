@@ -18,6 +18,7 @@ import lumien.randomthings.Configuration.ConfigDungeonLoot;
 import lumien.randomthings.Configuration.ConfigItems;
 import lumien.randomthings.Handler.Bloodmoon.ClientBloodmoonHandler;
 import lumien.randomthings.Handler.Bloodmoon.ServerBloodmoonHandler;
+import lumien.randomthings.Library.RandomThingsNBTKeys;
 import lumien.randomthings.Network.Messages.MessageWhitestone;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.RandomThings;
@@ -130,8 +131,8 @@ public class ItemWhiteStone extends ItemBase {
             } else {
                 if (ServerBloodmoonHandler.INSTANCE.isBloodmoonActive()) {
                     final NBTTagCompound nbt = entityItem.getEntityData();
-                    final int newProgress = nbt.getInteger("progress") + 1;
-                    nbt.setInteger("progress", newProgress);
+                    final int newProgress = nbt.getInteger(RandomThingsNBTKeys.PROGRESS) + 1;
+                    nbt.setInteger(RandomThingsNBTKeys.PROGRESS, newProgress);
                     if (newProgress >= 200) {
                         entityItem.setEntityItemStack(new ItemStack(ModItems.bloodStone));
                     }

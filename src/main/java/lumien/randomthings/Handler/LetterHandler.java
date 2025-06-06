@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.MinecraftServer;
 
 import lumien.randomthings.Items.ModItems;
+import lumien.randomthings.Library.RandomThingsNBTKeys;
 import lumien.randomthings.Network.Messages.MessageNotification;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.RandomThings;
@@ -42,7 +43,7 @@ public class LetterHandler {
             while (iterator.hasNext()) {
                 ItemStack toCheck = iterator.next();
 
-                String receiver = toCheck.stackTagCompound.getString("receiver");
+                String receiver = toCheck.stackTagCompound.getString(RandomThingsNBTKeys.RECEIVER);
                 EntityPlayerMP receiverEntity = MinecraftServer.getServer().getConfigurationManager()
                         .func_152612_a(receiver);
                 if (receiverEntity != null) {
@@ -56,13 +57,15 @@ public class LetterHandler {
                         writeToNBT();
                         RandomThings.instance.saveNBT();
 
-                        PacketHandler.INSTANCE.sendTo(
-                                new MessageNotification(
-                                        "Received Ender Letter",
-                                        "Sender: " + toCheck.stackTagCompound.getString("sender"),
-                                        100,
-                                        new ItemStack(ModItems.enderLetter, 1, 1)),
-                                receiverEntity);
+                        PacketHandler.INSTANCE
+                                .sendTo(
+                                        new MessageNotification(
+                                                "Received Ender Letter",
+                                                "Sender: " + toCheck.stackTagCompound
+                                                        .getString(RandomThingsNBTKeys.SENDER),
+                                                100,
+                                                new ItemStack(ModItems.enderLetter, 1, 1)),
+                                        receiverEntity);
                     }
                 }
             }

@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
 
+import lumien.randomthings.Library.RandomThingsNBTKeys;
 import lumien.randomthings.Network.Messages.MessageMagneticForceParticle;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.RandomThings;
@@ -25,7 +26,7 @@ public class MagneticForceHandler {
     }
 
     public void readFromNBT(NBTTagCompound nbt) {
-        NBTTagList tagList = nbt.getTagList("magneticForces", 9);
+        NBTTagList tagList = nbt.getTagList(RandomThingsNBTKeys.MAGNETIC_FORCES, 9);
         for (int i = 0; i < tagList.tagCount(); i++) {
             NBTTagCompound tag = tagList.getCompoundTagAt(i);
             MagneticForceEvent event = new MagneticForceEvent();
@@ -41,7 +42,7 @@ public class MagneticForceHandler {
             event.writeToNBT(tag);
             tagList.appendTag(tag);
         }
-        nbt.setTag("magneticForces", tagList);
+        nbt.setTag(RandomThingsNBTKeys.MAGNETIC_FORCES, tagList);
     }
 
     public void addEvent(String user, String target) {
@@ -68,15 +69,15 @@ public class MagneticForceHandler {
         public MagneticForceEvent() {}
 
         public void readFromNBT(NBTTagCompound nbt) {
-            this.user = nbt.getString("user");
-            this.target = nbt.getString("target");
-            this.progress = nbt.getInteger("progress");
+            this.user = nbt.getString(RandomThingsNBTKeys.USER);
+            this.target = nbt.getString(RandomThingsNBTKeys.TARGET);
+            this.progress = nbt.getInteger(RandomThingsNBTKeys.PROGRESS);
         }
 
         public void writeToNBT(NBTTagCompound nbt) {
-            nbt.setString("user", user);
-            nbt.setString("target", target);
-            nbt.setInteger("progress", progress);
+            nbt.setString(RandomThingsNBTKeys.USER, user);
+            nbt.setString(RandomThingsNBTKeys.TARGET, target);
+            nbt.setInteger(RandomThingsNBTKeys.PROGRESS, progress);
         }
 
         public boolean tick() {

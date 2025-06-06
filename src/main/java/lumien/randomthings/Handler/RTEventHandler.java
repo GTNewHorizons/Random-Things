@@ -83,6 +83,7 @@ import lumien.randomthings.Items.ItemWhiteStone;
 import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.DimensionCoordinate;
 import lumien.randomthings.Library.PotionEffects;
+import lumien.randomthings.Library.RandomThingsNBTKeys;
 import lumien.randomthings.Mixins.Minecraft.EntityAccessor;
 import lumien.randomthings.Mixins.Minecraft.EntityLivingAccessor;
 import lumien.randomthings.Potions.ModPotions;
@@ -152,7 +153,7 @@ public class RTEventHandler {
         if (Settings.BLOODMOON_VANISH && !event.entityLiving.worldObj.isRemote) {
             final EntityLivingBase entity = event.entityLiving;
             if (entity.dimension == 0 && ((EntityAccessor) entity).getCustomEntityData() != null
-                    && entity.getEntityData().getBoolean("bloodmoonSpawned")
+                    && entity.getEntityData().getBoolean(RandomThingsNBTKeys.BLOODMOON_SPAWNED)
                     && !ServerBloodmoonHandler.INSTANCE.isBloodmoonActive()
                     && Math.random() <= 0.2f) {
                 entity.setDead();
@@ -281,10 +282,10 @@ public class RTEventHandler {
                 }
             }
             final NBTTagCompound nbt = player.getEntityData();
-            nbt.setInteger("oldDimension", event.fromDim);
-            nbt.setDouble("oldPosX", player.posX / movementFactor);
-            nbt.setDouble("oldPosY", player.posY);
-            nbt.setDouble("oldPosZ", player.posZ / movementFactor);
+            nbt.setInteger(RandomThingsNBTKeys.OLD_DIMENSION, event.fromDim);
+            nbt.setDouble(RandomThingsNBTKeys.OLD_POSX, player.posX / movementFactor);
+            nbt.setDouble(RandomThingsNBTKeys.OLD_POSY, player.posY);
+            nbt.setDouble(RandomThingsNBTKeys.OLD_POSZ, player.posZ / movementFactor);
         }
     }
 

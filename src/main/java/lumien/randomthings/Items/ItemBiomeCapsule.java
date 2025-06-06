@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
 import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Library.RandomThingsNBTKeys;
 import lumien.randomthings.RandomThings;
 
 public class ItemBiomeCapsule extends ItemBase {
@@ -119,10 +120,10 @@ public class ItemBiomeCapsule extends ItemBase {
         } else {
             if (entityItem.getEntityItem().getItemDamage() == 0) {
                 NBTTagCompound nbt = entityItem.getEntityData();
-                if (nbt.getInteger("selectingTimer") == 0) {
-                    nbt.setInteger("selectingTimer", 200);
+                if (nbt.getInteger(RandomThingsNBTKeys.SELECTING_TIMER) == 0) {
+                    nbt.setInteger(RandomThingsNBTKeys.SELECTING_TIMER, 200);
                 } else {
-                    int currentTime = nbt.getInteger("selectingTimer");
+                    int currentTime = nbt.getInteger(RandomThingsNBTKeys.SELECTING_TIMER);
                     if (currentTime == 1) {
                         BiomeGenBase biome = entityItem.worldObj.getBiomeGenForCoords(
                                 (int) Math.floor(entityItem.posX),
@@ -132,7 +133,7 @@ public class ItemBiomeCapsule extends ItemBase {
                         entityItem.setEntityItemStack(is);
                     } else {
                         currentTime--;
-                        nbt.setInteger("selectingTimer", currentTime);
+                        nbt.setInteger(RandomThingsNBTKeys.SELECTING_TIMER, currentTime);
                     }
                 }
             } else {
