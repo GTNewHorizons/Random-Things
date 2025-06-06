@@ -18,10 +18,12 @@ public enum Mixin {
     ENTITY_RENDERER("MixinEntityRenderer", Side.CLIENT, () -> true),
     GUIVIDEOSETTINGS("MixinGuiVideoSettings", Side.CLIENT, () -> VanillaChanges.LOCKED_GAMMA),
     ITEM("MixinItem", Side.CLIENT, () -> true),
-    MINECRAFT_SERVER("WorldAccessor", Side.BOTH, () -> true),
     POTION_ACCESSOR("PotionAccessor", Side.BOTH, () -> true),
     RENDER_GLOBAL("MixinRenderGlobal", Side.CLIENT, () -> true),
-    WORLD("MixinWorld", Side.BOTH, () -> ConfigBlocks.wirelessLever);
+    SPAWNERANIMALS("MixinSpawnerAnimals", Side.BOTH, () -> true),
+    WORLD("MixinWorld", Side.BOTH, () -> ConfigBlocks.wirelessLever),
+    WORLD_ACCESSOR("WorldAccessor", Side.BOTH, () -> true),
+    WORLDSERVER_ACCESSOR("WorldServerAccessor", Side.BOTH, () -> true);
 
     public final String mixinClass;
     private final Side side;

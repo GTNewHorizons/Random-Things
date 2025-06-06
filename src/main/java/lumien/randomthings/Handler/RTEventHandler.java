@@ -288,7 +288,8 @@ public class RTEventHandler {
 
     @SubscribeEvent
     public void loadWorld(WorldEvent.Load event) {
-        if (!event.world.isRemote && event.world.provider.dimensionId == Settings.SPECTRE_DIMENSON_ID) {
+        if (event.world.isRemote) return;
+        if (event.world.provider.dimensionId == Settings.SPECTRE_DIMENSON_ID) {
             SpectreHandler spectreHandler = (SpectreHandler) event.world.mapStorage
                     .loadData(SpectreHandler.class, "SpectreHandler");
             if (spectreHandler == null) {
@@ -301,8 +302,7 @@ public class RTEventHandler {
             event.world.mapStorage.setData("SpectreHandler", spectreHandler);
             RandomThings.instance.spectreHandler = spectreHandler;
         }
-
-        if (!event.world.isRemote && event.world.provider.dimensionId == 0) {
+        if (event.world.provider.dimensionId == 0) {
             ServerBloodmoonHandler.INSTANCE = (ServerBloodmoonHandler) event.world.mapStorage
                     .loadData(ServerBloodmoonHandler.class, "Bloodmoon");
 
