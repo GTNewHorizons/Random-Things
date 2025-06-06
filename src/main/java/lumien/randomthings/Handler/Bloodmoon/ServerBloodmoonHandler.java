@@ -13,6 +13,7 @@ import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.WorldServer;
 
 import lumien.randomthings.Configuration.Settings;
+import lumien.randomthings.Mixins.Minecraft.WorldAccessor;
 import lumien.randomthings.Network.Messages.MessageBloodmoon;
 import lumien.randomthings.Network.PacketHandler;
 
@@ -51,8 +52,8 @@ public class ServerBloodmoonHandler extends WorldSavedData {
             int date = (int) Math.floor(world.getWorldTime() / 24000d);
 
             if (bloodMoon) {
-                if (!Settings.BLOODMOON_RESPECT_GAMERULE
-                        || world.getGameRules().getGameRuleBooleanValue("doMobSpawning")) {
+                boolean spawnHostiles = ((WorldAccessor) world).isSpawnHostileMobs();
+                if (!Settings.BLOODMOON_RESPECT_GAMERULE || spawnHostiles) {
                     for (int i = 0; i < Settings.BLOODMOON_SPAWNSPEED; i++) {
                         bloodMoonSpawner.findChunksForSpawning(
                                 (WorldServer) world,
