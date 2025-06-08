@@ -54,7 +54,7 @@ public class ServerBloodmoonHandler extends WorldSavedData {
             if (bloodMoon) {
                 boolean spawnHostiles = ((WorldAccessor) world).isSpawnHostileMobs();
                 boolean doMobSpawning = world.getGameRules().getGameRuleBooleanValue("doMobSpawning");
-                if (!Settings.BLOODMOON_RESPECT_GAMERULE || spawnHostiles && doMobSpawning) {
+                if (!Settings.BLOODMOON_RESPECT_GAMERULE || (spawnHostiles && doMobSpawning)) {
                     for (int i = 0; i < Settings.BLOODMOON_SPAWNSPEED; i++) {
                         bloodMoonSpawner.findChunksForSpawning(
                                 (WorldServer) world,
