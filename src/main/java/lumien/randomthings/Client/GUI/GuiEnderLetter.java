@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,6 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.Container.ContainerEnderLetter;
 import lumien.randomthings.Items.ModItems;
+import lumien.randomthings.Library.RandomThingsNBTKeys;
 import lumien.randomthings.Network.Messages.MessageChangeItemProperty;
 import lumien.randomthings.Network.PacketHandler;
 
@@ -24,10 +24,7 @@ public class GuiEnderLetter extends GuiContainer {
 
     GuiTextField receiverName;
     ItemStack enderLetter;
-
     String oldReceiver = "";
-
-    EntityPlayer thePlayer = Minecraft.getMinecraft().thePlayer;
 
     public GuiEnderLetter(IInventory inventoryPlayer, IInventory letterInventory, ItemStack enderLetter) {
         super(new ContainerEnderLetter(enderLetter, inventoryPlayer, letterInventory));
@@ -61,8 +58,8 @@ public class GuiEnderLetter extends GuiContainer {
                     new MessageChangeItemProperty(
                             Item.getIdFromItem(ModItems.enderLetter),
                             0,
-                            thePlayer.inventory.currentItem,
-                            "receiver",
+                            Minecraft.getMinecraft().thePlayer.inventory.currentItem,
+                            RandomThingsNBTKeys.RECEIVER,
                             oldReceiver));
         }
     }
@@ -81,7 +78,7 @@ public class GuiEnderLetter extends GuiContainer {
         receiverName.setCanLoseFocus(true);
         Keyboard.enableRepeatEvents(true);
 
-        String receiver = enderLetter.stackTagCompound.getString("receiver");
+        String receiver = enderLetter.stackTagCompound.getString(RandomThingsNBTKeys.RECEIVER);
         receiverName.setText(receiver);
         oldReceiver = receiver;
 
@@ -97,7 +94,7 @@ public class GuiEnderLetter extends GuiContainer {
                 new MessageChangeItemProperty(
                         Item.getIdFromItem(ModItems.enderLetter),
                         0,
-                        thePlayer.inventory.currentItem,
+                        Minecraft.getMinecraft().thePlayer.inventory.currentItem,
                         "receiver",
                         receiverName.getText()));
     }

@@ -13,6 +13,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 
 import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Library.RandomThingsNBTKeys;
 
 public class TileEntityPlayerInterface extends TileEntity implements ISidedInventory {
 
@@ -211,13 +212,13 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
     @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setString("playerName", this.playerName);
+        par1NBTTagCompound.setString(RandomThingsNBTKeys.PLAYERNAME, this.playerName);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readFromNBT(par1NBTTagCompound);
-        this.playerName = par1NBTTagCompound.getString("playerName");
+        this.playerName = par1NBTTagCompound.getString(RandomThingsNBTKeys.PLAYERNAME);
     }
 
     public boolean hasPlayer() {
