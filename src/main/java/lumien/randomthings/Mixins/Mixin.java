@@ -14,15 +14,18 @@ import lumien.randomthings.Configuration.VanillaChanges;
 public enum Mixin {
 
     BLOCK_LEAVES_BASE("MixinBlockLeavesBase", Side.BOTH, () -> VanillaChanges.FASTER_LEAVEDECAY),
+    ENTITYACCESSOR("EntityAccessor", Side.BOTH, () -> true),
     ENTITYLIVING_ACCESSOR("EntityLivingAccessor", Side.BOTH, () -> true),
     ENTITY_RENDERER("MixinEntityRenderer", Side.CLIENT, () -> true),
     GUIVIDEOSETTINGS("MixinGuiVideoSettings", Side.CLIENT, () -> VanillaChanges.LOCKED_GAMMA),
     GUI_ACCESSOR("GuiAccessor", Side.CLIENT, () -> true),
     ITEM("MixinItem", Side.CLIENT, () -> true),
-    MINECRAFT_SERVER("WorldAccessor", Side.BOTH, () -> true),
     POTION_ACCESSOR("PotionAccessor", Side.BOTH, () -> true),
     RENDER_GLOBAL("MixinRenderGlobal", Side.CLIENT, () -> true),
-    WORLD("MixinWorld", Side.BOTH, () -> ConfigBlocks.wirelessLever);
+    SPAWNERANIMALS("MixinSpawnerAnimals", Side.BOTH, () -> true),
+    WORLD("MixinWorld", Side.BOTH, () -> ConfigBlocks.wirelessLever),
+    WORLDSERVER_ACCESSOR("WorldServerAccessor", Side.BOTH, () -> true),
+    WORLD_ACCESSOR("WorldAccessor", Side.BOTH, () -> true);
 
     public final String mixinClass;
     private final Side side;

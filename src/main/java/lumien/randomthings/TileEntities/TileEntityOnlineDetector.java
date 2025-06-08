@@ -22,6 +22,7 @@ import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.SimpleComponent;
 import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.Library.RandomThingsNBTKeys;
 import lumien.randomthings.Library.WorldUtils;
 
 @Optional.InterfaceList(
@@ -57,13 +58,13 @@ public class TileEntityOnlineDetector extends TileEntity implements SimpleCompon
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
-        nbt.setString("username", username);
+        nbt.setString(RandomThingsNBTKeys.USERNAME, username);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        username = nbt.getString("username");
+        username = nbt.getString(RandomThingsNBTKeys.USERNAME);
     }
 
     public void setUsername(String username) {
