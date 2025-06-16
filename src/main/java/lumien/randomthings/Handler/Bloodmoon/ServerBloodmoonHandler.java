@@ -52,7 +52,8 @@ public class ServerBloodmoonHandler extends WorldSavedData {
 
             if (bloodMoon) {
                 boolean spawnHostiles = ((WorldAccessor) world).isSpawnHostileMobs();
-                if (!Settings.BLOODMOON_RESPECT_GAMERULE || spawnHostiles) {
+                boolean doMobSpawning = world.getGameRules().getGameRuleBooleanValue("doMobSpawning");
+                if (!Settings.BLOODMOON_RESPECT_GAMERULE || (spawnHostiles && doMobSpawning)) {
                     for (int i = 0; i < Settings.BLOODMOON_SPAWNSPEED; i++) {
                         final SpawnerAnimals spawnerAnimals = ((WorldServerAccessor) world).getAnimalSpawner();
                         final SpawnerAnimalsExt accessor = (SpawnerAnimalsExt) (Object) spawnerAnimals;
@@ -65,7 +66,6 @@ public class ServerBloodmoonHandler extends WorldSavedData {
                         accessor.rt$setBloodmoon(false);
                     }
                 }
-
                 if (time >= 0 && time < 12000) {
                     setBloodmoon(false);
                 }
