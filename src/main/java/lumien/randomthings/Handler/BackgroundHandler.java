@@ -8,6 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Configuration.VanillaChanges;
+import lumien.randomthings.Mixins.Minecraft.GuiAccessor;
 
 public class BackgroundHandler {
 
@@ -26,13 +27,13 @@ public class BackgroundHandler {
 
     public static void setBackground(ResourceLocation rl) {
         if (Gui.optionsBackground.getResourcePath().equals("textures/gui/options_background.png")) {
-            Gui.optionsBackground = rl;
+            GuiAccessor.setOptionsBackground(rl);
         }
     }
 
     public static void setRandomBackground() {
         if (VanillaChanges.MODIFIED_BACKGROUND) {
-            if (!Settings.FIXED_BACKGROUND.equals("")) {
+            if (!Settings.FIXED_BACKGROUND.isEmpty()) {
                 setBackground(new ResourceLocation(Settings.FIXED_BACKGROUND));
             } else {
                 String randomBlock = validBlocks[rng.nextInt(validBlocks.length)];
