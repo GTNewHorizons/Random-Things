@@ -18,6 +18,7 @@ public enum Mixin {
     ENTITYLIVING_ACCESSOR("EntityLivingAccessor", Side.BOTH, () -> true),
     ENTITY_RENDERER("MixinEntityRenderer", Side.CLIENT, () -> true),
     GUIVIDEOSETTINGS("MixinGuiVideoSettings", Side.CLIENT, () -> VanillaChanges.LOCKED_GAMMA),
+    GUI_ACCESSOR("GuiAccessor", Side.CLIENT, () -> true),
     ITEM("MixinItem", Side.CLIENT, () -> true),
     POTION_ACCESSOR("PotionAccessor", Side.BOTH, () -> true),
     RENDER_GLOBAL("MixinRenderGlobal", Side.CLIENT, () -> true),
