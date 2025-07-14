@@ -1,31 +1,23 @@
 package lumien.randomthings.Mixins;
 
-import cpw.mods.fml.common.Mod;
+import javax.annotation.Nonnull;
 
-public enum TargetedMod {
+import com.gtnewhorizon.gtnhmixins.builders.ITargetMod;
+import com.gtnewhorizon.gtnhmixins.builders.TargetModBuilder;
 
-    THAUMCRAFT("Thaumcraft", null, "Thaumcraft"),
-    VANILLA("Minecraft", null);
+public enum TargetedMod implements ITargetMod {
 
-    /** The "name" in the {@link Mod @Mod} annotation */
-    public final String modName;
-    /** Class that implements the IFMLLoadingPlugin interface */
-    public final String coreModClass;
-    /** The "modId" in the {@link Mod @Mod} annotation */
-    public final String modId;
+    THAUMCRAFT("Thaumcraft");
 
-    TargetedMod(String modName, String coreModClass) {
-        this(modName, coreModClass, null);
+    private final TargetModBuilder builder;
+
+    TargetedMod(String modId) {
+        this.builder = new TargetModBuilder().setModId(modId);
     }
 
-    TargetedMod(String modName, String coreModClass, String modId) {
-        this.modName = modName;
-        this.coreModClass = coreModClass;
-        this.modId = modId;
-    }
-
+    @Nonnull
     @Override
-    public String toString() {
-        return "TargetedMod{modName='" + modName + "', coreModClass='" + coreModClass + "', modId='" + modId + "'}";
+    public TargetModBuilder getBuilder() {
+        return builder;
     }
 }

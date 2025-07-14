@@ -1,12 +1,11 @@
-package lumien.randomthings;
+package lumien.randomthings.Mixins;
 
 import java.util.List;
 import java.util.Set;
 
 import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
 import com.gtnewhorizon.gtnhmixins.LateMixin;
-
-import lumien.randomthings.Mixins.Mixins;
+import com.gtnewhorizon.gtnhmixins.builders.IMixins;
 
 @LateMixin
 public class RandomThingsLateMixins implements ILateMixinLoader {
@@ -18,7 +17,7 @@ public class RandomThingsLateMixins implements ILateMixinLoader {
 
     @Override
     public List<String> getMixins(Set<String> loadedMods) {
-        return Mixins.getLateMixins(loadedMods);
+        return IMixins.getLateMixins(Mixins.class, loadedMods);
     }
 
 }

@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Configuration.VanillaChanges;
-import lumien.randomthings.Mixins.Minecraft.GuiAccessor;
+import lumien.randomthings.Mixins.early.GuiAccessor;
 
 public class BackgroundHandler {
 

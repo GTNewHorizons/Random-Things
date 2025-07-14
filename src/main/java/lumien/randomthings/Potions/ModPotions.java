@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Level;
 
 import lumien.randomthings.Configuration.RTConfiguration;
 import lumien.randomthings.Library.PotionIds;
-import lumien.randomthings.Mixins.Minecraft.PotionAccessor;
+import lumien.randomthings.Mixins.early.PotionAccessor;
 import lumien.randomthings.RandomThings;
 
 public class ModPotions {

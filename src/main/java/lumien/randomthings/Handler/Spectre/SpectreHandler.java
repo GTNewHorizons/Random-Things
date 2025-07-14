@@ -24,7 +24,7 @@ import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Library.PotionEffects;
 import lumien.randomthings.Library.RandomThingsNBTKeys;
 import lumien.randomthings.Library.WorldUtils;
-import lumien.randomthings.Mixins.Minecraft.EntityAccessor;
+import lumien.randomthings.Mixins.early.EntityAccessor;
 import lumien.randomthings.Network.Messages.MessageSpectreData;
 import lumien.randomthings.Network.PacketHandler;
 import lumien.randomthings.RandomThings;
