@@ -1,4 +1,4 @@
-package lumien.randomthings.Mixins.Minecraft;
+package lumien.randomthings.Mixins.early;
 
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;

@@ -14,9 +14,9 @@ import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.WorldServer;
 
 import lumien.randomthings.Configuration.Settings;
-import lumien.randomthings.Mixins.Minecraft.WorldAccessor;
-import lumien.randomthings.Mixins.Minecraft.WorldServerAccessor;
 import lumien.randomthings.Mixins.ducks.SpawnerAnimalsExt;
+import lumien.randomthings.Mixins.early.WorldAccessor;
+import lumien.randomthings.Mixins.early.WorldServerAccessor;
 import lumien.randomthings.Network.Messages.MessageBloodmoon;
 import lumien.randomthings.Network.PacketHandler;
 

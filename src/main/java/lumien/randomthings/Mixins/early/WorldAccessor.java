@@ -1,4 +1,4 @@
-package lumien.randomthings.Mixins.Minecraft;
+package lumien.randomthings.Mixins.early;
 
 import net.minecraft.world.World;
 

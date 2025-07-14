@@ -84,8 +84,8 @@ import lumien.randomthings.Items.ModItems;
 import lumien.randomthings.Library.DimensionCoordinate;
 import lumien.randomthings.Library.PotionEffects;
 import lumien.randomthings.Library.RandomThingsNBTKeys;
-import lumien.randomthings.Mixins.Minecraft.EntityAccessor;
-import lumien.randomthings.Mixins.Minecraft.EntityLivingAccessor;
+import lumien.randomthings.Mixins.early.EntityAccessor;
+import lumien.randomthings.Mixins.early.EntityLivingAccessor;
 import lumien.randomthings.Potions.ModPotions;
 import lumien.randomthings.RandomThings;
 
