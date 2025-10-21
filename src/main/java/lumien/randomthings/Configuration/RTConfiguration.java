@@ -30,6 +30,7 @@ public class RTConfiguration {
 
     public static Property bloodMoon_chance;
     public static Property bloodMoon_cycle;
+    public static Property bloodMoon_initial_pause;
 
     public static Property bloodMoon_spawnSpeed;
     public static Property bloodMoon_spawnLimitMult;
@@ -136,6 +137,11 @@ public class RTConfiguration {
                 "BloodMoonCycle",
                 0,
                 "Blood moon happens cyclically every X days (set to 0 to disable it)");
+        bloodMoon_initial_pause = config.get(
+                "Settings",
+                "BloodMoonInitialPause",
+                5,
+                "Stop bloodmoons from happening for the first X days after world creation").setMinValue(0);
         bloodMoon_noSleep = config.get(
                 "Settings",
                 "BloodMoonNoSleep",
@@ -259,6 +265,7 @@ public class RTConfiguration {
         Settings.DECAY_FUZZ = decayFuzz.getInt();
         Settings.BLOODMOON_CHANCE = (float) bloodMoon_chance.getDouble(0.05);
         Settings.BLOODMOON_CYCLE = bloodMoon_cycle.getInt(0);
+        Settings.BLOODMOON_INITIAL_PAUSE = bloodMoon_initial_pause.getInt(5);
         Settings.BLOODMOON_SPAWNLIMIT_MULTIPLIER = bloodMoon_spawnLimitMult.getInt(3);
         Settings.BLOODMOON_SPAWNRANGE = bloodMoon_spawnRange.getInt(4);
         Settings.BLOODMOON_SPAWNSPEED = bloodMoon_spawnSpeed.getInt(3);

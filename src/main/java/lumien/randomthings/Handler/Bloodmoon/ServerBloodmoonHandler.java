@@ -46,42 +46,41 @@ public class ServerBloodmoonHandler extends WorldSavedData {
     }
 
     public void endWorldTick(World world) {
-        if (world.provider.dimensionId == 0) {
-            int time = (int) (world.getWorldTime() % 24000);
-            int date = (int) Math.floor(world.getWorldTime() / 24000d);
+        if (world.provider.dimensionId != 0) return;
 
-            if (bloodMoon) {
-                boolean spawnHostiles = ((WorldAccessor) world).isSpawnHostileMobs();
-                boolean doMobSpawning = world.getGameRules().getGameRuleBooleanValue("doMobSpawning");
-                if (!Settings.BLOODMOON_RESPECT_GAMERULE || (spawnHostiles && doMobSpawning)) {
-                    for (int i = 0; i < Settings.BLOODMOON_SPAWNSPEED; i++) {
-                        final SpawnerAnimals spawnerAnimals = ((WorldServerAccessor) world).getAnimalSpawner();
-                        final SpawnerAnimalsExt accessor = (SpawnerAnimalsExt) (Object) spawnerAnimals;
-                        accessor.rt$setBloodmoon(true);
-                        spawnerAnimals.findChunksForSpawning(
-                                (WorldServer) world,
-                                true,
-                                false,
-                                world.getTotalWorldTime() % 20 == 0);
-                        accessor.rt$setBloodmoon(false);
-                    }
-                }
-                if (time >= 0 && time < 12000) {
-                    setBloodmoon(false);
-                }
-            } else {
-                if (time == 12000) {
-                    if (forceBloodMoon || isBloodMoonCycle(date) || Math.random() < Settings.BLOODMOON_CHANCE) {
-                        forceBloodMoon = false;
-                        setBloodmoon(true);
+        int time = (int) (world.getWorldTime() % 24000);
+        int date = (int) Math.floor(world.getWorldTime() / 24000d);
 
-                        if (Settings.BLOODMOON_MESSAGE) {
-                            for (EntityPlayer player : ((List<EntityPlayer>) world.playerEntities)) {
-                                player.addChatMessage(
-                                        new ChatComponentTranslation("text.bloodmoon.notify")
-                                                .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
-                            }
-                        }
+        if (bloodMoon) {
+            boolean spawnHostiles = ((WorldAccessor) world).isSpawnHostileMobs();
+            boolean doMobSpawning = world.getGameRules().getGameRuleBooleanValue("doMobSpawning");
+            if (!Settings.BLOODMOON_RESPECT_GAMERULE || (spawnHostiles && doMobSpawning)) {
+                for (int i = 0; i < Settings.BLOODMOON_SPAWNSPEED; i++) {
+                    final SpawnerAnimals spawnerAnimals = ((WorldServerAccessor) world).getAnimalSpawner();
+                    final SpawnerAnimalsExt accessor = (SpawnerAnimalsExt) (Object) spawnerAnimals;
+                    accessor.rt$setBloodmoon(true);
+                    spawnerAnimals.findChunksForSpawning(
+                            (WorldServer) world,
+                            true,
+                            false,
+                            world.getTotalWorldTime() % 20 == 0);
+                    accessor.rt$setBloodmoon(false);
+                }
+            }
+            if (time >= 0 && time < 12000) {
+                setBloodmoon(false);
+            }
+        } else if (time == 12000) {
+            if (forceBloodMoon || (date >= Settings.BLOODMOON_INITIAL_PAUSE
+                    && (isBloodMoonCycle(date) || Math.random() < Settings.BLOODMOON_CHANCE))) {
+                forceBloodMoon = false;
+                setBloodmoon(true);
+
+                if (Settings.BLOODMOON_MESSAGE) {
+                    for (EntityPlayer player : ((List<EntityPlayer>) world.playerEntities)) {
+                        player.addChatMessage(
+                                new ChatComponentTranslation("text.bloodmoon.notify")
+                                        .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                     }
                 }
             }
