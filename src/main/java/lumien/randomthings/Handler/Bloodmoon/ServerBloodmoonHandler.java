@@ -71,7 +71,8 @@ public class ServerBloodmoonHandler extends WorldSavedData {
                 }
             } else {
                 if (time == 12000) {
-                    if (forceBloodMoon || isBloodMoonCycle(date) || Math.random() < Settings.BLOODMOON_CHANCE) {
+                    if (forceBloodMoon || (date >= Settings.BLOODMOON_INITIAL_PAUSE
+                            && (isBloodMoonCycle(date) || Math.random() < Settings.BLOODMOON_CHANCE))) {
                         forceBloodMoon = false;
                         setBloodmoon(true);
 
