@@ -149,6 +149,8 @@ public class TileEntityAdvancedItemCollector extends TileEntity {
                         }
 
                         for (EntityItem ei : items) {
+                            if (ei.isDead) continue;
+
                             if (inventory.getStackInSlot(0) == null
                                     || ItemFilter.matchesItem(inventory.getStackInSlot(0), ei.getEntityItem())) {
                                 ItemStack rest = TileEntityHopper.func_145889_a(
