@@ -101,16 +101,16 @@ public class GuiItemCollector extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-        fontRendererObj.drawString(I18n.format("tile.advancedItemCollector.name"), 8, 6, 4210752);
+        fontRendererObj.drawString(I18n.format("gui.tile.advancedItemCollector.name.title"), 8, 6, 4210752);
 
-        String radiusX = "Radius X: " + te.rangeX;
-        String radiusY = "Radius Y: " + te.rangeY;
-        String radiusZ = "Radius Z: " + te.rangeZ;
+        String radiusX = I18n.format("text.miscellaneous.radiusX", te.rangeX);
+        String radiusY = I18n.format("text.miscellaneous.radiusY", te.rangeY);
+        String radiusZ = I18n.format("text.miscellaneous.radiusZ", te.rangeZ);
 
         fontRendererObj.drawString(radiusX, xSize / 2 - fontRendererObj.getStringWidth(radiusX) / 2, 25, 4210752);
         fontRendererObj.drawString(radiusY, xSize / 2 - fontRendererObj.getStringWidth(radiusY) / 2, 50, 4210752);
         fontRendererObj.drawString(radiusZ, xSize / 2 - fontRendererObj.getStringWidth(radiusZ) / 2, 75, 4210752);
 
-        fontRendererObj.drawString("Filter: ", 48, 103, 0x000000);
+        fontRendererObj.drawString(I18n.format("item.filter.name"), 48, 103, 0x000000);
     }
 }

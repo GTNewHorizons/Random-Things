@@ -51,8 +51,10 @@ public class GuiPlayerInterface extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-        fontRendererObj.drawString(I18n.format("tile.playerinterface.name"), 8, 6, 4210752);
-        String connectedTo = "Connected to " + (!te.getPlayerName().equals("") ? te.getPlayerName() : "nobody");
+        fontRendererObj.drawString(I18n.format("gui.tile.playerinterface.name.title"), 8, 6, 4210752);
+        String connectedTo = I18n.format(
+                "text.miscellaneous.connectedTo",
+                !te.getPlayerName().equals("") ? te.getPlayerName() : I18n.format("text.miscellaneous.nobody"));
         fontRendererObj.drawString(
                 connectedTo,
                 (xSize / 2 - fontRendererObj.getStringWidth(connectedTo) / 2),

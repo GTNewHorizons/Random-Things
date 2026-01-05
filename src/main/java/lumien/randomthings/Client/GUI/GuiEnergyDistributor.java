@@ -61,15 +61,18 @@ public class GuiEnergyDistributor extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        fontRendererObj.drawString(I18n.format("tile.energyDistributor.name"), 8, 6, 4210752);
+        fontRendererObj.drawString(I18n.format("gui.tile.energyDistributor.name.title"), 8, 6, 4210752);
 
         int distributed = ((ContainerEnergyDistributor) this.inventorySlots).energyDistributedLastTick;
-        fontRendererObj
-                .drawString("Edlt: " + distributed + "/" + Settings.ENERGY_DISTRIBUTOR_PERTICK + " RF", 8, 35, 4210752);
+        fontRendererObj.drawString(
+                I18n.format("text.miscellaneous.edlt", distributed, Settings.ENERGY_DISTRIBUTOR_PERTICK),
+                8,
+                35,
+                4210752);
 
         int machinesConnected = ((ContainerEnergyDistributor) this.inventorySlots).machinesConnected;
         fontRendererObj.drawString(
-                "MC: " + machinesConnected + "/" + Settings.ENERGY_DISTRIBUTOR_MAXMACHINES,
+                I18n.format("text.miscellaneous.mc", machinesConnected, Settings.ENERGY_DISTRIBUTOR_MAXMACHINES),
                 103,
                 35,
                 4210752);

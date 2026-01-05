@@ -73,7 +73,7 @@ public class GuiDyeingMachine extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-        fontRendererObj.drawString(I18n.format("tile.dyeingMachine.name"), 8, 6, 4210752);
+        fontRendererObj.drawString(I18n.format("gui.tile.dyeingMachine.name.title"), 8, 6, 4210752);
     }
 
     @Override

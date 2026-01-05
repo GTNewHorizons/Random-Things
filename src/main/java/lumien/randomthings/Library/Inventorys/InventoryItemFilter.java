@@ -1,5 +1,6 @@
 package lumien.randomthings.Library.Inventorys;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.ItemStack;
@@ -47,7 +48,7 @@ public class InventoryItemFilter extends InventoryBasic {
 
     @Override
     public String getInventoryName() {
-        return "Item Filter";
+        return I18n.format("gui.item.filterItem.name.title");
     }
 
     private boolean hasInventory() {
