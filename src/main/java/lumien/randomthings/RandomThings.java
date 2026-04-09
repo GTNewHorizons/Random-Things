@@ -25,6 +25,7 @@ import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Client.GuiHandler;
@@ -171,6 +172,11 @@ public class RandomThings {
 
         event.registerServerCommand(new RTCommand());
         event.registerServerCommand(new ExitSpectreCommand());
+    }
+
+    @EventHandler
+    public void serverStopped(FMLServerStoppedEvent event) {
+        spectreHandler = null;
     }
 
     @EventHandler
