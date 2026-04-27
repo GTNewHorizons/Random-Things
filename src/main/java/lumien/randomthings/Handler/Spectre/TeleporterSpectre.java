@@ -32,11 +32,12 @@ public class TeleporterSpectre extends Teleporter {
     public void placeInPortal(Entity entity, double par2, double par4, double par6, float par8) {
         if (this.world.provider.dimensionId == Settings.SPECTRE_DIMENSON_ID) {
 
+            final double movementFactor = entity.worldObj.provider.getMovementFactor();
             final NBTTagCompound nbt = entity.getEntityData();
             nbt.setInteger(RandomThingsNBTKeys.OLD_DIMENSION, entity.worldObj.provider.dimensionId);
-            nbt.setDouble(RandomThingsNBTKeys.OLD_POSX, entity.posX);
+            nbt.setDouble(RandomThingsNBTKeys.OLD_POSX, entity.posX / movementFactor);
             nbt.setDouble(RandomThingsNBTKeys.OLD_POSY, entity.posY);
-            nbt.setDouble(RandomThingsNBTKeys.OLD_POSZ, entity.posZ);
+            nbt.setDouble(RandomThingsNBTKeys.OLD_POSZ, entity.posZ / movementFactor);
 
             final int minX = Math.min(coord * 32, coord * 32 + 15);
             final int minY = 40;
