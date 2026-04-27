@@ -26,12 +26,9 @@ import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.world.WorldProvider;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.client.event.EntityViewRenderEvent.FogColors;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
@@ -59,7 +56,6 @@ import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lumien.randomthings.Blocks.ModBlocks;
@@ -266,26 +262,6 @@ public class RTEventHandler {
         if (event.world.isRemote && VanillaChanges.LOCKED_GAMMA) {
             Minecraft.getMinecraft().gameSettings.setOptionFloatValue(GameSettings.Options.GAMMA, 0);
             Minecraft.getMinecraft().gameSettings.gammaSetting = 0;
-        }
-    }
-
-    @SubscribeEvent
-    public void changedDimension(PlayerChangedDimensionEvent event) {
-        if (event.toDim == Settings.SPECTRE_DIMENSON_ID) {
-            double movementFactor = 1;
-            EntityPlayer player = event.player;
-            WorldServer world = MinecraftServer.getServer().worldServerForDimension(event.fromDim);
-            if (world != null) {
-                WorldProvider provider = world.provider;
-                if (provider != null) {
-                    movementFactor = provider.getMovementFactor();
-                }
-            }
-            final NBTTagCompound nbt = player.getEntityData();
-            nbt.setInteger(RandomThingsNBTKeys.OLD_DIMENSION, event.fromDim);
-            nbt.setDouble(RandomThingsNBTKeys.OLD_POSX, player.posX / movementFactor);
-            nbt.setDouble(RandomThingsNBTKeys.OLD_POSY, player.posY);
-            nbt.setDouble(RandomThingsNBTKeys.OLD_POSZ, player.posZ / movementFactor);
         }
     }
 
