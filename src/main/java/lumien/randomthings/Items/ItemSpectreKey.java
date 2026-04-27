@@ -68,15 +68,15 @@ public class ItemSpectreKey extends ItemBase {
     }
 
     @Override
-    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-        if (!par2World.isRemote) {
-            if (par2World.provider.dimensionId != Settings.SPECTRE_DIMENSON_ID) {
-                RandomThings.instance.spectreHandler.teleportPlayerToSpectreWorld((EntityPlayerMP) par3EntityPlayer);
+    public ItemStack onEaten(ItemStack stack, World world, EntityPlayer entity) {
+        if (!world.isRemote) {
+            if (world.provider.dimensionId != Settings.SPECTRE_DIMENSON_ID) {
+                RandomThings.instance.spectreHandler.teleportPlayerToSpectreWorld((EntityPlayerMP) entity);
             } else {
-                RandomThings.instance.spectreHandler.teleportPlayerOutOfSpectreWorld((EntityPlayerMP) par3EntityPlayer);
+                RandomThings.instance.spectreHandler.teleportPlayerOutOfSpectreWorld((EntityPlayerMP) entity);
             }
         }
-        return par1ItemStack;
+        return stack;
     }
 
     @Override

@@ -19,11 +19,9 @@ import net.minecraft.world.WorldServer;
 
 import org.apache.logging.log4j.Level;
 
-import lumien.randomthings.Blocks.ModBlocks;
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Library.PotionEffects;
 import lumien.randomthings.Library.RandomThingsNBTKeys;
-import lumien.randomthings.Library.WorldUtils;
 import lumien.randomthings.Mixins.early.EntityAccessor;
 import lumien.randomthings.Network.Messages.MessageSpectreData;
 import lumien.randomthings.Network.PacketHandler;
@@ -61,39 +59,26 @@ public class SpectreHandler extends WorldSavedData {
                 WorldServer spectreWorld = MinecraftServer.getServer()
                         .worldServerForDimension(Settings.SPECTRE_DIMENSON_ID);
                 int coord = playerConnection.get(cubeOwner);
-
                 if (operator.dimension != Settings.SPECTRE_DIMENSON_ID) {
                     MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(
                             (EntityPlayerMP) operator,
                             Settings.SPECTRE_DIMENSON_ID,
-                            new TeleporterSpectre(spectreWorld));
+                            new TeleporterSpectre(spectreWorld, coord));
                 }
-
-                operator.setPositionAndUpdate(coord * 32 + 9 - 1, 42, 2 - 0.5);
             }
         }
     }
 
     public void teleportPlayerToSpectreWorld(EntityPlayerMP player) {
-        String playerName = player.getCommandSenderName();
-        int coord;
-        WorldServer spectreWorld = MinecraftServer.getServer().worldServerForDimension(Settings.SPECTRE_DIMENSON_ID);
+        final String playerName = player.getCommandSenderName();
+        final int coord;
+        final WorldServer spectreWorld = MinecraftServer.getServer()
+                .worldServerForDimension(Settings.SPECTRE_DIMENSON_ID);
         if (playerConnection.containsKey(playerName)) {
             coord = playerConnection.get(playerName);
         } else {
             coord = nextCoord;
             nextCoord++;
-            WorldUtils.generateCube(
-                    spectreWorld,
-                    coord * 32,
-                    40,
-                    0,
-                    coord * 32 + 15,
-                    52,
-                    15,
-                    ModBlocks.spectreBlock,
-                    12,
-                    2);
             playerConnection.put(playerName, coord);
             this.markDirty();
         }
@@ -102,10 +87,8 @@ public class SpectreHandler extends WorldSavedData {
             MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(
                     player,
                     Settings.SPECTRE_DIMENSON_ID,
-                    new TeleporterSpectre(spectreWorld));
+                    new TeleporterSpectre(spectreWorld, coord));
         }
-
-        player.setPositionAndUpdate(coord * 32 + 9 - 1, 42, 2 - 0.5);
     }
 
     @Override
