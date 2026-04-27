@@ -179,26 +179,15 @@ public class SpectreHandler extends WorldSavedData {
                         oldDimension,
                         new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(oldDimension)));
                 player.setPositionAndUpdate(oldPosX, oldPosY, oldPosZ);
-            } else {
-                ChunkCoordinates cc = MinecraftServer.getServer().worldServerForDimension(0).provider
-                        .getRandomizedSpawnPoint();
-                MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(
-                        player,
-                        0,
-                        new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(0)));
-
-                player.setPositionAndUpdate(cc.posX, cc.posY, cc.posZ);
+                return;
             }
-        } else {
-            ChunkCoordinates cc = MinecraftServer.getServer().worldServerForDimension(0).provider
-                    .getRandomizedSpawnPoint();
-            MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(
-                    player,
-                    0,
-                    new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(0)));
-
-            player.setPositionAndUpdate(cc.posX, cc.posY, cc.posZ);
         }
+        ChunkCoordinates cc = MinecraftServer.getServer().worldServerForDimension(0).provider.getRandomizedSpawnPoint();
+        MinecraftServer.getServer().getConfigurationManager().transferPlayerToDimension(
+                player,
+                0,
+                new TeleporterSpectre(MinecraftServer.getServer().worldServerForDimension(0)));
+        player.setPositionAndUpdate(cc.posX, cc.posY, cc.posZ);
     }
 
     public void update() {
