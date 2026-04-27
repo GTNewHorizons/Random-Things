@@ -39,7 +39,9 @@ public class TeleporterSpectre extends Teleporter {
                 for (int y = minY; y <= maxY; y++) {
                     for (int z = minZ; z <= maxZ; z++) {
                         if (x == minX || y == minY || z == minZ || x == maxX || y == maxY || z == maxZ) {
-                            this.world.setBlock(x, y, z, ModBlocks.spectreBlock, 12, 2);
+                            if (this.world.getBlock(x, y, z) != ModBlocks.spectreBlock) {
+                                this.world.setBlock(x, y, z, ModBlocks.spectreBlock, 12, 2);
+                            }
                         }
                     }
                 }
