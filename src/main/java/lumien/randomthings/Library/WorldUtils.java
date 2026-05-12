@@ -110,27 +110,6 @@ public class WorldUtils {
         worldObj.notifyBlocksOfNeighborChange(posX, posY, posZ + 1, block);
     }
 
-    public static void generateCube(World worldObj, int posX1, int posY1, int posZ1, int posX2, int posY2, int posZ2,
-            Block b, int metadata, int flag) {
-        int minX = Math.min(posX1, posX2);
-        int minY = Math.min(posY1, posY2);
-        int minZ = Math.min(posZ1, posZ2);
-
-        int maxX = Math.max(posX1, posX2);
-        int maxY = Math.max(posY1, posY2);
-        int maxZ = Math.max(posZ1, posZ2);
-
-        for (int x = minX; x <= maxX; x++) {
-            for (int y = minY; y <= maxY; y++) {
-                for (int z = minZ; z <= maxZ; z++) {
-                    if (x == minX || y == minY || z == minZ || x == maxX || y == maxY || z == maxZ) {
-                        worldObj.setBlock(x, y, z, b, metadata, flag);
-                    }
-                }
-            }
-        }
-    }
-
     public static boolean isPlayerOnline(String username) {
         if (FMLCommonHandler.instance().getEffectiveSide().isServer()) {
             return MinecraftServer.getServer().getConfigurationManager().func_152612_a(username) != null;
