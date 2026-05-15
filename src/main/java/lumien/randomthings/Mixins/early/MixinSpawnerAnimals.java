@@ -5,6 +5,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.SpawnerAnimals;
 import net.minecraft.world.World;
 
+import org.spongepowered.asm.mixin.Dynamic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,15 +32,21 @@ public class MixinSpawnerAnimals implements SpawnerAnimalsExt {
         rt$isBloodMoon = isBloodMoon;
     }
 
+    // spotless:off
+    @Dynamic
     @ModifyExpressionValue(
             method = "findChunksForSpawning",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/EnumCreatureType;getMaxNumberOfCreature()I"))
+            at = {
+                    @At(value = "INVOKE", target = "Lnet/minecraft/entity/EnumCreatureType;getMaxNumberOfCreature()I"),
+                    @At(value = "INVOKE", target = "Lcom/mitchej123/hodgepodge/mixins/hooks/BukkitSpawnHelper;getSpawnLimit(Lnet/minecraft/world/World;Lnet/minecraft/entity/EnumCreatureType;)I", remap = false)
+            })
     private int rt$changeMaxAmountOfCreature(int original) {
         if (rt$isBloodMoon) {
             return original * Settings.BLOODMOON_SPAWNLIMIT_MULTIPLIER;
         }
         return original;
     }
+    // spotless:on
 
     @Redirect(
             method = "findChunksForSpawning",
