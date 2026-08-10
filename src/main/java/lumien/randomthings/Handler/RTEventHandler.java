@@ -117,9 +117,10 @@ public class RTEventHandler {
                 DimensionCoordinate pos = ItemFilter.getPosition(item);
 
                 if (player.dimension == pos.dimension) {
-                    double playerX = player.prevPosX + (player.posX - player.prevPosX) * event.partialTicks;
-                    double playerY = player.prevPosY + (player.posY - player.prevPosY) * event.partialTicks;
-                    double playerZ = player.prevPosZ + (player.posZ - player.prevPosZ) * event.partialTicks;
+                    EntityLivingBase viewEntity = mc.renderViewEntity != null ? mc.renderViewEntity : player;
+                    double playerX = viewEntity.prevPosX + (viewEntity.posX - viewEntity.prevPosX) * event.partialTicks;
+                    double playerY = viewEntity.prevPosY + (viewEntity.posY - viewEntity.prevPosY) * event.partialTicks;
+                    double playerZ = viewEntity.prevPosZ + (viewEntity.posZ - viewEntity.prevPosZ) * event.partialTicks;
 
                     RenderUtils.enableDefaultBlending();
 
