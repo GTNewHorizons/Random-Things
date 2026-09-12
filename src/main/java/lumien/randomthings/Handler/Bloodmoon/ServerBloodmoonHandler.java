@@ -1,6 +1,10 @@
 package lumien.randomthings.Handler.Bloodmoon;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -13,6 +17,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.WorldServer;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import lumien.randomthings.Configuration.Settings;
 import lumien.randomthings.Mixins.ducks.SpawnerAnimalsExt;
 import lumien.randomthings.Mixins.early.WorldAccessor;
@@ -24,32 +30,47 @@ public class ServerBloodmoonHandler extends WorldSavedData {
 
     public static ServerBloodmoonHandler INSTANCE;
 
-    boolean bloodMoon;
-    boolean forceBloodMoon;
+    private final Set<Integer> activeBloodMoons = new HashSet<>();
+    private final Set<Integer> forceBloodMoonDims = new HashSet<>();
+    private final Map<Integer, Boolean> nightMap = new HashMap<>();
 
     public ServerBloodmoonHandler() {
         super("Bloodmoon");
-        bloodMoon = false;
-        forceBloodMoon = false;
     }
 
     public ServerBloodmoonHandler(String name) {
         super("Bloodmoon");
-        bloodMoon = false;
-        forceBloodMoon = false;
     }
 
     public void playerJoinedWorld(EntityPlayer player) {
-        if (bloodMoon) {
-            PacketHandler.INSTANCE.sendTo(new MessageBloodmoon(bloodMoon), (EntityPlayerMP) player);
+        int dim = player.worldObj.provider.dimensionId;
+        if (activeBloodMoons.contains(dim)) {
+            PacketHandler.INSTANCE.sendTo(new MessageBloodmoon(true), (EntityPlayerMP) player);
+        } else {
+            PacketHandler.INSTANCE.sendTo(new MessageBloodmoon(false), (EntityPlayerMP) player);
         }
     }
 
     public void endWorldTick(World world) {
-        if (world.provider.dimensionId != 0) return;
+        int dim = world.provider.dimensionId;
 
-        int time = (int) (world.getWorldTime() % 24000);
+        if (Settings.BLOODMOON_DIM_WHITELIST.length != 0
+                && !ArrayUtils.contains(Settings.BLOODMOON_DIM_WHITELIST, dim)) {
+            return;
+        }
+
+        float angle = world.getCelestialAngle(1.0F);
+        // 0.215 (dusk), 0.785 (dawn)
+        boolean isNight = angle >= 0.215F && angle <= 0.785F;
+        boolean wasNight = nightMap.getOrDefault(dim, isNight);
+        nightMap.put(dim, isNight);
+
+        boolean duskJustStarted = isNight && !wasNight;
+        boolean dawnJustStarted = !isNight && wasNight;
         int date = (int) Math.floor(world.getWorldTime() / 24000d);
+
+        boolean bloodMoon = activeBloodMoons.contains(dim);
+        boolean forced = forceBloodMoonDims.contains(dim);
 
         if (bloodMoon) {
             boolean spawnHostiles = ((WorldAccessor) world).isSpawnHostileMobs();
@@ -67,14 +88,17 @@ public class ServerBloodmoonHandler extends WorldSavedData {
                     accessor.rt$setBloodmoon(false);
                 }
             }
-            if (time >= 0 && time < 12000) {
-                setBloodmoon(false);
+            if (dawnJustStarted) {
+                setBloodmoon(false, dim);
             }
-        } else if (time == 12000) {
-            if (forceBloodMoon || (date >= Settings.BLOODMOON_INITIAL_PAUSE
+        } else if (duskJustStarted) {
+            if (forced || (date >= Settings.BLOODMOON_INITIAL_PAUSE
                     && (isBloodMoonCycle(date) || Math.random() < Settings.BLOODMOON_CHANCE))) {
-                forceBloodMoon = false;
-                setBloodmoon(true);
+                if (forced) {
+                    forceBloodMoonDims.remove(dim);
+                    this.markDirty();
+                }
+                setBloodmoon(true, dim);
 
                 if (Settings.BLOODMOON_MESSAGE) {
                     for (EntityPlayer player : ((List<EntityPlayer>) world.playerEntities)) {
@@ -87,37 +111,90 @@ public class ServerBloodmoonHandler extends WorldSavedData {
         }
     }
 
-    private void setBloodmoon(boolean bloodMoon) {
-        if (this.bloodMoon != bloodMoon) {
-            PacketHandler.INSTANCE.sendToDimension(new MessageBloodmoon(bloodMoon), 0);
+    private void setBloodmoon(boolean bloodMoon, int dimID) {
+        if (activeBloodMoons.contains(dimID) != bloodMoon) {
+            if (bloodMoon) {
+                activeBloodMoons.add(dimID);
+            } else {
+                activeBloodMoons.remove(dimID);
+            }
+            PacketHandler.INSTANCE.sendToDimension(new MessageBloodmoon(bloodMoon), dimID);
             this.markDirty();
         }
-        this.bloodMoon = bloodMoon;
     }
 
-    public void force() {
-        forceBloodMoon = true;
+    public void force(int dimID) {
+        forceBloodMoonDims.add(dimID);
         this.markDirty();
     }
 
-    public boolean isBloodmoonActive() {
-        return bloodMoon;
+    public boolean isBloodmoonActive(int dimID) {
+        return activeBloodMoons.contains(dimID);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
-        this.bloodMoon = nbt.getBoolean("bloodMoon");
-        this.forceBloodMoon = nbt.getBoolean("forceBloodMoon");
+        activeBloodMoons.clear();
+        forceBloodMoonDims.clear();
+
+        if (nbt.hasKey("bloodMoon") && nbt.getBoolean("bloodMoon")) {
+            activeBloodMoons.add(0);
+        }
+        if (nbt.hasKey("forceBloodMoon") && nbt.getBoolean("forceBloodMoon")) {
+            forceBloodMoonDims.add(0);
+        }
+
+        if (nbt.hasKey("activeBloodMoons")) {
+            for (int dim : nbt.getIntArray("activeBloodMoons")) {
+                activeBloodMoons.add(dim);
+            }
+        }
+        if (nbt.hasKey("forceBloodMoonDims")) {
+            for (int dim : nbt.getIntArray("forceBloodMoonDims")) {
+                forceBloodMoonDims.add(dim);
+            }
+        }
+        if (nbt.hasKey("nightDims")) {
+            for (int dim : nbt.getIntArray("nightDims")) {
+                nightMap.put(dim, true);
+            }
+        }
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
-        nbt.setBoolean("bloodMoon", bloodMoon);
-        nbt.setBoolean("forceBloodMoon", forceBloodMoon);
+        int[] activeArray = new int[activeBloodMoons.size()];
+        int index = 0;
+        for (Integer dim : activeBloodMoons) {
+            activeArray[index++] = dim;
+        }
+        nbt.setIntArray("activeBloodMoons", activeArray);
+
+        int[] forcedArray = new int[forceBloodMoonDims.size()];
+        index = 0;
+        for (Integer dim : forceBloodMoonDims) {
+            forcedArray[index++] = dim;
+        }
+        nbt.setIntArray("forceBloodMoonDims", forcedArray);
+
+        int nightCount = 0;
+        for (Boolean isNight : nightMap.values()) {
+            if (isNight) {
+                nightCount++;
+            }
+        }
+        int[] nightArray = new int[nightCount];
+        index = 0;
+        for (Map.Entry<Integer, Boolean> entry : nightMap.entrySet()) {
+            if (entry.getValue()) {
+                nightArray[index++] = entry.getKey();
+            }
+        }
+        nbt.setIntArray("nightDims", nightArray);
     }
 
-    public boolean isBloodmoonScheduled() {
-        return forceBloodMoon;
+    public boolean isBloodmoonScheduled(int dimID) {
+        return forceBloodMoonDims.contains(dimID);
     }
 
     public boolean isBloodMoonCycle(int day) {
