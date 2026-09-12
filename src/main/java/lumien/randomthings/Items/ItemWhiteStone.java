@@ -119,8 +119,7 @@ public class ItemWhiteStone extends ItemBase {
 
     @Override
     public boolean onEntityItemUpdate(EntityItem entityItem) {
-        if (ConfigItems.bloodStone && entityItem.dimension == 0
-                && entityItem.getEntityItem().getItemDamage() == 1
+        if (ConfigItems.bloodStone && entityItem.getEntityItem().getItemDamage() == 1
                 && entityItem.worldObj.canBlockSeeTheSky(
                         (int) Math.floor(entityItem.posX),
                         (int) Math.floor(entityItem.posY),
@@ -129,7 +128,7 @@ public class ItemWhiteStone extends ItemBase {
                 if (ClientBloodmoonHandler.INSTANCE.isBloodmoonActive()) RandomThings.proxy
                         .spawnColoredDust(entityItem.posX, entityItem.posY, entityItem.posZ, 0, 0.1, 0, 1, 0, 0);
             } else {
-                if (ServerBloodmoonHandler.INSTANCE.isBloodmoonActive()) {
+                if (ServerBloodmoonHandler.INSTANCE.isBloodmoonActive(entityItem.dimension)) {
                     final NBTTagCompound nbt = entityItem.getEntityData();
                     final int newProgress = nbt.getInteger(RandomThingsNBTKeys.PROGRESS) + 1;
                     nbt.setInteger(RandomThingsNBTKeys.PROGRESS, newProgress);

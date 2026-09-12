@@ -72,7 +72,7 @@ public class ItemBloodstone extends ItemBase {
             float p_77648_8_, float p_77648_9_, float p_77648_10_) {
         if (worldObj.getBlock(posX, posY, posZ) == Blocks.obsidian) {
             if (!worldObj.isRemote && worldObj.getTotalWorldTime() > 15000
-                    && !ServerBloodmoonHandler.INSTANCE.isBloodmoonScheduled()) {
+                    && !ServerBloodmoonHandler.INSTANCE.isBloodmoonScheduled(worldObj.provider.dimensionId)) {
                 if (ritualPattern.matches(worldObj, posX, posY, posZ)) {
                     int charges = 0;
                     if (is.stackTagCompound != null) {

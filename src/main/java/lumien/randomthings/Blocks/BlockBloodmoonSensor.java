@@ -24,10 +24,11 @@ public class BlockBloodmoonSensor extends BlockDaylightDetector {
     public void func_149957_e(World worldObj, int posX, int posY, int posZ) {
         int metadata = worldObj.getBlockMetadata(posX, posY, posZ);
 
-        if (ServerBloodmoonHandler.INSTANCE.isBloodmoonActive() && metadata == 0) {
+        if (ServerBloodmoonHandler.INSTANCE.isBloodmoonActive(worldObj.provider.dimensionId) && metadata == 0) {
             worldObj.setBlockMetadataWithNotify(posX, posY, posZ, 15, 3);
-        } else if (!ServerBloodmoonHandler.INSTANCE.isBloodmoonActive() && metadata == 15) {
-            worldObj.setBlockMetadataWithNotify(posX, posY, posZ, 0, 3);
-        }
+        } else
+            if (!ServerBloodmoonHandler.INSTANCE.isBloodmoonActive(worldObj.provider.dimensionId) && metadata == 15) {
+                worldObj.setBlockMetadataWithNotify(posX, posY, posZ, 0, 3);
+            }
     }
 }
