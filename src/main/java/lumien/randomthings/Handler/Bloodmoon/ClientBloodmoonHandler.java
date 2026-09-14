@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.Configuration.Settings;
@@ -13,31 +14,45 @@ public class ClientBloodmoonHandler {
     public static final ClientBloodmoonHandler INSTANCE = new ClientBloodmoonHandler();
     boolean bloodMoon;
 
-    public static final float sinMax = (float) (Math.PI / 12000d);
-
     public float lightSub;
     public float fogRemove;
     private float skyColorAdd;
 
     static float d = 1f / 15000f;
-    static int difTime = 0;
+    private int lastDimension = Integer.MIN_VALUE;
 
     private ClientBloodmoonHandler() {
         bloodMoon = false;
     }
 
     public void tick() {
-        if (bloodMoon) {
-            final World world = Minecraft.getMinecraft().theWorld;
-            if (world != null) {
-                difTime = (int) (world.getWorldTime() % 24000) - 12000;
-                lightSub = (float) (Math.sin(difTime * sinMax) * 150f);
-                skyColorAdd = (float) (Math.sin(difTime * sinMax) * 0.1f);
-                float moonColorRed = (float) (Math.sin(difTime * sinMax) * 0.7f);
-                fogRemove = (float) (Math.sin(difTime * sinMax) * d * 6000f);
-                if (world.provider.dimensionId != 0) {
+        final World world = Minecraft.getMinecraft().theWorld;
+        if (world != null) {
+
+            if (lastDimension != world.provider.dimensionId) {
+                lastDimension = world.provider.dimensionId;
+                bloodMoon = false;
+            }
+
+            if (bloodMoon) {
+                if (Settings.BLOODMOON_DIM_WHITELIST.length != 0
+                        && !ArrayUtils.contains(Settings.BLOODMOON_DIM_WHITELIST, world.provider.dimensionId)) {
                     bloodMoon = false;
+                    return;
                 }
+
+                float angle = world.getCelestialAngle(1.0F);
+                // 0.215 (dusk), 0.785 (dawn)
+                float nightProgress = (angle - 0.215F) / (0.785F - 0.215F);
+                nightProgress = Math.max(0.0F, Math.min(1.0F, nightProgress));
+                float sinValue = (float) Math.sin(nightProgress * Math.PI);
+                lightSub = sinValue * 150f;
+                skyColorAdd = sinValue * 0.1f;
+                fogRemove = sinValue * d * 6000f;
+            } else {
+                lightSub = 0f;
+                skyColorAdd = 0f;
+                fogRemove = 0f;
             }
         }
     }

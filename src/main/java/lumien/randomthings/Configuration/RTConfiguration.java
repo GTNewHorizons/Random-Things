@@ -39,6 +39,7 @@ public class RTConfiguration {
     public static Property bloodMoon_vanish;
     public static Property bloodMoon_respectGamerule;
     public static Property bloodMoon_message;
+    public static Property bloodMoon_dimension_whitelist;
 
     public static Property bloodMoon_visual_redMoon;
     public static Property bloodMoon_visual_redLight;
@@ -159,6 +160,11 @@ public class RTConfiguration {
                 "BloodmoonMessage",
                 true,
                 "Whether players in the overworld should receive a message at the beginning of the bloodmoon");
+        bloodMoon_dimension_whitelist = config.get(
+                "Settings",
+                "BloodMoonDimensionWhitelist",
+                new int[] { 0 },
+                "Which dimensions Bloodmoons are allowed in. Leaving this empty allows all dimensions.");
         bloodMoon_visual_redMoon = config
                 .get("Settings", "BloodMoonRedMoon", true, "Whether the moon will be red on a Bloodmoon");
         bloodMoon_visual_redLight = config
@@ -273,6 +279,7 @@ public class RTConfiguration {
         Settings.BLOODMOON_VANISH = bloodMoon_vanish.getBoolean(false);
         Settings.BLOODMOON_RESPECT_GAMERULE = bloodMoon_respectGamerule.getBoolean(true);
         Settings.BLOODMOON_MESSAGE = bloodMoon_message.getBoolean(true);
+        Settings.BLOODMOON_DIM_WHITELIST = bloodMoon_dimension_whitelist.getIntList();
 
         Settings.BLOODMOON_VISUAL_REDMOON = bloodMoon_visual_redMoon.getBoolean();
         Settings.BLOODMOON_VISUAL_REDLIGHT = bloodMoon_visual_redLight.getBoolean();

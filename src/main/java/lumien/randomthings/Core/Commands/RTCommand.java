@@ -197,7 +197,12 @@ public class RTCommand extends CommandBase {
                 }
             }
         } else if (subCommand.equals("bloodmoon")) {
-            ServerBloodmoonHandler.INSTANCE.force();
+            if (args.length == 2) {
+                int dimID = CommandBase.parseInt(commandUser, args[1]);
+                ServerBloodmoonHandler.INSTANCE.force(dimID);
+            } else if (args.length == 1) {
+                ServerBloodmoonHandler.INSTANCE.force(commandUser.getEntityWorld().provider.dimensionId);
+            }
             commandUser.addChatMessage(new ChatComponentTranslation("text.bloodmoon.command"));
         }
     }
