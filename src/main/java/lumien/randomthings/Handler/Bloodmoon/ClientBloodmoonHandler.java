@@ -19,7 +19,6 @@ public class ClientBloodmoonHandler {
     private float skyColorAdd;
 
     static float d = 1f / 15000f;
-    private int lastDimension = Integer.MIN_VALUE;
 
     private ClientBloodmoonHandler() {
         bloodMoon = false;
@@ -28,12 +27,6 @@ public class ClientBloodmoonHandler {
     public void tick() {
         final World world = Minecraft.getMinecraft().theWorld;
         if (world != null) {
-
-            if (lastDimension != world.provider.dimensionId) {
-                lastDimension = world.provider.dimensionId;
-                bloodMoon = false;
-            }
-
             if (bloodMoon) {
                 if (Settings.BLOODMOON_DIM_WHITELIST.length != 0
                         && !ArrayUtils.contains(Settings.BLOODMOON_DIM_WHITELIST, world.provider.dimensionId)) {
