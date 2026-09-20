@@ -43,7 +43,7 @@ public class ServerBloodmoonHandler extends WorldSavedData {
     }
 
     public void playerJoinedWorld(EntityPlayer player) {
-        int dim = player.worldObj.provider.dimensionId;
+        int dim = player.dimension;
         if (activeBloodMoons.contains(dim)) {
             PacketHandler.INSTANCE.sendTo(new MessageBloodmoon(true), (EntityPlayerMP) player);
         } else {
