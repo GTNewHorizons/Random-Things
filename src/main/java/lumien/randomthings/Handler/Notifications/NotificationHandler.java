@@ -26,7 +26,7 @@ public class NotificationHandler {
     RenderItem itemRenderer;
 
     ResourceLocation notificationBackground = new ResourceLocation(
-            "randomthings:textures/gui/notificationBackground.png");
+            "textures/gui/achievement/achievement_background.png");
 
     ConcurrentLinkedQueue<Notification> queuedNotifications;
     Notification currentNotification;
@@ -65,7 +65,7 @@ public class NotificationHandler {
             GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
             int cardX = width - 160;
-            guiInstance.drawTexturedModalRect(cardX, drawY, 0, 0, 160, 32);
+            guiInstance.drawTexturedModalRect(cardX, drawY, 96, 202, 160, 32);
 
             // Text and icon layout matches vanilla's GuiAchievement popup
             FontRenderer f = mc.fontRenderer;
