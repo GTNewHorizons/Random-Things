@@ -13,35 +13,28 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import lumien.randomthings.Client.RenderUtils;
 import lumien.randomthings.Library.ClientUtil;
 
 public class NotificationHandler {
 
-    int tickCounter;
-    int tickRate;
     int displayCounter;
 
-    final float teiler = 28F / 20F;
+    final float teiler = 32F / 20F;
 
     Gui guiInstance = new Gui();
     Minecraft mc = Minecraft.getMinecraft();
     RenderItem itemRenderer;
 
     ResourceLocation notificationBackground = new ResourceLocation(
-            "randomthings:textures/gui/notificationBackground.png");
+            "textures/gui/achievement/achievement_background.png");
 
     ConcurrentLinkedQueue<Notification> queuedNotifications;
     Notification currentNotification;
-
-    int drawY;
 
     public NotificationHandler() {
         queuedNotifications = new ConcurrentLinkedQueue<>();
         currentNotification = null;
 
-        tickCounter = 0;
-        tickRate = 20;
         displayCounter = 0;
         itemRenderer = new RenderItem();
     }
@@ -49,8 +42,8 @@ public class NotificationHandler {
     public void drawNotificationOverlay(float partialTickTime) {
         if (currentNotification != null) {
             ScaledResolution scaledresolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
-            int i = scaledresolution.getScaleFactor();
 
+            int drawY;
             if (displayCounter < 20) {
                 drawY = (int) (teiler * (displayCounter + partialTickTime - 20F));
             } else if (displayCounter > currentNotification.duration + 20) {
@@ -60,41 +53,40 @@ public class NotificationHandler {
                 drawY = 0;
             }
 
-            this.mc.renderEngine.bindTexture(notificationBackground);
-            RenderUtils.enableDefaultBlending();
+            mc.getTextureManager().bindTexture(notificationBackground);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-            guiInstance.drawTexturedModalRect(scaledresolution.getScaledWidth() - 160, drawY, 0, 0, 160, 32);
+            // Same projection as vanilla's GuiAchievement, so the card sits flush with the screen edge
+            int width = scaledresolution.getScaledWidth();
+            GL11.glMatrixMode(GL11.GL_PROJECTION);
+            GL11.glPushMatrix();
+            GL11.glLoadIdentity();
+            GL11.glOrtho(0, width, scaledresolution.getScaledHeight(), 0, 1000, 3000);
+            GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
-            FontRenderer f = Minecraft.getMinecraft().fontRenderer;
-            f.drawString(
-                    currentNotification.title,
-                    scaledresolution.getScaledWidth() - 160 + 28,
-                    drawY + 5,
-                    16448250,
-                    true);
-            f.drawString(
-                    currentNotification.description,
-                    scaledresolution.getScaledWidth() - 160 + 28,
-                    drawY + 4 + f.FONT_HEIGHT + 2,
-                    11184810,
-                    true);
+            int cardX = width - 160;
+            guiInstance.drawTexturedModalRect(cardX, drawY, 96, 202, 160, 32);
 
-            RenderHelper.enableGUIStandardItemLighting();
-            GL11.glDisable(GL11.GL_LIGHTING);
+            // Text and icon layout matches vanilla's GuiAchievement popup
+            FontRenderer f = mc.fontRenderer;
+            f.drawString(currentNotification.title, cardX + 30, drawY + 7, 0xFAFAFA, false);
+            f.drawString(currentNotification.description, cardX + 30, drawY + 18, 0xAAAAAA, false);
+
+            // Same item lighting setup and cleanup as the vanilla hotbar
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-            GL11.glEnable(GL11.GL_COLOR_MATERIAL);
-            GL11.glEnable(GL11.GL_LIGHTING);
+            RenderHelper.enableGUIStandardItemLighting();
             itemRenderer.renderItemAndEffectIntoGUI(
                     f,
-                    Minecraft.getMinecraft().getTextureManager(),
+                    mc.getTextureManager(),
                     currentNotification.icon,
-                    scaledresolution.getScaledWidth() - 160 + 6,
-                    drawY + 6);
-            GL11.glDisable(GL11.GL_LIGHTING);
-            GL11.glDepthMask(true);
-            GL11.glEnable(GL11.GL_DEPTH_TEST);
-            GL11.glDisable(GL11.GL_BLEND);
+                    cardX + 8,
+                    drawY + 8);
+            RenderHelper.disableStandardItemLighting();
+            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+
+            GL11.glMatrixMode(GL11.GL_PROJECTION);
+            GL11.glPopMatrix();
+            GL11.glMatrixMode(GL11.GL_MODELVIEW);
         }
     }
 
