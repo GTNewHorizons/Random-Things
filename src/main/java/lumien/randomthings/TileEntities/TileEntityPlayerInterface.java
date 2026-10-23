@@ -26,12 +26,6 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
 
     public TileEntityPlayerInterface() {
         int i = 0;
-        for (int slot = 36; slot < 40; slot++) {
-            armorSlots[i] = slot;
-            i += 1;
-        }
-
-        i = 0;
         for (int slot = 9; slot < 36; slot++) {
             mainSlots[i] = slot;
             i += 1;
@@ -242,6 +236,9 @@ public class TileEntityPlayerInterface extends TileEntity implements ISidedInven
         if (side == 0) {
             return hotbarSlots;
         } else if (side == 1) {
+            for (int i = 0; i < armorSlots.length; i++) {
+                armorSlots[i] = playerEntity.inventory.mainInventory.length + i;
+            }
             return armorSlots;
         } else {
             return mainSlots;
