@@ -14,6 +14,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import lumien.randomthings.Library.ClientUtil;
+import lumien.randomthings.RandomThings;
 
 public class NotificationHandler {
 
@@ -42,6 +43,9 @@ public class NotificationHandler {
     public void drawNotificationOverlay(float partialTickTime) {
         if (currentNotification != null) {
             ScaledResolution scaledresolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+            if (RandomThings.dashboardLoaded && !DashboardHud.beginNotification(scaledresolution)) {
+                return;
+            }
 
             int drawY;
             if (displayCounter < 20) {
@@ -87,6 +91,9 @@ public class NotificationHandler {
             GL11.glMatrixMode(GL11.GL_PROJECTION);
             GL11.glPopMatrix();
             GL11.glMatrixMode(GL11.GL_MODELVIEW);
+            if (RandomThings.dashboardLoaded) {
+                DashboardHud.endNotification();
+            }
         }
     }
 
