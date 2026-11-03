@@ -1,43 +1,66 @@
 package lumien.randomthings.Handler.Notifications;
 
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
+import com.gtnewhorizons.dashboard.api.HudBounds;
 import com.gtnewhorizons.dashboard.api.HudElement;
 import com.gtnewhorizons.dashboard.api.HudRegistry;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.randomthings.Blocks.ModBlocks;
+import lumien.randomthings.RandomThings;
 
 /**
- * Moves and hides the notification card with the achievement popup in Dashboard's HUD editor, since the card looks like
- * that popup and shows at the same spot. The only class using Dashboard, so only call it while Dashboard is loaded.
+ * Lets players move, resize and hide the notification card in Dashboard's HUD editor. The only class using Dashboard,
+ * so only call it while Dashboard is loaded.
  */
 @SideOnly(Side.CLIENT)
 public final class DashboardHud {
 
-    private static final String ACHIEVEMENT = "minecraft:achievement";
+    private static final int WIDTH = 160;
+    private static final int HEIGHT = 32;
 
-    private static boolean moved;
+    private static final HudElement NOTIFICATION = new HudElement(
+            "randomthings:notification",
+            (screenWidth, screenHeight) -> new HudBounds(screenWidth - WIDTH, 0, WIDTH, HEIGHT));
+
+    private static Notification sample;
 
     private DashboardHud() {}
 
-    /**
-     * False means the player hid the achievement popup, so skip drawing the card. Without that element, the card is
-     * drawn at its usual spot.
-     */
-    public static boolean beginNotification(ScaledResolution resolution) {
-        HudElement achievement = HudRegistry.getElement(ACHIEVEMENT);
-        if (achievement == null) {
-            return true;
-        }
-        moved = HudRegistry.beginRender(achievement, resolution);
-        return moved;
+    public static void register() {
+        NOTIFICATION.setPreview(
+                (screenWidth, screenHeight) -> HudRegistry.render(
+                        NOTIFICATION,
+                        () -> RandomThings.instance.notificationHandler
+                                .drawCard(getSample(), HudRegistry.getResolution(), 0)));
+        HudRegistry.register(NOTIFICATION);
     }
 
-    public static void endNotification() {
-        if (moved) {
-            moved = false;
-            HudRegistry.endRender();
+    /** False means the player hid the card, so skip drawing it and do not call {@link #endRender()}. */
+    public static boolean beginNotification(ScaledResolution resolution) {
+        return HudRegistry.beginRender(NOTIFICATION, resolution);
+    }
+
+    public static void endRender() {
+        HudRegistry.endRender();
+    }
+
+    /** Made on first use, once the language and the blocks are loaded. */
+    private static Notification getSample() {
+        if (sample == null) {
+            ItemStack icon = ModBlocks.notificationInterface != null ? new ItemStack(ModBlocks.notificationInterface)
+                    : new ItemStack(Items.paper);
+            sample = new Notification(
+                    StatCollector.translateToLocal("tile.notificationInterface.name"),
+                    "/rt notify",
+                    0,
+                    icon);
         }
+        return sample;
     }
 }

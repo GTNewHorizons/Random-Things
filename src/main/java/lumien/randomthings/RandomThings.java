@@ -40,6 +40,7 @@ import lumien.randomthings.Handler.BackgroundHandler;
 import lumien.randomthings.Handler.LetterHandler;
 import lumien.randomthings.Handler.MagneticForceHandler;
 import lumien.randomthings.Handler.ModCompHandler;
+import lumien.randomthings.Handler.Notifications.DashboardHud;
 import lumien.randomthings.Handler.Notifications.NotificationHandler;
 import lumien.randomthings.Handler.PeripheralProvider;
 import lumien.randomthings.Handler.RTEventHandler;
@@ -60,7 +61,7 @@ import lumien.randomthings.TileEntities.ModTileEntities;
         modid = Reference.MOD_ID,
         name = Reference.MOD_NAME,
         version = Reference.MOD_VERSION,
-        dependencies = "after:dashboard@[1.0.2,)",
+        dependencies = "after:dashboard@[1.0.14,)",
         guiFactory = "lumien.randomthings.Client.Config.RandomThingsGuiFactory")
 public class RandomThings {
 
@@ -113,6 +114,9 @@ public class RandomThings {
         if (event.getSide().isClient()) {
             dashboardLoaded = Loader.isModLoaded("dashboard");
             notificationHandler = new NotificationHandler();
+            if (dashboardLoaded) {
+                DashboardHud.register();
+            }
             BackgroundHandler.setRandomBackground();
             soundRecorderHandler = new SoundRecorderHandler();
         }
