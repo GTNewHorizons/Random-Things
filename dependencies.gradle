@@ -5,5 +5,6 @@ dependencies {
         transitive = false
     }
     compileOnly("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev") { transitive = false }
+    compileOnly("com.github.GTNewHorizons:Dashboard:1.0.14:api")
     api("com.github.GTNewHorizons:NotEnoughItems:2.8.139-GTNH:dev")
 }
