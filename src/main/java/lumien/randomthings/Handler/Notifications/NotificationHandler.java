@@ -14,6 +14,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import lumien.randomthings.Library.ClientUtil;
+import lumien.randomthings.RandomThings;
 
 public class NotificationHandler {
 
@@ -42,6 +43,9 @@ public class NotificationHandler {
     public void drawNotificationOverlay(float partialTickTime) {
         if (currentNotification != null) {
             ScaledResolution scaledresolution = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+            if (RandomThings.dashboardLoaded && !DashboardHud.beginNotification(scaledresolution)) {
+                return;
+            }
 
             int drawY;
             if (displayCounter < 20) {
@@ -53,41 +57,44 @@ public class NotificationHandler {
                 drawY = 0;
             }
 
-            mc.getTextureManager().bindTexture(notificationBackground);
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-
-            // Same projection as vanilla's GuiAchievement, so the card sits flush with the screen edge
-            int width = scaledresolution.getScaledWidth();
-            GL11.glMatrixMode(GL11.GL_PROJECTION);
-            GL11.glPushMatrix();
-            GL11.glLoadIdentity();
-            GL11.glOrtho(0, width, scaledresolution.getScaledHeight(), 0, 1000, 3000);
-            GL11.glMatrixMode(GL11.GL_MODELVIEW);
-
-            int cardX = width - 160;
-            guiInstance.drawTexturedModalRect(cardX, drawY, 96, 202, 160, 32);
-
-            // Text and icon layout matches vanilla's GuiAchievement popup
-            FontRenderer f = mc.fontRenderer;
-            f.drawString(currentNotification.title, cardX + 30, drawY + 7, 0xFAFAFA, false);
-            f.drawString(currentNotification.description, cardX + 30, drawY + 18, 0xAAAAAA, false);
-
-            // Same item lighting setup and cleanup as the vanilla hotbar
-            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-            RenderHelper.enableGUIStandardItemLighting();
-            itemRenderer.renderItemAndEffectIntoGUI(
-                    f,
-                    mc.getTextureManager(),
-                    currentNotification.icon,
-                    cardX + 8,
-                    drawY + 8);
-            RenderHelper.disableStandardItemLighting();
-            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-
-            GL11.glMatrixMode(GL11.GL_PROJECTION);
-            GL11.glPopMatrix();
-            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+            drawCard(currentNotification, scaledresolution, drawY);
+            if (RandomThings.dashboardLoaded) {
+                DashboardHud.endRender();
+            }
         }
+    }
+
+    /** Also draws the sample in Dashboard's HUD editor. */
+    void drawCard(Notification notification, ScaledResolution scaledresolution, int drawY) {
+        mc.getTextureManager().bindTexture(notificationBackground);
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+
+        // Same projection as vanilla's GuiAchievement, so the card sits flush with the screen edge
+        int width = scaledresolution.getScaledWidth();
+        GL11.glMatrixMode(GL11.GL_PROJECTION);
+        GL11.glPushMatrix();
+        GL11.glLoadIdentity();
+        GL11.glOrtho(0, width, scaledresolution.getScaledHeight(), 0, 1000, 3000);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+
+        int cardX = width - 160;
+        guiInstance.drawTexturedModalRect(cardX, drawY, 96, 202, 160, 32);
+
+        // Text and icon layout matches vanilla's GuiAchievement popup
+        FontRenderer f = mc.fontRenderer;
+        f.drawString(notification.title, cardX + 30, drawY + 7, 0xFAFAFA, false);
+        f.drawString(notification.description, cardX + 30, drawY + 18, 0xAAAAAA, false);
+
+        // Same item lighting setup and cleanup as the vanilla hotbar
+        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+        RenderHelper.enableGUIStandardItemLighting();
+        itemRenderer.renderItemAndEffectIntoGUI(f, mc.getTextureManager(), notification.icon, cardX + 8, drawY + 8);
+        RenderHelper.disableStandardItemLighting();
+        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+
+        GL11.glMatrixMode(GL11.GL_PROJECTION);
+        GL11.glPopMatrix();
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
     }
 
     public void update() {

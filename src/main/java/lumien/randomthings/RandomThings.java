@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 import com.google.common.collect.ImmutableList;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -39,6 +40,7 @@ import lumien.randomthings.Handler.BackgroundHandler;
 import lumien.randomthings.Handler.LetterHandler;
 import lumien.randomthings.Handler.MagneticForceHandler;
 import lumien.randomthings.Handler.ModCompHandler;
+import lumien.randomthings.Handler.Notifications.DashboardHud;
 import lumien.randomthings.Handler.Notifications.NotificationHandler;
 import lumien.randomthings.Handler.PeripheralProvider;
 import lumien.randomthings.Handler.RTEventHandler;
@@ -59,6 +61,7 @@ import lumien.randomthings.TileEntities.ModTileEntities;
         modid = Reference.MOD_ID,
         name = Reference.MOD_NAME,
         version = Reference.MOD_VERSION,
+        dependencies = "after:dashboard@[1.0.14,)",
         guiFactory = "lumien.randomthings.Client.Config.RandomThingsGuiFactory")
 public class RandomThings {
 
@@ -73,6 +76,8 @@ public class RandomThings {
     public static CommonProxy proxy;
 
     public static final RTCreativeTab creativeTab = new RTCreativeTab();
+
+    public static boolean dashboardLoaded;
 
     public Logger logger;
 
@@ -107,7 +112,11 @@ public class RandomThings {
         proxy.registerTickHandler();
 
         if (event.getSide().isClient()) {
+            dashboardLoaded = Loader.isModLoaded("dashboard");
             notificationHandler = new NotificationHandler();
+            if (dashboardLoaded) {
+                DashboardHud.register();
+            }
             BackgroundHandler.setRandomBackground();
             soundRecorderHandler = new SoundRecorderHandler();
         }
