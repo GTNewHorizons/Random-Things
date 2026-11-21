@@ -50,7 +50,7 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public boolean isBloodmoon() {
+    public boolean isBloodmoon(int dimID) {
         return ClientBloodmoonHandler.INSTANCE.isBloodmoonActive();
     }
 

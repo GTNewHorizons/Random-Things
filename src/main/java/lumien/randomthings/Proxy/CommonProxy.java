@@ -17,8 +17,8 @@ public class CommonProxy {
         return false;
     }
 
-    public boolean isBloodmoon() {
-        return ServerBloodmoonHandler.INSTANCE.isBloodmoonActive();
+    public boolean isBloodmoon(int dimID) {
+        return ServerBloodmoonHandler.INSTANCE.isBloodmoonActive(dimID);
     }
 
     public void setContainerProperty(int index, int value) {}

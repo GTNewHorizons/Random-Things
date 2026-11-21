@@ -49,6 +49,7 @@ import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -117,9 +118,10 @@ public class RTEventHandler {
                 DimensionCoordinate pos = ItemFilter.getPosition(item);
 
                 if (player.dimension == pos.dimension) {
-                    double playerX = player.prevPosX + (player.posX - player.prevPosX) * event.partialTicks;
-                    double playerY = player.prevPosY + (player.posY - player.prevPosY) * event.partialTicks;
-                    double playerZ = player.prevPosZ + (player.posZ - player.prevPosZ) * event.partialTicks;
+                    EntityLivingBase viewEntity = mc.renderViewEntity != null ? mc.renderViewEntity : player;
+                    double playerX = viewEntity.prevPosX + (viewEntity.posX - viewEntity.prevPosX) * event.partialTicks;
+                    double playerY = viewEntity.prevPosY + (viewEntity.posY - viewEntity.prevPosY) * event.partialTicks;
+                    double playerZ = viewEntity.prevPosZ + (viewEntity.posZ - viewEntity.prevPosZ) * event.partialTicks;
 
                     RenderUtils.enableDefaultBlending();
 
@@ -150,7 +152,8 @@ public class RTEventHandler {
             final EntityLivingBase entity = event.entityLiving;
             if (entity.dimension == 0 && ((EntityAccessor) entity).getCustomEntityData() != null
                     && entity.getEntityData().getBoolean(RandomThingsNBTKeys.BLOODMOON_SPAWNED)
-                    && !ServerBloodmoonHandler.INSTANCE.isBloodmoonActive()
+                    && !ServerBloodmoonHandler.INSTANCE
+                            .isBloodmoonActive(event.entityLiving.worldObj.provider.dimensionId)
                     && Math.random() <= 0.2f) {
                 entity.setDead();
             }
@@ -160,7 +163,7 @@ public class RTEventHandler {
     @SubscribeEvent
     public void sleepInBed(PlayerSleepInBedEvent event) {
         if (Settings.BLOODMOON_NOSLEEP) {
-            if (RandomThings.proxy.isBloodmoon()) {
+            if (RandomThings.proxy.isBloodmoon(event.entityPlayer.dimension)) {
                 event.result = EnumStatus.OTHER_PROBLEM;
                 event.entityPlayer.addChatMessage(
                         new ChatComponentTranslation("text.bloodmoon.nosleep")
@@ -281,7 +284,8 @@ public class RTEventHandler {
             event.world.mapStorage.setData("SpectreHandler", spectreHandler);
             RandomThings.instance.spectreHandler = spectreHandler;
         }
-        if (event.world.provider.dimensionId == 0) {
+        if (Settings.BLOODMOON_DIM_WHITELIST.length == 0
+                || ArrayUtils.contains(Settings.BLOODMOON_DIM_WHITELIST, event.world.provider.dimensionId)) {
             ServerBloodmoonHandler.INSTANCE = (ServerBloodmoonHandler) event.world.mapStorage
                     .loadData(ServerBloodmoonHandler.class, "Bloodmoon");
 
@@ -349,7 +353,9 @@ public class RTEventHandler {
 
     @SubscribeEvent
     public void entityJoinWorld(EntityJoinWorldEvent event) {
-        if (!event.world.isRemote && event.entity instanceof EntityPlayer && event.world.provider.dimensionId == 0) {
+        boolean dimCheck = Settings.BLOODMOON_DIM_WHITELIST.length == 0
+                || ArrayUtils.contains(Settings.BLOODMOON_DIM_WHITELIST, event.world.provider.dimensionId);
+        if (!event.world.isRemote && event.entity instanceof EntityPlayer && dimCheck) {
             ServerBloodmoonHandler.INSTANCE.playerJoinedWorld((EntityPlayer) event.entity);
         }
 

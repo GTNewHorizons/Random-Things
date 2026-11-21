@@ -90,7 +90,7 @@ public class EntityBloodmoonCircle extends Entity implements IEntityAdditionalSp
 
         if (!worldObj.isRemote && age == 340) {
             this.setDead();
-            ServerBloodmoonHandler.INSTANCE.force();
+            ServerBloodmoonHandler.INSTANCE.force(this.dimension);
 
             for (int modX = -2; modX < 3; modX++) {
                 for (int modZ = -2; modZ < 3; modZ++) {
